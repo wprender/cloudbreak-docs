@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         
-        <link rel="canonical" href="http://sequenceiq.com/cloudbreak-deployer/development/">
+        <link rel="canonical" href="http://sequenceiq.com/cloudbreak-docs/development/">
         <link rel="shortcut icon" href="../img/favicon.ico">
 
 	<title>Development - Cloudbreak</title>
@@ -590,10 +590,10 @@ When you wan’t a new release, all you have to do:</p>
 
          <script>
            $( document ).ready(function() {
-               $.getJSON("http://sequenceiq.com/cloudbreak-deployer/versions.json", function(data) {
-               $("#versions-dropdown").append('<li><a href="http://sequenceiq.com/cloudbreak-deployer/latest">latest ('+data.latest+')</a></li>');
+               $.getJSON("http://sequenceiq.com/cloudbreak-docs/versions.json", function(data) {
+               $("#versions-dropdown").append('<li><a href="http://sequenceiq.com/cloudbreak-docs/latest">latest ('+data.latest+')</a></li>');
                 $.each(data.versions, function( index, value ) {
-                  $("#versions-dropdown").append('<li><a href="http://sequenceiq.com/cloudbreak-deployer/'+value+'">'+value+'</a></li>');
+                  $("#versions-dropdown").append('<li><a href="http://sequenceiq.com/cloudbreak-docs/'+value+'">'+value+'</a></li>');
                 });
                });
 

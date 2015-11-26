@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         
-        <link rel="canonical" href="http://sequenceiq.com/cloudbreak-deployer/aws_cb_ui/">
+        <link rel="canonical" href="http://sequenceiq.com/cloudbreak-docs/aws_cb_ui/">
         <link rel="shortcut icon" href="../img/favicon.ico">
 
 	<title>Provisioning - UI - Cloudbreak</title>
@@ -583,10 +583,10 @@ Instances are started in an Auto Scaling Group so they may be restarted if you t
 
          <script>
            $( document ).ready(function() {
-               $.getJSON("http://sequenceiq.com/cloudbreak-deployer/versions.json", function(data) {
-               $("#versions-dropdown").append('<li><a href="http://sequenceiq.com/cloudbreak-deployer/latest">latest ('+data.latest+')</a></li>');
+               $.getJSON("http://sequenceiq.com/cloudbreak-docs/versions.json", function(data) {
+               $("#versions-dropdown").append('<li><a href="http://sequenceiq.com/cloudbreak-docs/latest">latest ('+data.latest+')</a></li>');
                 $.each(data.versions, function( index, value ) {
-                  $("#versions-dropdown").append('<li><a href="http://sequenceiq.com/cloudbreak-deployer/'+value+'">'+value+'</a></li>');
+                  $("#versions-dropdown").append('<li><a href="http://sequenceiq.com/cloudbreak-docs/'+value+'">'+value+'</a></li>');
                 });
                });
 

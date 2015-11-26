@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         
-        <link rel="canonical" href="http://sequenceiq.com/cloudbreak-deployer/blueprints/">
+        <link rel="canonical" href="http://sequenceiq.com/cloudbreak-docs/blueprints/">
         <link rel="shortcut icon" href="../img/favicon.ico">
 
 	<title>Blueprints - Cloudbreak</title>
@@ -555,10 +555,10 @@
 
          <script>
            $( document ).ready(function() {
-               $.getJSON("http://sequenceiq.com/cloudbreak-deployer/versions.json", function(data) {
-               $("#versions-dropdown").append('<li><a href="http://sequenceiq.com/cloudbreak-deployer/latest">latest ('+data.latest+')</a></li>');
+               $.getJSON("http://sequenceiq.com/cloudbreak-docs/versions.json", function(data) {
+               $("#versions-dropdown").append('<li><a href="http://sequenceiq.com/cloudbreak-docs/latest">latest ('+data.latest+')</a></li>');
                 $.each(data.versions, function( index, value ) {
-                  $("#versions-dropdown").append('<li><a href="http://sequenceiq.com/cloudbreak-deployer/'+value+'">'+value+'</a></li>');
+                  $("#versions-dropdown").append('<li><a href="http://sequenceiq.com/cloudbreak-docs/'+value+'">'+value+'</a></li>');
                 });
                });
 
