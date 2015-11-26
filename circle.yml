@@ -7,17 +7,11 @@ dependencies:
     - git fetch --tags
     - make circleci
   override:
-    - true
-
-test:
-  override:
-    - true
+    - make build
 
 deployment:
   master:
-    branches: 
-      - master
-      - /v.*/
+    branch: master
     commands:
       - eval $(docker run gliderlabs/pagebuilder circleci-cmd)
 

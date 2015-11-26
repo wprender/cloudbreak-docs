@@ -3,3 +3,6 @@ make preview:
 
 circleci:
 	rm ~/.gitconfig
+
+build:
+	echo build
