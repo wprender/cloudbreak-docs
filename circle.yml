@@ -1,0 +1,27 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  pre:
+    - git fetch --tags
+    - make circleci
+  override:
+    - true
+
+test:
+  override:
+    - true
+
+deployment:
+  master:
+    branches: 
+      - master
+      - /v.*/
+    commands:
+      - eval $(docker run gliderlabs/pagebuilder circleci-cmd)
+
+general:
+  branches:
+    ignore:
+      - gh-pages
