@@ -7,11 +7,11 @@ dependencies:
     - git fetch --tags
     - make circleci
   override:
-    - true
+    - make clean
 
 test:
   override:
-    - make tests
+    - make test
 
 deployment:
   master:
