@@ -30,7 +30,7 @@ This release introduces the following changes in behavior as compared to previou
 |DASH support for WASB|When WASB is used as a Hadoop filesystem the files are full-value blobs in a storage account. It means better performance compared to the data disks and the WASB filesystem can be configured very easily but Azure storage accounts have their own [limitations](https://azure.microsoft.com/en-us/documentation/articles/azure-subscription-service-limits/#storage-limits) as well. There is a space limitation for TB per storage account (500 TB) as well but the real bottleneck is the total request rate that is only 20000 IOPS where Azure will start to throw errors when trying to do an I/O operation. To bypass those limits Microsoft created a small service called [DASH](https://github.com/MicrosoftDX/Dash). See [Filesystem configuration](azure_pre_prov.md) for more information.|
 |Support for new regions|On AWS we added support for **Frankfurt**. On GCP we added support for **us-east-1**.|
 |UAA zones| Updated to UAA 2.7.1 version, which introduced the concept of **zones**. See [Access from custom domains](configuration.md) for more information.|
-
+|Add/Remove nodes from UI| Introduced the availability to add or remove nodes (arbitrary number) to different hostgroups from the UI. This feature was previousely available from the shell or API only.|
 
 
 ## Patch Information
