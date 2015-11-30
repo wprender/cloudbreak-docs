@@ -69,3 +69,4 @@ hdfs dfs -mkdir input
 hdfs dfs -put /tmp/wait-for-host-number.sh input
 yarn jar $(find /usr/hdp -name hadoop-mapreduce-examples.jar) wordcount input output
 hdfs dfs -cat output/*
+```
