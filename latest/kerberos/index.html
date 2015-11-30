@@ -456,14 +456,14 @@ useradd custom-user
 <ul>
 <li>Log in via SSH to one of the nodes</li>
 </ul>
-<p>```
-sudo docker exec -i $(docker ps | grep ambari-warmup | cut -d" " -f 1) bash
+<pre><code>sudo docker exec -i $(docker ps | grep ambari-warmup | cut -d&quot; &quot; -f 1) bash
 su custom-user
 kinit -p custom-user (type user password)
 hdfs dfs -mkdir input
 hdfs dfs -put /tmp/wait-for-host-number.sh input
 yarn jar $(find /usr/hdp -name hadoop-mapreduce-examples.jar) wordcount input output
-hdfs dfs -cat output/*</p></div>
+hdfs dfs -cat output/*
+</code></pre></div>
             
         </div>
 
