@@ -60,7 +60,7 @@ If your SMTP server uses SMTPS you should change the protocol in your Profile:
 ```
 export CLOUDBREAK_SMTP_TYPE=smtps
 ```
-If the certificate used by the SMTP server is self-signed, or Java's default trust store doesn't contain it you can add it to the trust store by copying it to `certs/trusted` inside the cloudbreak deployer directory and start (or restart) the Cloudbreak container (with `cbd start`).The Cloudbreak container will automatically import the certificates in that directory to its trust store on startup.
+If the certificate used by the SMTP server is self-signed, or Java's default trust store doesn't contain it than you can add it to the trust store by copying it to `certs/trusted` inside the Cloudbreak deployer directory and start (or restart) the Cloudbreak container (with `cbd start`).The Cloudbreak container will automatically import the certificates in that directory to its trust store on startup.
 
 ###Access from custom domains
 
