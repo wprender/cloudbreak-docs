@@ -417,7 +417,19 @@ It can reveal some common problems with your docker or boot2docker configuration
 <p>In the current version of Cloudbreak all the nodes have a public IP address and all the nodes are accessible via SSH.
 The public IP addresses of a running cluster can be checked on the Cloudbreak UI under the <em>Nodes</em> tab.
 Only key-based authentication is supported - the public key can be specified when creating a cloud credential.</p>
-<pre><code>ssh -i ~/.ssh/private-key.pem cloudbreak@&lt;public-ip&gt;
+<p>Each cloud provider has different SSH user. In order to figure out the username you can try it wit the <code>root</code> user - that will tell you the correct username.</p>
+<p>As an example:</p>
+<pre><code>ssh root@172.16.252.31
+Warning: Permanently added '172.16.252.31' (ECDSA) to the list of known hosts.
+Please login with one of the following username rather than the user &quot;root&quot;:
+
+  centos                  : Reach the host running the ambari container
+  ambari-enter            : Enters the Ambari container
+  ambari-log              : Watches the Ambari logs
+</code></pre>
+
+<p>After you figured out the username you can SSH into the host.</p>
+<pre><code>ssh -i ~/.ssh/private-key.pem USER_NAME@&lt;public-ip&gt;
 </code></pre>
 
 <p>The default user is <code>cloudbreak</code> except on EC2 where it is <code>ec2-user</code>.</p>
