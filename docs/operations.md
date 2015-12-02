@@ -52,8 +52,24 @@ In the current version of Cloudbreak all the nodes have a public IP address and 
 The public IP addresses of a running cluster can be checked on the Cloudbreak UI under the *Nodes* tab.
 Only key-based authentication is supported - the public key can be specified when creating a cloud credential.
 
+Each cloud provider has different SSH user. In order to figure out the username you can try it wit the `root` user - that will tell you the correct username.
+
+As an example:
+
 ```
-ssh -i ~/.ssh/private-key.pem cloudbreak@<public-ip>
+ssh root@172.16.252.31
+Warning: Permanently added '172.16.252.31' (ECDSA) to the list of known hosts.
+Please login with one of the following username rather than the user "root":
+
+  centos                  : Reach the host running the ambari container
+  ambari-enter            : Enters the Ambari container
+  ambari-log              : Watches the Ambari logs
+```
+
+After you figured out the username you can SSH into the host.
+
+```
+ssh -i ~/.ssh/private-key.pem USER_NAME@<public-ip>
 ```
 
 The default user is `cloudbreak` except on EC2 where it is `ec2-user`.
@@ -183,4 +199,3 @@ Ambari's database runs on the `cbgateway` node inside a PostgreSQL docker contai
 ```
 [cloudbreak@vmcbgateway0 ~]$ sudo docker exec -it ambari_db psql -U postgres
 ```
-
