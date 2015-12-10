@@ -71,3 +71,5 @@ Later you'll need to pass the `.pub` file's contents to Cloudbreak and use the p
 ## Next steps
 
 After your IAM role is configured and you have an SSH key you can move on to create clusters on the [UI](aws_cb_ui.md) or with the [Shell](aws_cb_shell.md).
+
+> **IMPORTANT:** Make sure that you have sufficient qouta (CPU, network, etc) for the requested cluster size.
