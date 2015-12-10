@@ -487,7 +487,10 @@ When configuring a WASB filesystem with Hadoop, the only required config entries
 <p>The command first creates the namespace account and the scaleout storage accounts, builds the <em>.cscfg</em> configuration file based on the created storage account names and keys, generates an Account Name and an Account Key for the DASH service and finally deploys the cloud service package file to a new cloud service.</p>
 <p>The WASB filesystem configured with DASH can be used as a data lake - when multiple clusters are deployed with the same DASH filesystem configuration the same data can be accessed from all the clusters, but every cluster can have a different service configured as well. In that case deploy as many DASH services with cbd as clusters with Cloudbreak and configure them accordingly.</p>
 <h2 id="next-steps">Next steps</h2>
-<p>After these prerequisites are done you can move on to create clusters on the <a href="../azure_cb_ui/">UI</a> or with the <a href="../azure_cb_shell/">Shell</a>.</p></div>
+<p>After these prerequisites are done you can move on to create clusters on the <a href="../azure_cb_ui/">UI</a> or with the <a href="../azure_cb_shell/">Shell</a>.</p>
+<blockquote>
+<p><strong>IMPORTANT:</strong> Make sure that your cloud account can launch instances using the new Azure ARM *(a.k.a. V2) API and you have sufficient qouta (CPU, network, etc) for the requested cluster size.</p>
+</blockquote></div>
             
         </div>
 
