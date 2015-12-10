@@ -118,3 +118,5 @@ The WASB filesystem configured with DASH can be used as a data lake - when multi
 ## Next steps
 
 After these prerequisites are done you can move on to create clusters on the [UI](azure_cb_ui.md) or with the [Shell](azure_cb_shell.md).
+
+> **IMPORTANT:** Make sure that your cloud account can launch instances using the new Azure ARM *(a.k.a. V2) API and you have sufficient qouta (CPU, network, etc) for the requested cluster size.
