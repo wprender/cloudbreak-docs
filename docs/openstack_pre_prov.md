@@ -35,3 +35,5 @@ Later you'll need to pass the `.pub` file's contents to Cloudbreak and use the p
 ## Next steps
 
 After these prerequisites are done you can move on to create clusters on the [UI](openstack_cb_ui.md) or with the [Shell](openstack_cb_shell.md).
+
+> **IMPORTANT:** Make sure that you have sufficient qouta (CPU, network, etc) for the requested cluster size.
