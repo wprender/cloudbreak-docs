@@ -35,19 +35,6 @@ export AWS_SECRET_ACCESS_KEY=RWCT4Cs8******************/*skiOkWD
 
 You can learn more about the concepts used by Cloudbreak with AWS accounts in the [prerequisites chapter](aws_pre_prov.md) 
 
-### Generate your Profile
-
-You are done with the initialization of Cloudbreak deployer. The last thing you have to do is to regenerate the configurations in order to take effect.
-
-```
-rm *.yml
-cbd generate
-```
-
-This command applies the following steps: 
-
-- creates the **docker-compose.yml** file that describes the configuration of all the Docker containers needed for the Cloudbreak deployment.
-- creates the **uaa.yml** file that holds the configuration of the identity server used to authenticate users to Cloudbreak.
 
 ### Start Cloudbreak
 
@@ -59,6 +46,11 @@ cbd start
 ```
 
 >Launching it first will take more time as it downloads all the docker images needed by Cloudbreak.
+
+The `cbd start` command includes the `cbd generate` command which applies the following steps: 
+
+- creates the **docker-compose.yml** file that describes the configuration of all the Docker containers needed for the Cloudbreak deployment.
+- creates the **uaa.yml** file that holds the configuration of the identity server used to authenticate users to Cloudbreak.
 
 After the `cbd start` command finishes you can check the logs of the Cloudbreak server with this command:
 
