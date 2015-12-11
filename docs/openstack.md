@@ -32,20 +32,6 @@ The other required configuration in the `Profile` is the name of the Cloudbreak 
 export CB_OPENSTACK_IMAGE="$OS_IMAGE_NAME"
 ```
 
-###Generate your Profile
-
-You are done with the configuration of Cloudbreak deployer. The last thing you have to do is to regenerate the configurations in order to take effect.
-
-```
-rm *.yml
-cbd generate
-```
-
-This command applies the following steps: 
-
-- creates the **docker-compose.yml** file that describes the configuration of all the Docker containers needed for the Cloudbreak deployment.
-- creates the **uaa.yml** file that holds the configuration of the identity server used to authenticate users to Cloudbreak.
-
 ###Start Cloudbreak
 
 To start the Cloudbreak application use the following command.
@@ -56,6 +42,12 @@ cbd start
 ```
 
 >Launching it first will take more time as it downloads all the docker images needed by Cloudbreak.
+
+The `cbd start` command includes the `cbd generate` command which applies the following steps:
+
+- creates the **docker-compose.yml** file that describes the configuration of all the Docker containers needed for the Cloudbreak deployment.
+- creates the **uaa.yml** file that holds the configuration of the identity server used to authenticate users to Cloudbreak.
+
 
 After the `cbd start` command finishes you can check the logs of the Cloudbreak server with this command:
 

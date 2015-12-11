@@ -6,7 +6,7 @@ To install and configure the Cloudbreak Deployer on Azure, start
 an [OpenLogic 7.1](https://azure.microsoft.com/en-in/marketplace/partners/openlogic/centosbased71/) VM on Azure.
 
 Make sure you opened the following ports:
- 
+
  * SSH (22)
  * Ambari (8080)
  * Identity server (8089)
@@ -168,20 +168,6 @@ It will create a `Profile` file in the current directory. Please edit the file -
 configuration is the `PUBLIC_IP`. This IP will be used to access the Cloudbreak UI
 (called Uluwatu). In some cases the `cbd` tool tries to guess it, if can't than will give a hint.
 
-### Generate your Profile
-
-You are done with the configuration of Cloudbreak deployer. The last thing you have to do is to regenerate the configurations in order to take effect.
-
-```
-rm *.yml
-cbd generate
-```
-
-This command applies the following steps:
-
-- creates the **docker-compose.yml** file that describes the configuration of all the Docker containers needed for the Cloudbreak deployment.
-- creates the **uaa.yml** file that holds the configuration of the identity server used to authenticate users to Cloudbreak.
-
 ### Start Cloudbreak
 
 To start the Cloudbreak application use the following command.
@@ -192,6 +178,11 @@ cbd start
 ```
 
 >Launching it first will take more time as it downloads all the docker images needed by Cloudbreak.
+
+The `cbd start` command includes the `cbd generate` command which applies the following steps:
+
+- creates the **docker-compose.yml** file that describes the configuration of all the Docker containers needed for the Cloudbreak deployment.
+- creates the **uaa.yml** file that holds the configuration of the identity server used to authenticate users to Cloudbreak.
 
 After the `cbd start` command finishes you can check the logs of the Cloudbreak server with this command:
 
