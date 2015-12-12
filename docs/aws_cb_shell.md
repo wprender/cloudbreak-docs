@@ -247,4 +247,4 @@ cluster create --description "My first cluster"
 
 ## Next steps
 
-Congrats! Your cluster should now be up and running. To learn more about it we have some [interesting insights](insights.md) about Cloudbreak clusters.
+Congrats! Your cluster should now be up and running. To learn more about it we have some [interesting insights](operations.md) about Cloudbreak clusters.
