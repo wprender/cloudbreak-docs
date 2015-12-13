@@ -432,7 +432,6 @@ Please login with one of the following username rather than the user &quot;root&
 <pre><code>ssh -i ~/.ssh/private-key.pem USER_NAME@&lt;public-ip&gt;
 </code></pre>
 
-<p>The default user is <code>cloudbreak</code> except on EC2 where it is <code>ec2-user</code>.</p>
 <h3 id="accessing-hdp-client-services">Accessing HDP client services</h3>
 <p>The main difference between general HDP clusters and Cloudbreak-installed HDP clusters is that each host runs an Ambari server or agent Docker container and the HDP services will be installed in this container as well.
 It means that after <code>ssh</code> the client services won't be available instantly, first you'll have to <code>enter</code> the ambari-agent container.
