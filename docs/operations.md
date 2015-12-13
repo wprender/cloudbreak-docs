@@ -72,8 +72,6 @@ After you figured out the username you can SSH into the host.
 ssh -i ~/.ssh/private-key.pem USER_NAME@<public-ip>
 ```
 
-The default user is `cloudbreak` except on EC2 where it is `ec2-user`.
-
 ###Accessing HDP client services
 
 The main difference between general HDP clusters and Cloudbreak-installed HDP clusters is that each host runs an Ambari server or agent Docker container and the HDP services will be installed in this container as well.
