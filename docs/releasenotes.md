@@ -2,19 +2,31 @@
 
 The Release Notes summarize and describe changes released in Cloudbreak.
 
-
 ## New Features
 
 This release includes the following new features and improvements:
 
 | Feature | Description |
 |----|----|
-| Recipes | Ability to script extensions that run before/after cluster installation. See [Recipes](recipes.md) for more information. |
+| Cloudbreak Recipes | Ability to script extensions that run before/after cluster installation. See [Recipes](recipes.md) for more information. |
 | Cloudbreak Shell | A Command Line Interface (CLI) for interactively managing Cloudbreak. See [Shell](shell.md) for more information. |
+| Cloudbreak Shell | Password parameter validation. |
 | Pre-built Cloud Images | **Technical Preview** Pre-built Cloud images for AWS, GCP and OpenStack that include Cloudbreak Deployer pre-installed and configured.|
-| Kerberos | **Technical Preview** Support for enabling Kerberos on the HDP clusters deployed by Cloudbreak. See [Kerberos](kerberos.md) for more information. |
-| OpenStack Cloud Provider |  **Technical Preview** Support for OpenStack Juno cloud provider. See [OpenStack](openstack.md) for more information. |
-| Cloud Provider SPI | **Technical Preview** Cloudbreak Service Provider Interface (SPI) for pluging-in new providers. See [SPI](spi.md) for more information. |
+| Cloudbreak | **Technical Preview** Support for enabling Kerberos on the HDP clusters deployed by Cloudbreak. See [Kerberos](kerberos.md) for more information. |
+| Cloudbreak | Support for OpenStack Juno cloud provider. See [OpenStack](openstack.md) for more information. |
+| Cloudbreak | **Technical Preview** Support for OpenStack Kilo cloud provider. See [OpenStack](openstack.md) for more information. |
+| Cloudbreak | Cloudbreak Service Provider Interface (SPI) for pluging-in new providers. See [SPI](spi.md) for more information. |
+|Cloudbreak Deployer| Seamless upgrade from Cloudbreak 1.0.0 to 1.1.0. |
+| Cloudbreak Deployer | Deploy DASH for Azure. |
+| Cloudbreak UI | Cluster scaling .|
+| Cloudbreak UI | Cluster node termination. |
+| Cloudbreak UI | New cluster create panel. |
+| Cloudbreak UI | New cluster details panel. |
+| Cloudbreak UI | Progress bars for Ambari. |
+| Cloudbreak UI | Create new security group. |
+| Cloudbreak UI | Create/upload recipes. |
+
+
 
 
 ## Behavioral Changes
@@ -33,29 +45,3 @@ This release introduces the following changes in behavior as compared to previou
 |Add/Remove nodes from UI| Introduced the availability to add or remove nodes (arbitrary number) to different hostgroups from the UI. This feature was previousely available from the shell or API only.|
 
 
-## Patch Information
-
-TBD
-
-## Known Issues
-
-Cloudbreak has the following known issues, scheduled for resolution in a future release. Please work around the following issues:
-
-| JIRA | Problem | Solution |
-|----|----|---|
-| X | X | X |
-
-
-## Fixed Issues
-
-The following sections list selected issues resolved in Cloudbreak 1.1:
-
-| JIRA | Category | Summary |
-|----|----|---|
-| X |Potential Data Loss | X |
-| X |Stability | X |
-| X |Security | X |
-| X |Upgrade | X |
-| X |Usability | X |
-| X |Performance | X |
-| X |Other | X |
