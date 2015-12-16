@@ -2,10 +2,10 @@
 
 ## Setup Cloudbreak Deployer
 
+> This feature is currently `TECHNICAL PREVIEW` and is available for the `OpenStack Juno` release.
+
 If you already have Cloudbreak Deployer either by [using the OpenStack Cloud Images](openstack-image.md) or by [installing the Cloudbreak Deployer](onprem.md) manually on your own VM,
 you can start to setup the Cloudbreak Application with the deployer.
-
-> Cloudbreak currently only supports the `OpenStack Juno` release.
 
 Create and open the `cloudbreak-deployment` directory:
 

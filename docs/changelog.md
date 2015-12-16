@@ -1,3 +1,9 @@
+
+# Change Log
+
+The Change Log summarizes the changes in Cloudbreak.
+
+
 ## Unreleased
 
 ### Fixed
