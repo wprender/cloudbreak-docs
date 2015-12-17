@@ -18,6 +18,10 @@ deployment:
     branch: master
     commands:
       - eval $(docker run gliderlabs/pagebuilder circleci-cmd)
+  releases:
+    branch: /release.*/
+    commands:
+      - eval $(docker run gliderlabs/pagebuilder circleci-cmd)
 
 general:
   branches:
