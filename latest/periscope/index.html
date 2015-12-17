@@ -9,7 +9,7 @@
         <link rel="canonical" href="http://sequenceiq.com/cloudbreak-docs/periscope/">
         <link rel="shortcut icon" href="../img/favicon.ico">
 
-	<title>Auto-Scaling - Cloudbreak</title>
+	<title>Auto-Scaling - Cloudbreak 1.1.0</title>
 
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
@@ -44,7 +44,7 @@
 
             <!-- Main title -->
             <img class="navbar-logo" src="http://docs.hortonworks.com/HDPDocuments/Ambari-2.1.0.0/bk_Installing_HDP_AMB/common/images/hortonworks-logo.png" alt="Hortonworks Documentation" width="132" height="52">
-            <a class="navbar-brand" href="..">Cloudbreak</a>
+            <a class="navbar-brand" href="..">Cloudbreak 1.1.0</a>
         </div>
 
         <!-- Expanded navigation -->
@@ -106,6 +106,12 @@
                             
 <li >
     <a href="../releasenotes/">Release Notes</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../changelog/">Change Log</a>
 </li>
 
                         
@@ -325,12 +331,6 @@
 </li>
 
                         
-                            
-<li >
-    <a href="../changelog/">Changelog</a>
-</li>
-
-                        
                         </ul>
                     </li>
                 
@@ -384,9 +384,6 @@
 
 <h1 id="auto-scaling">Auto-Scaling</h1>
 <p>The purpose of <code>auto-scaling</code> is to apply SLA scaling policies to a Cloudbreak-managed Hadoop cluster.</p>
-<blockquote>
-<p>This feature is currently <code>TECHNICAL PREVIEW</code>.</p>
-</blockquote>
 <h2 id="how-it-works">How It Works</h2>
 <p>The auto-scaling capabilities is based on <a href="https://cwiki.apache.org/confluence/display/AMBARI/Metrics">Ambari Metrics</a> - and <a href="https://cwiki.apache.org/confluence/display/AMBARI/Alerts">Ambari Alerts</a>. Based on the Blueprint
 used and the running services, Cloudbreak can access all the available metrics from the subsystem and define <code>alerts</code> based on this information.</p>
