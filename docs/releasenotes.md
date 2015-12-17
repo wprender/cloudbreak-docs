@@ -16,7 +16,7 @@ This release includes the following new features and improvements:
 | Cloudbreak | Support for OpenStack Juno cloud provider. See [OpenStack](openstack.md) for more information. |
 | Cloudbreak | **Technical Preview** Support for OpenStack Kilo cloud provider. See [OpenStack](openstack.md) for more information. |
 | Cloudbreak | Cloudbreak Service Provider Interface (SPI) for pluging-in new providers. See [SPI](spi.md) for more information. |
-|Cloudbreak Deployer| Seamless upgrade from Cloudbreak 1.0.0 to 1.1.0. |
+| Cloudbreak Deployer| Seamless upgrade from Cloudbreak 1.0.0 to 1.1.0. |
 | Cloudbreak Deployer | Deploy DASH for Azure. |
 | Cloudbreak UI | Cluster scaling .|
 | Cloudbreak UI | Cluster node termination. |
@@ -25,7 +25,6 @@ This release includes the following new features and improvements:
 | Cloudbreak UI | Progress bars for Ambari. |
 | Cloudbreak UI | Create new security group. |
 | Cloudbreak UI | Create/upload recipes. |
-
 
 
 

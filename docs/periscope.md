@@ -2,8 +2,6 @@
 
 The purpose of `auto-scaling` is to apply SLA scaling policies to a Cloudbreak-managed Hadoop cluster.
 
-> This feature is currently `TECHNICAL PREVIEW`.
-
 ##How It Works
 
 The auto-scaling capabilities is based on [Ambari Metrics](https://cwiki.apache.org/confluence/display/AMBARI/Metrics) - and [Ambari Alerts](https://cwiki.apache.org/confluence/display/AMBARI/Alerts). Based on the Blueprint

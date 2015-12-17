@@ -1,4 +1,4 @@
-site_name: Cloudbreak
+site_name: Cloudbreak 1.1.0
 site_url: http://sequenceiq.com/cloudbreak-docs
 theme: mkdocs
 theme_dir: mkdocs_theme
@@ -13,6 +13,7 @@ pages:
             - GCP Cloud Images: gcp-image.md
             - OpenStack Cloud Images: openstack-image.md
         - Release Notes : releasenotes.md
+        - Change Log : changelog.md
     - Cloud Providers:
         - AWS :
             - Setup: aws.md
@@ -46,4 +47,3 @@ pages:
         - Migration : database.md
         - Advanced Configuration : configuration.md
         - Development : development.md
-        - Changelog : changelog.md

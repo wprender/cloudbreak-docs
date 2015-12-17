@@ -1,9 +1,9 @@
 #Kerberos Security
 
+> This feature is currently `TECHNICAL PREVIEW`.
+
 Cloudbreak can enable Kerberos security on the cluster. When enabled, Cloudbreak will install an MIT KDC into the cluster
 and enable Kerberos on the cluster.
-
-> This feature is currently `TECHNICAL PREVIEW`.
 
 ## Enable Kerberos
 

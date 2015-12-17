@@ -1,12 +1,10 @@
 # OpenStack Cloud Images
 
+> This feature is currently `TECHNICAL PREVIEW` and is available for the `OpenStack Juno` release.
+
 We have pre-built cloud images for OpenStack with the Cloudbreak Deployer pre-installed. Following the steps will guide you through the provider specific configuration then launch.
 
 > Alternatively, instead of using the pre-built cloud images, you can install Cloudbreak Deployer on your own VM. See [install the Cloudbreak Deployer](onprem.md) for more information.
-
-##System Requirements
-
-Cloudbreak currently only supports the `OpenStack Juno` release.
 
 ##Download the Cloudbreak image
 
