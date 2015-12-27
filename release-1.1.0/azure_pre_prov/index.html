@@ -580,7 +580,7 @@ When configuring a WASB filesystem with Hadoop, the only required config entries
                $.getJSON("../providers/gcp.json", function(data) {
                $("#gcp-image-details").append('<br>');
                $("#gcp-image-details").append('<br>');
-               $("#gcp-image-details").append('<pre><code style="font-size: 12pt;color:#333333">gcloud compute images create ' + data.gcp.id + ' --source-uri gs://' + data.gcp.source_image + '</code></pre>');
+               $("#gcp-image-details").append('<pre><code style="font-size: 12pt;color:#333333">gcloud compute images create ' + data.id + ' --source-uri gs://' + data.id + '.tar.gz</code></pre>');
                });
            });
          </script>
