@@ -25,7 +25,7 @@ This release includes the following new features and improvements:
 | Cloudbreak UI | Progress bars for Ambari. |
 | Cloudbreak UI | Create new security group. |
 | Cloudbreak UI | Create/upload recipes. |
-| Cloudbreak | SLA policy based [autoscaling](periscope.md)|
+| Cloudbreak | SLA policy based [autoscaling](periscope.md). |
 
 
 
