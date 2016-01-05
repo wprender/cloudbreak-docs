@@ -150,10 +150,15 @@ Remove docker folder and restart Docker service:
 rm -rf /var/lib/docker && systemctl daemon-reload && service docker start && systemctl enable docker.service
 ```
 
-Download **cloudbreak-deployer**:
+Download and install **cloudbreak-deployer**:
 
 ```
-curl https://raw.githubusercontent.com/sequenceiq/cloudbreak-deployer/master/install-latest | sh && cbd --version
+curl -Ls public-repo-1.hortonworks.com/HDP/cloudbreak/cloudbreak-deployer_1.1.0-rc3_$(uname)_x86_64.tgz | sudo tar -xz -C /bin cbd
+```
+
+Check that it was successfull:
+```
+cbd --version
 ```
 
 ### Initialize your Profile
