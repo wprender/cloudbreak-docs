@@ -363,6 +363,15 @@
                     </li>
                 
                 
+                    <li>
+                        <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/" >
+                            
+                                <i class="fa fa-github"></i>
+                            
+                            GitHub
+                        </a>
+                    </li>
+                
             </ul>
         </div>
     </div>
@@ -389,6 +398,7 @@
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
+                    
 
 <h1 id="service-provider-interface-spi">Service Provider Interface (SPI)</h1>
 <p>Cloudbreak already supports multiple cloud platforms and provides an easy way to integrate a new provider trough <a href="https://github.com/sequenceiq/cloudbreak/tree/master/cloud-api">Cloudbreak's Service Provider Interface (SPI)</a> which is a plugin mechanism to enable a seamless integration of any cloud provider.</p>
@@ -457,7 +467,9 @@ dependencies {
 <p>Cloudbreak's SPI interface reflects this flexibility using so called variants. This means that if some part of cloud provider (typically OpenStack) is using different component you don't need re-implement the complete stack but just use a different variant and re-implement the part what is different.</p>
 <p>The reference implementation for this feature can be found in  <a href="https://github.com/sequenceiq/cloudbreak/tree/master/cloud-openstack">cloud-openstack</a> module which support a HEAT and NATIVE variants. The HEAT variant utilizes the Heat templating to launch a stack, but the NATIVE variant starts the cluster by using a sequence of API calls without Heat to achieve the same result, although both of them are using the same authentication and credential management.</p>
 <h2 id="development">Development</h2>
-<p>In order to set up a development environment please take a look at <a href="https://github.com/sequenceiq/cloudbreak/blob/master/docs/dev/development.md">Local Development Setup</a> documentation.</p></div>
+<p>In order to set up a development environment please take a look at <a href="https://github.com/sequenceiq/cloudbreak/blob/master/docs/dev/development.md">Local Development Setup</a> documentation.</p>
+                    <a href="https://github.com/sequenceiq/cloudbreak-docs/edit/master/docs/spi.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
+                </div>
             
         </div>
 
