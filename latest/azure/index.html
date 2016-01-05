@@ -509,8 +509,12 @@ EOF
 <pre><code>rm -rf /var/lib/docker &amp;&amp; systemctl daemon-reload &amp;&amp; service docker start &amp;&amp; systemctl enable docker.service
 </code></pre>
 
-<p>Download <strong>cloudbreak-deployer</strong>:</p>
-<pre><code>curl https://raw.githubusercontent.com/sequenceiq/cloudbreak-deployer/master/install-latest | sh &amp;&amp; cbd --version
+<p>Download and install <strong>cloudbreak-deployer</strong>:</p>
+<pre><code>curl -Ls public-repo-1.hortonworks.com/HDP/cloudbreak/cloudbreak-deployer_1.1.0-rc3_$(uname)_x86_64.tgz | sudo tar -xz -C /bin cbd
+</code></pre>
+
+<p>Check that it was successfull:</p>
+<pre><code>cbd --version
 </code></pre>
 
 <h3 id="initialize-your-profile">Initialize your Profile</h3>
@@ -634,7 +638,7 @@ clusters with Cloudbreak.</p></div>
                $.getJSON("../providers/gcp.json", function(data) {
                $("#gcp-image-details").append('<br>');
                $("#gcp-image-details").append('<br>');
-               $("#gcp-image-details").append('<pre><code style="font-size: 12pt;color:#333333">gcloud compute images create ' + data.gcp.id + ' --source-uri gs://' + data.gcp.source_image + '</code></pre>');
+               $("#gcp-image-details").append('<pre><code style="font-size: 12pt;color:#333333">gcloud compute images create ' + data.id + ' --source-uri gs://' + data.id + '.tar.gz</code></pre>');
                });
            });
          </script>

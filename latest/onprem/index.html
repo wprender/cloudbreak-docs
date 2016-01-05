@@ -475,7 +475,7 @@ EOF
 
 <h2 id="install-cloudbreak-deployer_1">Install Cloudbreak deployer</h2>
 <p>Install the Cloudbreak deployer and unzip the platform specific single binary to your PATH. The one-liner way is:</p>
-<pre><code>curl https://raw.githubusercontent.com/sequenceiq/cloudbreak-deployer/master/install-latest | sh &amp;&amp; cbd --version
+<pre><code>curl -Ls public-repo-1.hortonworks.com/HDP/cloudbreak/cloudbreak-deployer_1.1.0-rc3_$(uname)_x86_64.tgz | sudo tar -xz -C /bin cbd
 </code></pre>
 
 <p>Once the Cloudbreak deployer is installed, you can start to setup the Cloudbreak application.</p>
@@ -612,7 +612,7 @@ This will start all the Docker containers and initialize the application. It wil
                $.getJSON("../providers/gcp.json", function(data) {
                $("#gcp-image-details").append('<br>');
                $("#gcp-image-details").append('<br>');
-               $("#gcp-image-details").append('<pre><code style="font-size: 12pt;color:#333333">gcloud compute images create ' + data.gcp.id + ' --source-uri gs://' + data.gcp.source_image + '</code></pre>');
+               $("#gcp-image-details").append('<pre><code style="font-size: 12pt;color:#333333">gcloud compute images create ' + data.id + ' --source-uri gs://' + data.id + '.tar.gz</code></pre>');
                });
            });
          </script>
