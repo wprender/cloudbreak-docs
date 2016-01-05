@@ -46,7 +46,10 @@
         <div class="container">
             {% block content %}
                 <div class="col-md-3">{% include "toc.html" %}</div>
-                <div class="col-md-9" role="main">{% include "content.html" %}</div>
+                <div class="col-md-9" role="main">
+                    {% include "content.html" %}
+                    <a href="{{ repo_url }}/blob/master/docs/{{ current_page.input_path }}" ><i class="fa fa-github"></i> Edit on GitHub </a>
+                </div>
             {% endblock %}
         </div>
 
