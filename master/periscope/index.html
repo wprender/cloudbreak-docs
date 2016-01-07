@@ -451,7 +451,7 @@ Cloudbreak will do the heavy lifting and based on the alerts and the scaling pol
 <li>We never remove <code>Application master nodes</code> from a cluster. In order to make sure that a node running AM is not removed, Cloudbreak has to be able to access the YARN Resource Manager - when creating a cluster using the <code>default</code> secure network template please make sure that the RM's port is open on the node</li>
 <li>In order to keep a healthy HDFS during downscale we always keep the configured <code>replication</code> factor and make sure there is enough <code>space</code> on HDFS to rebalance data. Also during downscale in order to minimize the rebalancing, replication and HDFS storms we check block locations and compute the least costly operations.</li>
 </ul>
-                    <a href="https://github.com/sequenceiq/cloudbreak-docs/edit/master/docs/periscope.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
+                    <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/periscope.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
                 </div>
             
         </div>
