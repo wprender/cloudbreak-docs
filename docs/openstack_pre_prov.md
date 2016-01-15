@@ -32,6 +32,20 @@ After you enter a passphrase the keypair is generated. The output should look so
 
 Later you'll need to pass the `.pub` file's contents to Cloudbreak and use the private part to SSH to the instances.
 
+## Download and import the Cloudbreak image
+
+###OpenStack Cloudbreak image details
+
+###Import the image into OpenStack
+
+```
+export OS_IMAGE_NAME="name_in_openstack"
+export OS_USERNAME=...
+export OS_AUTH_URL="http://.../v2.0"
+export OS_TENANT_NAME=...
+glance image-create --name "$OS_IMAGE_NAME" --file "$LATEST_IMAGE" --disk-format qcow2 --container-format bare --progress
+```
+
 ## Next steps
 
 After these prerequisites are done you can move on to create clusters on the [UI](openstack_cb_ui.md) or with the [Shell](openstack_cb_shell.md).
