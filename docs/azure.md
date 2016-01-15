@@ -56,14 +56,18 @@ echo export PUBLIC_IP=1.2.3.4 > Profile
 
 ### Start Cloudbreak
 
-To start the Cloudbreak application use the following command.
-This will start all the Docker containers and initialize the application. It will take a few minutes until all the services start.
+Before starting Cloudbreak you will need to pull the Docker containers. 
+
+```
+cbd pull
+```
+
+Once the containers are pulled you can start the Cloudbreak application with the following command.
+This will start all the Docker containers and initialize the application. 
 
 ```
 cbd start
 ```
-
->Launching it first will take more time as it downloads all the Docker images needed by Cloudbreak.
 
 The `cbd start` command includes the `cbd generate` command which applies the following steps:
 
