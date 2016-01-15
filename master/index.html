@@ -569,6 +569,14 @@ desired HDP clusters as possible. For example, if you plan to launch clusters on
                $("#openstack-image-details").append('<pre><code style="font-size: 12pt;color:#333333">curl -L  https://atlas.hashicorp.com/api/v1/artifacts/sequenceiq/cbd/openstack.image/' + data.version + '/file | tar -xz</code></pre>');
                });
 
+               <!--OpenStack Cloudbreak-->
+               $.getJSON("../providers/openstack_cloudbreak.json", function(data) {
+               $("#openstack-cloudbreak-image-details").append('<br>');
+               $("#openstack-cloudbreak-image-details").append('<br>');
+               $("#openstack-cloudbreak-image-details").append('<p style="font-size: 12pt"><code>LATEST_IMAGE:</code>' + data.id + '</p>');
+               $("#openstack-cloudbreak-image-details").append('<pre><code style="font-size: 12pt;color:#333333">curl -L  https://atlas.hashicorp.com/api/v1/artifacts/sequenceiq/cloudbreak/openstack.image/' + data.version + '/file | tar -xz</code></pre>');
+               });
+
                <!--GCP-->
                $.getJSON("../providers/gcp.json", function(data) {
                $("#gcp-image-details").append('<br>');
@@ -582,5 +590,5 @@ desired HDP clusters as possible. For example, if you plan to launch clusters on
 
 <!--
 MkDocs version : 0.14.0
-Build Date UTC : 2016-01-10 18:56:01.168422
+Build Date UTC : 2016-01-15 12:47:02.059496
 -->

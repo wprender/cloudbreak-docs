@@ -386,6 +386,8 @@
         
             <li><a href="#generate-a-new-ssh-key">Generate a new SSH key</a></li>
         
+            <li><a href="#download-and-import-the-cloudbreak-image">Download and import the Cloudbreak image</a></li>
+        
             <li><a href="#next-steps">Next steps</a></li>
         
     
@@ -420,6 +422,16 @@ You'll be asked to enter a passphrase, but you can leave it empty.
 </code></pre>
 
 <p>Later you'll need to pass the <code>.pub</code> file's contents to Cloudbreak and use the private part to SSH to the instances.</p>
+<h2 id="download-and-import-the-cloudbreak-image">Download and import the Cloudbreak image</h2>
+<h3 id="openstack-cloudbreak-image-details">OpenStack Cloudbreak image details</h3>
+<h3 id="import-the-image-into-openstack">Import the image into OpenStack</h3>
+<pre><code>export OS_IMAGE_NAME=&quot;name_in_openstack&quot;
+export OS_USERNAME=...
+export OS_AUTH_URL=&quot;http://.../v2.0&quot;
+export OS_TENANT_NAME=...
+glance image-create --name &quot;$OS_IMAGE_NAME&quot; --file &quot;$LATEST_IMAGE&quot; --disk-format qcow2 --container-format bare --progress
+</code></pre>
+
 <h2 id="next-steps">Next steps</h2>
 <p>After these prerequisites are done you can move on to create clusters on the <a href="../openstack_cb_ui/">UI</a> or with the <a href="../openstack_cb_shell/">Shell</a>.</p>
 <blockquote>
@@ -510,6 +522,14 @@ You'll be asked to enter a passphrase, but you can leave it empty.
                $("#openstack-image-details").append('<br>');
                $("#openstack-image-details").append('<p style="font-size: 12pt"><code>LATEST_IMAGE:</code>' + data.id + '</p>');
                $("#openstack-image-details").append('<pre><code style="font-size: 12pt;color:#333333">curl -L  https://atlas.hashicorp.com/api/v1/artifacts/sequenceiq/cbd/openstack.image/' + data.version + '/file | tar -xz</code></pre>');
+               });
+
+               <!--OpenStack Cloudbreak-->
+               $.getJSON("../providers/openstack_cloudbreak.json", function(data) {
+               $("#openstack-cloudbreak-image-details").append('<br>');
+               $("#openstack-cloudbreak-image-details").append('<br>');
+               $("#openstack-cloudbreak-image-details").append('<p style="font-size: 12pt"><code>LATEST_IMAGE:</code>' + data.id + '</p>');
+               $("#openstack-cloudbreak-image-details").append('<pre><code style="font-size: 12pt;color:#333333">curl -L  https://atlas.hashicorp.com/api/v1/artifacts/sequenceiq/cloudbreak/openstack.image/' + data.version + '/file | tar -xz</code></pre>');
                });
 
                <!--GCP-->
