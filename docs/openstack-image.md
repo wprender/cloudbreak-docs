@@ -6,7 +6,6 @@ We have pre-built cloud images for OpenStack with the Cloudbreak Deployer pre-in
 
 > Alternatively, instead of using the pre-built cloud images, you can install Cloudbreak Deployer on your own VM. See [install the Cloudbreak Deployer](onprem.md) for more information.
 
-##Download the Cloudbreak image
 
 You can download the latest pre-configured Cloudbreak deployer image for OpenStack with the following script in the 
 following section.
