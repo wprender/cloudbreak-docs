@@ -22,6 +22,8 @@ that includes Cloudbreak Deployer](#pre-built-images) pre-installed.
 <div id="install-deployer"></div>
 ### Installing the Cloudbreak Deployer
 
+> **System requirements:** 4GB RAM, 10GB disk, 2 cores recommended
+
 You can install the Cloudbreak Deployer on your own VM manually. Once installed, you will use the deployer to setup
 the Cloudbreak Application. We suggest you install the Cloudbreak Application as close to the
 desired HDP clusters as possible. For example, if you plan to launch clusters on AWS, install the Cloudbreak Application in AWS.
@@ -35,6 +37,8 @@ Follow the instructions for [installing the Cloudbreak Deployer](onprem.md). Alt
 ### Using the Pre-Built Cloud Images
 
 We have pre-built cloud images with Cloudbreak Deployer pre-installed. Following the steps will guide you through the provider specific configuration and launching clusters using that cloud provider.
+
+> **VM requirements:** 4GB RAM, 10GB disk, 2 cores recommended
 
 | Cloud | Cloud Image |
 |---|---|
