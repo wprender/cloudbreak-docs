@@ -1,85 +1,23 @@
 # Azure Setup
 
-## Setup Cloudbreak Deployer
+On other cloud providers you can create “public images”, while on Azure its a different process. 
+You have to create a publicly available virtual disk image (vhdi), which has to be downloaded and imported 
+into a storage account. Our experience shows that it takes about 30-60 minutes until you can log into the VM.
+Therefore we provider a much easier way based on a ResourceManager Template.
 
-To install and configure the Cloudbreak Deployer on Azure, start
-a [Docker on Ubuntu Server](https://azure.microsoft.com/en-us/marketplace/partners/canonicalandmsopentech/dockeronubuntuserver1404lts/) VM on Azure.
+## Deploy via Azure web UI
 
-Make sure you opened the following ports:
+It is as simple as clicking here: <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsequenceiq%2Fazure-cbd-quickstart%2Fmaster%2Fazuredeploy.json">  ![deploy on azure](http://azuredeploy.net/deploybutton.png) </a>
 
- * SSH (22)
- * Ambari (8080)
- * Identity server (8089)
- * Cloudbreak UI (3000)
- * User authentication (3001)
- * Autoscaling (8085)
+After that you have to wait about 15-20 minutes until the docker images are downloaded. Once its done, you can reach
+the Cloudbreak UI on port 3000
 
-Please log in to the machine with SSH or use username and password authentication (the following example shows how to ssh into the machine):
+## Under the hood
 
-```
-ssh -i <azure-ssh-pem-file> <username>@<virtual-machine-ip>
-```
-
-Install `unzip` on the machine:
-
-```
-sudo apt-get install unzip
-```
-
-Download **cloudbreak-deployer**:
-
-```
-curl -Ls public-repo-1.hortonworks.com/HDP/cloudbreak/cloudbreak-deployer_1.1.0_$(uname)_x86_64.tgz | sudo tar -xz -C /bin cbd
-```
-
-Check the cbd version running:
-
-```
-cbd --version
-```
-
-### Initialize your Profile
-
-First initialize cbd by creating a `Profile` file:
-
-```
-cbd init
-```
-
-It will create a `Profile` file in the current directory. Please edit the file - the only required
-configuration is the `PUBLIC_IP`. This IP will be used to access the Cloudbreak UI
-(called Uluwatu). In some cases the `cbd` tool tries to guess it, if can't than will give a hint. 
-
-```
-echo export PUBLIC_IP=1.2.3.4 > Profile
-```
-
-### Start Cloudbreak
-
-Before starting Cloudbreak you will need to pull the Docker containers. 
-
-```
-cbd pull
-```
-
-Once the containers are pulled you can start the Cloudbreak application with the following command.
-This will start all the Docker containers and initialize the application. 
-
-```
-cbd start
-```
-
-The `cbd start` command includes the `cbd generate` command which applies the following steps:
-
-- creates the **docker-compose.yml** file that describes the configuration of all the Docker containers needed for the Cloudbreak deployment.
-- creates the **uaa.yml** file that holds the configuration of the identity server used to authenticate users to Cloudbreak.
-
-After the `cbd start` command finishes you can check the logs of the Cloudbreak server with this command:
-
-```
-cbd logs cloudbreak
-```
->Cloudbreak server should start within a minute - you should see a line like this: `Started CloudbreakApplication in 36.823 seconds`
+Meanwhile azure is creating the deployment, here is some background what happens:
+- start from official CentOS, so no custom image copy is needed (which would take like 30 minutes)
+- use [Docker VM Extension](https://github.com/Azure/azure-docker-extension) to install Docker
+- use [CustomScript Extension](https://github.com/Azure/azure-linux-extensions/tree/master/CustomScript) to install Cloudbreak Deployer (cbd)
 
 ### Next steps
 
