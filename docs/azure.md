@@ -1,200 +1,28 @@
 # Azure Setup
 
-## Setup Cloudbreak Deployer
+On other cloud providers you can create “public images”, while on Azure its a different process. 
+You have to create a publicly available virtual disk image (vhdi), which has to be downloaded and imported 
+into a storage account. Based on our experience usually it takes about 30-60 minutes until it gets copied and you can log into the VM.
+Therefore we provide a much easier way to launch CBD - based on the new Azure ResourceManager Templates.
 
-To install and configure the Cloudbreak Deployer on Azure, start
-an [OpenLogic 7.1](https://azure.microsoft.com/en-in/marketplace/partners/openlogic/centosbased71/) VM on Azure.
+## Deploy using the Azure web UI
 
-Make sure you opened the following ports:
+It is as simple as clicking here: <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsequenceiq%2Fazure-cbd-quickstart%2Fmaster%2Fazuredeploy.json">  ![deploy on azure](http://azuredeploy.net/deploybutton.png) </a>
 
- * SSH (22)
- * Ambari (8080)
- * Identity server (8089)
- * Cloudbreak GUI (3000)
- * User authentication (3001)
+> **IMPORTANT:** Please create or reuse a new **Resource Group** at the same location where the VM is started.
 
-Please log in to the machine with SSH or use username and password authentication (the following example shows how to ssh into the machine):
 
-```
-ssh -i <azure-ssh-pem-file> <username>@<virtual-machine-ip>
-```
+After that you have to wait about 15-20 minutes until the Docker images are downloaded. Once its done, you can reach
+the Cloudbreak UI on port 3000. You can track the progress on the Azure UI and once the VM is created and running you can SSH to the instance and track the progress in the logs.
 
-Assume **root** privileges with this command:
 
-```
-sudo su
-```
+## Under the hood
 
-Configure the correct yum repository on the machine:
+Meanwhile Azure is creating the deployment, here is some information about what happens in the background:
 
-```
-cat > /etc/yum.repos.d/CentOS-Base.repo <<"EOF"
-# CentOS-Base.repo
-#
-# The mirror system uses the connecting IP address of the client and the
-# update status of each mirror to pick mirrors that are updated to and
-# geographically close to the client.  You should use this for CentOS updates
-# unless you are manually picking other mirrors.
-#
-# If the mirrorlist= does not work for you, as a fall back you can try the
-# remarked out baseurl= line instead.
-#
-#
-
-[base]
-name=CentOS-$releasever - Base
-mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=os&infra=$infra
-#baseurl=http://mirror.centos.org/centos/$releasever/os/$basearch/
-gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
-
-#released updates
-[updates]
-name=CentOS-$releasever - Updates
-mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=updates&infra=$infra
-#baseurl=http://mirror.centos.org/centos/$releasever/updates/$basearch/
-gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
-
-#additional packages that may be useful
-[extras]
-name=CentOS-$releasever - Extras
-mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=extras&infra=$infra
-#baseurl=http://mirror.centos.org/centos/$releasever/extras/$basearch/
-gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
-
-#additional packages that extend functionality of existing packages
-[centosplus]
-name=CentOS-$releasever - Plus
-mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=centosplus&infra=$infra
-#baseurl=http://mirror.centos.org/centos/$releasever/centosplus/$basearch/
-gpgcheck=1
-enabled=0
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
-EOF
-```
-
-Install the correct version of **kernel**, **kernel-tools** and **systemd**:
-
-```
-yum install -y kernel-3.10.0-229.14.1.el7 kernel-tools-3.10.0-229.14.1.el7 systemd-208-20.el7_1.6
-```
-
-To permanently disable **SELinux** set SELINUX=disabled in /etc/selinux/config This ensures that SELinux does not turn itself on after you reboot the machine:
-
-```
-setenforce 0 && sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
-```
-
-You need to install `iptables-services`, otherwise the `iptables save` command will not be available:
-
-```
-yum -y install iptables-services net-tools unzip
-```
-
-Please configure your `iptables` on your machine:
-
-```
-iptables --flush INPUT && \
-iptables --flush FORWARD && \
-service iptables save && \
-sed -i 's/net.ipv4.ip_forward = 0/net.ipv4.ip_forward = 1/g' /etc/sysctl.conf
-```
-
-Configure a custom Docker repository for installing the correct version of Docker:
-
-```
-cat > /etc/yum.repos.d/docker.repo <<"EOF"
-[dockerrepo]
-name=Docker Repository
-baseurl=https://yum.dockerproject.org/repo/main/centos/7
-enabled=1
-gpgcheck=1
-gpgkey=https://yum.dockerproject.org/gpg
-EOF
-```
-
-Then you are able to install the Docker service:
-
-```
-yum install -y docker-engine-1.8.3
-```
-
-Configure your installed Docker service:
-
-```
-cat > /usr/lib/systemd/system/docker.service <<"EOF"
-[Unit]
-Description=Docker Application Container Engine
-Documentation=https://docs.docker.com
-After=network.target docker.socket cloud-final.service
-Requires=docker.socket
-Wants=cloud-final.service
-
-[Service]
-ExecStart=/usr/bin/docker -d -H fd:// -H tcp://0.0.0.0:2376 --selinux-enabled=false --storage-driver=devicemapper --storage-opt=dm.basesize=30G
-MountFlags=slave
-LimitNOFILE=200000
-LimitNPROC=16384
-LimitCORE=infinity
-
-[Install]
-WantedBy=multi-user.target
-EOF
-```
-
-Remove docker folder and restart Docker service:
-
-```
-rm -rf /var/lib/docker && systemctl daemon-reload && service docker start && systemctl enable docker.service
-```
-
-Download and install **cloudbreak-deployer**:
-
-```
-curl -Ls public-repo-1.hortonworks.com/HDP/cloudbreak/cloudbreak-deployer_1.1.0-rc3_$(uname)_x86_64.tgz | sudo tar -xz -C /bin cbd
-```
-
-Check that it was successfull:
-```
-cbd --version
-```
-
-### Initialize your Profile
-
-First initialize cbd by creating a `Profile` file:
-
-```
-cbd init
-```
-
-It will create a `Profile` file in the current directory. Please edit the file - the only required
-configuration is the `PUBLIC_IP`. This IP will be used to access the Cloudbreak UI
-(called Uluwatu). In some cases the `cbd` tool tries to guess it, if can't than will give a hint.
-
-### Start Cloudbreak
-
-To start the Cloudbreak application use the following command.
-This will start all the Docker containers and initialize the application. It will take a few minutes until all the services start.
-
-```
-cbd start
-```
-
->Launching it first will take more time as it downloads all the docker images needed by Cloudbreak.
-
-The `cbd start` command includes the `cbd generate` command which applies the following steps:
-
-- creates the **docker-compose.yml** file that describes the configuration of all the Docker containers needed for the Cloudbreak deployment.
-- creates the **uaa.yml** file that holds the configuration of the identity server used to authenticate users to Cloudbreak.
-
-After the `cbd start` command finishes you can check the logs of the Cloudbreak server with this command:
-
-```
-cbd logs cloudbreak
-```
->Cloudbreak server should start within a minute - you should see a line like this: `Started CloudbreakApplication in 36.823 seconds`
+- start an instance from the official CentOS image, so no custom image copy is needed (which would take like 30 minutes)
+- use [Docker VM Extension](https://github.com/Azure/azure-docker-extension) to install Docker
+- use [CustomScript Extension](https://github.com/Azure/azure-linux-extensions/tree/master/CustomScript) to install Cloudbreak Deployer (cbd)
 
 ### Next steps
 
