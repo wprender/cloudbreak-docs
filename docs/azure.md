@@ -15,6 +15,7 @@ the Cloudbreak UI on port 3000
 ## Under the hood
 
 Meanwhile azure is creating the deployment, here is some background what happens:
+
 - start from official CentOS, so no custom image copy is needed (which would take like 30 minutes)
 - use [Docker VM Extension](https://github.com/Azure/azure-docker-extension) to install Docker
 - use [CustomScript Extension](https://github.com/Azure/azure-linux-extensions/tree/master/CustomScript) to install Cloudbreak Deployer (cbd)
