@@ -402,7 +402,7 @@
         }, 
         {
             "location": "/azure/", 
-            "text": "Azure Setup\n\n\nOn other cloud providers you can create \u201cpublic images\u201d, while on Azure its a different process. \nYou have to create a publicly available virtual disk image (vhdi), which has to be downloaded and imported \ninto a storage account. Our experience shows that it takes about 30-60 minutes until you can log into the VM.\nTherefore we provider a much easier way based on a ResourceManager Template.\n\n\nDeploy via Azure web UI\n\n\nIt is as simple as clicking here: \n  \n \n\n\nAfter that you have to wait about 15-20 minutes until the docker images are downloaded. Once its done, you can reach\nthe Cloudbreak UI on port 3000\n\n\nUnder the hood\n\n\nMeanwhile azure is creating the deployment, here is some background what happens:\n- start from official CentOS, so no custom image copy is needed (which would take like 30 minutes)\n- use \nDocker VM Extension\n to install Docker\n- use \nCustomScript Extension\n to install Cloudbreak Deployer (cbd)\n\n\nNext steps\n\n\nOnce Cloudbreak is up and running you should check out the \nProvisioning Prerequisites\n needed to create Azure\nclusters with Cloudbreak.", 
+            "text": "Azure Setup\n\n\nOn other cloud providers you can create \u201cpublic images\u201d, while on Azure its a different process. \nYou have to create a publicly available virtual disk image (vhdi), which has to be downloaded and imported \ninto a storage account. Our experience shows that it takes about 30-60 minutes until you can log into the VM.\nTherefore we provider a much easier way based on a ResourceManager Template.\n\n\nDeploy via Azure web UI\n\n\nIt is as simple as clicking here: \n  \n \n\n\nAfter that you have to wait about 15-20 minutes until the docker images are downloaded. Once its done, you can reach\nthe Cloudbreak UI on port 3000\n\n\nUnder the hood\n\n\nMeanwhile azure is creating the deployment, here is some background what happens:\n\n\n\n\nstart from official CentOS, so no custom image copy is needed (which would take like 30 minutes)\n\n\nuse \nDocker VM Extension\n to install Docker\n\n\nuse \nCustomScript Extension\n to install Cloudbreak Deployer (cbd)\n\n\n\n\nNext steps\n\n\nOnce Cloudbreak is up and running you should check out the \nProvisioning Prerequisites\n needed to create Azure\nclusters with Cloudbreak.", 
             "title": "Setup"
         }, 
         {
@@ -417,7 +417,7 @@
         }, 
         {
             "location": "/azure/#under-the-hood", 
-            "text": "Meanwhile azure is creating the deployment, here is some background what happens:\n- start from official CentOS, so no custom image copy is needed (which would take like 30 minutes)\n- use  Docker VM Extension  to install Docker\n- use  CustomScript Extension  to install Cloudbreak Deployer (cbd)  Next steps  Once Cloudbreak is up and running you should check out the  Provisioning Prerequisites  needed to create Azure\nclusters with Cloudbreak.", 
+            "text": "Meanwhile azure is creating the deployment, here is some background what happens:   start from official CentOS, so no custom image copy is needed (which would take like 30 minutes)  use  Docker VM Extension  to install Docker  use  CustomScript Extension  to install Cloudbreak Deployer (cbd)   Next steps  Once Cloudbreak is up and running you should check out the  Provisioning Prerequisites  needed to create Azure\nclusters with Cloudbreak.", 
             "title": "Under the hood"
         }, 
         {

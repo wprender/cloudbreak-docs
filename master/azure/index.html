@@ -404,10 +404,12 @@ Therefore we provider a much easier way based on a ResourceManager Template.</p>
 <p>After that you have to wait about 15-20 minutes until the docker images are downloaded. Once its done, you can reach
 the Cloudbreak UI on port 3000</p>
 <h2 id="under-the-hood">Under the hood</h2>
-<p>Meanwhile azure is creating the deployment, here is some background what happens:
-- start from official CentOS, so no custom image copy is needed (which would take like 30 minutes)
-- use <a href="https://github.com/Azure/azure-docker-extension">Docker VM Extension</a> to install Docker
-- use <a href="https://github.com/Azure/azure-linux-extensions/tree/master/CustomScript">CustomScript Extension</a> to install Cloudbreak Deployer (cbd)</p>
+<p>Meanwhile azure is creating the deployment, here is some background what happens:</p>
+<ul>
+<li>start from official CentOS, so no custom image copy is needed (which would take like 30 minutes)</li>
+<li>use <a href="https://github.com/Azure/azure-docker-extension">Docker VM Extension</a> to install Docker</li>
+<li>use <a href="https://github.com/Azure/azure-linux-extensions/tree/master/CustomScript">CustomScript Extension</a> to install Cloudbreak Deployer (cbd)</li>
+</ul>
 <h3 id="next-steps">Next steps</h3>
 <p>Once Cloudbreak is up and running you should check out the <a href="../azure_pre_prov/">Provisioning Prerequisites</a> needed to create Azure
 clusters with Cloudbreak.</p>
