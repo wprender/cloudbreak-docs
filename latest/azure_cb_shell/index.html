@@ -363,6 +363,15 @@
                     </li>
                 
                 
+                    <li>
+                        <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/" >
+                            
+                                <i class="fa fa-github"></i>
+                            
+                            GitHub
+                        </a>
+                    </li>
+                
             </ul>
         </div>
     </div>
@@ -406,6 +415,7 @@
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
+                    
 
 <h2 id="interactive-mode">Interactive mode</h2>
 <p>Start the shell with <code>cbd util cloudbreak-shell</code>. This will launch the Cloudbreak shell inside a Docker container and you are ready to start using it.</p>
@@ -604,7 +614,9 @@ cluster create --description &quot;My first cluster&quot;
 </code></pre>
 
 <h2 id="next-steps">Next steps</h2>
-<p>Congrats! Your cluster should now be up and running. To learn more about it we have some <a href="../operations/">interesting insights</a> about Cloudbreak clusters.</p></div>
+<p>Congrats! Your cluster should now be up and running. To learn more about it we have some <a href="../operations/">interesting insights</a> about Cloudbreak clusters.</p>
+                    <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/azure_cb_shell.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
+                </div>
             
         </div>
 
@@ -688,6 +700,14 @@ cluster create --description &quot;My first cluster&quot;
                $("#openstack-image-details").append('<br>');
                $("#openstack-image-details").append('<p style="font-size: 12pt"><code>LATEST_IMAGE:</code>' + data.id + '</p>');
                $("#openstack-image-details").append('<pre><code style="font-size: 12pt;color:#333333">curl -L  https://atlas.hashicorp.com/api/v1/artifacts/sequenceiq/cbd/openstack.image/' + data.version + '/file | tar -xz</code></pre>');
+               });
+
+               <!--OpenStack Cloudbreak-->
+               $.getJSON("../providers/openstack_cloudbreak.json", function(data) {
+               $("#openstack-cloudbreak-image-details").append('<br>');
+               $("#openstack-cloudbreak-image-details").append('<br>');
+               $("#openstack-cloudbreak-image-details").append('<p style="font-size: 12pt"><code>LATEST_IMAGE:</code>' + data.id + '</p>');
+               $("#openstack-cloudbreak-image-details").append('<pre><code style="font-size: 12pt;color:#333333">curl -L  https://atlas.hashicorp.com/api/v1/artifacts/sequenceiq/cloudbreak/openstack.image/' + data.version + '/file | tar -xz</code></pre>');
                });
 
                <!--GCP-->
