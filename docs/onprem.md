@@ -101,7 +101,7 @@ rm -rf /var/lib/docker && systemctl daemon-reload && service docker start && sys
 Install the Cloudbreak deployer and unzip the platform specific single binary to your PATH. The one-liner way is:
 
 ```
-curl -Ls public-repo-1.hortonworks.com/HDP/cloudbreak/cloudbreak-deployer_1.1.0-rc3_$(uname)_x86_64.tgz | sudo tar -xz -C /bin cbd
+curl -Ls public-repo-1.hortonworks.com/HDP/cloudbreak/cloudbreak-deployer_1.1.0_$(uname)_x86_64.tgz | sudo tar -xz -C /bin cbd
 ```
 
 Once the Cloudbreak deployer is installed, you can start to setup the Cloudbreak application.
