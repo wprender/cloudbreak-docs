@@ -92,7 +92,7 @@ App Owner Tenant ID: sdwerwe1-d98e-dsf12-dsf123-df123232
 
 ## Filesystem configuration
 
-When starting a cluster with Cloudbreak on Azure, the default filesystem is “Windows Azure Blob Storage with DASH”. Hadoop has built-in support for the [WASB filesystem](https://hadoop.apache.org/docs/current/hadoop-azure/index.html) so it can be used easily as HDFS instead of disks.
+When starting a cluster with Cloudbreak on Azure, the default filesystem is “Windows Azure Blob Storage”. Hadoop has built-in support for the [WASB filesystem](https://hadoop.apache.org/docs/current/hadoop-azure/index.html) so it can be used easily as HDFS instead of disks.
 
 ### Disks and blob storage
 
@@ -114,6 +114,13 @@ cbd azure deploy-dash --accounts 5 --prefix dash --location "West Europe" --inst
 The command first creates the namespace account and the scaleout storage accounts, builds the *.cscfg* configuration file based on the created storage account names and keys, generates an Account Name and an Account Key for the DASH service and finally deploys the cloud service package file to a new cloud service.
 
 The WASB filesystem configured with DASH can be used as a data lake - when multiple clusters are deployed with the same DASH filesystem configuration the same data can be accessed from all the clusters, but every cluster can have a different service configured as well. In that case deploy as many DASH services with CBD as clusters with Cloudbreak and configure them accordingly.
+
+### Containers within the storage account
+
+Cloudbreak creates a new container in the configured storage account for each cluster with the following name pattern: cloudbreak-UNIQUE_ID. Re-using existing containers in the same account is not supported as dirty data can lead to failing cluster installations. In order to take advantage of the WASB filesystem your data does not have to be in the same storage account nor in the same container. You can add as many accounts as you wish through Ambari, by setting the properties described [here](https://hadoop.apache.org/docs/stable/hadoop-azure/index.html). Once you added the appropriate properties you can use those storage accounts with the pre-existing data, like:
+```
+hadoop fs -ls wasb://data@youraccount.blob.core.windows.net/terasort-input/
+```
 
 ## Next steps
 
