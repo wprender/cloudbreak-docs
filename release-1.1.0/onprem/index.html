@@ -437,10 +437,7 @@
 </code></pre>
 
 <p>Please configure your iptables on your machine:</p>
-<pre><code>iptables --flush INPUT &amp;&amp; \
-iptables --flush FORWARD &amp;&amp; \
-service iptables save &amp;&amp; \
-sed -i 's/net.ipv4.ip_forward = 0/net.ipv4.ip_forward = 1/g' /etc/sysctl.conf
+<pre><code>sed -i 's/net.ipv4.ip_forward = 0/net.ipv4.ip_forward = 1/g' /etc/sysctl.conf
 </code></pre>
 
 <p>Configure a custom Docker repository for installing the correct version of Docker:</p>
@@ -463,16 +460,12 @@ EOF
 [Unit]
 Description=Docker Application Container Engine
 Documentation=https://docs.docker.com
-After=network.target docker.socket cloud-final.service
+After=network.target docker.socket
 Requires=docker.socket
-Wants=cloud-final.service
 
 [Service]
 ExecStart=/usr/bin/docker -d -H fd:// -H tcp://0.0.0.0:2376 --selinux-enabled=false --storage-driver=devicemapper --storage-opt=dm.basesize=30G
 MountFlags=slave
-LimitNOFILE=200000
-LimitNPROC=16384
-LimitCORE=infinity
 
 [Install]
 WantedBy=multi-user.target
@@ -480,7 +473,7 @@ EOF
 </code></pre>
 
 <p>Remove docker folder and restart Docker service:</p>
-<pre><code>rm -rf /var/lib/docker &amp;&amp; systemctl daemon-reload &amp;&amp; service docker start &amp;&amp; systemctl enable docker.service
+<pre><code>systemctl daemon-reload &amp;&amp; service docker start &amp;&amp; systemctl enable docker.service
 </code></pre>
 
 <h2 id="install-cloudbreak-deployer_1">Install Cloudbreak deployer</h2>
