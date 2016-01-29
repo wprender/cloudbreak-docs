@@ -587,7 +587,7 @@ desired HDP clusters as possible. For example, if you plan to launch clusters on
                $.getJSON("../providers/gcp.json", function(data) {
                $("#gcp-image-details").append('<br>');
                $("#gcp-image-details").append('<br>');
-               $("#gcp-image-details").append('<pre><code style="font-size: 12pt;color:#333333">gcloud compute images create ' + data.id + ' --source-uri gs://' + data.id + '.tar.gz</code></pre>');
+               $("#gcp-image-details").append('<pre><code style="font-size: 12pt;color:#333333">gcloud compute images create ' + data.imagename + ' --source-uri gs://' + data.bucket + '/' + data.imagename + '.tar.gz</code></pre>');
                });
            });
          </script>
@@ -596,5 +596,5 @@ desired HDP clusters as possible. For example, if you plan to launch clusters on
 
 <!--
 MkDocs version : 0.14.0
-Build Date UTC : 2016-01-29 18:12:17.799031
+Build Date UTC : 2016-01-29 18:22:40.889241
 -->
