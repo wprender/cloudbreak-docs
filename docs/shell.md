@@ -34,9 +34,9 @@ If want to use the code or extend it with new commands follow the steps below. Y
 - jdk 1.7
 
 ```
-git clone https://github.com/sequenceiq/cloudbreak-shell.git
-cd cloudbreak-shell
-./gradlew clean build
+git clone https://github.com/sequenceiq/cloudbreak.git
+cd cloudbreak/shell
+../gradlew clean build
 ```
 
 > **Note**

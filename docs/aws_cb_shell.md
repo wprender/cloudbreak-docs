@@ -15,7 +15,7 @@ In order to start using Cloudbreak you will need to have an AWS cloud credential
 credential create --EC2 --description "description" --name my-aws-credential --roleArn <arn role> --sshKeyPath <path of your AWS public key>
 ```
 
-Alternatively you can upload your public key from an url as well, by using the `—sshKeyUrl` switch. You can check whether the credential was created successfully by using the `credential list` command. You can switch between your cloud credentials - when you’d like to use one and act with that you will have to use:
+Alternatively you can upload your public key from an url as well, by using the `—sshKeyUrl` switch, or use the ssh string with `—sshKeyString` switch. You can check whether the credential was created successfully by using the `credential list` command. You can switch between your cloud credentials - when you’d like to use one and act with that you will have to use:
 
 ```
 credential select --name my-aws-credential

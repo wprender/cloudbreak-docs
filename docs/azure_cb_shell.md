@@ -12,7 +12,7 @@ credential create --AZURE --description "credential description" --name myazurec
 
 > Cloudbreak is supporting simple rsa public key instead of X509 certificate file after 1.0.4 version
 
-Alternatively you can upload your public key from an url as well, by using the `—sshKeyUrl` switch. You can check whether the credential was creates successfully by using the `credential list` command.
+Alternatively you can upload your public key from an url as well, by using the `—sshKeyUrl` switch, or use the ssh string with `—sshKeyString` switch. You can check whether the credential was creates successfully by using the `credential list` command.
 You can switch between your cloud credential - when you’d like to use one and act with that you will have to use:
 ```
 credential select --name myazurecredential

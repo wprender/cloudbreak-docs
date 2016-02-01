@@ -11,7 +11,7 @@ In order to start using Cloudbreak to provision a cluster in Google Cloud you wi
 credential create --GCP --description "short description of your linked credential" --name my-gcp-credential --projectId <your gcp projectid> --serviceAccountId <your GCP service account mail address> --serviceAccountPrivateKeyPath <path of your GCP service account generated private key> --sshKeyPath <path of your GCP public key> --publicInAccount false
 ```
 
-Alternatively you can upload your public key from an url as well, by using the `—sshKeyUrl` switch. You can check whether the credential was creates successfully by using the `credential list` command.
+Alternatively you can upload your public key from an url as well, by using the `—sshKeyUrl` switch, or use the ssh string with `—sshKeyString` switch. You can check whether the credential was creates successfully by using the `credential list` command.
 You can switch between your cloud credential - when you’d like to use one and act with that you will have to use:
 ```
 credential select --name my-gcp-credential
