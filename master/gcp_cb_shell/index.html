@@ -425,7 +425,7 @@
 <pre><code>credential create --GCP --description &quot;short description of your linked credential&quot; --name my-gcp-credential --projectId &lt;your gcp projectid&gt; --serviceAccountId &lt;your GCP service account mail address&gt; --serviceAccountPrivateKeyPath &lt;path of your GCP service account generated private key&gt; --sshKeyPath &lt;path of your GCP public key&gt; --publicInAccount false
 </code></pre>
 
-<p>Alternatively you can upload your public key from an url as well, by using the <code>—sshKeyUrl</code> switch, or use the the ssh string with <code>—sshKeyString</code>. You can check whether the credential was creates successfully by using the <code>credential list</code> command.
+<p>Alternatively you can upload your public key from an url as well, by using the <code>—sshKeyUrl</code> switch, or use the the ssh string with <code>—sshKeyString</code> switch. You can check whether the credential was creates successfully by using the <code>credential list</code> command.
 You can switch between your cloud credential - when you’d like to use one and act with that you will have to use:</p>
 <pre><code>credential select --name my-gcp-credential
 </code></pre>
