@@ -429,7 +429,7 @@
 <pre><code>credential create --EC2 --description &quot;description&quot; --name my-aws-credential --roleArn &lt;arn role&gt; --sshKeyPath &lt;path of your AWS public key&gt;
 </code></pre>
 
-<p>Alternatively you can upload your public key from an url as well, by using the <code>—sshKeyUrl</code> switch. You can check whether the credential was created successfully by using the <code>credential list</code> command. You can switch between your cloud credentials - when you’d like to use one and act with that you will have to use:</p>
+<p>Alternatively you can upload your public key from an url as well, by using the <code>—sshKeyUrl</code> switch, or use the the ssh string with <code>—sshKeyString</code>. You can check whether the credential was created successfully by using the <code>credential list</code> command. You can switch between your cloud credentials - when you’d like to use one and act with that you will have to use:</p>
 <pre><code>credential select --name my-aws-credential
 </code></pre>
 
