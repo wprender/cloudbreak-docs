@@ -1,7 +1,7 @@
 # Provisioning Prerequisites
 
 We use the new [Azure ARM](https://azure.microsoft.com/en-us/documentation/articles/resource-group-overview/) in 
-order to launch clusters. In order to work we need to create an Active Directory application with the configured name and password and adds the permissions that are needed to call the Azure Resource Manager API. Cloudbreak deployer automates all this for you.
+order to launch clusters. In order to work we need to create an **Active Directory** application with the configured name and password and adds the permissions that are needed to call the Azure Resource Manager API. Cloudbreak deployer automates all this for you.
 
 ## Generate a new SSH key
 
@@ -37,7 +37,7 @@ Later you'll need to pass the `.pub` file's contents to Cloudbreak and use the p
 
 ## Azure access setup
 
-If you do not have an Active directory user then you have to configure it before deploying a cluster with Cloudbreak.
+If you do not have an **Active Directory** user then you have to configure it before deploying a cluster with Cloudbreak.
 
 1. Go to `manage.windowsazure.com` > `Active Directory`
 ![](/images/azure1.png)
