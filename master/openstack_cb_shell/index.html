@@ -424,7 +424,7 @@
 <pre><code>credential create --OPENSTACK --name my-os-credential --description &quot;credentail description&quot; --userName &lt;OpenStack username&gt; --password &lt;OpenStack password&gt; --tenantName &lt;OpenStack tenant name&gt; --endPoint &lt;OpenStack Identity Service (Keystone) endpoint&gt; --sshKeyPath &lt;path of your public SSH key file&gt;
 </code></pre>
 
-<p>Alternatively you can upload your public key from an url as well, by using the <code>—sshKeyUrl</code> switch, or use the the ssh string with <code>—sshKeyString</code> switch. You can check whether the credential was created successfully by using the <code>credential list</code> command. You can switch between your cloud credentials - when you’d like to use one and act with that you will have to use:</p>
+<p>Alternatively you can upload your public key from an url as well, by using the <code>—sshKeyUrl</code> switch, or use the ssh string with <code>—sshKeyString</code> switch. You can check whether the credential was created successfully by using the <code>credential list</code> command. You can switch between your cloud credentials - when you’d like to use one and act with that you will have to use:</p>
 <pre><code>credential select --name my-openstack-credential
 </code></pre>
 
