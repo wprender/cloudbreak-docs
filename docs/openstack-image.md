@@ -11,10 +11,10 @@ We have pre-built cloud images for OpenStack with the Cloudbreak Deployer pre-in
 You can download the latest pre-configured Cloudbreak Deployer image for OpenStack with the following script in the 
 following section.
 
-Please make sure you opened the following ports on your virtual machine:
+Please make sure you opened the following ports on your network:
  
  * SSH (22)
- * Ambari (8080)
+ * Cloudbreak API (8080)
  * Identity server (8089)
  * Cloudbreak GUI (3000)
  * User authentication (3001)

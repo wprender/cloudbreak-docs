@@ -18,10 +18,10 @@ Images are global resources, so they can be used across zones and projects.
 
 ![](/images/google-cloud-shell.png)
 
-Please make sure you opened the following ports on your virtual machine:
+Please make sure you added the following ports to your firewall rules:
  
  * SSH (22)
- * Ambari (8080)
+ * Cloudbreak API (8080)
  * Identity server (8089)
  * Cloudbreak GUI (3000)
  * User authentication (3001)
