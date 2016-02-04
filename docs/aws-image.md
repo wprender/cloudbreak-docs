@@ -5,10 +5,10 @@ We have pre-built cloud images for AWS with the Cloudbreak Deployer pre-installe
 
 > Alternatively, instead of using the pre-built cloud images for AWS, you can install Cloudbreak Deployer on your own VM. See [install the Cloudbreak Deployer](onprem.md) for more information.
 
-Make sure you opened the following ports on your virtual machine:
+Make sure you opened the following ports on your security group:
  
  * SSH (22)
- * Ambari (8080)
+ * Cloudbreak API (8080)
  * Identity server (8089)
  * Cloudbreak GUI (3000)
  * User authentication (3001)
