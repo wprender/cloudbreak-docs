@@ -82,12 +82,12 @@
         }, 
         {
             "location": "/aws-image/", 
-            "text": "AWS Cloud Images\n\n\nWe have pre-built cloud images for AWS with the Cloudbreak Deployer pre-installed. You can launch the latest Cloudbreak Deployer image based on your region at the \nAWS Management Console\n.\n\n\n\n\nAlternatively, instead of using the pre-built cloud images for AWS, you can install Cloudbreak Deployer on your own VM. See \ninstall the Cloudbreak Deployer\n for more information.\n\n\n\n\nMake sure you opened the following ports on your virtual machine:\n\n\n\n\nSSH (22)\n\n\nAmbari (8080)\n\n\nIdentity server (8089)\n\n\nCloudbreak GUI (3000)\n\n\nUser authentication (3001)\n\n\n\n\nAWS Image Details\n\n\nSetup Cloudbreak Deployer\n\n\nOnce you have the Cloudbreak Deployer installed, proceed to \nSetup Cloudbreak Deployer\n.", 
+            "text": "AWS Cloud Images\n\n\nWe have pre-built cloud images for AWS with the Cloudbreak Deployer pre-installed. You can launch the latest Cloudbreak Deployer image based on your region at the \nAWS Management Console\n.\n\n\n\n\nAlternatively, instead of using the pre-built cloud images for AWS, you can install Cloudbreak Deployer on your own VM. See \ninstall the Cloudbreak Deployer\n for more information.\n\n\n\n\nMake sure you opened the following ports on your security group:\n\n\n\n\nSSH (22)\n\n\nCloudbreak API (8080)\n\n\nIdentity server (8089)\n\n\nCloudbreak GUI (3000)\n\n\nUser authentication (3001)\n\n\n\n\nAWS Image Details\n\n\nSetup Cloudbreak Deployer\n\n\nOnce you have the Cloudbreak Deployer installed, proceed to \nSetup Cloudbreak Deployer\n.", 
             "title": "AWS Cloud Images"
         }, 
         {
             "location": "/aws-image/#aws-cloud-images", 
-            "text": "We have pre-built cloud images for AWS with the Cloudbreak Deployer pre-installed. You can launch the latest Cloudbreak Deployer image based on your region at the  AWS Management Console .   Alternatively, instead of using the pre-built cloud images for AWS, you can install Cloudbreak Deployer on your own VM. See  install the Cloudbreak Deployer  for more information.   Make sure you opened the following ports on your virtual machine:   SSH (22)  Ambari (8080)  Identity server (8089)  Cloudbreak GUI (3000)  User authentication (3001)   AWS Image Details", 
+            "text": "We have pre-built cloud images for AWS with the Cloudbreak Deployer pre-installed. You can launch the latest Cloudbreak Deployer image based on your region at the  AWS Management Console .   Alternatively, instead of using the pre-built cloud images for AWS, you can install Cloudbreak Deployer on your own VM. See  install the Cloudbreak Deployer  for more information.   Make sure you opened the following ports on your security group:   SSH (22)  Cloudbreak API (8080)  Identity server (8089)  Cloudbreak GUI (3000)  User authentication (3001)   AWS Image Details", 
             "title": "AWS Cloud Images"
         }, 
         {
@@ -97,7 +97,7 @@
         }, 
         {
             "location": "/gcp-image/", 
-            "text": "Google Cloud Images\n\n\nWe have pre-built cloud images for GCP with the Cloudbreak Deployer pre-installed. Following the steps will guide you through the provider specific configuration then launch.\n\n\n\n\nAlternatively, instead of using the pre-built cloud images, you can install Cloudbreak Deployer on your own VM. See \ninstall the Cloudbreak Deployer\n for more information.\n\n\n\n\nConfigured Image\n\n\nYou can create the latest Cloudbreak deployer image on the \nGoogle Developers Console\n with the help\n of the \nGoogle Cloud Shell\n.\n\n\n\n\nImages are global resources, so they can be used across zones and projects.\n\n\nGCP Image Details\n\n\n\n\nPlease make sure you opened the following ports on your virtual machine:\n\n\n\n\nSSH (22)\n\n\nAmbari (8080)\n\n\nIdentity server (8089)\n\n\nCloudbreak GUI (3000)\n\n\nUser authentication (3001)\n\n\n\n\nSetup Cloudbreak Deployer\n\n\nOnce you have the Cloudbreak Deployer installed, proceed to \nSetup Cloudbreak Deployer\n.", 
+            "text": "Google Cloud Images\n\n\nWe have pre-built cloud images for GCP with the Cloudbreak Deployer pre-installed. Following the steps will guide you through the provider specific configuration then launch.\n\n\n\n\nAlternatively, instead of using the pre-built cloud images, you can install Cloudbreak Deployer on your own VM. See \ninstall the Cloudbreak Deployer\n for more information.\n\n\n\n\nConfigured Image\n\n\nYou can create the latest Cloudbreak deployer image on the \nGoogle Developers Console\n with the help\n of the \nGoogle Cloud Shell\n.\n\n\n\n\nImages are global resources, so they can be used across zones and projects.\n\n\nGCP Image Details\n\n\n\n\nPlease make sure you added the following ports to your firewall rules:\n\n\n\n\nSSH (22)\n\n\nCloudbreak API (8080)\n\n\nIdentity server (8089)\n\n\nCloudbreak GUI (3000)\n\n\nUser authentication (3001)\n\n\n\n\nSetup Cloudbreak Deployer\n\n\nOnce you have the Cloudbreak Deployer installed, proceed to \nSetup Cloudbreak Deployer\n.", 
             "title": "GCP Cloud Images"
         }, 
         {
@@ -107,7 +107,7 @@
         }, 
         {
             "location": "/gcp-image/#configured-image", 
-            "text": "You can create the latest Cloudbreak deployer image on the  Google Developers Console  with the help\n of the  Google Cloud Shell .   Images are global resources, so they can be used across zones and projects.  GCP Image Details   Please make sure you opened the following ports on your virtual machine:   SSH (22)  Ambari (8080)  Identity server (8089)  Cloudbreak GUI (3000)  User authentication (3001)", 
+            "text": "You can create the latest Cloudbreak deployer image on the  Google Developers Console  with the help\n of the  Google Cloud Shell .   Images are global resources, so they can be used across zones and projects.  GCP Image Details   Please make sure you added the following ports to your firewall rules:   SSH (22)  Cloudbreak API (8080)  Identity server (8089)  Cloudbreak GUI (3000)  User authentication (3001)", 
             "title": "Configured Image"
         }, 
         {
@@ -117,7 +117,7 @@
         }, 
         {
             "location": "/openstack-image/", 
-            "text": "OpenStack Cloud Images\n\n\n\n\nThis feature is currently \nTECHNICAL PREVIEW\n and is available for the \nOpenStack Juno\n release.\n\n\n\n\nWe have pre-built cloud images for OpenStack with the Cloudbreak Deployer pre-installed. Following the steps will guide you through the provider specific configuration then launch.\n\n\n\n\nAlternatively, instead of using the pre-built cloud images, you can install Cloudbreak Deployer on your own VM. See \ninstall the Cloudbreak Deployer\n for more information.\n\n\n\n\nDownload the Cloudbreak image\n\n\nYou can download the latest pre-configured Cloudbreak deployer image for OpenStack with the following script in the \nfollowing section.\n\n\nPlease make sure you opened the following ports on your virtual machine:\n\n\n\n\nSSH (22)\n\n\nAmbari (8080)\n\n\nIdentity server (8089)\n\n\nCloudbreak GUI (3000)\n\n\nUser authentication (3001)\n\n\n\n\nOpenStack image details\n\n\nImport the image into OpenStack\n\n\nexport OS_IMAGE_NAME=\nname_in_openstack\n\nexport OS_USERNAME=...\nexport OS_AUTH_URL=\nhttp://.../v2.0\n\nexport OS_TENANT_NAME=...\nglance image-create --name \n$OS_IMAGE_NAME\n --file \n$LATEST_IMAGE\n --disk-format qcow2 --container-format bare --progress\n\n\n\n\nSetup Cloudbreak Deployer\n\n\nOnce you have the Cloudbreak Deployer installed, proceed to \nSetup Cloudbreak Deployer\n.", 
+            "text": "OpenStack Cloud Images\n\n\n\n\nThis feature is currently \nTECHNICAL PREVIEW\n and is available for the \nOpenStack Juno\n release.\n\n\n\n\nWe have pre-built cloud images for OpenStack with the Cloudbreak Deployer pre-installed. Following the steps will guide you through the provider specific configuration then launch.\n\n\n\n\nAlternatively, instead of using the pre-built cloud images, you can install Cloudbreak Deployer on your own VM. See \ninstall the Cloudbreak Deployer\n for more information.\n\n\n\n\nDownload the Cloudbreak image\n\n\nYou can download the latest pre-configured Cloudbreak deployer image for OpenStack with the following script in the \nfollowing section.\n\n\nPlease make sure you opened the following ports on your network:\n\n\n\n\nSSH (22)\n\n\nCloudbreak API (8080)\n\n\nIdentity server (8089)\n\n\nCloudbreak GUI (3000)\n\n\nUser authentication (3001)\n\n\n\n\nOpenStack image details\n\n\nImport the image into OpenStack\n\n\nexport OS_IMAGE_NAME=\nname_in_openstack\n\nexport OS_USERNAME=...\nexport OS_AUTH_URL=\nhttp://.../v2.0\n\nexport OS_TENANT_NAME=...\nglance image-create --name \n$OS_IMAGE_NAME\n --file \n$LATEST_IMAGE\n --disk-format qcow2 --container-format bare --progress\n\n\n\n\nSetup Cloudbreak Deployer\n\n\nOnce you have the Cloudbreak Deployer installed, proceed to \nSetup Cloudbreak Deployer\n.", 
             "title": "OpenStack Cloud Images"
         }, 
         {
@@ -127,7 +127,7 @@
         }, 
         {
             "location": "/openstack-image/#download-the-cloudbreak-image", 
-            "text": "You can download the latest pre-configured Cloudbreak deployer image for OpenStack with the following script in the \nfollowing section.  Please make sure you opened the following ports on your virtual machine:   SSH (22)  Ambari (8080)  Identity server (8089)  Cloudbreak GUI (3000)  User authentication (3001)   OpenStack image details", 
+            "text": "You can download the latest pre-configured Cloudbreak deployer image for OpenStack with the following script in the \nfollowing section.  Please make sure you opened the following ports on your network:   SSH (22)  Cloudbreak API (8080)  Identity server (8089)  Cloudbreak GUI (3000)  User authentication (3001)   OpenStack image details", 
             "title": "Download the Cloudbreak image"
         }, 
         {
