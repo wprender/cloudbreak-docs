@@ -42,6 +42,7 @@ pages:
         - Auto-Scaling : periscope.md
         - Recipes: recipes.md
         - Blueprints : blueprints.md
+        - Platforms/Topologies : topologies.md
         - Kerberos: kerberos.md
         - SPI: spi.md
         - Operations : operations.md
