@@ -96,6 +96,12 @@
     </url>
         
     <url>
+     <loc>http://sequenceiq.com/cloudbreak-docs/topologies/</loc>
+     <lastmod>2016-02-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
      <loc>http://sequenceiq.com/cloudbreak-docs/kerberos/</loc>
      <lastmod>2016-02-04</lastmod>
      <changefreq>daily</changefreq>
