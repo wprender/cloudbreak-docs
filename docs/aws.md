@@ -11,7 +11,7 @@ Create and open the `cloudbreak-deployment` directory:
 cd cloudbreak-deployment
 ```
 
-This is the directory of the config files and the supporting binaries that will be downloaded by Cloudbreak deployer.
+This is the directory of the config files and the supporting binaries that will be downloaded by Cloudbreak deployer..
 
 ### Initialize your Profile
 
