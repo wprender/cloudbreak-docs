@@ -1,18 +1,19 @@
 
 
-## Account management on UI
+# Account management on UI
 
-On the Cloudbreak UI (Uluwatu) there are opportunity to review the user's account settings and manage some properties.
+On the Cloudbreak UI (Uluwatu) there are opportunity to review the user's entitlements and manage some settings.
 
-### Account Details page
+## Account Details page
 
-You can reach the `account details` page by clicking on the `account` header menu.
+You can view the `account details` on the `account` page (by clicking on the related header menu).
 
-#### Security scopes
+### Security scopes
 
-Next to the `Scope` field you can check the security scopes the user has. **The list of scopes the user has are not modifiable in this version of UI.**
+On the expanded `account details` you can check your **security scopes**.
+> **Note:** Even the administrator users cannot modify the list of scopes.
 
-Recently Cloudbreak has distinct security scope for the following resources:
+Cloudbreak has distinct security scope for the following resources:
 
  - Blueprints
  - Recipes
@@ -22,19 +23,20 @@ Recently Cloudbreak has distinct security scope for the following resources:
  - Networks
  - Security Groups
 
-In the future the list of security scopes could be extended with new resources.
+> In the future the list of security scopes could be extended with new resources.
 
-#### Cloud platforms
+### Cloud platforms
 
-Under the `Cloud platforms` field you can see the supported cloud platforms and whether they are displayed on the UI.
+`Cloud platforms` table lists the supported cloud platforms by Cloudbreak.
 
-Admin users can even change the displayed Cloud platforms.
-For example if only the Aws cloud platform is set to be displayed then under the `dashboard` header menu the `manage networks`, `manage resourcers`, `manage credentials`, `manage platforms` and under the `select a credential` header menu you can see only Aws related resourcers.
+**Administrator users can set the used (what will be available) cloud platforms for the group.**
 
-Supported Cloud platforms:
+**For example:** If the AWS cloud platform is the selected, only the AWS networks, resources, credentials and 
+platforms to be displayed and can be created for every users in the account (also for the managed users).
 
- - Aws
- - Azure rm
+#### Supported Cloud platforms:
+
+ - AWS
+ - Azure RM
  - GCP
- - Openstack
-
+ - OpenStack
