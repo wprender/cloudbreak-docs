@@ -39,6 +39,7 @@ pages:
     - Reference:
         - API : api.md
         - CLI/Shell : shell.md
+        - Account Management: ui_account.md
         - Auto-Scaling : periscope.md
         - Recipes: recipes.md
         - Blueprints : blueprints.md
