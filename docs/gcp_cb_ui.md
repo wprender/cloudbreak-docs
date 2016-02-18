@@ -195,6 +195,12 @@ There are some advanced features when deploying a new cluster, these are the fol
 
 `Validate blueprint:` feature to validate or not the Ambari blueprint. By default is switched on.
 
+## Cluster termination
+
+You can terminate running or stopped clusters with the `terminate` button in the cluster details.
+
+Sometimes Cloudbreak cannot synchronize it's state with the cluster state at the cloud provider and the cluster can't be terminated. In this case with the `Forced termination` option in the termination dialog box you can terminate the cluster at the Cloudbreak side anyway. **In this case you may need to manually remove resources at the cloud provider.**
+
 ## Next steps
 
 Congrats! Your cluster should now be up and running. To learn more about it we have some [interesting insights](operations.md) about Cloudbreak clusters.
