@@ -41,6 +41,7 @@ pages:
         - CLI/Shell : shell.md
         - Account Management: ui_account.md
         - Auto-Scaling : periscope.md
+        - SSSD configuration: sssd.md
         - Recipes: recipes.md
         - Blueprints : blueprints.md
         - Platforms/Topologies : topologies.md
