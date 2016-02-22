@@ -404,6 +404,8 @@
         
             <li><a href="#cluster-deployment">Cluster deployment</a></li>
         
+            <li><a href="#cluster-termination">Cluster termination</a></li>
+        
             <li><a href="#next-steps">Next steps</a></li>
         
     
@@ -550,6 +552,9 @@ OpenStack Dashboard.</p>
 <p><code>Minimum cluster size:</code> the provisioning strategy in case of the cloud provider can't allocate all the requested nodes</p>
 <p><code>Validate blueprint:</code> feature to validate or not the Ambari blueprint. By default is switched on.</p>
 <p>Once you have launched the cluster creation you can track the progress either on Cloudbreak UI or your cloud provider management UI.</p>
+<h2 id="cluster-termination">Cluster termination</h2>
+<p>You can terminate running or stopped clusters with the <code>terminate</code> button in the cluster details.</p>
+<p>Sometimes Cloudbreak cannot synchronize it's state with the cluster state at the cloud provider and the cluster can't be terminated. In this case with the <code>Forced termination</code> option in the termination dialog box you can terminate the cluster at the Cloudbreak side anyway. <strong>In this case you may need to manually remove resources at the cloud provider.</strong></p>
 <h2 id="next-steps">Next steps</h2>
 <p>Congrats! Your cluster should now be up and running. To learn more about it we have some <a href="../operations/">interesting insights</a> about Cloudbreak clusters.</p>
                     <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/openstack_cb_ui.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
