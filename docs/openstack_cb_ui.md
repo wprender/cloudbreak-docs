@@ -201,6 +201,12 @@ OpenStack Dashboard.
 
 Once you have launched the cluster creation you can track the progress either on Cloudbreak UI or your cloud provider management UI.
 
+## Cluster termination
+
+You can terminate running or stopped clusters with the `terminate` button in the cluster details.
+
+Sometimes Cloudbreak cannot synchronize it's state with the cluster state at the cloud provider and the cluster can't be terminated. In this case with the `Forced termination` option in the termination dialog box you can terminate the cluster at the Cloudbreak side anyway. **In this case you may need to manually remove resources at the cloud provider.**
+
 ## Next steps
 
 Congrats! Your cluster should now be up and running. To learn more about it we have some [interesting insights](operations.md) about Cloudbreak clusters.
