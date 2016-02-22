@@ -90,7 +90,7 @@ You can pass any additional consul configuration by defining a `DOCKER_CONSUL_OP
 ## Azure Resource manager command
 - **cbd azure configure-arm**
 - **cbd azure deploy-dash**
-See the documentation [here](/azure_pre_prov/#azure-application-setup-with-cloudbreak-deployer).
+See the documentation [here](/azure/#azure-application-setup-with-cloudbreak-deployer).
 
 ## Caveats
 

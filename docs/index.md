@@ -42,10 +42,10 @@ We have pre-built cloud images with Cloudbreak Deployer pre-installed. Following
 
 | Cloud | Cloud Image |
 |---|---|
-| AWS | You can follow the AWS instructions using this [link](aws-image.md). |
+| AWS | You can follow the AWS instructions using this [link](aws.md). |
 | Azure | There are no pre-built cloud images available for Azure. See [Azure Setup](azure.md) to get the Cloudbreak Deployer installed and configured. |
-| GCP | You can follow the GCP instructions using this [link](gcp-image.md) |
-| OpenStack | You can follow the OpenStack instructions using this [link](openstack-image.md) |
+| GCP | You can follow the GCP instructions using this [link](gcp.md) |
+| OpenStack | You can follow the OpenStack instructions using this [link](openstack.md) |
 
 ## Learn More
 
