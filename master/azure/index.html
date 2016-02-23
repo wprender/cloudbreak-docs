@@ -396,7 +396,7 @@
     
         <li class="main active"><a href="#azure-setup">Azure Setup</a></li>
         
-            <li><a href="#deploy-using-the-azure-web-ui">Deploy using the Azure web UI</a></li>
+            <li><a href="#deploy-using-the-azure-portal">Deploy using the Azure Portal</a></li>
         
             <li><a href="#under-the-hood">Under the hood</a></li>
         
@@ -407,26 +407,59 @@
                     
 
 <h1 id="azure-setup">Azure Setup</h1>
-<p>On other cloud providers you can create “public images”, while on Azure its a different process. 
-You have to create a publicly available virtual disk image (vhdi), which has to be downloaded and imported 
-into a storage account. Based on our experience usually it takes about 30-60 minutes until it gets copied and you can log into the VM.
-Therefore we provide a much easier way to launch CBD - based on the new Azure ResourceManager Templates.</p>
-<h2 id="deploy-using-the-azure-web-ui">Deploy using the Azure web UI</h2>
+<p>On other cloud providers you can create “public images”, while on Azure its a different process. You have to create a 
+publicly available virtual disk image (VHDI), which has to be downloaded and imported 
+into a storage account.</p>
+<p>Based on our experience usually it takes about 30-60 minutes until it gets copied and you can log into the VM.
+Therefore we provide a much easier way to launch Cludbreak Deployer based on the new <a href="https://github.com/Azure/azure-quickstart-templates">Azure Resource Manager 
+Templates</a>.</p>
+<h2 id="deploy-using-the-azure-portal">Deploy using the Azure Portal</h2>
 <p>It is as simple as clicking here: <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsequenceiq%2Fazure-cbd-quickstart%2Fmaster%2Fazuredeploy.json">  <img alt="deploy on azure" src="http://azuredeploy.net/deploybutton.png" /> </a></p>
+<p><strong>The following parameters are mandatory to be set (beyond to the default values) for the new CBD Template!</strong>
+On the <code>Custom deployment</code> panel:</p>
+<ol>
+<li>Please create a new <code>Resource group</code> </li>
+<li>
+<p>Select an appropriate <code>Resource group location</code>
+On the <code>Parameters</code> panel:</p>
+</li>
+<li>
+<p>Select the same <code>LOCATION</code> as for the resource group</p>
+</li>
+<li><code>PASSWORD</code> must be between 6-72 characters long and must satisfy at least 3 of password complexity requirements from the following:</li>
+<li>Contains an uppercase character</li>
+<li>Contains a lowercase character</li>
+<li>Contains a numeric digit</li>
+<li>
+<p>Contains a special character.
+Finally you should review the <code>Legal terms</code> on the <code>Custom deployment</code> panel:</p>
+</li>
+<li>
+<p>If you agree with the terms and conditions, just click on <code>Create</code> button of this pane</p>
+</li>
+<li>
+<p>Also click on the <code>Create</code> button on the <code>Custom deployment</code> </p>
 <blockquote>
-<p><strong>IMPORTANT:</strong> Please create or reuse a new <strong>Resource Group</strong> at the same location where the VM is started.</p>
+<p>Deployment takes about <strong>15-20 minutes</strong>. You can track the progress on the resource group details. If any issue 
+has occurred, open the <code>Audit logs</code> from the settings. </p>
 </blockquote>
-<p>After that you have to wait about 15-20 minutes until the Docker images are downloaded. Once its done, you can reach
-the Cloudbreak UI on port 3000. You can track the progress on the Azure UI and once the VM is created and running you can SSH to the instance and track the progress in the logs.</p>
+</li>
+<li>
+<p>Once it's successful done, you can reach the Cloudbreak UI at:<code>http://&lt;VM Public IP&gt;:3000/</code></p>
+</li>
+<li><strong>Optional:</strong> You can SSH to the VM and track the progress in the Cloudbreak logs (<code>cbd logs cloudbreak</code>)</li>
+</ol>
 <h2 id="under-the-hood">Under the hood</h2>
 <p>Meanwhile Azure is creating the deployment, here is some information about what happens in the background:</p>
 <ul>
-<li>start an instance from the official CentOS image, so no custom image copy is needed (which would take like 30 minutes)</li>
-<li>use <a href="https://github.com/Azure/azure-docker-extension">Docker VM Extension</a> to install Docker</li>
-<li>use <a href="https://github.com/Azure/azure-linux-extensions/tree/master/CustomScript">CustomScript Extension</a> to install Cloudbreak Deployer (cbd)</li>
+<li>Start an instance from the official CentOS image</li>
+<li>So no custom image copy is needed, which would take about 30 minutes</li>
+<li>Use <a href="https://github.com/Azure/azure-docker-extension">Docker VM Extension</a> to install Docker</li>
+<li>Use <a href="https://github.com/Azure/azure-linux-extensions/tree/master/CustomScript">CustomScript Extension</a> to install 
+Cloudbreak Deployer (cbd)</li>
 </ul>
 <h3 id="next-steps">Next steps</h3>
-<p>Once Cloudbreak is up and running you should check out the <a href="../azure_pre_prov/">Provisioning Prerequisites</a> needed to create Azure
+<p>Once Cloudbreak is up and running you should check out the <a href="../azure_pre_prov/">Provisioning Prerequisites</a> to create Azure
 clusters with Cloudbreak.</p>
                     <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/azure.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
                 </div>
