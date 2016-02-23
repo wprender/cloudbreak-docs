@@ -48,6 +48,7 @@ To launch the Cloudbreak application execute the `com.sequenceiq.cloudbreak.Clou
 -Dcb.client.secret=cbsecret2015
 -Dcb.db.port.5432.tcp.addr=192.168.59.103
 -Dcb.db.port.5432.tcp.port=5432
+-Dspring.cloud.consul.host=192.168.59.103
 -Dcb.identity.server.url=http://192.168.59.103:8089
 -Dserver.port=9091
 ```
@@ -63,6 +64,7 @@ cb.client.id=cloudbreak
 cb.client.secret=cbsecret2015
 cb.db.port.5432.tcp.addr=192.168.59.103
 cb.db.port.5432.tcp.port=5432
+spring.cloud.consul.host=192.168.59.103
 cb.identity.server.url=http://192.168.59.103:8089
 server.port=9091
 ```
