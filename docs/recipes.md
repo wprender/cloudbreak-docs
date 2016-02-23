@@ -17,7 +17,7 @@ The easiest way to create a custom recipe:
 
 ###Add recipe
 
-On the web interface under "manage recipes" section you should create new recipe. Please select SCRIPT or FILE type plugin, and fill other required fields.
+On the web interface under **manage recipes** section you should **create new recipe**. Please choose between SCRIPT, FILE or URL type plugin, and fill required fields.
 
 To add recipe via shell use the following command:
 
@@ -31,11 +31,9 @@ This command has optional parameters:
 
 `--timeout` "integer" timeout of the script execution
 
-`--publicInAccount` "flag" flags if the template is public in the account
+`--publicInAccount` "flag" flags if the recipe is public in the account
 
 In the background Cloudbreak pushes recipe to Consul key/value store during cluster creation.
-
-**Note** Stored recipes has limitation on size, because they are stored in Consul key/value store, the base64 encoded content of the scripts must be less than 512kB.
 
 ##Downloadable recipes
 
@@ -75,7 +73,7 @@ To configure recipe or recipe groups in Cloudbreak you have to create a descript
 
 At this point we need to understand some element of the JSON above.
 
-First of all `properties`. Properties are saved to Consul key/value store, and they are available from the pre or post script by fetching http://localhost:8500/v1/kv/[key]?raw. The limitation of the value's base64 representation is 512kB. This option is a good choice if you want to write reusable recipes.
+First of all `properties`. Properties are saved to Consul key/value store, and they are available from the pre or post script by fetching http://localhost:8500/v1/kv/[key]?raw. This option is a good choice if you want to write reusable recipes.
 
 The next one is `plugins`. As you read before we support a few kind of protocols, and each of them has their own limitations:
 
