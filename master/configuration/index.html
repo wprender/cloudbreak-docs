@@ -410,6 +410,8 @@
         
             <li><a href="#caveats">Caveats</a></li>
         
+            <li><a href="#ssh-fingerprint-verification">SSH fingerprint verification</a></li>
+        
     
     </ul>
 </div></div>
@@ -497,6 +499,11 @@ See the documentation <a href="../azure_pre_prov/#azure-application-setup-with-c
 <li><code>CBD_DEFAULT_PROFILE</code></li>
 <li>all <code>DOCKER_XXX</code></li>
 </ul>
+<h2 id="ssh-fingerprint-verification">SSH fingerprint verification</h2>
+<p>Cloudbreak is able to verify the SSH fingerprints of the provisioned virtual machines. We disable this feature by default for AWS and GCP because we have experienced issues, since Cloud providers do not always print the SSH fingerprint into the provisioned machines console output. The fingerprint validation feature could be turned on by configuring the 'CB_AWS_HOSTKEY_VERIFY' and/or the CB_GCP_HOSTKEY_VERIFY variables in your cbd profile like in the following example:</p>
+<pre><code>export CB_AWS_HOSTKEY_VERIFY=true
+export CB_GCP_HOSTKEY_VERIFY=true
+</code></pre>
                     <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/configuration.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
                 </div>
             
