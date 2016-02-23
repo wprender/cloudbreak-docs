@@ -6,10 +6,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         
-        <link rel="canonical" href="http://sequenceiq.com/cloudbreak-docs/topologies/">
+        <link rel="canonical" href="http://sequenceiq.com/cloudbreak-docs/sssd/">
         <link rel="shortcut icon" href="../img/favicon.ico">
 
-	<title>Platforms/Topologies - Cloudbreak 1.1.0</title>
+	<title>SSSD configuration - Cloudbreak 1.1.0</title>
 
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
@@ -290,8 +290,8 @@
 
                         
                             
-<li >
-    <a href="../sssd/">SSSD configuration</a>
+<li class="active">
+    <a href="./">SSSD configuration</a>
 </li>
 
                         
@@ -308,8 +308,8 @@
 
                         
                             
-<li class="active">
-    <a href="./">Platforms/Topologies</a>
+<li >
+    <a href="../topologies/">Platforms/Topologies</a>
 </li>
 
                         
@@ -370,12 +370,12 @@
                 </li>
                 
                     <li >
-                        <a rel="next" href="../blueprints/">
+                        <a rel="next" href="../periscope/">
                             <i class="fa fa-arrow-left"></i> Previous
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="../kerberos/">
+                        <a rel="prev" href="../recipes/">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -400,15 +400,15 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#platforms">Platforms</a></li>
+        <li class="main active"><a href="#system-security-services-daemon-configuration">System Security Services Daemon configuration</a></li>
         
-            <li><a href="#data-locality-and-topologies">Data locality and topologies</a></li>
+            <li><a href="#manage-sssd-configurations">Manage SSSD configurations</a></li>
         
-            <li><a href="#managing-platforms">Managing Platforms</a></li>
+            <li><a href="#enable-sssd-configuration">Enable SSSD configuration</a></li>
         
-            <li><a href="#credential-network-and-template-creation">Credential, Network and Template Creation</a></li>
+            <li><a href="#embedded-ldap-support">Embedded LDAP support</a></li>
         
-            <li><a href="#cluster-creation-on-ui">Cluster Creation on UI</a></li>
+            <li><a href="#throubleshooting">Throubleshooting</a></li>
         
     
     </ul>
@@ -416,73 +416,78 @@
                 <div class="col-md-9" role="main">
                     
 
-<h1 id="platforms">Platforms</h1>
+<h1 id="system-security-services-daemon-configuration">System Security Services Daemon configuration</h1>
 <blockquote>
 <p>This feature is currently <code>TECHNICAL PREVIEW</code>.</p>
 </blockquote>
-<p>With this feature you can define platform tag that can be attached to Credentials, Networks and Templates. This way you 
-can bundle together different configurations.</p>
-<h2 id="data-locality-and-topologies">Data locality and topologies</h2>
-<p>The <a href="http://docs.openstack.org/developer/sahara/icehouse/userdoc/features.html#data-locality">OpenStack documentation</a> about data locality:</p>
-<blockquote>
-<p>It is extremely important for data processing to do locally (on the same rack, OpenStack compute node or even VM) 
-as much work as possible. Hadoop supports data-locality feature and can schedule jobs to tasktracker nodes that are local for input stream. In this case tasktracker could communicate directly with local data node.</p>
-</blockquote>
-<h3 id="openstack-topology-mapping">OpenStack Topology Mapping</h3>
-<p>Topology mapping can be attached to the Platform definition, that associates the hypervisors with racks. 
-You can set the mapping on the Cloudbreak Web UI by defining this line by line or uploading in a file.</p>
-<p>The <code>mapping file</code> should have the following format:</p>
-<pre><code>hypervisor1 /rack1
-hypervisor2 /rack2
-hypervisor3 /rack2
+<p>By default Cloudbreak installs Hadoop with a few default users. Most of the time default users don't give great freedom, to manage permissions in the ecosystem.
+Other big problem around the user management is that created users must be consistent on the whole cluster, otherwise operations will fail.
+That's where System Security Services Daemon (a.k.a. SSSD) comes in picture. SSSD is a system daemon. Its primary function is to provide access to identity and authentication remote resource through a common framework that can provide caching and offline support to the system. Cloudbreak helps to install and configure SSSD, and sets up an SSH server on Ambari hosts, to allow log in with external users on the hosts's 2022 port.</p>
+<pre><code>ssh [external-user]@[ambari-host] -p 2022
 </code></pre>
-<p>Based on this mapping the Cloudbreak application could ensure that the rack information of the started VMs will be passed to Hadoop services via Ambari.</p>
-<h2 id="managing-platforms">Managing Platforms</h2>
-<h3 id="cloudbreak-ui">Cloudbreak UI</h3>
-<blockquote>
-<p>You can log into the Cloudbreak application at http://PUBLIC_IP:3000. You can find the provider specific 
-documentations here:</p>
+
+<h2 id="manage-sssd-configurations">Manage SSSD configurations</h2>
+<p>You can add new configuration on the web UI. Go to <strong>manage security configurations</strong> section and select <strong>create configuration</strong>. There are 3 types of configuration:</p>
 <ul>
-<li><a href="../aws/">AWS</a></li>
-<li><a href="../azure/">Azure</a></li>
-<li><a href="../gcp/">GCP</a></li>
-<li><a href="../openstack/">OpenStack</a></li>
+<li>PARAMETERS, Cloudbreak will generate configuration by the given parameters</li>
+<li>FILE, upload your configuration</li>
+<li>TEXT, simply type or paste your configuration</li>
 </ul>
-</blockquote>
-<p>You can find the <code>manage platforms</code> expandable section on the Cloudbreak Dashboard. With the help of <code>create 
-platform</code> button you can open the platform creation form. <strong>Platform name is the only one 
-required parameter.</strong>
-<img alt="" src="../images/platform-simple.png" /></p>
-<p><a href="#openstack-topology-mapping">OpenStack Topology Mapping</a> is optional on the <code>manage platforms</code>.
-<img alt="" src="../images/platform-form-filled.png" /></p>
-<h3 id="cloudbreak-shell">Cloudbreak Shell</h3>
-<blockquote>
-<p>Start the shell with <code>cbd util cloudbreak-shell</code> on a console. This will launch the Cloudbreak shell inside a Docker
- container and you are ready to start using it. You can find more details at the <a href="../shell/">Cloudbreak Shell</a> page.</p>
-</blockquote>
-<pre><code># Creating a Platform
-platform create --AWS --name platform-name --description 'description of the platform'
-
-# Creating OpenStack Platform with topology mapping
-platform create --OPENSTACK --name platform-name --description 'openstack platform' --file file_path
-platform create --OPENSTACK --name platform-name --description 'openstack platform' --url url_to_file
+<p>In the shell you have two options <code>add</code> and <code>upload</code>.</p>
+<pre><code>sssdconfig add --name [config-name] --providerType [LDAP|ACTIVE_DIRECTORY|IPA] --url [provider-url] --schema [AD|IPA|RFC2307|RFC2307BIS] --baseSearch [search-base-of-posix-entities] --tlsReqcert [NEVER|ALLOW|TRY|DEMAND|HARD]
 </code></pre>
 
-<h2 id="credential-network-and-template-creation">Credential, Network and Template Creation</h2>
-<p>Credential, Network and Template creation forms and the related shell commands have option to set a platform for 
-the resource.</p>
-<h3 id="cloudbreak-ui_1">Cloudbreak UI</h3>
-<p>Example network resource creation an the UI with the option of selecting a Platform:
-<img alt="" src="../images/platform-select.png" /></p>
-<h3 id="cloudbreak-shell_1">Cloudbreak Shell</h3>
-<pre><code># Example shell command to create Network resource with a connected Platform
-network create --AWS --name aws-network --subnet 10.10.10.0/24 --description 'example network' --platformId 26
+<p>This command has optional parameters:</p>
+<p><code>--description</code> "string" description of the configuration</p>
+<p><code>--adServer</code> "string" comma-separated list of IP addresses or hostnames of the AD servers</p>
+<p><code>--kerberosServer</code> "string" comma-separated list of IP addresses or hostnames of the Kerberos servers</p>
+<p><code>--kerberosRealm</code> "string" name of the Kerberos realm</p>
+<p><code>--publicInAccount</code> "flag" flags if the configuration is public in the account</p>
+<p>To upload configuration please use <code>upload</code> command:</p>
+<pre><code>sssdconfig upload --name [config-name] --file [configuration-path]
 </code></pre>
 
-<h2 id="cluster-creation-on-ui">Cluster Creation on UI</h2>
-<p>If platform has assigned to the selected credential, then only the associated networks and templates can be selected 
-during cluster creation.</p>
-                    <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/topologies.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
+<p>This command also has optional parameters:</p>
+<p><code>--description</code> "string" description of the configuration</p>
+<p><code>--publicInAccount</code> "flag" flags if the configuration is public in the account</p>
+<h2 id="enable-sssd-configuration">Enable SSSD configuration</h2>
+<p>There are two ways to enable SSSD configuration on a Cloudbreak cluster.</p>
+<ul>
+<li>On UI in the <strong>Create cluster</strong> wizard, on the <strong>Setup Network and Security</strong> tab, check the <strong>Use pre configured SSSD</strong> option and select an existing configuration at <strong>Select configuration</strong>.</li>
+<li>In CLoudbreak shell before <code>cluster create</code> command select a configuration by name <code>sssdconfig select --name [config-name]</code> or by id <code>sssdconfig select --id [config-id]</code></li>
+</ul>
+<h2 id="embedded-ldap-support">Embedded LDAP support</h2>
+<p>In Cloudbreak there is a built in but optionally LDAP service,</p>
+<ul>
+<li>On UI in the <strong>Create cluster</strong> wizard, on the <strong>Setup Network and Security</strong> tab, check the <strong>Start LDAP and configure SSSD</strong> option.</li>
+</ul>
+<p>or</p>
+<ul>
+<li>In Cloudbreak shell place <code>ldapRequired</code> flag in <code>cluster create</code> command: <code>cluster create --ldapRequired</code>.</li>
+</ul>
+<p>That's it. In the background Cloudbreak creates a default SSSD configuration named <code>cloudbreak-default-ldap</code> if there is no other selected configuration, starts LDAP service and integrate them together. If you want to connect to an Ambari node (except Ambari server), just use <code>ambari-qa</code> user with <code>cloudbreak</code> password to login: <code>ssh ambari-qa@[ambari-host] -p 2022</code>.</p>
+<h3 id="test-configuration">Test configuration</h3>
+<p>User and group ids are starting at 10000 in the LDAP database, so after login you have to see this results:</p>
+<pre><code>[ambari-qa@host ~]$ id ambari-qa
+uid=10000(ambari-qa) gid=10000(hadoop) groups=10000(hadoop),100(users)
+[ambari-qa@host ~]$ getent passwd ambari-qa
+ambari-qa:*:10000:10000:ambari-qa:/home/ambari-qa:/bin/bash
+</code></pre>
+
+<h2 id="throubleshooting">Throubleshooting</h2>
+<p>In Cloudbreak the SSSD service starts in very verbose mode. To read log files first login to the host as <code>centos</code> user.</p>
+<pre><code>ssh centos@[ambari-host] -i [cluster-credential]
+</code></pre>
+
+<p>Next you have jump into Ambari agent Docker container.</p>
+<pre><code>sudo docker exec -it $(docker ps --format=&quot;{{.Names}}&quot; | grep ambari-agent) bash
+</code></pre>
+
+<p>Logs are found at <code>/var/log/sssd</code> directory in file per service format.</p>
+<pre><code>[root@docker-ambari /]# ls /var/log/sssd
+ldap_child.log  sssd_LDAP.log  sssd.log  sssd_nss.log  sssd_pam.log
+</code></pre>
+                    <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/sssd.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
                 </div>
             
         </div>

@@ -290,6 +290,12 @@
 
                         
                             
+<li >
+    <a href="../sssd/">SSSD configuration</a>
+</li>
+
+                        
+                            
 <li class="active">
     <a href="./">Recipes</a>
 </li>
@@ -364,7 +370,7 @@
                 </li>
                 
                     <li >
-                        <a rel="next" href="../periscope/">
+                        <a rel="next" href="../sssd/">
                             <i class="fa fa-arrow-left"></i> Previous
                         </a>
                     </li>
@@ -420,7 +426,7 @@
 <li>upload them on shell or web interface</li>
 </ul>
 <h3 id="add-recipe">Add recipe</h3>
-<p>On the web interface under "manage recipes" section you should create new recipe. Please select SCRIPT or FILE type plugin, and fill other required fields.</p>
+<p>On the web interface under <strong>manage recipes</strong> section you should <strong>create new recipe</strong>. Please choose between SCRIPT, FILE or URL type plugin, and fill required fields.</p>
 <p>To add recipe via shell use the following command:</p>
 <pre><code>recipe store --name [recipe-name] --executionType [ONE_NODE|ALL_NODES] --preInstallScriptFile /path/of/the/pre-install-script --postInstallScriptFile /path/of/the/post-install-script
 </code></pre>
@@ -428,9 +434,8 @@
 <p>This command has optional parameters:</p>
 <p><code>--description</code> "string" description of the recipe</p>
 <p><code>--timeout</code> "integer" timeout of the script execution</p>
-<p><code>--publicInAccount</code> "flag" flags if the template is public in the account</p>
+<p><code>--publicInAccount</code> "flag" flags if the recipe is public in the account</p>
 <p>In the background Cloudbreak pushes recipe to Consul key/value store during cluster creation.</p>
-<p><strong>Note</strong> Stored recipes has limitation on size, because they are stored in Consul key/value store, the base64 encoded content of the scripts must be less than 512kB.</p>
 <h2 id="downloadable-recipes">Downloadable recipes</h2>
 <p>A downloadable recipe should be available on HTTP, HTTPS protocols optionally with basic authentication, or any kind of public Git repository.</p>
 <p>This kind of recipe must contain a plugin.toml file, with some basic information about the recipe. Besides this at least a recipe-pre-install or a recipe-post-install script.</p>
@@ -461,7 +466,7 @@ website_url = &quot;[website-url]&quot;
 </code></pre>
 
 <p>At this point we need to understand some element of the JSON above.</p>
-<p>First of all <code>properties</code>. Properties are saved to Consul key/value store, and they are available from the pre or post script by fetching http://localhost:8500/v1/kv/[key]?raw. The limitation of the value's base64 representation is 512kB. This option is a good choice if you want to write reusable recipes.</p>
+<p>First of all <code>properties</code>. Properties are saved to Consul key/value store, and they are available from the pre or post script by fetching http://localhost:8500/v1/kv/[key]?raw. This option is a good choice if you want to write reusable recipes.</p>
 <p>The next one is <code>plugins</code>. As you read before we support a few kind of protocols, and each of them has their own limitations:</p>
 <ul>
 <li>

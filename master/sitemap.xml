@@ -90,6 +90,12 @@
     </url>
         
     <url>
+     <loc>http://sequenceiq.com/cloudbreak-docs/sssd/</loc>
+     <lastmod>2016-02-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
      <loc>http://sequenceiq.com/cloudbreak-docs/recipes/</loc>
      <lastmod>2016-02-23</lastmod>
      <changefreq>daily</changefreq>
