@@ -103,3 +103,11 @@ Only the following environment variables _are_ inherited:
 - `TRACE`
 - `CBD_DEFAULT_PROFILE`
 - all `DOCKER_XXX`
+
+##SSH fingerprint verification
+
+Cloudbreak is able to verify the SSH fingerprints of the provisioned virtual machines. We disable this feature by default for AWS and GCP because we have experienced issues, since Cloud providers do not always print the SSH fingerprint into the provisioned machines console output. The fingerprint validation feature could be turned on by configuring the 'CB_AWS_HOSTKEY_VERIFY' and/or the CB_GCP_HOSTKEY_VERIFY variables in your cbd profile like in the following example:
+```
+export CB_AWS_HOSTKEY_VERIFY=true
+export CB_GCP_HOSTKEY_VERIFY=true
+```
