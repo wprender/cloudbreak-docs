@@ -71,36 +71,9 @@
 
                         
                             
-  <li class="dropdown-submenu">
-    <a tabindex="-1" href="">Installation</a>
-    <ul class="dropdown-menu">
-        
-            
 <li >
-    <a href="../onprem/">Cloudbreak Deployer</a>
+    <a href="../onprem/">Installation</a>
 </li>
-
-        
-            
-<li >
-    <a href="../aws-image/">AWS Cloud Images</a>
-</li>
-
-        
-            
-<li >
-    <a href="../gcp-image/">GCP Cloud Images</a>
-</li>
-
-        
-            
-<li >
-    <a href="../openstack-image/">OpenStack Cloud Images</a>
-</li>
-
-        
-    </ul>
-  </li>
 
                         
                             
@@ -120,143 +93,26 @@
                 
                 
                 
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cloud Providers <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                        
-                            
-  <li class="dropdown-submenu">
-    <a tabindex="-1" href="">AWS</a>
-    <ul class="dropdown-menu">
-        
-            
-<li >
-    <a href="../aws/">Setup</a>
-</li>
-
-        
-            
-<li >
-    <a href="../aws_pre_prov/">Provisioning Prerequisites</a>
-</li>
-
-        
-            
-<li >
-    <a href="../aws_cb_ui/">Provisioning - UI</a>
-</li>
-
-        
-            
-<li >
-    <a href="../aws_cb_shell/">Provisioning - CLI</a>
-</li>
-
-        
-    </ul>
-  </li>
-
-                        
-                            
-  <li class="dropdown-submenu">
-    <a tabindex="-1" href="">Azure</a>
-    <ul class="dropdown-menu">
-        
-            
-<li >
-    <a href="../azure/">Setup</a>
-</li>
-
-        
-            
-<li >
-    <a href="../azure_pre_prov/">Provisioning Prerequisites</a>
-</li>
-
-        
-            
-<li >
-    <a href="../azure_cb_ui/">Provisioning - UI</a>
-</li>
-
-        
-            
-<li >
-    <a href="../azure_cb_shell/">Provisioning - CLI</a>
-</li>
-
-        
-    </ul>
-  </li>
-
-                        
-                            
-  <li class="dropdown-submenu">
-    <a tabindex="-1" href="">GCP</a>
-    <ul class="dropdown-menu">
-        
-            
-<li >
-    <a href="../gcp/">Setup</a>
-</li>
-
-        
-            
-<li >
-    <a href="../gcp_pre_prov/">Provisioning Prerequisites</a>
-</li>
-
-        
-            
-<li >
-    <a href="../gcp_cb_ui/">Provisioning - UI</a>
-</li>
-
-        
-            
-<li >
-    <a href="../gcp_cb_shell/">Provisioning - CLI</a>
-</li>
-
-        
-    </ul>
-  </li>
-
-                        
-                            
-  <li class="dropdown-submenu">
-    <a tabindex="-1" href="">OpenStack</a>
-    <ul class="dropdown-menu">
-        
-            
-<li >
-    <a href="../openstack/">Setup</a>
-</li>
-
-        
-            
-<li >
-    <a href="../openstack_pre_prov/">Provisioning Prerequisites</a>
-</li>
-
-        
-            
-<li >
-    <a href="../openstack_cb_ui/">Provisioning - UI</a>
-</li>
-
-        
-            
-<li >
-    <a href="../openstack_cb_shell/">Provisioning - CLI</a>
-</li>
-
-        
-    </ul>
-  </li>
-
-                        
-                        </ul>
+                    <li >
+                        <a href="../aws/">AWS</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../azure/">Azure</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../gcp/">GCP</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../openstack/">OpenStack</a>
                     </li>
                 
                 
@@ -370,7 +226,7 @@
                 </li>
                 
                     <li >
-                        <a rel="next" href="../openstack-image/">
+                        <a rel="next" href="../onprem/">
                             <i class="fa fa-arrow-left"></i> Previous
                         </a>
                     </li>
@@ -522,11 +378,11 @@
 </tr>
 <tr>
 <td>WASB support</td>
-<td>For clusters launched on Microsoft Azure the default file system in use will be <a href="http://blogs.msdn.com/b/cindygross/archive/2015/02/04/understanding-wasb-and-hadoop-storage-in-azure.aspx">WASB</a>. Users will still have to option to use local HDFS with attached disk but the recommended file system will be WASB. See <a href="../azure_pre_prov/">Filesystem configuration</a> for more information.</td>
+<td>For clusters launched on Microsoft Azure the default file system in use will be <a href="http://blogs.msdn.com/b/cindygross/archive/2015/02/04/understanding-wasb-and-hadoop-storage-in-azure.aspx">WASB</a>. Users will still have to option to use local HDFS with attached disk but the recommended file system will be WASB. See Filesystem configuration for more information.</td>
 </tr>
 <tr>
 <td>DASH support for WASB</td>
-<td>When WASB is used as a Hadoop filesystem the files are full-value blobs in a storage account. It means better performance compared to the data disks and the WASB filesystem can be configured very easily but Azure storage accounts have their own <a href="https://azure.microsoft.com/en-us/documentation/articles/azure-subscription-service-limits/#storage-limits">limitations</a> as well. There is a space limitation for TB per storage account (500 TB) as well but the real bottleneck is the total request rate that is only 20000 IOPS where Azure will start to throw errors when trying to do an I/O operation. To bypass those limits Microsoft created a small service called <a href="https://github.com/MicrosoftDX/Dash">DASH</a>. See <a href="../azure_pre_prov/">Filesystem configuration</a> for more information.</td>
+<td>When WASB is used as a Hadoop filesystem the files are full-value blobs in a storage account. It means better performance compared to the data disks and the WASB filesystem can be configured very easily but Azure storage accounts have their own <a href="https://azure.microsoft.com/en-us/documentation/articles/azure-subscription-service-limits/#storage-limits">limitations</a> as well. There is a space limitation for TB per storage account (500 TB) as well but the real bottleneck is the total request rate that is only 20000 IOPS where Azure will start to throw errors when trying to do an I/O operation. To bypass those limits Microsoft created a small service called <a href="https://github.com/MicrosoftDX/Dash">DASH</a>. See Filesystem configuration for more information.</td>
 </tr>
 <tr>
 <td>Support for new regions</td>

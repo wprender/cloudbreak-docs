@@ -9,7 +9,7 @@
         <link rel="canonical" href="http://sequenceiq.com/cloudbreak-docs/onprem/">
         <link rel="shortcut icon" href="../img/favicon.ico">
 
-	<title>Cloudbreak Deployer - Cloudbreak 1.1.0</title>
+	<title>Installation - Cloudbreak 1.1.0</title>
 
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
@@ -71,36 +71,9 @@
 
                         
                             
-  <li class="dropdown-submenu">
-    <a tabindex="-1" href="">Installation</a>
-    <ul class="dropdown-menu">
-        
-            
 <li class="active">
-    <a href="./">Cloudbreak Deployer</a>
+    <a href="./">Installation</a>
 </li>
-
-        
-            
-<li >
-    <a href="../aws-image/">AWS Cloud Images</a>
-</li>
-
-        
-            
-<li >
-    <a href="../gcp-image/">GCP Cloud Images</a>
-</li>
-
-        
-            
-<li >
-    <a href="../openstack-image/">OpenStack Cloud Images</a>
-</li>
-
-        
-    </ul>
-  </li>
 
                         
                             
@@ -120,143 +93,26 @@
                 
                 
                 
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cloud Providers <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                        
-                            
-  <li class="dropdown-submenu">
-    <a tabindex="-1" href="">AWS</a>
-    <ul class="dropdown-menu">
-        
-            
-<li >
-    <a href="../aws/">Setup</a>
-</li>
-
-        
-            
-<li >
-    <a href="../aws_pre_prov/">Provisioning Prerequisites</a>
-</li>
-
-        
-            
-<li >
-    <a href="../aws_cb_ui/">Provisioning - UI</a>
-</li>
-
-        
-            
-<li >
-    <a href="../aws_cb_shell/">Provisioning - CLI</a>
-</li>
-
-        
-    </ul>
-  </li>
-
-                        
-                            
-  <li class="dropdown-submenu">
-    <a tabindex="-1" href="">Azure</a>
-    <ul class="dropdown-menu">
-        
-            
-<li >
-    <a href="../azure/">Setup</a>
-</li>
-
-        
-            
-<li >
-    <a href="../azure_pre_prov/">Provisioning Prerequisites</a>
-</li>
-
-        
-            
-<li >
-    <a href="../azure_cb_ui/">Provisioning - UI</a>
-</li>
-
-        
-            
-<li >
-    <a href="../azure_cb_shell/">Provisioning - CLI</a>
-</li>
-
-        
-    </ul>
-  </li>
-
-                        
-                            
-  <li class="dropdown-submenu">
-    <a tabindex="-1" href="">GCP</a>
-    <ul class="dropdown-menu">
-        
-            
-<li >
-    <a href="../gcp/">Setup</a>
-</li>
-
-        
-            
-<li >
-    <a href="../gcp_pre_prov/">Provisioning Prerequisites</a>
-</li>
-
-        
-            
-<li >
-    <a href="../gcp_cb_ui/">Provisioning - UI</a>
-</li>
-
-        
-            
-<li >
-    <a href="../gcp_cb_shell/">Provisioning - CLI</a>
-</li>
-
-        
-    </ul>
-  </li>
-
-                        
-                            
-  <li class="dropdown-submenu">
-    <a tabindex="-1" href="">OpenStack</a>
-    <ul class="dropdown-menu">
-        
-            
-<li >
-    <a href="../openstack/">Setup</a>
-</li>
-
-        
-            
-<li >
-    <a href="../openstack_pre_prov/">Provisioning Prerequisites</a>
-</li>
-
-        
-            
-<li >
-    <a href="../openstack_cb_ui/">Provisioning - UI</a>
-</li>
-
-        
-            
-<li >
-    <a href="../openstack_cb_shell/">Provisioning - CLI</a>
-</li>
-
-        
-    </ul>
-  </li>
-
-                        
-                        </ul>
+                    <li >
+                        <a href="../aws/">AWS</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../azure/">Azure</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../gcp/">GCP</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../openstack/">OpenStack</a>
                     </li>
                 
                 
@@ -375,7 +231,7 @@
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="../aws-image/">
+                        <a rel="prev" href="../releasenotes/">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -412,6 +268,8 @@
         
             <li><a href="#start-cloudbreak">Start Cloudbreak</a></li>
         
+            <li><a href="#troubleshooting">Troubleshooting</a></li>
+        
             <li><a href="#next-steps">Next steps</a></li>
         
     
@@ -422,14 +280,11 @@
 
 <h1 id="install-cloudbreak-deployer">Install Cloudbreak Deployer</h1>
 <p>To install Cloudbreak Deployer on your selected environment you have to follow the steps below. The instruction describe a CentOS-based installation.</p>
-<blockquote>
-<p><strong>IMPORTANT:</strong> If you plan to use Cloudbreak on Azure, you <strong>must</strong> use the <a href="../azure/">Azure Setup</a> instructions to install and configure the Cloudbreak.</p>
-</blockquote>
 <h2 id="system-requirements">System Requirements</h2>
 <p>To run the Cloudbreak Deployer and install the Cloudbreak Application, you must meet the following system requirements:</p>
 <ul>
 <li>RHEL / CentOS / Oracle Linux 7 (64-bit)</li>
-<li>Docker 1.8.3 (or later)</li>
+<li>Docker 1.9.1</li>
 </ul>
 <blockquote>
 <p>You can install Cloudbreak on Mac OS X "Darwin" for <strong>evaluation purposes only</strong>. This operating system is not supported for a production deployment of Cloudbreak.</p>
@@ -437,25 +292,27 @@
 <p>Make sure you opened the following ports:</p>
 <ul>
 <li>SSH (22)</li>
-<li>Ambari (8080)</li>
+<li>Cloudbreak (8080)</li>
 <li>Identity server (8089)</li>
 <li>Cloudbreak GUI (3000)</li>
 <li>User authentication (3001)</li>
 </ul>
-<p>Assume <strong>root</strong> privileges with this command:</p>
-<pre><code>sudo su
+<p>Every command shall be executed as root <strong>root</strong>. In order to get root privileges execute:</p>
+<pre><code>sudo -i
 </code></pre>
 
-<p>To permanently disable <strong>SELinux</strong> set SELINUX=disabled in /etc/selinux/config This ensures that SELinux does not turn itself on after you reboot the machine:</p>
-<pre><code>setenforce 0 &amp;&amp; sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
+<p>Ensure that your system is up-to date and reboot if necessary (e.g. there was a kernel update)  :</p>
+<pre><code>yum -y update
 </code></pre>
 
 <p>You need to install iptables-services, otherwise the 'iptables save' command will not be available:</p>
-<pre><code>yum -y install iptables-services net-tools unzip
+<pre><code>yum -y install iptables-services net-tools
 </code></pre>
 
-<p>Please configure your iptables on your machine:</p>
-<pre><code>sed -i 's/net.ipv4.ip_forward = 0/net.ipv4.ip_forward = 1/g' /etc/sysctl.conf
+<p>Please configure permissive iptables on your machine:</p>
+<pre><code>iptables --flush INPUT &amp;&amp; \
+iptables --flush FORWARD &amp;&amp; \
+service iptables save
 </code></pre>
 
 <p>Configure a custom Docker repository for installing the correct version of Docker:</p>
@@ -470,39 +327,23 @@ EOF
 </code></pre>
 
 <p>Then you are able to install the Docker service:</p>
-<pre><code>yum install -y docker-engine-1.8.3
-</code></pre>
-
-<p>Configure your installed Docker service:</p>
-<pre><code>cat &gt; /usr/lib/systemd/system/docker.service &lt;&lt;&quot;EOF&quot;
-[Unit]
-Description=Docker Application Container Engine
-Documentation=https://docs.docker.com
-After=network.target docker.socket
-Requires=docker.socket
-
-[Service]
-ExecStart=/usr/bin/docker -d -H fd:// -H tcp://0.0.0.0:2376 --selinux-enabled=false --storage-driver=devicemapper --storage-opt=dm.basesize=30G
-MountFlags=slave
-
-[Install]
-WantedBy=multi-user.target
-EOF
-</code></pre>
-
-<p>Remove docker folder and restart Docker service:</p>
-<pre><code>systemctl daemon-reload &amp;&amp; service docker start &amp;&amp; systemctl enable docker.service
+<pre><code>yum install -y docker-engine-1.9.1 docker-engine-selinux-1.9.1
+systemctl start docker
+systemctl enable docker
 </code></pre>
 
 <h2 id="install-cloudbreak-deployer_1">Install Cloudbreak deployer</h2>
 <p>Install the Cloudbreak deployer and unzip the platform specific single binary to your PATH. The one-liner way is:</p>
-<pre><code>curl https://raw.githubusercontent.com/sequenceiq/cloudbreak-deployer/master/install-latest | sh &amp;&amp; cbd --version
+<pre><code>yum -y install unzip tar
+curl https://raw.githubusercontent.com/sequenceiq/cloudbreak-deployer/master/install-latest | sh &amp;&amp; cbd --version
 </code></pre>
 
 <p>Once the Cloudbreak deployer is installed, you can start to setup the Cloudbreak application.</p>
 <h2 id="initialize-your-profile">Initialize your Profile</h2>
 <p>First initialize cbd by creating a <code>Profile</code> file:</p>
-<pre><code>cbd init
+<pre><code>mkdir cloudbreak-deployment
+cd cloudbreak-deployment
+cbd init
 </code></pre>
 
 <p>It will create a <code>Profile</code> file in the current directory. Please edit the file - the only required
@@ -522,7 +363,8 @@ cbd generate
 <h2 id="start-cloudbreak">Start Cloudbreak</h2>
 <p>To start the Cloudbreak application use the following command.
 This will start all the Docker containers and initialize the application. It will take a few minutes until all the services start.</p>
-<pre><code>cbd start
+<pre><code>cbd pull
+cbd start
 </code></pre>
 
 <blockquote>
@@ -535,6 +377,11 @@ This will start all the Docker containers and initialize the application. It wil
 <blockquote>
 <p>Cloudbreak server should start within a minute - you should see a line like this: <code>Started CloudbreakApplication in 36.823 seconds</code></p>
 </blockquote>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<p>If you are experiencing with permission or connection issues, then try to permanently disable <strong>SELinux</strong>. Setting the SELINUX=disabled in /etc/selinux/config  ensures that SELinux is not turned on after reboot of the machine:</p>
+<pre><code>setenforce 0 &amp;&amp; sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
+</code></pre>
+
 <h2 id="next-steps">Next steps</h2>
 <p>Now that you all pre-requisites for Cloudbreak are in place you can follow with the <strong>cloud provider specific</strong> configuration. Based on the location where you plan to launch HDP clusters select one of the providers documentation and follow the steps from the <strong>Deployment</strong> section.</p>
 <p>You can find the provider specific documentations here:</p>
