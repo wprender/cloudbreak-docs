@@ -14,7 +14,7 @@ To run the Cloudbreak Deployer and install the Cloudbreak Application, you must 
 Make sure you opened the following ports:
 
  * SSH (22)
- * Cloudbreak (8080)
+ * Cloudbreak API (8080)
  * Identity server (8089)
  * Cloudbreak GUI (3000)
  * User authentication (3001)
@@ -136,11 +136,13 @@ setenforce 0 && sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/con
 
 ## Next steps
 
-Now that you all pre-requisites for Cloudbreak are in place you can follow with the **cloud provider specific** configuration. Based on the location where you plan to launch HDP clusters select one of the providers documentation and follow the steps from the **Deployment** section.
+Now that you all pre-requisites for Cloudbreak are in place you can follow with the **cloud provider specific** 
+configuration. Based on the location where you plan to launch HDP clusters select one of the provider in the header 
+and follow the steps from the **Setup** section:
 
-You can find the provider specific documentations here:
+ * [AWS](aws.md#aws-setup)
+ * [Azure](azure.md)
+ * [GCP](gcp.md#google-setup)
+ * [OpenStack](openstack.md#openstack-setup)
 
-* [AWS](aws.md)
-* [Azure](azure.md)
-* [GCP](gcp.md)
-* [OpenStack](openstack.md)
+> **Note!** AWS and OpenStack Setup sections contain provider specific `Profile` settings.
