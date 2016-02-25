@@ -358,7 +358,12 @@ progress on the resource group details. If any issue has occurred, open the <cod
 <li>Once it's successful done, you can reach the Cloudbreak UI 
 at:<code>http://&lt;VM Public IP&gt;:3000/</code></li>
 <li><strong>Optional:</strong> You can SSH to the VM and track the progress in the 
-Cloudbreak logs (<code>cbd logs cloudbreak</code>)</li>
+Cloudbreak logs (<code>cbd logs cloudbreak</code>), but keep in mind:<ul>
+<li>the deployer location is /var/lib/cloudbreak-deployment</li>
+<li>all cbd actions must be performed as root</li>
+<li>all cbd actions must be executed from /var/lib/cloudbreak-deployment</li>
+</ul>
+</li>
 </ul>
 <blockquote>
 <p>We have faced an interesting behaviour on the Azure Portal: <a href="https://github.com/Azure/azure-quickstart-templates/issues/1294">All operations were successful on template deployment, 
