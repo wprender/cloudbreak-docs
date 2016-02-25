@@ -6,7 +6,7 @@ Use the Cloudbreak UI or CLI to launch HDP clusters on public cloud infrastructu
 
 Cloudbreak has two main components: the **Cloudbreak Application** and the **Cloudbreak Deployer**.
 
-The **Cloudbreak Application** is made up from microservices (Cloudbreak, Uluwatu, Sultans, ...). The **Cloudbreak Deployer** helps you to deploy the Cloudbreak application automatically in environments with Docker support. Once the Cloudbreak Application is deployed you can use it to provision HDP clusters in different cloud environments.
+The **Cloudbreak Application** is made up from microservices (Cloudbreak, Uluwatu, Sultans, ...). The **Cloudbreak Deployer** helps you to deploy the Cloudbreak application automatically with Docker support. Once the Cloudbreak Application is deployed you can use it to provision HDP clusters in different cloud environments.
 
 > For an architectural overview of the Cloudbreak Deployer, the Cloudbreak Application, Apache Ambari, Docker and the rest of the Cloudbreak components, please follow this [link](architecture.md).
 
@@ -22,7 +22,9 @@ that includes Cloudbreak Deployer](#pre-built-images) pre-installed.
 <div id="install-deployer"></div>
 ### Installing the Cloudbreak Deployer
 
-> **System requirements:** 4GB RAM, 10GB disk, 2 cores recommended
+> **Minimum and Recommended System requirements:** RHEL / CentOS / Oracle Linux 7 (64-bit), Docker 1.9.1, 4GB RAM, 
+10GB disk, 2 cores 
+recommended
 
 You can install the Cloudbreak Deployer on your own VM manually. Once installed, you will use the deployer to setup
 the Cloudbreak Application. We suggest you install the Cloudbreak Application as close to the
@@ -30,15 +32,16 @@ desired HDP clusters as possible. For example, if you plan to launch clusters on
 
 Follow the instructions for [installing the Cloudbreak Deployer](onprem.md). Alternatively, you can consider using one of the [pre-built cloud images that includes Cloudbreak Deployer](#pre-built-images) pre-installed.
 
-> **IMPORTANT:** If you plan to use Cloudbreak on Azure, you **must** use the [Azure Setup](azure.md) instructions to configure the image.
+> **IMPORTANT:** If you plan to use Cloudbreak on Azure, you **must** use the [Azure Setup](azure.md#deploy-using-the-azure-portal) instructions to configure the image.
 
 
 <div id="pre-built-images"></div>
 ### Using the Pre-Built Cloud Images
 
-We have pre-built cloud images with Cloudbreak Deployer pre-installed. Following the steps will guide you through the provider specific configuration and launching clusters using that cloud provider.
+We have pre-built cloud images with Cloudbreak Deployer pre-installed. In the below table you can find the 
+provider specific guides to configure and launch **cbd (Cloudbreak Deployer)** then clusters.
 
-> **VM requirements:** 4GB RAM, 10GB disk, 2 cores recommended
+> **Minimum and Recommended VM requirements:** 4GB RAM, 10GB disk, 2 cores recommended
 
 | Cloud | Cloud Image |
 |---|---|
@@ -54,7 +57,7 @@ For more information on Cloudbreak, Docker, Ambari and Ambari Blueprints, see:
 | Resource | Description |
 |---|---|
 |[Cloudbreak Project](http://hortonworks.com/hadoop/cloudbreak/) | Cloudbreak is a tool to help simplify the provisioning of HDP clusters in virtual and cloud environments. |
-|[Cloudbreak Forums](hortonworks.com/community/forums/forum/cloudbreak/) | Get connected with the community in the Cloudbreak Forums. |
+|[Cloudbreak Forums](http://hortonworks.com/hadoop/cloudbreak/#forums) | Get connected with the community in the Cloudbreak Forums. |
 |[Apache Ambari Project](http://hortonworks.com/hadoop/ambari/) | Apache Ambari is an operational platform for provisioning, managing, and monitoring Apache Hadoop clusters. Ambari exposes a robust set of REST APIs and a rich Web interface for cluster management. |
 |[Ambari Blueprints](https://cwiki.apache.org/confluence/display/AMBARI/Blueprints)| Ambari Blueprints are a declarative definition of a Hadoop cluster that Ambari can use to create Hadoop clusters. |
 |[Docker](https://www.docker.com/) | Docker is an open platform for developers and system administrators to build, ship, and run distributed applications. |
