@@ -13,7 +13,7 @@ Make sure you opened the following ports on your security group:
  * Cloudbreak GUI (3000)
  * User authentication (3001)
 
-### AWS Image Details
+## Cloudbreak Deployer AWS Image Details
 
 
 # AWS Setup

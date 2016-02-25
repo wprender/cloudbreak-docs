@@ -13,7 +13,7 @@ You can create the latest Cloudbreak deployer image on the [Google Developers Co
 
 Images are global resources, so they can be used across zones and projects.
 
-### GCP Image Details
+### Cloudbreak Deployer GCP Image Details
 
 
 ![](/images/google-cloud-shell.png)
