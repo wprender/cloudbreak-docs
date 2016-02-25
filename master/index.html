@@ -272,7 +272,7 @@
 <p>Cloudbreak simplifies the provisioning, management and monitoring of on-demand HDP clusters in virtual and cloud environments. Cloudbreak leverages the cloud infrastructure platforms to create host instances, uses Docker technology to deploy the requisite containers cloud-agnostically, and uses Apache Ambari (via Ambari Blueprints) to install and manage the HDP cluster.</p>
 <p>Use the Cloudbreak UI or CLI to launch HDP clusters on public cloud infrastructure platforms such as Microsoft Azure, Amazon Web Services (AWS), and Google Cloud Platform (GCP) and the private cloud infrastructure platform OpenStack (available as Technical Preview).</p>
 <p>Cloudbreak has two main components: the <strong>Cloudbreak Application</strong> and the <strong>Cloudbreak Deployer</strong>.</p>
-<p>The <strong>Cloudbreak Application</strong> is made up from microservices (Cloudbreak, Uluwatu, Sultans, ...). The <strong>Cloudbreak Deployer</strong> helps you to deploy the Cloudbreak application automatically in environments with Docker support. Once the Cloudbreak Application is deployed you can use it to provision HDP clusters in different cloud environments.</p>
+<p>The <strong>Cloudbreak Application</strong> is made up from microservices (Cloudbreak, Uluwatu, Sultans, ...). The <strong>Cloudbreak Deployer</strong> helps you to deploy the Cloudbreak application automatically with Docker support. Once the Cloudbreak Application is deployed you can use it to provision HDP clusters in different cloud environments.</p>
 <blockquote>
 <p>For an architectural overview of the Cloudbreak Deployer, the Cloudbreak Application, Apache Ambari, Docker and the rest of the Cloudbreak components, please follow this <a href="architecture/">link</a>.</p>
 </blockquote>
@@ -288,21 +288,24 @@ that includes Cloudbreak Deployer</a> pre-installed.</li>
 
 <h3 id="installing-the-cloudbreak-deployer">Installing the Cloudbreak Deployer</h3>
 <blockquote>
-<p><strong>System requirements:</strong> 4GB RAM, 10GB disk, 2 cores recommended</p>
+<p><strong>Minimum and Recommended System requirements:</strong> RHEL / CentOS / Oracle Linux 7 (64-bit), Docker 1.9.1, 4GB RAM, 
+10GB disk, 2 cores 
+recommended</p>
 </blockquote>
 <p>You can install the Cloudbreak Deployer on your own VM manually. Once installed, you will use the deployer to setup
 the Cloudbreak Application. We suggest you install the Cloudbreak Application as close to the
 desired HDP clusters as possible. For example, if you plan to launch clusters on AWS, install the Cloudbreak Application in AWS.</p>
 <p>Follow the instructions for <a href="onprem/">installing the Cloudbreak Deployer</a>. Alternatively, you can consider using one of the <a href="#pre-built-images">pre-built cloud images that includes Cloudbreak Deployer</a> pre-installed.</p>
 <blockquote>
-<p><strong>IMPORTANT:</strong> If you plan to use Cloudbreak on Azure, you <strong>must</strong> use the <a href="azure/">Azure Setup</a> instructions to configure the image.</p>
+<p><strong>IMPORTANT:</strong> If you plan to use Cloudbreak on Azure, you <strong>must</strong> use the <a href="azure/#deploy-using-the-azure-portal">Azure Setup</a> instructions to configure the image.</p>
 </blockquote>
 <div id="pre-built-images"></div>
 
 <h3 id="using-the-pre-built-cloud-images">Using the Pre-Built Cloud Images</h3>
-<p>We have pre-built cloud images with Cloudbreak Deployer pre-installed. Following the steps will guide you through the provider specific configuration and launching clusters using that cloud provider.</p>
+<p>We have pre-built cloud images with Cloudbreak Deployer pre-installed. In the below table you can find the 
+provider specific guides to configure and launch <strong>cbd (Cloudbreak Deployer)</strong> then clusters.</p>
 <blockquote>
-<p><strong>VM requirements:</strong> 4GB RAM, 10GB disk, 2 cores recommended</p>
+<p><strong>Minimum and Recommended VM requirements:</strong> 4GB RAM, 10GB disk, 2 cores recommended</p>
 </blockquote>
 <table>
 <thead>
@@ -345,7 +348,7 @@ desired HDP clusters as possible. For example, if you plan to launch clusters on
 <td>Cloudbreak is a tool to help simplify the provisioning of HDP clusters in virtual and cloud environments.</td>
 </tr>
 <tr>
-<td><a href="./hortonworks.com/community/forums/forum/cloudbreak/">Cloudbreak Forums</a></td>
+<td><a href="http://hortonworks.com/hadoop/cloudbreak/#forums">Cloudbreak Forums</a></td>
 <td>Get connected with the community in the Cloudbreak Forums.</td>
 </tr>
 <tr>
@@ -470,5 +473,5 @@ desired HDP clusters as possible. For example, if you plan to launch clusters on
 
 <!--
 MkDocs version : 0.14.0
-Build Date UTC : 2016-02-25 14:04:24.498785
+Build Date UTC : 2016-02-25 15:43:28.882141
 -->
