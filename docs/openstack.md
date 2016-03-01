@@ -353,6 +353,12 @@ OpenStack Dashboard.
 
 `Validate blueprint:` feature to validate or not the Ambari blueprint. By default is switched on.
 
+`Config recommendation strategy:` Specifies the strategy for how configuration recommendations may be applied to a cluster’s configuration. Recommended configurations gathered by the response of the stack advisor. 
+
+* `NEVER_APPLY:`               Configuration recommendations are ignored with this option.
+* `ONLY_STACK_DEFAULTS_APPLY:` Applies only on the default configurations for all included services.
+* `ALWAYS_APPLY:`              Applies on all configuration properties.
+
 Once you have launched the cluster creation you can track the progress either on Cloudbreak UI or your cloud provider management UI.
 
 ## Next steps
