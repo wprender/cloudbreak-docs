@@ -22,9 +22,9 @@ that includes Cloudbreak Deployer](#pre-built-images) pre-installed.
 <div id="install-deployer"></div>
 ### Installing the Cloudbreak Deployer
 
-> **Minimum and Recommended System requirements:** RHEL / CentOS / Oracle Linux 7 (64-bit), Docker 1.9.1, 4GB RAM, 
-10GB disk, 2 cores 
-recommended
+> **[Minimum and Recommended System requirements](onprem.md#minimum-and-recommended-system-requirements):** RHEL / 
+CentOS / Oracle Linux 7 (64-bit), Docker 1.9.1, 4GB RAM, 
+10GB disk, 2 cores recommended
 
 You can install the Cloudbreak Deployer on your own VM manually. Once installed, you will use the deployer to setup
 the Cloudbreak Application. We suggest you install the Cloudbreak Application as close to the

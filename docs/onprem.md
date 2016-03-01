@@ -1,18 +1,21 @@
 # Install Cloudbreak Deployer
 
-To install Cloudbreak Deployer on your selected environment you have to follow the steps below. The instruction describe a CentOS-based installation.
+To install Cloudbreak Deployer on your selected environment you have to follow the steps below. The instruction 
+describe a CentOS based installation.
 
 ## Minimum and Recommended System Requirements
 
-To run the Cloudbreak Deployer and install the Cloudbreak Application, you must meet the following system requirements:
+To run the Cloudbreak Deployer and install the Cloudbreak Application, you must meet the following requirements:
 
   * RHEL / CentOS / Oracle Linux 7 (64-bit)
   * Docker 1.9.1
-  * 4GB RAM
-  * 10GB disk
-  * 2 cores
+  * Minimum and Recommended VM requirements:
+    * 4GB RAM
+    * 10GB disk
+    * 2 cores
 
-> You can install Cloudbreak on Mac OS X "Darwin" for **evaluation purposes only**. This operating system is not supported for a production deployment of Cloudbreak.
+> You can install Cloudbreak on **Mac OS X for evaluation purposes only**. This operating system is not supported 
+for a production deployment of Cloudbreak.
 
 Make sure you opened the following ports:
 
@@ -22,7 +25,7 @@ Make sure you opened the following ports:
  * Cloudbreak GUI (3000)
  * User authentication (3001)
 
-Every command shall be executed as root **root**. In order to get root privileges execute:
+Every command shall be executed as **root**. In order to get root privileges execute:
 
 ```
 sudo -i
