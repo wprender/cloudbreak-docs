@@ -233,6 +233,14 @@ Manage networks allows you to create or reuse existing networks and configure th
 
 `Public network ID:` id of an OpenStack public network
 
+Optional parameters (reuse existing network and subnet, in case of existing subnet all 3 parameters must be provided, with new subnet only 2 required):
+
+`Virtual Network Identifier:` provide an id of an existing virtual network to reuse
+
+`Router Identifier:` id of the router which belongs to the existing virtual network (must be provided in case of existing virtual network)
+
+`Subnet Identifier:` id of a subnet within the existing virtual network, the provided subnet CIDR will be ignored and the existing subnet's CIDR range will be used (leave it blank if you'd like to create a new subnet within the virtual network with the provided subnet CIDR range)
+
 `Public in account:` share it with others in the account
 
 **Security groups**
