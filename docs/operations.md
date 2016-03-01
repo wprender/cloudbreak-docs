@@ -1,8 +1,6 @@
 # Operations
 
-##Cloudbreak deployer
-
-###Debug
+## Debug
 
 If you want to have more detailed output set the `DEBUG` env variable to non-zero:
 
@@ -10,7 +8,7 @@ If you want to have more detailed output set the `DEBUG` env variable to non-zer
 DEBUG=1 cbd some_command
 ```
 
-###Troubleshoot
+## Troubleshoot
 
 You can use the `doctor` command to diagnose your environment.
 It can reveal some common problems with your docker or boot2docker configuration and it also checks the cbd versions.
@@ -19,7 +17,7 @@ It can reveal some common problems with your docker or boot2docker configuration
 cbd doctor
 ```
 
-###Logs
+## Logs
 
 The aggregated logs of all the Cloudbreak components can be checked with:
 
@@ -35,18 +33,35 @@ cbd logs cloudbreak
 
 You can also check the individual logs of `uluwatu`, `periscope`, and `identity`.
 
-###Update
+## Cloudbreak Deployer Update
 
 The cloudbreak-deployer tool is capable of upgrading itself to a newer version.
 
+Please apply the following steps on the console:
+- Update command shall be executed as **root**. In order to get root privileges execute:
 ```
-cbd update
+   sudo -i
+```
+- Update Cloudbreak Deployer 
+```
+   cbd update
+```
+- Update the `docker-compose.yml` file with new Docker containers that are needed for the `cbd`
+```
+   cbd regenerate
+```
+- Check the health and version of the updated `cbd` 
+```
+   cbd doctor
+```
+- Start the new version of the `cbd`
+```
+   cbd start
 ```
 
+> It will take for a while, because of need to download all the updated docker images for the new version.
 
-##Cloudbreak application
-
-###SSH to the hosts
+## SSH to the hosts
 
 In the current version of Cloudbreak all the nodes have a public IP address and all the nodes are accessible via SSH.
 The public IP addresses of a running cluster can be checked on the Cloudbreak UI under the *Nodes* tab.
@@ -72,7 +87,7 @@ After you figured out the username you can SSH into the host.
 ssh -i ~/.ssh/private-key.pem USER_NAME@<public-ip>
 ```
 
-###Accessing HDP client services
+## Accessing HDP client services
 
 The main difference between general HDP clusters and Cloudbreak-installed HDP clusters is that each host runs an Ambari server or agent Docker container and the HDP services will be installed in this container as well.
 It means that after `ssh` the client services won't be available instantly, first you'll have to `enter` the ambari-agent container.
@@ -128,7 +143,7 @@ Or you can use this one-step command as well:
 [root@docker-ambari tmp]#
 ```
 
-###Data volumes
+## Data volumes
 
 The disks that are attached to the instances are automatically mounted to `/hadoopfs/fs1`, `/hadoopfs/fs2`, ... `/hadoopfs/fsN` respectively.
 These directories are mounted from the host into the ambari-agent container under the same name so these can be accessed from inside.
@@ -148,7 +163,7 @@ drwxr-xr-x   - hdfs supergroup          0 2015-10-21 13:46 /tmp/data
 drwx-wx-wx   - hive supergroup          0 2015-10-21 08:51 /tmp/hive
 ```
 
-###Internal hostnames
+## Internal hostnames
 
 After a cluster is created with Cloudbreak, the nodes will have internal hostnames like this:
 
@@ -159,7 +174,7 @@ It means that you won't see entries to the other nodes inside the `/etc/hosts` f
 
 In the current version the `node.dc1.consul` domain is hardcoded and cannot be changed.
 
-###Accessing Ambari server from the other nodes
+## Accessing Ambari server from the other nodes
 
 Ambari server is registered as a service in Consul, so it can always be accessed through its domain name `ambari-8080.service.consul` from the other ambari containers.
 It can be tried by pinging it from one of the `ambari-agent` containers:
@@ -168,7 +183,7 @@ It can be tried by pinging it from one of the `ambari-agent` containers:
 ping ambari-8080.service.consul
 ```
 
-###Cloudbreak gateway node
+## Cloudbreak gateway node
 
 With every Cloudbreak cluster installation there is a special node called *cbgateway* started that won't run an ambari-agent container so it won't run HDP services either.
 It can be seen on the Cloudbreak UI among the hostgroups when creating a cluster, but its node count cannot be changed from 1 and it shouldn't be there in the Ambari blueprint.

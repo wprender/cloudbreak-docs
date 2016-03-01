@@ -3,7 +3,8 @@
 We have pre-built cloud images for AWS with the Cloudbreak Deployer pre-installed. You can launch the latest Cloudbreak Deployer image based on your region at the [AWS Management Console](https://aws
 .amazon.com/console/).
 
-> Alternatively, instead of using the pre-built cloud images for AWS, you can install Cloudbreak Deployer on your own VM. See [install the Cloudbreak Deployer](onprem.md) for more information.
+> Alternatively, instead of using the pre-built cloud images for AWS, you can install Cloudbreak Deployer on your own
+ VM. See [installation page](onprem.md) for more information.
 
 Make sure you opened the following ports on your security group:
  
@@ -15,61 +16,90 @@ Make sure you opened the following ports on your security group:
 
 ## Cloudbreak Deployer AWS Image Details
 
+> **[Minimum and Recommended VM requirements](onprem.md#minimum-and-recommended-system-requirements):** 4GB RAM, 10GB disk, 2 cores
 
 # AWS Setup
 
 ## Setup Cloudbreak Deployer
 
-Create and open the `cloudbreak-deployment` directory:
+Open the `cloudbreak-deployment` directory:
 
 ```
 cd cloudbreak-deployment
 ```
 
-This is the directory of the config files and the supporting binaries that will be downloaded by Cloudbreak deployer..
+This is the directory of the configuration files and the supporting binaries for Cloudbreak Deployer.
 
 ### Initialize your Profile
-
-First initialize cbd by creating a `Profile` file:
 
 ```
 cbd init
 ```
 
-It will create a `Profile` file in the current directory. Please edit the file - one of the required configurations is the `PUBLIC_IP`.
-This IP will be used to access the Cloudbreak UI (called Uluwatu). In some cases the `cbd` tool tries to guess it, if can't than will give a hint.
+It will create a `Profile` file in the current directory. Please open the `Profile` file then check the `PUBLIC_IP`. 
+This is mandatory, because of to can access the Cloudbreak UI (called Uluwatu). In some cases the `cbd` tool tries to 
+guess it. If `cbd` cannot get the IP address during the initialization, please add set the appropriate value.
 
-The other required configuration in the `Profile` are the AWS keys belonging to the AWS account used by the Cloudbreak application.
+#### AWS Specific Configuration
+
+**AWS Account Keys**
+
 In order for Cloudbreak to be able to launch clusters on AWS on your behalf you need to set your AWS keys in the `Profile` file.
-We suggest to use the keys of an *IAM User* here. The IAM User's policies must be configured to have permission to assume roles (`sts:AssumeRole`) on all (`*`) resources.
+We suggest to use the keys of a valid **IAM User** here.
 
 ```
 export AWS_ACCESS_KEY_ID=AKIA**************W7SA
 export AWS_SECRET_ACCESS_KEY=RWCT4Cs8******************/*skiOkWD
 ```
 
+**AWS IAM Policy that grants permission to assume a role**
+
+The `sts-assume-role` IAM user [policy](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_enable-create.html) must be configured to have 
+permission to assume roles on all resources. Here it is an example how to configure the `sts:AssumeRole` for all 
+`Resource`:
+
+```
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Effect": "Allow",
+    "Action": "sts:AssumeRole",
+    "Resource": "*"
+  }]
+}
+```
+
 ### Start Cloudbreak
 
 To start the Cloudbreak application use the following command.
-This will start all the Docker containers and initialize the application. It will take a few minutes until all the services start.
+This will start all the Docker containers and initialize the application.
 
 ```
 cbd start
 ```
 
->Launching it first will take more time as it downloads all the docker images needed by Cloudbreak.
+>At the very first time it will take for a while, because of need to download all the necessary docker images.
 
 The `cbd start` command includes the `cbd generate` command which applies the following steps: 
 
 - creates the **docker-compose.yml** file that describes the configuration of all the Docker containers needed for the Cloudbreak deployment.
 - creates the **uaa.yml** file that holds the configuration of the identity server used to authenticate users to Cloudbreak.
 
-After the `cbd start` command finishes you can check the logs of the Cloudbreak server with this command:
+### Validate the started Cloudbreak
 
+After the `cbd start` command finishes followings are worthy to check:
+
+- Pre-installed Cloudbreak Deployer version and health.
 ```
-cbd logs cloudbreak
+   cbd doctor
 ```
->Cloudbreak server should start within a minute - you should see a line like this: `Started CloudbreakApplication in 36.823 seconds`
+>In case of `cbd update` is needed, please check the related documentation for [Cloudbreak Deployer Update](operations.md#cloudbreak-deployer-update)
+
+- Started Cloudbreak Application logs.
+```
+   cbd logs cloudbreak
+```
+>Cloudbreak should start within a minute - you should see a line like this: `Started CloudbreakApplication in 36.823 seconds`
 
 # Provisioning Prerequisites
 
