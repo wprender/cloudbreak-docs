@@ -280,12 +280,20 @@ Manage networks allows you to create or reuse existing networks and configure th
 
 `Address prefix (CIDR):` the address space that is used for subnets
 
+Optional parameters (reuse existing network and subnet, in this case all 3 parameters must be provided as well, changes the security group's behavior described in security group section):
+
+`Resource Group Identifier:` name of an existing resource group which is used in case of existing virtual network and subnet
+
+`Virtual Network Identifier:` name of the virutal network within the selected resource group
+
+`Subnet Identifier:` name of the subnet within the selected virtual network (the provided subnet CIDR will be ignored and the existing subnet's CIDR range will be used)
+
 `Public in account:` share it with others in the account
 
 **Security groups**
 
 They describe the allowed inbound traffic to the instances in the cluster.
-Currently only one security group template can be selected for a Cloudbreak cluster and all the instances have a public IP address so all the instances in the cluster will belong to the same security group.
+Currently only one security group template can be selected for a Cloudbreak cluster and all the instances have a public IP address so all the instances in the cluster will belong to the same security group. If you choose to deploy your cluster into and existing network and subnet the security group won't be created, because only 1 security group can be assigned to a subnet. However the security rules defined in the selected security group will be applied to the gateway instance.
 This may change in a later release.
 
 You can define your own security group by adding all the ports, protocols and CIDR range you'd like to use. 443 needs to be there in every security group otherwise Cloudbreak won't be able to communicate with the provisioned cluster. The rules defined here doesn't need to contain the internal rules, those are automatically added by Cloudbreak to the security group on Azure.

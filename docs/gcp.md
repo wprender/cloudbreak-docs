@@ -222,6 +222,8 @@ Manage networks allows you to create or reuse existing networks and configure th
 
 `Subnet (CIDR):` a subnet in the VPC with CIDR block
 
+`Virtual Network Identifier:` optional field, id of an existing virtual network, the provided subnet CIDR will be ignored and the existing network's CIDR range will be used
+
 `Public in account:` share it with others in the account
 
 **Security groups**

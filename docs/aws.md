@@ -221,18 +221,21 @@ There are some additional configuration options here:
 **Networks**
 
 Your clusters can be created in their own Virtual Private Cloud (VPC) or in one of your already existing VPCs.
-Currently Cloudbreak creates a new subnet in both cases, in a later release it may change.
+In case if you choose an existing VPC it is possible to create a new subnet within the VPC or use an already existing one.
 The subnet's IP range must be defined in the `Subnet (CIDR)` field using the general CIDR notation.
 
 If you don't want to use your already existing VPC, you can use the default network (`default-aws-network`) for all your clusters.
 It will create a new VPC with a `10.0.0.0/16` subnet every time a cluster is created.
 
 If you'd like to deploy a cluster to an already existing VPC you'll have to create a new network template where you configure the identifier of your VPC and the internet gateway (IGW) that's attached to the VPC.
-In this case you'll have to create a different network template for every one of your clusters because the Subnet CIDR cannot overlap an already existing subnet in the VPC.
+In this case you'll have to create a different network template for every one of your clusters because the subnet CIDR cannot overlap an already existing subnet in the VPC.
+To create a new subnet within the VPC leave the subnet field empty otherwise provide the id of the subnet which is in the existing VPC and your cluster will be launched
+into that subnet.
 For example you can create 3 different clusters with 3 different network templates for the subnets `10.0.0.0/24`, `10.0.1.0/24`, `10.0.2.0/24` but with the same VPC and IGW identifiers.
 
 >**Important** Please make sure that the subnet you define here doesn't overlap with any of your already deployed 
-subnets in the VPC because the validation only happens after the cluster creation starts.
+subnets in the VPC because the validation only happens after the cluster creation starts. In case of existing subnet make sure you have enough room within
+your network space for the new instances. In this case the provided subnet CIDR will be ignored, but a proper CIDR range will be used based on the provided id of the subnet.
 
 If `Public in account` is checked all the users belonging to your account will be able to use this network template to create clusters, but cannot delete or modify it.
 
