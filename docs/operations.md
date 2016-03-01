@@ -38,6 +38,7 @@ You can also check the individual logs of `uluwatu`, `periscope`, and `identity`
 The cloudbreak-deployer tool is capable of upgrading itself to a newer version.
 
 Please apply the following steps on the console:
+
 - Update command shall be executed as **root**. In order to get root privileges execute:
 ```
    sudo -i

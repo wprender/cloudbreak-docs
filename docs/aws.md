@@ -69,7 +69,7 @@ permission to assume roles on all resources. Here it is an example how to config
 }
 ```
 
-### Start Cloudbreak
+## Start Cloudbreak Deployer
 
 To start the Cloudbreak application use the following command.
 This will start all the Docker containers and initialize the application.
@@ -85,7 +85,7 @@ The `cbd start` command includes the `cbd generate` command which applies the fo
 - creates the **docker-compose.yml** file that describes the configuration of all the Docker containers needed for the Cloudbreak deployment.
 - creates the **uaa.yml** file that holds the configuration of the identity server used to authenticate users to Cloudbreak.
 
-### Validate the started Cloudbreak
+## Validate the started Cloudbreak Deployer
 
 After the `cbd start` command finishes followings are worthy to check:
 
