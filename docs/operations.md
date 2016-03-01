@@ -39,10 +39,6 @@ The cloudbreak-deployer tool is capable of upgrading itself to a newer version.
 
 Please apply the following steps on the console:
 
-- Update command shall be executed as **root**. In order to get root privileges execute:
-```
-   sudo -i
-```
 - Update Cloudbreak Deployer 
 ```
    cbd update
@@ -51,16 +47,21 @@ Please apply the following steps on the console:
 ```
    cbd regenerate
 ```
-- Check the health and version of the updated `cbd` 
-```
-   cbd doctor
-```
 - Start the new version of the `cbd`
 ```
    cbd start
 ```
-
 > It will take for a while, because of need to download all the updated docker images for the new version.
+
+- Check the health and version of the updated `cbd` 
+```
+   cbd doctor
+```
+- Check the started Cloudbreak Application logs
+```
+   cbd logs cloudbreak
+```
+>Cloudbreak should start within a minute - you should see a line like this: `Started CloudbreakApplication in 36.823 seconds`
 
 ## SSH to the hosts
 
