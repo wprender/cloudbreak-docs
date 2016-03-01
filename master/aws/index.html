@@ -599,6 +599,12 @@ Instances are started in an Auto Scaling Group so they may be restarted if you t
 <p><code>Use dedicated instances:</code> You can use <a href="https://aws.amazon.com/ec2/purchasing-options/dedicated-instances/">dedicated instances</a> on EC2</p>
 <p><code>Minimum cluster size:</code> the provisioning strategy in case of the cloud provider cannot allocate all the requested nodes</p>
 <p><code>Validate blueprint:</code> feature to validate the Ambari blueprint. By default is switched on.</p>
+<p><code>Config recommendation strategy:</code> Specifies the strategy for how configuration recommendations may be applied to a cluster’s configuration. Recommended configurations gathered by the response of the stack advisor. </p>
+<ul>
+<li><code>NEVER_APPLY:</code>               Configuration recommendations are ignored with this option.</li>
+<li><code>ONLY_STACK_DEFAULTS_APPLY:</code> Applies only on the default configurations for all included services.</li>
+<li><code>ALWAYS_APPLY:</code>              Applies on all configuration properties.</li>
+</ul>
 <h2 id="cluster-termination">Cluster termination</h2>
 <p>You can terminate running or stopped clusters with the <code>terminate</code> button in the cluster details.</p>
 <p>Sometimes Cloudbreak cannot synchronize it's state with the cluster state at the cloud provider and the cluster can't be terminated. In this case with the <code>Forced termination</code> option in the termination dialog box you can terminate the cluster at the Cloudbreak side anyway. <strong>In this case you may need to manually remove resources at the cloud provider.</strong></p>
