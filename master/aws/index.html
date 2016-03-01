@@ -320,7 +320,8 @@
 <p>We have pre-built cloud images for AWS with the Cloudbreak Deployer pre-installed. You can launch the latest Cloudbreak Deployer image based on your region at the <a href="https://aws
 .amazon.com/console/">AWS Management Console</a>.</p>
 <blockquote>
-<p>Alternatively, instead of using the pre-built cloud images for AWS, you can install Cloudbreak Deployer on your own VM. See <a href="../onprem/">install the Cloudbreak Deployer</a> for more information.</p>
+<p>Alternatively, instead of using the pre-built cloud images for AWS, you can install Cloudbreak Deployer on your own
+ VM. See <a href="../onprem/">installation page</a> for more information.</p>
 </blockquote>
 <p>Make sure you opened the following ports on your security group:</p>
 <ul>
@@ -331,47 +332,78 @@
 <li>User authentication (3001)</li>
 </ul>
 <h2 id="cloudbreak-deployer-aws-image-details">Cloudbreak Deployer AWS Image Details</h2>
+<blockquote>
+<p><strong><a href="../onprem/#minimum-and-recommended-system-requirements">Minimum and Recommended VM requirements</a>:</strong> 4GB RAM, 10GB disk, 2 cores</p>
+</blockquote>
 <h1 id="aws-setup">AWS Setup</h1>
 <h2 id="setup-cloudbreak-deployer">Setup Cloudbreak Deployer</h2>
-<p>Create and open the <code>cloudbreak-deployment</code> directory:</p>
+<p>Open the <code>cloudbreak-deployment</code> directory:</p>
 <pre><code>cd cloudbreak-deployment
 </code></pre>
 
-<p>This is the directory of the config files and the supporting binaries that will be downloaded by Cloudbreak deployer..</p>
+<p>This is the directory of the configuration files and the supporting binaries for Cloudbreak Deployer.</p>
 <h3 id="initialize-your-profile">Initialize your Profile</h3>
-<p>First initialize cbd by creating a <code>Profile</code> file:</p>
 <pre><code>cbd init
 </code></pre>
 
-<p>It will create a <code>Profile</code> file in the current directory. Please edit the file - one of the required configurations is the <code>PUBLIC_IP</code>.
-This IP will be used to access the Cloudbreak UI (called Uluwatu). In some cases the <code>cbd</code> tool tries to guess it, if can't than will give a hint.</p>
-<p>The other required configuration in the <code>Profile</code> are the AWS keys belonging to the AWS account used by the Cloudbreak application.
-In order for Cloudbreak to be able to launch clusters on AWS on your behalf you need to set your AWS keys in the <code>Profile</code> file.
-We suggest to use the keys of an <em>IAM User</em> here. The IAM User's policies must be configured to have permission to assume roles (<code>sts:AssumeRole</code>) on all (<code>*</code>) resources.</p>
+<p>It will create a <code>Profile</code> file in the current directory. Please open the <code>Profile</code> file then check the <code>PUBLIC_IP</code>. 
+This is mandatory, because of to can access the Cloudbreak UI (called Uluwatu). In some cases the <code>cbd</code> tool tries to 
+guess it. If <code>cbd</code> cannot get the IP address during the initialization, please add set the appropriate value.</p>
+<h4 id="aws-specific-configuration">AWS Specific Configuration</h4>
+<p><strong>AWS Account Keys</strong></p>
+<p>In order for Cloudbreak to be able to launch clusters on AWS on your behalf you need to set your AWS keys in the <code>Profile</code> file.
+We suggest to use the keys of a valid <strong>IAM User</strong> here.</p>
 <pre><code>export AWS_ACCESS_KEY_ID=AKIA**************W7SA
 export AWS_SECRET_ACCESS_KEY=RWCT4Cs8******************/*skiOkWD
 </code></pre>
 
+<p><strong>AWS IAM Policy that grants permission to assume a role</strong></p>
+<p>The <code>sts-assume-role</code> IAM user <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_enable-create.html">policy</a> must be configured to have 
+permission to assume roles on all resources. Here it is an example how to configure the <code>sts:AssumeRole</code> for all 
+<code>Resource</code>:</p>
+<pre><code>{
+  &quot;Version&quot;: &quot;2012-10-17&quot;,
+  &quot;Statement&quot;: [{
+    &quot;Effect&quot;: &quot;Allow&quot;,
+    &quot;Action&quot;: &quot;sts:AssumeRole&quot;,
+    &quot;Resource&quot;: &quot;*&quot;
+  }]
+}
+</code></pre>
+
 <h3 id="start-cloudbreak">Start Cloudbreak</h3>
 <p>To start the Cloudbreak application use the following command.
-This will start all the Docker containers and initialize the application. It will take a few minutes until all the services start.</p>
+This will start all the Docker containers and initialize the application.</p>
 <pre><code>cbd start
 </code></pre>
 
 <blockquote>
-<p>Launching it first will take more time as it downloads all the docker images needed by Cloudbreak.</p>
+<p>At the very first time it will take for a while, because of need to download all the necessary docker images.</p>
 </blockquote>
 <p>The <code>cbd start</code> command includes the <code>cbd generate</code> command which applies the following steps: </p>
 <ul>
 <li>creates the <strong>docker-compose.yml</strong> file that describes the configuration of all the Docker containers needed for the Cloudbreak deployment.</li>
 <li>creates the <strong>uaa.yml</strong> file that holds the configuration of the identity server used to authenticate users to Cloudbreak.</li>
 </ul>
-<p>After the <code>cbd start</code> command finishes you can check the logs of the Cloudbreak server with this command:</p>
-<pre><code>cbd logs cloudbreak
+<h3 id="validate-the-started-cloudbreak">Validate the started Cloudbreak</h3>
+<p>After the <code>cbd start</code> command finishes followings are worthy to check:</p>
+<ul>
+<li>Pre-installed Cloudbreak Deployer version and health.</li>
+</ul>
+<pre><code>   cbd doctor
 </code></pre>
 
 <blockquote>
-<p>Cloudbreak server should start within a minute - you should see a line like this: <code>Started CloudbreakApplication in 36.823 seconds</code></p>
+<p>In case of <code>cbd update</code> is needed, please check the related documentation for <a href="../operations/#cloudbreak-deployer-update">Cloudbreak Deployer Update</a></p>
+</blockquote>
+<ul>
+<li>Started Cloudbreak Application logs.</li>
+</ul>
+<pre><code>   cbd logs cloudbreak
+</code></pre>
+
+<blockquote>
+<p>Cloudbreak should start within a minute - you should see a line like this: <code>Started CloudbreakApplication in 36.823 seconds</code></p>
 </blockquote>
 <h1 id="provisioning-prerequisites">Provisioning Prerequisites</h1>
 <h2 id="iam-role-setup">IAM role setup</h2>
