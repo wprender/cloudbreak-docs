@@ -121,34 +121,35 @@ cbd pull
 cbd start
 ```
 
->Launching it first will take more time as it downloads all the docker images needed by Cloudbreak.
+>At the very first time it will take for a while, because of need to download all the necessary docker images.
 
-After the `cbd start` command finishes you can check the logs of the Cloudbreak server with this command:
+After the `cbd start` command finishes you can check the logs of the Cloudbreak application with this command:
 
 ```
 cbd logs cloudbreak
 ```
->Cloudbreak server should start within a minute - you should see a line like this: `Started CloudbreakApplication in 36.823 seconds`
+>Cloudbreak should start within a minute - you should see a line like this: `Started CloudbreakApplication in 36.823 seconds`
 
 
 ## Troubleshooting
 
-If you are experiencing with permission or connection issues, then try to permanently disable **SELinux**. Setting the SELINUX=disabled in /etc/selinux/config  ensures that SELinux is not turned on after reboot of the machine:
-
+If you are faced with permission or connection issue, first you can try to disable **SELinux**:
+  
+  1. Setting the `SELINUX=disabled` in `/etc/selinux/config`
+  2. Reboot the machine
+  3. Ensure the SELinux is not turned on after
+    
 ```
 setenforce 0 && sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
 ```
-
-
 ## Next steps
 
-Now that you all pre-requisites for Cloudbreak are in place you can follow with the **cloud provider specific** 
-configuration. Based on the location where you plan to launch HDP clusters select one of the provider in the header 
-and follow the steps from the **Setup** section:
+Now you have all the pre-requisites for Cloudbreak. You can follow with the **cloud provider specific** configuration. Select one of the provider in the header 
+then follow the steps from the **Setup** section:
 
  * [AWS](aws.md#aws-setup)
  * [Azure](azure.md)
  * [GCP](gcp.md#google-setup)
  * [OpenStack](openstack.md#openstack-setup)
 
-> **Note!** AWS and OpenStack Setup sections contain provider specific `Profile` settings.
+> **Note!** AWS and OpenStack Setup sections contain additional and provider specific `Profile` settings.
