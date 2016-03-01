@@ -310,12 +310,6 @@ It can reveal some common problems with your docker or boot2docker configuration
 <p>The cloudbreak-deployer tool is capable of upgrading itself to a newer version.</p>
 <p>Please apply the following steps on the console:</p>
 <ul>
-<li>Update command shall be executed as <strong>root</strong>. In order to get root privileges execute:</li>
-</ul>
-<pre><code>   sudo -i
-</code></pre>
-
-<ul>
 <li>Update Cloudbreak Deployer </li>
 </ul>
 <pre><code>   cbd update
@@ -328,12 +322,6 @@ It can reveal some common problems with your docker or boot2docker configuration
 </code></pre>
 
 <ul>
-<li>Check the health and version of the updated <code>cbd</code> </li>
-</ul>
-<pre><code>   cbd doctor
-</code></pre>
-
-<ul>
 <li>Start the new version of the <code>cbd</code></li>
 </ul>
 <pre><code>   cbd start
@@ -341,6 +329,21 @@ It can reveal some common problems with your docker or boot2docker configuration
 
 <blockquote>
 <p>It will take for a while, because of need to download all the updated docker images for the new version.</p>
+</blockquote>
+<ul>
+<li>Check the health and version of the updated <code>cbd</code> </li>
+</ul>
+<pre><code>   cbd doctor
+</code></pre>
+
+<ul>
+<li>Check the started Cloudbreak Application logs</li>
+</ul>
+<pre><code>   cbd logs cloudbreak
+</code></pre>
+
+<blockquote>
+<p>Cloudbreak should start within a minute - you should see a line like this: <code>Started CloudbreakApplication in 36.823 seconds</code></p>
 </blockquote>
 <h2 id="ssh-to-the-hosts">SSH to the hosts</h2>
 <p>In the current version of Cloudbreak all the nodes have a public IP address and all the nodes are accessible via SSH.
