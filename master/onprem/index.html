@@ -376,24 +376,28 @@ cbd start
 </code></pre>
 
 <blockquote>
-<p>Launching it first will take more time as it downloads all the docker images needed by Cloudbreak.</p>
+<p>At the very first time it will take for a while, because of need to download all the necessary docker images.</p>
 </blockquote>
-<p>After the <code>cbd start</code> command finishes you can check the logs of the Cloudbreak server with this command:</p>
+<p>After the <code>cbd start</code> command finishes you can check the logs of the Cloudbreak application with this command:</p>
 <pre><code>cbd logs cloudbreak
 </code></pre>
 
 <blockquote>
-<p>Cloudbreak server should start within a minute - you should see a line like this: <code>Started CloudbreakApplication in 36.823 seconds</code></p>
+<p>Cloudbreak should start within a minute - you should see a line like this: <code>Started CloudbreakApplication in 36.823 seconds</code></p>
 </blockquote>
 <h2 id="troubleshooting">Troubleshooting</h2>
-<p>If you are experiencing with permission or connection issues, then try to permanently disable <strong>SELinux</strong>. Setting the SELINUX=disabled in /etc/selinux/config  ensures that SELinux is not turned on after reboot of the machine:</p>
+<p>If you are faced with permission or connection issue, first you can try to disable <strong>SELinux</strong>:</p>
+<ol>
+<li>Setting the <code>SELINUX=disabled</code> in <code>/etc/selinux/config</code></li>
+<li>Reboot the machine</li>
+<li>Ensure the SELinux is not turned on after</li>
+</ol>
 <pre><code>setenforce 0 &amp;&amp; sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
 </code></pre>
 
 <h2 id="next-steps">Next steps</h2>
-<p>Now that you all pre-requisites for Cloudbreak are in place you can follow with the <strong>cloud provider specific</strong> 
-configuration. Based on the location where you plan to launch HDP clusters select one of the provider in the header 
-and follow the steps from the <strong>Setup</strong> section:</p>
+<p>Now you have all the pre-requisites for Cloudbreak. You can follow with the <strong>cloud provider specific</strong> configuration. Select one of the provider in the header 
+then follow the steps from the <strong>Setup</strong> section:</p>
 <ul>
 <li><a href="../aws/#aws-setup">AWS</a></li>
 <li><a href="../azure/">Azure</a></li>
@@ -401,7 +405,7 @@ and follow the steps from the <strong>Setup</strong> section:</p>
 <li><a href="../openstack/#openstack-setup">OpenStack</a></li>
 </ul>
 <blockquote>
-<p><strong>Note!</strong> AWS and OpenStack Setup sections contain provider specific <code>Profile</code> settings.</p>
+<p><strong>Note!</strong> AWS and OpenStack Setup sections contain additional and provider specific <code>Profile</code> settings.</p>
 </blockquote>
                     <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/onprem.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
                 </div>
