@@ -356,6 +356,12 @@ There are some advanced features when deploying a new cluster, these are the fol
 
 `Validate blueprint:` feature to validate the Ambari blueprint. By default is switched on.
 
+`Config recommendation strategy:` Specifies the strategy for how configuration recommendations may be applied to a cluster’s configuration. Recommended configurations gathered by the response of the stack advisor. 
+
+* `NEVER_APPLY:`               Configuration recommendations are ignored with this option.
+* `ONLY_STACK_DEFAULTS_APPLY:` Applies only on the default configurations for all included services.
+* `ALWAYS_APPLY:`              Applies on all configuration properties.
+
 ## Cluster termination
 
 You can terminate running or stopped clusters with the `terminate` button in the cluster details.
