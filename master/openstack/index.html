@@ -487,6 +487,10 @@ These templates are saved to Cloudbreak's database and can be reused with multip
 <p><code>Description:</code> short description of your network</p>
 <p><code>Subnet (CIDR):</code> a subnet with CIDR block under the given <code>public network</code></p>
 <p><code>Public network ID:</code> id of an OpenStack public network</p>
+<p>Optional parameters (reuse existing network and subnet, in case of existing subnet all 3 parameters must be provided, with new subnet only 2 required):</p>
+<p><code>Virtual Network Identifier:</code> provide an id of an existing virtual network to reuse</p>
+<p><code>Router Identifier:</code> id of the router which belongs to the existing virtual network (must be provided in case of existing virtual network)</p>
+<p><code>Subnet Identifier:</code> id of a subnet within the existing virtual network, the provided subnet CIDR will be ignored and the existing subnet's CIDR range will be used (leave it blank if you'd like to create a new subnet within the virtual network with the provided subnet CIDR range)</p>
 <p><code>Public in account:</code> share it with others in the account</p>
 <p><strong>Security groups</strong></p>
 <p>They describe the allowed inbound traffic to the instances in the cluster.
