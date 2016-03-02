@@ -399,7 +399,7 @@ This will start all the Docker containers and initialize the application.</p>
 <h2 id="iam-role-setup">IAM role setup</h2>
 <p>Cloudbreak works by connecting your AWS account through so called <em>Credentials</em>, and then uses these credentials to create resources on your behalf.</p>
 <blockquote>
-<p><strong>Important</strong> Cloudbreak deployment uses two different AWS accounts for two different purposes:</p>
+<p><strong>IMPORTANT</strong> Cloudbreak deployment uses two different AWS accounts for two different purposes:</p>
 </blockquote>
 <ul>
 <li>The account belonging to the <em>Cloudbreak webapp</em> itself, acts as a <em>third party</em>, that creates resources on the 
@@ -448,7 +448,7 @@ This command creates a role with the name <code>cbreak-deployer</code> by defaul
 
 <p>You can check the generated role on your AWS console, under IAM roles:
 <img alt="" src="../images/aws-iam-role.png" />
-<sub><em>You can open this up in full from <a href="../images/aws-iam-role.png">here</a>.</em></sub></p>
+<sub><em>Full size <a href="../images/aws-iam-role.png">here</a>.</em></sub></p>
 <h2 id="generate-a-new-ssh-key">Generate a new SSH key</h2>
 <p>All the instances created by Cloudbreak are configured to allow key-based SSH,
 so you'll need to provide an SSH public key that can be used later to SSH onto the instances in the clusters you'll create with Cloudbreak.
@@ -475,10 +475,10 @@ You'll be asked to enter a passphrase, but you can leave it empty.
 
 <p>Later you'll need to pass the <code>.pub</code> file's contents to Cloudbreak and use the private part to SSH to the instances.</p>
 <blockquote>
-<p><strong>IMPORTANT:</strong> Make sure that you have sufficient qouta (CPU, network, etc) for the requested cluster size.</p>
+<p><strong>IMPORTANT</strong> Make sure that you have sufficient qouta (CPU, network, etc) for the requested cluster size.</p>
 </blockquote>
 <h1 id="provisioning-via-browser">Provisioning via Browser</h1>
-<p>You can log into the Cloudbreak application at http://PUBLIC_IP:3000.</p>
+<p>You can log into the Cloudbreak application at http://<code>PUBLIC_IP</code>:3000.</p>
 <p>The main goal of the Cloudbreak UI is to easily create clusters on your own cloud provider account.
 This description details the AWS setup - if you'd like to use a different cloud provider check out its manual.</p>
 <p>This document explains the four steps that need to be followed to create Cloudbreak clusters from the UI:</p>
@@ -486,72 +486,104 @@ This description details the AWS setup - if you'd like to use a different cloud 
 <li>connect your AWS account with Cloudbreak</li>
 <li>create some template resources on the UI that describe the infrastructure of your clusters</li>
 <li>create a blueprint that describes the HDP services in your clusters and add some recipes for customization</li>
-<li>launch the cluster itself based on these template resources</li>
+<li>launch the cluster itself based on these resources</li>
 </ul>
 <h2 id="setting-up-aws-credentials">Setting up AWS credentials</h2>
-<p>Cloudbreak works by connecting your AWS account through so called <em>Credentials</em>, and then uses these credentials to create resources on your behalf.
-The credentials can be configured on the "manage credentials".</p>
-<p>Add a <code>name</code> and a <code>description</code> for the credential, copy your IAM role's Amazon Resource Name (ARN) to the corresponding field (<code>IAM Role ARN</code>) and copy your SSH public key to the <code>SSH public key</code> field.</p>
-<p>The SSH public key must be in OpenSSH format and it's private keypair can be used later to <a href="http://sequenceiq.com/cloudbreak-deployer/1.1.0/insights/#ssh-to-the-host">SSH onto every instance</a> of every cluster you'll create with this credential.
-The SSH username for the EC2 instances is <strong>ec2-user</strong>.</p>
-<p>There is a last option called <code>Public in account</code> - it means that all the users belonging to your account will be able to use this credential to create clusters, but cannot delete or modify it.</p>
-<p><img alt="" src="../images/aws-credential.png" /></p>
+<p>Cloudbreak works by connecting your AWS account through so called <em>Credentials</em>, and then uses these credentials to 
+create resources on your behalf. The credentials can be configured on the <strong>manage credentials</strong> panel on the 
+Cloudbreak Dashboard.</p>
+<p>To create a new AWS credential follow these steps:</p>
+<ol>
+<li>Select the credential type. For instance, select the <code>Role Based</code></li>
+<li>Fill out the new credential <code>name</code><ul>
+<li>Only alphanumeric and lowercase characters (min 5, max 100 characters) can be applied</li>
+</ul>
+</li>
+<li>Copy your AWS IAM role's Amazon Resource Name (ARN) to the <code>IAM Role ARN</code> field</li>
+<li>Copy your SSH public key to the <code>SSH public key</code> field<ul>
+<li>The SSH public key must be in OpenSSH format and it's private keypair can be used later to <a href="../operations/#ssh-to-the-hosts">SSH onto every 
+instance</a> of every cluster you'll create with this credential.</li>
+<li>The <strong>SSH username</strong> for the EC2 instances is <strong>ec2-user</strong>.</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>Any other parameter is optional here.</p>
+<p><code>Public in account</code> means that all the users belonging to your account will be able to use this credential to create 
+clusters, but cannot delete it.</p>
+</blockquote>
+<p><img alt="" src="../images/aws-credential.png" />
+<sub><em>Full size <a href="../images/aws-credential.png">here</a>.</em></sub></p>
 <h2 id="infrastructure-templates">Infrastructure templates</h2>
 <p>After your AWS account is linked to Cloudbreak you can start creating templates that describe your clusters' infrastructure:</p>
 <ul>
-<li>resources</li>
-<li>networks</li>
 <li>security groups</li>
+<li>networks</li>
+<li>templates</li>
 </ul>
 <p>When you create a template, Cloudbreak <em>doesn't make any requests</em> to AWS.
 Resources are only created on AWS after the <code>create cluster</code> button is pushed.
 These templates are saved to Cloudbreak's database and can be reused with multiple clusters to describe the infrastructure.</p>
-<p><strong>Resources</strong></p>
-<p>Resources describe the instances of your cluster - the instance type and the attached volumes.
-A typical setup is to combine multiple resources in a cluster for the different types of nodes.
-For example you may want to attach multiple large disks to the datanodes or have memory optimized instances for Spark nodes.</p>
-<p>There are some additional configuration options here:</p>
+<p><strong>Templates</strong></p>
+<p>Templates describe the <strong>instances of your cluster</strong> - the instance type and the attached volumes. A typical setup is
+ to combine multiple templates in a cluster for the different types of nodes. For example you may want to attach multiple
+ large disks to the datanodes or have memory optimized instances for Spark nodes.</p>
+<p>The instance templates can be configured on the <strong>manage templates</strong> panel on the Cloudbreak Dashboard.</p>
+<p>There are some optional configurations here as well:</p>
 <ul>
-<li><code>Spot price (USD)</code> is not mandatory, if specified Cloudbreak will request spot price instances (which might take a while or never be fulfilled by Amazon). This option is <em>not supported</em> by the default RedHat images.</li>
+<li><code>Spot price (USD)</code> If specified Cloudbreak will request spot price instances (which might take a while or never be 
+fulfilled by Amazon). <strong>This option is <em>not supported</em> by the default RedHat images</strong>.</li>
 <li><code>EBS encryption</code> is supported for all volume types. If this option is checked then all the attached disks <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">will be encrypted</a> by Amazon using the AWS KMS master keys.</li>
-<li>If <code>Public in account</code> is checked all the users belonging to your account will be able to use this resource to create clusters, but cannot delete or modify it.</li>
+<li>If <code>Public in account</code> is checked all the users belonging to your account will be able to use this resource to create clusters, but cannot delete it.</li>
 </ul>
-<p><img alt="" src="../images/aws-resources.png" /></p>
 <p><strong>Networks</strong></p>
-<p>Your clusters can be created in their own Virtual Private Cloud (VPC) or in one of your already existing VPCs.
-In case if you choose an existing VPC it is possible to create a new subnet within the VPC or use an already existing one.
+<p>Your clusters can be created in their own <strong>Virtual Private Cloud (VPC)</strong> or in one of your already existing VPCs.
+If you choose an existing VPC it is possible to create a new subnet within the VPC or use an already existing one.
 The subnet's IP range must be defined in the <code>Subnet (CIDR)</code> field using the general CIDR notation.</p>
-<p>If you don't want to use your already existing VPC, you can use the default network (<code>default-aws-network</code>) for all your clusters.
-It will create a new VPC with a <code>10.0.0.0/16</code> subnet every time a cluster is created.</p>
-<p>If you'd like to deploy a cluster to an already existing VPC you'll have to create a new network template where you configure the identifier of your VPC and the internet gateway (IGW) that's attached to the VPC.
-In this case you'll have to create a different network template for every one of your clusters because the subnet CIDR cannot overlap an already existing subnet in the VPC.
-To create a new subnet within the VPC leave the subnet field empty otherwise provide the id of the subnet which is in the existing VPC and your cluster will be launched
-into that subnet.
-For example you can create 3 different clusters with 3 different network templates for the subnets <code>10.0.0.0/24</code>, <code>10.0.1.0/24</code>, <code>10.0.2.0/24</code> but with the same VPC and IGW identifiers.</p>
+<p><em>Default AWS Network</em></p>
+<p>If you don't want to create or use your custom VPC, you can use the <code>default-aws-network</code> for all your 
+Cloudbreak clusters. It will create a new VPC with a <code>10.0.0.0/16</code> subnet every time a cluster is created.</p>
+<p><em>Custom AWS Network</em></p>
+<p>If you'd like to deploy a cluster to a custom VPC you'll have to <strong>create a new network</strong> template on the <strong>manage 
+networks</strong> panel. You can configure the <code>Subnet Identifier</code> and the <code>Internet Gateway Identifier</code> (IGW) of your VPC.</p>
 <blockquote>
-<p><strong>Important</strong> Please make sure that the subnet you define here doesn't overlap with any of your already deployed 
-subnets in the VPC because the validation only happens after the cluster creation starts. In case of existing subnet make sure you have enough room within
-your network space for the new instances. In this case the provided subnet CIDR will be ignored, but a proper CIDR range will be used based on the provided id of the subnet.</p>
+<p><strong>IMPORTANT</strong> The subnet CIDR cannot overlap each other in a VPC. So you have to create different network 
+templates for every each clusters.</p>
 </blockquote>
-<p>If <code>Public in account</code> is checked all the users belonging to your account will be able to use this network template to create clusters, but cannot delete or modify it.</p>
+<p>To create a new subnet within the VPC, provide the ID of the subnet which is in the existing VPC and your cluster 
+will be launched into that subnet. <strong>For example</strong> you can create 3 different clusters with 3 different network 
+templates for multiple subnets <code>10.0.0.0/24</code>, <code>10.0.1.0/24</code>, <code>10.0.2.0/24</code> with the same VPC and IGW identifiers.</p>
 <blockquote>
-<p><strong>Note</strong> that the VPCs, IGWs and/or subnets are <em>not created</em> on AWS after the <code>Create Network</code> button is pushed, 
-only after the cluster provisioning starts with the selected network template.</p>
+<p><strong>IMPORTANT</strong> Please make sure the define subnet here doesn't overlap with any of your already deployed subnet in 
+the VPC, because of the validation only happens after the cluster creation starts.</p>
+<p>In case of existing subnet make sure you have enough room within your network space for the new instances. The 
+provided subnet CIDR will be ignored, but a proper CIDR range will be used.</p>
 </blockquote>
-<p><img alt="" src="../images/aws-network.png" /></p>
+<p>If <code>Public in account</code> is checked all the users belonging to your account will be able to use this network template to create clusters, but cannot delete it.</p>
+<blockquote>
+<p><strong>NOTE</strong> The VPCs, IGWs and subnet are created on AWS only after the the cluster provisioning starts with the selected 
+network template.</p>
+</blockquote>
+<p><img alt="" src="../images/aws-network.png" />
+<sub><em>Full size <a href="../images/aws-network.png">here</a>.</em></sub></p>
 <p><strong>Security groups</strong></p>
-<p>Security group templates are very similar to the security groups on the AWS Console.
-They describe the allowed inbound traffic to the instances in the cluster.
+<p>Security group templates are very similar to the <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html">security groups on the AWS Console</a>.
+<strong>They describe the allowed inbound traffic to the instances in the cluster.</strong>
 Currently only one security group template can be selected for a Cloudbreak cluster and all the instances have a public IP address so all the instances in the cluster will belong to the same security group.
 This may change in a later release.</p>
-<p>You can define your own security group by adding all the ports, protocols and CIDR range you'd like to use. 443 needs to be there in every security group otherwise Cloudbreak won't be able to communicate with the provisioned cluster. The rules defined here doesn't need to contain the internal rules, those are automatically added by Cloudbreak to the security group on AWS.</p>
-<p>You can also use the two pre-defined security groups in Cloudbreak:</p>
+<p>You can define your own security group by adding all the ports, protocols and CIDR range you'd like to use.  The rules defined here doesn't need to contain the internal rules, those are automatically added by Cloudbreak to the security group on AWS.</p>
+<blockquote>
+<p><strong>IMPORTANT</strong> 443 needs to be there in every security group otherwise Cloudbreak won't be able to communicate with the 
+provisioned cluster.</p>
+</blockquote>
+<p><em>Default Security Group</em></p>
+<p>You can also use the two pre-defined security groups in Cloudbreak.</p>
 <p><code>only-ssh-and-ssl:</code> all ports are locked down except for SSH and gateway HTTPS (you can't access Hadoop services outside of the VPC):</p>
 <ul>
 <li>SSH (22)</li>
 <li>HTTPS (443)</li>
 </ul>
-<p><code>all-services-port:</code> all Hadoop services and SSH/gateway HTTPS are accessible by default:</p>
+<p><code>all-services-port:</code> all Hadoop services and SSH, gateway and HTTPS are accessible by default:</p>
 <ul>
 <li>SSH (22)</li>
 <li>HTTPS (443)</li>
@@ -583,12 +615,12 @@ This may change in a later release.</p>
 <li>Kibana (3080)</li>
 <li>Elasticsearch (9200)</li>
 </ul>
-<p>If <code>Public in account</code> is checked all the users belonging to your account will be able to use this security group template to create clusters, but cannot delete or modify it.</p>
+<p>If <code>Public in account</code> is checked all the users belonging to your account will be able to use this security group template to create clusters, but cannot delete it.</p>
 <blockquote>
-<p><strong>Note</strong> that the security groups are <em>not created</em> on AWS after the <code>Create Security Group</code> button is pushed, only 
-after the cluster provisioning starts with the selected security group template.</p>
+<p><strong>NOTE</strong> The security groups are created on AWS only after the cluster provisioning starts with the selected security group template.</p>
 </blockquote>
-<p><img alt="" src="../images/ui-secgroup.png" /></p>
+<p><img alt="" src="../images/ui-secgroup.png" />
+<sub><em>Full size <a href="../images/ui-secgroup.png">here</a>.</em></sub></p>
 <h2 id="defining-cluster-services">Defining cluster services</h2>
 <p><strong>Blueprints</strong></p>
 <p>Blueprints are your declarative definition of a Hadoop cluster. These are the same blueprints that are <a href="https://cwiki.apache.org/confluence/display/AMBARI/Blueprints">used by Ambari</a>.</p>
@@ -617,7 +649,7 @@ After you've selected a <code>Blueprint</code> as well you should be able to con
 <p>After the <code>create and start cluster</code> button is pushed Cloudbreak will start to create resources on your AWS account.
 Cloudbreak uses <em>CloudFormation</em> to create the resources - you can check out the resources created by Cloudbreak on the AWS Console under the CloudFormation page.</p>
 <blockquote>
-<p><strong>Important</strong> Always use Cloudbreak to delete the cluster. If that fails for some reason always try to delete the 
+<p><strong>IMPORTANT</strong> Always use Cloudbreak to delete the cluster. If that fails for some reason always try to delete the 
 CloudFormation stack first.
 Instances are started in an Auto Scaling Group so they may be restarted if you terminate an instance manually!</p>
 </blockquote>
@@ -642,7 +674,7 @@ Instances are started in an Auto Scaling Group so they may be restarted if you t
 <h3 id="create-a-cloud-credential">Create a cloud credential</h3>
 <p>In order to start using Cloudbreak you will need to have an AWS cloud credential configured.</p>
 <blockquote>
-<p><strong>Note</strong> that Cloudbreak <strong>does not</strong> store your cloud user details - we work around the concept of <a href="http://aws
+<p><strong>NOTE</strong> that Cloudbreak <strong>does not</strong> store your cloud user details - we work around the concept of <a href="http://aws
 .amazon.com/iam/">IAM</a> - on Amazon (or other cloud providers) you will have to create an IAM role, a policy and associate that with your Cloudbreak account.</p>
 </blockquote>
 <pre><code>credential create --EC2 --description &quot;description&quot; --name my-aws-credential --roleArn &lt;arn role&gt; --sshKeyPath &lt;path of your AWS public key&gt;
