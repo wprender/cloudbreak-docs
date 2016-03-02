@@ -40,7 +40,7 @@ It will create a `Profile` file in the current directory. Please open the `Profi
 This is mandatory, because of to can access the Cloudbreak UI (called Uluwatu). In some cases the `cbd` tool tries to 
 guess it. If `cbd` cannot get the IP address during the initialization, please add set the appropriate value.
 
-#### AWS Specific Configuration
+### AWS Specific Configuration
 
 **AWS Account Keys**
 
@@ -51,24 +51,6 @@ We suggest to use the keys of a valid **IAM User** here.
 export AWS_ACCESS_KEY_ID=AKIA**************W7SA
 export AWS_SECRET_ACCESS_KEY=RWCT4Cs8******************/*skiOkWD
 ```
-
-**AWS IAM Policy that grants permission to assume a role**
-
-The `sts-assume-role` IAM user [policy](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_enable-create.html) must be configured to have 
-permission to assume roles on all resources. Here it is an example how to configure the `sts:AssumeRole` for all 
-`Resource`:
-
-```
-{
-  "Version": "2012-10-17",
-  "Statement": [{
-    "Effect": "Allow",
-    "Action": "sts:AssumeRole",
-    "Resource": "*"
-  }]
-}
-```
-
 ## Start Cloudbreak Deployer
 
 To start the Cloudbreak application use the following command.
@@ -91,13 +73,13 @@ After the `cbd start` command finishes followings are worthy to check:
 
 - Pre-installed Cloudbreak Deployer version and health.
 ```
-   cbd doctor
+   `cbd` doctor
 ```
 >In case of `cbd update` is needed, please check the related documentation for [Cloudbreak Deployer Update](operations.md#cloudbreak-deployer-update)
 
 - Started Cloudbreak Application logs.
 ```
-   cbd logs cloudbreak
+   `cbd` logs cloudbreak
 ```
 >Cloudbreak should start within a minute - you should see a line like this: `Started CloudbreakApplication in 36.823 seconds`
 
@@ -109,17 +91,24 @@ Cloudbreak works by connecting your AWS account through so called *Credentials*,
 
 >**Important** Cloudbreak deployment uses two different AWS accounts for two different purposes:
 
-- The account belonging to the *Cloudbreak webapp* itself that acts as a *third party* that creates resources on the account of the *end-user*. This account is configured at server-deployment time.
+- The account belonging to the *Cloudbreak webapp* itself, acts as a *third party*, that creates resources on the 
+account of the *end user*. This account is configured at server-deployment time.
 - The account belonging to the *end user* who uses the UI or the Shell to create clusters. This account is configured when setting up credentials.
 
-These two accounts are usually *the same* when the end user is the same who deployed the Cloudbreak server, but it allows Cloudbreak to act as a SaaS project as well if needed.
+These accounts are usually *the same* when the end user is the same who deployed the Cloudbreak server, but it allows Cloudbreak to act as a SaaS project as well if needed.
 
 Credentials use [IAM Roles](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) to give access to the third party to act on behalf of the end user without giving full access to your resources.
 This IAM Role will be *assumed* later by an IAM user.
 
-**You can not assume a role with root account**, so you need to **create an IAM user** with an attached *Inline* policy and **then set the Access key and Secret Access key** in the 
-`Profile` file (check out [this description](aws.md)).
-Here is the policy that gives permission to the IAM user to assume roles:
+**AWS IAM Policy that grants permission to assume a role**
+
+**You cannot assume a role with root account**, so you need to **create an IAM user** with an attached [*Inline* 
+policy](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html) and **then set the Access key and Secret Access key** in the 
+`Profile` file (check [this description](aws.md#aws-specific-configuration) out).
+
+The `sts-assume-role` IAM user [policy](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_enable-create.html) must be configured to have 
+permission to assume roles on all resources. Here it is the policy to configure the `sts:AssumeRole` for all 
+`Resource`:
 
 ```
 {
@@ -140,7 +129,7 @@ Here is the policy that gives permission to the IAM user to assume roles:
 ```
 
 To connect your (*end user*) AWS account with a credential in Cloudbreak you'll have to create an IAM role on your AWS account that is configured to allow the third-party account to access and create resources on your behalf.
-The easiest way to do this is with cbd commands (but it can also be done manually from the [AWS Console](https://console.aws.amazon.com)):
+The easiest way to do this is with `cbd` commands (but it can also be done manually from the [AWS Console](https://console.aws.amazon.com)):
 
 ```
 cbd aws generate-role  - Generates an AWS IAM role for Cloudbreak provisioning on AWS
@@ -149,16 +138,15 @@ cbd aws delete-role    - Deletes an AWS IAM role, removes all inline policies
 ```
 
 The `generate-role` command creates a role that is assumable by the Cloudbreak Deployer AWS account and has a broad policy setup.
-By default the `generate-role` command creates a role with the name `cbreak-deployer`.
-If you'd like to create the role with a different name or if you'd like to create multiple roles then the role's name can be changed by adding this line to your `Profile`:
+This command creates a role with the name `cbreak-deployer` by default. If you'd like to create role with a different
+ name or multiple roles, you need to add this line to your `Profile`:
 
 ```
 export AWS_ROLE_NAME=my-cloudbreak-role
 ```
-
 You can check the generated role on your AWS console, under IAM roles:
-
 ![](/images/aws-iam-role.png)
+<sub>*You can open this up in full from [here](/images/aws-iam-role.png).*</sub>
 
 ## Generate a new SSH key
 
@@ -405,7 +393,7 @@ Sometimes Cloudbreak cannot synchronize it's state with the cluster state at the
 
 Start the shell with `cbd util cloudbreak-shell`. This will launch the Cloudbreak shell inside a Docker container and you are ready to start using it.
 
-You have to copy files into the cbd working directory, which you would like to use from shell. For example if your `cbd` working directory is `~/prj/cbd` then copy your blueprint and public ssh key file into this directory. You can refer to these files with their names from the shell.
+You have to copy files into the `cbd` working directory, which you would like to use from shell. For example if your `cbd` working directory is `~/prj/cbd` then copy your blueprint and public ssh key file into this directory. You can refer to these files with their names from the shell.
 
 ### Create a cloud credential
 
@@ -621,7 +609,7 @@ With Cloudbreak shell you can execute script files as well. A script file contai
 script <your script file>
 ```
 
-or with the `cbd util cloudbreak-shell-quiet` cbd command:
+or with the `cbd util cloudbreak-shell-quiet` `cbd` command:
 
 ```
 cbd util cloudbreak-shell-quiet < example.sh
@@ -629,7 +617,7 @@ cbd util cloudbreak-shell-quiet < example.sh
 
 ## Example
 
-The following example creates a hadoop cluster with `hdp-small-default` blueprint on M3Xlarge instances with 2X100G attached disks on `default-aws-network` network using `all-services-port` security group. You should copy your ssh public key file into your cbd working directory with name `id_rsa.pub` and change the `<arn role>` part with your arn role.
+The following example creates a hadoop cluster with `hdp-small-default` blueprint on M3Xlarge instances with 2X100G attached disks on `default-aws-network` network using `all-services-port` security group. You should copy your ssh public key file into your `cbd` working directory with name `id_rsa.pub` and change the `<arn role>` part with your arn role.
 
 ```
 credential create --EC2 --description description --name my-aws-credential --roleArn <arn role> --sshKeyPath id_rsa.pub
