@@ -33,7 +33,7 @@ cbd logs cloudbreak
 
 You can also check the individual logs of `uluwatu`, `periscope`, and `identity`.
 
-## Cloudbreak Deployer Update
+## Update Cloudbreak Deployer
 
 The cloudbreak-deployer tool is capable of upgrading itself to a newer version.
 
