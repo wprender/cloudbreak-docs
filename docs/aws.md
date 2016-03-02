@@ -145,8 +145,8 @@ This command creates a role with the name `cbreak-deployer` by default. If you'd
 export AWS_ROLE_NAME=my-cloudbreak-role
 ```
 You can check the generated role on your AWS console, under IAM roles:
-![](/images/aws-iam-role.png)
-<sub>*Full size [here](/images/aws-iam-role.png).*</sub>
+![](/images/aws-iam-role_v2.png)
+<sub>*Full size [here](/images/aws-iam-role_v2.png).*</sub>
 
 ## Generate a new SSH key
 
@@ -218,8 +218,8 @@ To create a new AWS credential follow these steps:
 >`Public in account` means that all the users belonging to your account will be able to use this credential to create 
 clusters, but cannot delete it.
 
-![](/images/aws-credential.png)
-<sub>*Full size [here](/images/aws-credential.png).*</sub>
+![](/images/aws-credential_v2.png)
+<sub>*Full size [here](/images/aws-credential_v2.png).*</sub>
 
 ## Infrastructure templates
 
@@ -282,8 +282,8 @@ If `Public in account` is checked all the users belonging to your account will b
 >**NOTE** The VPCs, IGWs and subnet are created on AWS only after the the cluster provisioning starts with the selected 
 network template.
 
-![](/images/aws-network.png)
-<sub>*Full size [here](/images/aws-network.png).*</sub>
+![](/images/aws-network_v2.png)
+<sub>*Full size [here](/images/aws-network_v2.png).*</sub>
 
 **Security groups**
 
@@ -342,8 +342,8 @@ If `Public in account` is checked all the users belonging to your account will b
 
 >**NOTE** The security groups are created on AWS only after the cluster provisioning starts with the selected security group template.
 
-![](/images/ui-secgroup.png)
-<sub>*Full size [here](/images/ui-secgroup.png).*</sub>
+![](/images/ui-secgroup_v2.png)
+<sub>*Full size [here](/images/ui-secgroup_v2.png).*</sub>
 
 ## Defining cluster services
 
@@ -351,20 +351,25 @@ If `Public in account` is checked all the users belonging to your account will b
 
 Blueprints are your declarative definition of a Hadoop cluster. These are the same blueprints that are [used by Ambari](https://cwiki.apache.org/confluence/display/AMBARI/Blueprints).
 
-You can use the 3 default blueprints pre-defined in Cloudbreak or you can create your own.
-Blueprints can be added from an URL (an example [blueprint](https://github.com/sequenceiq/ambari-rest-client/raw/1.6.0/src/main/resources/blueprints/multi-node-hdfs-yarn)) or the whole JSON can be copied to the `Manual copy` field.
+You can use the 3 default blueprints pre-defined in Cloudbreak or you can create your own ones.
+Blueprints can be added from file, URL (an [example blueprint](https://raw.githubusercontent
+.com/sequenceiq/cloudbreak/master/integration-test/src/main/resources/blueprint/multi-node-hdfs-yarn.bp)) or the 
+whole JSON can be written in the `JSON text` box.
 
-The hostgroups added in the JSON will be mapped to a set of instances when starting the cluster and the services and components defined in the hostgroup will be installed on the corresponding nodes.
-It is not necessary to define all the configuration fields in the blueprints - if a configuration is missing, Ambari will fill that with a default value.
-The configurations defined in the blueprint can also be modified later from the Ambari UI.
+The host groups in the JSON will be mapped to a set of instances when starting the cluster. Besides this the services and
+ components will also be installed on the corresponding nodes. Blueprints can be modified later from the Ambari UI.
+ 
+>**NOTE** Not necessary to define all the configuration in the blueprint. If a configuration is missing, Ambari will fill that with a default value.
 
 If `Public in account` is checked all the users belonging to your account will be able to use this blueprint to create clusters, but cannot delete or modify it.
 
-![](/images/ui-blueprints.png)
+![](/images/ui-blueprints_v2.png)
+<sub>*Full size [here](/images/ui-blueprints_v2.png).*</sub>
 
-A blueprint can be exported from a running Ambari cluster that can be reused in Cloudbreak with slight modifications.
+**A blueprint can be exported from a running Ambari cluster that can be reused in Cloudbreak with slight 
+modifications.**
 There is no automatic way to modify an exported blueprint and make it instantly usable in Cloudbreak, the modifications have to be done manually.
-When the blueprint is exported some configurations will have hardcoded for example domain names, or memory configurations that won't be applicable to the Cloudbreak cluster.
+When the blueprint is exported some configurations are hardcoded for example domain names, memory configurations..etc. that won't be applicable to the Cloudbreak cluster.
 
 **Cluster customization**
 
