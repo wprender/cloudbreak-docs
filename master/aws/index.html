@@ -353,26 +353,12 @@
 <p>It will create a <code>Profile</code> file in the current directory. Please open the <code>Profile</code> file then check the <code>PUBLIC_IP</code>. 
 This is mandatory, because of to can access the Cloudbreak UI (called Uluwatu). In some cases the <code>cbd</code> tool tries to 
 guess it. If <code>cbd</code> cannot get the IP address during the initialization, please add set the appropriate value.</p>
-<h4 id="aws-specific-configuration">AWS Specific Configuration</h4>
+<h3 id="aws-specific-configuration">AWS Specific Configuration</h3>
 <p><strong>AWS Account Keys</strong></p>
 <p>In order for Cloudbreak to be able to launch clusters on AWS on your behalf you need to set your AWS keys in the <code>Profile</code> file.
 We suggest to use the keys of a valid <strong>IAM User</strong> here.</p>
 <pre><code>export AWS_ACCESS_KEY_ID=AKIA**************W7SA
 export AWS_SECRET_ACCESS_KEY=RWCT4Cs8******************/*skiOkWD
-</code></pre>
-
-<p><strong>AWS IAM Policy that grants permission to assume a role</strong></p>
-<p>The <code>sts-assume-role</code> IAM user <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_enable-create.html">policy</a> must be configured to have 
-permission to assume roles on all resources. Here it is an example how to configure the <code>sts:AssumeRole</code> for all 
-<code>Resource</code>:</p>
-<pre><code>{
-  &quot;Version&quot;: &quot;2012-10-17&quot;,
-  &quot;Statement&quot;: [{
-    &quot;Effect&quot;: &quot;Allow&quot;,
-    &quot;Action&quot;: &quot;sts:AssumeRole&quot;,
-    &quot;Resource&quot;: &quot;*&quot;
-  }]
-}
 </code></pre>
 
 <h2 id="start-cloudbreak-deployer">Start Cloudbreak Deployer</h2>
@@ -394,7 +380,7 @@ This will start all the Docker containers and initialize the application.</p>
 <ul>
 <li>Pre-installed Cloudbreak Deployer version and health.</li>
 </ul>
-<pre><code>   cbd doctor
+<pre><code>   `cbd` doctor
 </code></pre>
 
 <blockquote>
@@ -403,7 +389,7 @@ This will start all the Docker containers and initialize the application.</p>
 <ul>
 <li>Started Cloudbreak Application logs.</li>
 </ul>
-<pre><code>   cbd logs cloudbreak
+<pre><code>   `cbd` logs cloudbreak
 </code></pre>
 
 <blockquote>
@@ -416,15 +402,20 @@ This will start all the Docker containers and initialize the application.</p>
 <p><strong>Important</strong> Cloudbreak deployment uses two different AWS accounts for two different purposes:</p>
 </blockquote>
 <ul>
-<li>The account belonging to the <em>Cloudbreak webapp</em> itself that acts as a <em>third party</em> that creates resources on the account of the <em>end-user</em>. This account is configured at server-deployment time.</li>
+<li>The account belonging to the <em>Cloudbreak webapp</em> itself, acts as a <em>third party</em>, that creates resources on the 
+account of the <em>end user</em>. This account is configured at server-deployment time.</li>
 <li>The account belonging to the <em>end user</em> who uses the UI or the Shell to create clusters. This account is configured when setting up credentials.</li>
 </ul>
-<p>These two accounts are usually <em>the same</em> when the end user is the same who deployed the Cloudbreak server, but it allows Cloudbreak to act as a SaaS project as well if needed.</p>
+<p>These accounts are usually <em>the same</em> when the end user is the same who deployed the Cloudbreak server, but it allows Cloudbreak to act as a SaaS project as well if needed.</p>
 <p>Credentials use <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html">IAM Roles</a> to give access to the third party to act on behalf of the end user without giving full access to your resources.
 This IAM Role will be <em>assumed</em> later by an IAM user.</p>
-<p><strong>You can not assume a role with root account</strong>, so you need to <strong>create an IAM user</strong> with an attached <em>Inline</em> policy and <strong>then set the Access key and Secret Access key</strong> in the 
-<code>Profile</code> file (check out <a href="./">this description</a>).
-Here is the policy that gives permission to the IAM user to assume roles:</p>
+<p><strong>AWS IAM Policy that grants permission to assume a role</strong></p>
+<p><strong>You cannot assume a role with root account</strong>, so you need to <strong>create an IAM user</strong> with an attached <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html"><em>Inline</em> 
+policy</a> and <strong>then set the Access key and Secret Access key</strong> in the 
+<code>Profile</code> file (check <a href="./#aws-specific-configuration">this description</a> out).</p>
+<p>The <code>sts-assume-role</code> IAM user <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_enable-create.html">policy</a> must be configured to have 
+permission to assume roles on all resources. Here it is the policy to configure the <code>sts:AssumeRole</code> for all 
+<code>Resource</code>:</p>
 <pre><code>{
   &quot;Version&quot;: &quot;2012-10-17&quot;,
   &quot;Statement&quot;: [
@@ -443,20 +434,21 @@ Here is the policy that gives permission to the IAM user to assume roles:</p>
 </code></pre>
 
 <p>To connect your (<em>end user</em>) AWS account with a credential in Cloudbreak you'll have to create an IAM role on your AWS account that is configured to allow the third-party account to access and create resources on your behalf.
-The easiest way to do this is with cbd commands (but it can also be done manually from the <a href="https://console.aws.amazon.com">AWS Console</a>):</p>
+The easiest way to do this is with <code>cbd</code> commands (but it can also be done manually from the <a href="https://console.aws.amazon.com">AWS Console</a>):</p>
 <pre><code>cbd aws generate-role  - Generates an AWS IAM role for Cloudbreak provisioning on AWS
 cbd aws show-role      - Show assumers and policies for an AWS role
 cbd aws delete-role    - Deletes an AWS IAM role, removes all inline policies
 </code></pre>
 
 <p>The <code>generate-role</code> command creates a role that is assumable by the Cloudbreak Deployer AWS account and has a broad policy setup.
-By default the <code>generate-role</code> command creates a role with the name <code>cbreak-deployer</code>.
-If you'd like to create the role with a different name or if you'd like to create multiple roles then the role's name can be changed by adding this line to your <code>Profile</code>:</p>
+This command creates a role with the name <code>cbreak-deployer</code> by default. If you'd like to create role with a different
+ name or multiple roles, you need to add this line to your <code>Profile</code>:</p>
 <pre><code>export AWS_ROLE_NAME=my-cloudbreak-role
 </code></pre>
 
-<p>You can check the generated role on your AWS console, under IAM roles:</p>
-<p><img alt="" src="../images/aws-iam-role.png" /></p>
+<p>You can check the generated role on your AWS console, under IAM roles:
+<img alt="" src="../images/aws-iam-role.png" />
+<sub><em>You can open this up in full from <a href="../images/aws-iam-role.png">here</a>.</em></sub></p>
 <h2 id="generate-a-new-ssh-key">Generate a new SSH key</h2>
 <p>All the instances created by Cloudbreak are configured to allow key-based SSH,
 so you'll need to provide an SSH public key that can be used later to SSH onto the instances in the clusters you'll create with Cloudbreak.
@@ -646,7 +638,7 @@ Instances are started in an Auto Scaling Group so they may be restarted if you t
 <p>Sometimes Cloudbreak cannot synchronize it's state with the cluster state at the cloud provider and the cluster can't be terminated. In this case with the <code>Forced termination</code> option in the termination dialog box you can terminate the cluster at the Cloudbreak side anyway. <strong>In this case you may need to manually remove resources at the cloud provider.</strong></p>
 <h1 id="interactive-mode">Interactive mode</h1>
 <p>Start the shell with <code>cbd util cloudbreak-shell</code>. This will launch the Cloudbreak shell inside a Docker container and you are ready to start using it.</p>
-<p>You have to copy files into the cbd working directory, which you would like to use from shell. For example if your <code>cbd</code> working directory is <code>~/prj/cbd</code> then copy your blueprint and public ssh key file into this directory. You can refer to these files with their names from the shell.</p>
+<p>You have to copy files into the <code>cbd</code> working directory, which you would like to use from shell. For example if your <code>cbd</code> working directory is <code>~/prj/cbd</code> then copy your blueprint and public ssh key file into this directory. You can refer to these files with their names from the shell.</p>
 <h3 id="create-a-cloud-credential">Create a cloud credential</h3>
 <p>In order to start using Cloudbreak you will need to have an AWS cloud credential configured.</p>
 <blockquote>
@@ -813,12 +805,12 @@ or you can upscale the related cluster separately as well:</p>
 <pre><code>script &lt;your script file&gt;
 </code></pre>
 
-<p>or with the <code>cbd util cloudbreak-shell-quiet</code> cbd command:</p>
+<p>or with the <code>cbd util cloudbreak-shell-quiet</code> <code>cbd</code> command:</p>
 <pre><code>cbd util cloudbreak-shell-quiet &lt; example.sh
 </code></pre>
 
 <h2 id="example">Example</h2>
-<p>The following example creates a hadoop cluster with <code>hdp-small-default</code> blueprint on M3Xlarge instances with 2X100G attached disks on <code>default-aws-network</code> network using <code>all-services-port</code> security group. You should copy your ssh public key file into your cbd working directory with name <code>id_rsa.pub</code> and change the <code>&lt;arn role&gt;</code> part with your arn role.</p>
+<p>The following example creates a hadoop cluster with <code>hdp-small-default</code> blueprint on M3Xlarge instances with 2X100G attached disks on <code>default-aws-network</code> network using <code>all-services-port</code> security group. You should copy your ssh public key file into your <code>cbd</code> working directory with name <code>id_rsa.pub</code> and change the <code>&lt;arn role&gt;</code> part with your arn role.</p>
 <pre><code>credential create --EC2 --description description --name my-aws-credential --roleArn &lt;arn role&gt; --sshKeyPath id_rsa.pub
 credential select --name my-aws-credential
 template create --EC2 --name awstemplate --description aws-template --instanceType M3Xlarge --volumeSize 100 --volumeCount 2
