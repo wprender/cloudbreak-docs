@@ -72,20 +72,20 @@ systemctl start docker
 systemctl enable docker
 ```
 
-## Install Cloudbreak deployer
+## Install Cloudbreak Deployer
 
-Install the Cloudbreak deployer and unzip the platform specific single binary to your PATH. The one-liner way is:
+Install the Cloudbreak Deployer and unzip the platform specific single binary to your PATH. The one-liner way is:
 
 ```
 yum -y install unzip tar
 curl https://raw.githubusercontent.com/sequenceiq/cloudbreak-deployer/master/install-latest | sh && cbd --version
 ```
 
-Once the Cloudbreak deployer is installed, you can start to setup the Cloudbreak application.
+Once the Cloudbreak Deployer is installed, you can start to setup the Cloudbreak application.
 
 ## Initialize your Profile
 
-First initialize cbd by creating a `Profile` file:
+First initialize `cbd` by creating a `Profile` file:
 
 ```
 mkdir cloudbreak-deployment
@@ -99,7 +99,7 @@ configuration is the `PUBLIC_IP`. This IP will be used to access the Cloudbreak 
 
 ## Generate your Profile
 
-You are done with the configuration of Cloudbreak deployer. The last thing you have to do is to regenerate the configurations in order to take effect.
+You are done with the configuration of Cloudbreak Deployer. The last thing you have to do is to regenerate the configurations in order to take effect.
 
 ```
 rm *.yml

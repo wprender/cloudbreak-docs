@@ -73,13 +73,13 @@ After the `cbd start` command finishes followings are worthy to check:
 
 - Pre-installed Cloudbreak Deployer version and health.
 ```
-   `cbd` doctor
+   cbd doctor
 ```
 >In case of `cbd update` is needed, please check the related documentation for [Cloudbreak Deployer Update](operations.md#cloudbreak-deployer-update)
 
 - Started Cloudbreak Application logs.
 ```
-   `cbd` logs cloudbreak
+   cbd logs cloudbreak
 ```
 >Cloudbreak should start within a minute - you should see a line like this: `Started CloudbreakApplication in 36.823 seconds`
 
@@ -373,30 +373,71 @@ When the blueprint is exported some configurations are hardcoded for example dom
 
 **Cluster customization**
 
-Sometimes it can be useful to define some custom scripts that run during cluster creation and add some additional functionality.
-For example it can be a service you'd like to install but it's not supported by Ambari or some script that automatically downloads some data to the necessary nodes.
-The most notable example is Ranger setup: it has a prerequisite of a running database when Ranger Admin is installing.
-A PostgreSQL database can be easily started and configured with a recipe before the blueprint installation starts.
+Sometimes it can be useful to **define some custom scripts so called Recipes in Cloudbreak** that run during cluster 
+creation and add some additional functionality.
 
-To learn more about these so called *Recipes*, and to check out the Ranger database recipe, take a look at the [Cluster customization](recipes.md) part of the documentation.
+For example it can be a service you'd like to install but it's not supported by Ambari or some script that automatically downloads some data to the necessary nodes.
+The most **notable example is Ranger setup**:
+
+- It has a prerequisite of a running database when Ranger Admin is installing.
+- A PostgreSQL database can be easily started and configured with a recipe before the blueprint installation starts.
+
+To learn more about these and check the Ranger recipe out, take a look at the [Cluster customization](recipes.md).
 
 
 ## Cluster deployment
 
-After all the templates are configured you can deploy a new HDP cluster. Start by selecting a previously created AWS credential in the header.
-Click on `create cluster`, give it a `name`, select a `Region` where the cluster infrastructure will be provisioned and select one of the `Networks` and `Security Groups` created earlier.
-After you've selected a `Blueprint` as well you should be able to configure the `Template resources` and the number of nodes for all of the hostgroups in the blueprint.
+After all the cluster resources are configured you can deploy a new HDP cluster.
 
-If `Public in account` is checked all the users belonging to your account will be able to see the newly created cluster on the UI, but cannot delete or modify it.
+Here is a basic flow for cluster creation on Cloudbreak Web UI:
 
-If `Enable security` is checked as well, Cloudbreak will install Key Distribution Center (KDC) and the cluster will be Kerberized. See more about it in the [Kerberos](kerberos.md) section of this documentation.
+ - Start by selecting a previously created AWS credential in the header.
 
-After the `create and start cluster` button is pushed Cloudbreak will start to create resources on your AWS account.
+![](/images/ui-credentials.png)
+<sub>*Full size [here](/images/ui-credentials.png).*</sub>
+
+ - Open `create cluster`
+
+`Configure Cluster` tab
+
+ - Fill out the new cluster `name`
+    - Cluster name must start with a lowercase alphabetic character then you can apply lowercase alphanumeric and 
+   hyphens only (min 5, max 40 characters)
+ - Select a `Region` where you like your cluster be provisioned
+ - Click on the `Setup Network and Security` button
+>If `Public in account` is checked all the users belonging to your account will be able to see the created cluster on the UI, but cannot delete or modify it.
+
+`Setup Network and Security` tab
+
+ - Select one of the networks
+ - Select one of the security groups
+ - Click on the `Choose Blueprint` button
+>If `Enable security` is checked as well, Cloudbreak will install Key Distribution Center (KDC) and the cluster will be Kerberized. See more about it in the [Kerberos](kerberos.md) section of this documentation.
+
+`Choose Blueprint` tab
+
+ - Select one of the blueprint
+ - After you've selected a `Blueprint`, you should be able to configure:
+    - the templates
+    - the number of nodes for all of the host groups in the blueprint
+    - the recipes for nodes
+ - Click on the `Review and Launch` button
+
+`Review and Launch` tab
+
+ - After the `create and start cluster` button has clicked Cloudbreak will start to create the cluster's resources on 
+ your AWS account.
+
 Cloudbreak uses *CloudFormation* to create the resources - you can check out the resources created by Cloudbreak on the AWS Console under the CloudFormation page.
+![](/images/aws-cloudformation.png)
+<sub>*Full size [here](/images/aws-cloudformation.png).*</sub>
 
->**IMPORTANT** Always use Cloudbreak to delete the cluster. If that fails for some reason always try to delete the 
-CloudFormation stack first.
-Instances are started in an Auto Scaling Group so they may be restarted if you terminate an instance manually!
+Besides these you can check the progress on the Cloudbreak Web UI itself if you open the new cluster's `Event History`.
+![](/images/ui-eventhistory.png)
+<sub>*Full size [here](/images/ui-eventhistory.png).*</sub>
+
+>**IMPORTANT** Always use Cloudbreak to terminate the cluster. If that fails for some reason always try to delete the 
+CloudFormation stack first. Instances are started in an Auto Scaling Group so they may be restarted if you terminate an instance manually!
 
 **Advanced options**
 
