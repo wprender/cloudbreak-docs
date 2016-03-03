@@ -27,6 +27,10 @@ Start the shell with `cbd util cloudbreak-shell`. This will launch the Cloudbrea
 
 You can find the docker image and its documentation [here](https://github.com/sequenceiq/docker-cb-shell).
 
+```
+docker run -it --rm --name cloudbreak-shell -e CLOUDBREAK_ADDRESS=http://<cloudbreak-address>:8080 -e IDENTITY_ADDRESS=http://<cloudbreak-identity-address>:8089 -e SEQUENCEIQ_USER=admin@example.com -e SEQUENCEIQ_PASSWORD=cloudbreak -w /data sequenceiq/cb-shell:0.5.38
+```
+
 <a name="fromsource"></a>
 ### Build from source
 
@@ -36,6 +40,7 @@ If want to use the code or extend it with new commands follow the steps below. Y
 ```
 git clone https://github.com/sequenceiq/cloudbreak-shell.git
 cd cloudbreak-shell
+git checkout rc-1.1
 ./gradlew clean build
 ```
 
