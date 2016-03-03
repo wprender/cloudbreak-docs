@@ -415,12 +415,16 @@
 <p><a name="dockerimage"></a></p>
 <h3 id="starting-cloudbreak-shell-with-our-prepared-docker-image">Starting Cloudbreak shell with our prepared docker image</h3>
 <p>You can find the docker image and its documentation <a href="https://github.com/sequenceiq/docker-cb-shell">here</a>.</p>
+<pre><code>docker run -it --rm --name cloudbreak-shell -e CLOUDBREAK_ADDRESS=http://&lt;cloudbreak-address&gt;:8080 -e IDENTITY_ADDRESS=http://&lt;cloudbreak-identity-address&gt;:8089 -e SEQUENCEIQ_USER=admin@example.com -e SEQUENCEIQ_PASSWORD=cloudbreak -w /data sequenceiq/cb-shell:0.5.38
+</code></pre>
+
 <p><a name="fromsource"></a></p>
 <h3 id="build-from-source">Build from source</h3>
 <p>If want to use the code or extend it with new commands follow the steps below. You will need:
 - jdk 1.7</p>
 <pre><code>git clone https://github.com/sequenceiq/cloudbreak-shell.git
 cd cloudbreak-shell
+git checkout rc-1.1
 ./gradlew clean build
 </code></pre>
 
