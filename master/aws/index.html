@@ -515,8 +515,8 @@ instance</a> of every cluster you'll create with this credential.</li>
 <p><code>Public in account</code> means that all the users belonging to your account will be able to use this credential to create 
 clusters, but cannot delete it.</p>
 </blockquote>
-<p><img alt="" src="../images/aws-credential_v2.png" />
-<sub><em>Full size <a href="../images/aws-credential_v2.png">here</a>.</em></sub></p>
+<p><img alt="" src="../images/aws-credential_v3.png" />
+<sub><em>Full size <a href="../images/aws-credential_v3.png">here</a>.</em></sub></p>
 <h2 id="infrastructure-templates">Infrastructure templates</h2>
 <p>After your AWS account is linked to Cloudbreak you can start creating resource templates that describe your clusters' infrastructure:</p>
 <ul>
@@ -568,8 +568,8 @@ to create clusters, but cannot delete it.</p>
 <p><strong>NOTE</strong> The VPCs, IGWs and subnet are created on AWS only after the the cluster provisioning starts with the selected 
 network template.</p>
 </blockquote>
-<p><img alt="" src="../images/aws-network_v2.png" />
-<sub><em>Full size <a href="../images/aws-network_v2.png">here</a>.</em></sub></p>
+<p><img alt="" src="../images/aws-network_v3.png" />
+<sub><em>Full size <a href="../images/aws-network_v3.png">here</a>.</em></sub></p>
 <p><strong>Security groups</strong></p>
 <p>Security group templates are very similar to the <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html">security groups on the AWS Console</a>.
 <strong>They describe the allowed inbound traffic to the instances in the cluster.</strong>
@@ -627,8 +627,8 @@ template to create clusters, but cannot delete it.</p>
 <blockquote>
 <p><strong>NOTE</strong> The security groups are created on AWS only after the cluster provisioning starts with the selected security group template.</p>
 </blockquote>
-<p><img alt="" src="../images/ui-secgroup_v2.png" />
-<sub><em>Full size <a href="../images/ui-secgroup_v2.png">here</a>.</em></sub></p>
+<p><img alt="" src="../images/ui-secgroup_v3.png" />
+<sub><em>Full size <a href="../images/ui-secgroup_v3.png">here</a>.</em></sub></p>
 <h2 id="defining-cluster-services">Defining cluster services</h2>
 <p><strong>Blueprints</strong></p>
 <p>Blueprints are your declarative definition of a Hadoop cluster. These are the same blueprints that are <a href="https://cwiki.apache.org/confluence/display/AMBARI/Blueprints">used by Ambari</a>.</p>
@@ -644,8 +644,8 @@ fill that with a default value.</p>
 </blockquote>
 <p>If <code>Public in account</code> is checked all the users belonging to your account will be able to use this blueprint to 
 create clusters, but cannot delete or modify it.</p>
-<p><img alt="" src="../images/ui-blueprints_v2.png" />
-<sub><em>Full size <a href="../images/ui-blueprints_v2.png">here</a>.</em></sub></p>
+<p><img alt="" src="../images/ui-blueprints_v3.png" />
+<sub><em>Full size <a href="../images/ui-blueprints_v3.png">here</a>.</em></sub></p>
 <p><strong>A blueprint can be exported from a running Ambari cluster that can be reused in Cloudbreak with slight 
 modifications.</strong>
 There is no automatic way to modify an exported blueprint and make it instantly usable in Cloudbreak, the 
@@ -669,8 +669,8 @@ The most <strong>notable example is Ranger setup</strong>:</p>
 <ul>
 <li>Start by selecting a previously created AWS credential in the header.</li>
 </ul>
-<p><img alt="" src="../images/ui-credentials.png" />
-<sub><em>Full size <a href="../images/ui-credentials.png">here</a>.</em></sub></p>
+<p><img alt="" src="../images/ui-credentials_v2.png" />
+<sub><em>Full size <a href="../images/ui-credentials_v2.png">here</a>.</em></sub></p>
 <ul>
 <li>Open <code>create cluster</code></li>
 </ul>
@@ -719,8 +719,8 @@ the AWS Console CloudFormation page.
 <img alt="" src="../images/aws-cloudformation_v2.png" />
 <sub><em>Full size <a href="../images/aws-cloudformation_v2.png">here</a>.</em></sub></p>
 <p>Besides these you can check the progress on the Cloudbreak Web UI itself if you open the new cluster's <code>Event History</code>.
-<img alt="" src="../images/ui-eventhistory_v2.png" />
-<sub><em>Full size <a href="../images/ui-eventhistory_v2.png">here</a>.</em></sub></p>
+<img alt="" src="../images/ui-eventhistory_v3.png" />
+<sub><em>Full size <a href="../images/ui-eventhistory_v3.png">here</a>.</em></sub></p>
 <p><strong>Advanced options</strong></p>
 <p>There are some advanced features when deploying a new cluster, these are the following:</p>
 <p><code>Availability Zone</code> You can restrict the instances to a specific availability zone. It may be useful if you're using reserved instances.</p>
@@ -748,8 +748,8 @@ CloudFormation stack first. Instances are started in an Auto Scaling Group so th
 <li>You should check the related resources at the AWS CloudFormation</li>
 <li>If it is needed you need to manually remove resources from there.</li>
 </ol>
-<p><img alt="" src="../images/ui-forceterminate.png" />
-<sub><em>Full size <a href="../images/ui-forceterminate.png">here</a>.</em></sub></p>
+<p><img alt="" src="../images/ui-forceterminate_v2.png" />
+<sub><em>Full size <a href="../images/ui-forceterminate_v2.png">here</a>.</em></sub></p>
 <h1 id="interactive-mode-cloudbreak-shell">Interactive mode / Cloudbreak Shell</h1>
 <p>The goal with the Cloudbreak Shell (Cloudbreak CLI) was to provide an interactive command line tool which supports:</p>
 <ul>
@@ -1013,21 +1013,27 @@ instancegroup configure --instanceGroup slave_1 --nodecount 1 --templateName min
 <pre><code>securitygroup select --name all-services-port
 </code></pre>
 
-<p><strong>Create a Hadoop cluster</strong></p>
-<p>You are almost done - two more command and this will create your Hadoop cluster on your AWS cloud.</p>
-<p>As on API or UI the new cluster will use your <code>credential</code>, <code>blueprint</code>, <code>instancegroups</code>, <code>network</code>, <code>securitygroup</code>
- then by CloudFormation will launch a cloud stack:</p>
+<p><strong>Create stack / Create cloud infrastructure</strong></p>
+<p>Stack means the running cloud infrastructure that is created based on the instance groups configured earlier 
+(<code>credential</code>, <code>instancegroups</code>, <code>network</code>, <code>securitygroup</code>). Same as in case of the API or UI the new cluster will 
+use your templates and by using CloudFormation will launch your cloud stack. Use the following command to create a 
+stack to be used with your Hadoop cluster:</p>
 <pre><code>stack create --name myawsstack --region us-east-1
 </code></pre>
 
-<p><strong>Once the <code>stack</code> is up and running (cloud provisioning is done)</strong> it will use your selected resources.</p>
-<p>Install your custom Hadoop cluster with the selected components and services:</p>
+<p>The infrastructure is created asynchronously, the state of the stack can be checked with the stack <code>show command</code>. If 
+it reports AVAILABLE, it means that the virtual machines and the corresponding infrastructure is running at the cloud provider.
+Other available option is <code>--wait</code> - in this case the create command will return only after the process has finished. </p>
+<p><strong>Create a Hadoop cluster / Cloud provisioning</strong></p>
+<p><strong>You are almost done! One more command and your Hadoop cluster is starting!</strong> Cloud provisioning is done once the 
+cluster is up and running. The new cluster will use your selected blueprint and install your custom Hadoop cluster 
+with the selected components and services.</p>
 <pre><code>cluster create --description &quot;my first cluster&quot;
 </code></pre>
 
-<p>Other available option for both command:</p>
-<p><code>--wait</code> The create command will return only after the process has finished. </p>
-<p><strong>You are done</strong> you can check the progress:</p>
+<p>You can use the <code>--wait</code> parameter here as well. </p>
+<p><strong>You are done!</strong> You have several opportunities to check the progress during the infrastructure creation then 
+provisioning:</p>
 <ul>
 <li>Cloudbreak uses <em>CloudFormation</em> to create the resources - you can check out the resources created by Cloudbreak on
  the AWS Console CloudFormation page.</li>
@@ -1036,9 +1042,9 @@ instancegroup configure --instanceGroup slave_1 --nodecount 1 --templateName min
 <img alt="" src="../images/aws-cloudformation_v2.png" />
 <sub><em>Full size <a href="../images/aws-cloudformation_v2.png">here</a>.</em></sub></p>
 <ul>
-<li>If stack then cluster creation have successfully done, you can check the Ambari Web UI. However for this you 
-should know the Ambari IP (for example: <code>ambariServerIp 52.8.110.95</code>) then add the <code>:8080</code> port to this. <ul>
-<li>You can get the IP from the result of the following command:</li>
+<li>If stack then cluster creation have successfully done, you can check the Ambari Web UI. However you need to know the 
+Ambari IP (for example: <code>http://52.8.110.95:8080</code>): <ul>
+<li>You can get the IP from the CLI as a result (<code>ambariServerIp 52.8.110.95</code>) of the following command:</li>
 </ul>
 </li>
 </ul>
@@ -1049,54 +1055,52 @@ should know the Ambari IP (for example: <code>ambariServerIp 52.8.110.95</code>)
 <img alt="" src="../images/ambari-dashboard.png" />
 <sub><em>Full size <a href="../images/ambari-dashboard.png">here</a>.</em></sub></p>
 <ul>
-<li>Besides these you can check the progress and the Ambari IP as well on the Cloudbreak Web UI itself. Open the 
-new cluster's <code>Event History</code>.</li>
+<li>Besides these you can check the entire progress and the Ambari IP as well on the Cloudbreak Web UI itself. Open the 
+new cluster's <code>details</code> and its <code>Event History</code> here.</li>
 </ul>
 <p>For example:
-<img alt="" src="../images/ui-eventhistory_v2.png" />
-<sub><em>Full size <a href="../images/ui-eventhistory_v2.png">here</a>.</em></sub></p>
-<p><strong>Stop cluster and stack</strong></p>
+<img alt="" src="../images/ui-eventhistory_v3.png" />
+<sub><em>Full size <a href="../images/ui-eventhistory_v3.png">here</a>.</em></sub></p>
+<p><strong>Stop cluster</strong></p>
 <p>You have the ability to <strong>stop your existing stack then its cluster</strong> if you want to suspend the work on it.</p>
 <p>Select a stack for example with its name:</p>
 <pre><code>stack select --name my-stack
 </code></pre>
 
-<p>Other available option to define a stack is its <code>--id</code> (instead of the <code>--name</code>).</p>
-<p>Apply the following commands to stop the previously selected stack:</p>
+<p>Other available option to define a stack is its <code>--id</code>.</p>
+<p>Every time you should stop the <code>cluster</code> first then the <code>stack</code>. So apply following commands to stop the previously 
+selected stack:</p>
 <pre><code>cluster stop
 stack stop
 </code></pre>
 
-<blockquote>
-<p><strong>Important!</strong> The related cluster should be stopped before you can stop the stack.</p>
-</blockquote>
-<p><strong>Restart cluster and stack</strong></p>
-<p>Apply the following command to <strong>restart the previously selected and stopped stack</strong>:</p>
+<p><strong>Restart cluster</strong></p>
+<p><strong>Select your stack that you would like to restart</strong> after this you can apply:</p>
 <pre><code>stack start
 </code></pre>
 
-<p>After the selected stack has restarted, you can <strong>restart the related cluster as well</strong>:</p>
+<p>After the stack has successfully restarted, you can <strong>restart the related cluster as well</strong>:</p>
 <pre><code>cluster start
 </code></pre>
 
-<p><strong>Upscale cluster and stack</strong></p>
-<p>You can <strong>upscale your selected stack</strong> if you need more instances to your infrastructure:</p>
+<p><strong>Upscale cluster</strong></p>
+<p>If you need more instances to your infrastructure, you can <strong>upscale your selected stack</strong>:</p>
 <pre><code>stack node --ADD --instanceGroup host_group_slave_1 --adjustment 6
 </code></pre>
 
-<p>Other available options:</p>
-<p><code>--withClusterUpScale</code> indicates cluster upscale after stack upscale
-or you can upscale the related cluster separately as well:</p>
+<p>Other available option is <code>--withClusterUpScale</code> - this indicates also a cluster upscale after the stack upscale. You
+ can upscale the related cluster separately if you want to do this:</p>
 <pre><code>cluster node --ADD --hostgroup host_group_slave_1 --adjustment 6
 </code></pre>
 
-<p><strong>Downscale cluster and stack</strong></p>
-<p>Apply the following command to <strong>downscale the previously selected stack</strong>:</p>
-<pre><code>stack node --REMOVE  --instanceGroup host_group_slave_1 --adjustment -2
+<p><strong>Downscale cluster</strong></p>
+<p>You also can reduce the number of instances in your infrastructure. <strong>After you selected your stack</strong>:</p>
+<pre><code>cluster node --REMOVE  --hostgroup host_group_slave_1 --adjustment -2
 </code></pre>
 
-<p>and the related cluster separately:</p>
-<pre><code>cluster node --REMOVE  --hostgroup host_group_slave_1 --adjustment -2
+<p>Other available option is <code>--withStackDownScale</code> - this indicates also a stack downscale after the cluster downscale.
+ You can downscale the related stack separately if you want to do this:</p>
+<pre><code>stack node --REMOVE  --instanceGroup host_group_slave_1 --adjustment -2
 </code></pre>
 
 <h2 id="cluster-termination_1">Cluster termination</h2>
