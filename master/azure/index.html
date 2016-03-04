@@ -326,7 +326,7 @@ Therefore we provide a much easier way to launch Cludbreak Deployer based on the
 Templates</a>.</p>
 <h2 id="deploy-using-the-azure-portal">Deploy using the Azure Portal</h2>
 <p>It is as simple as clicking here: <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsequenceiq%2Fazure-cbd-quickstart%2Fmaster%2Fazuredeploy.json">  <img alt="deploy on azure" src="http://azuredeploy.net/deploybutton.png" /> </a></p>
-<p><strong>The following parameters are mandatory to be set (beyond to the default values) for the new CBD Template!</strong></p>
+<p><strong>The following parameters are mandatory (beyond to the default values) for the new <code>cbd</code> Template!</strong></p>
 <p>On the <code>Custom deployment</code> panel:</p>
 <ul>
 <li>Please create a new <code>Resource group</code></li>
@@ -344,10 +344,10 @@ Templates</a>.</p>
 </ul>
 </li>
 </ul>
-<p>Finally you should review the <code>Legal terms</code> on the <code>Custom deployment</code> panel:</p>
+<p><strong>Finally</strong> you should review the <code>Legal terms</code> from the <code>Custom deployment</code> panel:</p>
 <ul>
 <li>If you agree with the terms and conditions, just click on <code>Create</code> 
-button of this pane</li>
+button of this panel</li>
 <li>Also click on the <code>Create</code> button on the <code>Custom deployment</code> </li>
 </ul>
 <blockquote>
@@ -358,16 +358,37 @@ but overall fail</a>.</p>
 </blockquote>
 <ul>
 <li>Once it's successful done, you can reach the Cloudbreak UI 
-at:<code>http://&lt;VM Public IP&gt;:3000/</code></li>
+at:<code>http://&lt;VM Public IP&gt;:3000/</code><ul>
+<li>email: admin@example.com</li>
+<li>password: cloudbreak</li>
 </ul>
-<p><strong>Optional:</strong> You can SSH to the VM and track the progress in the 
-Cloudbreak logs (<code>cbd logs cloudbreak</code>):</p>
+</li>
+</ul>
+<p><strong>Optional</strong></p>
+<p>You can SSH to the VM and track the progress in the Cloudbreak logs as well:</p>
+<pre><code>cbd logs cloudbreak
+</code></pre>
+
 <ul>
-<li>Cloudbreak Deployer location is <code>/var/lib/cloudbreak-deployment</code></li>
-<li>All cbd actions must be performed as root</li>
-<li>All cbd actions must be executed from the cbd folder:
-    <code>cloudbreak@cbdeployerVM:/var/lib/cloudbreak-deployment# cbd logs cloudbreak</code></li>
+<li>Cloudbreak Deployer location is <code>/var/lib/cloudbreak-deployment</code>.</li>
+<li>All <code>cbd</code> actions must be executed from the <code>cbd</code> folder.</li>
+<li>Most of the <code>cbd</code> commands require <code>root</code> permissions.</li>
 </ul>
+<p>For example to investigate the Cloudbreak logs:</p>
+<pre><code>cloudbreak@cbdeployerVM:/var/lib/cloudbreak-deployment# cbd logs cloudbreak
+</code></pre>
+
+<blockquote>
+<p>You should see a line like the following one in the logs: 
+<code>Started CloudbreakApplication in 187.791 seconds (JVM running for 202.127)</code></p>
+</blockquote>
+<p>After the Cloudbreak Deployer has started the following is worthy to check:</p>
+<pre><code>cbd doctor
+</code></pre>
+
+<blockquote>
+<p>In case of cbd update is needed, please check the related documentation for <a href="../operations/#cloudbreak-deployer-update">Cloudbreak Deployer Update</a></p>
+</blockquote>
 <h2 id="under-the-hood">Under the hood</h2>
 <p>Meanwhile Azure is creating the deployment, here is some information about what happens in the background:</p>
 <ul>
@@ -376,15 +397,13 @@ Cloudbreak logs (<code>cbd logs cloudbreak</code>):</p>
    minutes</li>
 </ul>
 </li>
-<li>Use <a href="https://github
-.com/Azure/azure-docker-extension">Docker VM Extension</a> to install Docker</li>
-<li>Use <a href="https://github
-.com/Azure/azure-linux-extensions/tree/master/CustomScript">CustomScript Extension</a> to install 
-Cloudbreak Deployer (cbd)</li>
+<li>Use <a href="https://github.com/Azure/azure-docker-extension">Docker VM Extension</a> to install Docker</li>
+<li>Use <a href="https://github.com/Azure/azure-linux-extensions/tree/master/CustomScript">CustomScript Extension</a> to install 
+Cloudbreak Deployer (<code>cbd</code>)</li>
 </ul>
 <h1 id="provisioning-prerequisites">Provisioning Prerequisites</h1>
 <p>We use the new <a href="https://azure.microsoft.com/en-us/documentation/articles/resource-group-overview/">Azure ARM</a> in 
-order to launch clusters. In order to work we need to create an <strong>Active Directory</strong> application with the configured name and password and adds the permissions that are needed to call the Azure Resource Manager API. Cloudbreak deployer automates all this for you.</p>
+order to launch clusters. In order to work we need to create an <strong>Active Directory</strong> application with the configured name and password and adds the permissions that are needed to call the Azure Resource Manager API. Cloudbreak Deployer automates all this for you.</p>
 <h2 id="generate-a-new-ssh-key">Generate a new SSH key</h2>
 <p>All the instances created by Cloudbreak are configured to allow key-based SSH,
 so you'll need to provide an SSH public key that can be used later to SSH onto the instances in the clusters you'll create with Cloudbreak.
@@ -411,39 +430,46 @@ You'll be asked to enter a passphrase, but you can leave it empty.
 
 <p>Later you'll need to pass the <code>.pub</code> file's contents to Cloudbreak and use the private part to SSH to the instances.</p>
 <h2 id="azure-access-setup">Azure access setup</h2>
-<p>If you do not have an <strong>Active Directory</strong> user then you have to configure it before deploying a cluster with Cloudbreak.</p>
-<ol>
-<li>
-<p>Go to <code>manage.windowsazure.com</code> &gt; <code>Active Directory</code>
-<img alt="" src="../images/azure1.png" /></p>
+<p>If you do not have an <strong>Active Directory (AD)</strong> user then you have to configure it before deploying a cluster with 
+Cloudbreak:</p>
+<ul>
+<li>Go to <code>manage.windowsazure.com</code> &gt; <code>Active Directory</code></li>
+<li>Select one of your AD where you would like to create the new user</li>
+<li>You can configure your AD users on <code>Your active directory</code> &gt; <code>Users</code> menu</li>
+</ul>
+<p><img alt="" src="../images/azure-aduser_v2.png" />
+<sub><em>Full size <a href="../images/azure-aduser_v2.png">here</a>.</em></sub></p>
+<ul>
+<li>Here you can add the new user to AD. Simply click on <code>Add User</code> in the bottom of the page<ul>
+<li><code>TYPE OF USER</code>: select <code>New user in your organization</code></li>
+<li><code>USER NAME</code>: type the new user name into the box</li>
+<li>Fill out the name fields for the new user on the second page of the ADD USER window</li>
+<li>Submit the new user creation on the third window with the big green button</li>
+<li>Copy the password <code>Folo4965</code></li>
+<li>Click on the tick button in the bottom of the the ADD USER window</li>
+</ul>
 </li>
-<li>
-<p>You can configure your AD users on <code>Your active directory</code> &gt; <code>Users</code> menu
-<img alt="" src="../images/azure2.png" /></p>
+<li>You will see the new user in the <code>USERS</code> list</li>
+</ul>
+<blockquote>
+<p>You have got a temporary password so you have to change it before you start using the new user.</p>
+</blockquote>
+<ul>
+<li>You need to add your AD user to the <code>manage.windowsazure.com</code> &gt; <code>Settings</code> &gt; <code>Administrators</code></li>
+</ul>
+<p><img alt="" src="../images/azure-administrators_v2.png" />
+<sub><em>Full size <a href="../images/azure-administrators_v2.png">here</a>.</em></sub></p>
+<ul>
+<li>Here you can add the new user to Administrators. Simply click on <code>Add</code> in the bottom of the page<ul>
+<li><code>EMAIL ADDRESS</code>: copy the previously created user email address here</li>
+<li>Select the appropriate <code>SUBSCRIPTION</code> for the user</li>
+<li>Click on the tick button in the bottom of the the ADD A CO-ADMINISTRATOR window</li>
+</ul>
 </li>
-<li>
-<p>Here you can add the new user to AD. Simply click on <code>Add User</code> on the bottom of the page
-<img alt="" src="../images/azure3.png" /></p>
-</li>
-<li>
-<p>Type the new user name into the box
-<img alt="" src="../images/azure4.png" /></p>
-</li>
-<li>
-<p>You will see the new user in the list. You have got a temporary password so you have to change it before you start using the new user.
-<img alt="" src="../images/azure5.png" /></p>
-</li>
-<li>
-<p>After you add the user to the AD you need to add your AD user to the <code>manage.windowsazure.com</code> &gt; <code>Settings</code> &gt; <code>Administrators</code>
-<img alt="" src="../images/azure6.png" /></p>
-</li>
-<li>
-<p>Here you can add the new user to Administrators. Simply click on <code>Add</code> on the bottom of the page
-<img alt="" src="../images/azure7.png" /></p>
-</li>
-</ol>
+<li>You will see the new co-administrator a in the <code>ADMINISTRATORS</code> list</li>
+</ul>
 <h2 id="azure-application-setup-with-cloudbreak-deployer">Azure application setup with Cloudbreak Deployer</h2>
-<p>In order for Cloudbreak to be able to launch clusters on Azure on your behalf you need to set up your <strong>Azure ARM application</strong>. We have automated the Azure configurations in the Cloudbreak Deployer (CBD). After CBD has been installed, simply run the following command:</p>
+<p>In order for Cloudbreak to be able to launch clusters on Azure on your behalf you need to set up your <strong>Azure ARM application</strong>. We have automated the Azure configurations in the Cloudbreak Deployer (CBD). After <code>cbd</code> has been installed, simply run the following command:</p>
 <pre><code>cbd azure configure-arm --app_name myapp --app_password password123 --subscription_id 1234-abcd-efgh-1234
 </code></pre>
 
@@ -471,13 +497,13 @@ To bypass those limits Microsoft created a small service called <a href="https:/
 DASH works by sharding the storage access across multiple storage accounts. It can be configured to distribute storage account load to at most 15 <strong>scaleout</strong> storage accounts. It needs one more <strong>namespace</strong> storage account where it keeps track of where the data is stored.
 When configuring a WASB filesystem with Hadoop, the only required config entries are the ones where the access details are described. To access a storage account Azure generates an access key that is displayed on the Azure portal or can be queried through the API while the account name is the name of the storage account itself. A DASH service has a similar account name and key, those can be configured in the configuration file while deploying the cloud service.</p>
 <p><img alt="" src="../diagrams/dash.png" /></p>
-<h3 id="deploying-a-dash-service-with-cloudbreak-deployer">Deploying a DASH service with Cloudbreak deployer</h3>
-<p>We have automated the deployment of a DASH service in cloudbreak-deployer. After cbd is installed, simply run the following command to deploy a DASH cloud service with 5 scale out storage accounts:</p>
+<h3 id="deploying-a-dash-service-with-cloudbreak-deployer">Deploying a DASH service with Cloudbreak Deployer</h3>
+<p>We have automated the deployment of a DASH service in cloudbreak-deployer. After <code>cbd</code> is installed, simply run the following command to deploy a DASH cloud service with 5 scale out storage accounts:</p>
 <pre><code>cbd azure deploy-dash --accounts 5 --prefix dash --location &quot;West Europe&quot; --instances 3
 </code></pre>
 
 <p>The command first creates the namespace account and the scaleout storage accounts, builds the <em>.cscfg</em> configuration file based on the created storage account names and keys, generates an Account Name and an Account Key for the DASH service and finally deploys the cloud service package file to a new cloud service.</p>
-<p>The WASB filesystem configured with DASH can be used as a data lake - when multiple clusters are deployed with the same DASH filesystem configuration the same data can be accessed from all the clusters, but every cluster can have a different service configured as well. In that case deploy as many DASH services with CBD as clusters with Cloudbreak and configure them accordingly.</p>
+<p>The WASB filesystem configured with DASH can be used as a data lake - when multiple clusters are deployed with the same DASH filesystem configuration the same data can be accessed from all the clusters, but every cluster can have a different service configured as well. In that case deploy as many DASH services with <code>cbd</code> as clusters with Cloudbreak and configure them accordingly.</p>
 <h3 id="containers-within-the-storage-account">Containers within the storage account</h3>
 <p>Cloudbreak creates a new container in the configured storage account for each cluster with the following name pattern: cloudbreak-UNIQUE_ID. Re-using existing containers in the same account is not supported as dirty data can lead to failing cluster installations. In order to take advantage of the WASB filesystem your data does not have to be in the same storage account nor in the same container. You can add as many accounts as you wish through Ambari, by setting the properties described <a href="https://hadoop.apache.org/docs/stable/hadoop-azure/index.html">here</a>. Once you added the appropriate properties you can use those storage accounts with the pre-existing data, like:</p>
 <pre><code>hadoop fs -ls wasb://data@youraccount.blob.core.windows.net/terasort-input/
@@ -498,7 +524,7 @@ This description details the AZURE setup - if you'd like to use a different clou
 <li>launch the cluster itself based on these template resources</li>
 </ul>
 <h2 id="setting-up-azure-credentials">Setting up Azure credentials</h2>
-<p>If you do not have an Azure Resource manager application you can simply create it with Cloudbreak deployer. Please read the Provisioning prerequisites for more information.</p>
+<p>If you do not have an Azure Resource manager application you can simply create it with Cloudbreak Deployer. Please read the Provisioning prerequisites for more information.</p>
 <p><code>Name:</code> name of your credential</p>
 <p><code>Description:</code> short description of your linked credential</p>
 <p><code>Subscription Id:</code> your Azure subscription id - see Accounts (<code>portal.azure.com</code>&gt; <code>Browse all</code>&gt; <code>Subscription</code>)</p>
@@ -591,7 +617,7 @@ This may change in a later release.</p>
 </ul>
 <p>If <code>Public in account</code> is checked all the users belonging to your account will be able to use this security group template to create clusters, but cannot delete or modify it.</p>
 <blockquote>
-<p>Note that the security groups are <em>not created</em> on AZURE after the <code>Create Security Group</code> button is pushed, only 
+<p><strong>NOTE</strong> that the security groups are <em>not created</em> on AZURE after the <code>Create Security Group</code> button is pushed, only 
 after the cluster provisioning starts with the selected security group template.</p>
 </blockquote>
 <h2 id="cluster-installation">Cluster installation</h2>
@@ -622,12 +648,12 @@ After you've selected a <code>Blueprint</code> as well you should be able to con
 <p>After the <code>create and start cluster</code> button is pushed Cloudbreak will start to create resources on your AZURE account.
 Cloudbreak uses <em>ARM template</em> to create the resources - you can check out the resources created by Cloudbreak on the <a href="https://portal.azure.com">ARM Portal</a> on the 'Resource groups' page.</p>
 <blockquote>
-<p><strong>Important</strong> Always use Cloudbreak to delete the cluster, or if that fails for some reason always try to delete 
+<p><strong>IMPORTANT</strong> Always use Cloudbreak to delete the cluster, or if that fails for some reason always try to delete 
 the ARM first.</p>
 </blockquote>
 <p><strong>Advanced options</strong></p>
 <p>There are some advanced features when deploying a new cluster, these are the following:</p>
-<p><code>File system:</code> read more Deploying a DASH service with Cloudbreak deployer in the preprovisioning section</p>
+<p><code>File system:</code> read more Deploying a DASH service with Cloudbreak Deployer in the preprovisioning section</p>
 <p><code>Minimum cluster size:</code> the provisioning strategy in case of the cloud provider can't allocate all the requested nodes</p>
 <p><code>Validate blueprint:</code> feature to validate or not the Ambari blueprint. By default is switched on.</p>
 <p><code>Config recommendation strategy:</code> Specifies the strategy for how configuration recommendations may be applied to a cluster’s configuration. Recommended configurations gathered by the response of the stack advisor. </p>
@@ -641,8 +667,8 @@ the ARM first.</p>
 <p>You can terminate running or stopped clusters with the <code>terminate</code> button in the cluster details.</p>
 <p>Sometimes Cloudbreak cannot synchronize it's state with the cluster state at the cloud provider and the cluster can't be terminated. In this case with the <code>Forced termination</code> option in the termination dialog box you can terminate the cluster at the Cloudbreak side anyway. <strong>In this case you may need to manually remove resources at the cloud provider.</strong></p>
 <h1 id="interactive-mode">Interactive mode</h1>
-<p>Start the shell with <code>cbd util cloudbreak-shell</code>. This will launch the Cloudbreak shell inside a Docker container and you are ready to start using it.</p>
-<p>You have to copy files into the cbd working directory, which you would like to use from shell. For example if your <code>cbd</code> working directory is <code>~/prj/cbd</code> then copy your blueprint and public ssh key file into this directory. You can refer to these files with their names from the shell.</p>
+<p>Start the shell with <code>cbd util cloudbreak-shell</code>. This will launch the Cloudbreak Shell inside a Docker container and you are ready to start using it.</p>
+<p>You have to copy files into the <code>cbd</code> working directory, which you would like to use from shell. For example if your <code>cbd</code> working directory is <code>~/prj/cbd</code> then copy your blueprint and public ssh key file into this directory. You can refer to these files with their names from the shell.</p>
 <h3 id="create-a-cloud-credential">Create a cloud credential</h3>
 <pre><code>credential create --AZURE --description &quot;credential description&quot; --name myazurecredential --subscriptionId &lt;your Azure subscription id&gt; --appId &lt;your Azure application id&gt; --tenantId &lt;your tenant id&gt; --password &lt;your Azure application password&gt; --sshKeyPath &lt;path of your public SSH key file&gt;
 </code></pre>
@@ -780,7 +806,7 @@ stack stop
 </code></pre>
 
 <blockquote>
-<p><strong>Important!</strong> The related cluster should be stopped before you can stop the stack.</p>
+<p><strong>IMPORTANT!</strong> The related cluster should be stopped before you can stop the stack.</p>
 </blockquote>
 <p>Apply the following command to <strong>restart the previously selected and stopped stack</strong>:</p>
 <pre><code>stack start
@@ -810,16 +836,16 @@ or you can upscale the related cluster separately as well:</p>
 </code></pre>
 
 <h2 id="silent-mode">Silent mode</h2>
-<p>With Cloudbreak shell you can execute script files as well. A script file contains cloudbreak shell commands and can be executed with the <code>script</code> cloudbreak shell command</p>
+<p>With Cloudbreak Shell you can execute script files as well. A script file contains cloudbreak shell commands and can be executed with the <code>script</code> cloudbreak shell command</p>
 <pre><code>script &lt;your script file&gt;
 </code></pre>
 
-<p>or with the <code>cbd util cloudbreak-shell-quiet</code> cbd command:</p>
+<p>or with the <code>cbd util cloudbreak-shell-quiet</code> <code>cbd</code> command:</p>
 <pre><code>cbd util cloudbreak-shell-quiet &lt; example.sh
 </code></pre>
 
 <h2 id="example">Example</h2>
-<p>The following example creates a hadoop cluster with <code>hdp-small-default</code> blueprint on STANDARD_D3 instances with 2X100G attached disks on <code>default-azure-network</code> network using <code>all-services-port</code> security group. You should copy your ssh public key file into your cbd working directory with name <code>id_rsa.pub</code> and change the <code>&lt;...&gt;</code> parts with your azure credential details.</p>
+<p>The following example creates a hadoop cluster with <code>hdp-small-default</code> blueprint on STANDARD_D3 instances with 2X100G attached disks on <code>default-azure-network</code> network using <code>all-services-port</code> security group. You should copy your ssh public key file into your <code>cbd</code> working directory with name <code>id_rsa.pub</code> and change the <code>&lt;...&gt;</code> parts with your azure credential details.</p>
 <pre><code>credential create --AZURE --description &quot;credential description&quot; --name myazurecredential --subscriptionId &lt;your Azure subscription id&gt; --appId &lt;your Azure application id&gt; --tenantId &lt;your tenant id&gt; --password &lt;your Azure application password&gt; --sshKeyPath id_rsa.pub
 credential select --name myazurecredential
 template create --AZURE --name azuretemplate --description azure-template --instanceType STANDARD_D3 --volumeSize 100 --volumeCount 2
