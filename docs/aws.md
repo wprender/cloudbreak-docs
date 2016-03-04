@@ -224,8 +224,8 @@ To create a new AWS credential follow these steps:
 >`Public in account` means that all the users belonging to your account will be able to use this credential to create 
 clusters, but cannot delete it.
 
-![](/images/aws-credential_v2.png)
-<sub>*Full size [here](/images/aws-credential_v2.png).*</sub>
+![](/images/aws-credential_v3.png)
+<sub>*Full size [here](/images/aws-credential_v3.png).*</sub>
 
 ## Infrastructure templates
 
@@ -289,8 +289,8 @@ to create clusters, but cannot delete it.
 >**NOTE** The VPCs, IGWs and subnet are created on AWS only after the the cluster provisioning starts with the selected 
 network template.
 
-![](/images/aws-network_v2.png)
-<sub>*Full size [here](/images/aws-network_v2.png).*</sub>
+![](/images/aws-network_v3.png)
+<sub>*Full size [here](/images/aws-network_v3.png).*</sub>
 
 **Security groups**
 
@@ -354,8 +354,8 @@ template to create clusters, but cannot delete it.
 
 >**NOTE** The security groups are created on AWS only after the cluster provisioning starts with the selected security group template.
 
-![](/images/ui-secgroup_v2.png)
-<sub>*Full size [here](/images/ui-secgroup_v2.png).*</sub>
+![](/images/ui-secgroup_v3.png)
+<sub>*Full size [here](/images/ui-secgroup_v3.png).*</sub>
 
 ## Defining cluster services
 
@@ -377,8 +377,8 @@ fill that with a default value.
 If `Public in account` is checked all the users belonging to your account will be able to use this blueprint to 
 create clusters, but cannot delete or modify it.
 
-![](/images/ui-blueprints_v2.png)
-<sub>*Full size [here](/images/ui-blueprints_v2.png).*</sub>
+![](/images/ui-blueprints_v3.png)
+<sub>*Full size [here](/images/ui-blueprints_v3.png).*</sub>
 
 **A blueprint can be exported from a running Ambari cluster that can be reused in Cloudbreak with slight 
 modifications.**
@@ -409,8 +409,8 @@ Here is a **basic flow for cluster creation on Cloudbreak Web UI**:
 
  - Start by selecting a previously created AWS credential in the header.
 
-![](/images/ui-credentials.png)
-<sub>*Full size [here](/images/ui-credentials.png).*</sub>
+![](/images/ui-credentials_v2.png)
+<sub>*Full size [here](/images/ui-credentials_v2.png).*</sub>
 
  - Open `create cluster`
 
@@ -452,8 +452,8 @@ the AWS Console CloudFormation page.
 <sub>*Full size [here](/images/aws-cloudformation_v2.png).*</sub>
 
 Besides these you can check the progress on the Cloudbreak Web UI itself if you open the new cluster's `Event History`.
-![](/images/ui-eventhistory_v2.png)
-<sub>*Full size [here](/images/ui-eventhistory_v2.png).*</sub>
+![](/images/ui-eventhistory_v3.png)
+<sub>*Full size [here](/images/ui-eventhistory_v3.png).*</sub>
 
 **Advanced options**
 
@@ -490,8 +490,8 @@ Sometimes Cloudbreak cannot synchronize it's state with the cluster state at the
 1. You should check the related resources at the AWS CloudFormation
 2. If it is needed you need to manually remove resources from there.
 
-![](/images/ui-forceterminate.png)
-<sub>*Full size [here](/images/ui-forceterminate.png).*</sub>
+![](/images/ui-forceterminate_v2.png)
+<sub>*Full size [here](/images/ui-forceterminate_v2.png).*</sub>
 
 # Interactive mode / Cloudbreak Shell
 
@@ -804,27 +804,32 @@ Select one of your previously created security which fits your needs or a defaul
 ```
 securitygroup select --name all-services-port
 ```
+**Create stack / Create cloud infrastructure**
 
-**Create a Hadoop cluster**
-
-You are almost done - two more command and this will create your Hadoop cluster on your AWS cloud.
-
-As on API or UI the new cluster will use your `credential`, `blueprint`, `instancegroups`, `network`, `securitygroup`
- then by CloudFormation will launch a cloud stack:
+Stack means the running cloud infrastructure that is created based on the instance groups configured earlier 
+(`credential`, `instancegroups`, `network`, `securitygroup`). Same as in case of the API or UI the new cluster will 
+use your templates and by using CloudFormation will launch your cloud stack. Use the following command to create a 
+stack to be used with your Hadoop cluster:
 ```
 stack create --name myawsstack --region us-east-1
 ```
-**Once the `stack` is up and running (cloud provisioning is done)** it will use your selected resources.
+The infrastructure is created asynchronously, the state of the stack can be checked with the stack `show command`. If 
+it reports AVAILABLE, it means that the virtual machines and the corresponding infrastructure is running at the cloud provider.
+Other available option is `--wait` - in this case the create command will return only after the process has finished. 
 
-Install your custom Hadoop cluster with the selected components and services:
+**Create a Hadoop cluster / Cloud provisioning**
+
+**You are almost done! One more command and your Hadoop cluster is starting!** Cloud provisioning is done once the 
+cluster is up and running. The new cluster will use your selected blueprint and install your custom Hadoop cluster 
+with the selected components and services.
+
 ```
 cluster create --description "my first cluster"
 ```
-Other available option for both command:
+You can use the `--wait` parameter here as well. 
 
-`--wait` The create command will return only after the process has finished. 
-
-**You are done** you can check the progress:
+**You are done!** You have several opportunities to check the progress during the infrastructure creation then 
+provisioning:
 
 - Cloudbreak uses *CloudFormation* to create the resources - you can check out the resources created by Cloudbreak on
  the AWS Console CloudFormation page.
@@ -833,9 +838,9 @@ For example:
 ![](/images/aws-cloudformation_v2.png)
 <sub>*Full size [here](/images/aws-cloudformation_v2.png).*</sub>
 
-- If stack then cluster creation have successfully done, you can check the Ambari Web UI. However for this you 
-should know the Ambari IP (for example: `ambariServerIp 52.8.110.95`) then add the `:8080` port to this. 
-    - You can get the IP from the result of the following command:
+- If stack then cluster creation have successfully done, you can check the Ambari Web UI. However you need to know the 
+Ambari IP (for example: `http://52.8.110.95:8080`): 
+    - You can get the IP from the CLI as a result (`ambariServerIp 52.8.110.95`) of the following command:
 ```
          cluster show
 ```
@@ -844,14 +849,14 @@ For example:
 ![](/images/ambari-dashboard.png)
 <sub>*Full size [here](/images/ambari-dashboard.png).*</sub>
 
-- Besides these you can check the progress and the Ambari IP as well on the Cloudbreak Web UI itself. Open the 
-new cluster's `Event History`.
+- Besides these you can check the entire progress and the Ambari IP as well on the Cloudbreak Web UI itself. Open the 
+new cluster's `details` and its `Event History` here.
 
 For example:
-![](/images/ui-eventhistory_v2.png)
-<sub>*Full size [here](/images/ui-eventhistory_v2.png).*</sub>
+![](/images/ui-eventhistory_v3.png)
+<sub>*Full size [here](/images/ui-eventhistory_v3.png).*</sub>
 
-**Stop cluster and stack**
+**Stop cluster**
 
 You have the ability to **stop your existing stack then its cluster** if you want to suspend the work on it.
 
@@ -859,48 +864,47 @@ Select a stack for example with its name:
 ```
 stack select --name my-stack
 ```
-Other available option to define a stack is its `--id` (instead of the `--name`).
+Other available option to define a stack is its `--id`.
 
-Apply the following commands to stop the previously selected stack:
+Every time you should stop the `cluster` first then the `stack`. So apply following commands to stop the previously 
+selected stack:
 ```
 cluster stop
 stack stop
 ```
->**Important!** The related cluster should be stopped before you can stop the stack.
 
-**Restart cluster and stack**
+**Restart cluster**
 
-Apply the following command to **restart the previously selected and stopped stack**:
+**Select your stack that you would like to restart** after this you can apply:
 ```
 stack start
 ```
-After the selected stack has restarted, you can **restart the related cluster as well**:
+After the stack has successfully restarted, you can **restart the related cluster as well**:
 ```
 cluster start
 ```
 
-**Upscale cluster and stack**
+**Upscale cluster**
 
-You can **upscale your selected stack** if you need more instances to your infrastructure:
+If you need more instances to your infrastructure, you can **upscale your selected stack**:
 ```
 stack node --ADD --instanceGroup host_group_slave_1 --adjustment 6
 ```
-Other available options:
-
-`--withClusterUpScale` indicates cluster upscale after stack upscale
-or you can upscale the related cluster separately as well:
+Other available option is `--withClusterUpScale` - this indicates also a cluster upscale after the stack upscale. You
+ can upscale the related cluster separately if you want to do this:
 ```
 cluster node --ADD --hostgroup host_group_slave_1 --adjustment 6
 ```
-**Downscale cluster and stack**
+**Downscale cluster**
 
-Apply the following command to **downscale the previously selected stack**:
-```
-stack node --REMOVE  --instanceGroup host_group_slave_1 --adjustment -2
-```
-and the related cluster separately:
+You also can reduce the number of instances in your infrastructure. **After you selected your stack**:
 ```
 cluster node --REMOVE  --hostgroup host_group_slave_1 --adjustment -2
+```
+Other available option is `--withStackDownScale` - this indicates also a stack downscale after the cluster downscale.
+ You can downscale the related stack separately if you want to do this:
+```
+stack node --REMOVE  --instanceGroup host_group_slave_1 --adjustment -2
 ```
 
 ## Cluster termination
