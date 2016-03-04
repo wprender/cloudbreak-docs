@@ -187,7 +187,7 @@ Later you'll need to pass the `.pub` file's contents to Cloudbreak and use the p
 
 # Provisioning via Browser
 
-You can log into the Cloudbreak application at ```http://<VM Public IP>:3000/```.
+You can log into the Cloudbreak application at `http://<Public_IP>:3000/`.
 
 The main goal of the Cloudbreak UI is to easily create clusters on your own cloud provider account.
 This description details the AWS setup - if you'd like to use a different cloud provider check out its manual.
@@ -230,9 +230,9 @@ clusters, but cannot delete it.
 
 After your AWS account is linked to Cloudbreak you can start creating resource templates that describe your clusters' infrastructure:
 
-- security groups
-- networks
 - templates
+- networks
+- security groups
 
 When you create one of the above resource, **Cloudbreak does not make any requests to AWS. Resources are only created
  on AWS after the `create cluster` button has pushed.** These templates are saved to Cloudbreak's database and can be 
