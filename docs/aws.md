@@ -70,12 +70,11 @@ The `cbd start` command includes the `cbd generate` command which applies the fo
 ## Validate the started Cloudbreak Deployer
 
 After the `cbd start` command finishes followings are worthy to check:
-
 - Pre-installed Cloudbreak Deployer version and health.
 ```
    cbd doctor
 ```
->In case of `cbd update` is needed, please check the related documentation for [Cloudbreak Deployer Update](operations.md#cloudbreak-deployer-update)
+>In case of `cbd update` is needed, please check the related documentation for [Cloudbreak Deployer Update](operations.md#cloudbreak-deployer-update). Most of the `cbd` commands require `root` permissions.
 
 - Started Cloudbreak Application logs.
 ```
@@ -186,11 +185,9 @@ After you enter a passphrase the keypair is generated. The output should look so
 
 Later you'll need to pass the `.pub` file's contents to Cloudbreak and use the private part to SSH to the instances.
 
-> **IMPORTANT** Make sure that you have sufficient qouta (CPU, network, etc) for the requested cluster size.
-
 # Provisioning via Browser
 
-You can log into the Cloudbreak application at http://`PUBLIC_IP`:3000.
+You can log into the Cloudbreak application at ```http://<VM Public IP>:3000/```.
 
 The main goal of the Cloudbreak UI is to easily create clusters on your own cloud provider account.
 This description details the AWS setup - if you'd like to use a different cloud provider check out its manual.
@@ -201,6 +198,8 @@ This document explains the four steps that need to be followed to create Cloudbr
 - create some template resources on the UI that describe the infrastructure of your clusters
 - create a blueprint that describes the HDP services in your clusters and add some recipes for customization
 - launch the cluster itself based on these resources
+
+> **IMPORTANT** Make sure that you have sufficient qouta (CPU, network, etc) for the requested cluster size.
 
 ## Setting up AWS credentials
 
@@ -524,8 +523,8 @@ To start the Cloudbreak CLI use the following commands:
 
 This will launch the Cloudbreak shell inside a Docker container then it is ready to use.
 
-![](/images/shell-started.png)
-<sub>*Full size [here](/images/shell-started.png).*</sub>
+![](/images/shell-started_v2.png)
+<sub>*Full size [here](/images/shell-started_v2.png).*</sub>
 
 >**IMPORTANT You have to copy all your files into the `cbd` working directory, what you would like to use in shell.** For 
 example if your `cbd` working directory is `~/cloudbreak-deployment` then copy your **blueprint JSON, public ssh key 
