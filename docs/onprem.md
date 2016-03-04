@@ -78,7 +78,8 @@ Install the Cloudbreak Deployer and unzip the platform specific single binary to
 
 ```
 yum -y install unzip tar
-curl https://raw.githubusercontent.com/sequenceiq/cloudbreak-deployer/master/install-latest | sh && cbd --version
+curl -Ls public-repo-1.hortonworks.com/HDP/cloudbreak/cloudbreak-deployer_1.2.0-rc0_$(uname)_x86_64.tgz | sudo tar -xz -C /bin cbd
+cbd --version
 ```
 
 Once the Cloudbreak Deployer is installed, you can start to setup the Cloudbreak application.
