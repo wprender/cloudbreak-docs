@@ -280,6 +280,8 @@
         
             <li><a href="#infrastructure-templates">Infrastructure templates</a></li>
         
+            <li><a href="#defining-cluster-services">Defining cluster services</a></li>
+        
             <li><a href="#cluster-installation">Cluster installation</a></li>
         
             <li><a href="#cluster-deployment">Cluster deployment</a></li>
@@ -469,19 +471,35 @@ Cloudbreak:</p>
 <li>You will see the new co-administrator a in the <code>ADMINISTRATORS</code> list</li>
 </ul>
 <h2 id="azure-application-setup-with-cloudbreak-deployer">Azure application setup with Cloudbreak Deployer</h2>
-<p>In order for Cloudbreak to be able to launch clusters on Azure on your behalf you need to set up your <strong>Azure ARM application</strong>. We have automated the Azure configurations in the Cloudbreak Deployer (CBD). After <code>cbd</code> has been installed, simply run the following command:</p>
+<p>In order for Cloudbreak to be able to launch clusters on Azure on your behalf you need to set up your <strong>Azure ARM 
+application</strong>. If you do not want to create your ARM application via the Azure Web UI, <strong>we automated the related Azure 
+configurations in the Cloudbreak Deployer</strong>.</p>
+<p>If you use our <a href="./#deploy-using-the-azure-portal">Azure Template for Cloudbreak Deployer</a>, you should:</p>
+<ul>
+<li>SSH to the Cloudbreak Deployer Virtual machine</li>
+<li><code>cbd</code> location is <code>/var/lib/cloudbreak-deployment</code></li>
+<li>all <code>cbd</code> actions must be executed from the <code>cbd</code> folder</li>
+</ul>
+<blockquote>
+<p>Most of the <code>cbd</code> commands require <code>root</code> permissions. <strong>So <code>sudo su</code> here would be worth for you.</strong></p>
+</blockquote>
+<p>You can setup your Azure Application with the following <code>cbd</code> command:</p>
 <pre><code>cbd azure configure-arm --app_name myapp --app_password password123 --subscription_id 1234-abcd-efgh-1234
 </code></pre>
 
-<p><em>Options:</em></p>
-<p><strong>--app_name</strong>: Your application name. Default is <em>app</em>.</p>
-<p><strong>--app_password</strong>: Your application password. Default is <em>password</em>.</p>
-<p><strong>--subscription_id</strong>: Your Azure subscription ID.</p>
-<p><strong>--username</strong>: Your Azure username.</p>
-<p><strong>--password</strong>: Your Azure password.</p>
-<p>The command first creates an Active Directory application with the configured name and password and adds the permissions that are needed to call the Azure Resource Manager API.
-Please use the output of the command when you creating your Azure credential in Cloudbreak.
-The output of the command something like this:</p>
+<p>Other available options:</p>
+<p><code>--app_name</code> your new application name, <em>app</em> by default</p>
+<p><code>--app_password</code> your application password, <em>password</em> by default</p>
+<p><code>--subscription_id</code> your Azure subscription ID</p>
+<p><code>--username</code> your Azure username</p>
+<p><code>--password</code> your Azure password</p>
+<p>The command applies the following steps:</p>
+<ol>
+<li>It creates an Active Directory application with the configured name, password</li>
+<li>It grants permissions to call the Azure Resource Manager API</li>
+</ol>
+<p><strong>Please use the output of the command when you creating your Azure credential in Cloudbreak.</strong> The major part of 
+the output should be like this example:</p>
 <pre><code>Subscription ID: sdf324-26b3-sdf234-ad10-234dfsdfsd
 App ID: 234sdf-c469-sdf234-9062-dsf324
 Password: password123
@@ -489,7 +507,9 @@ App Owner Tenant ID: sdwerwe1-d98e-dsf12-dsf123-df123232
 </code></pre>
 
 <h2 id="filesystem-configuration">Filesystem configuration</h2>
-<p>When starting a cluster with Cloudbreak on Azure, the default filesystem is “Windows Azure Blob Storage”. Hadoop has built-in support for the <a href="https://hadoop.apache.org/docs/current/hadoop-azure/index.html">WASB filesystem</a> so it can be used easily as HDFS instead of disks.</p>
+<p>When starting a cluster with Cloudbreak on Azure, the default filesystem is “Windows Azure Blob Storage”. Hadoop has 
+built-in support for the <a href="https://hadoop.apache.org/docs/current/hadoop-azure/index.html">WASB filesystem</a> so it can be
+used easily as HDFS.</p>
 <h3 id="disks-and-blob-storage">Disks and blob storage</h3>
 <p>In Azure every data disk attached to a virtual machine <a href="https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-disks-vhds/">is stored</a> as a virtual hard disk (VHD) in a page blob inside an Azure storage account. Because these are not local disks and the operations must be done on the VHD files it causes degraded performance when used as HDFS.
 When WASB is used as a Hadoop filesystem the files are full-value blobs in a storage account. It means better performance compared to the data disks and the WASB filesystem can be configured very easily but Azure storage accounts have their own <a href="https://azure.microsoft.com/en-us/documentation/articles/azure-subscription-service-limits/#storage-limits">limitations</a> as well. There is a space limitation for TB per storage account (500 TB) as well but the real bottleneck is the total request rate that is only 20000 IOPS where Azure will start to throw errors when trying to do an I/O operation.
@@ -498,22 +518,38 @@ DASH works by sharding the storage access across multiple storage accounts. It c
 When configuring a WASB filesystem with Hadoop, the only required config entries are the ones where the access details are described. To access a storage account Azure generates an access key that is displayed on the Azure portal or can be queried through the API while the account name is the name of the storage account itself. A DASH service has a similar account name and key, those can be configured in the configuration file while deploying the cloud service.</p>
 <p><img alt="" src="../diagrams/dash.png" /></p>
 <h3 id="deploying-a-dash-service-with-cloudbreak-deployer">Deploying a DASH service with Cloudbreak Deployer</h3>
-<p>We have automated the deployment of a DASH service in cloudbreak-deployer. After <code>cbd</code> is installed, simply run the following command to deploy a DASH cloud service with 5 scale out storage accounts:</p>
+<p>We automated the deployment of DASH service in Cloudbreak Deployer. After <code>cbd</code> is installed, simply run the 
+following command to deploy a DASH cloud service with 5 scale out storage accounts:</p>
 <pre><code>cbd azure deploy-dash --accounts 5 --prefix dash --location &quot;West Europe&quot; --instances 3
 </code></pre>
 
-<p>The command first creates the namespace account and the scaleout storage accounts, builds the <em>.cscfg</em> configuration file based on the created storage account names and keys, generates an Account Name and an Account Key for the DASH service and finally deploys the cloud service package file to a new cloud service.</p>
-<p>The WASB filesystem configured with DASH can be used as a data lake - when multiple clusters are deployed with the same DASH filesystem configuration the same data can be accessed from all the clusters, but every cluster can have a different service configured as well. In that case deploy as many DASH services with <code>cbd</code> as clusters with Cloudbreak and configure them accordingly.</p>
+<p>The command applies the following steps:</p>
+<ol>
+<li>It creates the namespace account and the scale out storage accounts</li>
+<li>It builds the <em>.cscfg</em> configuration file based on the created storage account names and keys</li>
+<li>It generates an Account Name and an Account Key for the DASH service</li>
+<li>Finally it deploys the cloud service package file to a new cloud service</li>
+</ol>
+<p>The WASB filesystem configured with DASH can be used as a data lake - when multiple clusters are deployed with the 
+same DASH filesystem configuration the same data can be accessed from all the clusters, but every cluster can have a 
+different service configured as well. In that case deploy as many DASH services with <code>cbd</code> as clusters with 
+Cloudbreak and configure them accordingly.</p>
 <h3 id="containers-within-the-storage-account">Containers within the storage account</h3>
-<p>Cloudbreak creates a new container in the configured storage account for each cluster with the following name pattern: cloudbreak-UNIQUE_ID. Re-using existing containers in the same account is not supported as dirty data can lead to failing cluster installations. In order to take advantage of the WASB filesystem your data does not have to be in the same storage account nor in the same container. You can add as many accounts as you wish through Ambari, by setting the properties described <a href="https://hadoop.apache.org/docs/stable/hadoop-azure/index.html">here</a>. Once you added the appropriate properties you can use those storage accounts with the pre-existing data, like:</p>
+<p>Cloudbreak creates a new container in the configured storage account for each cluster with the following name 
+pattern <code>cloudbreak-UNIQUE_ID</code>. Re-using existing containers in the same account is not supported as dirty data can 
+lead to failing cluster installations. In order to take advantage of the WASB filesystem your data does not have to 
+be in the same storage account nor in the same container. You can add as many accounts as you wish through Ambari, by
+ setting the properties described <a href="https://hadoop.apache.org/docs/stable/hadoop-azure/index.html">here</a>. Once you 
+ added the appropriate properties you can use those storage accounts with the pre-existing data, like:</p>
 <pre><code>hadoop fs -ls wasb://data@youraccount.blob.core.windows.net/terasort-input/
 </code></pre>
 
 <blockquote>
-<p><strong>IMPORTANT:</strong> Make sure that your cloud account can launch instances using the new Azure ARM *(a.k.a. V2) API and you have sufficient qouta (CPU, network, etc) for the requested cluster size.</p>
+<p><strong>IMPORTANT</strong> Make sure that your cloud account can launch instances using the new Azure ARM (a.k.a. V2) API and 
+you have sufficient qouta (CPU, network, etc) for the requested cluster size.</p>
 </blockquote>
 <h1 id="provisioning-via-browser">Provisioning via Browser</h1>
-<p>You can log into the Cloudbreak application at http://PUBLIC_IP:3000.</p>
+<p>You can log into the Cloudbreak application at <code>http://&lt;Public_IP&gt;:3000/</code>.</p>
 <p>The main goal of the Cloudbreak UI is to easily create clusters on your own cloud provider account.
 This description details the AZURE setup - if you'd like to use a different cloud provider check out its manual.</p>
 <p>This document explains the four steps that need to be followed to create Cloudbreak clusters from the UI:</p>
@@ -524,44 +560,100 @@ This description details the AZURE setup - if you'd like to use a different clou
 <li>launch the cluster itself based on these template resources</li>
 </ul>
 <h2 id="setting-up-azure-credentials">Setting up Azure credentials</h2>
-<p>If you do not have an Azure Resource manager application you can simply create it with Cloudbreak Deployer. Please read the Provisioning prerequisites for more information.</p>
-<p><code>Name:</code> name of your credential</p>
-<p><code>Description:</code> short description of your linked credential</p>
-<p><code>Subscription Id:</code> your Azure subscription id - see Accounts (<code>portal.azure.com</code>&gt; <code>Browse all</code>&gt; <code>Subscription</code>)</p>
-<p><code>Password:</code> your password which was setted up when you create the AD app</p>
-<p><code>App Id:</code> You app Id (<code>portal.azure.com</code>&gt; <code>Browse all</code>&gt; <code>Subscription</code>&gt; <code>Subscription detail</code>&gt; <code>Users</code>&gt; <code>You application</code>&gt; <code>Properties</code>)</p>
-<p><code>App Owner Tenant Id:</code> You Tenant Id (<code>portal.azure.com</code>&gt; <code>Browse all</code>&gt; <code>Subscription</code>&gt; <code>Subscription detail</code>&gt; <code>Users</code>&gt; <code>You application</code>&gt; <code>Properties</code>)</p>
-<p><code>SSH public key:</code> the SSH public key in OpenSSH format that's private keypair can be used to <a href="http://sequenceiq.com/cloudbreak-deployer/1.1.0/insights/#ssh-to-the-host">log into the launched instances</a> later</p>
+<p>Cloudbreak works by connecting your AZURE account through so called <em>Credentials</em>, and then uses these credentials to 
+create resources on your behalf. The credentials can be configured on the <strong>manage credentials</strong> panel on the 
+Cloudbreak Dashboard.</p>
 <blockquote>
+<p>Please read the <a href="./#azure-application-setup-with-cloudbreak-deployer">Provisioning prerequisites</a> where you 
+can find the steps how can get the mandatory <code>Subscription ID</code>, <code>App ID</code>, <code>Password</code> and <code>App Owner Tenant ID</code> for 
+your Cloudbreak credential.</p>
+</blockquote>
+<p>To create a new AZURE credential follow these steps:</p>
+<ul>
+<li>Fill out the new credential <code>name</code><ul>
+<li>Only alphanumeric and lowercase characters (min 5, max 100 characters) can be applied</li>
+</ul>
+</li>
+<li>Copy your AZURE Subscription ID to the <code>Subscription Id</code> field</li>
+</ul>
+<p><img alt="" src="../images/azure-subscription.png" />
+<sub><em>Full size <a href="../images/azure-subscription.png">here</a>.</em></sub></p>
+<ul>
+<li>Copy your AZURE Active Directory Application:<ul>
+<li>ID to the <code>App Id</code> field</li>
+<li>password to the <code>Password</code> field</li>
+<li><code>App Owner Tenant Id</code> field</li>
+</ul>
+</li>
+</ul>
+<p><img alt="" src="../images/azure-application.png" />
+<sub><em>Full size <a href="../images/azure-application.png">here</a>.</em></sub></p>
+<ul>
+<li>Copy your SSH public key to the <code>SSH public key</code> field<ul>
+<li>The SSH public key must be in OpenSSH format and it's private keypair can be used later to <a href="../operations/#ssh-to-the-hosts">SSH onto every 
+instance</a> of every cluster you'll create with this credential.</li>
+<li>The <strong>SSH username</strong> for the AZURE instances is <strong>cloudbreak</strong>.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Any other parameter is optional here.</p>
+<p><code>Public in account</code> means that all the users belonging to your account will be able to use this credential to create 
+clusters, but cannot delete it.</p>
 <p>Cloudbreak is supporting simple rsa public key instead of X509 certificate file after 1.0.4 version</p>
 </blockquote>
-<p>The ssh username is <strong>cloudbreak</strong></p>
+<p><img alt="" src="../images/azure-credentials.png" />
+<sub><em>Full size <a href="../images/azure-credentials.png">here</a>.</em></sub></p>
 <h2 id="infrastructure-templates">Infrastructure templates</h2>
-<p>After your AZURE account is linked to Cloudbreak you can start creating templates that describe your clusters' infrastructure:</p>
+<p>After your AZURE account is linked to Cloudbreak you can start creating resource templates that describe your clusters' 
+infrastructure:</p>
 <ul>
-<li>resources</li>
+<li>templates</li>
 <li>networks</li>
 <li>security groups</li>
 </ul>
-<p>When you create a template, Cloudbreak <em>doesn't make any requests</em> to AZURE.
-Resources are only created on AZURE after the <code>create cluster</code> button is pushed.
-These templates are saved to Cloudbreak's database and can be reused with multiple clusters to describe the infrastructure.</p>
-<p><strong>Manage resources</strong></p>
-<p>Using manage resources you can create infrastructure templates. Templates describes the infrastructure where the HDP cluster will be provisioned. We support heterogenous clusters - this means that one cluster can be built by combining different templates.</p>
-<p><code>Name:</code> name of your template</p>
-<p><code>Description:</code> short description of your template</p>
-<p><code>Instance type:</code> the Azure instance type to be used</p>
-<p><code>Attached volumes per instance:</code> the number of disks to be attached</p>
-<p><code>Volume size (GB):</code> the size of the attached disks (in GB)</p>
-<p><code>Public in account:</code> share it with others in the account</p>
-<p><strong>Manage blueprints</strong></p>
-<p>Blueprints are your declarative definition of a Hadoop cluster.</p>
-<p><code>Name:</code> name of your blueprint</p>
-<p><code>Description:</code> short description of your blueprint</p>
-<p><code>Source URL:</code> you can add a blueprint by pointing to a URL. As an example you can use this <a href="https://raw.githubusercontent.com/sequenceiq/cloudbreak/master/core/src/main/resources/defaults/blueprints/multi-node-hdfs-yarn.bp">blueprint</a>.</p>
-<p><code>Manual copy:</code> you can copy paste your blueprint in this text area</p>
-<p><code>Public in account:</code> share it with others in the account</p>
-<p><strong>Manage networks</strong></p>
+<p>When you create one of the above resource, <strong>Cloudbreak does not make any requests to AZURE. Resources are only created
+ on AZURE after the <code>create cluster</code> button has pushed.</strong> These templates are saved to Cloudbreak's database and can be 
+ reused with multiple clusters to describe the infrastructure.</p>
+<p><strong>Templates</strong></p>
+<p>Templates describe the <strong>instances of your cluster</strong> - the instance type and the attached volumes. A typical setup is
+ to combine multiple templates in a cluster for the different types of nodes. For example you may want to attach multiple
+ large disks to the datanodes or have memory optimized instances for Spark nodes.</p>
+<p>The instance templates can be configured on the <strong>manage templates</strong> panel on the Cloudbreak Dashboard.</p>
+<p>If <code>Public in account</code>is checked all the users belonging to your account will be able to use this resource to create 
+clusters, but cannot delete it.</p>
+<p><strong>Networks</strong></p>
+<p>Your clusters can be created in their own <strong>Virtual Private Cloud (VPC)</strong> or in one of your already existing VPCs.
+If you choose an existing VPC it is possible to create a new subnet within the VPC or use an already existing one.
+The subnet's IP range must be defined in the <code>Subnet (CIDR)</code> field using the general CIDR notation.</p>
+<p><em>Default AZURE Network</em></p>
+<p>If you don't want to create or use your custom VPC, you can use the <code>default-azure-network</code> for all your 
+Cloudbreak clusters. It will create a new VPC with a <code>10.0.0.0/16</code> subnet every time a cluster is created.</p>
+<p><em>Custom AZURE Network</em></p>
+<p>If you'd like to deploy a cluster to a custom VPC you'll have to <strong>create a new network</strong> template on the <strong>manage 
+networks</strong> panel. You can configure the <code>Subnet Identifier</code> and the <code>Virtual Network Identifier</code> of your VPC.</p>
+<blockquote>
+<p><strong>IMPORTANT</strong> The subnet CIDR cannot overlap each other in a VPC. So you have to create different network 
+templates for every each clusters.</p>
+</blockquote>
+<p>To create a new subnet within the VPC, provide the ID of the subnet which is in the existing VPC and your cluster 
+will be launched into that subnet. <strong>For example</strong> you can create 3 different clusters with 3 different network 
+templates for multiple subnets <code>10.0.0.0/24</code>, <code>10.0.1.0/24</code>, <code>10.0.2.0/24</code> with the same VPC and Virtual Network 
+Identifiers.</p>
+<blockquote>
+<p><strong>IMPORTANT</strong> Please make sure the define subnet here doesn't overlap with any of your already deployed subnet in 
+the VPC, because of the validation only happens after the cluster creation starts.</p>
+<p>In case of existing subnet make sure you have enough room within your network space for the new instances. The 
+provided subnet CIDR will be ignored, but a proper CIDR range will be used.</p>
+</blockquote>
+<p>If <code>Public in account</code> is checked all the users belonging to your account will be able to use this network template 
+to create clusters, but cannot delete it.</p>
+<blockquote>
+<p><strong>NOTE</strong> The VPCs, Virtual Network identifiers and subnet are created on AZURE only after the the cluster 
+provisioning starts with the selected network template.</p>
+</blockquote>
+<p><img alt="" src="../images/azure-network.png" />
+<sub><em>Full size <a href="../images/azure-network.png">here</a>.</em></sub></p>
 <p>Manage networks allows you to create or reuse existing networks and configure them.</p>
 <p><code>Name:</code> name of the network</p>
 <p><code>Description:</code> short description of your network</p>
@@ -620,6 +712,14 @@ This may change in a later release.</p>
 <p><strong>NOTE</strong> that the security groups are <em>not created</em> on AZURE after the <code>Create Security Group</code> button is pushed, only 
 after the cluster provisioning starts with the selected security group template.</p>
 </blockquote>
+<h2 id="defining-cluster-services">Defining cluster services</h2>
+<p><strong>Blueprints</strong></p>
+<p>Blueprints are your declarative definition of a Hadoop cluster.</p>
+<p><code>Name:</code> name of your blueprint</p>
+<p><code>Description:</code> short description of your blueprint</p>
+<p><code>Source URL:</code> you can add a blueprint by pointing to a URL. As an example you can use this <a href="https://raw.githubusercontent.com/sequenceiq/cloudbreak/master/core/src/main/resources/defaults/blueprints/multi-node-hdfs-yarn.bp">blueprint</a>.</p>
+<p><code>Manual copy:</code> you can copy paste your blueprint in this text area</p>
+<p><code>Public in account:</code> share it with others in the account</p>
 <h2 id="cluster-installation">Cluster installation</h2>
 <p>This section describes</p>
 <p><strong>Blueprints</strong></p>

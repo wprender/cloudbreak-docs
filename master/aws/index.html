@@ -476,7 +476,7 @@ You'll be asked to enter a passphrase, but you can leave it empty.
 
 <p>Later you'll need to pass the <code>.pub</code> file's contents to Cloudbreak and use the private part to SSH to the instances.</p>
 <h1 id="provisioning-via-browser">Provisioning via Browser</h1>
-<p>You can log into the Cloudbreak application at <code>http://&lt;VM Public IP&gt;:3000/</code>.</p>
+<p>You can log into the Cloudbreak application at <code>http://&lt;Public_IP&gt;:3000/</code>.</p>
 <p>The main goal of the Cloudbreak UI is to easily create clusters on your own cloud provider account.
 This description details the AWS setup - if you'd like to use a different cloud provider check out its manual.</p>
 <p>This document explains the four steps that need to be followed to create Cloudbreak clusters from the UI:</p>
@@ -518,9 +518,9 @@ clusters, but cannot delete it.</p>
 <h2 id="infrastructure-templates">Infrastructure templates</h2>
 <p>After your AWS account is linked to Cloudbreak you can start creating resource templates that describe your clusters' infrastructure:</p>
 <ul>
-<li>security groups</li>
-<li>networks</li>
 <li>templates</li>
+<li>networks</li>
+<li>security groups</li>
 </ul>
 <p>When you create one of the above resource, <strong>Cloudbreak does not make any requests to AWS. Resources are only created
  on AWS after the <code>create cluster</code> button has pushed.</strong> These templates are saved to Cloudbreak's database and can be 
