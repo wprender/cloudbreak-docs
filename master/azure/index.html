@@ -265,13 +265,13 @@
     
         <li class="main "><a href="#provisioning-prerequisites">Provisioning Prerequisites</a></li>
         
-            <li><a href="#generate-a-new-ssh-key">Generate a new SSH key</a></li>
-        
             <li><a href="#azure-access-setup">Azure access setup</a></li>
         
             <li><a href="#azure-application-setup-with-cloudbreak-deployer">Azure application setup with Cloudbreak Deployer</a></li>
         
             <li><a href="#file-system-configuration">File system configuration</a></li>
+        
+            <li><a href="#generate-a-new-ssh-key">Generate a new SSH key</a></li>
         
     
         <li class="main "><a href="#provisioning-via-browser">Provisioning via Browser</a></li>
@@ -401,31 +401,6 @@ Cloudbreak Deployer (<code>cbd</code>)</li>
 <h1 id="provisioning-prerequisites">Provisioning Prerequisites</h1>
 <p>We use the new <a href="https://azure.microsoft.com/en-us/documentation/articles/resource-group-overview/">Azure ARM</a> in 
 order to launch clusters. In order to work we need to create an <strong>Active Directory</strong> application with the configured name and password and adds the permissions that are needed to call the Azure Resource Manager API. Cloudbreak Deployer automates all this for you.</p>
-<h2 id="generate-a-new-ssh-key">Generate a new SSH key</h2>
-<p>All the instances created by Cloudbreak are configured to allow key-based SSH,
-so you'll need to provide an SSH public key that can be used later to SSH onto the instances in the clusters you'll create with Cloudbreak.
-You can use one of your existing keys or you can generate a new one.</p>
-<p>To generate a new SSH keypair:</p>
-<pre><code>ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;
-# Creates a new ssh key, using the provided email as a label
-# Generating public/private rsa key pair.
-</code></pre>
-
-<pre><code># Enter file in which to save the key (/Users/you/.ssh/id_rsa): [Press enter]
-You'll be asked to enter a passphrase, but you can leave it empty.
-
-# Enter passphrase (empty for no passphrase): [Type a passphrase]
-# Enter same passphrase again: [Type passphrase again]
-</code></pre>
-
-<p>After you enter a passphrase the keypair is generated. The output should look something like below.</p>
-<pre><code># Your identification has been saved in /Users/you/.ssh/id_rsa.
-# Your public key has been saved in /Users/you/.ssh/id_rsa.pub.
-# The key fingerprint is:
-# 01:0f:f4:3b:ca:85:sd:17:sd:7d:sd:68:9d:sd:a2:sd your_email@example.com
-</code></pre>
-
-<p>Later you'll need to pass the <code>.pub</code> file's contents to Cloudbreak and use the private part to SSH to the instances.</p>
 <h2 id="azure-access-setup">Azure access setup</h2>
 <p>If you do not have an <strong>Active Directory (AD)</strong> user then you have to configure it before deploying a cluster with 
 Cloudbreak:</p>
@@ -543,6 +518,31 @@ be in the same storage account nor in the same container. You can add as many ac
 <p><strong>IMPORTANT</strong> Make sure that your cloud account can launch instances using the new Azure ARM (a.k.a. V2) API and 
 you have sufficient qouta (CPU, network, etc) for the requested cluster size.</p>
 </blockquote>
+<h2 id="generate-a-new-ssh-key">Generate a new SSH key</h2>
+<p>All the instances created by Cloudbreak are configured to allow key-based SSH,
+so you'll need to provide an SSH public key that can be used later to SSH onto the instances in the clusters you'll create with Cloudbreak.
+You can use one of your existing keys or you can generate a new one.</p>
+<p>To generate a new SSH keypair:</p>
+<pre><code>ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;
+# Creates a new ssh key, using the provided email as a label
+# Generating public/private rsa key pair.
+</code></pre>
+
+<pre><code># Enter file in which to save the key (/Users/you/.ssh/id_rsa): [Press enter]
+You'll be asked to enter a passphrase, but you can leave it empty.
+
+# Enter passphrase (empty for no passphrase): [Type a passphrase]
+# Enter same passphrase again: [Type passphrase again]
+</code></pre>
+
+<p>After you enter a passphrase the keypair is generated. The output should look something like below.</p>
+<pre><code># Your identification has been saved in /Users/you/.ssh/id_rsa.
+# Your public key has been saved in /Users/you/.ssh/id_rsa.pub.
+# The key fingerprint is:
+# 01:0f:f4:3b:ca:85:sd:17:sd:7d:sd:68:9d:sd:a2:sd your_email@example.com
+</code></pre>
+
+<p>Later you'll need to pass the <code>.pub</code> file's contents to Cloudbreak and use the private part to SSH to the instances.</p>
 <h1 id="provisioning-via-browser">Provisioning via Browser</h1>
 <p>You can log into the Cloudbreak application at <code>http://&lt;Public_IP&gt;:3000/</code>.</p>
 <p>The main goal of the Cloudbreak UI is to easily create clusters on your own cloud provider account.
@@ -1143,16 +1143,14 @@ Ambari IP (for example: <code>http://52.8.110.95:8080</code>): <ul>
 <pre><code>         cluster show
 </code></pre>
 
-<p>For example:
-<img alt="" src="../images/ambari-dashboard.png" />
-<sub><em>Full size <a href="../images/ambari-dashboard.png">here</a>.</em></sub></p>
+<p><img alt="" src="../images/ambari-dashboard_2.png" />
+<sub><em>Full size <a href="../images/ambari-dashboard_2.png">here</a>.</em></sub></p>
 <ul>
 <li>Besides these you can check the entire progress and the Ambari IP as well on the Cloudbreak Web UI itself. Open the 
 new cluster's <code>details</code> and its <code>Event History</code> here.</li>
 </ul>
-<p>For example:
-<img alt="" src="../images/ui-eventhistory_v3.png" />
-<sub><em>Full size <a href="../images/ui-eventhistory_v3.png">here</a>.</em></sub></p>
+<p><img alt="" src="../images/azure-eventhistory_2.png" />
+<sub><em>Full size <a href="../images/azure-eventhistory_2.png">here</a>.</em></sub></p>
 <p><strong>Stop cluster</strong></p>
 <p>You have the ability to <strong>stop your existing stack then its cluster</strong> if you want to suspend the work on it.</p>
 <p>Select a stack for example with its name:</p>
