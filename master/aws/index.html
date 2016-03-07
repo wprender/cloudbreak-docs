@@ -299,7 +299,7 @@
     
         <li class="main "><a href="#provisioning-via-cli">Provisioning via CLI</a></li>
         
-            <li><a href="#setting-up-aws-credentials_1">Setting up AWS credentials</a></li>
+            <li><a href="#setting-up-aws-credential">Setting up AWS credential</a></li>
         
             <li><a href="#infrastructure-templates_1">Infrastructure templates</a></li>
         
@@ -648,8 +648,7 @@ create clusters, but cannot delete or modify it.</p>
 modifications.</strong>
 There is no automatic way to modify an exported blueprint and make it instantly usable in Cloudbreak, the 
 modifications have to be done manually.
-When the blueprint is exported some configurations are hardcoded for example domain names, memory configurations..etc
-. that won't be applicable to the Cloudbreak cluster.</p>
+When the blueprint is exported some configurations are hardcoded for example domain names, memory configurations..etc. that won't be applicable to the Cloudbreak cluster.</p>
 <p><strong>Cluster customization</strong></p>
 <p>Sometimes it can be useful to <strong>define some custom scripts so called Recipes in Cloudbreak</strong> that run during cluster 
 creation and add some additional functionality.</p>
@@ -728,9 +727,9 @@ the AWS Console CloudFormation page.
 <p><code>Config recommendation strategy</code> Strategy for configuration recommendations how will be applied. Recommended 
 configurations gathered by the response of the stack advisor. </p>
 <ul>
-<li><code>NEVER_APPLY:</code>               Configuration recommendations are ignored with this option.</li>
-<li><code>ONLY_STACK_DEFAULTS_APPLY:</code> Applies only on the default configurations for all included services.</li>
-<li><code>ALWAYS_APPLY:</code>              Applies on all configuration properties.</li>
+<li><code>NEVER_APPLY</code>               Configuration recommendations are ignored with this option.</li>
+<li><code>ONLY_STACK_DEFAULTS_APPLY</code> Applies only on the default configurations for all included services.</li>
+<li><code>ALWAYS_APPLY</code>              Applies on all configuration properties.</li>
 </ul>
 <p><code>Start LDAP and configure SSSD</code> Enables the <a href="../sssd/">System Security Services Daemon</a> configuration.</p>
 <h2 id="cluster-termination">Cluster termination</h2>
@@ -744,7 +743,7 @@ CloudFormation stack first. Instances are started in an Auto Scaling Group so th
  side. <strong>If it has happened:</strong></p>
 <ol>
 <li>You should check the related resources at the AWS CloudFormation</li>
-<li>If it is needed you need to manually remove resources from there.</li>
+<li>If it is needed you need to manually remove resources from there</li>
 </ol>
 <p><img alt="" src="../images/ui-forceterminate_v2.png" />
 <sub><em>Full size <a href="../images/ui-forceterminate_v2.png">here</a>.</em></sub></p>
@@ -761,13 +760,13 @@ CloudFormation stack first. Instances are started in an Auto Scaling Group so th
 <h2 id="start-cloudbreak-shell">Start Cloudbreak Shell</h2>
 <p>To start the Cloudbreak CLI use the following commands:</p>
 <ul>
-<li>Open your the <code>cloudbreak-deployment</code> directory if it is needed. For example:</li>
+<li>Open your <code>cloudbreak-deployment</code> directory if it is needed. For example:</li>
 </ul>
 <pre><code>   cd cloudbreak-deployment
 </code></pre>
 
 <ul>
-<li>Start the <code>cbd</code> from her if it is needed</li>
+<li>Start the <code>cbd</code> from here if it is needed</li>
 </ul>
 <pre><code>   cbd start
 </code></pre>
@@ -781,8 +780,8 @@ CloudFormation stack first. Instances are started in an Auto Scaling Group so th
 <blockquote>
 <p>At the very first time it will take for a while, because of need to download all the necessary docker images.</p>
 </blockquote>
-<p>This will launch the Cloudbreak shell inside a Docker container then it is ready to use.</p>
-<p><img alt="" src="../images/shell-started_v2.png" />
+<p>This will launch the Cloudbreak shell inside a Docker container then it is ready to use.
+<img alt="" src="../images/shell-started_v2.png" />
 <sub><em>Full size <a href="../images/shell-started_v2.png">here</a>.</em></sub></p>
 <blockquote>
 <p><strong>IMPORTANT You have to copy all your files into the <code>cbd</code> working directory, what you would like to use in shell.</strong> For 
@@ -802,7 +801,7 @@ credential create --AWS          credential create --AZURE        credential cre
 </code></pre>
 
 <h1 id="provisioning-via-cli">Provisioning via CLI</h1>
-<h2 id="setting-up-aws-credentials_1">Setting up AWS credentials</h2>
+<h2 id="setting-up-aws-credential">Setting up AWS credential</h2>
 <p>Cloudbreak works by connecting your AWS account through so called Credentials, and then uses these credentials to 
 create resources on your behalf. Credentials can be configured with the following command for example:</p>
 <pre><code>credential create --AWS --name my-aws-credential --description &quot;sample description&quot; --roleArn 
@@ -810,8 +809,7 @@ arn:aws:iam::***********:role/userrole --sshKeyString &quot;ssh-rsa AAAAB****etc
 </code></pre>
 
 <blockquote>
-<p><strong>NOTE</strong> that Cloudbreak <strong>does not set your cloud user details</strong> - we work around the concept of [IAM]
-(http://aws.amazon.com/iam/) - <strong>on Amazon (or other cloud providers)</strong>. You should have already a valid IAM role. You can 
+<p><strong>NOTE</strong> that Cloudbreak <strong>does not set your cloud user details</strong> - we work around the concept of <a href="http://aws.amazon.com/iam/">IAM</a> - <strong>on Amazon (or other cloud providers)</strong>. You should have already a valid IAM role. You can 
 find further details <a href="./#provisioning-prerequisites">here</a>.</p>
 </blockquote>
 <p>Alternatives to provide <code>SSH Key</code>:</p>
@@ -835,7 +833,7 @@ find further details <a href="./#provisioning-prerequisites">here</a>.</p>
 <li>templates</li>
 </ul>
 <p>When you create one of the above resource, <strong>Cloudbreak does not make any requests to AWS. Resources are only created
- on AWS after the <code>create cluster</code> button has pushed.</strong> These templates are saved to Cloudbreak's database and can be 
+ on AWS after the <code>cluster create</code> has applied.</strong> These templates are saved to Cloudbreak's database and can be 
  reused with multiple clusters to describe the infrastructure.</p>
 <p><strong>Templates</strong></p>
 <p>Templates describe the <strong>instances of your cluster</strong> - the instance type and the attached volumes. A typical setup is
@@ -965,8 +963,7 @@ Blueprints can be added from file or URL (an <a href="https://raw.githubusercont
 modifications.</strong>
 There is no automatic way to modify an exported blueprint and make it instantly usable in Cloudbreak, the 
 modifications have to be done manually.
-When the blueprint is exported some configurations are hardcoded for example domain names, memory configurations..etc
-. that won't be applicable to the Cloudbreak cluster.</p>
+When the blueprint is exported some configurations are hardcoded for example domain names, memory configurations..etc. that won't be applicable to the Cloudbreak cluster.</p>
 <p><strong>Cluster customization</strong></p>
 <p>Sometimes it can be useful to <strong>define some custom scripts so called Recipes in Cloudbreak</strong> that run during cluster 
 creation and add some additional functionality.</p>
@@ -1115,7 +1112,7 @@ CloudFormation stack first. Instances are started in an Auto Scaling Group so th
   at the Cloudbreak side. <strong>If it has happened:</strong></p>
 <ol>
 <li>You should check the related resources at the AWS CloudFormation</li>
-<li>If it is needed you need to manually remove resources from there.</li>
+<li>If it is needed you need to manually remove resources from there</li>
 </ol>
 <h2 id="silent-mode">Silent mode</h2>
 <p>With Cloudbreak Shell you can execute script files as well. A script file contains shell commands and can 
@@ -1134,7 +1131,7 @@ be executed with the <code>script</code> cloudbreak shell command</p>
 <h3 id="example">Example</h3>
 <p>The following example creates a Hadoop cluster with <code>hdp-small-default</code> blueprint on M4Xlarge instances with 2X100G 
 attached disks on <code>default-aws-network</code> network using <code>all-services-port</code> security group. You should copy your ssh 
-public key file into your <code>cbd</code> working directory with name <code>id_rsa.pub</code> and change the <code>&lt;arn role&gt;</code> part with your arn role.</p>
+public key file into your <code>cbd</code> working directory with name <code>id_rsa.pub</code> and paste your AWS credentials in the parts with <code>&lt;...&gt;</code> highlight.</p>
 <pre><code>credential create --AWS --description description --name my-aws-credential --roleArn &lt;arn role&gt; --sshKeyPath id_rsa.pub
 credential select --name my-aws-credential
 template create --AWS --name awstemplate --description aws-template --instanceType m4.xlarge --volumeSize 100 
