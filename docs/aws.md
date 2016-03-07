@@ -383,8 +383,7 @@ create clusters, but cannot delete or modify it.
 modifications.**
 There is no automatic way to modify an exported blueprint and make it instantly usable in Cloudbreak, the 
 modifications have to be done manually.
-When the blueprint is exported some configurations are hardcoded for example domain names, memory configurations..etc
-. that won't be applicable to the Cloudbreak cluster.
+When the blueprint is exported some configurations are hardcoded for example domain names, memory configurations..etc. that won't be applicable to the Cloudbreak cluster.
 
 **Cluster customization**
 
@@ -469,9 +468,9 @@ There are some advanced features when deploying a new cluster, these are the fol
 `Config recommendation strategy` Strategy for configuration recommendations how will be applied. Recommended 
 configurations gathered by the response of the stack advisor. 
 
-* `NEVER_APPLY:`               Configuration recommendations are ignored with this option.
-* `ONLY_STACK_DEFAULTS_APPLY:` Applies only on the default configurations for all included services.
-* `ALWAYS_APPLY:`              Applies on all configuration properties.
+* `NEVER_APPLY`               Configuration recommendations are ignored with this option.
+* `ONLY_STACK_DEFAULTS_APPLY` Applies only on the default configurations for all included services.
+* `ALWAYS_APPLY`              Applies on all configuration properties.
 
 `Start LDAP and configure SSSD` Enables the [System Security Services Daemon](sssd.md) configuration.
 
@@ -487,7 +486,7 @@ Sometimes Cloudbreak cannot synchronize it's state with the cluster state at the
  side. **If it has happened:**
 
 1. You should check the related resources at the AWS CloudFormation
-2. If it is needed you need to manually remove resources from there.
+2. If it is needed you need to manually remove resources from there
 
 ![](/images/ui-forceterminate_v2.png)
 <sub>*Full size [here](/images/ui-forceterminate_v2.png).*</sub>
@@ -507,11 +506,11 @@ The goal with the Cloudbreak Shell (Cloudbreak CLI) was to provide an interactiv
 
 To start the Cloudbreak CLI use the following commands:
 
- - Open your the `cloudbreak-deployment` directory if it is needed. For example:
+ - Open your `cloudbreak-deployment` directory if it is needed. For example:
 ```
    cd cloudbreak-deployment
 ```
- - Start the `cbd` from her if it is needed
+ - Start the `cbd` from here if it is needed
 ```
    cbd start
 ```
@@ -522,7 +521,6 @@ To start the Cloudbreak CLI use the following commands:
 >At the very first time it will take for a while, because of need to download all the necessary docker images.
 
 This will launch the Cloudbreak shell inside a Docker container then it is ready to use.
-
 ![](/images/shell-started_v2.png)
 <sub>*Full size [here](/images/shell-started_v2.png).*</sub>
 
@@ -545,7 +543,7 @@ credential create --AWS          credential create --AZURE        credential cre
 ```
 # Provisioning via CLI
 
-## Setting up AWS credentials
+## Setting up AWS credential
 
 Cloudbreak works by connecting your AWS account through so called Credentials, and then uses these credentials to 
 create resources on your behalf. Credentials can be configured with the following command for example:
@@ -553,8 +551,7 @@ create resources on your behalf. Credentials can be configured with the followin
 credential create --AWS --name my-aws-credential --description "sample description" --roleArn 
 arn:aws:iam::***********:role/userrole --sshKeyString "ssh-rsa AAAAB****etc"
 ```
->**NOTE** that Cloudbreak **does not set your cloud user details** - we work around the concept of [IAM]
-(http://aws.amazon.com/iam/) - **on Amazon (or other cloud providers)**. You should have already a valid IAM role. You can 
+>**NOTE** that Cloudbreak **does not set your cloud user details** - we work around the concept of [IAM](http://aws.amazon.com/iam/) - **on Amazon (or other cloud providers)**. You should have already a valid IAM role. You can 
 find further details [here](aws.md#provisioning-prerequisites).
 
 Alternatives to provide `SSH Key`:
@@ -580,7 +577,7 @@ After your AWS account is linked to Cloudbreak you can start creating resource t
 - templates
 
 When you create one of the above resource, **Cloudbreak does not make any requests to AWS. Resources are only created
- on AWS after the `create cluster` button has pushed.** These templates are saved to Cloudbreak's database and can be 
+ on AWS after the `cluster create` has applied.** These templates are saved to Cloudbreak's database and can be 
  reused with multiple clusters to describe the infrastructure.
 
 **Templates**
@@ -740,8 +737,7 @@ blueprint list
 modifications.**
 There is no automatic way to modify an exported blueprint and make it instantly usable in Cloudbreak, the 
 modifications have to be done manually.
-When the blueprint is exported some configurations are hardcoded for example domain names, memory configurations..etc
-. that won't be applicable to the Cloudbreak cluster.
+When the blueprint is exported some configurations are hardcoded for example domain names, memory configurations..etc. that won't be applicable to the Cloudbreak cluster.
 
 **Cluster customization**
 
@@ -921,8 +917,7 @@ Sometimes Cloudbreak cannot synchronize it's state with the cluster state at the
   at the Cloudbreak side. **If it has happened:**
 
 1. You should check the related resources at the AWS CloudFormation
-2. If it is needed you need to manually remove resources from there.
-
+2. If it is needed you need to manually remove resources from there
 
 ## Silent mode
 
@@ -946,7 +941,7 @@ cbd util cloudbreak-shell-quiet < example.sh
 
 The following example creates a Hadoop cluster with `hdp-small-default` blueprint on M4Xlarge instances with 2X100G 
 attached disks on `default-aws-network` network using `all-services-port` security group. You should copy your ssh 
-public key file into your `cbd` working directory with name `id_rsa.pub` and change the `<arn role>` part with your arn role.
+public key file into your `cbd` working directory with name `id_rsa.pub` and paste your AWS credentials in the parts with `<...>` highlight.
 
 ```
 credential create --AWS --description description --name my-aws-credential --roleArn <arn role> --sshKeyPath id_rsa.pub
