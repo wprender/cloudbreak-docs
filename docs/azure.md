@@ -85,38 +85,6 @@ Cloudbreak Deployer (`cbd`)
 We use the new [Azure ARM](https://azure.microsoft.com/en-us/documentation/articles/resource-group-overview/) in 
 order to launch clusters. In order to work we need to create an **Active Directory** application with the configured name and password and adds the permissions that are needed to call the Azure Resource Manager API. Cloudbreak Deployer automates all this for you.
 
-## Generate a new SSH key
-
-All the instances created by Cloudbreak are configured to allow key-based SSH,
-so you'll need to provide an SSH public key that can be used later to SSH onto the instances in the clusters you'll create with Cloudbreak.
-You can use one of your existing keys or you can generate a new one.
-
-To generate a new SSH keypair:
-
-```
-ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
-# Creates a new ssh key, using the provided email as a label
-# Generating public/private rsa key pair.
-```
-
-```
-# Enter file in which to save the key (/Users/you/.ssh/id_rsa): [Press enter]
-You'll be asked to enter a passphrase, but you can leave it empty.
-
-# Enter passphrase (empty for no passphrase): [Type a passphrase]
-# Enter same passphrase again: [Type passphrase again]
-```
-
-After you enter a passphrase the keypair is generated. The output should look something like below.
-```
-# Your identification has been saved in /Users/you/.ssh/id_rsa.
-# Your public key has been saved in /Users/you/.ssh/id_rsa.pub.
-# The key fingerprint is:
-# 01:0f:f4:3b:ca:85:sd:17:sd:7d:sd:68:9d:sd:a2:sd your_email@example.com
-```
-
-Later you'll need to pass the `.pub` file's contents to Cloudbreak and use the private part to SSH to the instances.
-
 ## Azure access setup
 
 If you do not have an **Active Directory (AD)** user then you have to configure it before deploying a cluster with 
@@ -247,6 +215,38 @@ hadoop fs -ls wasb://data@youraccount.blob.core.windows.net/terasort-input/
 
 > **IMPORTANT** Make sure that your cloud account can launch instances using the new Azure ARM (a.k.a. V2) API and 
 you have sufficient qouta (CPU, network, etc) for the requested cluster size.
+
+## Generate a new SSH key
+
+All the instances created by Cloudbreak are configured to allow key-based SSH,
+so you'll need to provide an SSH public key that can be used later to SSH onto the instances in the clusters you'll create with Cloudbreak.
+You can use one of your existing keys or you can generate a new one.
+
+To generate a new SSH keypair:
+
+```
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+# Creates a new ssh key, using the provided email as a label
+# Generating public/private rsa key pair.
+```
+
+```
+# Enter file in which to save the key (/Users/you/.ssh/id_rsa): [Press enter]
+You'll be asked to enter a passphrase, but you can leave it empty.
+
+# Enter passphrase (empty for no passphrase): [Type a passphrase]
+# Enter same passphrase again: [Type passphrase again]
+```
+
+After you enter a passphrase the keypair is generated. The output should look something like below.
+```
+# Your identification has been saved in /Users/you/.ssh/id_rsa.
+# Your public key has been saved in /Users/you/.ssh/id_rsa.pub.
+# The key fingerprint is:
+# 01:0f:f4:3b:ca:85:sd:17:sd:7d:sd:68:9d:sd:a2:sd your_email@example.com
+```
+
+Later you'll need to pass the `.pub` file's contents to Cloudbreak and use the private part to SSH to the instances.
 
 #Provisioning via Browser
 
@@ -924,16 +924,14 @@ Ambari IP (for example: `http://52.8.110.95:8080`):
          cluster show
 ```
 
-For example:
-![](/images/ambari-dashboard.png)
-<sub>*Full size [here](/images/ambari-dashboard.png).*</sub>
+![](/images/ambari-dashboard_2.png)
+<sub>*Full size [here](/images/ambari-dashboard_2.png).*</sub>
 
 - Besides these you can check the entire progress and the Ambari IP as well on the Cloudbreak Web UI itself. Open the 
 new cluster's `details` and its `Event History` here.
 
-For example:
-![](/images/ui-eventhistory_v3.png)
-<sub>*Full size [here](/images/ui-eventhistory_v3.png).*</sub>
+![](/images/azure-eventhistory_2.png)
+<sub>*Full size [here](/images/azure-eventhistory_2.png).*</sub>
 
 **Stop cluster**
 
