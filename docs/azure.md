@@ -142,8 +142,8 @@ Cloudbreak:
 
  - You need to add your AD user to the `manage.windowsazure.com` > `Settings` > `Administrators`
 
-![](/images/azure-administrators_v2.png)
-<sub>*Full size [here](/images/azure-administrators_v2.png).*</sub>
+![](/images/azure-administrators_v3.png)
+<sub>*Full size [here](/images/azure-administrators_v3.png).*</sub>
 
  - Here you can add the new user to Administrators. Simply click on `Add` in the bottom of the page
     * `EMAIL ADDRESS`: copy the previously created user email address here
@@ -366,29 +366,6 @@ provisioning starts with the selected network template.
 
 ![](/images/azure-network.png)
 <sub>*Full size [here](/images/azure-network.png).*</sub>
-
-
-
-
-Manage networks allows you to create or reuse existing networks and configure them.
-
-`Name:` name of the network
-
-`Description:` short description of your network
-
-`Subnet (CIDR):` a subnet in the VPC with CIDR block
-
-`Address prefix (CIDR):` the address space that is used for subnets
-
-Optional parameters (reuse existing network and subnet, in this case all 3 parameters must be provided as well, changes the security group's behavior described in security group section):
-
-`Resource Group Identifier:` name of an existing resource group which is used in case of existing virtual network and subnet
-
-`Virtual Network Identifier:` name of the virutal network within the selected resource group
-
-`Subnet Identifier:` name of the subnet within the selected virtual network (the provided subnet CIDR will be ignored and the existing subnet's CIDR range will be used)
-
-`Public in account:` share it with others in the account
 
 **Security groups**
 
