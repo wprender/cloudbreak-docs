@@ -459,8 +459,8 @@ Cloudbreak:</p>
 <ul>
 <li>You need to add your AD user to the <code>manage.windowsazure.com</code> &gt; <code>Settings</code> &gt; <code>Administrators</code></li>
 </ul>
-<p><img alt="" src="../images/azure-administrators_v2.png" />
-<sub><em>Full size <a href="../images/azure-administrators_v2.png">here</a>.</em></sub></p>
+<p><img alt="" src="../images/azure-administrators_v3.png" />
+<sub><em>Full size <a href="../images/azure-administrators_v3.png">here</a>.</em></sub></p>
 <ul>
 <li>Here you can add the new user to Administrators. Simply click on <code>Add</code> in the bottom of the page<ul>
 <li><code>EMAIL ADDRESS</code>: copy the previously created user email address here</li>
@@ -654,16 +654,6 @@ provisioning starts with the selected network template.</p>
 </blockquote>
 <p><img alt="" src="../images/azure-network.png" />
 <sub><em>Full size <a href="../images/azure-network.png">here</a>.</em></sub></p>
-<p>Manage networks allows you to create or reuse existing networks and configure them.</p>
-<p><code>Name:</code> name of the network</p>
-<p><code>Description:</code> short description of your network</p>
-<p><code>Subnet (CIDR):</code> a subnet in the VPC with CIDR block</p>
-<p><code>Address prefix (CIDR):</code> the address space that is used for subnets</p>
-<p>Optional parameters (reuse existing network and subnet, in this case all 3 parameters must be provided as well, changes the security group's behavior described in security group section):</p>
-<p><code>Resource Group Identifier:</code> name of an existing resource group which is used in case of existing virtual network and subnet</p>
-<p><code>Virtual Network Identifier:</code> name of the virutal network within the selected resource group</p>
-<p><code>Subnet Identifier:</code> name of the subnet within the selected virtual network (the provided subnet CIDR will be ignored and the existing subnet's CIDR range will be used)</p>
-<p><code>Public in account:</code> share it with others in the account</p>
 <p><strong>Security groups</strong></p>
 <p>They describe the allowed inbound traffic to the instances in the cluster.
 Currently only one security group template can be selected for a Cloudbreak cluster and all the instances have a public IP address so all the instances in the cluster will belong to the same security group. If you choose to deploy your cluster into and existing network and subnet the security group won't be created, because only 1 security group can be assigned to a subnet. However the security rules defined in the selected security group will be applied to the gateway instance.
