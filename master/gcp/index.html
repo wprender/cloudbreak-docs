@@ -258,12 +258,16 @@
     
         <li class="main active"><a href="#google-cloud-images">Google Cloud Images</a></li>
         
-            <li><a href="#configured-image">Configured Image</a></li>
+            <li><a href="#cloudbreak-deployer-gcp-image-details">Cloudbreak Deployer GCP Image Details</a></li>
         
     
         <li class="main "><a href="#google-setup">Google Setup</a></li>
         
             <li><a href="#setup-cloudbreak-deployer">Setup Cloudbreak Deployer</a></li>
+        
+            <li><a href="#start-cloudbreak-deployer">Start Cloudbreak Deployer</a></li>
+        
+            <li><a href="#validate-the-started-cloudbreak-deployer">Validate the started Cloudbreak Deployer</a></li>
         
     
         <li class="main "><a href="#provisioning-prerequisites">Provisioning Prerequisites</a></li>
@@ -317,17 +321,12 @@
                     
 
 <h1 id="google-cloud-images">Google Cloud Images</h1>
-<p>We have pre-built cloud images for GCP with the Cloudbreak Deployer pre-installed. Following the steps will guide you through the provider specific configuration then launch.</p>
+<p>We have pre-built Cloudbreak Deployer cloud image for Google Cloud Platform (GCP). You can launch the latest 
+Cloudbreak Deployer image at the <a href="https://console.developers.google.com/">Google Developers Console</a>.</p>
 <blockquote>
-<p>Alternatively, instead of using the pre-built cloud images, you can install Cloudbreak Deployer on your own VM. See <a href="../onprem/">install the Cloudbreak Deployer</a> for more information.</p>
+<p>Alternatively, instead of using the pre-built cloud images for GCP, you can install Cloudbreak Deployer on your own
+ VM. See <a href="../onprem/">installation page</a> for more information.</p>
 </blockquote>
-<h2 id="configured-image">Configured Image</h2>
-<p>You can create the latest Cloudbreak deployer image on the <a href="https://console.developers.google.com/">Google Developers Console</a> with the help
- of the <a href="https://cloud.google.com/cloud-shell/docs/">Google Cloud Shell</a>.</p>
-<p><img alt="" src="../images/google-cloud-shell-launch.png" /></p>
-<p>Images are global resources, so they can be used across zones and projects.</p>
-<h3 id="cloudbreak-deployer-gcp-image-details">Cloudbreak Deployer GCP Image Details</h3>
-<p><img alt="" src="../images/google-cloud-shell.png" /></p>
 <p>Please make sure you added the following ports to your firewall rules:</p>
 <ul>
 <li>SSH (22)</li>
@@ -336,43 +335,74 @@
 <li>Cloudbreak GUI (3000)</li>
 <li>User authentication (3001)</li>
 </ul>
+<h2 id="cloudbreak-deployer-gcp-image-details">Cloudbreak Deployer GCP Image Details</h2>
+<h3 id="import-cloudbreak-deployer-image">Import Cloudbreak Deployer Image</h3>
+<p>You can import the latest Cloudbreak Deployer image on the <a href="https://console.developers.google.com/">Google Developers Console</a> with the help
+ of the <a href="https://cloud.google.com/cloud-shell/docs/">Google Cloud Shell</a>.</p>
+<p>Just click on the <code>Activate Google Cloud Shell</code> icon in the top right corner of the page:</p>
+<p><img alt="" src="../images/google-cloud-shell-button.png" />
+<sub><em>Full size <a href="../images/google-cloud-shell-button.png">here</a>.</em></sub></p>
+<p><strong>Images are global resources, so you can use these across zones and projects.</strong>
+<img alt="" src="../images/google-cloud-shell_v2.png" />
+<sub><em>Full size <a href="../images/google-cloud-shell_v2.png">here</a>.</em></sub></p>
+<p>You can <strong>create your own Cloudbreak Deployer (cbd) instance from the imported image</strong> on the Google Developers Console.</p>
+<blockquote>
+<p><strong><a href="../onprem/#minimum-and-recommended-system-requirements">Minimum and Recommended VM requirements</a>:</strong> 4GB RAM, 10GB disk, 2 cores</p>
+</blockquote>
 <h1 id="google-setup">Google Setup</h1>
 <h2 id="setup-cloudbreak-deployer">Setup Cloudbreak Deployer</h2>
-<p>If you already have Cloudbreak Deployer either by <a href="./">using the GCP Cloud Images</a> or by <a href="../onprem/">installing the Cloudbreak Deployer</a> manually on your own VM,
-you can start to setup the Cloudbreak Application with the deployer.</p>
-<p>Create and open the <code>cloudbreak-deployment</code> directory:</p>
+<p>You should already have the Cloudbreak Deployer either by <a href="./">using the GCP Cloud Images</a> or by <a href="../onprem/">installing the 
+Cloudbreak Deployer</a> manually on your own VM. If you have your own installed VM with </p>
+<p>You have several opportunities to <a href="https://cloud.google.com/compute/docs/instances/connecting-to-instance">connect to the previously created <code>cbd</code> VM</a>.</p>
+<ul>
+<li>Cloudbreak Deployer location is <code>/home/centos/cloudbreak-deployment/</code>.</li>
+<li>All <code>cbd</code> actions must be executed from the <code>cbd</code> folder.</li>
+<li>Most of the <code>cbd</code> commands require <code>root</code> permissions. So <code>sudo su</code> here would be worth for you. </li>
+</ul>
+<p>Open the <code>cloudbreak-deployment</code> directory:</p>
 <pre><code>cd cloudbreak-deployment
 </code></pre>
 
-<p>This is the directory of the config files and the supporting binaries that will be downloaded by Cloudbreak deployer.</p>
+<p>This is the directory of the config files and the supporting binaries that will be downloaded by Cloudbreak Deployer.</p>
 <h3 id="initialize-your-profile">Initialize your Profile</h3>
-<p>First initialize cbd by creating a <code>Profile</code> file:</p>
+<p>First initialize <code>cbd</code> by creating a <code>Profile</code> file:</p>
 <pre><code>cbd init
 </code></pre>
 
-<p>It will create a <code>Profile</code> file in the current directory. Please edit the file - the only required
-configuration is the <code>PUBLIC_IP</code>. This IP will be used to access the Cloudbreak UI
-(called Uluwatu). In some cases the <code>cbd</code> tool tries to guess it, if can't than will give a hint.</p>
-<h3 id="start-cloudbreak">Start Cloudbreak</h3>
+<p>It will create a <code>Profile</code> file in the current directory. Please open the <code>Profile</code> file then check the <code>PUBLIC_IP</code>. 
+This is mandatory, because of to can access the Cloudbreak UI (called Uluwatu). In some cases the <code>cbd</code> tool tries to 
+guess it. If <code>cbd</code> cannot get the IP address during the initialization, please add set the appropriate value.</p>
+<h2 id="start-cloudbreak-deployer">Start Cloudbreak Deployer</h2>
 <p>To start the Cloudbreak application use the following command.
-This will start all the Docker containers and initialize the application. It will take a few minutes until all the services start.</p>
+This will start all the Docker containers and initialize the application.</p>
 <pre><code>cbd start
 </code></pre>
 
 <blockquote>
-<p>Launching it first will take more time as it downloads all the docker images needed by Cloudbreak.</p>
+<p>At the very first time it will take for a while, because of need to download all the necessary docker images.</p>
 </blockquote>
 <p>The <code>cbd start</code> command includes the <code>cbd generate</code> command which applies the following steps:</p>
 <ul>
 <li>creates the <strong>docker-compose.yml</strong> file that describes the configuration of all the Docker containers needed for the Cloudbreak deployment.</li>
 <li>creates the <strong>uaa.yml</strong> file that holds the configuration of the identity server used to authenticate users to Cloudbreak.</li>
 </ul>
-<p>After the <code>cbd start</code> command finishes you can check the logs of the Cloudbreak server with this command:</p>
-<pre><code>cbd logs cloudbreak
+<h2 id="validate-the-started-cloudbreak-deployer">Validate the started Cloudbreak Deployer</h2>
+<p>After the <code>cbd start</code> command finishes followings are worthy to check:
+- Pre-installed Cloudbreak Deployer version and health.</p>
+<pre><code>   cbd doctor
 </code></pre>
 
 <blockquote>
-<p>Cloudbreak server should start within a minute - you should see a line like this: <code>Started CloudbreakApplication in 36.823 seconds</code></p>
+<p>In case of <code>cbd update</code> is needed, please check the related documentation for <a href="../operations/#cloudbreak-deployer-update">Cloudbreak Deployer Update</a>. Most of the <code>cbd</code> commands require <code>root</code> permissions.</p>
+</blockquote>
+<ul>
+<li>Started Cloudbreak Application logs.</li>
+</ul>
+<pre><code>   cbd logs cloudbreak
+</code></pre>
+
+<blockquote>
+<p>Cloudbreak should start within a minute - you should see a line like this: <code>Started CloudbreakApplication in 36.823 seconds</code></p>
 </blockquote>
 <h1 id="provisioning-prerequisites">Provisioning Prerequisites</h1>
 <h2 id="creating-a-google-cloud-service-account">Creating a Google Cloud Service Account</h2>
@@ -520,7 +550,7 @@ This may change in a later release.</p>
 </ul>
 <p>If <code>Public in account</code> is checked all the users belonging to your account will be able to use this security group template to create clusters, but cannot delete or modify it.</p>
 <blockquote>
-<p><strong>Note</strong> that the security groups are <em>not created</em> on GCP after the <code>Create Security Group</code> button is pushed, only 
+<p><strong>NOTE</strong> that the security groups are <em>not created</em> on GCP after the <code>Create Security Group</code> button is pushed, only 
 after the cluster provisioning starts with the selected security group template.</p>
 </blockquote>
 <h2 id="cluster-installation">Cluster installation</h2>
@@ -550,7 +580,7 @@ After you've selected a <code>Blueprint</code> as well you should be able to con
 <p>If <code>Enable security</code> is checked as well, Cloudbreak will install KDC and the cluster will be Kerberized. See more about it in the <a href="../kerberos/">Kerberos</a> section of this documentation.</p>
 <p>After the <code>create and start cluster</code> button is pushed Cloudbreak will start to create resources on your GCP account.</p>
 <blockquote>
-<p><strong>Important</strong> Always use Cloudbreak to delete the cluster, or if that fails for some reason always try to delete 
+<p><strong>IMPORTANT</strong> Always use Cloudbreak to delete the cluster, or if that fails for some reason always try to delete 
 the Google Cloud first.</p>
 </blockquote>
 <p><strong>Advanced options</strong></p>
@@ -569,7 +599,7 @@ the Google Cloud first.</p>
 <p>Sometimes Cloudbreak cannot synchronize it's state with the cluster state at the cloud provider and the cluster can't be terminated. In this case with the <code>Forced termination</code> option in the termination dialog box you can terminate the cluster at the Cloudbreak side anyway. <strong>In this case you may need to manually remove resources at the cloud provider.</strong></p>
 <h1 id="interactive-mode">Interactive mode</h1>
 <p>Start the shell with <code>cbd util cloudbreak-shell</code>. This will launch the Cloudbreak shell inside a Docker container and you are ready to start using it.</p>
-<p>You have to copy files into the cbd working directory, which you would like to use from shell. For example if your <code>cbd</code> working directory is <code>~/prj/cbd</code> then copy your blueprint and public ssh key file into this directory. You can refer to these files with their names from the shell.</p>
+<p>You have to copy files into the <code>cbd</code> working directory, which you would like to use from shell. For example if your <code>cbd</code> working directory is <code>~/prj/cbd</code> then copy your blueprint and public ssh key file into this directory. You can refer to these files with their names from the shell.</p>
 <h3 id="create-a-cloud-credential">Create a cloud credential</h3>
 <p>In order to start using Cloudbreak to provision a cluster in Google Cloud you will need to have a GCP credential. If you do not want to Cloubreak to reach your Google Cloud resources then you have to delete the service account.</p>
 <pre><code>credential create --GCP --description &quot;short description of your linked credential&quot; --name my-gcp-credential --projectId &lt;your gcp projectid&gt; --serviceAccountId &lt;your GCP service account mail address&gt; --serviceAccountPrivateKeyPath &lt;path of your GCP service account generated private key&gt; --sshKeyPath &lt;path of your GCP public key&gt; --publicInAccount false
@@ -708,7 +738,7 @@ stack stop
 </code></pre>
 
 <blockquote>
-<p><strong>Important!</strong> The related cluster should be stopped before you can stop the stack.</p>
+<p><strong>IMPORTANT</strong> The related cluster should be stopped before you can stop the stack.</p>
 </blockquote>
 <p>Apply the following command to <strong>restart the previously selected and stopped stack</strong>:</p>
 <pre><code>stack start
@@ -742,12 +772,12 @@ or you can upscale the related cluster separately as well:</p>
 <pre><code>script &lt;your script file&gt;
 </code></pre>
 
-<p>or with the <code>cbd util cloudbreak-shell-quiet</code> cbd command:</p>
+<p>or with the <code>cbd util cloudbreak-shell-quiet</code> <code>cbd</code> command:</p>
 <pre><code>cbd util cloudbreak-shell-quiet &lt; example.sh
 </code></pre>
 
 <h2 id="example">Example</h2>
-<p>The following example creates a hadoop cluster with <code>hdp-small-default</code> blueprint on M3Xlarge instances with 2X100G attached disks on <code>default-gcp-network</code> network using <code>all-services-port</code> security group. You should copy your ssh public key file and your GCP service account generated private key into your cbd working directory with name <code>id_rsa.pub</code> and <code>gcp.p12</code> and change the <code>&lt;...&gt;</code> parts with your gcp credential details.</p>
+<p>The following example creates a hadoop cluster with <code>hdp-small-default</code> blueprint on M3Xlarge instances with 2X100G attached disks on <code>default-gcp-network</code> network using <code>all-services-port</code> security group. You should copy your ssh public key file and your GCP service account generated private key into your <code>cbd</code> working directory with name <code>id_rsa.pub</code> and <code>gcp.p12</code> and change the <code>&lt;...&gt;</code> parts with your gcp credential details.</p>
 <pre><code>credential create --GCP --description &quot;my credential&quot; --name my-gcp-credential --projectId &lt;your gcp projectid&gt; --serviceAccountId &lt;your GCP service account mail address&gt; --serviceAccountPrivateKeyPath gcp.p12 --sshKeyFile id_rsa.pub
 credential select --name my-gcp-credential
 template create --GCP --name gcptemplate --description gcp-template --instanceType N1_STANDARD_4 --volumeSize 100 --volumeCount 2
