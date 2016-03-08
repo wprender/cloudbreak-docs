@@ -67,7 +67,7 @@ After the Cloudbreak Deployer has started the following is worthy to check:
 cbd doctor
 ```
 
->In case of cbd update is needed, please check the related documentation for [Cloudbreak Deployer Update](operations.md#cloudbreak-deployer-update)
+>In case of `cbd`  update is needed, please check the related documentation for [Cloudbreak Deployer Update](operations.md#cloudbreak-deployer-update)
 
 ## Under the hood
 
@@ -1014,8 +1014,8 @@ or with the `cbd util cloudbreak-shell-quiet` `cbd` command:
 ```
 cbd util cloudbreak-shell-quiet < example.sh
 ```
->**IMPORTANT** You have to copy all your files into the cbd working directory, what you would like to use in shell. For 
-example if your cbd working directory is ~/cloudbreak-deployment then copy your script file to here.
+>**IMPORTANT** You have to copy all your files into the `cbd`  working directory, what you would like to use in shell. For 
+example if your `cbd`  working directory is ~/cloudbreak-deployment then copy your script file to here.
 
 ### Example
 

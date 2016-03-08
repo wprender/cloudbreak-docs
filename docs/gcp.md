@@ -1,22 +1,10 @@
 # Google Cloud Images
 
-We have pre-built cloud images for GCP with the Cloudbreak Deployer pre-installed. Following the steps will guide you through the provider specific configuration then launch.
+We have pre-built Cloudbreak Deployer cloud image for Google Cloud Platform (GCP). You can launch the latest 
+Cloudbreak Deployer image at the [Google Developers Console](https://console.developers.google.com/).
 
-> Alternatively, instead of using the pre-built cloud images, you can install Cloudbreak Deployer on your own VM. See [install the Cloudbreak Deployer](onprem.md) for more information.
-
-## Configured Image
-
-You can create the latest Cloudbreak deployer image on the [Google Developers Console](https://console.developers.google.com/) with the help
- of the [Google Cloud Shell](https://cloud.google.com/cloud-shell/docs/).
- 
-![](/images/google-cloud-shell-launch.png)
-
-Images are global resources, so they can be used across zones and projects.
-
-### Cloudbreak Deployer GCP Image Details
-
-
-![](/images/google-cloud-shell.png)
+> Alternatively, instead of using the pre-built cloud images for GCP, you can install Cloudbreak Deployer on your own
+ VM. See [installation page](onprem.md) for more information.
 
 Please make sure you added the following ports to your firewall rules:
  
@@ -25,57 +13,90 @@ Please make sure you added the following ports to your firewall rules:
  * Identity server (8089)
  * Cloudbreak GUI (3000)
  * User authentication (3001)
+
+## Cloudbreak Deployer GCP Image Details
+
+
+### Import Cloudbreak Deployer Image
+
+You can import the latest Cloudbreak Deployer image on the [Google Developers Console](https://console.developers.google.com/) with the help
+ of the [Google Cloud Shell](https://cloud.google.com/cloud-shell/docs/).
  
+Just click on the `Activate Google Cloud Shell` icon in the top right corner of the page:
+ 
+![](/images/google-cloud-shell-button.png)
+<sub>*Full size [here](/images/google-cloud-shell-button.png).*</sub>
+
+**Images are global resources, so you can use these across zones and projects.**
+![](/images/google-cloud-shell_v2.png)
+<sub>*Full size [here](/images/google-cloud-shell_v2.png).*</sub>
+
+You can **create your own Cloudbreak Deployer (cbd) instance from the imported image** on the Google Developers Console.
+
+> **[Minimum and Recommended VM requirements](onprem.md#minimum-and-recommended-system-requirements):** 4GB RAM, 10GB disk, 2 cores
+
 # Google Setup
 
 ## Setup Cloudbreak Deployer
 
-If you already have Cloudbreak Deployer either by [using the GCP Cloud Images](gcp.md) or by [installing the Cloudbreak Deployer](onprem.md) manually on your own VM,
-you can start to setup the Cloudbreak Application with the deployer.
+You should already have the Cloudbreak Deployer either by [using the GCP Cloud Images](gcp.md) or by [installing the 
+Cloudbreak Deployer](onprem.md) manually on your own VM. If you have your own installed VM with 
 
-Create and open the `cloudbreak-deployment` directory:
+You have several opportunities to [connect to the previously created `cbd` VM](https://cloud.google.com/compute/docs/instances/connecting-to-instance).
+
+  * Cloudbreak Deployer location is `/home/centos/cloudbreak-deployment/`.
+  * All `cbd` actions must be executed from the `cbd` folder.
+  * Most of the `cbd` commands require `root` permissions. So `sudo su` here would be worth for you. 
+
+Open the `cloudbreak-deployment` directory:
 
 ```
 cd cloudbreak-deployment
 ```
 
-This is the directory of the config files and the supporting binaries that will be downloaded by Cloudbreak deployer.
+This is the directory of the config files and the supporting binaries that will be downloaded by Cloudbreak Deployer.
 
 ### Initialize your Profile
 
-First initialize cbd by creating a `Profile` file:
+First initialize `cbd` by creating a `Profile` file:
 
 ```
 cbd init
 ```
+It will create a `Profile` file in the current directory. Please open the `Profile` file then check the `PUBLIC_IP`. 
+This is mandatory, because of to can access the Cloudbreak UI (called Uluwatu). In some cases the `cbd` tool tries to 
+guess it. If `cbd` cannot get the IP address during the initialization, please add set the appropriate value.
 
-It will create a `Profile` file in the current directory. Please edit the file - the only required
-configuration is the `PUBLIC_IP`. This IP will be used to access the Cloudbreak UI
-(called Uluwatu). In some cases the `cbd` tool tries to guess it, if can't than will give a hint.
-
-### Start Cloudbreak
+## Start Cloudbreak Deployer
 
 To start the Cloudbreak application use the following command.
-This will start all the Docker containers and initialize the application. It will take a few minutes until all the services start.
+This will start all the Docker containers and initialize the application.
 
 ```
 cbd start
 ```
 
->Launching it first will take more time as it downloads all the docker images needed by Cloudbreak.
+>At the very first time it will take for a while, because of need to download all the necessary docker images.
 
 The `cbd start` command includes the `cbd generate` command which applies the following steps:
 
 - creates the **docker-compose.yml** file that describes the configuration of all the Docker containers needed for the Cloudbreak deployment.
 - creates the **uaa.yml** file that holds the configuration of the identity server used to authenticate users to Cloudbreak.
 
+## Validate the started Cloudbreak Deployer
 
-After the `cbd start` command finishes you can check the logs of the Cloudbreak server with this command:
+After the `cbd start` command finishes followings are worthy to check:
+- Pre-installed Cloudbreak Deployer version and health.
+```
+   cbd doctor
+```
+>In case of `cbd update` is needed, please check the related documentation for [Cloudbreak Deployer Update](operations.md#cloudbreak-deployer-update). Most of the `cbd` commands require `root` permissions.
 
+- Started Cloudbreak Application logs.
 ```
-cbd logs cloudbreak
+   cbd logs cloudbreak
 ```
->Cloudbreak server should start within a minute - you should see a line like this: `Started CloudbreakApplication in 36.823 seconds`
+>Cloudbreak should start within a minute - you should see a line like this: `Started CloudbreakApplication in 36.823 seconds`
 
 # Provisioning Prerequisites
 
@@ -275,7 +296,7 @@ You can also use the two pre-defined security groups in Cloudbreak:
 
 If `Public in account` is checked all the users belonging to your account will be able to use this security group template to create clusters, but cannot delete or modify it.
 
->**Note** that the security groups are *not created* on GCP after the `Create Security Group` button is pushed, only 
+>**NOTE** that the security groups are *not created* on GCP after the `Create Security Group` button is pushed, only 
 after the cluster provisioning starts with the selected security group template.
 
 ## Cluster installation
@@ -321,7 +342,7 @@ If `Enable security` is checked as well, Cloudbreak will install KDC and the clu
 
 After the `create and start cluster` button is pushed Cloudbreak will start to create resources on your GCP account.
 
->**Important** Always use Cloudbreak to delete the cluster, or if that fails for some reason always try to delete 
+>**IMPORTANT** Always use Cloudbreak to delete the cluster, or if that fails for some reason always try to delete 
 the Google Cloud first.
 
 **Advanced options**
@@ -350,7 +371,7 @@ Sometimes Cloudbreak cannot synchronize it's state with the cluster state at the
 
 Start the shell with `cbd util cloudbreak-shell`. This will launch the Cloudbreak shell inside a Docker container and you are ready to start using it.
 
-You have to copy files into the cbd working directory, which you would like to use from shell. For example if your `cbd` working directory is `~/prj/cbd` then copy your blueprint and public ssh key file into this directory. You can refer to these files with their names from the shell.
+You have to copy files into the `cbd` working directory, which you would like to use from shell. For example if your `cbd` working directory is `~/prj/cbd` then copy your blueprint and public ssh key file into this directory. You can refer to these files with their names from the shell.
 
 ### Create a cloud credential
 
@@ -530,7 +551,7 @@ Apply the following commands to stop the previously selected stack:
 cluster stop
 stack stop
 ```
->**Important!** The related cluster should be stopped before you can stop the stack.
+>**IMPORTANT** The related cluster should be stopped before you can stop the stack.
 
 
 Apply the following command to **restart the previously selected and stopped stack**:
@@ -573,7 +594,7 @@ With Cloudbreak shell you can execute script files as well. A script file contai
 script <your script file>
 ```
 
-or with the `cbd util cloudbreak-shell-quiet` cbd command:
+or with the `cbd util cloudbreak-shell-quiet` `cbd` command:
 
 ```
 cbd util cloudbreak-shell-quiet < example.sh
@@ -581,7 +602,7 @@ cbd util cloudbreak-shell-quiet < example.sh
 
 ## Example
 
-The following example creates a hadoop cluster with `hdp-small-default` blueprint on M3Xlarge instances with 2X100G attached disks on `default-gcp-network` network using `all-services-port` security group. You should copy your ssh public key file and your GCP service account generated private key into your cbd working directory with name `id_rsa.pub` and `gcp.p12` and change the `<...>` parts with your gcp credential details.
+The following example creates a hadoop cluster with `hdp-small-default` blueprint on M3Xlarge instances with 2X100G attached disks on `default-gcp-network` network using `all-services-port` security group. You should copy your ssh public key file and your GCP service account generated private key into your `cbd` working directory with name `id_rsa.pub` and `gcp.p12` and change the `<...>` parts with your gcp credential details.
 
 ```
 credential create --GCP --description "my credential" --name my-gcp-credential --projectId <your gcp projectid> --serviceAccountId <your GCP service account mail address> --serviceAccountPrivateKeyPath gcp.p12 --sshKeyFile id_rsa.pub

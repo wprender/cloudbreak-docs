@@ -6,7 +6,7 @@ Cloudbreak Deployer image based on your region at the [AWS Management Console](h
 > Alternatively, instead of using the pre-built cloud images for AWS, you can install Cloudbreak Deployer on your own
  VM. See [installation page](onprem.md) for more information.
 
-Make sure you opened the following ports on your security group:
+Please make sure you opened the following ports on your security group:
  
  * SSH (22)
  * Cloudbreak API (8080)
