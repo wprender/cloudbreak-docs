@@ -618,34 +618,28 @@ infrastructure:</p>
 <p>If <code>Public in account</code>is checked all the users belonging to your account will be able to use this resource to create 
 clusters, but cannot delete it.</p>
 <p><strong>Networks</strong></p>
-<p>Your clusters can be created in their own <strong>Virtual Private Cloud (VPC)</strong> or in one of your already existing VPCs.
-If you choose an existing VPC it is possible to create a new subnet within the VPC or use an already existing one.
-The subnet's IP range must be defined in the <code>Subnet (CIDR)</code> field using the general CIDR notation.</p>
+<p>Your clusters can be created in their own <strong>networks</strong> or in one of your already existing one. If you choose an 
+existing network, it is possible to create a new subnet within the network. The subnet's IP range must be defined in 
+the <code>Subnet (CIDR)</code> field using the general CIDR notation.</p>
 <p><em>Default AZURE Network</em></p>
-<p>If you don't want to create or use your custom VPC, you can use the <code>default-azure-network</code> for all your 
-Cloudbreak clusters. It will create a new VPC with a <code>10.0.0.0/16</code> subnet every time a cluster is created.</p>
+<p>If you don't want to create or use your custom network, you can use the <code>default-azure-network</code> for all your 
+Cloudbreak clusters. It will create a new network with a <code>10.0.0.0/16</code> subnet every time a cluster is created.</p>
 <p><em>Custom AZURE Network</em></p>
-<p>If you'd like to deploy a cluster to a custom VPC you'll have to <strong>create a new network</strong> template on the <strong>manage 
-networks</strong> panel. You can configure the <code>Subnet Identifier</code> and the <code>Virtual Network Identifier</code> of your VPC.</p>
+<p>If you'd like to deploy a cluster to a custom network you'll have to <strong>create a new network</strong> template on the <strong>manage 
+networks</strong> panel. You can define the <code>Subnet Identifier</code> and the <code>Virtual Network Identifier</code> of your network.</p>
+<p><code>Virtual Network Identifier</code> is an optional value. This must be an ID of an existing AZURE virtual network. If the 
+identifier is provided, the subnet CIDR will be ignored and the existing network's CIDR range will be used.</p>
 <blockquote>
-<p><strong>IMPORTANT</strong> The subnet CIDR cannot overlap each other in a VPC. So you have to create different network 
-templates for every each clusters.</p>
-</blockquote>
-<p>To create a new subnet within the VPC, provide the ID of the subnet which is in the existing VPC and your cluster 
-will be launched into that subnet. <strong>For example</strong> you can create 3 different clusters with 3 different network 
-templates for multiple subnets <code>10.0.0.0/24</code>, <code>10.0.1.0/24</code>, <code>10.0.2.0/24</code> with the same VPC and Virtual Network 
-Identifiers.</p>
-<blockquote>
-<p><strong>IMPORTANT</strong> Please make sure the define subnet here doesn't overlap with any of your already deployed subnet in 
-the VPC, because of the validation only happens after the cluster creation starts.</p>
+<p><strong>IMPORTANT</strong> Please make sure the defined subnet here doesn't overlap with any of your already deployed subnet in the
+ network, because of the validation only happens after the cluster creation starts.</p>
 <p>In case of existing subnet make sure you have enough room within your network space for the new instances. The 
 provided subnet CIDR will be ignored, but a proper CIDR range will be used.</p>
 </blockquote>
 <p>If <code>Public in account</code> is checked all the users belonging to your account will be able to use this network template 
 to create clusters, but cannot delete it.</p>
 <blockquote>
-<p><strong>NOTE</strong> The VPCs, Virtual Network identifiers and subnet are created on AZURE only after the the cluster 
-provisioning starts with the selected network template.</p>
+<p><strong>NOTE</strong> The new networks are created on AZURE only after the the cluster provisioning starts with the selected 
+network template.</p>
 </blockquote>
 <p><img alt="" src="../images/azure-network.png" />
 <sub><em>Full size <a href="../images/azure-network.png">here</a>.</em></sub></p>
@@ -950,30 +944,42 @@ new stack). Templates can be configured with the following command for example:<
 </code></pre>
 
 <p><strong>Networks</strong></p>
-<p>Your clusters can be created in their own <strong>Virtual Private Cloud (VPC)</strong> or in one of your already existing VPCs. If 
-you choose an existing VPC it is possible to create a new subnet within the VPC or use an already existing one. The 
-subnet's IP range must be defined in the <code>Subnet (CIDR)</code> field using the general CIDR notation.</p>
-<p><em>Default Azure Network</em></p>
-<p>If you don't want to create or use your custom VPC, you can use the <code>default-azure-network</code> for all your Cloudbreak 
-clusters. It will create a new VPC with a <code>10.0.0.0/16</code> subnet every time a cluster is created.</p>
-<p><em>Custom Azure Network</em></p>
-<p>If you'd like to deploy a cluster to a custom VPC you'll have to <strong>create a new network</strong> template, to create a new 
-subnet within the VPC, provide the ID of the subnet which is in the existing VPC.</p>
-<p>A network also can be used repeatedly to create identical copies of the same stack (or to use as a foundation to 
-start a new stack).</p>
-<blockquote>
-<p><strong>IMPORTANT</strong> The subnet CIDR cannot overlap each other in a VPC. So you have to create different network templates 
-for every each clusters.
-For example you can create 3 different clusters with 3 different network templates for multiple subnets 10.0.0.0/24,
- 10.0.1.0/24, 10.0.2.0/24 with the same VPC and Virtual Network Identifiers.</p>
-</blockquote>
+<p>Your clusters can be created in their own <strong>networks</strong> or in one of your already existing one. If you choose an 
+existing network, it is possible to create a new subnet within the network. The subnet's IP range must be defined in 
+the <code>Subnet (CIDR)</code> field using the general CIDR notation.</p>
+<p><em>Default AZURE Network</em></p>
+<p>If you don't want to create or use your custom network, you can use the <code>default-azure-network</code> for all your 
+Cloudbreak clusters. It will create a new network with a <code>10.0.0.0/16</code> subnet and <code>10.0.0.0/8</code> address prefix every 
+time a cluster is created.</p>
+<p><em>Custom AZURE Network</em></p>
+<p>If you'd like to deploy a cluster to a custom network you'll have to apply the following command:</p>
 <pre><code>network create --AZURE --name my-azure-network --addressPrefix 192.168.123.123 --subnet 10.0.0.0/16
 </code></pre>
 
+<blockquote>
+<p><strong>IMPORTANT</strong> Please make sure the defined subnet and theirs address prefixes here doesn't overlap with any of your 
+already deployed subnet and its already used address prefix in the network, because of the validation only happens 
+after the cluster creation 
+starts.</p>
+<p>In case of existing subnet make sure you have enough room within your network space for the new instances. The 
+provided subnet CIDR will be ignored, but a proper CIDR range will be used.</p>
+</blockquote>
 <p>You can check whether the network was created successfully</p>
 <pre><code>network list
 </code></pre>
 
+<p><code>--addressPrefix</code> This list will be appended to the current list of address prefixes.</p>
+<ul>
+<li>The address prefixes in this list should not overlap between them.</li>
+<li>The address prefixes in this list should not overlap with existing address prefixes in the network.</li>
+</ul>
+<p>You can find more details about the AZURE Address Prefixes <a href="https://azure.microsoft.com/en-us/documentation/articles/azure-cli-arm-commands/#azure-network-commands-to-manage-network-resources">here</a>.</p>
+<p>If <code>--publicInAccount</code> is true, all the users belonging to your account will be able to use this network template 
+to create clusters, but cannot delete it.</p>
+<blockquote>
+<p><strong>NOTE</strong> The new networks are created on AZURE only after the the cluster provisioning starts with the selected 
+network template.</p>
+</blockquote>
 <p><strong>Security groups</strong></p>
 <p>Security group templates are very similar to the <a href="https://azure.microsoft.com/en-us/documentation/articles/virtual-networks-nsg/">security groups on Azure</a>. <strong>They describe the allowed 
 inbound traffic to the instances in the cluster.</strong> Currently only one security group template can be selected for a 
