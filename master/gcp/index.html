@@ -279,7 +279,7 @@
     
         <li class="main "><a href="#provisioning-via-browser">Provisioning via Browser</a></li>
         
-            <li><a href="#manage-cloud-credentials">Manage cloud credentials</a></li>
+            <li><a href="#setting-up-gcp-credentials">Setting up GCP credentials</a></li>
         
             <li><a href="#infrastructure-templates">Infrastructure templates</a></li>
         
@@ -420,9 +420,12 @@ This will start all the Docker containers and initialize the application.</p>
 <li>Google Cloud Storage JSON API</li>
 </ul>
 <blockquote>
-<p>If you enabled every API then you have to wait about <strong>10 minutes</strong> for the provider.</p>
+<p>If you have enabled every API then you have to wait about <strong>10 minutes</strong> for the provider.</p>
 </blockquote>
-<p>When creating GCP credentials in Cloudbreak you will have to provide the email address of the Service Account and the project ID (from Google Developers Console - Projects) where the service account is created. You'll also have to upload the generated P12 file and provide an OpenSSH formatted public key that will be used as an SSH key.</p>
+<p>When creating GCP credentials <strong>in Cloudbreak you will have to provide the email address of your <code>Service Account</code> 
+(from the Service accounts page of your Google Cloud Platform Permissions) and the <code>Project ID</code> (from the Dashboard 
+of your Google Cloud Platform Home) where the service account is created.</strong> You'll also have to <strong>upload the 
+generated P12 file and provide an OpenSSH formatted public key</strong> that will be used as an SSH key.</p>
 <h2 id="generate-a-new-ssh-key">Generate a new SSH key</h2>
 <p>All the instances created by Cloudbreak are configured to allow key-based SSH,
 so you'll need to provide an SSH public key that can be used later to SSH onto the instances in the clusters you'll create with Cloudbreak.
@@ -448,11 +451,8 @@ You'll be asked to enter a passphrase, but you can leave it empty.
 </code></pre>
 
 <p>Later you'll need to pass the <code>.pub</code> file's contents to Cloudbreak and use the private part to SSH to the instances.</p>
-<blockquote>
-<p><strong>IMPORTANT:</strong> Make sure that you have sufficient qouta (CPU, network, etc) for the requested cluster size.</p>
-</blockquote>
 <h1 id="provisioning-via-browser">Provisioning via Browser</h1>
-<p>You can log into the Cloudbreak application at http://PUBLIC_IP:3000.</p>
+<p>You can log into the Cloudbreak application at <code>http://&lt;PUBLIC_IP&gt;:3000</code>.</p>
 <p>The main goal of the Cloudbreak UI is to easily create clusters on your own cloud provider account.
 This description details the GCP setup - if you'd like to use a different cloud provider check out its manual.</p>
 <p>This document explains the four steps that need to be followed to create Cloudbreak clusters from the UI:</p>
@@ -462,16 +462,35 @@ This description details the GCP setup - if you'd like to use a different cloud 
 <li>create a blueprint that describes the HDP services in your clusters and add some recipes for customization</li>
 <li>launch the cluster itself based on these template resources</li>
 </ul>
-<h2 id="manage-cloud-credentials">Manage cloud credentials</h2>
-<p>You can now log into the Cloudbreak application at http://PUBLIC_IP:3000. Once logged in go to <strong>Manage credentials</strong>. Using manage credentials will  link your cloud account with the Cloudbreak account.</p>
-<p><code>Name:</code> name of your credential</p>
-<p><code>Description:</code> short description of your linked credential</p>
-<p><code>Project Id:</code> your GCP Project id - see Accounts</p>
-<p><code>Service Account Email Address:</code> your GCP service account mail address - see Accounts</p>
-<p><code>Service Account private (p12) key:</code> your GCP service account generated private key - see Accounts</p>
-<p><code>SSH public key:</code> the SSH public key in OpenSSH format that's private keypair can be used to <a href="http://sequenceiq.com/cloudbreak-deployer/1.1.0/insights/#ssh-to-the-host">log into the launched instances</a> later</p>
-<p><code>Public in account:</code> share it with others in the account</p>
-<p>The ssh username is <strong>cloudbreak</strong>.</p>
+<blockquote>
+<p><strong>IMPORTANT</strong> Make sure that you have sufficient qouta (CPU, network, etc) for the requested cluster size.</p>
+</blockquote>
+<h2 id="setting-up-gcp-credentials">Setting up GCP credentials</h2>
+<p>Cloudbreak works by connecting your GCP account through so called <em>Credentials</em>, and then uses these credentials to 
+create resources on your behalf. The credentials can be configured on the <strong>manage credentials</strong> panel on the 
+Cloudbreak Dashboard.</p>
+<p>To create a new GCP credential follow these steps:</p>
+<ol>
+<li>Fill out the new credential <code>name</code><ul>
+<li>Only alphanumeric and lowercase characters (min 5, max 100 characters) can be applied</li>
+</ul>
+</li>
+<li>Copy your GCP project ID to the <code>Project Id</code> field</li>
+<li>Copy your GCP Service Account email address to the <code>Service Account Email Address</code> field</li>
+<li>Upload your GCP Service Account private key (generated <code>p12 Key</code>) to the <code>Service Account Private (p12) Key</code> field</li>
+<li>Copy your SSH public key to the <code>SSH public key</code> field<ul>
+<li>The SSH public key must be in OpenSSH format and it's private keypair can be used later to <a href="../operations/#ssh-to-the-hosts">SSH onto every instance</a> of every cluster you'll create with this credential.</li>
+<li>The <strong>SSH username</strong> for the EC2 instances is <strong>cloudbreak</strong>.</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>Any other parameter is optional here.</p>
+<p><code>Public in account</code> means that all the users belonging to your account will be able to use this credential to create 
+clusters, but cannot delete it.</p>
+</blockquote>
+<p><img alt="" src="../images/gcp-credential.png" />
+<sub><em>Full size <a href="../images/gcp-credential.png">here</a>.</em></sub></p>
 <h2 id="infrastructure-templates">Infrastructure templates</h2>
 <p>After your GCP account is linked to Cloudbreak you can start creating templates that describe your clusters' infrastructure:</p>
 <ul>
