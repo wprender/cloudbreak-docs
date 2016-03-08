@@ -198,61 +198,57 @@ clusters, but cannot delete it.
 
 ## Infrastructure templates
 
-After your GCP account is linked to Cloudbreak you can start creating templates that describe your clusters' infrastructure:
+After your GCP account is linked to Cloudbreak you can start creating resource templates that describe your clusters' 
+infrastructure:
 
-- resources
+- templates
 - networks
 - security groups
 
-When you create a template, Cloudbreak *doesn't make any requests* to GCP.
-Resources are only created on GCP after the `Create cluster` button is pushed.
-These templates are saved to Cloudbreak's database and can be reused with multiple clusters to describe the infrastructure.
+When you create one of the above resource, **Cloudbreak does not make any requests to GCP. Resources are only created 
+on GCP after the `create cluster` button has pushed.** These templates are saved to Cloudbreak's database and can be 
+reused with multiple clusters to describe the infrastructure.
 
-**Manage resources**
+**Templates**
 
-Using manage resources you can create infrastructure templates. Templates describes the infrastructure where the HDP cluster will be provisioned. We support heterogenous clusters - this means that one cluster can be built by combining different templates.
+Templates describe the **instances of your cluster** - the instance type and the attached volumes. A typical setup is
+ to combine multiple templates in a cluster for the different types of nodes. For example you may want to attach multiple
+ large disks to the datanodes or have memory optimized instances for Spark nodes.
 
-`Name:` name of your template
+The instance templates can be configured on the **manage templates** panel on the Cloudbreak Dashboard.
 
-`Description:` short description of your template
+If `Public in account` is checked all the users belonging to your account will be able to use this resource to create clusters, but cannot delete it.
 
-`Instance type:` the Google Cloud instance type to be used - we suggest to use at least n1-standard-4 instances
+**Networks**
 
-`Volume type:` option to choose are SSD, regular Magnetic
+Your clusters can be created in their own **networks** or in one of your already existing one. If you choose an 
+existing network, it is possible to create a new subnet within the network. The subnet's IP range must be defined in 
+the `Subnet (CIDR)` field using the general CIDR notation.
 
-`Attached volumes per instance:` the number of disks to be attached
+*Default GCP Network*
 
-`Volume size (GB):` the size of the attached disks (in GB)
+If you don't want to create or use your custom network, you can use the `default-gcp-network` for all your 
+Cloudbreak clusters. It will create a new network with a `10.0.0.0/16` subnet every time a cluster is created.
 
-`Public in account:` share it with others in the account
+*Custom GCP Network*
 
-**Manage blueprints**
+If you'd like to deploy a cluster to a custom network you'll have to **create a new network** template on the **manage 
+networks** panel. You can define the `Virtual Network Identifier` of your network.
 
-Blueprints are your declarative definition of a Hadoop cluster.
+`Virtual Network Identifier` is an optional value. This must be an ID of an existing GCP virtual network. If the 
+identifier is provided, the subnet CIDR will be ignored and the existing network's CIDR range will be used.
 
-`Name:` name of your blueprint
+>In case of existing subnet make sure you have enough room within your network space for the new instances. The 
+provided subnet CIDR will be ignored, but a proper CIDR range will be used.
 
-`Description:` short description of your blueprint
+If `Public in account` is checked all the users belonging to your account will be able to use this network template 
+to create clusters, but cannot delete it.
 
-`Source URL:` you can add a blueprint by pointing to a URL. As an example you can use this [blueprint](https://raw.githubusercontent.com/sequenceiq/cloudbreak/master/core/src/main/resources/defaults/blueprints/multi-node-hdfs-yarn.bp).
+>**NOTE** The new networks are created on GCP only after the the cluster provisioning starts with the selected 
+network template.
 
-`Manual copy:` you can copy paste your blueprint in this text area
-
-`Public in account:` share it with others in the account
-
-**Manage networks**
-
-Manage networks allows you to create or reuse existing networks and configure them.
-
-`Name:` name of the network
-
-`Description:` short description of your network
-
-`Subnet (CIDR):` a subnet in the VPC with CIDR block
-
-`Virtual Network Identifier:` optional field, id of an existing virtual network, the provided subnet CIDR will be ignored and the existing network's CIDR range will be used
-
-`Public in account:` share it with others in the account
+![](/images/gcp-network.png)
+<sub>*Full size [here](/images/gcp-network.png).*</sub>
 
 **Security groups**
 
@@ -306,7 +302,22 @@ If `Public in account` is checked all the users belonging to your account will b
 >**NOTE** that the security groups are *not created* on GCP after the `Create Security Group` button is pushed, only 
 after the cluster provisioning starts with the selected security group template.
 
-## Cluster installation
+## Defining cluster services
+
+**Manage blueprints**
+
+Blueprints are your declarative definition of a Hadoop cluster.
+
+`Name:` name of your blueprint
+
+`Description:` short description of your blueprint
+
+`Source URL:` you can add a blueprint by pointing to a URL. As an example you can use this [blueprint](https://raw.githubusercontent.com/sequenceiq/cloudbreak/master/core/src/main/resources/defaults/blueprints/multi-node-hdfs-yarn.bp).
+
+`Manual copy:` you can copy paste your blueprint in this text area
+
+`Public in account:` share it with others in the account
+
 
 This section describes
 
