@@ -116,9 +116,12 @@ Make sure that at API level (**APIs and auth** menu) you have enabled:
 * Google Cloud Storage
 * Google Cloud Storage JSON API
 
->If you enabled every API then you have to wait about **10 minutes** for the provider.
+>If you have enabled every API then you have to wait about **10 minutes** for the provider.
 
-When creating GCP credentials in Cloudbreak you will have to provide the email address of the Service Account and the project ID (from Google Developers Console - Projects) where the service account is created. You'll also have to upload the generated P12 file and provide an OpenSSH formatted public key that will be used as an SSH key.
+When creating GCP credentials **in Cloudbreak you will have to provide the email address of your `Service Account` 
+(from the Service accounts page of your Google Cloud Platform Permissions) and the `Project ID` (from the Dashboard 
+of your Google Cloud Platform Home) where the service account is created.** You'll also have to **upload the 
+generated P12 file and provide an OpenSSH formatted public key** that will be used as an SSH key.
 
 ## Generate a new SSH key
 
@@ -152,11 +155,9 @@ After you enter a passphrase the keypair is generated. The output should look so
 
 Later you'll need to pass the `.pub` file's contents to Cloudbreak and use the private part to SSH to the instances.
 
-> **IMPORTANT:** Make sure that you have sufficient qouta (CPU, network, etc) for the requested cluster size.
+# Provisioning via Browser
 
-#Provisioning via Browser
-
-You can log into the Cloudbreak application at http://PUBLIC_IP:3000.
+You can log into the Cloudbreak application at `http://<PUBLIC_IP>:3000`.
 
 The main goal of the Cloudbreak UI is to easily create clusters on your own cloud provider account.
 This description details the GCP setup - if you'd like to use a different cloud provider check out its manual.
@@ -168,26 +169,32 @@ This document explains the four steps that need to be followed to create Cloudbr
 - create a blueprint that describes the HDP services in your clusters and add some recipes for customization
 - launch the cluster itself based on these template resources
 
+>**IMPORTANT** Make sure that you have sufficient qouta (CPU, network, etc) for the requested cluster size.
 
-## Manage cloud credentials
+## Setting up GCP credentials
 
-You can now log into the Cloudbreak application at http://PUBLIC_IP:3000. Once logged in go to **Manage credentials**. Using manage credentials will  link your cloud account with the Cloudbreak account.
+Cloudbreak works by connecting your GCP account through so called *Credentials*, and then uses these credentials to 
+create resources on your behalf. The credentials can be configured on the **manage credentials** panel on the 
+Cloudbreak Dashboard.
 
-`Name:` name of your credential
+To create a new GCP credential follow these steps:
 
-`Description:` short description of your linked credential
+  1. Fill out the new credential `name`
+    - Only alphanumeric and lowercase characters (min 5, max 100 characters) can be applied
+  2. Copy your GCP project ID to the `Project Id` field
+  3. Copy your GCP Service Account email address to the `Service Account Email Address` field
+  4. Upload your GCP Service Account private key (generated `p12 Key`) to the `Service Account Private (p12) Key` field
+  5. Copy your SSH public key to the `SSH public key` field
+    - The SSH public key must be in OpenSSH format and it's private keypair can be used later to [SSH onto every instance](operations.md#ssh-to-the-hosts) of every cluster you'll create with this credential.
+    - The **SSH username** for the EC2 instances is **cloudbreak**.
 
-`Project Id:` your GCP Project id - see Accounts
+>Any other parameter is optional here.
 
-`Service Account Email Address:` your GCP service account mail address - see Accounts
+>`Public in account` means that all the users belonging to your account will be able to use this credential to create 
+clusters, but cannot delete it.
 
-`Service Account private (p12) key:` your GCP service account generated private key - see Accounts
-
-`SSH public key:` the SSH public key in OpenSSH format that's private keypair can be used to [log into the launched instances](http://sequenceiq.com/cloudbreak-deployer/1.1.0/insights/#ssh-to-the-host) later
-
-`Public in account:` share it with others in the account
-
-The ssh username is **cloudbreak**.
+![](/images/gcp-credential.png)
+<sub>*Full size [here](/images/gcp-credential.png).*</sub>
 
 ## Infrastructure templates
 
