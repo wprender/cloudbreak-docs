@@ -467,34 +467,97 @@ Sometimes Cloudbreak cannot synchronize it's state with the cluster state at the
 
 # Interactive mode / Cloudbreak Shell
 
-Start the shell with `cbd util cloudbreak-shell`. This will launch the Cloudbreak shell inside a Docker container and you are ready to start using it.
+The goal with the Cloudbreak Shell (Cloudbreak CLI) was to provide an interactive command line tool which supports:
 
-You have to copy files into the `cbd` working directory, which you would like to use from shell. For example if your `cbd` working directory is `~/prj/cbd` then copy your blueprint and public ssh key file into this directory. You can refer to these files with their names from the shell.
+- all functionality available through the REST API or Cloudbreak Web UI
+- makes possible complete automation of management task via scripts
+- context aware command availability
+- tab completion
+- required/optional parameter support
+- hint command to guide you on the usual path
 
-### Create a cloud credential
+## Start Cloudbreak Shell
 
-In order to start using Cloudbreak to provision a cluster in Google Cloud you will need to have a GCP credential. If you do not want to Cloubreak to reach your Google Cloud resources then you have to delete the service account.
+To start the Cloudbreak CLI use the following commands:
+
+ - Open your `cloudbreak-deployment` directory if it is needed. For example:
 ```
-credential create --GCP --description "short description of your linked credential" --name my-gcp-credential --projectId <your gcp projectid> --serviceAccountId <your GCP service account mail address> --serviceAccountPrivateKeyPath <path of your GCP service account generated private key> --sshKeyPath <path of your GCP public key> --publicInAccount false
+   cd cloudbreak-deployment
 ```
+>If you use deployed Cloudbreak VM from GCP Image, the path is `/home/centos/cloudbreak-deployment/`.
 
-Alternatively you can upload your public key from an url as well, by using the `—sshKeyUrl` switch, or use the ssh string with `—sshKeyString` switch. You can check whether the credential was creates successfully by using the `credential list` command.
-You can switch between your cloud credential - when you’d like to use one and act with that you will have to use:
+ - Start the `cbd` from here if it is needed
+```
+   cbd start
+```
+ - In the root of your `cloudbreak-deployment` folder apply:
+```
+   cbd util cloudbreak-shell
+```
+>At the very first time it will take for a while, because of need to download all the necessary docker images.
+
+This will launch the Cloudbreak shell inside a Docker container then it is ready to use.
+![](/images/gcp-cbdshell-started.png)
+<sub>*Full size [here](/images/gcp-cbdshell-started.png).*</sub>
+
+>**IMPORTANT You have to copy all your files into the `cbd` working directory, what you would like to use in shell.** For 
+example if your `cbd` working directory is `~/cloudbreak-deployment` then copy your **blueprint JSON, public ssh key 
+file...etc.** to here. You can refer to these files with their names from the shell.
+
+## Autocomplete and hints
+
+Cloudbreak Shell helps to you with **hint messages** from the very beginning, for example:
+```
+cloudbreak-shell>hint
+Hint: Add a blueprint with the 'blueprint add' command or select an existing one with 'blueprint select'
+cloudbreak-shell>
+```
+Beyond this you can use the **autocompletion (double-TAB)** as well:
+```
+cloudbreak-shell>credential create --
+credential create --AWS          credential create --AZURE        credential create --EC2          credential create --GCP          credential create --OPENSTACK
+```
+# Provisioning via CLI
+
+## Setting up GCP credential
+
+Cloudbreak works by connecting your GCP account through so called Credentials, and then uses these credentials to 
+create resources on your behalf. Credentials can be configured with the following command for example:
+```
+credential create --GCP --description "sample description" --name my-gcp-credential --projectId <your gcp projectid> 
+--serviceAccountId <your GCP service account mail address> --serviceAccountPrivateKeyPath /files/mykey.p12 
+--sshKeyString "ssh-rsa AAAAB3***etc."
+```
+>**NOTE** that Cloudbreak **does not set your cloud user details** - we work around the concept of GCP Service 
+Account Credentials. You should have already a valid GCP service account. You can find further details [here](gcp.md#provisioning-prerequisites).
+
+Alternatives to provide `SSH Key`:
+
+- you can upload your public key from an url: `—sshKeyUrl` 
+- or you can add the path of your public key: `—sshKeyPath`
+
+You can check whether the credential was created successfully
+```
+credential list
+```
+You can switch between your existing credentials
 ```
 credential select --name my-gcp-credential
 ```
+## Infrastructure templates
 
-You can delete your cloud credential - when you’d like to delete one you will have to use:
-```
-credential delete --name my-gcp-credential
-```
+After your GCP account is linked to Cloudbreak you can start creating resource templates that describe your clusters' 
+infrastructure:
 
-You can show your cloud credential - when you’d like to show one you will have to use:
-```
-credential show --name my-gcp-credential
-```
+- security groups
+- networks
+- templates
 
-### Create a template
+When you create one of the above resource, **Cloudbreak does not make any requests to GCP. Resources are only created
+ on GCP after the `cluster create` has applied.** These templates are saved to Cloudbreak's database and can be 
+ reused with multiple clusters to describe the infrastructure.
+
+**Templates**
 
 A template gives developers and systems administrators an easy way to create and manage a collection of cloud infrastructure related resources, maintaining and updating them in an orderly and predictable fashion. A template can be used repeatedly to create identical copies of the same stack (or to use as a foundation to start a new stack).
 

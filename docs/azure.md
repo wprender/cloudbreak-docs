@@ -639,8 +639,7 @@ your-azure-application-id --password YourApplicationPassword --sshKeyString "ssh
 > Cloudbreak is supporting simple rsa public key instead of X509 certificate file after 1.0.4 version
 
 >**NOTE** that Cloudbreak **does not set your cloud user details** - we work around the concept of Access Control 
-Service (ACS) - **on Amazon (or other cloud providers)**. You should have already a valid Azure 
-Subscription and Application. You can find further details [here](azure.md#provisioning-prerequisites).
+Service (ACS). You should have already a valid Azure Subscription and Application. You can find further details [here](azure.md#provisioning-prerequisites).
 
 Alternatives to provide `SSH Key`:
 
