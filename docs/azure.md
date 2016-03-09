@@ -45,15 +45,25 @@ at:```http://<VM Public IP>:3000/```
     * email: admin@example.com
     * password: cloudbreak
 
-**Optional**
+# Azure Setup
 
-You can SSH to the VM and track the progress in the Cloudbreak logs as well:
-```
-cbd logs cloudbreak
-```
+  * Default user is cloudbreak
   * Cloudbreak Deployer location is `/var/lib/cloudbreak-deployment`.
   * All `cbd` actions must be executed from the `cbd` folder.
   * Most of the `cbd` commands require `root` permissions.
+
+## Throubleshooting
+
+Open the `cloudbreak-deployment` directory:
+
+```
+cd /var/lib/cloudbreak-deployment
+```
+
+Track the progress in the Cloudbreak logs:
+```
+cbd logs cloudbreak
+```
 
 For example to investigate the Cloudbreak logs:
 ```
