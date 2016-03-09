@@ -292,23 +292,16 @@
     
         <li class="main "><a href="#interactive-mode-cloudbreak-shell">Interactive mode / Cloudbreak Shell</a></li>
         
-            <li><a href="#create-a-cloud-credential">Create a cloud credential</a></li>
+            <li><a href="#start-cloudbreak-shell">Start Cloudbreak Shell</a></li>
         
-            <li><a href="#create-a-template">Create a template</a></li>
+            <li><a href="#autocomplete-and-hints">Autocomplete and hints</a></li>
         
-            <li><a href="#create-or-select-a-blueprint">Create or select a blueprint</a></li>
+    
+        <li class="main "><a href="#provisioning-via-cli">Provisioning via CLI</a></li>
         
-            <li><a href="#create-a-network">Create a network</a></li>
+            <li><a href="#setting-up-gcp-credential">Setting up GCP credential</a></li>
         
-            <li><a href="#create-a-security-group">Create a security group</a></li>
-        
-            <li><a href="#configure-instance-groups">Configure instance groups</a></li>
-        
-            <li><a href="#create-a-hadoop-cluster">Create a Hadoop cluster</a></li>
-        
-            <li><a href="#stoprestart-cluster-and-stack">Stop/Restart cluster and stack</a></li>
-        
-            <li><a href="#upscaledownscale-cluster-and-stack">Upscale/Downscale cluster and stack</a></li>
+            <li><a href="#infrastructure-templates_1">Infrastructure templates</a></li>
         
             <li><a href="#silent-mode">Silent mode</a></li>
         
@@ -731,27 +724,99 @@ instance manually!</p>
 <p><img alt="" src="../images/gcp-forceterminate.png" />
 <sub><em>Full size <a href="../images/gcp-forceterminate.png">here</a>.</em></sub></p>
 <h1 id="interactive-mode-cloudbreak-shell">Interactive mode / Cloudbreak Shell</h1>
-<p>Start the shell with <code>cbd util cloudbreak-shell</code>. This will launch the Cloudbreak shell inside a Docker container and you are ready to start using it.</p>
-<p>You have to copy files into the <code>cbd</code> working directory, which you would like to use from shell. For example if your <code>cbd</code> working directory is <code>~/prj/cbd</code> then copy your blueprint and public ssh key file into this directory. You can refer to these files with their names from the shell.</p>
-<h3 id="create-a-cloud-credential">Create a cloud credential</h3>
-<p>In order to start using Cloudbreak to provision a cluster in Google Cloud you will need to have a GCP credential. If you do not want to Cloubreak to reach your Google Cloud resources then you have to delete the service account.</p>
-<pre><code>credential create --GCP --description &quot;short description of your linked credential&quot; --name my-gcp-credential --projectId &lt;your gcp projectid&gt; --serviceAccountId &lt;your GCP service account mail address&gt; --serviceAccountPrivateKeyPath &lt;path of your GCP service account generated private key&gt; --sshKeyPath &lt;path of your GCP public key&gt; --publicInAccount false
+<p>The goal with the Cloudbreak Shell (Cloudbreak CLI) was to provide an interactive command line tool which supports:</p>
+<ul>
+<li>all functionality available through the REST API or Cloudbreak Web UI</li>
+<li>makes possible complete automation of management task via scripts</li>
+<li>context aware command availability</li>
+<li>tab completion</li>
+<li>required/optional parameter support</li>
+<li>hint command to guide you on the usual path</li>
+</ul>
+<h2 id="start-cloudbreak-shell">Start Cloudbreak Shell</h2>
+<p>To start the Cloudbreak CLI use the following commands:</p>
+<ul>
+<li>Open your <code>cloudbreak-deployment</code> directory if it is needed. For example:</li>
+</ul>
+<pre><code>   cd cloudbreak-deployment
 </code></pre>
 
-<p>Alternatively you can upload your public key from an url as well, by using the <code>—sshKeyUrl</code> switch, or use the ssh string with <code>—sshKeyString</code> switch. You can check whether the credential was creates successfully by using the <code>credential list</code> command.
-You can switch between your cloud credential - when you’d like to use one and act with that you will have to use:</p>
+<blockquote>
+<p>If you use deployed Cloudbreak VM from GCP Image, the path is <code>/home/centos/cloudbreak-deployment/</code>.</p>
+</blockquote>
+<ul>
+<li>Start the <code>cbd</code> from here if it is needed</li>
+</ul>
+<pre><code>   cbd start
+</code></pre>
+
+<ul>
+<li>In the root of your <code>cloudbreak-deployment</code> folder apply:</li>
+</ul>
+<pre><code>   cbd util cloudbreak-shell
+</code></pre>
+
+<blockquote>
+<p>At the very first time it will take for a while, because of need to download all the necessary docker images.</p>
+</blockquote>
+<p>This will launch the Cloudbreak shell inside a Docker container then it is ready to use.
+<img alt="" src="../images/gcp-cbdshell-started.png" />
+<sub><em>Full size <a href="../images/gcp-cbdshell-started.png">here</a>.</em></sub></p>
+<blockquote>
+<p><strong>IMPORTANT You have to copy all your files into the <code>cbd</code> working directory, what you would like to use in shell.</strong> For 
+example if your <code>cbd</code> working directory is <code>~/cloudbreak-deployment</code> then copy your <strong>blueprint JSON, public ssh key 
+file...etc.</strong> to here. You can refer to these files with their names from the shell.</p>
+</blockquote>
+<h2 id="autocomplete-and-hints">Autocomplete and hints</h2>
+<p>Cloudbreak Shell helps to you with <strong>hint messages</strong> from the very beginning, for example:</p>
+<pre><code>cloudbreak-shell&gt;hint
+Hint: Add a blueprint with the 'blueprint add' command or select an existing one with 'blueprint select'
+cloudbreak-shell&gt;
+</code></pre>
+
+<p>Beyond this you can use the <strong>autocompletion (double-TAB)</strong> as well:</p>
+<pre><code>cloudbreak-shell&gt;credential create --
+credential create --AWS          credential create --AZURE        credential create --EC2          credential create --GCP          credential create --OPENSTACK
+</code></pre>
+
+<h1 id="provisioning-via-cli">Provisioning via CLI</h1>
+<h2 id="setting-up-gcp-credential">Setting up GCP credential</h2>
+<p>Cloudbreak works by connecting your GCP account through so called Credentials, and then uses these credentials to 
+create resources on your behalf. Credentials can be configured with the following command for example:</p>
+<pre><code>credential create --GCP --description &quot;sample description&quot; --name my-gcp-credential --projectId &lt;your gcp projectid&gt; 
+--serviceAccountId &lt;your GCP service account mail address&gt; --serviceAccountPrivateKeyPath /files/mykey.p12 
+--sshKeyString &quot;ssh-rsa AAAAB3***etc.&quot;
+</code></pre>
+
+<blockquote>
+<p><strong>NOTE</strong> that Cloudbreak <strong>does not set your cloud user details</strong> - we work around the concept of GCP Service 
+Account Credentials. You should have already a valid GCP service account. You can find further details <a href="./#provisioning-prerequisites">here</a>.</p>
+</blockquote>
+<p>Alternatives to provide <code>SSH Key</code>:</p>
+<ul>
+<li>you can upload your public key from an url: <code>—sshKeyUrl</code> </li>
+<li>or you can add the path of your public key: <code>—sshKeyPath</code></li>
+</ul>
+<p>You can check whether the credential was created successfully</p>
+<pre><code>credential list
+</code></pre>
+
+<p>You can switch between your existing credentials</p>
 <pre><code>credential select --name my-gcp-credential
 </code></pre>
 
-<p>You can delete your cloud credential - when you’d like to delete one you will have to use:</p>
-<pre><code>credential delete --name my-gcp-credential
-</code></pre>
-
-<p>You can show your cloud credential - when you’d like to show one you will have to use:</p>
-<pre><code>credential show --name my-gcp-credential
-</code></pre>
-
-<h3 id="create-a-template">Create a template</h3>
+<h2 id="infrastructure-templates_1">Infrastructure templates</h2>
+<p>After your GCP account is linked to Cloudbreak you can start creating resource templates that describe your clusters' 
+infrastructure:</p>
+<ul>
+<li>security groups</li>
+<li>networks</li>
+<li>templates</li>
+</ul>
+<p>When you create one of the above resource, <strong>Cloudbreak does not make any requests to GCP. Resources are only created
+ on GCP after the <code>cluster create</code> has applied.</strong> These templates are saved to Cloudbreak's database and can be 
+ reused with multiple clusters to describe the infrastructure.</p>
+<p><strong>Templates</strong></p>
 <p>A template gives developers and systems administrators an easy way to create and manage a collection of cloud infrastructure related resources, maintaining and updating them in an orderly and predictable fashion. A template can be used repeatedly to create identical copies of the same stack (or to use as a foundation to start a new stack).</p>
 <pre><code>template create --GCP --name gcptemplate --description gcp-template --instanceType N1_STANDARD_4 --volumeSize 100 --volumeCount 2
 </code></pre>
