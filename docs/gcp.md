@@ -223,7 +223,8 @@ If `Public in account` is checked all the users belonging to your account will b
 
 Your clusters can be created in their own **networks** or in one of your already existing one. If you choose an 
 existing network, it is possible to create a new subnet within the network. The subnet's IP range must be defined in 
-the `Subnet (CIDR)` field using the general CIDR notation.
+the `Subnet (CIDR)` field using the general CIDR notation. You can read more about [GCP Networks](https://cloud.google.com/compute/docs/networking#networks) and [Subnet 
+networks](https://cloud.google.com/compute/docs/networking#subnet_network).
 
 *Default GCP Network*
 
@@ -237,6 +238,9 @@ networks** panel. You can define the `Virtual Network Identifier` of your networ
 
 `Virtual Network Identifier` is an optional value. This must be an ID of an existing GCP virtual network. If the 
 identifier is provided, the subnet CIDR will be ignored and the existing network's CIDR range will be used.
+
+>**IMPORTANT** Please make sure the defined subnet here doesn't overlap with any of your already deployed subnet in the
+ network, because of the validation only happens after the cluster creation starts.
 
 >In case of existing subnet make sure you have enough room within your network space for the new instances. The 
 provided subnet CIDR will be ignored, but a proper CIDR range will be used.
@@ -252,20 +256,23 @@ network template.
 
 **Security groups**
 
-They describe the allowed inbound traffic to the instances in the cluster.
-Currently only one security group template can be selected for a Cloudbreak cluster and all the instances have a public IP address so all the instances in the cluster will belong to the same security group.
-This may change in a later release.
+Security group templates are very similar to the [Firewalls on GCP](https://cloud.google
+.com/compute/docs/networks-and-firewalls#firewalls). **They describe the allowed inbound traffic 
+to the instances in the cluster.** Currently only one security group template can be selected for a Cloudbreak cluster 
+and all the instances have a public IP address so all the instances in the cluster will belong to the same security 
+group. This may change in a later release.
 
-You can define your own security group by adding all the ports, protocols and CIDR range you'd like to use. 443 needs to be there in every security group otherwise Cloudbreak won't be able to communicate with the provisioned cluster. The rules defined here doesn't need to contain the internal rules, those are automatically added by Cloudbreak to the security group on GCP.
+*Default Security Group*
 
-You can also use the two pre-defined security groups in Cloudbreak:
+You can also use the two pre-defined security groups in Cloudbreak.
 
-`only-ssh-and-ssl:` all ports are locked down except for SSH and gateway HTTPS (you can't access Hadoop services outside of the VPC):
+`only-ssh-and-ssl:` all ports are locked down except for SSH and gateway HTTPS (you can't access Hadoop services 
+outside of the virtual network):
 
 * SSH (22)
 * HTTPS (443)
 
-`all-services-port:` all Hadoop services and SSH/gateway HTTPS are accessible by default:
+`all-services-port:` all Hadoop services and SSH, gateway HTTPS are accessible by default:
 
 * SSH (22)
 * HTTPS (443)
@@ -297,71 +304,128 @@ You can also use the two pre-defined security groups in Cloudbreak:
 * Kibana (3080)
 * Elasticsearch (9200)
 
-If `Public in account` is checked all the users belonging to your account will be able to use this security group template to create clusters, but cannot delete or modify it.
+*Custom Security Group*
 
->**NOTE** that the security groups are *not created* on GCP after the `Create Security Group` button is pushed, only 
-after the cluster provisioning starts with the selected security group template.
+You can define your own security group by adding all the ports, protocols and CIDR range you'd like to use. The rules
+ defined here doesn't need to contain the internal rules, those are automatically added by Cloudbreak to the security
+  group on GCP.
+
+>**IMPORTANT** 443 needs to be there in every security group otherwise Cloudbreak won't be able to communicate with the 
+provisioned cluster.
+
+If `Public in account` is checked all the users belonging to your account will be able to use this security group 
+template to create clusters, but cannot delete it.
+
+>**NOTE** The security groups are created on GCP only after the cluster provisioning starts with the selected 
+security group template.
+
+![](/images/ui-secgroup_v3.png)
+<sub>*Full size [here](/images/ui-secgroup_v3.png).*</sub>
 
 ## Defining cluster services
-
-**Manage blueprints**
-
-Blueprints are your declarative definition of a Hadoop cluster.
-
-`Name:` name of your blueprint
-
-`Description:` short description of your blueprint
-
-`Source URL:` you can add a blueprint by pointing to a URL. As an example you can use this [blueprint](https://raw.githubusercontent.com/sequenceiq/cloudbreak/master/core/src/main/resources/defaults/blueprints/multi-node-hdfs-yarn.bp).
-
-`Manual copy:` you can copy paste your blueprint in this text area
-
-`Public in account:` share it with others in the account
-
-
-This section describes
 
 **Blueprints**
 
 Blueprints are your declarative definition of a Hadoop cluster. These are the same blueprints that are [used by Ambari](https://cwiki.apache.org/confluence/display/AMBARI/Blueprints).
 
-You can use the 3 default blueprints pre-defined in Cloudbreak or you can create your own.
-Blueprints can be added from an URL or the whole JSON can be copied to the `Manual copy` field.
+You can use the 3 default blueprints pre-defined in Cloudbreak or you can create your own ones.
+Blueprints can be added from file, URL (an [example blueprint](https://raw.githubusercontent.com/sequenceiq/cloudbreak/master/integration-test/src/main/resources/blueprint/multi-node-hdfs-yarn.bp)) or the 
+whole JSON can be written in the `JSON text` box.
 
-The hostgroups added in the JSON will be mapped to a set of instances when starting the cluster and the services and components defined in the hostgroup will be installed on the corresponding nodes.
-It is not necessary to define all the configuration fields in the blueprints - if a configuration is missing, Ambari will fill that with a default value.
-The configurations defined in the blueprint can also be modified later from the Ambari UI.
+The host groups in the JSON will be mapped to a set of instances when starting the cluster. Besides this the services and
+ components will also be installed on the corresponding nodes. Blueprints can be modified later from the Ambari UI.
+ 
+>**NOTE** Not necessary to define all the configuration in the blueprint. If a configuration is missing, Ambari will 
+fill that with a default value.
 
-If `Public in account` is checked all the users belonging to your account will be able to use this blueprint to create clusters, but cannot delete or modify it.
+If `Public in account` is checked all the users belonging to your account will be able to use this blueprint to 
+create clusters, but cannot delete or modify it.
 
-A blueprint can be exported from a running Ambari cluster that can be reused in Cloudbreak with slight modifications.
-There is no automatic way to modify an exported blueprint and make it instantly usable in Cloudbreak, the modifications have to be done manually.
-When the blueprint is exported some configurations will have for example hardcoded domain names, or memory configurations that won't be applicable to the Cloudbreak cluster.
+![](/images/ui-blueprints_v3.png)
+<sub>*Full size [here](/images/ui-blueprints_v3.png).*</sub>
+
+**A blueprint can be exported from a running Ambari cluster that can be reused in Cloudbreak with slight 
+modifications.**
+There is no automatic way to modify an exported blueprint and make it instantly usable in Cloudbreak, the 
+modifications have to be done manually.
+When the blueprint is exported some configurations are hardcoded for example domain names, memory configurations...etc. that won't be applicable to the Cloudbreak cluster.
 
 **Cluster customization**
 
-Sometimes it can be useful to define some custom scripts that run during cluster creation and add some additional functionality.
-For example it can be a service you'd like to install but it's not supported by Ambari or some script that automatically downloads some data to the necessary nodes.
-The most notable example is Ranger setup: it has a prerequisite of a running database when Ranger Admin is installing.
-A PostgreSQL database can be easily started and configured with a recipe before the blueprint installation starts.
+Sometimes it can be useful to **define some custom scripts so called Recipes in Cloudbreak** that run during cluster 
+creation and add some additional functionality.
 
-To learn more about these so called *Recipes*, and to check out the Ranger database recipe, take a look at the [Cluster customization](recipes.md) part of the documentation.
+For example it can be a service you'd like to install but it's not supported by Ambari or some script that 
+automatically downloads some data to the necessary nodes.
+The most **notable example is Ranger setup**:
 
+- It has a prerequisite of a running database when Ranger Admin is installing.
+- A PostgreSQL database can be easily started and configured with a recipe before the blueprint installation starts.
+
+To learn more about these and check the Ranger recipe out, take a look at the [Cluster customization](recipes.md).
 
 ## Cluster deployment
 
-After all the templates are configured you can deploy a new HDP cluster. Start by selecting a previously created credential in the header.
-Click on `create cluster`, give it a `Name`, select a `Region` where the cluster infrastructure will be provisioned and select one of the `Networks` and `Security Groups` created earlier.
-After you've selected a `Blueprint` as well you should be able to configure the `Template resources` and the number of nodes for all of the hostgroups in the blueprint.
+After all the cluster resources are configured you can deploy a new HDP cluster.
 
-If `Public in account` is checked all the users belonging to your account will be able to see the newly created cluster on the UI, but cannot delete or modify it.
+Here is a **basic flow for cluster creation on Cloudbreak Web UI**:
 
-If `Enable security` is checked as well, Cloudbreak will install KDC and the cluster will be Kerberized. See more about it in the [Kerberos](kerberos.md) section of this documentation.
+ - Start by selecting a previously created GCP credential in the header.
 
-After the `create and start cluster` button is pushed Cloudbreak will start to create resources on your GCP account.
+![](/images/ui-credentials_v2.png)
+<sub>*Full size [here](/images/ui-credentials_v2.png).*</sub>
 
->**IMPORTANT** Always use Cloudbreak to delete the cluster, or if that fails for some reason always try to delete 
-the Google Cloud first.
+ - Open `create cluster`
+
+`Configure Cluster` tab
+
+ - Fill out the new cluster `name`
+    - Cluster name must start with a lowercase alphabetic character then you can apply lowercase alphanumeric and 
+   hyphens only (min 5, max 40 characters)
+ - Select a `Region` where you like your cluster be provisioned
+ - Click on the `Setup Network and Security` button
+>If `Public in account` is checked all the users belonging to your account will be able to see the created cluster on
+ the UI, but cannot delete or modify it.
+
+`Setup Network and Security` tab
+
+ - Select one of the networks
+ - Select one of the security groups
+ - Click on the `Choose Blueprint` button
+>If `Enable security` is checked as well, Cloudbreak will install Key Distribution Center (KDC) and the cluster will 
+be Kerberized. See more about it in the [Kerberos](kerberos.md) section of this documentation.
+
+`Choose Blueprint` tab
+
+ - Select one of the blueprint
+ - After you've selected a `Blueprint`, you should be able to configure:
+    - the templates
+    - the number of nodes for all of the host groups in the blueprint
+    - the recipes for nodes
+ - Click on the `Add File System` button
+
+`Add File System` tab
+
+ - Select one of the file system that fits your needs
+ - After you've selected `WASB` or `DASH`, you should configure:
+    - `Storage Account Name`
+    - `Storage Account Access Key`
+ - Click on the `Review and Launch` button
+
+`Review and Launch` tab
+
+ - After the `create and start cluster` button has clicked Cloudbreak will start to create the cluster's resources on 
+ your Azure account.
+
+Cloudbreak uses *Azure Portal* to create the resources - you can check out the resources created by Cloudbreak on 
+the `Azure Portal Resource groups` page.
+![](/images/azure-resourcegroup.png)
+<sub>*Full size [here](/images/azure-resourcegroup.png).*</sub>
+
+Besides these you can check the progress on the Cloudbreak Web UI itself if you open the new cluster's `Event History`.
+![](/images/azure-eventhistory.png)
+<sub>*Full size [here](/images/azure-eventhistory.png).*</sub>
+
 
 **Advanced options**
 

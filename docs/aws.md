@@ -383,7 +383,7 @@ create clusters, but cannot delete or modify it.
 modifications.**
 There is no automatic way to modify an exported blueprint and make it instantly usable in Cloudbreak, the 
 modifications have to be done manually.
-When the blueprint is exported some configurations are hardcoded for example domain names, memory configurations..etc. that won't be applicable to the Cloudbreak cluster.
+When the blueprint is exported some configurations are hardcoded for example domain names, memory configurations...etc. that won't be applicable to the Cloudbreak cluster.
 
 **Cluster customization**
 
@@ -810,6 +810,7 @@ stack create --name myawsstack --region us-east-1
 ```
 The infrastructure is created asynchronously, the state of the stack can be checked with the stack `show command`. If 
 it reports AVAILABLE, it means that the virtual machines and the corresponding infrastructure is running at the cloud provider.
+
 Other available option is `--wait` - in this case the create command will return only after the process has finished. 
 
 **Create a Hadoop cluster / Cloud provisioning**
