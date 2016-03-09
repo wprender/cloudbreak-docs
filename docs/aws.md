@@ -20,17 +20,20 @@ Please make sure you opened the following ports on your security group:
 
 # AWS Setup
 
-  * Default user is `ec2-user`
-  * Cloudbreak Deployer location is `/var/lib/cloudbreak-deployment`.
-  * All `cbd` actions must be executed from the `cbd` folder.
-  * Most of the `cbd` commands require `root` permissions.
+**Cloudbreak Deployer Highlights**
+
+  * The default SSH username for the EC2 instances is `ec2-user`.
+  * Cloudbreak Deployer location is `/home/ec2-user/cloudbreak-deployment` on the launched EC2 instance. This is the 
+  `cbd` root folder there.
+  * All `cbd` actions must be executed from the `cbd` root folder.
+  * Most of the `cbd` commands require `root` permissions. So it would be worth if you apply the `sudo su`.
 
 ## Setup Cloudbreak Deployer
 
 Open the `cloudbreak-deployment` directory:
 
 ```
-cd /var/lib/cloudbreak-deployment`
+cd cloudbreak-deployment`
 ```
 
 This is the directory of the configuration files and the supporting binaries for Cloudbreak Deployer.
@@ -75,13 +78,13 @@ The `cbd start` command includes the `cbd generate` command which applies the fo
 ## Validate the started Cloudbreak Deployer
 
 After the `cbd start` command finishes followings are worthy to check:
-- Pre-installed Cloudbreak Deployer version and health.
+- Pre-installed Cloudbreak Deployer version and health:
 ```
    cbd doctor
 ```
 >In case of `cbd update` is needed, please check the related documentation for [Cloudbreak Deployer Update](operations.md#cloudbreak-deployer-update). Most of the `cbd` commands require `root` permissions.
 
-- Started Cloudbreak Application logs.
+- Started Cloudbreak Application logs:
 ```
    cbd logs cloudbreak
 ```
