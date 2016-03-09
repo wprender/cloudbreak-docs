@@ -37,6 +37,14 @@ You can **create your own Cloudbreak Deployer (cbd) instance from the imported i
 
 # Google Setup
 
+**Cloudbreak Deployer Highlights**
+
+  * The default SSH username for the GCP instances is `cloudbreak`.
+  * Cloudbreak Deployer location is `/home/centos/cloudbreak-deployment/` on the launched `cbd` VM. This is the 
+      `cbd` root folder there.
+  * All `cbd` actions must be executed from the `cbd` folder.
+  * Most of the `cbd` commands require `root` permissions. So it would be worth if you apply the `sudo su`.
+
 ## Setup Cloudbreak Deployer
 
 You should already have the Cloudbreak Deployer either by [using the GCP Cloud Images](gcp.md) or by [installing the 
