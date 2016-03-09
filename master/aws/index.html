@@ -648,7 +648,7 @@ create clusters, but cannot delete or modify it.</p>
 modifications.</strong>
 There is no automatic way to modify an exported blueprint and make it instantly usable in Cloudbreak, the 
 modifications have to be done manually.
-When the blueprint is exported some configurations are hardcoded for example domain names, memory configurations..etc. that won't be applicable to the Cloudbreak cluster.</p>
+When the blueprint is exported some configurations are hardcoded for example domain names, memory configurations...etc. that won't be applicable to the Cloudbreak cluster.</p>
 <p><strong>Cluster customization</strong></p>
 <p>Sometimes it can be useful to <strong>define some custom scripts so called Recipes in Cloudbreak</strong> that run during cluster 
 creation and add some additional functionality.</p>
@@ -1017,8 +1017,8 @@ stack to be used with your Hadoop cluster:</p>
 </code></pre>
 
 <p>The infrastructure is created asynchronously, the state of the stack can be checked with the stack <code>show command</code>. If 
-it reports AVAILABLE, it means that the virtual machines and the corresponding infrastructure is running at the cloud provider.
-Other available option is <code>--wait</code> - in this case the create command will return only after the process has finished. </p>
+it reports AVAILABLE, it means that the virtual machines and the corresponding infrastructure is running at the cloud provider.</p>
+<p>Other available option is <code>--wait</code> - in this case the create command will return only after the process has finished. </p>
 <p><strong>Create a Hadoop cluster / Cloud provisioning</strong></p>
 <p><strong>You are almost done! One more command and your Hadoop cluster is starting!</strong> Cloud provisioning is done once the 
 cluster is up and running. The new cluster will use your selected blueprint and install your custom Hadoop cluster 
