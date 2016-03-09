@@ -792,14 +792,18 @@ be Kerberized. See more about it in the <a href="../kerberos/">Kerberos</a> sect
 <li><code>Storage Account Access Key</code></li>
 </ul>
 </li>
-<li>Click on the <code>Review and Launch</code> button</li>
+<li>Click on the <code>Review and Launch</code> button<blockquote>
+<p><code>File system</code> is a mandatory configuration for Azure. You can read more about WASB and DASH in the <a href="./#file-system-configuration">File System Configuration section</a>.</p>
+</blockquote>
+</li>
 </ul>
 <p><code>Review and Launch</code> tab</p>
 <ul>
 <li>After the <code>create and start cluster</code> button has clicked Cloudbreak will start to create the cluster's resources on 
  your Azure account.</li>
 </ul>
-<p>Cloudbreak uses <em>Azure Portal</em> to create the resources - you can check out the resources created by Cloudbreak on 
+<p>Cloudbreak uses <em>Azure Resource Manager</em> to create the resources - you can check out the resources created by Cloudbreak
+ on 
 the <code>Azure Portal Resource groups</code> page.
 <img alt="" src="../images/azure-resourcegroup.png" />
 <sub><em>Full size <a href="../images/azure-resourcegroup.png">here</a>.</em></sub></p>
@@ -808,9 +812,7 @@ the <code>Azure Portal Resource groups</code> page.
 <sub><em>Full size <a href="../images/azure-eventhistory.png">here</a>.</em></sub></p>
 <p><strong>Advanced options</strong></p>
 <p>There are some advanced features when deploying a new cluster, these are the following:</p>
-<p><code>File system</code> this is a mandatory configuration for Azure. You can read more about WASB and DASH in the <a href="./#file-system-configuration">File 
-System Configuration section</a>.</p>
-<p><code>Minimum cluster size</code> The provisioning strategy in case of the cloud provider cannot allocate all the requested nodes</p>
+<p><code>Minimum cluster size</code> The provisioning strategy in case of the cloud provider cannot allocate all the requested nodes.</p>
 <p><code>Validate blueprint</code> This is selected by default. Cloudbreak validates the Ambari blueprint in this case.</p>
 <p><code>Config recommendation strategy</code> Strategy for configuration recommendations how will be applied. Recommended 
 configurations gathered by the response of the stack advisor. </p>
