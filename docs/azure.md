@@ -678,6 +678,10 @@ new stack). Templates can be configured with the following command for example:
 ```
 template create --AZURE --name my-azure-template --description "sample description" --instanceType Standard_D4 --volumeSize 100 --volumeCount 2
 ```
+
+Other available option here is `--publicInAccount`. If it is true, all the users belonging to your account will be able
+ to use this template to create clusters, but cannot delete it.
+
 You can check whether the template was created successfully
 ```
 template list
@@ -790,6 +794,9 @@ provisioned cluster.
 securitygroup create --name my-security-group --description "sample description" --rules 0.0.0.0/0:tcp:443,8080,9090;10.0.33.0/24:tcp:1234,1235
 ```
 
+Other available option here is `--publicInAccount`. If it is true, all the users belonging to your account will be able
+ to use this template to create clusters, but cannot delete it.
+
 >**NOTE** The security groups are created on Azure only after the cluster provisioning starts with the selected security
  group template.
 
@@ -815,11 +822,12 @@ The host groups in the JSON will be mapped to a set of instances when starting t
 ```
 blueprint add --name my-blueprint --description "sample description" --file <the path of the blueprint>
 ```
-Other available options:
+Other available options here:
 
 `--url` the url of the blueprint
 
-`--publicInAccount` flags if the network is public in the account
+`--publicInAccount` is true, all the users belonging to your account will be able to use this blueprint 
+to create clusters, but cannot delete it.
 
 You can check whether the blueprint was created successfully
 ```
@@ -830,7 +838,7 @@ blueprint list
 modifications.**
 There is no automatic way to modify an exported blueprint and make it instantly usable in Cloudbreak, the 
 modifications have to be done manually.
-When the blueprint is exported some configurations are hardcoded for example domain names, memory configurations..etc. that won't be applicable to the Cloudbreak cluster.
+When the blueprint is exported some configurations are hardcoded for example domain names, memory configurations...etc. that won't be applicable to the Cloudbreak cluster.
 
 **Cluster customization**
 
@@ -896,7 +904,7 @@ securitygroup select --name all-services-port
 
 Stack means the running cloud infrastructure that is created based on the instance groups configured earlier 
 (`credential`, `instancegroups`, `network`, `securitygroup`). Same as in case of the API or UI the new cluster will 
-use your templates and by using CloudFormation will launch your cloud stack. Use the following command to create a 
+use your templates and by using Azure ARM will launch your cloud stack. Use the following command to create a 
 stack to be used with your Hadoop cluster:
 ```
 stack create --name myazurestack --region "North Europe"
@@ -927,8 +935,8 @@ provisioning:
 <sub>*Full size [here](/images/azure-resourcegroups_2.png).*</sub>
 
 - If stack then cluster creation have successfully done, you can check the Ambari Web UI. However you need to know the 
-Ambari IP (for example: `http://52.8.110.95:8080`): 
-    - You can get the IP from the CLI as a result (`ambariServerIp 52.8.110.95`) of the following command:
+Ambari IP (for example: `http://23.101.60.49:8080`): 
+    - You can get the IP from the CLI as a result (`ambariServerIp 23.101.60.49`) of the following command:
 ```
          cluster show
 ```
