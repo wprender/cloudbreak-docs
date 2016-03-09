@@ -941,6 +941,8 @@ new stack). Templates can be configured with the following command for example:<
 <pre><code>template create --AZURE --name my-azure-template --description &quot;sample description&quot; --instanceType Standard_D4 --volumeSize 100 --volumeCount 2
 </code></pre>
 
+<p>Other available option here is <code>--publicInAccount</code>. If it is true, all the users belonging to your account will be able
+ to use this template to create clusters, but cannot delete it.</p>
 <p>You can check whether the template was created successfully</p>
 <pre><code>template list
 </code></pre>
@@ -1038,6 +1040,8 @@ provisioned cluster.</p>
 <pre><code>securitygroup create --name my-security-group --description &quot;sample description&quot; --rules 0.0.0.0/0:tcp:443,8080,9090;10.0.33.0/24:tcp:1234,1235
 </code></pre>
 
+<p>Other available option here is <code>--publicInAccount</code>. If it is true, all the users belonging to your account will be able
+ to use this template to create clusters, but cannot delete it.</p>
 <blockquote>
 <p><strong>NOTE</strong> The security groups are created on Azure only after the cluster provisioning starts with the selected security
  group template.</p>
@@ -1059,9 +1063,10 @@ Blueprints can be added from file or URL (an <a href="https://raw.githubusercont
 <pre><code>blueprint add --name my-blueprint --description &quot;sample description&quot; --file &lt;the path of the blueprint&gt;
 </code></pre>
 
-<p>Other available options:</p>
+<p>Other available options here:</p>
 <p><code>--url</code> the url of the blueprint</p>
-<p><code>--publicInAccount</code> flags if the network is public in the account</p>
+<p><code>--publicInAccount</code> is true, all the users belonging to your account will be able to use this blueprint 
+to create clusters, but cannot delete it.</p>
 <p>You can check whether the blueprint was created successfully</p>
 <pre><code>blueprint list
 </code></pre>
@@ -1070,7 +1075,7 @@ Blueprints can be added from file or URL (an <a href="https://raw.githubusercont
 modifications.</strong>
 There is no automatic way to modify an exported blueprint and make it instantly usable in Cloudbreak, the 
 modifications have to be done manually.
-When the blueprint is exported some configurations are hardcoded for example domain names, memory configurations..etc. that won't be applicable to the Cloudbreak cluster.</p>
+When the blueprint is exported some configurations are hardcoded for example domain names, memory configurations...etc. that won't be applicable to the Cloudbreak cluster.</p>
 <p><strong>Cluster customization</strong></p>
 <p>Sometimes it can be useful to <strong>define some custom scripts so called Recipes in Cloudbreak</strong> that run during cluster 
 creation and add some additional functionality.</p>
@@ -1118,7 +1123,7 @@ instancegroup configure --instanceGroup slave_1 --nodecount 1 --templateName min
 <p><strong>Create stack / Create cloud infrastructure</strong></p>
 <p>Stack means the running cloud infrastructure that is created based on the instance groups configured earlier 
 (<code>credential</code>, <code>instancegroups</code>, <code>network</code>, <code>securitygroup</code>). Same as in case of the API or UI the new cluster will 
-use your templates and by using CloudFormation will launch your cloud stack. Use the following command to create a 
+use your templates and by using Azure ARM will launch your cloud stack. Use the following command to create a 
 stack to be used with your Hadoop cluster:</p>
 <pre><code>stack create --name myazurestack --region &quot;North Europe&quot;
 </code></pre>
@@ -1144,8 +1149,8 @@ provisioning:</p>
 <sub><em>Full size <a href="../images/azure-resourcegroups_2.png">here</a>.</em></sub></p>
 <ul>
 <li>If stack then cluster creation have successfully done, you can check the Ambari Web UI. However you need to know the 
-Ambari IP (for example: <code>http://52.8.110.95:8080</code>): <ul>
-<li>You can get the IP from the CLI as a result (<code>ambariServerIp 52.8.110.95</code>) of the following command:</li>
+Ambari IP (for example: <code>http://23.101.60.49:8080</code>): <ul>
+<li>You can get the IP from the CLI as a result (<code>ambariServerIp 23.101.60.49</code>) of the following command:</li>
 </ul>
 </li>
 </ul>

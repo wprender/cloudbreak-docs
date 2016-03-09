@@ -846,6 +846,8 @@ new stack). Templates can be configured with the following command for example:<
 100 --volumeCount 2
 </code></pre>
 
+<p>Other available option here is <code>--publicInAccount</code>. If it is true, all the users belonging to your account will be able
+ to use this template to create clusters, but cannot delete it.</p>
 <p>You can check whether the template was created successfully</p>
 <pre><code>template list
 </code></pre>
@@ -933,6 +935,8 @@ provisioned cluster.</p>
 <pre><code>securitygroup create --name my-security-group --description &quot;sample description&quot; --rules 0.0.0.0/0:tcp:443,8080,9090;10.0.33.0/24:tcp:1234,1235
 </code></pre>
 
+<p>If <code>--publicInAccount</code> is true, all the users belonging to your account will be able
+ to use this template to create clusters, but cannot delete it.</p>
 <blockquote>
 <p><strong>NOTE</strong> The security groups are created on AWS only after the cluster provisioning starts with the selected security group template.</p>
 </blockquote>
