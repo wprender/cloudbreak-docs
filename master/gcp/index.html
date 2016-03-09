@@ -347,6 +347,14 @@ Cloudbreak Deployer image at the <a href="https://console.developers.google.com/
 <p><strong><a href="../onprem/#minimum-and-recommended-system-requirements">Minimum and Recommended VM requirements</a>:</strong> 4GB RAM, 10GB disk, 2 cores</p>
 </blockquote>
 <h1 id="google-setup">Google Setup</h1>
+<p><strong>Cloudbreak Deployer Highlights</strong></p>
+<ul>
+<li>The default SSH username for the GCP instances is <code>cloudbreak</code>.</li>
+<li>Cloudbreak Deployer location is <code>/home/centos/cloudbreak-deployment/</code> on the launched <code>cbd</code> VM. This is the 
+      <code>cbd</code> root folder there.</li>
+<li>All <code>cbd</code> actions must be executed from the <code>cbd</code> folder.</li>
+<li>Most of the <code>cbd</code> commands require <code>root</code> permissions. So it would be worth if you apply the <code>sudo su</code>.</li>
+</ul>
 <h2 id="setup-cloudbreak-deployer">Setup Cloudbreak Deployer</h2>
 <p>You should already have the Cloudbreak Deployer either by <a href="./">using the GCP Cloud Images</a> or by <a href="../onprem/">installing the 
 Cloudbreak Deployer</a> manually on your own VM. If you have your own installed VM with </p>

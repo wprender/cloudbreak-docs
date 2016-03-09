@@ -260,6 +260,8 @@
         
             <li><a href="#deploy-using-the-azure-portal">Deploy using the Azure Portal</a></li>
         
+            <li><a href="#validate-the-started-cloudbreak-deployer">Validate the started Cloudbreak Deployer</a></li>
+        
             <li><a href="#under-the-hood">Under the hood</a></li>
         
     
@@ -361,31 +363,44 @@ at:<code>http://&lt;VM Public IP&gt;:3000/</code><ul>
 </ul>
 </li>
 </ul>
-<p><strong>Optional</strong></p>
-<p>You can SSH to the VM and track the progress in the Cloudbreak logs as well:</p>
-<pre><code>cbd logs cloudbreak
+<p><strong>Cloudbreak Deployer Highlights</strong></p>
+<ul>
+<li>The default SSH username for the Azure VMs is <code>cloudbreak</code>.</li>
+<li>Cloudbreak Deployer location is <code>/var/lib/cloudbreak-deployment</code> on the launched <code>cbd</code> VM. This is the 
+      <code>cbd</code> root folder there.</li>
+<li>All <code>cbd</code> actions must be executed from the <code>cbd</code> folder.</li>
+<li>Most of the <code>cbd</code> commands require <code>root</code> permissions. So it would be worth if you apply the <code>sudo su</code>.</li>
+</ul>
+<h2 id="validate-the-started-cloudbreak-deployer">Validate the started Cloudbreak Deployer</h2>
+<ul>
+<li>SSH to the launched Azure VM.</li>
+<li>Open the <code>cloudbreak-deployment</code> directory:</li>
+</ul>
+<pre><code>   cd /var/lib/cloudbreak-deployment
 </code></pre>
 
 <ul>
-<li>Cloudbreak Deployer location is <code>/var/lib/cloudbreak-deployment</code>.</li>
-<li>All <code>cbd</code> actions must be executed from the <code>cbd</code> folder.</li>
-<li>Most of the <code>cbd</code> commands require <code>root</code> permissions.</li>
+<li>Pre-installed Cloudbreak Deployer version and health:</li>
 </ul>
+<pre><code>   cbd doctor
+</code></pre>
+
+<blockquote>
+<p>In case of <code>cbd update</code> is needed, please check the related documentation for <a href="../operations/#cloudbreak-deployer-update">Cloudbreak Deployer Update</a>. Most of the <code>cbd</code> commands require <code>root</code> permissions.</p>
+</blockquote>
+<ul>
+<li>Started Cloudbreak Application logs:</li>
+</ul>
+<pre><code>   cbd logs cloudbreak
+</code></pre>
+
+<blockquote>
+<p>Cloudbreak should start within a minute - you should see a line like this: <code>Started CloudbreakApplication in 36.823 seconds</code></p>
+</blockquote>
 <p>For example to investigate the Cloudbreak logs:</p>
 <pre><code>cloudbreak@cbdeployerVM:/var/lib/cloudbreak-deployment# cbd logs cloudbreak
 </code></pre>
 
-<blockquote>
-<p>You should see a line like the following one in the logs: 
-<code>Started CloudbreakApplication in 187.791 seconds (JVM running for 202.127)</code></p>
-</blockquote>
-<p>After the Cloudbreak Deployer has started the following is worthy to check:</p>
-<pre><code>cbd doctor
-</code></pre>
-
-<blockquote>
-<p>In case of <code>cbd</code>  update is needed, please check the related documentation for <a href="../operations/#cloudbreak-deployer-update">Cloudbreak Deployer Update</a></p>
-</blockquote>
 <h2 id="under-the-hood">Under the hood</h2>
 <p>Meanwhile Azure is creating the deployment, here is some information about what happens in the background:</p>
 <ul>

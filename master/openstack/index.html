@@ -351,6 +351,14 @@ glance image-create --name &quot;$OS_IMAGE_NAME&quot; --file &quot;$LATEST_IMAGE
 </code></pre>
 
 <h1 id="openstack-setup">OpenStack Setup</h1>
+<p><strong>Cloudbreak Deployer Highlights</strong></p>
+<ul>
+<li>The default SSH username for the OpenStack instances is <code>cloudbreak</code>.</li>
+<li>Cloudbreak Deployer location is <code>/home/cloudbreak/cloudbreak-deployment</code> on the launched <code>cbd</code> VM. This is the 
+      <code>cbd</code> root folder there.</li>
+<li>All <code>cbd</code> actions must be executed from the <code>cbd</code> folder.</li>
+<li>Most of the <code>cbd</code> commands require <code>root</code> permissions. So it would be worth if you apply the <code>sudo su</code>.</li>
+</ul>
 <h2 id="setup-cloudbreak-deployer">Setup Cloudbreak Deployer</h2>
 <blockquote>
 <p>This feature is currently <code>TECHNICAL PREVIEW</code> and is available for the <code>OpenStack Juno</code> release.</p>
@@ -358,7 +366,7 @@ glance image-create --name &quot;$OS_IMAGE_NAME&quot; --file &quot;$LATEST_IMAGE
 <p>If you already have Cloudbreak Deployer either by <a href="./">using the OpenStack Cloud Images</a> or by <a href="../onprem/">installing the Cloudbreak Deployer</a> manually on your own VM,
 you can start to setup the Cloudbreak Application with the deployer.</p>
 <p>Create and open the <code>cloudbreak-deployment</code> directory:</p>
-<pre><code>cd cloudbreak-deployment
+<pre><code>cd /var/lib/cloudbreak-deployment
 </code></pre>
 
 <p>This is the directory of the config files and the supporting binaries that will be downloaded by Cloudbreak deployer.</p>

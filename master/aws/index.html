@@ -337,9 +337,17 @@ Cloudbreak Deployer image based on your region at the <a href="https://aws.amazo
 <p><strong><a href="../onprem/#minimum-and-recommended-system-requirements">Minimum and Recommended VM requirements</a>:</strong> 4GB RAM, 10GB disk, 2 cores</p>
 </blockquote>
 <h1 id="aws-setup">AWS Setup</h1>
+<p><strong>Cloudbreak Deployer Highlights</strong></p>
+<ul>
+<li>The default SSH username for the EC2 instances is <code>ec2-user</code>.</li>
+<li>Cloudbreak Deployer location is <code>/home/ec2-user/cloudbreak-deployment</code> on the launched EC2 instance. This is the 
+  <code>cbd</code> root folder there.</li>
+<li>All <code>cbd</code> actions must be executed from the <code>cbd</code> root folder.</li>
+<li>Most of the <code>cbd</code> commands require <code>root</code> permissions. So it would be worth if you apply the <code>sudo su</code>.</li>
+</ul>
 <h2 id="setup-cloudbreak-deployer">Setup Cloudbreak Deployer</h2>
 <p>Open the <code>cloudbreak-deployment</code> directory:</p>
-<pre><code>cd cloudbreak-deployment
+<pre><code>cd cloudbreak-deployment`
 </code></pre>
 
 <p>This is the directory of the configuration files and the supporting binaries for Cloudbreak Deployer.</p>
@@ -374,7 +382,7 @@ This will start all the Docker containers and initialize the application.</p>
 </ul>
 <h2 id="validate-the-started-cloudbreak-deployer">Validate the started Cloudbreak Deployer</h2>
 <p>After the <code>cbd start</code> command finishes followings are worthy to check:
-- Pre-installed Cloudbreak Deployer version and health.</p>
+- Pre-installed Cloudbreak Deployer version and health:</p>
 <pre><code>   cbd doctor
 </code></pre>
 
@@ -382,7 +390,7 @@ This will start all the Docker containers and initialize the application.</p>
 <p>In case of <code>cbd update</code> is needed, please check the related documentation for <a href="../operations/#cloudbreak-deployer-update">Cloudbreak Deployer Update</a>. Most of the <code>cbd</code> commands require <code>root</code> permissions.</p>
 </blockquote>
 <ul>
-<li>Started Cloudbreak Application logs.</li>
+<li>Started Cloudbreak Application logs:</li>
 </ul>
 <pre><code>   cbd logs cloudbreak
 </code></pre>
