@@ -457,11 +457,12 @@ Besides these you can check the progress on the Cloudbreak Web UI itself if you 
 
 There are some advanced features when deploying a new cluster, these are the following:
 
-`Availability Zone` You can restrict the instances to a specific availability zone. It may be useful if you're using reserved instances.
+`Availability Zone` You can restrict the instances to a [specific availability zone](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html). It may be useful if you're using
+ reserved instances.
 
 `Use dedicated instances` You can use [dedicated instances](https://aws.amazon.com/ec2/purchasing-options/dedicated-instances/) on EC2
 
-`Minimum cluster size` The provisioning strategy in case of the cloud provider cannot allocate all the requested nodes
+`Minimum cluster size` The provisioning strategy in case of the cloud provider cannot allocate all the requested nodes.
 
 `Validate blueprint` This is selected by default. Cloudbreak validates the Ambari blueprint in this case.
 

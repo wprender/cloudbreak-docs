@@ -520,13 +520,15 @@ be Kerberized. See more about it in the [Kerberos](kerberos.md) section of this 
     - `Storage Account Name`
     - `Storage Account Access Key`
  - Click on the `Review and Launch` button
+>`File system` is a mandatory configuration for Azure. You can read more about WASB and DASH in the [File System Configuration section](azure.md#file-system-configuration).
 
 `Review and Launch` tab
 
  - After the `create and start cluster` button has clicked Cloudbreak will start to create the cluster's resources on 
  your Azure account.
 
-Cloudbreak uses *Azure Portal* to create the resources - you can check out the resources created by Cloudbreak on 
+Cloudbreak uses *Azure Resource Manager* to create the resources - you can check out the resources created by Cloudbreak
+ on 
 the `Azure Portal Resource groups` page.
 ![](/images/azure-resourcegroup.png)
 <sub>*Full size [here](/images/azure-resourcegroup.png).*</sub>
@@ -539,10 +541,7 @@ Besides these you can check the progress on the Cloudbreak Web UI itself if you 
 
 There are some advanced features when deploying a new cluster, these are the following:
 
-`File system` this is a mandatory configuration for Azure. You can read more about WASB and DASH in the [File 
-System Configuration section](azure.md#file-system-configuration).
-
-`Minimum cluster size` The provisioning strategy in case of the cloud provider cannot allocate all the requested nodes
+`Minimum cluster size` The provisioning strategy in case of the cloud provider cannot allocate all the requested nodes.
 
 `Validate blueprint` This is selected by default. Cloudbreak validates the Ambari blueprint in this case.
 

@@ -407,49 +407,65 @@ be Kerberized. See more about it in the [Kerberos](kerberos.md) section of this 
 `Add File System` tab
 
  - Select one of the file system that fits your needs
- - After you've selected `WASB` or `DASH`, you should configure:
-    - `Storage Account Name`
-    - `Storage Account Access Key`
+ - After you've selected `GCS file system`, you should configure:
+    - `Default Bucket Name`
  - Click on the `Review and Launch` button
+>You can read more about [GCS File System](https://cloud.google.com/storage/docs/gcs-fuse) and [Bucket Naming](https://cloud.google.com/storage/docs/naming#requirements) in GCP 
+Documentation.
 
 `Review and Launch` tab
 
  - After the `create and start cluster` button has clicked Cloudbreak will start to create the cluster's resources on 
- your Azure account.
+ your GCP account.
 
-Cloudbreak uses *Azure Portal* to create the resources - you can check out the resources created by Cloudbreak on 
-the `Azure Portal Resource groups` page.
-![](/images/azure-resourcegroup.png)
-<sub>*Full size [here](/images/azure-resourcegroup.png).*</sub>
+Cloudbreak uses *Google Cloud Platform* to create the resources - you can check out the resources created by Cloudbreak
+ on the `Compute Engine` page of the `Google Compute Platform`.
+![](/images/gcp-computeengine.png)
+<sub>*Full size [here](/images/gcp-computeengine.png).*</sub>
 
 Besides these you can check the progress on the Cloudbreak Web UI itself if you open the new cluster's `Event History`.
-![](/images/azure-eventhistory.png)
-<sub>*Full size [here](/images/azure-eventhistory.png).*</sub>
-
+![](/images/gcp-eventhistory.png)
+<sub>*Full size [here](/images/gcp-eventhistory.png).*</sub>
 
 **Advanced options**
 
 There are some advanced features when deploying a new cluster, these are the following:
 
-`Minimum cluster size:` the provisioning strategy in case of the cloud provider can't allocate all the requested nodes
+`Availability Zone` You can restrict the instances to a [specific availability zone](https://cloud.google.com/compute/docs/zones). It may be useful if you're using
+ reserved instances.
 
-`Validate blueprint:` feature to validate or not the Ambari blueprint. By default is switched on.
+`Minimum cluster size` The provisioning strategy in case of the cloud provider cannot allocate all the requested nodes.
 
-`Config recommendation strategy:` Specifies the strategy for how configuration recommendations may be applied to a cluster’s configuration. Recommended configurations gathered by the response of the stack advisor. 
+`Validate blueprint` This is selected by default. Cloudbreak validates the Ambari blueprint in this case.
 
-* `NEVER_APPLY:`               Configuration recommendations are ignored with this option.
-* `ONLY_STACK_DEFAULTS_APPLY:` Applies only on the default configurations for all included services.
-* `ALWAYS_APPLY:`              Applies on all configuration properties.
+`Config recommendation strategy` Strategy for configuration recommendations how will be applied. Recommended 
+configurations gathered by the response of the stack advisor. 
 
-Congrats! Your cluster should now be up and running. To learn more about it we have some [interesting insights](operations.md) about Cloudbreak clusters.
+* `NEVER_APPLY`               Configuration recommendations are ignored with this option.
+* `ONLY_STACK_DEFAULTS_APPLY` Applies only on the default configurations for all included services.
+* `ALWAYS_APPLY`              Applies on all configuration properties.
+
+`Start LDAP and configure SSSD` Enables the [System Security Services Daemon](sssd.md) configuration.
 
 ## Cluster termination
 
 You can terminate running or stopped clusters with the `terminate` button in the cluster details.
 
-Sometimes Cloudbreak cannot synchronize it's state with the cluster state at the cloud provider and the cluster can't be terminated. In this case with the `Forced termination` option in the termination dialog box you can terminate the cluster at the Cloudbreak side anyway. **In this case you may need to manually remove resources at the cloud provider.**
+>**IMPORTANT** Always use Cloudbreak to terminate the cluster. If that fails for some reason, try to delete the 
+GCP instances first. Instances are started in an Auto Scaling Group so they may be restarted if you terminate an 
+instance manually!
 
-# Interactive mode
+Sometimes Cloudbreak cannot synchronize it's state with the cluster state at the cloud provider and the cluster can't
+ be terminated. In this case the `Forced termination` option can help to terminate the cluster at the Cloudbreak 
+ side. **If it has happened:**
+
+1. You should check the related resources at the Google Cloud Platform
+2. If it is needed you need to manually remove resources from there
+
+![](/images/gcp-forceterminate.png)
+<sub>*Full size [here](/images/gcp-forceterminate.png).*</sub>
+
+# Interactive mode / Cloudbreak Shell
 
 Start the shell with `cbd util cloudbreak-shell`. This will launch the Cloudbreak shell inside a Docker container and you are ready to start using it.
 
