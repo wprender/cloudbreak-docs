@@ -1,17 +1,12 @@
 # OpenStack Cloud Images
 
-> This feature is currently `TECHNICAL PREVIEW` and is available for the `OpenStack Juno` release.
+We have pre-built cloud image for OpenStack with the Cloudbreak Deployer pre-installed. Following steps will guide 
+you through the launch of the image then the needed configuration.
 
-We have pre-built cloud images for OpenStack with the Cloudbreak Deployer pre-installed. Following the steps will guide you through the provider specific configuration then launch.
+> Alternatively, instead of using the pre-built cloud image, you can install Cloudbreak Deployer on your own VM. See
+ [install the Cloudbreak Deployer](onprem.md) for more information.
 
-> Alternatively, instead of using the pre-built cloud images, you can install Cloudbreak Deployer on your own VM. See [install the Cloudbreak Deployer](onprem.md) for more information.
-
-##Configured Image 
-
-You can download the latest pre-configured Cloudbreak Deployer image for OpenStack with the following script in the 
-following section.
-
-Please make sure you opened the following ports on your network:
+Please make sure you opened the following ports on your [security group](http://docs.openstack.org/openstack-ops/content/security_groups.html):
  
  * SSH (22)
  * Cloudbreak API (8080)
@@ -19,32 +14,36 @@ Please make sure you opened the following ports on your network:
  * Cloudbreak GUI (3000)
  * User authentication (3001)
 
-###Cloudbreak Deployer OpenStack Image Details
+## Cloudbreak Deployer OpenStack Image Details
 
+> **[Minimum and Recommended VM requirements](onprem.md#minimum-and-recommended-system-requirements):** 4GB RAM, 10GB disk, 2 cores
 
-##Import the image into OpenStack
-
+##Import the image into your OpenStack
 ```
 export OS_IMAGE_NAME="name_in_openstack"
 export OS_USERNAME=...
 export OS_AUTH_URL="http://.../v2.0"
 export OS_TENANT_NAME=...
+```
+Import the new image into your OpenStack:
+```
 glance image-create --name "$OS_IMAGE_NAME" --file "$LATEST_IMAGE" --disk-format qcow2 --container-format bare --progress
 ```
+
+![](/images/os-images.png)
+<sub>*Full size [here](/images/os-images.png).*</sub>
 
 #OpenStack Setup
 
 **Cloudbreak Deployer Highlights**
 
-  * The default SSH username for the OpenStack instances is `cloudbreak`.
-  * Cloudbreak Deployer location is `/home/cloudbreak/cloudbreak-deployment` on the launched `cbd` VM. This is the 
+  * The default SSH username for the OpenStack instances is `centos`.
+  * Cloudbreak Deployer location is `/home/centos/cloudbreak-deployment` on the launched `cbd` VM. This is the 
       `cbd` root folder there.
   * All `cbd` actions must be executed from the `cbd` folder.
   * Most of the `cbd` commands require `root` permissions. So it would be worth if you apply the `sudo su`.
 
 ## Setup Cloudbreak Deployer
-
-> This feature is currently `TECHNICAL PREVIEW` and is available for the `OpenStack Juno` release.
 
 If you already have Cloudbreak Deployer either by [using the OpenStack Cloud Images](openstack.md) or by [installing the Cloudbreak Deployer](onprem.md) manually on your own VM,
 you can start to setup the Cloudbreak Application with the deployer.

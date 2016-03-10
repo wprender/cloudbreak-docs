@@ -45,6 +45,17 @@ at:```http://<VM Public IP>:3000/```
     * email: admin@example.com
     * password: cloudbreak
 
+## Under the hood
+
+Meanwhile Azure is creating the deployment, here is some information about what happens in the background:
+
+  * Start an instance from the official CentOS image
+    * So no custom image copy is needed, which would take about 30 
+   minutes
+  * Use [Docker VM Extension](https://github.com/Azure/azure-docker-extension) to install Docker
+  * Use [CustomScript Extension](https://github.com/Azure/azure-linux-extensions/tree/master/CustomScript) to install 
+Cloudbreak Deployer (`cbd`)
+
 **Cloudbreak Deployer Highlights**
 
   * The default SSH username for the Azure VMs is `cloudbreak`.
@@ -77,17 +88,6 @@ For example to investigate the Cloudbreak logs:
 ```
 cloudbreak@cbdeployerVM:/var/lib/cloudbreak-deployment# cbd logs cloudbreak
 ```
-
-## Under the hood
-
-Meanwhile Azure is creating the deployment, here is some information about what happens in the background:
-
-  * Start an instance from the official CentOS image
-    * So no custom image copy is needed, which would take about 30 
-   minutes
-  * Use [Docker VM Extension](https://github.com/Azure/azure-docker-extension) to install Docker
-  * Use [CustomScript Extension](https://github.com/Azure/azure-linux-extensions/tree/master/CustomScript) to install 
-Cloudbreak Deployer (`cbd`)
 
 # Provisioning Prerequisites
 

@@ -6,7 +6,7 @@ Cloudbreak Deployer image based on your region at the [AWS Management Console](h
 > Alternatively, instead of using the pre-built cloud images for AWS, you can install Cloudbreak Deployer on your own
  VM. See [installation page](onprem.md) for more information.
 
-Please make sure you opened the following ports on your security group:
+Please make sure you opened the following ports on your [security group](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html):
  
  * SSH (22)
  * Cloudbreak API (8080)
@@ -78,6 +78,7 @@ The `cbd start` command includes the `cbd generate` command which applies the fo
 ## Validate the started Cloudbreak Deployer
 
 After the `cbd start` command finishes followings are worthy to check:
+
 - Pre-installed Cloudbreak Deployer version and health:
 ```
    cbd doctor

@@ -94,6 +94,7 @@ The `cbd start` command includes the `cbd generate` command which applies the fo
 ## Validate the started Cloudbreak Deployer
 
 After the `cbd start` command finishes followings are worthy to check:
+
 - Pre-installed Cloudbreak Deployer version and health.
 ```
    cbd doctor
