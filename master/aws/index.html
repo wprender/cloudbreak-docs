@@ -324,7 +324,7 @@ Cloudbreak Deployer image based on your region at the <a href="https://aws.amazo
 <p>Alternatively, instead of using the pre-built cloud images for AWS, you can install Cloudbreak Deployer on your own
  VM. See <a href="../onprem/">installation page</a> for more information.</p>
 </blockquote>
-<p>Please make sure you opened the following ports on your security group:</p>
+<p>Please make sure you opened the following ports on your <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html">security group</a>:</p>
 <ul>
 <li>SSH (22)</li>
 <li>Cloudbreak API (8080)</li>
@@ -381,8 +381,10 @@ This will start all the Docker containers and initialize the application.</p>
 <li>creates the <strong>uaa.yml</strong> file that holds the configuration of the identity server used to authenticate users to Cloudbreak.</li>
 </ul>
 <h2 id="validate-the-started-cloudbreak-deployer">Validate the started Cloudbreak Deployer</h2>
-<p>After the <code>cbd start</code> command finishes followings are worthy to check:
-- Pre-installed Cloudbreak Deployer version and health:</p>
+<p>After the <code>cbd start</code> command finishes followings are worthy to check:</p>
+<ul>
+<li>Pre-installed Cloudbreak Deployer version and health:</li>
+</ul>
 <pre><code>   cbd doctor
 </code></pre>
 
@@ -1243,12 +1245,16 @@ provisioning, we have some <a href="../operations/">interesting insights</a> for
                $("#cloudbreak-deployer-aws-image-details").append('</table>');
                });
 
-               <!--OpenStack-->
+               <!--OpenStack CBD-->
                $.getJSON("../providers/openstack.json", function(data) {
                $("#cloudbreak-deployer-openstack-image-details").append('<br>');
                $("#cloudbreak-deployer-openstack-image-details").append('<br>');
-               $("#cloudbreak-deployer-openstack-image-details").append('<p style="font-size: 12pt"><code>LATEST_IMAGE:</code>' + data.metadata.image_name + '</p>');
+               $("#cloudbreak-deployer-openstack-image-details").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">Download the latest image to your local machine:</p>');
                $("#cloudbreak-deployer-openstack-image-details").append('<pre><code style="font-size: 12pt;color:#333333">curl -L https://atlas.hashicorp.com/api/v1/artifacts/sequenceiq/cbd/openstack.image/' + data.version + '/file | tar -xz</code></pre>');
+               $("#import-the-image-into-your-openstack").append('<br>');
+               $("#import-the-image-into-your-openstack").append('<br>');
+               $("#import-the-image-into-your-openstack").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">Set the following environment variables for the OpenStack image import:</p>');
+               $("#import-the-image-into-your-openstack").append('<pre><code style="font-size: 12pt;color:#333333">export LATEST_IMAGE=</code>' + data.metadata.image_name + '.img</code></p>');
                });
 
                <!--OpenStack Cloudbreak-->

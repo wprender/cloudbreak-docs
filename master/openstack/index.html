@@ -258,9 +258,9 @@
     
         <li class="main active"><a href="#openstack-cloud-images">OpenStack Cloud Images</a></li>
         
-            <li><a href="#configured-image">Configured Image</a></li>
+            <li><a href="#cloudbreak-deployer-openstack-image-details">Cloudbreak Deployer OpenStack Image Details</a></li>
         
-            <li><a href="#import-the-image-into-openstack">Import the image into OpenStack</a></li>
+            <li><a href="#import-the-image-into-your-openstack">Import the image into your OpenStack</a></li>
         
     
         <li class="main "><a href="#openstack-setup">OpenStack Setup</a></li>
@@ -323,17 +323,13 @@
                     
 
 <h1 id="openstack-cloud-images">OpenStack Cloud Images</h1>
+<p>We have pre-built cloud image for OpenStack with the Cloudbreak Deployer pre-installed. Following steps will guide 
+you through the launch of the image then the needed configuration.</p>
 <blockquote>
-<p>This feature is currently <code>TECHNICAL PREVIEW</code> and is available for the <code>OpenStack Juno</code> release.</p>
+<p>Alternatively, instead of using the pre-built cloud image, you can install Cloudbreak Deployer on your own VM. See
+ <a href="../onprem/">install the Cloudbreak Deployer</a> for more information.</p>
 </blockquote>
-<p>We have pre-built cloud images for OpenStack with the Cloudbreak Deployer pre-installed. Following the steps will guide you through the provider specific configuration then launch.</p>
-<blockquote>
-<p>Alternatively, instead of using the pre-built cloud images, you can install Cloudbreak Deployer on your own VM. See <a href="../onprem/">install the Cloudbreak Deployer</a> for more information.</p>
-</blockquote>
-<h2 id="configured-image">Configured Image</h2>
-<p>You can download the latest pre-configured Cloudbreak Deployer image for OpenStack with the following script in the 
-following section.</p>
-<p>Please make sure you opened the following ports on your network:</p>
+<p>Please make sure you opened the following ports on your <a href="http://docs.openstack.org/openstack-ops/content/security_groups.html">security group</a>:</p>
 <ul>
 <li>SSH (22)</li>
 <li>Cloudbreak API (8080)</li>
@@ -341,28 +337,33 @@ following section.</p>
 <li>Cloudbreak GUI (3000)</li>
 <li>User authentication (3001)</li>
 </ul>
-<h3 id="cloudbreak-deployer-openstack-image-details">Cloudbreak Deployer OpenStack Image Details</h3>
-<h2 id="import-the-image-into-openstack">Import the image into OpenStack</h2>
+<h2 id="cloudbreak-deployer-openstack-image-details">Cloudbreak Deployer OpenStack Image Details</h2>
+<blockquote>
+<p><strong><a href="../onprem/#minimum-and-recommended-system-requirements">Minimum and Recommended VM requirements</a>:</strong> 4GB RAM, 10GB disk, 2 cores</p>
+</blockquote>
+<h2 id="import-the-image-into-your-openstack">Import the image into your OpenStack</h2>
 <pre><code>export OS_IMAGE_NAME=&quot;name_in_openstack&quot;
 export OS_USERNAME=...
 export OS_AUTH_URL=&quot;http://.../v2.0&quot;
 export OS_TENANT_NAME=...
-glance image-create --name &quot;$OS_IMAGE_NAME&quot; --file &quot;$LATEST_IMAGE&quot; --disk-format qcow2 --container-format bare --progress
 </code></pre>
 
+<p>Import the new image into your OpenStack:</p>
+<pre><code>glance image-create --name &quot;$OS_IMAGE_NAME&quot; --file &quot;$LATEST_IMAGE&quot; --disk-format qcow2 --container-format bare --progress
+</code></pre>
+
+<p><img alt="" src="../images/os-images.png" />
+<sub><em>Full size <a href="../images/os-images.png">here</a>.</em></sub></p>
 <h1 id="openstack-setup">OpenStack Setup</h1>
 <p><strong>Cloudbreak Deployer Highlights</strong></p>
 <ul>
-<li>The default SSH username for the OpenStack instances is <code>cloudbreak</code>.</li>
-<li>Cloudbreak Deployer location is <code>/home/cloudbreak/cloudbreak-deployment</code> on the launched <code>cbd</code> VM. This is the 
+<li>The default SSH username for the OpenStack instances is <code>centos</code>.</li>
+<li>Cloudbreak Deployer location is <code>/home/centos/cloudbreak-deployment</code> on the launched <code>cbd</code> VM. This is the 
       <code>cbd</code> root folder there.</li>
 <li>All <code>cbd</code> actions must be executed from the <code>cbd</code> folder.</li>
 <li>Most of the <code>cbd</code> commands require <code>root</code> permissions. So it would be worth if you apply the <code>sudo su</code>.</li>
 </ul>
 <h2 id="setup-cloudbreak-deployer">Setup Cloudbreak Deployer</h2>
-<blockquote>
-<p>This feature is currently <code>TECHNICAL PREVIEW</code> and is available for the <code>OpenStack Juno</code> release.</p>
-</blockquote>
 <p>If you already have Cloudbreak Deployer either by <a href="./">using the OpenStack Cloud Images</a> or by <a href="../onprem/">installing the Cloudbreak Deployer</a> manually on your own VM,
 you can start to setup the Cloudbreak Application with the deployer.</p>
 <p>Create and open the <code>cloudbreak-deployment</code> directory:</p>
@@ -432,7 +433,7 @@ You'll be asked to enter a passphrase, but you can leave it empty.
 <p>Later you'll need to pass the <code>.pub</code> file's contents to Cloudbreak and use the private part to SSH to the instances.</p>
 <h2 id="download-and-import-the-cloudbreak-image">Download and import the Cloudbreak image</h2>
 <h3 id="openstack-cloudbreak-image-details">OpenStack Cloudbreak image details</h3>
-<h3 id="import-the-image-into-openstack_1">Import the image into OpenStack</h3>
+<h3 id="import-the-image-into-openstack">Import the image into OpenStack</h3>
 <pre><code>export OS_IMAGE_NAME=&quot;name_in_openstack&quot;
 export OS_USERNAME=...
 export OS_AUTH_URL=&quot;http://.../v2.0&quot;
@@ -861,12 +862,16 @@ cluster create --description &quot;My first cluster&quot;
                $("#cloudbreak-deployer-aws-image-details").append('</table>');
                });
 
-               <!--OpenStack-->
+               <!--OpenStack CBD-->
                $.getJSON("../providers/openstack.json", function(data) {
                $("#cloudbreak-deployer-openstack-image-details").append('<br>');
                $("#cloudbreak-deployer-openstack-image-details").append('<br>');
-               $("#cloudbreak-deployer-openstack-image-details").append('<p style="font-size: 12pt"><code>LATEST_IMAGE:</code>' + data.metadata.image_name + '</p>');
+               $("#cloudbreak-deployer-openstack-image-details").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">Download the latest image to your local machine:</p>');
                $("#cloudbreak-deployer-openstack-image-details").append('<pre><code style="font-size: 12pt;color:#333333">curl -L https://atlas.hashicorp.com/api/v1/artifacts/sequenceiq/cbd/openstack.image/' + data.version + '/file | tar -xz</code></pre>');
+               $("#import-the-image-into-your-openstack").append('<br>');
+               $("#import-the-image-into-your-openstack").append('<br>');
+               $("#import-the-image-into-your-openstack").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">Set the following environment variables for the OpenStack image import:</p>');
+               $("#import-the-image-into-your-openstack").append('<pre><code style="font-size: 12pt;color:#333333">export LATEST_IMAGE=</code>' + data.metadata.image_name + '.img</code></p>');
                });
 
                <!--OpenStack Cloudbreak-->

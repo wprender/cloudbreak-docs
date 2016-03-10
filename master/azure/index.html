@@ -260,9 +260,9 @@
         
             <li><a href="#deploy-using-the-azure-portal">Deploy using the Azure Portal</a></li>
         
-            <li><a href="#validate-the-started-cloudbreak-deployer">Validate the started Cloudbreak Deployer</a></li>
-        
             <li><a href="#under-the-hood">Under the hood</a></li>
+        
+            <li><a href="#validate-the-started-cloudbreak-deployer">Validate the started Cloudbreak Deployer</a></li>
         
     
         <li class="main "><a href="#provisioning-prerequisites">Provisioning Prerequisites</a></li>
@@ -363,6 +363,18 @@ at:<code>http://&lt;VM Public IP&gt;:3000/</code><ul>
 </ul>
 </li>
 </ul>
+<h2 id="under-the-hood">Under the hood</h2>
+<p>Meanwhile Azure is creating the deployment, here is some information about what happens in the background:</p>
+<ul>
+<li>Start an instance from the official CentOS image<ul>
+<li>So no custom image copy is needed, which would take about 30 
+   minutes</li>
+</ul>
+</li>
+<li>Use <a href="https://github.com/Azure/azure-docker-extension">Docker VM Extension</a> to install Docker</li>
+<li>Use <a href="https://github.com/Azure/azure-linux-extensions/tree/master/CustomScript">CustomScript Extension</a> to install 
+Cloudbreak Deployer (<code>cbd</code>)</li>
+</ul>
 <p><strong>Cloudbreak Deployer Highlights</strong></p>
 <ul>
 <li>The default SSH username for the Azure VMs is <code>cloudbreak</code>.</li>
@@ -401,18 +413,6 @@ at:<code>http://&lt;VM Public IP&gt;:3000/</code><ul>
 <pre><code>cloudbreak@cbdeployerVM:/var/lib/cloudbreak-deployment# cbd logs cloudbreak
 </code></pre>
 
-<h2 id="under-the-hood">Under the hood</h2>
-<p>Meanwhile Azure is creating the deployment, here is some information about what happens in the background:</p>
-<ul>
-<li>Start an instance from the official CentOS image<ul>
-<li>So no custom image copy is needed, which would take about 30 
-   minutes</li>
-</ul>
-</li>
-<li>Use <a href="https://github.com/Azure/azure-docker-extension">Docker VM Extension</a> to install Docker</li>
-<li>Use <a href="https://github.com/Azure/azure-linux-extensions/tree/master/CustomScript">CustomScript Extension</a> to install 
-Cloudbreak Deployer (<code>cbd</code>)</li>
-</ul>
 <h1 id="provisioning-prerequisites">Provisioning Prerequisites</h1>
 <p>We use the new <a href="https://azure.microsoft.com/en-us/documentation/articles/resource-group-overview/">Azure ARM</a> in 
 order to launch clusters. In order to work we need to create an <strong>Active Directory</strong> application with the configured name and password and adds the permissions that are needed to call the Azure Resource Manager API. Cloudbreak Deployer automates all this for you.</p>
@@ -1354,12 +1354,16 @@ provisioning, we have some <a href="../operations/">interesting insights</a> for
                $("#cloudbreak-deployer-aws-image-details").append('</table>');
                });
 
-               <!--OpenStack-->
+               <!--OpenStack CBD-->
                $.getJSON("../providers/openstack.json", function(data) {
                $("#cloudbreak-deployer-openstack-image-details").append('<br>');
                $("#cloudbreak-deployer-openstack-image-details").append('<br>');
-               $("#cloudbreak-deployer-openstack-image-details").append('<p style="font-size: 12pt"><code>LATEST_IMAGE:</code>' + data.metadata.image_name + '</p>');
+               $("#cloudbreak-deployer-openstack-image-details").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">Download the latest image to your local machine:</p>');
                $("#cloudbreak-deployer-openstack-image-details").append('<pre><code style="font-size: 12pt;color:#333333">curl -L https://atlas.hashicorp.com/api/v1/artifacts/sequenceiq/cbd/openstack.image/' + data.version + '/file | tar -xz</code></pre>');
+               $("#import-the-image-into-your-openstack").append('<br>');
+               $("#import-the-image-into-your-openstack").append('<br>');
+               $("#import-the-image-into-your-openstack").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">Set the following environment variables for the OpenStack image import:</p>');
+               $("#import-the-image-into-your-openstack").append('<pre><code style="font-size: 12pt;color:#333333">export LATEST_IMAGE=</code>' + data.metadata.image_name + '.img</code></p>');
                });
 
                <!--OpenStack Cloudbreak-->

@@ -422,12 +422,16 @@ ldap_child.log  sssd_LDAP.log  sssd.log  sssd_nss.log  sssd_pam.log
                $("#cloudbreak-deployer-aws-image-details").append('</table>');
                });
 
-               <!--OpenStack-->
+               <!--OpenStack CBD-->
                $.getJSON("../providers/openstack.json", function(data) {
                $("#cloudbreak-deployer-openstack-image-details").append('<br>');
                $("#cloudbreak-deployer-openstack-image-details").append('<br>');
-               $("#cloudbreak-deployer-openstack-image-details").append('<p style="font-size: 12pt"><code>LATEST_IMAGE:</code>' + data.metadata.image_name + '</p>');
+               $("#cloudbreak-deployer-openstack-image-details").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">Download the latest image to your local machine:</p>');
                $("#cloudbreak-deployer-openstack-image-details").append('<pre><code style="font-size: 12pt;color:#333333">curl -L https://atlas.hashicorp.com/api/v1/artifacts/sequenceiq/cbd/openstack.image/' + data.version + '/file | tar -xz</code></pre>');
+               $("#import-the-image-into-your-openstack").append('<br>');
+               $("#import-the-image-into-your-openstack").append('<br>');
+               $("#import-the-image-into-your-openstack").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">Set the following environment variables for the OpenStack image import:</p>');
+               $("#import-the-image-into-your-openstack").append('<pre><code style="font-size: 12pt;color:#333333">export LATEST_IMAGE=</code>' + data.metadata.image_name + '.img</code></p>');
                });
 
                <!--OpenStack Cloudbreak-->
