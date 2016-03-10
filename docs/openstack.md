@@ -1,7 +1,7 @@
 # OpenStack Cloud Images
 
-We have pre-built cloud image for OpenStack with the Cloudbreak Deployer pre-installed. Following steps will guide 
-you through the launch of the image then the needed configuration.
+We have pre-built cloud images for OpenStack with the Cloudbreak Deployer pre-installed and with Cloudbreak 
+pre-installed. Following steps will guide you through the launch of the images then the needed configuration.
 
 > Alternatively, instead of using the pre-built cloud image, you can install Cloudbreak Deployer on your own VM. See
  [install the Cloudbreak Deployer](onprem.md) for more information.
@@ -14,26 +14,53 @@ Please make sure you opened the following ports on your [security group](http://
  * Cloudbreak GUI (3000)
  * User authentication (3001)
 
-## Cloudbreak Deployer OpenStack Image Details
+## OpenStack Image Details
 
-> **[Minimum and Recommended VM requirements](onprem.md#minimum-and-recommended-system-requirements):** 4GB RAM, 10GB disk, 2 cores
+### Cloudbreak Deployer image
 
-##Import the image into your OpenStack
+
+### Cloudbreak image
+
+
+## Import the image into your OpenStack
+
+### Cloudbreak Deployer import
+
 ```
-export OS_IMAGE_NAME="name_in_openstack"
-export OS_USERNAME=...
-export OS_AUTH_URL="http://.../v2.0"
-export OS_TENANT_NAME=...
+export OS_IMAGE_NAME=<add_a_name_to_your_new_image>
+export OS_USERNAME=<your_os_user_name>
+export OS_AUTH_URL=<http://.../v2.0>
+export OS_TENANT_NAME=<your_os_tenant_name>
 ```
 Import the new image into your OpenStack:
 ```
 glance image-create --name "$OS_IMAGE_NAME" --file "$LATEST_IMAGE" --disk-format qcow2 --container-format bare --progress
 ```
+>**NOTE** This image is needed to launch a machine on your OpenStack with Cloudbreak Deployer. You need to 
+[provide its name in the `Profile` file](openstack.md#openstack-setup).
+
+> **[Minimum and Recommended VM requirements](onprem.md#minimum-and-recommended-system-requirements):** 4GB RAM, 10GB disk, 2 cores
 
 ![](/images/os-images.png)
 <sub>*Full size [here](/images/os-images.png).*</sub>
 
-#OpenStack Setup
+### Cloudbreak import
+
+```
+export LATEST_IMAGE_NAME=<file_name_of_the_above_cloudbreak_image>
+export OS_USERNAME=<your_os_user_name>
+export OS_AUTH_URL=<http://.../v2.0>
+export OS_TENANT_NAME=<your_os_tenant_name>
+```
+Import the new image into your OpenStack:
+```
+glance image-create --name "$LATEST_IMAGE_NAME" --file "$LATEST_IMAGE" --disk-format qcow2 
+--container-format bare --progress
+```
+>**NOTE** This image is mandatory to provisioning on OpenStack with Cloudbreak application. You need to [provide its 
+name in the `Profile` file](openstack.md#openstack-specific-configuration).
+
+# OpenStack Setup
 
 **Cloudbreak Deployer Highlights**
 
@@ -45,33 +72,44 @@ glance image-create --name "$OS_IMAGE_NAME" --file "$LATEST_IMAGE" --disk-format
 
 ## Setup Cloudbreak Deployer
 
-If you already have Cloudbreak Deployer either by [using the OpenStack Cloud Images](openstack.md) or by [installing the Cloudbreak Deployer](onprem.md) manually on your own VM,
-you can start to setup the Cloudbreak Application with the deployer.
+You should already have the Cloudbreak Deployer either by [using the OpenStack Cloud Images](openstack.md) or by 
+[installing the Cloudbreak Deployer](onprem.md) manually on your own VM. If you have your own installed VM with 
 
-Create and open the `cloudbreak-deployment` directory:
+You can [connect to the previously created `cbd` VM](http://docs.openstack.org/user-guide/dashboard_launch_instances.html#connect-to-your-instance-by-using-ssh).
+
+  * Cloudbreak Deployer location is `/home/centos/cloudbreak-deployment/`.
+  * All `cbd` actions must be executed from the `cbd` folder.
+  * Most of the `cbd` commands require `root` permissions. So `sudo su` here would be worth for you. 
+
+Open the `cloudbreak-deployment` directory:
 
 ```
-cd /var/lib/cloudbreak-deployment
+cd cloudbreak-deployment
 ```
+This is the directory of the configuration files and the supporting binaries that will be downloaded by Cloudbreak 
+Deployer.
 
-This is the directory of the config files and the supporting binaries that will be downloaded by Cloudbreak deployer.
-
-###Initialize your Profile
+### Initialize your Profile
 
 First initialize your directory by creating a `Profile` file:
 
 ```
 cbd init
 ```
+It will create a `Profile` file in the current directory. Please open the `Profile` file then check the `PUBLIC_IP`. 
+This is mandatory, because of to can access the Cloudbreak UI (called Uluwatu). In some cases the `cbd` tool tries to 
+guess it. If `cbd` cannot get the IP address during the initialization, please set the appropriate value.
 
-It will create a `Profile` file in the current directory. Please edit the file - one of the required configurations is the `PUBLIC_IP`.
-This IP will be used to access the Cloudbreak UI (called Uluwatu). In some cases the `cbd` tool tries to guess it, if can't than will give a hint.
+### OpenStack specific configuration
 
-The other required configuration in the `Profile` is the name of the Cloudbreak image you uploaded to your OpenStack cloud.
+In order for Cloudbreak to be able to launch clusters on OpenStack on your behalf you need to set your Cloudbreak 
+image name in the `Profile` file.
 
 ```
-export CB_OPENSTACK_IMAGE="$OS_IMAGE_NAME"
+export CB_OPENSTACK_IMAGE="$LATEST_IMAGE_NAME"
 ```
+
+>**NOTE** The `LATEST_IMAGE_NAME` is the name of the [latest Cloudbreak image on your OpenStack](openstack.md#cloudbreak-import). 
 
 ###Start Cloudbreak
 
@@ -299,7 +337,7 @@ You can also use the two pre-defined security groups in Cloudbreak:
 
 If `Public in account` is checked all the users belonging to your account will be able to use this security group template to create clusters, but cannot delete or modify it.
 
-**Note** that the security groups are *not created* on OpenStack after the `Create Security Group` button is pushed, only after the cluster provisioning starts with the selected security group template.
+**NOTE** that the security groups are *not created* on OpenStack after the `Create Security Group` button is pushed, only after the cluster provisioning starts with the selected security group template.
 
 ## Cluster installation
 
@@ -344,7 +382,7 @@ If `Enable security` is checked as well, Cloudbreak will install Key Distributio
 
 After the `create and start cluster` button is pushed Cloudbreak will start to create resources on your OpenStack.
 
->**Important** Always use Cloudbreak to delete the cluster. If that fails for some reason, always try to delete via 
+>**IMPORTANT** Always use Cloudbreak to delete the cluster. If that fails for some reason, always try to delete via 
 OpenStack Dashboard.
 
 **Advanced options**:
@@ -382,7 +420,7 @@ Sometimes Cloudbreak cannot synchronize it's state with the cluster state at the
 
 Start the shell with `cbd util cloudbreak-shell`. This will launch the Cloudbreak shell inside a Docker container and you are ready to start using it.
 
-You have to copy files into the cbd working directory, which you would like to use from shell. For example if your `cbd` working directory is `~/prj/cbd` then copy your blueprint and public ssh key file into this directory. You can refer to these files with their names from the shell.
+You have to copy files into the `cbd` working directory, which you would like to use from shell. For example if your `cbd` working directory is `~/prj/cbd` then copy your blueprint and public ssh key file into this directory. You can refer to these files with their names from the shell.
 
 ### Create a cloud credential
 
@@ -544,7 +582,7 @@ Apply the following commands to stop the previously selected stack:
 cluster stop
 stack stop
 ```
->**Important!** The related cluster should be stopped before you can stop the stack.
+>**IMPORTANT!** The related cluster should be stopped before you can stop the stack.
 
 
 Apply the following command to **restart the previously selected and stopped stack**:
@@ -587,7 +625,7 @@ With Cloudbreak shell you can execute script files as well. A script file contai
 script <your script file>
 ```
 
-or with the `cbd util cloudbreak-shell-quiet` cbd command:
+or with the `cbd util cloudbreak-shell-quiet` `cbd` command:
 
 ```
 cbd util cloudbreak-shell-quiet < example.sh
@@ -595,7 +633,7 @@ cbd util cloudbreak-shell-quiet < example.sh
 
 ## Example
 
-The following example creates a hadoop cluster with `hdp-small-default` blueprint on `m1.large` instances with 2X100G attached disks on `osnetwork` network using `all-services-port` security group. You should copy your ssh public key file into your cbd working directory with name `id_rsa.pub` and change the `<...>` parts with your openstack credential and network details.
+The following example creates a hadoop cluster with `hdp-small-default` blueprint on `m1.large` instances with 2X100G attached disks on `osnetwork` network using `all-services-port` security group. You should copy your ssh public key file into your `cbd` working directory with name `id_rsa.pub` and change the `<...>` parts with your openstack credential and network details.
 
 ```
 credential create --OPENSTACK --name my-os-credential --description "credentail description" --userName <OpenStack username> --password <OpenStack password> --tenantName <OpenStack tenant name> --endPoint <OpenStack Identity Service (Keystone) endpoint> --sshKeyPath <path of your public SSH key file>

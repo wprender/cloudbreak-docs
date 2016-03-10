@@ -48,7 +48,7 @@ It will create a `Profile` file in the current directory. Please open the `Profi
 This is mandatory, because of to can access the Cloudbreak UI (called Uluwatu). In some cases the `cbd` tool tries to 
 guess it. If `cbd` cannot get the IP address during the initialization, please add set the appropriate value.
 
-### AWS Specific Configuration
+### AWS specific configuration
 
 **AWS Account Keys**
 

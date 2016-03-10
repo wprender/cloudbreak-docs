@@ -2,9 +2,9 @@
   "username": "sequenceiq",
   "name": "cbd",
   "tag": "sequenceiq/cbd",
-  "slug": "sequenceiq/cbd/openstack.yml/3",
-  "artifact_type": "openstack.yml",
-  "id": "openstack.yml",
+  "slug": "sequenceiq/cbd/openstack.image/3",
+  "artifact_type": "openstack.image",
+  "id": "cloudbreak-deployer-110-2016-01-22.img",
   "version": 3,
   "metadata": {
     "created": "2016-01-22 18:38:21 +0000",
@@ -14,5 +14,5 @@
     "cbd_version": "1.1.0",
     "yum_version_docker": "1.9.1"
   },
-  "file": false
+  "file": true
 }

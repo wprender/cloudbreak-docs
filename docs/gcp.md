@@ -16,7 +16,6 @@ Please make sure you added the following ports to your firewall rules:
 
 ## Cloudbreak Deployer GCP Image Details
 
-
 ### Import Cloudbreak Deployer Image
 
 You can import the latest Cloudbreak Deployer image on the [Google Developers Console](https://console.developers.google.com/) with the help
@@ -62,7 +61,8 @@ Open the `cloudbreak-deployment` directory:
 cd cloudbreak-deployment
 ```
 
-This is the directory of the config files and the supporting binaries that will be downloaded by Cloudbreak Deployer.
+This is the directory of the configuration files and the supporting binaries that will be downloaded by Cloudbreak 
+Deployer.
 
 ### Initialize your Profile
 
@@ -73,7 +73,7 @@ cbd init
 ```
 It will create a `Profile` file in the current directory. Please open the `Profile` file then check the `PUBLIC_IP`. 
 This is mandatory, because of to can access the Cloudbreak UI (called Uluwatu). In some cases the `cbd` tool tries to 
-guess it. If `cbd` cannot get the IP address during the initialization, please add set the appropriate value.
+guess it. If `cbd` cannot get the IP address during the initialization, please set the appropriate value.
 
 ## Start Cloudbreak Deployer
 
