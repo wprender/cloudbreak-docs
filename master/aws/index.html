@@ -346,18 +346,27 @@ Cloudbreak Deployer image based on your region at the <a href="https://aws.amazo
 <li>Most of the <code>cbd</code> commands require <code>root</code> permissions. So it would be worth if you apply the <code>sudo su</code>.</li>
 </ul>
 <h2 id="setup-cloudbreak-deployer">Setup Cloudbreak Deployer</h2>
+<p>You should already have the Cloudbreak Deployer either by <a href="./">using the AWS Cloud Images</a> or by <a href="../onprem/">installing the 
+Cloudbreak Deployer</a> manually on your own VM. If you have your own installed VM with </p>
+<p>You can <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstances.html">connect to the previously created <code>cbd</code> VM</a>.</p>
+<ul>
+<li>Cloudbreak Deployer location is <code>/home/ec2-user/cloudbreak-deployment/</code>.</li>
+<li>All <code>cbd</code> actions must be executed from the <code>cbd</code> root folder.</li>
+<li>Most of the <code>cbd</code> commands require <code>root</code> permissions. So <code>sudo su</code> here would be worth for you. </li>
+</ul>
 <p>Open the <code>cloudbreak-deployment</code> directory:</p>
 <pre><code>cd cloudbreak-deployment`
 </code></pre>
 
 <p>This is the directory of the configuration files and the supporting binaries for Cloudbreak Deployer.</p>
 <h3 id="initialize-your-profile">Initialize your Profile</h3>
+<p>First initialize <code>cbd</code> by creating a <code>Profile</code> file:</p>
 <pre><code>cbd init
 </code></pre>
 
 <p>It will create a <code>Profile</code> file in the current directory. Please open the <code>Profile</code> file then check the <code>PUBLIC_IP</code>. 
 This is mandatory, because of to can access the Cloudbreak UI (called Uluwatu). In some cases the <code>cbd</code> tool tries to 
-guess it. If <code>cbd</code> cannot get the IP address during the initialization, please add set the appropriate value.</p>
+guess it. If <code>cbd</code> cannot get the IP address during the initialization, please set the appropriate value.</p>
 <h3 id="aws-specific-configuration">AWS specific configuration</h3>
 <p><strong>AWS Account Keys</strong></p>
 <p>In order for Cloudbreak to be able to launch clusters on AWS on your behalf you need to set your AWS keys in the <code>Profile</code> file.
@@ -1254,10 +1263,10 @@ provisioning, we have some <a href="../operations/">interesting insights</a> for
                $("#cloudbreak-deployer-import").append('<br>');
                $("#cloudbreak-deployer-import").append('<br>');
                $("#cloudbreak-deployer-import").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">Set the following environment variables for the OpenStack image import:</p>');
-               $("#cloudbreak-deployer-import").append('<pre><code style="font-size: 12px;color:#333333">export LATEST_IMAGE=</code>' + data.id + '</code></p>');
+               $("#cloudbreak-deployer-import").append('<pre><code style="font-size: 12px;color:#333333">export CBD_LATEST_IMAGE=</code>' + data.id + '</code></p>');
                });
 
-               <!--OpenStack Cloudbreak-->
+               <!--OpenStack CB-->
                $.getJSON("../providers/openstack_cloudbreak.json", function(data) {
                $("#cloudbreak-image").append('<br>');
                $("#cloudbreak-image").append('<br>');
@@ -1266,7 +1275,7 @@ provisioning, we have some <a href="../operations/">interesting insights</a> for
                $("#cloudbreak-import").append('<br>');
                $("#cloudbreak-import").append('<br>');
                $("#cloudbreak-import").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">This is very similar to the Cloudbrek Deployer. Set the following environment variables for the OpenStack image import:</p>');
-               $("#cloudbreak-import").append('<pre><code style="font-size: 12px;color:#333333">export LATEST_IMAGE=</code>' + data.id + '</code></p>');
+               $("#cloudbreak-import").append('<pre><code style="font-size: 12px;color:#333333">export CB_LATEST_IMAGE=</code>' + data.id + '</code></p>');
                });
 
                <!--GCP-->

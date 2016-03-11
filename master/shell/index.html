@@ -324,10 +324,10 @@ All commands are <code>context aware</code> - they are available only when it ma
 </blockquote>
 <p><strong>Provider specific documentations</strong></p>
 <ul>
-<li><a href="aws_cb_shell.md">AWS</a></li>
-<li><a href="azure_cb_shell.md">Azure</a></li>
-<li><a href="gcp_cb_shell.md">GCP</a></li>
-<li><a href="openstack_cb_shell.md">OpenStack</a></li>
+<li><a href="../aws/#interactive-mode-cloudbreak-shell">AWS</a></li>
+<li><a href="../azure/#interactive-mode-cloudbreak-shell">Azure</a></li>
+<li><a href="../gcp/#interactive-mode-cloudbreak-shell">GCP</a></li>
+<li><a href="../openstack/#interactive-mode-cloudbreak-shell">OpenStack</a></li>
 </ul>
 <p>or you can find a more detailed documentation about Cloudbreak-shell in its <a href="https://github.com/sequenceiq/cloudbreak-shell">Github repositiry</a>.</p>
                     <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/shell.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
@@ -418,10 +418,10 @@ All commands are <code>context aware</code> - they are available only when it ma
                $("#cloudbreak-deployer-import").append('<br>');
                $("#cloudbreak-deployer-import").append('<br>');
                $("#cloudbreak-deployer-import").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">Set the following environment variables for the OpenStack image import:</p>');
-               $("#cloudbreak-deployer-import").append('<pre><code style="font-size: 12px;color:#333333">export LATEST_IMAGE=</code>' + data.id + '</code></p>');
+               $("#cloudbreak-deployer-import").append('<pre><code style="font-size: 12px;color:#333333">export CBD_LATEST_IMAGE=</code>' + data.id + '</code></p>');
                });
 
-               <!--OpenStack Cloudbreak-->
+               <!--OpenStack CB-->
                $.getJSON("../providers/openstack_cloudbreak.json", function(data) {
                $("#cloudbreak-image").append('<br>');
                $("#cloudbreak-image").append('<br>');
@@ -430,7 +430,7 @@ All commands are <code>context aware</code> - they are available only when it ma
                $("#cloudbreak-import").append('<br>');
                $("#cloudbreak-import").append('<br>');
                $("#cloudbreak-import").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">This is very similar to the Cloudbrek Deployer. Set the following environment variables for the OpenStack image import:</p>');
-               $("#cloudbreak-import").append('<pre><code style="font-size: 12px;color:#333333">export LATEST_IMAGE=</code>' + data.id + '</code></p>');
+               $("#cloudbreak-import").append('<pre><code style="font-size: 12px;color:#333333">export CB_LATEST_IMAGE=</code>' + data.id + '</code></p>');
                });
 
                <!--GCP-->

@@ -380,7 +380,7 @@ Cloudbreak Deployer (<code>cbd</code>)</li>
 <li>The default SSH username for the Azure VMs is <code>cloudbreak</code>.</li>
 <li>Cloudbreak Deployer location is <code>/var/lib/cloudbreak-deployment</code> on the launched <code>cbd</code> VM. This is the 
       <code>cbd</code> root folder there.</li>
-<li>All <code>cbd</code> actions must be executed from the <code>cbd</code> folder.</li>
+<li>All <code>cbd</code> actions must be executed from the <code>cbd</code> root folder.</li>
 <li>Most of the <code>cbd</code> commands require <code>root</code> permissions. So it would be worth if you apply the <code>sudo su</code>.</li>
 </ul>
 <h2 id="validate-the-started-cloudbreak-deployer">Validate the started Cloudbreak Deployer</h2>
@@ -409,10 +409,6 @@ Cloudbreak Deployer (<code>cbd</code>)</li>
 <blockquote>
 <p>Cloudbreak should start within a minute - you should see a line like this: <code>Started CloudbreakApplication in 36.823 seconds</code></p>
 </blockquote>
-<p>For example to investigate the Cloudbreak logs:</p>
-<pre><code>cloudbreak@cbdeployerVM:/var/lib/cloudbreak-deployment# cbd logs cloudbreak
-</code></pre>
-
 <h1 id="provisioning-prerequisites">Provisioning Prerequisites</h1>
 <p>We use the new <a href="https://azure.microsoft.com/en-us/documentation/articles/resource-group-overview/">Azure ARM</a> in 
 order to launch clusters. In order to work we need to create an <strong>Active Directory</strong> application with the configured name and password and adds the permissions that are needed to call the Azure Resource Manager API. Cloudbreak Deployer automates all this for you.</p>
@@ -1363,10 +1359,10 @@ provisioning, we have some <a href="../operations/">interesting insights</a> for
                $("#cloudbreak-deployer-import").append('<br>');
                $("#cloudbreak-deployer-import").append('<br>');
                $("#cloudbreak-deployer-import").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">Set the following environment variables for the OpenStack image import:</p>');
-               $("#cloudbreak-deployer-import").append('<pre><code style="font-size: 12px;color:#333333">export LATEST_IMAGE=</code>' + data.id + '</code></p>');
+               $("#cloudbreak-deployer-import").append('<pre><code style="font-size: 12px;color:#333333">export CBD_LATEST_IMAGE=</code>' + data.id + '</code></p>');
                });
 
-               <!--OpenStack Cloudbreak-->
+               <!--OpenStack CB-->
                $.getJSON("../providers/openstack_cloudbreak.json", function(data) {
                $("#cloudbreak-image").append('<br>');
                $("#cloudbreak-image").append('<br>');
@@ -1375,7 +1371,7 @@ provisioning, we have some <a href="../operations/">interesting insights</a> for
                $("#cloudbreak-import").append('<br>');
                $("#cloudbreak-import").append('<br>');
                $("#cloudbreak-import").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">This is very similar to the Cloudbrek Deployer. Set the following environment variables for the OpenStack image import:</p>');
-               $("#cloudbreak-import").append('<pre><code style="font-size: 12px;color:#333333">export LATEST_IMAGE=</code>' + data.id + '</code></p>');
+               $("#cloudbreak-import").append('<pre><code style="font-size: 12px;color:#333333">export CB_LATEST_IMAGE=</code>' + data.id + '</code></p>');
                });
 
                <!--GCP-->

@@ -453,10 +453,10 @@ provider specific guides to configure and launch <strong>cbd (Cloudbreak Deploye
                $("#cloudbreak-deployer-import").append('<br>');
                $("#cloudbreak-deployer-import").append('<br>');
                $("#cloudbreak-deployer-import").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">Set the following environment variables for the OpenStack image import:</p>');
-               $("#cloudbreak-deployer-import").append('<pre><code style="font-size: 12px;color:#333333">export LATEST_IMAGE=</code>' + data.id + '</code></p>');
+               $("#cloudbreak-deployer-import").append('<pre><code style="font-size: 12px;color:#333333">export CBD_LATEST_IMAGE=</code>' + data.id + '</code></p>');
                });
 
-               <!--OpenStack Cloudbreak-->
+               <!--OpenStack CB-->
                $.getJSON("../providers/openstack_cloudbreak.json", function(data) {
                $("#cloudbreak-image").append('<br>');
                $("#cloudbreak-image").append('<br>');
@@ -465,7 +465,7 @@ provider specific guides to configure and launch <strong>cbd (Cloudbreak Deploye
                $("#cloudbreak-import").append('<br>');
                $("#cloudbreak-import").append('<br>');
                $("#cloudbreak-import").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">This is very similar to the Cloudbrek Deployer. Set the following environment variables for the OpenStack image import:</p>');
-               $("#cloudbreak-import").append('<pre><code style="font-size: 12px;color:#333333">export LATEST_IMAGE=</code>' + data.id + '</code></p>');
+               $("#cloudbreak-import").append('<pre><code style="font-size: 12px;color:#333333">export CB_LATEST_IMAGE=</code>' + data.id + '</code></p>');
                });
 
                <!--GCP-->
@@ -480,6 +480,6 @@ provider specific guides to configure and launch <strong>cbd (Cloudbreak Deploye
 </html>
 
 <!--
-MkDocs version : 0.14.0
-Build Date UTC : 2016-03-10 15:46:37.845115
+MkDocs version : 0.15.3
+Build Date UTC : 2016-03-11 05:59:04.779502
 -->

@@ -350,9 +350,9 @@ Cloudbreak Deployer image at the <a href="https://console.developers.google.com/
 <p><strong>Cloudbreak Deployer Highlights</strong></p>
 <ul>
 <li>The default SSH username for the GCP instances is <code>cloudbreak</code>.</li>
-<li>Cloudbreak Deployer location is <code>/home/centos/cloudbreak-deployment/</code> on the launched <code>cbd</code> VM. This is the 
+<li>Cloudbreak Deployer location is <code>/home/cloudbreak/cloudbreak-deployment/</code> on the launched <code>cbd</code> VM. This is the 
       <code>cbd</code> root folder there.</li>
-<li>All <code>cbd</code> actions must be executed from the <code>cbd</code> folder.</li>
+<li>All <code>cbd</code> actions must be executed from the <code>cbd</code> root folder.</li>
 <li>Most of the <code>cbd</code> commands require <code>root</code> permissions. So it would be worth if you apply the <code>sudo su</code>.</li>
 </ul>
 <h2 id="setup-cloudbreak-deployer">Setup Cloudbreak Deployer</h2>
@@ -360,7 +360,7 @@ Cloudbreak Deployer image at the <a href="https://console.developers.google.com/
 Cloudbreak Deployer</a> manually on your own VM. If you have your own installed VM with </p>
 <p>You have several opportunities to <a href="https://cloud.google.com/compute/docs/instances/connecting-to-instance">connect to the previously created <code>cbd</code> VM</a>.</p>
 <ul>
-<li>Cloudbreak Deployer location is <code>/home/centos/cloudbreak-deployment/</code>.</li>
+<li>Cloudbreak Deployer location is <code>/home/cloudbreak/cloudbreak-deployment/</code>.</li>
 <li>All <code>cbd</code> actions must be executed from the <code>cbd</code> folder.</li>
 <li>Most of the <code>cbd</code> commands require <code>root</code> permissions. So <code>sudo su</code> here would be worth for you. </li>
 </ul>
@@ -368,8 +368,7 @@ Cloudbreak Deployer</a> manually on your own VM. If you have your own installed 
 <pre><code>cd cloudbreak-deployment
 </code></pre>
 
-<p>This is the directory of the configuration files and the supporting binaries that will be downloaded by Cloudbreak 
-Deployer.</p>
+<p>This is the directory of the configuration files and the supporting binaries for Cloudbreak Deployer.</p>
 <h3 id="initialize-your-profile">Initialize your Profile</h3>
 <p>First initialize <code>cbd</code> by creating a <code>Profile</code> file:</p>
 <pre><code>cbd init
@@ -1246,10 +1245,10 @@ provisioning, we have some <a href="../operations/">interesting insights</a> for
                $("#cloudbreak-deployer-import").append('<br>');
                $("#cloudbreak-deployer-import").append('<br>');
                $("#cloudbreak-deployer-import").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">Set the following environment variables for the OpenStack image import:</p>');
-               $("#cloudbreak-deployer-import").append('<pre><code style="font-size: 12px;color:#333333">export LATEST_IMAGE=</code>' + data.id + '</code></p>');
+               $("#cloudbreak-deployer-import").append('<pre><code style="font-size: 12px;color:#333333">export CBD_LATEST_IMAGE=</code>' + data.id + '</code></p>');
                });
 
-               <!--OpenStack Cloudbreak-->
+               <!--OpenStack CB-->
                $.getJSON("../providers/openstack_cloudbreak.json", function(data) {
                $("#cloudbreak-image").append('<br>');
                $("#cloudbreak-image").append('<br>');
@@ -1258,7 +1257,7 @@ provisioning, we have some <a href="../operations/">interesting insights</a> for
                $("#cloudbreak-import").append('<br>');
                $("#cloudbreak-import").append('<br>');
                $("#cloudbreak-import").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">This is very similar to the Cloudbrek Deployer. Set the following environment variables for the OpenStack image import:</p>');
-               $("#cloudbreak-import").append('<pre><code style="font-size: 12px;color:#333333">export LATEST_IMAGE=</code>' + data.id + '</code></p>');
+               $("#cloudbreak-import").append('<pre><code style="font-size: 12px;color:#333333">export CB_LATEST_IMAGE=</code>' + data.id + '</code></p>');
                });
 
                <!--GCP-->

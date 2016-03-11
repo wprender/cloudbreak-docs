@@ -4,17 +4,21 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        
-        
-        <link rel="shortcut icon" href="./img/favicon.ico">
+        {% if page_description %}<meta name="description" content="{{ page_description }}">{% endif %}
+        {% if site_author %}<meta name="author" content="{{ site_author }}">{% endif %}
+        {% if canonical_url %}<link rel="canonical" href="{{ canonical_url }}">{% endif %}
+        {% if favicon %}<link rel="shortcut icon" href="{{ base_url }}/{{ favicon }}">
+        {% else %}<link rel="shortcut icon" href="{{ base_url }}/img/favicon.ico">{% endif %}
 
-	<title>Cloudbreak 1.2.0</title>
+	<title>{% if page_title %}{{ page_title }} - {% endif %}{{ site_name }}</title>
 
-        <link href="./css/bootstrap-custom.min.css" rel="stylesheet">
-        <link href="./css/font-awesome-4.0.3.css" rel="stylesheet">
-        <link href="./css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="./css/highlight.css">
+        <link href="{{ base_url }}/css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="{{ base_url }}/css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link href="{{ base_url }}/css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="{{ base_url }}/css/highlight.css">
+        {%- for path in extra_css %}
+        <link href="{{ path }}" rel="stylesheet">
+        {%- endfor %}
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -22,260 +26,50 @@
             <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
 
-        
+        {% if google_analytics %}
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', '{{ google_analytics[0] }}', '{{ google_analytics[1] }}');
+            ga('send', 'pageview');
+        </script>
+        {% endif %}
     </head>
 
-    <body>
+    <body{% if current_page and current_page.is_homepage %} class="homepage"{% endif %}>
 
-        <div class="navbar navbar-default navbar-fixed-top" role="navigation" background="red">
-    <div class="container">
-
-        <!-- Collapsed navigation -->
-        <div class="navbar-header">
-            
-            <!-- Expander button -->
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            
-
-            <!-- Main title -->
-            <img class="navbar-logo" src="http://docs.hortonworks.com/HDPDocuments/Ambari-2.1.0.0/bk_Installing_HDP_AMB/common/images/hortonworks-logo.png" alt="Hortonworks Documentation" width="132" height="52">
-            <a class="navbar-brand" href=".">Cloudbreak 1.2.0</a>
-        </div>
-
-        <!-- Expanded navigation -->
-        <div class="navbar-collapse collapse">
-            
-                <!-- Main navigation -->
-                <ul class="nav navbar-nav">
-                
-                
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Home <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                        
-                            
-<li >
-    <a href=".">Introduction</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="architecture/">Architecture</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="onprem/">Installation</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="releasenotes/">Release Notes</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="changelog/">Change Log</a>
-</li>
-
-                        
-                        </ul>
-                    </li>
-                
-                
-                
-                    <li >
-                        <a href="aws/">AWS</a>
-                    </li>
-                
-                
-                
-                    <li >
-                        <a href="azure/">Azure</a>
-                    </li>
-                
-                
-                
-                    <li >
-                        <a href="gcp/">GCP</a>
-                    </li>
-                
-                
-                
-                    <li >
-                        <a href="openstack/">OpenStack</a>
-                    </li>
-                
-                
-                
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reference <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                        
-                            
-<li >
-    <a href="api/">API</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="shell/">CLI/Shell</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="ui_account/">Account Management</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="periscope/">Auto-Scaling</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="sssd/">SSSD configuration</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="recipes/">Recipes</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="blueprints/">Blueprints</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="topologies/">Platforms/Topologies</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="kerberos/">Kerberos</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="spi/">SPI</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="operations/">Operations</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="database/">Migration</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="configuration/">Advanced Configuration</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="development/">Development</a>
-</li>
-
-                        
-                        </ul>
-                    </li>
-                
-                
-                </ul>
-            
-
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Versions <b class="caret"></b></a>
-                    <ul class="dropdown-menu" id="versions-dropdown">
-                    </ul>
-                </li>
-                
-                <li>
-                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
-                        <i class="fa fa-search"></i> Search
-                    </a>
-                </li>
-                
-                    <li class="disabled">
-                        <a rel="next" >
-                            <i class="fa fa-arrow-left"></i> Previous
-                        </a>
-                    </li>
-                    <li class="disabled">
-                        <a rel="prev" >
-                            Next <i class="fa fa-arrow-right"></i>
-                        </a>
-                    </li>
-                
-                
-                    <li>
-                        <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/" >
-                            
-                                <i class="fa fa-github"></i>
-                            
-                            GitHub
-                        </a>
-                    </li>
-                
-            </ul>
-        </div>
-    </div>
-</div>
+        {% include "nav.html" %}
 
         <div class="container">
-            
-
-    <div class="row-fluid">
-      <div id="main-content" class="span12">
-        <h1 id="404-page-not-found" style="text-align: center">404</h1>
-        <p style="text-align: center"><strong>Page not found</strong></p>
-      </div>
-    </div>
-
-
+            {% block content %}
+                <div class="col-md-3">{% include "toc.html" %}</div>
+                <div class="col-md-9" role="main">
+                    {% include "content.html" %}
+                    <a href="{{ repo_url }}/blob/master/docs/{{ current_page.input_path }}" ><i class="fa fa-github"></i> Edit on GitHub </a>
+                </div>
+            {% endblock %}
         </div>
 
         <footer class="col-md-12">
             <hr>
-            
+            {% if copyright %}
+                <p>{{ copyright }}</p>
+            {% endif %}
             <center>Documentation built with <a href="https://gliderlabs.com/pagebuilder">Pagebuilder</a>.</center>
         </footer>
 
-        <script src="./js/jquery-1.10.2.min.js"></script>
-        <script src="./js/bootstrap-3.0.3.min.js"></script>
-        <script src="./js/highlight.pack.js"></script>
-        <script>var base_url = '.';</script>
-        <script data-main="./mkdocs/js/search.js" src="./mkdocs/js/require.js"></script>
-        <script src="./js/base.js"></script>
+        <script src="{{ base_url }}/js/jquery-1.10.2.min.js"></script>
+        <script src="{{ base_url }}/js/bootstrap-3.0.3.min.js"></script>
+        <script src="{{ base_url }}/js/highlight.pack.js"></script>
+        <script>var base_url = '{{ base_url }}';</script>
+        <script data-main="{{ base_url }}/mkdocs/js/search.js" src="{{ base_url }}/mkdocs/js/require.js"></script>
+        <script src="{{ base_url }}/js/base.js"></script>
+        {%- for path in extra_javascript %}
+        <script src="{{ path }}"></script>
+        {%- endfor %}
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
             <div class="modal-dialog">
@@ -304,10 +98,10 @@
 
          <script>
            $( document ).ready(function() {
-               $.getJSON("http://sequenceiq.com/cloudbreak-docs/versions.json", function(data) {
-               $("#versions-dropdown").append('<li><a href="http://sequenceiq.com/cloudbreak-docs/latest">latest ('+data.latest+')</a></li>');
+               $.getJSON("{{ config.site_url }}/versions.json", function(data) {
+               $("#versions-dropdown").append('<li><a href="{{ config.site_url }}/latest">latest ('+data.latest+')</a></li>');
                 $.each(data.versions, function( index, value ) {
-                  $("#versions-dropdown").append('<li><a href="http://sequenceiq.com/cloudbreak-docs/'+value+'">'+value+'</a></li>');
+                  $("#versions-dropdown").append('<li><a href="{{ config.site_url }}/'+value+'">'+value+'</a></li>');
                 });
                });
 
@@ -372,3 +166,9 @@
          </script>
     </body>
 </html>
+{% if current_page and current_page.is_homepage %}
+<!--
+MkDocs version : {{ mkdocs_version }}
+Build Date UTC : {{ build_date_utc }}
+-->
+{% endif %}
