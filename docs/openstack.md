@@ -245,42 +245,78 @@ If `Public in account` is checked all the users belonging to your account will b
 
 **Networks**
 
-Manage networks allows you to create or reuse existing networks and configure them.
+Your clusters can be created in their own **networks** or in one of your already existing one. If you choose an 
+existing network, it is possible to create a new subnet within the network. The subnet's IP range must be defined in 
+the `Subnet (CIDR)` field using the general CIDR notation. You can read more about [OpenStack Networks and 
+theirs Subnets](http://docs.openstack.org/user-guide/cli_create_and_manage_networks.html).
 
-`Name:` name of the network
+*Custom OpenStack Network*
 
-`Description:` short description of your network
+If you'd like to deploy a cluster to your OpenStack network you'll have to **create a new network** template on the 
+**manage networks** panel on the Cloudbreak Dashboard.
 
-`Subnet (CIDR):` a subnet with CIDR block under the given `public network`
+>"Before launching an instance, you must create the necessary virtual network infrastructure...an instance uses a 
+public provider virtual network that connects to the physical network infrastructure...This network includes a DHCP 
+server that provides IP addresses to instances...The admin or other privileged user must create this network because 
+it connects directly to the physical network infrastructure."
 
-`Public network ID:` id of an OpenStack public network
+>Here you can read more about OpenStack [virtual network](http://docs.openstack.org/liberty/install-guide-rdo/launch-instance.html#create-virtual-networks) and [public provider network](http://docs.openstack.org/liberty/install-guide-rdo/launch-instance-networks-public.html).
 
-Optional parameters (reuse existing network and subnet, in case of existing subnet all 3 parameters must be provided, with new subnet only 2 required):
+To create a new OpenStack network follow these steps:
 
-`Virtual Network Identifier:` provide an id of an existing virtual network to reuse
+  1. Fill out the new network `Name`
+    - The name must be between 5 and 100 characters long and must satisfy the followings:
+      - Starts with a lowercase alphabetic character
+      - Can contain lowercase alphanumeric and hyphens only
+  2. Copy your OpenStack public network's subnet with CIDR block to the `Subnet (CIDR)` field
+  3. Copy your OpenStack public network ID to the `Public Network ID` field
 
-`Router Identifier:` id of the router which belongs to the existing virtual network (must be provided in case of existing virtual network)
+Any other parameter is optional here:
 
-`Subnet Identifier:` id of a subnet within the existing virtual network, the provided subnet CIDR will be ignored and the existing subnet's CIDR range will be used (leave it blank if you'd like to create a new subnet within the virtual network with the provided subnet CIDR range)
+`Virtual Network Identifier` This must be an ID of an existing OpenStack virtual network.
 
-`Public in account:` share it with others in the account
+`Router Identifier` Your virtual network router ID (must be provided in case of existing virtual network).
+
+`Subnet Identifier(optional)` Your subnet ID within your virtual network. If the identifier is provided, the subnet 
+CIDR will be ignored and the existing subnet's CIDR range will be used. Leave it blank if you'd like to create a new 
+subnet within the virtual network with the provided subnet CIDR range.
+
+
+>**IMPORTANT**
+
+>- In case of existing subnet all three parameters must be provided, with new subnet only two are required.
+- Please make sure the defined subnet here doesn't overlap with any of your already deployed subnet in the
+ network, because of the validation only happens after the cluster creation starts.
+- In case of existing subnet make sure you have enough room within your network space for the new instances. The 
+provided subnet CIDR will be ignored, but a proper CIDR range will be used.
+
+If `Public in account` is checked all the users belonging to your account will be able to use this network template 
+to create clusters, but cannot delete it.
+
+>**NOTE** The new networks are created on OpenStack only after the the cluster provisioning starts with the selected 
+network template.
+
+![](/images/os-network.png)
+<sub>*Full size [here](/images/os-network.png).*</sub>
 
 **Security groups**
 
-They describe the allowed inbound traffic to the instances in the cluster.
-Currently only one security group template can be selected for a Cloudbreak cluster and all the instances have a public IP address so all the instances in the cluster will belong to the same security group.
-This may change in a later release.
+Security group templates are very similar to the [Security Groups on OpenStack](http://docs.openstack.org/openstack-ops/content/security_groups.html). **They describe the allowed inbound traffic 
+to the instances in the cluster.** Currently only one security group template can be selected for a Cloudbreak cluster 
+and all the instances have a public IP address so all the instances in the cluster will belong to the same security 
+group. This may change in a later release.
 
-You can define your own security group by adding all the ports, protocols and CIDR range you'd like to use. 443 needs to be there in every security group otherwise Cloudbreak won't be able to communicate with the provisioned cluster. The rules defined here doesn't need to contain the internal rules, those are automatically added by Cloudbreak to the security group on OpenStack.
+*Default Security Group*
 
-You can also use the two pre-defined security groups in Cloudbreak:
+You can also use the two pre-defined security groups in Cloudbreak.
 
-`only-ssh-and-ssl:` all ports are locked down (you can't access Hadoop services outside of the Virtual Private Cloud) but
+`only-ssh-and-ssl:` all ports are locked down except for SSH and gateway HTTPS (you can't access Hadoop services 
+outside of the network):
 
 * SSH (22)
 * HTTPS (443)
 
-`all-services-port:` all Hadoop services + SSH/gateway HTTPS are accessible by default:
+`all-services-port:` all Hadoop services and SSH, gateway HTTPS are accessible by default:
 
 * SSH (22)
 * HTTPS (443)
@@ -312,55 +348,65 @@ You can also use the two pre-defined security groups in Cloudbreak:
 * Kibana (3080)
 * Elasticsearch (9200)
 
-If `Public in account` is checked all the users belonging to your account will be able to use this security group template to create clusters, but cannot delete or modify it.
+*Custom Security Group*
 
-**NOTE** that the security groups are *not created* on OpenStack after the `Create Security Group` button is pushed, only after the cluster provisioning starts with the selected security group template.
+You can define your own security group by adding all the ports, protocols and CIDR range you'd like to use. The rules
+ defined here doesn't need to contain the internal rules, those are automatically added by Cloudbreak to the security
+  group on OpenStack.
+
+>**IMPORTANT** 443 needs to be there in every security group otherwise Cloudbreak won't be able to communicate with the 
+provisioned cluster.
+
+If `Public in account` is checked all the users belonging to your account will be able to use this security group 
+template to create clusters, but cannot delete it.
+
+>**NOTE** The security groups are created on OpenStack only after the cluster provisioning starts with the selected 
+security group template.
+
+![](/images/ui-secgroup_v3.png)
+<sub>*Full size [here](/images/ui-secgroup_v3.png).*</sub>
 
 ## Defining cluster services
-
-**Manage blueprints**
-
-Blueprints are your declarative definition of a Hadoop cluster.
-
-`Name:` name of your blueprint
-
-`Description:` short description of your blueprint
-
-`Source URL:` you can add a blueprint by pointing to a URL. As an example you can use this [blueprint](https://github.com/sequenceiq/ambari-rest-client/raw/1.6.0/src/main/resources/blueprints/multi-node-hdfs-yarn).
-
-`Manual copy:` you can copy paste your blueprint in this text area
-
-`Public in account:` share it with others in the account
-
-
-This section describes
 
 **Blueprints**
 
 Blueprints are your declarative definition of a Hadoop cluster. These are the same blueprints that are [used by Ambari](https://cwiki.apache.org/confluence/display/AMBARI/Blueprints).
 
-You can use the 3 default blueprints pre-defined in Cloudbreak or you can create your own.
-Blueprints can be added from an URL or the whole JSON can be copied to the `Manual copy` field.
+You can use the 3 default blueprints pre-defined in Cloudbreak or you can create your own ones.
+Blueprints can be added from file, URL (an [example blueprint](https://raw.githubusercontent.com/sequenceiq/cloudbreak/master/integration-test/src/main/resources/blueprint/multi-node-hdfs-yarn.bp)) or the 
+whole JSON can be written in the `JSON text` box.
 
-The hostgroups added in the JSON will be mapped to a set of instances when starting the cluster and the services and components defined in the hostgroup will be installed on the corresponding nodes.
-It is not necessary to define all the configuration fields in the blueprints - if a configuration is missing, Ambari will fill that with a default value.
-The configurations defined in the blueprint can also be modified later from the Ambari UI.
+The host groups in the JSON will be mapped to a set of instances when starting the cluster. Besides this the services and
+ components will also be installed on the corresponding nodes. Blueprints can be modified later from the Ambari UI.
+ 
+>**NOTE** Not necessary to define all the configuration in the blueprint. If a configuration is missing, Ambari will 
+fill that with a default value.
 
-If `Public in account` is checked all the users belonging to your account will be able to use this blueprint to create clusters, but cannot delete or modify it.
+If `Public in account` is checked all the users belonging to your account will be able to use this blueprint to 
+create clusters, but cannot delete or modify it.
 
-A blueprint can be exported from a running Ambari cluster that can be reused in Cloudbreak with slight modifications.
-There is no automatic way to modify an exported blueprint and make it instantly usable in Cloudbreak, the modifications have to be done manually.
-When the blueprint is exported some configurations will have for example hardcoded domain names, or memory configurations that won't be applicable to the Cloudbreak cluster.
+![](/images/ui-blueprints_v3.png)
+<sub>*Full size [here](/images/ui-blueprints_v3.png).*</sub>
+
+**A blueprint can be exported from a running Ambari cluster that can be reused in Cloudbreak with slight 
+modifications.**
+There is no automatic way to modify an exported blueprint and make it instantly usable in Cloudbreak, the 
+modifications have to be done manually.
+When the blueprint is exported some configurations are hardcoded for example domain names, memory configurations...etc. that won't be applicable to the Cloudbreak cluster.
 
 **Cluster customization**
 
-Sometimes it can be useful to define some custom scripts that run during cluster creation and add some additional functionality.
-For example it can be a service you'd like to install but it's not supported by Ambari or some script that automatically downloads some data to the necessary nodes.
-The most notable example is Ranger setup: it has a prerequisite of a running database when Ranger Admin is installing.
-A PostgreSQL database can be easily started and configured with a recipe before the blueprint installation starts.
+Sometimes it can be useful to **define some custom scripts so called Recipes in Cloudbreak** that run during cluster 
+creation and add some additional functionality.
 
-To learn more about these so called *Recipes*, and to check out the Ranger database recipe, take a look at the [Cluster customization](recipes.md) part of the documentation.
+For example it can be a service you'd like to install but it's not supported by Ambari or some script that 
+automatically downloads some data to the necessary nodes.
+The most **notable example is Ranger setup**:
 
+- It has a prerequisite of a running database when Ranger Admin is installing.
+- A PostgreSQL database can be easily started and configured with a recipe before the blueprint installation starts.
+
+To learn more about these and check the Ranger recipe out, take a look at the [Cluster customization](recipes.md).
 
 ## Cluster deployment
 
