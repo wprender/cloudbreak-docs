@@ -278,7 +278,7 @@ your Cloudbreak credential.
 
 To create a new AZURE credential follow these steps:
 
-  - Fill out the new credential `name`
+  - Fill out the new credential `Name`
     * Only alphanumeric and lowercase characters (min 5, max 100 characters) can be applied
   - Copy your AZURE Subscription ID to the `Subscription Id` field
 

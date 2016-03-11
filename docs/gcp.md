@@ -186,7 +186,7 @@ Cloudbreak Dashboard.
 
 To create a new GCP credential follow these steps:
 
-  1. Fill out the new credential `name`
+  1. Fill out the new credential `Name`
     - Only alphanumeric and lowercase characters (min 5, max 100 characters) can be applied
   2. Copy your GCP project ID to the `Project Id` field
   3. Copy your GCP Service Account email address to the `Service Account Email Address` field

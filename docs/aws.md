@@ -228,7 +228,7 @@ Cloudbreak Dashboard.
 To create a new AWS credential follow these steps:
 
   1. Select the credential type. For instance, select the `Role Based`
-  2. Fill out the new credential `name`
+  2. Fill out the new credential `Name`
     - Only alphanumeric and lowercase characters (min 5, max 100 characters) can be applied
   3. Copy your AWS IAM role's Amazon Resource Name (ARN) to the `IAM Role ARN` field
   4. Copy your SSH public key to the `SSH public key` field

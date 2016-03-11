@@ -185,7 +185,7 @@ This description details the OpenStack setup - if you'd like to use a different 
 
 This document explains the four steps that need to be followed to create Cloudbreak clusters from the UI:
 
-- connect your AWS account with Cloudbreak
+- connect your OpenStack account with Cloudbreak
 - create some template resources on the UI that describe the infrastructure of your clusters
 - create a blueprint that describes the HDP services in your clusters and add some recipes for customization
 - launch the cluster itself based on these resources
@@ -194,38 +194,46 @@ This document explains the four steps that need to be followed to create Cloudbr
 
 ## Setting up OpenStack credentials
 
-You can now log into the Cloudbreak application at http://PUBLIC_IP:3000. Once logged in go to **Manage credentials**. Using manage credentials will  link your cloud account with the Cloudbreak account.
+Cloudbreak works by connecting your OpenStack account through so called *Credentials*, and then uses these credentials
+ to create resources on your behalf. The credentials can be configured on the **manage credentials** panel on the 
+Cloudbreak Dashboard.
 
-`Name:` name of your credential
+To create a new OpenStack credential follow these steps:
 
-`Description:` short description of your linked credential
+  1. Select the [`Keystone Version`](http://docs.openstack.org/developer/keystone/http-api.html). For instance, select the `v2`
+  2. Fill out the new credential `Name`
+    - Only alphanumeric and lowercase characters (min 5, max 100 characters) can be applied
+  3. Copy your OpenStack user name to the `User` field
+  4. Copy your OpenStack user password to the `Password` field
+  5. Copy your OpenStack tenant name to the `Tenant Name` field
+  6. Copy your OpenStack identity service (Keystone) endpoint (e.g. http://PUBLIC_IP:5000/v2.0) to the `Endpoint` field
+  7. Copy your SSH public key to the `SSH public key` field
+    - The SSH public key must be in OpenSSH format and it's private keypair can be used later to [SSH onto every 
+    instance](operations.md#ssh-to-the-hosts) of every cluster you'll create with this credential.
+    - The **SSH username** for the OpenStack instances is **centos**.
 
-`User:` your OpenStack user
+>Any other parameter is optional here.
 
-`Password:` your password
+>`Public in account` means that all the users belonging to your account will be able to use this credential to create 
+clusters, but cannot delete it.
 
-`Tenant Name:` OpenStack tenant name
-
-`Endpoint:` Openstack Identity Service (Keystone) endpont (e.g. http://PUBLIC_IP:5000/v2.0)
-
-`SSH public key:` the SSH public certificate in OpenSSH format that's private keypair can be used to [log into the launched instances](http://sequenceiq.com/cloudbreak-deployer/1.1.0/insights/#ssh-to-the-host) later with the **ssh username: centos**
-
-`Public in account:` share it with others in the account
-
+![](/images/os-credential.png)
+<sub>*Full size [here](/images/os-credential.png).*</sub>
 
 ## Infrastructure templates
 
-After your OpenStack is linked to Cloudbreak you can start creating templates that describe your clusters' infrastructure:
+After your OpenStack account is linked to Cloudbreak you can start creating resource templates that describe your 
+clusters' infrastructure:
 
-- resources
+- templates
 - networks
 - security groups
 
-When you create a template, Cloudbreak *doesn't make any requests* to OpenStack.
-Resources are only created on OpenStack after the `create cluster` button is pushed.
-These templates are saved to Cloudbreak's database and can be reused with multiple clusters to describe the infrastructure.
+When you create one of the above resource, **Cloudbreak does not make any requests to OpenStack. Resources are only 
+created on OpenStack after the `create cluster` button has pushed.** These templates are saved to Cloudbreak's 
+database and can be reused with multiple clusters to describe the infrastructure.
 
-**Manage resources**
+**Templates**
 
 Using manage resources you can create infrastructure templates. Templates describes the infrastructure where the HDP cluster will be provisioned. We support heterogenous clusters - this means that one cluster can be built by combining different templates.
 
