@@ -212,7 +212,7 @@ To create a new OpenStack credential follow these steps:
     instance](operations.md#ssh-to-the-hosts) of every cluster you'll create with this credential.
     - The **SSH username** for the OpenStack instances is **centos**.
 
->Any other parameter is optional here.
+>Any other parameter is optional here. You can read more about Keystone v3 [here](http://developer.openstack.org/api-ref-identity-v3.html).
 
 >`Public in account` means that all the users belonging to your account will be able to use this credential to create 
 clusters, but cannot delete it.
@@ -235,35 +235,15 @@ database and can be reused with multiple clusters to describe the infrastructure
 
 **Templates**
 
-Using manage resources you can create infrastructure templates. Templates describes the infrastructure where the HDP cluster will be provisioned. We support heterogenous clusters - this means that one cluster can be built by combining different templates.
+Templates describe the **instances of your cluster** - the instance type and the attached volumes. A typical setup is
+ to combine multiple templates in a cluster for the different types of nodes. For example you may want to attach multiple
+ large disks to the datanodes or have memory optimized instances for Spark nodes.
 
-`Name:` name of your template
+The instance templates can be configured on the **manage templates** panel on the Cloudbreak Dashboard.
 
-`Description:` short description of your template
+If `Public in account` is checked all the users belonging to your account will be able to use this resource to create clusters, but cannot delete it.
 
-`Instance type:` the OpenStack instance type to be used
-
-`Attached volumes per instance:` the number of disks to be attached
-
-`Volume size (GB):` the size of the attached disks (in GB)
-
-`Public in account:` share it with others in the account
-
-**Manage blueprints**
-
-Blueprints are your declarative definition of a Hadoop cluster.
-
-`Name:` name of your blueprint
-
-`Description:` short description of your blueprint
-
-`Source URL:` you can add a blueprint by pointing to a URL. As an example you can use this [blueprint](https://github.com/sequenceiq/ambari-rest-client/raw/1.6.0/src/main/resources/blueprints/multi-node-hdfs-yarn).
-
-`Manual copy:` you can copy paste your blueprint in this text area
-
-`Public in account:` share it with others in the account
-
-**Manage networks**
+**Networks**
 
 Manage networks allows you to create or reuse existing networks and configure them.
 
@@ -336,7 +316,22 @@ If `Public in account` is checked all the users belonging to your account will b
 
 **NOTE** that the security groups are *not created* on OpenStack after the `Create Security Group` button is pushed, only after the cluster provisioning starts with the selected security group template.
 
-## Cluster installation
+## Defining cluster services
+
+**Manage blueprints**
+
+Blueprints are your declarative definition of a Hadoop cluster.
+
+`Name:` name of your blueprint
+
+`Description:` short description of your blueprint
+
+`Source URL:` you can add a blueprint by pointing to a URL. As an example you can use this [blueprint](https://github.com/sequenceiq/ambari-rest-client/raw/1.6.0/src/main/resources/blueprints/multi-node-hdfs-yarn).
+
+`Manual copy:` you can copy paste your blueprint in this text area
+
+`Public in account:` share it with others in the account
+
 
 This section describes
 
