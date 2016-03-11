@@ -426,7 +426,7 @@ Cloudbreak:</p>
 <li>Select one of your AD where you would like to create the new user</li>
 <li>You can configure your AD users on <code>Your active directory</code> &gt; <code>Users</code> menu</li>
 </ul>
-<p><img alt="" src="../../../azure/images/azure-aduser_v2.png" />
+<p><img alt="" src="../azure/images/azure-aduser_v2.png" />
 <sub><em>Full size <a href="../azure/images/azure-aduser_v2.png">here</a>.</em></sub></p>
 <ul>
 <li>Here you can add the new user to AD. Simply click on <code>Add User</code> in the bottom of the page<ul>
@@ -446,7 +446,7 @@ Cloudbreak:</p>
 <ul>
 <li>You need to add your AD user to the <code>manage.windowsazure.com</code> &gt; <code>Settings</code> &gt; <code>Administrators</code></li>
 </ul>
-<p><img alt="" src="../../../azure/images/azure-administrators_v3.png" />
+<p><img alt="" src="../azure/images/azure-administrators_v3.png" />
 <sub><em>Full size <a href="../azure/images/azure-administrators_v3.png">here</a>.</em></sub></p>
 <ul>
 <li>Here you can add the new user to Administrators. Simply click on <code>Add</code> in the bottom of the page<ul>
@@ -503,7 +503,7 @@ When WASB is used as a Hadoop file system the files are full-value blobs in a st
 To bypass those limits Microsoft created a small service called <a href="https://github.com/MicrosoftDX/Dash">DASH</a>. DASH itself is a service that imitates the API of the Azure Blob Storage API and it can be deployed as a Microsoft Azure Cloud Service. Because its API is the same as the standard blob storage API it can be used <em>almost</em> in the same way as the default WASB file system from a Hadoop deployment.
 DASH works by sharding the storage access across multiple storage accounts. It can be configured to distribute storage account load to at most 15 <strong>scaleout</strong> storage accounts. It needs one more <strong>namespace</strong> storage account where it keeps track of where the data is stored.
 When configuring a WASB file system with Hadoop, the only required config entries are the ones where the access details are described. To access a storage account Azure generates an access key that is displayed on the Azure portal or can be queried through the API while the account name is the name of the storage account itself. A DASH service has a similar account name and key, those can be configured in the configuration file while deploying the cloud service.</p>
-<p><img alt="" src="../../../diagrams/dash.png" /></p>
+<p><img alt="" src="../diagrams/dash.png" /></p>
 <h3 id="deploying-a-dash-service-with-cloudbreak-deployer">Deploying a DASH service with Cloudbreak Deployer</h3>
 <p>We automated the deployment of DASH service in Cloudbreak Deployer. After <code>cbd</code> is installed, simply run the 
 following command to deploy a DASH cloud service with 5 scale out storage accounts:</p>
@@ -588,7 +588,7 @@ your Cloudbreak credential.</p>
 </li>
 <li>Copy your AZURE Subscription ID to the <code>Subscription Id</code> field</li>
 </ul>
-<p><img alt="" src="../../../azure/images/azure-subscription.png" />
+<p><img alt="" src="../azure/images/azure-subscription.png" />
 <sub><em>Full size <a href="../azure/images/azure-subscription.png">here</a>.</em></sub></p>
 <ul>
 <li>Copy your AZURE Active Directory Application:<ul>
@@ -598,7 +598,7 @@ your Cloudbreak credential.</p>
 </ul>
 </li>
 </ul>
-<p><img alt="" src="../../../azure/images/azure-application.png" />
+<p><img alt="" src="../azure/images/azure-application.png" />
 <sub><em>Full size <a href="../azure/images/azure-application.png">here</a>.</em></sub></p>
 <ul>
 <li>Copy your SSH public key to the <code>SSH public key</code> field<ul>
@@ -614,7 +614,7 @@ instance</a> of every cluster you'll create with this credential.</li>
 clusters, but cannot delete it.</p>
 <p>Cloudbreak is supporting simple rsa public key instead of X509 certificate file after 1.0.4 version</p>
 </blockquote>
-<p><img alt="" src="../../../azure/images/azure-credentials.png" />
+<p><img alt="" src="../azure/images/azure-credentials.png" />
 <sub><em>Full size <a href="../azure/images/azure-credentials.png">here</a>.</em></sub></p>
 <h2 id="infrastructure-templates">Infrastructure templates</h2>
 <p>After your AZURE account is linked to Cloudbreak you can start creating resource templates that describe your clusters' 
@@ -658,7 +658,7 @@ to create clusters, but cannot delete it.</p>
 <p><strong>NOTE</strong> The new networks are created on AZURE only after the the cluster provisioning starts with the selected 
 network template.</p>
 </blockquote>
-<p><img alt="" src="../../../azure/images/azure-network.png" />
+<p><img alt="" src="../azure/images/azure-network.png" />
 <sub><em>Full size <a href="../azure/images/azure-network.png">here</a>.</em>&lt;/sub</p>
 <p><strong>Security groups</strong></p>
 <p>Security group templates are very similar to the <a href="https://azure.microsoft.com/en-us/documentation/articles/virtual-networks-nsg/">security groups on Azure</a>.
@@ -720,8 +720,8 @@ template to create clusters, but cannot delete it.</p>
 <p><strong>NOTE</strong> The security groups are created on Azure only after the cluster provisioning starts with the selected 
 security group template.</p>
 </blockquote>
-<p><img alt="" src="../../../images/ui-secgroup_v3.png" />
-<sub><em>Full size <a href="../../../images/ui-secgroup_v3.png">here</a>.</em>&lt;/sub</p>
+<p><img alt="" src="../images/ui-secgroup_v3.png" />
+<sub><em>Full size <a href="../images/ui-secgroup_v3.png">here</a>.</em>&lt;/sub</p>
 <h2 id="defining-cluster-services">Defining cluster services</h2>
 <p><strong>Blueprints</strong></p>
 <p>Blueprints are your declarative definition of a Hadoop cluster. These are the same blueprints that are <a href="https://cwiki.apache.org/confluence/display/AMBARI/Blueprints">used by Ambari</a>.</p>
@@ -737,8 +737,8 @@ fill that with a default value.</p>
 </blockquote>
 <p>If <code>Public in account</code> is checked all the users belonging to your account will be able to use this blueprint to 
 create clusters, but cannot delete or modify it.</p>
-<p><img alt="" src="../../images/ui-blueprints_v3.png" />
-<sub><em>Full size <a href="../../images/ui-blueprints_v3.png">here</a>.</em></sub></p>
+<p><img alt="" src="../images/ui-blueprints_v3.png" />
+<sub><em>Full size <a href="../images/ui-blueprints_v3.png">here</a>.</em></sub></p>
 <p><strong>A blueprint can be exported from a running Ambari cluster that can be reused in Cloudbreak with slight 
 modifications.</strong>
 There is no automatic way to modify an exported blueprint and make it instantly usable in Cloudbreak, the 
@@ -772,7 +772,7 @@ The most <strong>notable example is Ranger setup</strong>:</p>
 <ul>
 <li>Start by selecting a previously created Azure credential in the header.</li>
 </ul>
-<p><img alt="" src="../../../images/ui-credentials_v2.png" />
+<p><img alt="" src="../images/ui-credentials_v2.png" />
 <sub><em>Full size <a href="../images/ui-credentials_v2.png">here</a>.</em></sub></p>
 <ul>
 <li>Open <code>create cluster</code></li>
@@ -833,10 +833,10 @@ be Kerberized. See more about it in the <a href="../kerberos/">Kerberos</a> sect
 <p>Cloudbreak uses <em>Azure Resource Manager</em> to create the resources - you can check out the resources created by Cloudbreak
  on 
 the <code>Azure Portal Resource groups</code> page.
-<img alt="" src="../../../azure/images/azure-resourcegroup.png" />
+<img alt="" src="../azure/images/azure-resourcegroup.png" />
 <sub><em>Full size <a href="../azure/images/azure-resourcegroup.png">here</a>.</em></sub></p>
 <p>Besides these you can check the progress on the Cloudbreak Web UI itself if you open the new cluster's <code>Event History</code>.
-<img alt="" src="../../../azure/images/azure-eventhistory.png" />
+<img alt="" src="../azure/images/azure-eventhistory.png" />
 <sub><em>Full size <a href="../azure/images/azure-eventhistory.png">here</a>.</em></sub></p>
 <p><strong>Advanced options</strong></p>
 <p>There are some advanced features when deploying a new cluster, these are the following:</p>
@@ -864,7 +864,7 @@ instance manually!</p>
 <li>You should check the related resources at the Azure Portal</li>
 <li>If it is needed you need to manually remove resources from there</li>
 </ol>
-<p><img alt="" src="../../../azure/images/azure-forceterminate.png" />
+<p><img alt="" src="../azure/images/azure-forceterminate.png" />
 <sub><em>Full size <a href="../azure/images/azure-forceterminate.png">here</a>.</em></sub></p>
 <h1 id="interactive-mode-cloudbreak-shell">Interactive mode / Cloudbreak Shell</h1>
 <p>The goal with the Cloudbreak Shell (Cloudbreak CLI) was to provide an interactive command line tool which supports:</p>
@@ -900,7 +900,7 @@ instance manually!</p>
 <p>At the very first time it will take for a while, because of need to download all the necessary docker images.</p>
 </blockquote>
 <p>This will launch the Cloudbreak shell inside a Docker container then it is ready to use.
-<img alt="" src="../../../shell/image/shell-started_v2.png" />
+<img alt="" src="../shell/image/shell-started_v2.png" />
 <sub><em>Full size <a href="../shell/image/shell-started_v2.png">here</a>.</em></sub></p>
 <blockquote>
 <p><strong>IMPORTANT You have to copy all your files into the <code>cbd</code> working directory, what you would like to use in shell.</strong> For 

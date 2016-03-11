@@ -542,7 +542,7 @@ instance</a> of every cluster you'll create with this credential.</li>
 <p><code>Public in account</code> means that all the users belonging to your account will be able to use this credential to create 
 clusters, but cannot delete it.</p>
 </blockquote>
-<p><img alt="" src="../../../aws/images/aws-credential_v3.png" />
+<p><img alt="" src="../aws/images/aws-credential_v3.png" />
 <sub><em>Full size <a href="../aws/images/aws-credential_v3.png">here</a>.</em></sub></p>
 <h2 id="infrastructure-templates">Infrastructure templates</h2>
 <p>After your AWS account is linked to Cloudbreak you can start creating resource templates that describe your clusters' infrastructure:</p>
@@ -595,7 +595,7 @@ to create clusters, but cannot delete it.</p>
 <p><strong>NOTE</strong> The VPCs, IGWs and subnet are created on AWS only after the the cluster provisioning starts with the selected 
 network template.</p>
 </blockquote>
-<p><img alt="" src="../../../aws/images/aws-network_v3.png" />
+<p><img alt="" src="../aws/images/aws-network_v3.png" />
 <sub><em>Full size <a href="../aws/images/aws-network_v3.png">here</a>.</em></sub></p>
 <p><strong>Security groups</strong></p>
 <p>Security group templates are very similar to the <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html">security groups on the AWS Console</a>.
@@ -654,7 +654,7 @@ template to create clusters, but cannot delete it.</p>
 <blockquote>
 <p><strong>NOTE</strong> The security groups are created on AWS only after the cluster provisioning starts with the selected security group template.</p>
 </blockquote>
-<p><img alt="" src="../../../images/ui-secgroup_v3.png" />
+<p><img alt="" src="../images/ui-secgroup_v3.png" />
 <sub><em>Full size <a href="../images/ui-secgroup_v3.png">here</a>.</em></sub></p>
 <h2 id="defining-cluster-services">Defining cluster services</h2>
 <p><strong>Blueprints</strong></p>
@@ -671,8 +671,8 @@ fill that with a default value.</p>
 </blockquote>
 <p>If <code>Public in account</code> is checked all the users belonging to your account will be able to use this blueprint to 
 create clusters, but cannot delete or modify it.</p>
-<p><img alt="" src="../../images/ui-blueprints_v3.png" />
-<sub><em>Full size <a href="../../images/ui-blueprints_v3.png">here</a>.</em></sub></p>
+<p><img alt="" src="../images/ui-blueprints_v3.png" />
+<sub><em>Full size <a href="../images/ui-blueprints_v3.png">here</a>.</em></sub></p>
 <p><strong>A blueprint can be exported from a running Ambari cluster that can be reused in Cloudbreak with slight 
 modifications.</strong>
 There is no automatic way to modify an exported blueprint and make it instantly usable in Cloudbreak, the 
@@ -695,7 +695,7 @@ The most <strong>notable example is Ranger setup</strong>:</p>
 <ul>
 <li>Start by selecting a previously created AWS credential in the header.</li>
 </ul>
-<p><img alt="" src="../../../images/ui-credentials_v2.png" />
+<p><img alt="" src="../images/ui-credentials_v2.png" />
 <sub><em>Full size <a href="../images/ui-credentials_v2.png">here</a>.</em></sub></p>
 <ul>
 <li>Open <code>create cluster</code></li>
@@ -742,10 +742,10 @@ be Kerberized. See more about it in the <a href="../kerberos/">Kerberos</a> sect
 </ul>
 <p>Cloudbreak uses <em>CloudFormation</em> to create the resources - you can check out the resources created by Cloudbreak on 
 the AWS Console CloudFormation page.
-<img alt="" src="../../../aws/images/aws-cloudformation_v2.png" />
+<img alt="" src="../aws/images/aws-cloudformation_v2.png" />
 <sub><em>Full size <a href="../aws/images/aws-cloudformation_v2.png">here</a>.</em></sub></p>
 <p>Besides these you can check the progress on the Cloudbreak Web UI itself if you open the new cluster's <code>Event History</code>.
-<img alt="" src="../../../images/ui-eventhistory_v3.png" />
+<img alt="" src="../images/ui-eventhistory_v3.png" />
 <sub><em>Full size <a href="../images/ui-eventhistory_v3.png">here</a>.</em></sub></p>
 <p><strong>Advanced options</strong></p>
 <p>There are some advanced features when deploying a new cluster, these are the following:</p>
@@ -775,7 +775,7 @@ CloudFormation stack first. Instances are started in an Auto Scaling Group so th
 <li>You should check the related resources at the AWS CloudFormation</li>
 <li>If it is needed you need to manually remove resources from there</li>
 </ol>
-<p><img alt="" src="../../../images/ui-forceterminate_v2.png" />
+<p><img alt="" src="../images/ui-forceterminate_v2.png" />
 <sub><em>Full size <a href="../images/ui-forceterminate_v2.png">here</a>.</em></sub></p>
 <h1 id="interactive-mode-cloudbreak-shell">Interactive mode / Cloudbreak Shell</h1>
 <p>The goal with the Cloudbreak Shell (Cloudbreak CLI) was to provide an interactive command line tool which supports:</p>
@@ -811,7 +811,7 @@ CloudFormation stack first. Instances are started in an Auto Scaling Group so th
 <p>At the very first time it will take for a while, because of need to download all the necessary docker images.</p>
 </blockquote>
 <p>This will launch the Cloudbreak shell inside a Docker container then it is ready to use.
-<img alt="" src="../../../shell/image/shell-started_v2.png" />
+<img alt="" src="../shell/image/shell-started_v2.png" />
 <sub><em>Full size <a href="../shell/image/shell-started_v2.png">here</a>.</em></sub></p>
 <blockquote>
 <p><strong>IMPORTANT You have to copy all your files into the <code>cbd</code> working directory, what you would like to use in shell.</strong> For 
@@ -1068,7 +1068,7 @@ provisioning:</p>
  the AWS Console CloudFormation page.</li>
 </ul>
 <p>For example:
-<img alt="" src="../../../aws/images/aws-cloudformation_v2.png" />
+<img alt="" src="../aws/images/aws-cloudformation_v2.png" />
 <sub><em>Full size <a href="../aws/images/aws-cloudformation_v2.png">here</a>.</em></sub></p>
 <ul>
 <li>If stack then cluster creation have successfully done, you can check the Ambari Web UI. However you need to know the 
@@ -1081,14 +1081,14 @@ Ambari IP (for example: <code>http://52.8.110.95:8080</code>): <ul>
 </code></pre>
 
 <p>For example:
-<img alt="" src="../../../images/ambari-dashboard.png" />
+<img alt="" src="../images/ambari-dashboard.png" />
 <sub><em>Full size <a href="../images/ambari-dashboard.png">here</a>.</em></sub></p>
 <ul>
 <li>Besides these you can check the entire progress and the Ambari IP as well on the Cloudbreak Web UI itself. Open the 
 new cluster's <code>details</code> and its <code>Event History</code> here.</li>
 </ul>
 <p>For example:
-<img alt="" src="../../../images/ui-eventhistory_v3.png" />
+<img alt="" src="../images/ui-eventhistory_v3.png" />
 <sub><em>Full size <a href="../images/ui-eventhistory_v3.png">here</a>.</em></sub></p>
 <p><strong>Stop cluster</strong></p>
 <p>You have the ability to <strong>stop your existing stack then its cluster</strong> if you want to suspend the work on it.</p>
