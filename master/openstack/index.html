@@ -283,7 +283,7 @@
         
             <li><a href="#infrastructure-templates">Infrastructure templates</a></li>
         
-            <li><a href="#cluster-installation">Cluster installation</a></li>
+            <li><a href="#defining-cluster-services">Defining cluster services</a></li>
         
             <li><a href="#cluster-deployment">Cluster deployment</a></li>
         
@@ -514,7 +514,7 @@ instance</a> of every cluster you'll create with this credential.</li>
 </li>
 </ol>
 <blockquote>
-<p>Any other parameter is optional here.</p>
+<p>Any other parameter is optional here. You can read more about Keystone v3 <a href="http://developer.openstack.org/api-ref-identity-v3.html">here</a>.</p>
 <p><code>Public in account</code> means that all the users belonging to your account will be able to use this credential to create 
 clusters, but cannot delete it.</p>
 </blockquote>
@@ -532,21 +532,12 @@ clusters' infrastructure:</p>
 created on OpenStack after the <code>create cluster</code> button has pushed.</strong> These templates are saved to Cloudbreak's 
 database and can be reused with multiple clusters to describe the infrastructure.</p>
 <p><strong>Templates</strong></p>
-<p>Using manage resources you can create infrastructure templates. Templates describes the infrastructure where the HDP cluster will be provisioned. We support heterogenous clusters - this means that one cluster can be built by combining different templates.</p>
-<p><code>Name:</code> name of your template</p>
-<p><code>Description:</code> short description of your template</p>
-<p><code>Instance type:</code> the OpenStack instance type to be used</p>
-<p><code>Attached volumes per instance:</code> the number of disks to be attached</p>
-<p><code>Volume size (GB):</code> the size of the attached disks (in GB)</p>
-<p><code>Public in account:</code> share it with others in the account</p>
-<p><strong>Manage blueprints</strong></p>
-<p>Blueprints are your declarative definition of a Hadoop cluster.</p>
-<p><code>Name:</code> name of your blueprint</p>
-<p><code>Description:</code> short description of your blueprint</p>
-<p><code>Source URL:</code> you can add a blueprint by pointing to a URL. As an example you can use this <a href="https://github.com/sequenceiq/ambari-rest-client/raw/1.6.0/src/main/resources/blueprints/multi-node-hdfs-yarn">blueprint</a>.</p>
-<p><code>Manual copy:</code> you can copy paste your blueprint in this text area</p>
-<p><code>Public in account:</code> share it with others in the account</p>
-<p><strong>Manage networks</strong></p>
+<p>Templates describe the <strong>instances of your cluster</strong> - the instance type and the attached volumes. A typical setup is
+ to combine multiple templates in a cluster for the different types of nodes. For example you may want to attach multiple
+ large disks to the datanodes or have memory optimized instances for Spark nodes.</p>
+<p>The instance templates can be configured on the <strong>manage templates</strong> panel on the Cloudbreak Dashboard.</p>
+<p>If <code>Public in account</code> is checked all the users belonging to your account will be able to use this resource to create clusters, but cannot delete it.</p>
+<p><strong>Networks</strong></p>
 <p>Manage networks allows you to create or reuse existing networks and configure them.</p>
 <p><code>Name:</code> name of the network</p>
 <p><code>Description:</code> short description of your network</p>
@@ -602,7 +593,14 @@ This may change in a later release.</p>
 </ul>
 <p>If <code>Public in account</code> is checked all the users belonging to your account will be able to use this security group template to create clusters, but cannot delete or modify it.</p>
 <p><strong>NOTE</strong> that the security groups are <em>not created</em> on OpenStack after the <code>Create Security Group</code> button is pushed, only after the cluster provisioning starts with the selected security group template.</p>
-<h2 id="cluster-installation">Cluster installation</h2>
+<h2 id="defining-cluster-services">Defining cluster services</h2>
+<p><strong>Manage blueprints</strong></p>
+<p>Blueprints are your declarative definition of a Hadoop cluster.</p>
+<p><code>Name:</code> name of your blueprint</p>
+<p><code>Description:</code> short description of your blueprint</p>
+<p><code>Source URL:</code> you can add a blueprint by pointing to a URL. As an example you can use this <a href="https://github.com/sequenceiq/ambari-rest-client/raw/1.6.0/src/main/resources/blueprints/multi-node-hdfs-yarn">blueprint</a>.</p>
+<p><code>Manual copy:</code> you can copy paste your blueprint in this text area</p>
+<p><code>Public in account:</code> share it with others in the account</p>
 <p>This section describes</p>
 <p><strong>Blueprints</strong></p>
 <p>Blueprints are your declarative definition of a Hadoop cluster. These are the same blueprints that are <a href="https://cwiki.apache.org/confluence/display/AMBARI/Blueprints">used by Ambari</a>.</p>
