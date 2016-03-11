@@ -65,9 +65,9 @@ Once you are connected you can start to create a cluster. If you are lost and ne
 
 **Provider specific documentations**
 
-- [AWS](aws_cb_shell.md)
-- [Azure](azure_cb_shell.md)
-- [GCP](gcp_cb_shell.md)
-- [OpenStack](openstack_cb_shell.md)
+- [AWS](aws.md#interactive-mode-cloudbreak-shell)
+- [Azure](azure.md#interactive-mode-cloudbreak-shell)
+- [GCP](gcp.md#interactive-mode-cloudbreak-shell)
+- [OpenStack](openstack.md#interactive-mode-cloudbreak-shell)
 
 or you can find a more detailed documentation about Cloudbreak-shell in its [Github repositiry](https://github.com/sequenceiq/cloudbreak-shell).

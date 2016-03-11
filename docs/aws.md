@@ -30,23 +30,32 @@ Please make sure you opened the following ports on your [security group](http://
 
 ## Setup Cloudbreak Deployer
 
+You should already have the Cloudbreak Deployer either by [using the AWS Cloud Images](aws.md) or by [installing the 
+Cloudbreak Deployer](onprem.md) manually on your own VM. If you have your own installed VM with 
+
+You can [connect to the previously created `cbd` VM](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstances.html).
+
+  * Cloudbreak Deployer location is `/home/ec2-user/cloudbreak-deployment/`.
+  * All `cbd` actions must be executed from the `cbd` root folder.
+  * Most of the `cbd` commands require `root` permissions. So `sudo su` here would be worth for you. 
+
 Open the `cloudbreak-deployment` directory:
 
 ```
 cd cloudbreak-deployment`
 ```
-
 This is the directory of the configuration files and the supporting binaries for Cloudbreak Deployer.
 
 ### Initialize your Profile
 
+First initialize `cbd` by creating a `Profile` file:
+
 ```
 cbd init
 ```
-
 It will create a `Profile` file in the current directory. Please open the `Profile` file then check the `PUBLIC_IP`. 
 This is mandatory, because of to can access the Cloudbreak UI (called Uluwatu). In some cases the `cbd` tool tries to 
-guess it. If `cbd` cannot get the IP address during the initialization, please add set the appropriate value.
+guess it. If `cbd` cannot get the IP address during the initialization, please set the appropriate value.
 
 ### AWS specific configuration
 

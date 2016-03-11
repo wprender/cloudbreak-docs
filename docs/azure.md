@@ -61,7 +61,7 @@ Cloudbreak Deployer (`cbd`)
   * The default SSH username for the Azure VMs is `cloudbreak`.
   * Cloudbreak Deployer location is `/var/lib/cloudbreak-deployment` on the launched `cbd` VM. This is the 
       `cbd` root folder there.
-  * All `cbd` actions must be executed from the `cbd` folder.
+  * All `cbd` actions must be executed from the `cbd` root folder.
   * Most of the `cbd` commands require `root` permissions. So it would be worth if you apply the `sudo su`.
 
 ## Validate the started Cloudbreak Deployer
@@ -83,11 +83,6 @@ Cloudbreak Deployer (`cbd`)
    cbd logs cloudbreak
 ```
 >Cloudbreak should start within a minute - you should see a line like this: `Started CloudbreakApplication in 36.823 seconds`
-
-For example to investigate the Cloudbreak logs:
-```
-cloudbreak@cbdeployerVM:/var/lib/cloudbreak-deployment# cbd logs cloudbreak
-```
 
 # Provisioning Prerequisites
 

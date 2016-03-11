@@ -34,10 +34,10 @@ export OS_TENANT_NAME=<your_os_tenant_name>
 ```
 Import the new image into your OpenStack:
 ```
-glance image-create --name "$OS_IMAGE_NAME" --file "$LATEST_IMAGE" --disk-format qcow2 --container-format bare --progress
+glance image-create --name "$OS_IMAGE_NAME" --file "$CBD_LATEST_IMAGE" --disk-format qcow2 --container-format bare 
+--progress
 ```
->**NOTE** This image is needed to launch a machine on your OpenStack with Cloudbreak Deployer. You need to 
-[provide its name in the `Profile` file](openstack.md#openstack-setup).
+>**NOTE** This image is needed to launch a machine on your OpenStack with Cloudbreak Deployer.
 
 > **[Minimum and Recommended VM requirements](onprem.md#minimum-and-recommended-system-requirements):** 4GB RAM, 10GB disk, 2 cores
 
@@ -47,14 +47,14 @@ glance image-create --name "$OS_IMAGE_NAME" --file "$LATEST_IMAGE" --disk-format
 ### Cloudbreak import
 
 ```
-export LATEST_IMAGE_NAME=<file_name_of_the_above_cloudbreak_image>
+export CB_LATEST_IMAGE_NAME=<file_name_of_the_above_cloudbreak_image>
 export OS_USERNAME=<your_os_user_name>
 export OS_AUTH_URL=<http://.../v2.0>
 export OS_TENANT_NAME=<your_os_tenant_name>
 ```
 Import the new image into your OpenStack:
 ```
-glance image-create --name "$LATEST_IMAGE_NAME" --file "$LATEST_IMAGE" --disk-format qcow2 
+glance image-create --name "$CB_LATEST_IMAGE_NAME" --file "$CB_LATEST_IMAGE" --disk-format qcow2 
 --container-format bare --progress
 ```
 >**NOTE** This image is mandatory to provisioning on OpenStack with Cloudbreak application. You need to [provide its 
@@ -67,7 +67,7 @@ name in the `Profile` file](openstack.md#openstack-specific-configuration).
   * The default SSH username for the OpenStack instances is `centos`.
   * Cloudbreak Deployer location is `/home/centos/cloudbreak-deployment` on the launched `cbd` VM. This is the 
       `cbd` root folder there.
-  * All `cbd` actions must be executed from the `cbd` folder.
+  * All `cbd` actions must be executed from the `cbd` root folder.
   * Most of the `cbd` commands require `root` permissions. So it would be worth if you apply the `sudo su`.
 
 ## Setup Cloudbreak Deployer
@@ -78,7 +78,7 @@ You should already have the Cloudbreak Deployer either by [using the OpenStack C
 You can [connect to the previously created `cbd` VM](http://docs.openstack.org/user-guide/dashboard_launch_instances.html#connect-to-your-instance-by-using-ssh).
 
   * Cloudbreak Deployer location is `/home/centos/cloudbreak-deployment/`.
-  * All `cbd` actions must be executed from the `cbd` folder.
+  * All `cbd` actions must be executed from the `cbd` root folder.
   * Most of the `cbd` commands require `root` permissions. So `sudo su` here would be worth for you. 
 
 Open the `cloudbreak-deployment` directory:
@@ -86,12 +86,11 @@ Open the `cloudbreak-deployment` directory:
 ```
 cd cloudbreak-deployment
 ```
-This is the directory of the configuration files and the supporting binaries that will be downloaded by Cloudbreak 
-Deployer.
+This is the directory of the configuration files and the supporting binaries for Cloudbreak Deployer.
 
 ### Initialize your Profile
 
-First initialize your directory by creating a `Profile` file:
+First initialize `cbd` by creating a `Profile` file:
 
 ```
 cbd init
@@ -106,40 +105,44 @@ In order for Cloudbreak to be able to launch clusters on OpenStack on your behal
 image name in the `Profile` file.
 
 ```
-export CB_OPENSTACK_IMAGE="$LATEST_IMAGE_NAME"
+export CB_OPENSTACK_IMAGE="$CB_LATEST_IMAGE_NAME"
 ```
 
->**NOTE** The `LATEST_IMAGE_NAME` is the name of the [latest Cloudbreak image on your OpenStack](openstack.md#cloudbreak-import). 
+>**NOTE** The `CB_LATEST_IMAGE_NAME` is the name of the [latest Cloudbreak image on your OpenStack](openstack.md#cloudbreak-import). 
 
-###Start Cloudbreak
+## Start Cloudbreak Deployer
 
 To start the Cloudbreak application use the following command.
-This will start all the Docker containers and initialize the application. It will take a few minutes until all the services start.
+This will start all the Docker containers and initialize the application.
 
 ```
 cbd start
 ```
 
->Launching it first will take more time as it downloads all the docker images needed by Cloudbreak.
+>At the very first time it will take for a while, because of need to download all the necessary docker images.
 
 The `cbd start` command includes the `cbd generate` command which applies the following steps:
 
 - creates the **docker-compose.yml** file that describes the configuration of all the Docker containers needed for the Cloudbreak deployment.
 - creates the **uaa.yml** file that holds the configuration of the identity server used to authenticate users to Cloudbreak.
 
+## Validate the started Cloudbreak Deployer
 
-After the `cbd start` command finishes you can check the logs of the Cloudbreak server with this command:
+After the `cbd start` command finishes followings are worthy to check:
 
+- Pre-installed Cloudbreak Deployer version and health.
 ```
-cbd logs cloudbreak
+   cbd doctor
 ```
->Cloudbreak server should start within a minute - you should see a line like this: `Started CloudbreakApplication in 36.823 seconds`
+>In case of `cbd update` is needed, please check the related documentation for [Cloudbreak Deployer Update](operations.md#cloudbreak-deployer-update). Most of the `cbd` commands require `root` permissions.
 
-###Next steps
+- Started Cloudbreak Application logs.
+```
+   cbd logs cloudbreak
+```
+>Cloudbreak should start within a minute - you should see a line like this: `Started CloudbreakApplication in 36.823 seconds`
 
-Once Cloudbreak is up and running you should check out the Provisioning Prerequisites which needed to create OpenStack clusters with Cloudbreak.
-
-#Provisioning Prerequisites
+# Provisioning Prerequisites
 
 ## Generate a new SSH key
 
@@ -173,37 +176,23 @@ After you enter a passphrase the keypair is generated. The output should look so
 
 Later you'll need to pass the `.pub` file's contents to Cloudbreak and use the private part to SSH to the instances.
 
-## Download and import the Cloudbreak image
+# Provisioning via Browser
 
-###OpenStack Cloudbreak image details
-
-###Import the image into OpenStack
-
-```
-export OS_IMAGE_NAME="name_in_openstack"
-export OS_USERNAME=...
-export OS_AUTH_URL="http://.../v2.0"
-export OS_TENANT_NAME=...
-glance image-create --name "$OS_IMAGE_NAME" --file "$LATEST_IMAGE" --disk-format qcow2 --container-format bare --progress
-```
-
-> **IMPORTANT:** Make sure that you have sufficient qouta (CPU, network, etc) for the requested cluster size.
-
-#Provisioning via Browser
-
-You can log into the Cloudbreak application at http://PUBLIC_IP:3000.
+You can log into the Cloudbreak application at `http://<Public_IP>:3000/`.
 
 The main goal of the Cloudbreak UI is to easily create clusters on your own cloud provider account.
 This description details the OpenStack setup - if you'd like to use a different cloud provider check out its manual.
 
 This document explains the four steps that need to be followed to create Cloudbreak clusters from the UI:
 
-- connect your OpenStack with Cloudbreak
+- connect your AWS account with Cloudbreak
 - create some template resources on the UI that describe the infrastructure of your clusters
 - create a blueprint that describes the HDP services in your clusters and add some recipes for customization
-- launch the cluster itself based on these template resources
+- launch the cluster itself based on these resources
 
-## Manage cloud credentials
+> **IMPORTANT** Make sure that you have sufficient qouta (CPU, network, etc) for the requested cluster size.
+
+## Setting up OpenStack credentials
 
 You can now log into the Cloudbreak application at http://PUBLIC_IP:3000. Once logged in go to **Manage credentials**. Using manage credentials will  link your cloud account with the Cloudbreak account.
 
@@ -416,7 +405,7 @@ You can terminate running or stopped clusters with the `terminate` button in the
 
 Sometimes Cloudbreak cannot synchronize it's state with the cluster state at the cloud provider and the cluster can't be terminated. In this case with the `Forced termination` option in the termination dialog box you can terminate the cluster at the Cloudbreak side anyway. **In this case you may need to manually remove resources at the cloud provider.**
 
-# Interactive mode
+# Interactive mode / Cloudbreak Shell
 
 Start the shell with `cbd util cloudbreak-shell`. This will launch the Cloudbreak shell inside a Docker container and you are ready to start using it.
 
