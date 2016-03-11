@@ -193,7 +193,7 @@ To create a new GCP credential follow these steps:
   4. Upload your GCP Service Account private key (generated `p12 Key`) to the `Service Account Private (p12) Key` field
   5. Copy your SSH public key to the `SSH public key` field
     - The SSH public key must be in OpenSSH format and it's private keypair can be used later to [SSH onto every instance](operations.md#ssh-to-the-hosts) of every cluster you'll create with this credential.
-    - The **SSH username** for the EC2 instances is **cloudbreak**.
+    - The **SSH username** for the GCP instances is **cloudbreak**.
 
 >Any other parameter is optional here.
 
