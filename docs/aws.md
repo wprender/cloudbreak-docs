@@ -1,4 +1,8 @@
+# AWS Images
+
 {!docs/aws/images.md!}
+
+# Aws Setup
 
 {!docs/aws/deployer.md!}
 
@@ -27,6 +31,8 @@
 {!docs/aws/ui/create.md!}
 
 {!docs/aws/ui/termination.md!}
+
+# Interactive mode / Cloudbreak Shell
 
 {!docs/shell/short_shell.md!}
 

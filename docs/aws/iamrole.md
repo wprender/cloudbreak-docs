@@ -64,5 +64,5 @@ This command creates a role with the name `cbreak-deployer` by default. If you'd
 export AWS_ROLE_NAME=my-cloudbreak-role
 ```
 You can check the generated role on your AWS console, under IAM roles:
-![](../images/aws-iam-role_v2.png)
-<sub>*Full size [here](../images/aws-iam-role_v2.png).*</sub>
+![](/aws/images/aws-iam-role_v2.png)
+<sub>*Full size [here](/aws/images/aws-iam-role_v2.png).*</sub>

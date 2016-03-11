@@ -1,5 +1,3 @@
-# Interactive mode / Cloudbreak Shell
-
 The goal with the Cloudbreak Shell (Cloudbreak CLI) was to provide an interactive command line tool which supports:
 
 - all functionality available through the REST API or Cloudbreak Web UI
@@ -28,8 +26,8 @@ To start the Cloudbreak CLI use the following commands:
 >At the very first time it will take for a while, because of need to download all the necessary docker images.
 
 This will launch the Cloudbreak shell inside a Docker container then it is ready to use.
-![](../images/shell-started_v2.png)
-<sub>*Full size [here](../images/shell-started_v2.png).*</sub>
+![](/shell/image/shell-started_v2.png)
+<sub>*Full size [here](/shell/image/shell-started_v2.png).*</sub>
 
 >**IMPORTANT You have to copy all your files into the `cbd` working directory, what you would like to use in shell.** For 
 example if your `cbd` working directory is `~/cloudbreak-deployment` then copy your **blueprint JSON, public ssh key 

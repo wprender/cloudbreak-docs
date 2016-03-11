@@ -1,5 +1,3 @@
-# Azure Setup
-
 On other cloud providers you can create “public images”, while on Azure its a different process. You have to create a 
 publicly available virtual disk image (VHDI), which has to be downloaded and imported 
 into a storage account.

@@ -1,15 +1,14 @@
-## Setting up AWS credential
+## Setting up GCP credential
 
-Cloudbreak works by connecting your AWS account through so called Credentials, and then uses these credentials to 
+Cloudbreak works by connecting your GCP account through so called Credentials, and then uses these credentials to 
 create resources on your behalf. Credentials can be configured with the following command for example:
-
 ```
-credential create --AWS --name my-aws-credential --description "sample description" --roleArn 
-arn:aws:iam::***********:role/userrole --sshKeyString "ssh-rsa AAAAB****etc"
+credential create --GCP --description "sample description" --name my-gcp-credential --projectId <your gcp projectid> 
+--serviceAccountId <your GCP service account mail address> --serviceAccountPrivateKeyPath /files/mykey.p12 
+--sshKeyString "ssh-rsa AAAAB3***etc."
 ```
-
->**NOTE** that Cloudbreak **does not set your cloud user details** - we work around the concept of [IAM](http://aws.amazon.com/iam/) - **on Amazon (or other cloud providers)**. You should have already a valid IAM role. You can 
-find further details [here](aws.md#provisioning-prerequisites).
+>**NOTE** that Cloudbreak **does not set your cloud user details** - we work around the concept of GCP Service 
+Account Credentials. You should have already a valid GCP service account. You can find further details [here](gcp.md#provisioning-prerequisites).
 
 Alternatives to provide `SSH Key`:
 
@@ -17,27 +16,24 @@ Alternatives to provide `SSH Key`:
 - or you can add the path of your public key: `—sshKeyPath`
 
 You can check whether the credential was created successfully
-
 ```
 credential list
 ```
-
 You can switch between your existing credentials
-
 ```
-credential select --name my-aws-credential
+credential select --name my-gcp-credential
 ```
-
 ## Infrastructure templates
 
-After your AWS account is linked to Cloudbreak you can start creating resource templates that describe your clusters' infrastructure:
+After your GCP account is linked to Cloudbreak you can start creating resource templates that describe your clusters' 
+infrastructure:
 
 - security groups
 - networks
 - templates
 
-When you create one of the above resource, **Cloudbreak does not make any requests to AWS. Resources are only created
- on AWS after the `cluster create` has applied.** These templates are saved to Cloudbreak's database and can be 
+When you create one of the above resource, **Cloudbreak does not make any requests to GCP. Resources are only created
+ on GCP after the `cluster create` has applied.** These templates are saved to Cloudbreak's database and can be 
  reused with multiple clusters to describe the infrastructure.
 
 **Templates**
@@ -49,62 +45,62 @@ Templates describe the **instances of your cluster** - the instance type and the
 A template can be used repeatedly to create identical copies of the same stack (or to use as a foundation to start a 
 new stack). Templates can be configured with the following command for example:
 ```
-template create --AWS --name my-aws-template --description "sample description" --instanceType m4.large --volumeSize 
-100 --volumeCount 2
+template create --GCP --name my-gcp-template --instanceType n1-standard-2 --volumeCount 2 --volumeSize 100
 ```
+Other available options here:
 
-Other available option here is `--publicInAccount`. If it is true, all the users belonging to your account will be able
- to use this template to create clusters, but cannot delete it.
+`--volumeType` The default is `pd-standard` (HDD), other allowed value is `pd-ssd` 
+(SSD).
+
+`--publicInAccount` is true, all the users belonging to your account will be able to use this template 
+to create clusters, but cannot delete it.
 
 You can check whether the template was created successfully
 ```
 template list
 ```
-
 **Networks**
 
-Your clusters can be created in their own **Virtual Private Cloud (VPC)** or in one of your already existing VPCs. If 
-you choose an existing VPC it is possible to create a new subnet within the VPC or use an already existing one. The 
-subnet's IP range must be defined in the `Subnet (CIDR)` field using the general CIDR notation.
+Your clusters can be created in their own **networks** or in one of your already existing one. If you choose an 
+existing network, it is possible to create a new subnet within the network. The subnet's IP range must be defined in 
+the `Subnet (CIDR)` field using the general CIDR notation. You can read more about [GCP Networks](https://cloud.google.com/compute/docs/networking#networks) and [Subnet networks](https://cloud.google.com/compute/docs/networking#subnet_network).
 
-*Default AWS Network*
+*Default GCP Network*
 
-If you don't want to create or use your custom VPC, you can use the `default-aws-network` for all your Cloudbreak 
-clusters. It will create a new VPC with a `10.0.0.0/16` subnet every time a cluster is created.
+If you don't want to create or use your custom network, you can use the `default-gcp-network` for all your 
+Cloudbreak clusters. It will create a new network with a `10.0.0.0/16` subnet every time a cluster is created.
 
-*Custom AWS Network*
+*Custom GCP Network*
 
-If you'd like to deploy a cluster to a custom VPC you'll have to **create a new network** template, to create a new 
-subnet within the VPC, provide the ID of the subnet which is in the existing VPC.
-
-A network also can be used repeatedly to create identical copies of the same stack (or to use as a foundation to 
-start a new stack).
-
->**IMPORTANT** The subnet CIDR cannot overlap each other in a VPC. So you have to create different network templates 
-for every each clusters.
->For example you can create 3 different clusters with 3 different network templates for multiple subnets 10.0.0.0/24,
- 10.0.1.0/24, 10.0.2.0/24 with the same VPC and IGW identifiers.
-
+If you'd like to deploy a cluster to a custom network you'll have to apply the following command:
 ```
-network create --AWS --name my-aws-network --subnet 10.0.0.0/16
+network create --GCP --name my-gcp-network --description "sample description" --subnet 10.0.0.0/16
 ```
+Other available options here:
 
-Other available options:
+`--networkId` The Virtual Network Identifier of your network. This is an optional 
+value and must be an ID of an existing GCP virtual network. If the identifier is provided, the subnet CIDR will be 
+ignored and the existing network's CIDR range will be used.
 
-`--vpcID` your existing vpc on amazon
+`--publicInAccount` is true, all the users belonging to your account will be able to use this network template 
+to create clusters, but cannot delete it.
 
-`--internetGatewayID` your amazon internet gateway of the given VPC
-
-`--publicInAccount` flags if the network is public in the account
+>**IMPORTANT** Please make sure the defined subnet here doesn't overlap with any of your 
+already deployed subnet in the network, because of the validation only happens after the cluster creation starts.
+   
+>In case of existing subnet make sure you have enough room within your network space for the new instances. The 
+provided subnet CIDR will be ignored, but a proper CIDR range will be used.
 
 You can check whether the network was created successfully
 ```
 network list
 ```
+>**NOTE** The new networks are created on GCP only after the the cluster provisioning starts with the selected 
+network template.
 
 **Security groups**
 
-Security group templates are very similar to the [security groups on the AWS Console](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html). **They describe the allowed 
+Security group templates are very similar to the [firewalls on GCP](https://cloud.google.com/compute/docs/networks-and-firewalls#firewalls). **They describe the allowed 
 inbound traffic to the instances in the cluster.** Currently only one security group template can be selected for a 
 Cloudbreak cluster and all the instances have a public IP address so all the instances in the cluster will belong to 
 the same security group. This may change in a later release.
@@ -113,7 +109,8 @@ the same security group. This may change in a later release.
 
 You can also use the two pre-defined security groups in Cloudbreak.
 
-`only-ssh-and-ssl:` all ports are locked down except for SSH and gateway HTTPS (you can't access Hadoop services outside of the VPC):
+`only-ssh-and-ssl:` all ports are locked down except for SSH and gateway HTTPS (you can't access Hadoop services 
+outside of the virtual network):
 
 * SSH (22)
 * HTTPS (443)
@@ -153,7 +150,8 @@ You can also use the two pre-defined security groups in Cloudbreak.
 *Custom Security Group*
 
 You can define your own security group by adding all the ports, protocols and CIDR range you'd like to use. The rules
- defined here doesn't need to contain the internal rules, those are automatically added by Cloudbreak to the security group on AWS.
+ defined here doesn't need to contain the internal rules, those are automatically added by Cloudbreak to the security
+  group on GCP.
 
 >**IMPORTANT** 443 needs to be there in every security group otherwise Cloudbreak won't be able to communicate with the 
 provisioned cluster.
@@ -162,10 +160,11 @@ provisioned cluster.
 securitygroup create --name my-security-group --description "sample description" --rules 0.0.0.0/0:tcp:443,8080,9090;10.0.33.0/24:tcp:1234,1235
 ```
 
-If `--publicInAccount` is true, all the users belonging to your account will be able
- to use this template to create clusters, but cannot delete it.
+If `--publicInAccount` is true, all the users belonging to your account will be able to use this template 
+to create clusters, but cannot delete it.
 
->**NOTE** The security groups are created on AWS only after the cluster provisioning starts with the selected security group template.
+>**NOTE** The security groups are created on GCP only after the cluster provisioning starts with the selected security
+ group template.
 
 You can check whether the security group was created successfully
 ```
@@ -189,11 +188,12 @@ The host groups in the JSON will be mapped to a set of instances when starting t
 ```
 blueprint add --name my-blueprint --description "sample description" --file <the path of the blueprint>
 ```
-Other available options:
+Other available options here:
 
 `--url` the url of the blueprint
 
-`--publicInAccount` flags if the network is public in the account
+`--publicInAccount` is true, all the users belonging to your account will be able to use this blueprint 
+to create clusters, but cannot delete it.
 
 You can check whether the blueprint was created successfully
 ```
@@ -204,7 +204,7 @@ blueprint list
 modifications.**
 There is no automatic way to modify an exported blueprint and make it instantly usable in Cloudbreak, the 
 modifications have to be done manually.
-When the blueprint is exported some configurations are hardcoded for example domain names, memory configurations..etc. that won't be applicable to the Cloudbreak cluster.
+When the blueprint is exported some configurations are hardcoded for example domain names, memory configurations...etc. that won't be applicable to the Cloudbreak cluster.
 
 **Cluster customization**
 
@@ -227,9 +227,9 @@ you a **basic flow for cluster creation with Cloudbreak Shell**.
 
 **Select credential**
 
-Select one of your previously created AWS credential:
+Select one of your previously created GCP credential:
 ```
-credential select --name my-aws-credential
+credential select --name my-gcp-credential
 ```
 
 **Select blueprint**
@@ -245,9 +245,9 @@ You must configure instance groups before provisioning. An instance group define
 template. Usually we create instance groups for host groups in the blueprint.
 
 ```
-instancegroup configure --instanceGroup cbgateway --nodecount 1 --templateName minviable-aws
-instancegroup configure --instanceGroup master --nodecount 1 --templateName minviable-aws
-instancegroup configure --instanceGroup slave_1 --nodecount 1 --templateName minviable-aws
+instancegroup configure --instanceGroup cbgateway --nodecount 1 --templateName minviable-gcp
+instancegroup configure --instanceGroup master --nodecount 1 --templateName minviable-gcp
+instancegroup configure --instanceGroup slave_1 --nodecount 1 --templateName minviable-gcp
 ```
 Other available option:
 
@@ -257,7 +257,7 @@ Other available option:
 
 Select one of your previously created network which fits your needs or a default one:
 ```
-network select --name default-aws-network
+network select --name default-gcp-network
 ```
 
 **Select security group**
@@ -270,10 +270,10 @@ securitygroup select --name all-services-port
 
 Stack means the running cloud infrastructure that is created based on the instance groups configured earlier 
 (`credential`, `instancegroups`, `network`, `securitygroup`). Same as in case of the API or UI the new cluster will 
-use your templates and by using CloudFormation will launch your cloud stack. Use the following command to create a 
+use your templates and by using GCP will launch your cloud stack. Use the following command to create a 
 stack to be used with your Hadoop cluster:
 ```
-stack create --name myawsstack --region us-east-1
+stack create --name mygcpstack --region us-central1
 ```
 The infrastructure is created asynchronously, the state of the stack can be checked with the stack `show command`. If 
 it reports AVAILABLE, it means that the virtual machines and the corresponding infrastructure is running at the cloud provider.
@@ -294,30 +294,27 @@ You can use the `--wait` parameter here as well.
 **You are done!** You have several opportunities to check the progress during the infrastructure creation then 
 provisioning:
 
-- Cloudbreak uses *CloudFormation* to create the resources - you can check out the resources created by Cloudbreak on
- the AWS Console CloudFormation page.
+- Cloudbreak uses *Google Cloud Platform* to create the resources - you can check out the resources created by 
+Cloudbreak on the Compute Engine page of the Google Compute Platform..
 
-For example:
-![](/aws/images/aws-cloudformation_v2.png)
-<sub>*Full size [here](/aws/images/aws-cloudformation_v2.png).*</sub>
+![](/gcp/images/gcp-computeengine_2.png)
+<sub>*Full size [here](/gcp/images/gcp-computeengine_2.png).*</sub>
 
 - If stack then cluster creation have successfully done, you can check the Ambari Web UI. However you need to know the 
-Ambari IP (for example: `http://52.8.110.95:8080`): 
-    - You can get the IP from the CLI as a result (`ambariServerIp 52.8.110.95`) of the following command:
+Ambari IP (for example: `http://130.211.163.13:8080`): 
+    - You can get the IP from the CLI as a result (`ambariServerIp 130.211.163.13`) of the following command:
 ```
          cluster show
 ```
 
-For example:
-![](/images/ambari-dashboard.png)
-<sub>*Full size [here](/images/ambari-dashboard.png).*</sub>
+![](/images/ambari-dashboard_3.png)
+<sub>*Full size [here](/images/ambari-dashboard_3.png).*</sub>
 
 - Besides these you can check the entire progress and the Ambari IP as well on the Cloudbreak Web UI itself. Open the 
 new cluster's `details` and its `Event History` here.
 
-For example:
-![](/images/ui-eventhistory_v3.png)
-<sub>*Full size [here](/images/ui-eventhistory_v3.png).*</sub>
+![](/gcp/images/gcp-eventhistory_2.png)
+<sub>*Full size [here](/gcp/images/gcp-eventhistory_2.png).*</sub>
 
 **Stop cluster**
 
@@ -373,60 +370,58 @@ stack node --REMOVE  --instanceGroup host_group_slave_1 --adjustment -2
 ## Cluster termination
 
 You can terminate running or stopped clusters with
-
 ```
-stack terminate --name myawsstack
+stack terminate --name mygcpstack
 ```
 
 >**IMPORTANT** Always use Cloudbreak to terminate the cluster. If that fails for some reason, try to delete the 
-CloudFormation stack first. Instances are started in an Auto Scaling Group so they may be restarted if you terminate an instance manually!
+GCP resource group first. Instances are started in an Auto Scaling Group so they may be restarted if you terminate an 
+instance manually!
 
 Sometimes Cloudbreak cannot synchronize it's state with the cluster state at the cloud provider and the cluster can't
  be terminated. In this case the `Forced termination` option on the Cloudbreak Web UI can help to terminate the cluster
   at the Cloudbreak side. **If it has happened:**
 
-1. You should check the related resources at the AWS CloudFormation
+1. You should check the related resources at the GCP
 2. If it is needed you need to manually remove resources from there
 
 ## Silent mode
 
-With Cloudbreak Shell you can execute script files as well. A script file contains shell commands and can 
-be executed with the `script` cloudbreak shell command
+With Cloudbreak shell you can execute script files as well. A script file contains cloudbreak shell commands and can be executed with the `script` cloudbreak shell command
 
 ```
 script <your script file>
 ```
 
-or with the `cbd util cloudbreak-shell-quiet` command
+or with the `cbd util cloudbreak-shell-quiet` `cbd` command:
 
 ```
 cbd util cloudbreak-shell-quiet < example.sh
 ```
-
->**IMPORTANT** You have to copy all your files into the `cbd` working directory, what you would like to use in shell.
- For example if your `cbd` working directory is ~/cloudbreak-deployment then copy your script file to here.
+>**IMPORTANT** You have to copy all your files into the `cbd` working directory, what you would like to use in shell. For 
+example if your `cbd` working directory is ~/cloudbreak-deployment then copy your script file to here.
 
 ### Example
 
-The following example creates a Hadoop cluster with `hdp-small-default` blueprint on M4Xlarge instances with 2X100G 
-attached disks on `default-aws-network` network using `all-services-port` security group. You should copy your ssh 
-public key file into your `cbd` working directory with name `id_rsa.pub` and paste your AWS credentials in the parts with `<...>` highlight.
-
+The following example creates a hadoop cluster with `hdp-small-default` blueprint on M3Xlarge instances with 2X100G 
+attached disks on `default-gcp-network` network using `all-services-port` security group. You should copy your ssh 
+public key file (with name `id_rsa.pub`) and your GCP service account generated private key ( with name `gcp.p12`) into your `cbd` working 
+directory and change the `<...>` parts with your GCP credential details.
 
 ```
-credential create --AWS --description description --name my-aws-credential --roleArn <arn role> --sshKeyPath id_rsa.pub
-credential select --name my-aws-credential
-template create --AWS --name awstemplate --description aws-template --instanceType m4.xlarge --volumeSize 100 
+credential create --GCP --description "my credential" --name my-gcp-credential --projectId <your gcp projectid> --serviceAccountId <your GCP service account mail address> --serviceAccountPrivateKeyPath gcp.p12 --sshKeyFile id_rsa.pub
+credential select --name my-gcp-credential
+template create --GCP --name gcptemplate --description gcp-template --instanceType n1-standard-4 --volumeSize 100 
 --volumeCount 2
 blueprint select --name hdp-small-default
-instancegroup configure --instanceGroup cbgateway --nodecount 1 --templateName awstemplate
-instancegroup configure --instanceGroup host_group_master_1 --nodecount 1 --templateName awstemplate
-instancegroup configure --instanceGroup host_group_master_2 --nodecount 1 --templateName awstemplate
-instancegroup configure --instanceGroup host_group_master_3 --nodecount 1 --templateName awstemplate
-instancegroup configure --instanceGroup host_group_client_1  --nodecount 1 --templateName awstemplate
-instancegroup configure --instanceGroup host_group_slave_1 --nodecount 3 --templateName awstemplate
-network select --name default-aws-network
+instancegroup configure --instanceGroup cbgateway --nodecount 1 --templateName gcptemplate
+instancegroup configure --instanceGroup host_group_master_1 --nodecount 1 --templateName gcptemplate
+instancegroup configure --instanceGroup host_group_master_2 --nodecount 1 --templateName gcptemplate
+instancegroup configure --instanceGroup host_group_master_3 --nodecount 1 --templateName gcptemplate
+instancegroup configure --instanceGroup host_group_client_1  --nodecount 1 --templateName gcptemplate
+instancegroup configure --instanceGroup host_group_slave_1 --nodecount 3 --templateName gcptemplate
+network select --name default-gcp-network
 securitygroup select --name all-services-port
-stack create --name my-first-stack --region us-east-1
+stack create --name my-first-stack --region us-central1
 cluster create --description "My first cluster"
 ```

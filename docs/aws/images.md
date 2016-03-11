@@ -1,5 +1,3 @@
-# AWS Cloud Images
-
 We have pre-built cloud images for AWS with the Cloudbreak Deployer pre-installed. You can launch the latest 
 Cloudbreak Deployer image based on your region at the [AWS Management Console](https://aws.amazon.com/console/).
 

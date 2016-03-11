@@ -18,8 +18,8 @@ fill that with a default value.
 If `Public in account` is checked all the users belonging to your account will be able to use this blueprint to 
 create clusters, but cannot delete or modify it.
 
-![](../images/ui-blueprints_v3.png)
-<sub>*Full size [here](../images/ui-blueprints_v3.png).*</sub>
+![](/images/ui-blueprints_v3.png)
+<sub>*Full size [here](/images/ui-blueprints_v3.png).*</sub>
 
 **A blueprint can be exported from a running Ambari cluster that can be reused in Cloudbreak with slight 
 modifications.**

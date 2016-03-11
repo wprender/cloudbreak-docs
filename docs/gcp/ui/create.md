@@ -4,9 +4,9 @@ After all the cluster resources are configured you can deploy a new HDP cluster.
 
 Here is a **basic flow for cluster creation on Cloudbreak Web UI**:
 
- - Start by selecting a previously created AWS credential in the header.
+ - Start by selecting a previously created GCP credential in the header.
 
-![](/images/ui-credentials_v2.png)
+![](../../images/ui-credentials_v2.png)
 <sub>*Full size [here](/images/ui-credentials_v2.png).*</sub>
 
  - Open `create cluster`
@@ -36,30 +36,37 @@ be Kerberized. See more about it in the [Kerberos](kerberos.md) section of this 
     - the templates
     - the number of nodes for all of the host groups in the blueprint
     - the recipes for nodes
+ - Click on the `Add File System` button
+
+`Add File System` tab
+
+ - Select one of the file system that fits your needs
+ - After you've selected `GCS file system`, you should configure:
+    - `Default Bucket Name`
  - Click on the `Review and Launch` button
+>You can read more about [GCS File System](https://cloud.google.com/storage/docs/gcs-fuse) and [Bucket Naming](https://cloud.google.com/storage/docs/naming#requirements) in GCP 
+Documentation.
 
 `Review and Launch` tab
 
  - After the `create and start cluster` button has clicked Cloudbreak will start to create the cluster's resources on 
- your AWS account.
+ your GCP account.
 
-Cloudbreak uses *CloudFormation* to create the resources - you can check out the resources created by Cloudbreak on 
-the AWS Console CloudFormation page.
-![](/aws/images/aws-cloudformation_v2.png)
-<sub>*Full size [here](/aws/images/aws-cloudformation_v2.png).*</sub>
+Cloudbreak uses *Google Cloud Platform* to create the resources - you can check out the resources created by Cloudbreak
+ on the `Compute Engine` page of the `Google Compute Platform`.
+![](/images/gcp-computeengine.png)
+<sub>*Full size [here](/gcp/images/gcp-computeengine.png).*</sub>
 
 Besides these you can check the progress on the Cloudbreak Web UI itself if you open the new cluster's `Event History`.
-![](/images/ui-eventhistory_v3.png)
-<sub>*Full size [here](/images/ui-eventhistory_v3.png).*</sub>
+![](/images/gcp-eventhistory.png)
+<sub>*Full size [here](/gcp/images/gcp-eventhistory.png).*</sub>
 
 **Advanced options**
 
 There are some advanced features when deploying a new cluster, these are the following:
 
-`Availability Zone` You can restrict the instances to a [specific availability zone](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html). It may be useful if you're using
+`Availability Zone` You can restrict the instances to a [specific availability zone](https://cloud.google.com/compute/docs/zones). It may be useful if you're using
  reserved instances.
-
-`Use dedicated instances` You can use [dedicated instances](https://aws.amazon.com/ec2/purchasing-options/dedicated-instances/) on EC2
 
 `Minimum cluster size` The provisioning strategy in case of the cloud provider cannot allocate all the requested nodes.
 

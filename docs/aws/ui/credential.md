@@ -20,5 +20,5 @@ To create a new AWS credential follow these steps:
 >`Public in account` means that all the users belonging to your account will be able to use this credential to create 
 clusters, but cannot delete it.
 
-![](../../images/aws-credential_v3.png)
-<sub>*Full size [here](../../images/aws-credential_v3.png).*</sub>
+![](/aws/images/aws-credential_v3.png)
+<sub>*Full size [here](/aws/images/aws-credential_v3.png).*</sub>

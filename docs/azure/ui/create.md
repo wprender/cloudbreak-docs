@@ -1,10 +1,24 @@
+**Cluster customization**
+
+Sometimes it can be useful to **define some custom scripts so called Recipes in Cloudbreak** that run during cluster 
+creation and add some additional functionality.
+
+For example it can be a service you'd like to install but it's not supported by Ambari or some script that 
+automatically downloads some data to the necessary nodes.
+The most **notable example is Ranger setup**:
+
+- It has a prerequisite of a running database when Ranger Admin is installing.
+- A PostgreSQL database can be easily started and configured with a recipe before the blueprint installation starts.
+
+To learn more about these and check the Ranger recipe out, take a look at the [Cluster customization](recipes.md).
+
 ## Cluster deployment
 
 After all the cluster resources are configured you can deploy a new HDP cluster.
 
 Here is a **basic flow for cluster creation on Cloudbreak Web UI**:
 
- - Start by selecting a previously created AWS credential in the header.
+ - Start by selecting a previously created Azure credential in the header.
 
 ![](/images/ui-credentials_v2.png)
 <sub>*Full size [here](/images/ui-credentials_v2.png).*</sub>
@@ -36,30 +50,35 @@ be Kerberized. See more about it in the [Kerberos](kerberos.md) section of this 
     - the templates
     - the number of nodes for all of the host groups in the blueprint
     - the recipes for nodes
+ - Click on the `Add File System` button
+
+`Add File System` tab
+
+ - Select one of the file system that fits your needs
+ - After you've selected `WASB` or `DASH`, you should configure:
+    - `Storage Account Name`
+    - `Storage Account Access Key`
  - Click on the `Review and Launch` button
+>`File system` is a mandatory configuration for Azure. You can read more about WASB and DASH in the [File System Configuration section](azure.md#file-system-configuration).
 
 `Review and Launch` tab
 
  - After the `create and start cluster` button has clicked Cloudbreak will start to create the cluster's resources on 
- your AWS account.
+ your Azure account.
 
-Cloudbreak uses *CloudFormation* to create the resources - you can check out the resources created by Cloudbreak on 
-the AWS Console CloudFormation page.
-![](/aws/images/aws-cloudformation_v2.png)
-<sub>*Full size [here](/aws/images/aws-cloudformation_v2.png).*</sub>
+Cloudbreak uses *Azure Resource Manager* to create the resources - you can check out the resources created by Cloudbreak
+ on 
+the `Azure Portal Resource groups` page.
+![](/azure/images/azure-resourcegroup.png)
+<sub>*Full size [here](/azure/images/azure-resourcegroup.png).*</sub>
 
 Besides these you can check the progress on the Cloudbreak Web UI itself if you open the new cluster's `Event History`.
-![](/images/ui-eventhistory_v3.png)
-<sub>*Full size [here](/images/ui-eventhistory_v3.png).*</sub>
+![](/azure/images/azure-eventhistory.png)
+<sub>*Full size [here](/azure/images/azure-eventhistory.png).*</sub>
 
 **Advanced options**
 
 There are some advanced features when deploying a new cluster, these are the following:
-
-`Availability Zone` You can restrict the instances to a [specific availability zone](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html). It may be useful if you're using
- reserved instances.
-
-`Use dedicated instances` You can use [dedicated instances](https://aws.amazon.com/ec2/purchasing-options/dedicated-instances/) on EC2
 
 `Minimum cluster size` The provisioning strategy in case of the cloud provider cannot allocate all the requested nodes.
 

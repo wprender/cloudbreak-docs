@@ -1,15 +1,17 @@
-## Setting up AWS credential
+## Setting up Azure credential
 
-Cloudbreak works by connecting your AWS account through so called Credentials, and then uses these credentials to 
+Cloudbreak works by connecting your Azure account through so called Credentials, and then uses these credentials to 
 create resources on your behalf. Credentials can be configured with the following command for example:
-
 ```
-credential create --AWS --name my-aws-credential --description "sample description" --roleArn 
-arn:aws:iam::***********:role/userrole --sshKeyString "ssh-rsa AAAAB****etc"
+credential create --AZURE --name my-azure-credential --description "sample credential" --subscriptionId 
+your-azure-subscription-id --tenantId your-azure-application-tenant-id --appId 
+your-azure-application-id --password YourApplicationPassword --sshKeyString "ssh-rsa AAAAB3***etc."
 ```
 
->**NOTE** that Cloudbreak **does not set your cloud user details** - we work around the concept of [IAM](http://aws.amazon.com/iam/) - **on Amazon (or other cloud providers)**. You should have already a valid IAM role. You can 
-find further details [here](aws.md#provisioning-prerequisites).
+> Cloudbreak is supporting simple rsa public key instead of X509 certificate file after 1.0.4 version
+
+>**NOTE** that Cloudbreak **does not set your cloud user details** - we work around the concept of Access Control 
+Service (ACS). You should have already a valid Azure Subscription and Application. You can find further details [here](azure.md#provisioning-prerequisites).
 
 Alternatives to provide `SSH Key`:
 
@@ -17,27 +19,24 @@ Alternatives to provide `SSH Key`:
 - or you can add the path of your public key: `—sshKeyPath`
 
 You can check whether the credential was created successfully
-
 ```
 credential list
 ```
-
 You can switch between your existing credentials
-
 ```
-credential select --name my-aws-credential
+credential select --name my-azure-credential
 ```
-
 ## Infrastructure templates
 
-After your AWS account is linked to Cloudbreak you can start creating resource templates that describe your clusters' infrastructure:
+After your Azure account is linked to Cloudbreak you can start creating resource templates that describe your clusters' 
+infrastructure:
 
 - security groups
 - networks
 - templates
 
-When you create one of the above resource, **Cloudbreak does not make any requests to AWS. Resources are only created
- on AWS after the `cluster create` has applied.** These templates are saved to Cloudbreak's database and can be 
+When you create one of the above resource, **Cloudbreak does not make any requests to Azure. Resources are only created
+ on Azure after the `cluster create` has applied.** These templates are saved to Cloudbreak's database and can be 
  reused with multiple clusters to describe the infrastructure.
 
 **Templates**
@@ -49,8 +48,7 @@ Templates describe the **instances of your cluster** - the instance type and the
 A template can be used repeatedly to create identical copies of the same stack (or to use as a foundation to start a 
 new stack). Templates can be configured with the following command for example:
 ```
-template create --AWS --name my-aws-template --description "sample description" --instanceType m4.large --volumeSize 
-100 --volumeCount 2
+template create --AZURE --name my-azure-template --description "sample description" --instanceType Standard_D4 --volumeSize 100 --volumeCount 2
 ```
 
 Other available option here is `--publicInAccount`. If it is true, all the users belonging to your account will be able
@@ -63,48 +61,52 @@ template list
 
 **Networks**
 
-Your clusters can be created in their own **Virtual Private Cloud (VPC)** or in one of your already existing VPCs. If 
-you choose an existing VPC it is possible to create a new subnet within the VPC or use an already existing one. The 
-subnet's IP range must be defined in the `Subnet (CIDR)` field using the general CIDR notation.
+Your clusters can be created in their own **networks** or in one of your already existing one. If you choose an 
+existing network, it is possible to create a new subnet within the network. The subnet's IP range must be defined in 
+the `Subnet (CIDR)` field using the general CIDR notation.
 
-*Default AWS Network*
+*Default AZURE Network*
 
-If you don't want to create or use your custom VPC, you can use the `default-aws-network` for all your Cloudbreak 
-clusters. It will create a new VPC with a `10.0.0.0/16` subnet every time a cluster is created.
+If you don't want to create or use your custom network, you can use the `default-azure-network` for all your 
+Cloudbreak clusters. It will create a new network with a `10.0.0.0/16` subnet and `10.0.0.0/8` address prefix every 
+time a cluster is created.
 
-*Custom AWS Network*
+*Custom AZURE Network*
 
-If you'd like to deploy a cluster to a custom VPC you'll have to **create a new network** template, to create a new 
-subnet within the VPC, provide the ID of the subnet which is in the existing VPC.
-
-A network also can be used repeatedly to create identical copies of the same stack (or to use as a foundation to 
-start a new stack).
-
->**IMPORTANT** The subnet CIDR cannot overlap each other in a VPC. So you have to create different network templates 
-for every each clusters.
->For example you can create 3 different clusters with 3 different network templates for multiple subnets 10.0.0.0/24,
- 10.0.1.0/24, 10.0.2.0/24 with the same VPC and IGW identifiers.
-
+If you'd like to deploy a cluster to a custom network you'll have to apply the following command:
 ```
-network create --AWS --name my-aws-network --subnet 10.0.0.0/16
+network create --AZURE --name my-azure-network --addressPrefix 192.168.123.123 --subnet 10.0.0.0/16
 ```
 
-Other available options:
-
-`--vpcID` your existing vpc on amazon
-
-`--internetGatewayID` your amazon internet gateway of the given VPC
-
-`--publicInAccount` flags if the network is public in the account
+>**IMPORTANT** Please make sure the defined subnet and theirs address prefixes here doesn't overlap with any of your 
+already deployed subnet and its already used address prefix in the network, because of the validation only happens 
+after the cluster creation 
+starts.
+   
+>In case of existing subnet make sure you have enough room within your network space for the new instances. The 
+provided subnet CIDR will be ignored, but a proper CIDR range will be used.
 
 You can check whether the network was created successfully
 ```
 network list
 ```
 
+`--addressPrefix` This list will be appended to the current list of address prefixes.
+
+- The address prefixes in this list should not overlap between them.
+- The address prefixes in this list should not overlap with existing address prefixes in the network.
+
+You can find more details about the AZURE Address Prefixes [here](https://azure.microsoft.com/en-us/documentation/articles/azure-cli-arm-commands/#azure-network-commands-to-manage-network-resources).
+
+If `--publicInAccount` is true, all the users belonging to your account will be able to use this network template 
+to create clusters, but cannot delete it.
+
+>**NOTE** The new networks are created on AZURE only after the the cluster provisioning starts with the selected 
+network template.
+
 **Security groups**
 
-Security group templates are very similar to the [security groups on the AWS Console](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html). **They describe the allowed 
+Security group templates are very similar to the [security groups on Azure](https://azure.microsoft.com/en-us/documentation/articles/virtual-networks-nsg/). **They describe the allowed 
 inbound traffic to the instances in the cluster.** Currently only one security group template can be selected for a 
 Cloudbreak cluster and all the instances have a public IP address so all the instances in the cluster will belong to 
 the same security group. This may change in a later release.
@@ -113,7 +115,8 @@ the same security group. This may change in a later release.
 
 You can also use the two pre-defined security groups in Cloudbreak.
 
-`only-ssh-and-ssl:` all ports are locked down except for SSH and gateway HTTPS (you can't access Hadoop services outside of the VPC):
+`only-ssh-and-ssl:` all ports are locked down except for SSH and gateway HTTPS (you can't access Hadoop services 
+outside of the virtual network):
 
 * SSH (22)
 * HTTPS (443)
@@ -153,7 +156,8 @@ You can also use the two pre-defined security groups in Cloudbreak.
 *Custom Security Group*
 
 You can define your own security group by adding all the ports, protocols and CIDR range you'd like to use. The rules
- defined here doesn't need to contain the internal rules, those are automatically added by Cloudbreak to the security group on AWS.
+ defined here doesn't need to contain the internal rules, those are automatically added by Cloudbreak to the security
+  group on Azure.
 
 >**IMPORTANT** 443 needs to be there in every security group otherwise Cloudbreak won't be able to communicate with the 
 provisioned cluster.
@@ -162,10 +166,11 @@ provisioned cluster.
 securitygroup create --name my-security-group --description "sample description" --rules 0.0.0.0/0:tcp:443,8080,9090;10.0.33.0/24:tcp:1234,1235
 ```
 
-If `--publicInAccount` is true, all the users belonging to your account will be able
+Other available option here is `--publicInAccount`. If it is true, all the users belonging to your account will be able
  to use this template to create clusters, but cannot delete it.
 
->**NOTE** The security groups are created on AWS only after the cluster provisioning starts with the selected security group template.
+>**NOTE** The security groups are created on Azure only after the cluster provisioning starts with the selected security
+ group template.
 
 You can check whether the security group was created successfully
 ```
@@ -189,11 +194,12 @@ The host groups in the JSON will be mapped to a set of instances when starting t
 ```
 blueprint add --name my-blueprint --description "sample description" --file <the path of the blueprint>
 ```
-Other available options:
+Other available options here:
 
 `--url` the url of the blueprint
 
-`--publicInAccount` flags if the network is public in the account
+`--publicInAccount` is true, all the users belonging to your account will be able to use this blueprint 
+to create clusters, but cannot delete it.
 
 You can check whether the blueprint was created successfully
 ```
@@ -204,7 +210,7 @@ blueprint list
 modifications.**
 There is no automatic way to modify an exported blueprint and make it instantly usable in Cloudbreak, the 
 modifications have to be done manually.
-When the blueprint is exported some configurations are hardcoded for example domain names, memory configurations..etc. that won't be applicable to the Cloudbreak cluster.
+When the blueprint is exported some configurations are hardcoded for example domain names, memory configurations...etc. that won't be applicable to the Cloudbreak cluster.
 
 **Cluster customization**
 
@@ -227,9 +233,9 @@ you a **basic flow for cluster creation with Cloudbreak Shell**.
 
 **Select credential**
 
-Select one of your previously created AWS credential:
+Select one of your previously created Azure credential:
 ```
-credential select --name my-aws-credential
+credential select --name my-azure-credential
 ```
 
 **Select blueprint**
@@ -245,9 +251,9 @@ You must configure instance groups before provisioning. An instance group define
 template. Usually we create instance groups for host groups in the blueprint.
 
 ```
-instancegroup configure --instanceGroup cbgateway --nodecount 1 --templateName minviable-aws
-instancegroup configure --instanceGroup master --nodecount 1 --templateName minviable-aws
-instancegroup configure --instanceGroup slave_1 --nodecount 1 --templateName minviable-aws
+instancegroup configure --instanceGroup cbgateway --nodecount 1 --templateName minviable-azure
+instancegroup configure --instanceGroup master --nodecount 1 --templateName minviable-azure
+instancegroup configure --instanceGroup slave_1 --nodecount 1 --templateName minviable-azure
 ```
 Other available option:
 
@@ -257,7 +263,7 @@ Other available option:
 
 Select one of your previously created network which fits your needs or a default one:
 ```
-network select --name default-aws-network
+network select --name default-azure-network
 ```
 
 **Select security group**
@@ -270,10 +276,10 @@ securitygroup select --name all-services-port
 
 Stack means the running cloud infrastructure that is created based on the instance groups configured earlier 
 (`credential`, `instancegroups`, `network`, `securitygroup`). Same as in case of the API or UI the new cluster will 
-use your templates and by using CloudFormation will launch your cloud stack. Use the following command to create a 
+use your templates and by using Azure ARM will launch your cloud stack. Use the following command to create a 
 stack to be used with your Hadoop cluster:
 ```
-stack create --name myawsstack --region us-east-1
+stack create --name myazurestack --region "North Europe"
 ```
 The infrastructure is created asynchronously, the state of the stack can be checked with the stack `show command`. If 
 it reports AVAILABLE, it means that the virtual machines and the corresponding infrastructure is running at the cloud provider.
@@ -294,30 +300,27 @@ You can use the `--wait` parameter here as well.
 **You are done!** You have several opportunities to check the progress during the infrastructure creation then 
 provisioning:
 
-- Cloudbreak uses *CloudFormation* to create the resources - you can check out the resources created by Cloudbreak on
- the AWS Console CloudFormation page.
+- Cloudbreak uses *ARM* to create the resources - you can check out the resources created by Cloudbreak on
+ the Azure Portal Resource groups page.
 
-For example:
-![](/aws/images/aws-cloudformation_v2.png)
-<sub>*Full size [here](/aws/images/aws-cloudformation_v2.png).*</sub>
+![](../../azure/images/azure-resourcegroups_2.png)
+<sub>*Full size [here](/azure/images/azure-resourcegroups_2.png).*</sub>
 
 - If stack then cluster creation have successfully done, you can check the Ambari Web UI. However you need to know the 
-Ambari IP (for example: `http://52.8.110.95:8080`): 
-    - You can get the IP from the CLI as a result (`ambariServerIp 52.8.110.95`) of the following command:
+Ambari IP (for example: `http://23.101.60.49:8080`): 
+    - You can get the IP from the CLI as a result (`ambariServerIp 23.101.60.49`) of the following command:
 ```
          cluster show
 ```
 
-For example:
-![](/images/ambari-dashboard.png)
-<sub>*Full size [here](/images/ambari-dashboard.png).*</sub>
+![](../../images/ambari-dashboard_2.png)
+<sub>*Full size [here](/images/ambari-dashboard_2.png).*</sub>
 
 - Besides these you can check the entire progress and the Ambari IP as well on the Cloudbreak Web UI itself. Open the 
 new cluster's `details` and its `Event History` here.
 
-For example:
-![](/images/ui-eventhistory_v3.png)
-<sub>*Full size [here](/images/ui-eventhistory_v3.png).*</sub>
+![](../../azure/images/azure-eventhistory_2.png)
+<sub>*Full size [here](/azure/images/azure-eventhistory_2.png).*</sub>
 
 **Stop cluster**
 
@@ -373,60 +376,57 @@ stack node --REMOVE  --instanceGroup host_group_slave_1 --adjustment -2
 ## Cluster termination
 
 You can terminate running or stopped clusters with
-
 ```
-stack terminate --name myawsstack
+stack terminate --name myazurestack
 ```
 
 >**IMPORTANT** Always use Cloudbreak to terminate the cluster. If that fails for some reason, try to delete the 
-CloudFormation stack first. Instances are started in an Auto Scaling Group so they may be restarted if you terminate an instance manually!
+Azure resource group first. Instances are started in an Auto Scaling Group so they may be restarted if you terminate an instance manually!
 
 Sometimes Cloudbreak cannot synchronize it's state with the cluster state at the cloud provider and the cluster can't
  be terminated. In this case the `Forced termination` option on the Cloudbreak Web UI can help to terminate the cluster
   at the Cloudbreak side. **If it has happened:**
 
-1. You should check the related resources at the AWS CloudFormation
+1. You should check the related resources at the Azure Portal
 2. If it is needed you need to manually remove resources from there
 
 ## Silent mode
 
-With Cloudbreak Shell you can execute script files as well. A script file contains shell commands and can 
-be executed with the `script` cloudbreak shell command
+With Cloudbreak Shell you can execute script files as well. A script file contains cloudbreak shell commands and can be executed with the `script` cloudbreak shell command
 
 ```
 script <your script file>
 ```
 
-or with the `cbd util cloudbreak-shell-quiet` command
+or with the `cbd util cloudbreak-shell-quiet` `cbd` command:
 
 ```
 cbd util cloudbreak-shell-quiet < example.sh
 ```
-
->**IMPORTANT** You have to copy all your files into the `cbd` working directory, what you would like to use in shell.
- For example if your `cbd` working directory is ~/cloudbreak-deployment then copy your script file to here.
+>**IMPORTANT** You have to copy all your files into the `cbd`  working directory, what you would like to use in shell. For 
+example if your `cbd`  working directory is ~/cloudbreak-deployment then copy your script file to here.
 
 ### Example
 
-The following example creates a Hadoop cluster with `hdp-small-default` blueprint on M4Xlarge instances with 2X100G 
-attached disks on `default-aws-network` network using `all-services-port` security group. You should copy your ssh 
-public key file into your `cbd` working directory with name `id_rsa.pub` and paste your AWS credentials in the parts with `<...>` highlight.
-
+The following example creates a hadoop cluster with `hdp-small-default` blueprint on Standard_D3 instances with 
+2X100G attached disks on `default-azure-network` network using `all-services-port` security group. You should copy 
+your ssh public key file into your `cbd` working directory with name `id_rsa.pub` and paste your Azure credentials in 
+the parts with `<...>` highlight.
 
 ```
-credential create --AWS --description description --name my-aws-credential --roleArn <arn role> --sshKeyPath id_rsa.pub
-credential select --name my-aws-credential
-template create --AWS --name awstemplate --description aws-template --instanceType m4.xlarge --volumeSize 100 
+credential create --AZURE --description "credential description" --name myazurecredential --subscriptionId <your Azure subscription id> --appId <your Azure application id> --tenantId <your tenant id> --password <your Azure application password> --sshKeyPath id_rsa.pub
+credential select --name myazurecredential
+template create --AZURE --name azuretemplate --description azure-template --instanceType Standard_D3 --volumeSize 100 
 --volumeCount 2
 blueprint select --name hdp-small-default
-instancegroup configure --instanceGroup cbgateway --nodecount 1 --templateName awstemplate
-instancegroup configure --instanceGroup host_group_master_1 --nodecount 1 --templateName awstemplate
-instancegroup configure --instanceGroup host_group_master_2 --nodecount 1 --templateName awstemplate
-instancegroup configure --instanceGroup host_group_master_3 --nodecount 1 --templateName awstemplate
-instancegroup configure --instanceGroup host_group_client_1  --nodecount 1 --templateName awstemplate
-instancegroup configure --instanceGroup host_group_slave_1 --nodecount 3 --templateName awstemplate
-network select --name default-aws-network
+instancegroup configure --instanceGroup cbgateway --nodecount 1 --templateName azuretemplate
+instancegroup configure --instanceGroup host_group_master_1 --nodecount 1 --templateName azuretemplate
+instancegroup configure --instanceGroup host_group_master_2 --nodecount 1 --templateName azuretemplate
+instancegroup configure --instanceGroup host_group_master_3 --nodecount 1 --templateName azuretemplate
+instancegroup configure --instanceGroup host_group_client_1  --nodecount 1 --templateName azuretemplate
+instancegroup configure --instanceGroup host_group_slave_1 --nodecount 3 --templateName azuretemplate
+network select --name default-azure-network
 securitygroup select --name all-services-port
-stack create --name my-first-stack --region us-east-1
+stack create --name my-first-stack --region "West US"
 cluster create --description "My first cluster"
 ```
