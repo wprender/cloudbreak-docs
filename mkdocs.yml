@@ -32,3 +32,4 @@ pages:
         - Migration : database.md
         - Advanced Configuration : configuration.md
         - Development : development.md
+        - Known issues: issues.md
