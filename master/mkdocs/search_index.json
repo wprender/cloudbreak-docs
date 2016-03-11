@@ -1834,6 +1834,21 @@
             "location": "/development/#acceptance", 
             "text": "Now you should test this release. You can get it by  cbd update release-x.y.z . Comment with LGTM (Looking Good To Me).  Once the PR is merged, CircleCI will:   create a new release on  GitHub releases tab , with the\n help of  gh-release .  it will create the git tag with  v  prefix like:  v0.0.3", 
             "title": "Acceptance"
+        }, 
+        {
+            "location": "/issues/", 
+            "text": "Known issues\n\n\nDecommission\n\n\n\n\nAMBARI-15294\n In case of downscaling if the selected host group contains an HBase RegionServer it's not guaranteed that all regions will be safely moved to another RegionServer which will remain as part of the cluster. If you choose to scale down such a host group Cloudbreak won't track the region movement process. It is recommended to put the RegionServers in a different host group in your blueprint than the ones you'll be scaling.", 
+            "title": "Known issues"
+        }, 
+        {
+            "location": "/issues/#known-issues", 
+            "text": "", 
+            "title": "Known issues"
+        }, 
+        {
+            "location": "/issues/#decommission", 
+            "text": "AMBARI-15294  In case of downscaling if the selected host group contains an HBase RegionServer it's not guaranteed that all regions will be safely moved to another RegionServer which will remain as part of the cluster. If you choose to scale down such a host group Cloudbreak won't track the region movement process. It is recommended to put the RegionServers in a different host group in your blueprint than the ones you'll be scaling.", 
+            "title": "Decommission"
         }
     ]
 }

@@ -153,6 +153,12 @@
      <changefreq>daily</changefreq>
     </url>
         
+    <url>
+     <loc>http://sequenceiq.com/cloudbreak-docs/issues/</loc>
+     <lastmod>2016-03-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
     
 
 </urlset>
