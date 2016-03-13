@@ -1,10 +1,11 @@
-#System Security Services Daemon configuration
+#System Security Services Daemon
 
 > This feature is currently `TECHNICAL PREVIEW`.
 
-By default Cloudbreak installs Hadoop with a few default users. Most of the time default users don't give great freedom, to manage permissions in the ecosystem.
+By default Cloudbreak installs Hadoop with a few default users. Most of the time, default users do not give great freedom, to manage permissions in the ecosystem.
 Other big problem around the user management is that created users must be consistent on the whole cluster, otherwise operations will fail.
-That's where System Security Services Daemon (a.k.a. SSSD) comes in picture. SSSD is a system daemon. Its primary function is to provide access to identity and authentication remote resource through a common framework that can provide caching and offline support to the system. Cloudbreak helps to install and configure SSSD, and sets up an SSH server on Ambari hosts, to allow log in with external users on the hosts's 2022 port.
+
+That's where *System Security Services Daemon* (SSSD) comes in picture. SSSD is a system daemon. Its primary function is to provide access to remote identity and authentication resources through a common framework that can provide caching and offline support to the system. Cloudbreak helps to install and configure SSSD, and sets up an SSH server on Ambari hosts, to allow log in with external users on the host's 2022 port.
 
 ```
 ssh [external-user]@[ambari-host] -p 2022
