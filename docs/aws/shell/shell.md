@@ -95,7 +95,8 @@ Other available options:
 
 `--internetGatewayID` your amazon internet gateway of the given VPC
 
-`--publicInAccount` flags if the network is public in the account
+`--publicInAccount` If it is true, all the users belonging to your account will be able to use this network to create 
+clusters, but cannot delete it.
 
 You can check whether the network was created successfully
 ```
@@ -193,7 +194,8 @@ Other available options:
 
 `--url` the url of the blueprint
 
-`--publicInAccount` flags if the network is public in the account
+`--publicInAccount` If it is true, all the users belonging to your account will be able to use this blueprint to create 
+clusters, but cannot delete it.
 
 You can check whether the blueprint was created successfully
 ```

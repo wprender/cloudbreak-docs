@@ -74,7 +74,7 @@ Cloudbreak Deployer (`cbd`)
 ```
    cbd doctor
 ```
->In case of `cbd update` is needed, please check the related documentation for [Cloudbreak Deployer Update](operations.md#cloudbreak-deployer-update). Most of the `cbd` commands require `root` permissions.
+>In case of `cbd update` is needed, please check the related documentation for [Cloudbreak Deployer Update](operations.md#update-cloudbreak-deployer). Most of the `cbd` commands require `root` permissions.
 
 - Started Cloudbreak Application logs:
 ```

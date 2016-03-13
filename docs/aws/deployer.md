@@ -15,7 +15,10 @@
 ## Setup Cloudbreak Deployer
 
 You should already have the Cloudbreak Deployer either by [using the AWS Cloud Images](aws.md) or by [installing the 
-Cloudbreak Deployer](onprem.md) manually on your own VM. If you have your own installed VM with 
+Cloudbreak Deployer](onprem.md) manually on your own VM.
+
+If you have your own installed VM, you should check the [Initialize your Profile](aws.md#initialize-your-profile) 
+section here before starting the provisioning.
 
 You can [connect to the previously created `cbd` VM](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstances.html).
 
@@ -76,7 +79,7 @@ After the `cbd start` command finishes followings are worthy to check:
 ```
    cbd doctor
 ```
->In case of `cbd update` is needed, please check the related documentation for [Cloudbreak Deployer Update](operations.md#cloudbreak-deployer-update). Most of the `cbd` commands require `root` permissions.
+>In case of `cbd update` is needed, please check the related documentation for [Cloudbreak Deployer Update](operations.md#update-cloudbreak-deployer). Most of the `cbd` commands require `root` permissions.
 
 - Started Cloudbreak Application logs:
 ```
