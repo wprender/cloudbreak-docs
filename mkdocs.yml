@@ -22,10 +22,10 @@ pages:
         - CLI/Shell : shell.md
         - Account Management: ui_account.md
         - Auto-Scaling : periscope.md
-        - SSSD configuration: sssd.md
+        - SSSD Configuration: sssd.md
         - Recipes: recipes.md
         - Blueprints : blueprints.md
-        - Platforms/Topologies : topologies.md
+        - Platforms : topologies.md
         - Kerberos: kerberos.md
         - SPI: spi.md
         - Operations : operations.md

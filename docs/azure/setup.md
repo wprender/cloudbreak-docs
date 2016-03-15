@@ -1,14 +1,10 @@
-On other cloud providers you can create “public images”, while on Azure its a different process. You have to create a 
-publicly available virtual disk image (VHDI), which has to be downloaded and imported 
-into a storage account.
-
-Based on our experience usually it takes about 30-60 minutes until it gets copied and you can log into the VM.
-Therefore we provide a much easier way to launch Cludbreak Deployer based on the new [Azure Resource Manager 
+On other cloud providers, we provide “public images” that are pre-built with the Cloudbreak Deployer. But on Azure, its a different process.
+We provide a way to launch Cloudbreak Deployer based on the new [Azure Resource Manager 
 Templates](https://github.com/Azure/azure-quickstart-templates).
 
 ## Deploy using the Azure Portal
 
-It is as simple as clicking here: <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsequenceiq%2Fazure-cbd-quickstart%2Fv1.2.0%2Fazuredeploy.json">  ![deploy on azure](http://azuredeploy.net/deploybutton.png) </a>
+To get started using the Azure Resource Manager template to install Cloudbreak, it is as simple as clicking here: <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsequenceiq%2Fazure-cbd-quickstart%2Fv1.2.0%2Fazuredeploy.json">  ![deploy on azure](http://azuredeploy.net/deploybutton.png) </a>
 
 **The following parameters are mandatory (beyond to the default values) for the new `cbd` Template!**
 

@@ -3,25 +3,14 @@
 
 # Blueprints
 
-We provide a list of default Hadoop cluster Blueprints for your convenience, however you can always build and use your own Blueprint.
+Cloudbreak provides a list of default Hadoop cluster Blueprints for your convenience. However you can always build and use your own Blueprint.
 
-* hdp-small-default - HDP 2.3 blueprint
 
-This is a complex [Blueprint](https://raw.githubusercontent.com/sequenceiq/cloudbreak/master/core/src/main/resources/defaults/blueprints/hdp-small-default.bp) which allows you to launch a multi node, fully distributed HDP 2.3 Cluster in the cloud.
-
-It allows you to use the following services: HDFS, YARN, MAPREDUCE2, KNOX, HBASE, HIVE, HCATALOG, WEBHCAT, SLIDER, OOZIE, PIG, SQOOP, METRICS, TEZ, FALCON, ZOOKEEPER.
-
-* hdp-streaming-cluster - HDP 2.3 blueprint
-
-This is a streaming [Blueprint](https://raw.githubusercontent.com/sequenceiq/cloudbreak/master/core/src/main/resources/defaults/blueprints/hdp-streaming-cluster.bp) which allows you to launch a multi node, fully distributed HDP 2.3 Cluster in the cloud, optimized for streaming jobs.
-
-It allows you to use the following services: HDFS, YARN, MAPREDUCE2, STORM, KNOX, HBASE, HIVE, HCATALOG, WEBHCAT, SLIDER, OOZIE, PIG, SQOOP, METRICS, TEZ, FALCON, ZOOKEEPER.
-
-* hdp-spark-cluster - HDP 2.3 blueprint
-
-This is an analytics [Blueprint](https://raw.githubusercontent.com/sequenceiq/cloudbreak/master/core/src/main/resources/defaults/blueprints/hdp-spark-cluster.bp) which allows you to launch a multi node, fully distributed HDP 2.3 Cluster in the cloud, optimized for analytic jobs.
-
-It allows you to use the following services: HDFS, YARN, MAPREDUCE2, SPARK, ZEPPELIN, KNOX, HBASE, HIVE, HCATALOG, WEBHCAT, SLIDER, OOZIE, PIG, SQOOP, METRICS, TEZ, FALCON, ZOOKEEPER.
+| Name | Description | Services | Source |
+|----|----|---|---|
+| hdp-small-default | Launch a multi-node HDP 2.4 cluster. | HDFS, YARN, MAPREDUCE2, KNOX, HBASE, HIVE, HCATALOG, WEBHCAT, SLIDER, OOZIE, PIG, SQOOP, METRICS, TEZ, FALCON, ZOOKEEPER | [hdp-small-default.bp](https://raw.githubusercontent.com/sequenceiq/cloudbreak/master/core/src/main/resources/defaults/blueprints/hdp-small-default.bp) |
+| hdp-streaming-cluster | Launch a multi-node HDP 2.4 cluster optimized for streaming. | HDFS, YARN, MAPREDUCE2, STORM, KNOX, HBASE, HIVE, HCATALOG, WEBHCAT, SLIDER, OOZIE, PIG, SQOOP, METRICS, TEZ, FALCON, ZOOKEEPER | [hdp-streaming-cluster.bp](https://raw.githubusercontent.com/sequenceiq/cloudbreak/master/core/src/main/resources/defaults/blueprints/hdp-streaming-cluster.bp) |
+| hdp-spark-cluster | Launch a multi-node HDP 2.4 cluster optimized for Spark analytic jobs. | HDFS, YARN, MAPREDUCE2, SPARK, ZEPPELIN, KNOX, HBASE, HIVE, HCATALOG, WEBHCAT, SLIDER, OOZIE, PIG, SQOOP, METRICS, TEZ, FALCON, ZOOKEEPER | [hdp-spark-cluster.bp](https://raw.githubusercontent.com/sequenceiq/cloudbreak/master/core/src/main/resources/defaults/blueprints/hdp-spark-cluster.bp) |
 
 ## Components
 
@@ -34,7 +23,6 @@ At high level the supported list of components can be grouped into main categori
 | HDFS		    | DATANODE, HDFS_CLIENT, JOURNALNODE, NAMENODE, SECONDARY_NAMENODE, ZKFC  |
 | YARN		    | APP_TIMELINE_SERVER, NODEMANAGER, RESOURCEMANAGER, YARN_CLIENT          |
 | MAPREDUCE2	| HISTORYSERVER, MAPREDUCE2_CLIENT                                        |
-| GANGLIA		  | GANGLIA_MONITOR, GANGLIA_SERVER                                         |
 | HBASE		    | HBASE_CLIENT, HBASE_MASTER, HBASE_REGIONSERVER                          |
 | HIVE		    | HIVE_CLIENT, HIVE_METASTORE, HIVE_SERVER, MYSQL_SERVER                  |
 | HCATALOG	  | HCAT                                                                    |
@@ -53,6 +41,5 @@ At high level the supported list of components can be grouped into main categori
 | FLUME	  | FLUME_HANDLER                                      |
 | KAFKA	  | KAFKA_BROKER                                      |
 | KNOX	  | KNOX_GATEWAY                                      |
-| NAGIOS	  | NAGIOS_SERVER                                      |
 | ATLAS	  | ATLAS                                     |
 | CLOUDBREAK	  | CLOUDBREAK                                      |
