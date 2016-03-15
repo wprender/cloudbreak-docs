@@ -147,7 +147,7 @@
                         
                             
 <li >
-    <a href="../sssd/">SSSD configuration</a>
+    <a href="../sssd/">SSSD Configuration</a>
 </li>
 
                         
@@ -165,7 +165,7 @@
                         
                             
 <li >
-    <a href="../topologies/">Platforms/Topologies</a>
+    <a href="../topologies/">Platforms</a>
 </li>
 
                         
@@ -266,6 +266,8 @@
         
             <li><a href="#new-features">New Features</a></li>
         
+            <li><a href="#technical-preview">Technical Preview</a></li>
+        
             <li><a href="#behavioral-changes">Behavioral Changes</a></li>
         
     
@@ -295,68 +297,76 @@
 <td>A Command Line Interface (CLI) for interactively managing Cloudbreak. See <a href="../shell/">Shell</a> for more information.</td>
 </tr>
 <tr>
-<td>Cloudbreak Shell</td>
-<td>Password parameter validation.</td>
-</tr>
-<tr>
-<td>Pre-built Cloud Images</td>
-<td><strong>Technical Preview</strong> Pre-built Cloud images for AWS, GCP and OpenStack that include Cloudbreak Deployer pre-installed and configured.</td>
-</tr>
-<tr>
-<td>Cloudbreak</td>
-<td><strong>Technical Preview</strong> Support for enabling Kerberos on the HDP clusters deployed by Cloudbreak. See <a href="../kerberos/">Kerberos</a> for more information.</td>
-</tr>
-<tr>
-<td>Cloudbreak</td>
-<td>Support for OpenStack Juno cloud provider. See <a href="../openstack/">OpenStack</a> for more information.</td>
-</tr>
-<tr>
-<td>Cloudbreak</td>
-<td><strong>Technical Preview</strong> Support for OpenStack Kilo cloud provider. See <a href="../openstack/">OpenStack</a> for more information.</td>
-</tr>
-<tr>
-<td>Cloudbreak</td>
+<td>Cloud Provider SPI</td>
 <td>Cloudbreak Service Provider Interface (SPI) for pluging-in new providers. See <a href="../spi/">SPI</a> for more information.</td>
 </tr>
 <tr>
-<td>Cloudbreak Deployer</td>
-<td>Seamless upgrade from Cloudbreak 1.0.0 to 1.1.0.</td>
+<td>Pre-built Cloud Images</td>
+<td>Pre-built Cloud images for AWS, GCP and OpenStack that include Cloudbreak Deployer pre-installed and configured.</td>
 </tr>
 <tr>
-<td>Cloudbreak Deployer</td>
-<td>Deploy DASH for Azure.</td>
+<td>Azure Resource Manager Template</td>
+<td>Pre-build ARM template to install the Cloudbreak Deployer. See <a href="../azure/">Azure Setup</a> for more information.</td>
 </tr>
 <tr>
-<td>Cloudbreak UI</td>
-<td>Cluster scaling .</td>
+<td>Azure WASB Support</td>
+<td>For clusters launched on Microsoft Azure the default file system in use will be <a href="http://blogs.msdn.com/b/cindygross/archive/2015/02/04/understanding-wasb-and-hadoop-storage-in-azure.aspx">WASB</a>. Users will still have to option to use local HDFS with attached disk but the recommended file system will be WASB. See Filesystem configuration for more information.</td>
 </tr>
 <tr>
-<td>Cloudbreak UI</td>
-<td>Cluster node termination.</td>
+<td>Azure DASH Support for WASB</td>
+<td>When WASB is used as a Hadoop filesystem, the files are full-value blobs in a storage account. It means better performance compared to the data disks and the WASB filesystem can be configured very easily but Azure storage accounts have their own <a href="https://azure.microsoft.com/en-us/documentation/articles/azure-subscription-service-limits/#storage-limits">limitations</a> as well. There is a space limitation for TB per storage account (500 TB) as well but the real bottleneck is the total request rate that is only 20000 IOPS where Azure will start to throw errors when trying to do an I/O operation. To bypass those limits Microsoft created a small service called <a href="https://github.com/MicrosoftDX/Dash">DASH</a>. See <a href="../azure/#file-system-configuration">File system configuration</a> for more information.</td>
 </tr>
 <tr>
-<td>Cloudbreak UI</td>
-<td>New cluster create panel.</td>
+<td>OpenStack</td>
+<td>Support for OpenStack Juno and Kilo. See <a href="../openstack/">OpenStack</a> for more information.</td>
 </tr>
 <tr>
-<td>Cloudbreak UI</td>
-<td>New cluster details panel.</td>
+<td>Support for New Regions</td>
+<td>On AWS we added support for <strong>Frankfurt</strong>. On GCP we added support for <strong>us-east-1</strong>.</td>
 </tr>
 <tr>
-<td>Cloudbreak UI</td>
-<td>Progress bars for Ambari.</td>
+<td>Custom Security Groups</td>
+<td>Ability to define and create custom security groups and rules.</td>
 </tr>
 <tr>
-<td>Cloudbreak UI</td>
-<td>Create new security group.</td>
+<td>Add/Remove Nodes</td>
+<td>Introduced the availability to add or remove nodes (arbitrary number) to different hostgroups from the UI. This feature was previousely available from the shell or API only.</td>
 </tr>
 <tr>
-<td>Cloudbreak UI</td>
-<td>Create/upload recipes.</td>
+<td>Auto-scaling</td>
+<td>Support for SLA-based <a href="../periscope/">Auto-Scaling</a>.</td>
 </tr>
 <tr>
-<td>Cloudbreak</td>
-<td>SLA policy based <a href="../periscope/">autoscaling</a>.</td>
+<td>Auto-termination</td>
+<td>Automatic termination for unused nodes.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="technical-preview">Technical Preview</h2>
+<p>This release includes the following Technical Preview features and improvements:</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mesos</td>
+<td><strong>Technical Preview</strong> Support for Mesos cloud provider.</td>
+</tr>
+<tr>
+<td>Kerberos</td>
+<td><strong>Technical Preview</strong> Support for enabling Kerberos on the HDP clusters deployed by Cloudbreak. See <a href="../kerberos/">Kerberos</a> for more information.</td>
+</tr>
+<tr>
+<td>SSSD</td>
+<td><strong>Technical Preview</strong> Support for configuring System Security Services Daemon (SSSD) to help with cluster user management. See <a href="../sssd/">SSSD</a> for more information.</td>
+</tr>
+<tr>
+<td>Platforms</td>
+<td><strong>Technical Preview</strong> Support for defining Platforms to relate different configurations together. See <a href="../topologies/">Platforms</a> for more information.</td>
 </tr>
 </tbody>
 </table>
@@ -371,36 +381,20 @@
 </thead>
 <tbody>
 <tr>
-<td>UI changes</td>
-<td>Cluster creation is based on a step-by-step wizard.</td>
-</tr>
-<tr>
-<td>Custom Security Groups</td>
-<td>Ability to define and create custom security groups and rules.</td>
-</tr>
-<tr>
-<td>Azure ARM support</td>
-<td>With this release we have switched to the new <a href="https://azure.microsoft.com/en-us/documentation/articles/resource-group-overview/">Azure ARM API</a> aka <strong>Azure API v2</strong>. Using the old API is not supported anymore - users have the option to <strong>terminate only</strong> clusters lunched with the old API. All new clusters are lunched with the new API.</td>
-</tr>
-<tr>
-<td>WASB support</td>
-<td>For clusters launched on Microsoft Azure the default file system in use will be <a href="http://blogs.msdn.com/b/cindygross/archive/2015/02/04/understanding-wasb-and-hadoop-storage-in-azure.aspx">WASB</a>. Users will still have to option to use local HDFS with attached disk but the recommended file system will be WASB. See Filesystem configuration for more information.</td>
-</tr>
-<tr>
-<td>DASH support for WASB</td>
-<td>When WASB is used as a Hadoop filesystem the files are full-value blobs in a storage account. It means better performance compared to the data disks and the WASB filesystem can be configured very easily but Azure storage accounts have their own <a href="https://azure.microsoft.com/en-us/documentation/articles/azure-subscription-service-limits/#storage-limits">limitations</a> as well. There is a space limitation for TB per storage account (500 TB) as well but the real bottleneck is the total request rate that is only 20000 IOPS where Azure will start to throw errors when trying to do an I/O operation. To bypass those limits Microsoft created a small service called <a href="https://github.com/MicrosoftDX/Dash">DASH</a>. See Filesystem configuration for more information.</td>
-</tr>
-<tr>
-<td>Support for new regions</td>
-<td>On AWS we added support for <strong>Frankfurt</strong>. On GCP we added support for <strong>us-east-1</strong>.</td>
+<td>Cloudbreak Web UI</td>
+<td>New cluster create wizard, new cluster details panel, new progress bars for Ambari.</td>
 </tr>
 <tr>
 <td>UAA zones</td>
 <td>Updated to UAA 2.7.1 version, which introduced the concept of <strong>zones</strong>. See <a href="../configuration/">Access from custom domains</a> for more information.</td>
 </tr>
 <tr>
-<td>Add/Remove nodes from UI</td>
-<td>Introduced the availability to add or remove nodes (arbitrary number) to different hostgroups from the UI. This feature was previousely available from the shell or API only.</td>
+<td>Ambari</td>
+<td>Upgraded to Ambari 2.2.1.1.</td>
+</tr>
+<tr>
+<td>Blueprints</td>
+<td>Includes new HDP 2.4 Ambari Blueprints.</td>
 </tr>
 </tbody>
 </table>

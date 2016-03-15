@@ -147,7 +147,7 @@
                         
                             
 <li >
-    <a href="../sssd/">SSSD configuration</a>
+    <a href="../sssd/">SSSD Configuration</a>
 </li>
 
                         
@@ -165,7 +165,7 @@
                         
                             
 <li >
-    <a href="../topologies/">Platforms/Topologies</a>
+    <a href="../topologies/">Platforms</a>
 </li>
 
                         
@@ -273,22 +273,37 @@
                     
 
 <h1 id="blueprints">Blueprints</h1>
-<p>We provide a list of default Hadoop cluster Blueprints for your convenience, however you can always build and use your own Blueprint.</p>
-<ul>
-<li>hdp-small-default - HDP 2.3 blueprint</li>
-</ul>
-<p>This is a complex <a href="https://raw.githubusercontent.com/sequenceiq/cloudbreak/master/core/src/main/resources/defaults/blueprints/hdp-small-default.bp">Blueprint</a> which allows you to launch a multi node, fully distributed HDP 2.3 Cluster in the cloud.</p>
-<p>It allows you to use the following services: HDFS, YARN, MAPREDUCE2, KNOX, HBASE, HIVE, HCATALOG, WEBHCAT, SLIDER, OOZIE, PIG, SQOOP, METRICS, TEZ, FALCON, ZOOKEEPER.</p>
-<ul>
-<li>hdp-streaming-cluster - HDP 2.3 blueprint</li>
-</ul>
-<p>This is a streaming <a href="https://raw.githubusercontent.com/sequenceiq/cloudbreak/master/core/src/main/resources/defaults/blueprints/hdp-streaming-cluster.bp">Blueprint</a> which allows you to launch a multi node, fully distributed HDP 2.3 Cluster in the cloud, optimized for streaming jobs.</p>
-<p>It allows you to use the following services: HDFS, YARN, MAPREDUCE2, STORM, KNOX, HBASE, HIVE, HCATALOG, WEBHCAT, SLIDER, OOZIE, PIG, SQOOP, METRICS, TEZ, FALCON, ZOOKEEPER.</p>
-<ul>
-<li>hdp-spark-cluster - HDP 2.3 blueprint</li>
-</ul>
-<p>This is an analytics <a href="https://raw.githubusercontent.com/sequenceiq/cloudbreak/master/core/src/main/resources/defaults/blueprints/hdp-spark-cluster.bp">Blueprint</a> which allows you to launch a multi node, fully distributed HDP 2.3 Cluster in the cloud, optimized for analytic jobs.</p>
-<p>It allows you to use the following services: HDFS, YARN, MAPREDUCE2, SPARK, ZEPPELIN, KNOX, HBASE, HIVE, HCATALOG, WEBHCAT, SLIDER, OOZIE, PIG, SQOOP, METRICS, TEZ, FALCON, ZOOKEEPER.</p>
+<p>Cloudbreak provides a list of default Hadoop cluster Blueprints for your convenience. However you can always build and use your own Blueprint.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Services</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hdp-small-default</td>
+<td>Launch a multi-node HDP 2.4 cluster.</td>
+<td>HDFS, YARN, MAPREDUCE2, KNOX, HBASE, HIVE, HCATALOG, WEBHCAT, SLIDER, OOZIE, PIG, SQOOP, METRICS, TEZ, FALCON, ZOOKEEPER</td>
+<td><a href="https://raw.githubusercontent.com/sequenceiq/cloudbreak/master/core/src/main/resources/defaults/blueprints/hdp-small-default.bp">hdp-small-default.bp</a></td>
+</tr>
+<tr>
+<td>hdp-streaming-cluster</td>
+<td>Launch a multi-node HDP 2.4 cluster optimized for streaming.</td>
+<td>HDFS, YARN, MAPREDUCE2, STORM, KNOX, HBASE, HIVE, HCATALOG, WEBHCAT, SLIDER, OOZIE, PIG, SQOOP, METRICS, TEZ, FALCON, ZOOKEEPER</td>
+<td><a href="https://raw.githubusercontent.com/sequenceiq/cloudbreak/master/core/src/main/resources/defaults/blueprints/hdp-streaming-cluster.bp">hdp-streaming-cluster.bp</a></td>
+</tr>
+<tr>
+<td>hdp-spark-cluster</td>
+<td>Launch a multi-node HDP 2.4 cluster optimized for Spark analytic jobs.</td>
+<td>HDFS, YARN, MAPREDUCE2, SPARK, ZEPPELIN, KNOX, HBASE, HIVE, HCATALOG, WEBHCAT, SLIDER, OOZIE, PIG, SQOOP, METRICS, TEZ, FALCON, ZOOKEEPER</td>
+<td><a href="https://raw.githubusercontent.com/sequenceiq/cloudbreak/master/core/src/main/resources/defaults/blueprints/hdp-spark-cluster.bp">hdp-spark-cluster.bp</a></td>
+</tr>
+</tbody>
+</table>
 <h2 id="components">Components</h2>
 <p>Ambari supports the concept of stacks and associated services in a stack definition. By leveraging the stack definition, Ambari has a consistent and defined interface to install, manage and monitor a set of services and provides extensibility model for new stacks and services to be introduced.</p>
 <p>At high level the supported list of components can be grouped into main categories: Master and Slave - and bundling them together form a Hadoop Service.</p>
@@ -311,10 +326,6 @@
 <tr>
 <td align="left">MAPREDUCE2</td>
 <td align="left">HISTORYSERVER, MAPREDUCE2_CLIENT</td>
-</tr>
-<tr>
-<td align="left">GANGLIA</td>
-<td align="left">GANGLIA_MONITOR, GANGLIA_SERVER</td>
 </tr>
 <tr>
 <td align="left">HBASE</td>
@@ -387,10 +398,6 @@
 <tr>
 <td align="left">KNOX</td>
 <td align="left">KNOX_GATEWAY</td>
-</tr>
-<tr>
-<td align="left">NAGIOS</td>
-<td align="left">NAGIOS_SERVER</td>
 </tr>
 <tr>
 <td align="left">ATLAS</td>
