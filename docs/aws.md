@@ -2,7 +2,7 @@
 
 {!docs/aws/images.md!}
 
-# Aws Setup
+# AWS Setup
 
 {!docs/aws/deployer.md!}
 
