@@ -62,5 +62,3 @@
 
 {!docs/azure/shell/example.md!}
 
-**Congratulations!** Your cluster should now be up and running on this way as well. To learn more about Cloudbreak and 
-provisioning, we have some [interesting insights](operations.md) for you.

@@ -38,7 +38,26 @@
 
 # Provisioning via CLI
 
-{!docs/gcp/shell/shell.md!}
+{!docs/gcp/shell/credential.md!}
 
-**Congratulations!** Your cluster should now be up and running on this way as well. To learn more about Cloudbreak and 
-provisioning, we have some [interesting insights](operations.md) for you.
+{!docs/gcp/shell/template.md!}
+
+{!docs/gcp/shell/network.md!}
+
+{!docs/shell/blueprint.md!}
+
+{!docs/shell/recipe.md!}
+
+{!docs/gcp/shell/create.md!}
+
+{!docs/shell/stop.md!}
+
+{!docs/shell/restart.md!}
+
+{!docs/shell/upscale.md!}
+
+{!docs/shell/terminate.md!}
+
+{!docs/shell/silent.md!}
+
+{!docs/gcp/shell/example.md!}

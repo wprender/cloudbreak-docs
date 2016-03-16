@@ -36,7 +36,26 @@
 
 # Provisioning via CLI
 
-{!docs/openstack/shell/shell.md!}
+{!docs/openstack/shell/credential.md!}
 
-**Congratulations!** Your cluster should now be up and running on this way as well. To learn more about Cloudbreak and 
-provisioning, we have some [interesting insights](operations.md) for you.
+{!docs/openstack/shell/template.md!}
+
+{!docs/openstack/shell/network.md!}
+
+{!docs/shell/blueprint.md!}
+
+{!docs/shell/recipe.md!}
+
+{!docs/openstack/shell/create.md!}
+
+{!docs/shell/stop.md!}
+
+{!docs/shell/restart.md!}
+
+{!docs/shell/upscale.md!}
+
+{!docs/shell/terminate.md!}
+
+{!docs/shell/silent.md!}
+
+{!docs/openstack/shell/example.md!}
