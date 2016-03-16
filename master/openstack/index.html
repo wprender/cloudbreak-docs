@@ -930,72 +930,6 @@ provided <code>Subnet (CIDR)</code> range.</p>
 <pre><code>network list
 </code></pre>
 
-<p><strong>Security groups</strong></p>
-<p>Security group templates are very similar to the <a href="http://docs.openstack.org/openstack-ops/content/security_groups.html">Security Groups on OpenStack</a>. <strong>They describe the allowed inbound traffic 
-to the instances in the cluster.</strong> Currently only one security group template can be selected for a Cloudbreak cluster 
-and all the instances have a public IP address so all the instances in the cluster will belong to the same security 
-group. This may change in a later release.</p>
-<p><em>Default Security Group</em></p>
-<p>You can also use the two pre-defined security groups in Cloudbreak.</p>
-<p><code>only-ssh-and-ssl:</code> all ports are locked down except for SSH and gateway HTTPS (you can't access Hadoop services 
-outside of the network):</p>
-<ul>
-<li>SSH (22)</li>
-<li>HTTPS (443)</li>
-</ul>
-<p><code>all-services-port:</code> all Hadoop services and SSH, gateway HTTPS are accessible by default:</p>
-<ul>
-<li>SSH (22)</li>
-<li>HTTPS (443)</li>
-<li>Ambari (8080)</li>
-<li>Consul (8500)</li>
-<li>NN (50070)</li>
-<li>RM Web (8088)</li>
-<li>Scheduler (8030RM)</li>
-<li>IPC (8050RM)</li>
-<li>Job history server (19888)</li>
-<li>HBase master (60000)</li>
-<li>HBase master web (60010)</li>
-<li>HBase RS (16020)</li>
-<li>HBase RS info (60030)</li>
-<li>Falcon (15000)</li>
-<li>Storm (8744)</li>
-<li>Hive metastore (9083)</li>
-<li>Hive server (10000)</li>
-<li>Hive server HTTP (10001)</li>
-<li>Accumulo master (9999)</li>
-<li>Accumulo Tserver (9997)</li>
-<li>Atlas (21000)</li>
-<li>KNOX (8443)</li>
-<li>Oozie (11000)</li>
-<li>Spark HS (18080)</li>
-<li>NM Web (8042)</li>
-<li>Zeppelin WebSocket (9996)</li>
-<li>Zeppelin UI (9995)</li>
-<li>Kibana (3080)</li>
-<li>Elasticsearch (9200)</li>
-</ul>
-<p><em>Custom Security Group</em></p>
-<p>You can define your own security group by adding all the ports, protocols and CIDR range you'd like to use. The rules
- defined here doesn't need to contain the internal rules, those are automatically added by Cloudbreak to the security
-  group on OpenStack.</p>
-<blockquote>
-<p><strong>IMPORTANT</strong> 443 needs to be there in every security group otherwise Cloudbreak won't be able to communicate with the 
-provisioned cluster.</p>
-</blockquote>
-<pre><code>securitygroup create --name my-security-group --description &quot;sample description&quot; --rules 0.0.0.0/0:tcp:443,8080,9090;10.0.33.0/24:tcp:1234,1235
-</code></pre>
-
-<blockquote>
-<p><strong>NOTE</strong> The security groups are created on OpenStack only after the cluster provisioning starts with the selected 
-security group template.</p>
-</blockquote>
-<p>If <code>--publicInAccount</code> is true, all the users belonging to your account will be able
- to use this template to create clusters, but cannot delete it.</p>
-<p>You can check whether the security group was created successfully</p>
-<pre><code>securitygroup list
-</code></pre>
-
 <h2 id="defining-cluster-services_1">Defining cluster services</h2>
 <p><strong>Blueprints</strong></p>
 <p>Blueprints are your declarative definition of a Hadoop cluster. These are the same blueprints that are <a href="https://cwiki.apache.org/confluence/display/AMBARI/Blueprints">used by Ambari</a>.</p>
@@ -1009,7 +943,7 @@ Blueprints can be added from file or URL (an <a href="https://raw.githubusercont
 <pre><code>blueprint add --name my-blueprint --description &quot;sample description&quot; --file &lt;the path of the blueprint&gt;
 </code></pre>
 
-<p>Other available options here:</p>
+<p>Other available options:</p>
 <p><code>--url</code> the url of the blueprint</p>
 <p><code>--publicInAccount</code> If it is true, all the users belonging to your account will be able to use this blueprint to create 
 clusters, but cannot delete it.</p>
@@ -1032,7 +966,7 @@ The most <strong>notable example is Ranger setup</strong>:</p>
 <li>It has a prerequisite of a running database when Ranger Admin is installing.</li>
 <li>A PostgreSQL database can be easily started and configured with a recipe before the blueprint installation starts.</li>
 </ul>
-<p>To learn more about these and check the Ranger recipe out, take a look at the <a href="../recipes/">Cluster customization</a>.</p>
+<p>To learn more about these and check the Ranger recipe out, take a look at the <a href="../recipes/">Cluster customization</a></p>
 <h2 id="cluster-deployment_1">Cluster deployment</h2>
 <p>After all the cluster resources are configured you can deploy a new HDP cluster. The following sub-sections show 
 you a <strong>basic flow for cluster creation with Cloudbreak Shell</strong>.</p>
@@ -1158,7 +1092,7 @@ stack stop
 
 <h2 id="cluster-termination_1">Cluster termination</h2>
 <p>You can terminate running or stopped clusters with</p>
-<pre><code>stack terminate --name myosstack
+<pre><code>stack terminate --name myawsstack
 </code></pre>
 
 <blockquote>
@@ -1170,7 +1104,7 @@ CloudFormation stack first. Instances are started in an Auto Scaling Group so th
   at the Cloudbreak side. <strong>If it has happened:</strong></p>
 <ol>
 <li>You should check the related resources at the AWS CloudFormation</li>
-<li>If it is needed you need to manually remove resources from there</li>
+<li>If it is needed you need to manually remove resources from ther</li>
 </ol>
 <h2 id="silent-mode">Silent mode</h2>
 <p>With Cloudbreak Shell you can execute script files as well. A script file contains shell commands and can 
