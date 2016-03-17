@@ -6,6 +6,8 @@ Templates](https://github.com/Azure/azure-quickstart-templates).
 
 To get started using the Azure Resource Manager template to install Cloudbreak, it is as simple as clicking here: <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsequenceiq%2Fazure-cbd-quickstart%2Fv1.2.0%2Fazuredeploy.json">  ![deploy on azure](http://azuredeploy.net/deploybutton.png) </a>
 
+> **[Minimum and Recommended VM requirements](onprem.md#minimum-and-recommended-system-requirements):** 8GB RAM, 10GB disk, 2 cores (The minimum instance type which is fit for cloudbreak is **D2**)
+
 **The following parameters are mandatory (beyond to the default values) for the new `cbd` Template!**
 
 On the `Custom deployment` panel:

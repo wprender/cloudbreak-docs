@@ -48,6 +48,8 @@
 
 {!docs/shell/recipe.md!}
 
+{!docs/shell/metadata.md!}
+
 {!docs/gcp/shell/create.md!}
 
 {!docs/shell/stop.md!}

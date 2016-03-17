@@ -67,7 +67,7 @@ with the selected components and services.
 ```
 cluster create --description "my first cluster"
 ```
-You can use the `--wait` parameter here as well. 
+Other available option is `--wait` - in this case the create command will return only after the process has finished. 
 
 **You are done!** You have several opportunities to check the progress during the infrastructure creation then 
 provisioning:

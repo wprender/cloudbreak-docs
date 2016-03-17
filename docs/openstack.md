@@ -46,6 +46,8 @@
 
 {!docs/shell/recipe.md!}
 
+{!docs/shell/metadata.md!}
+
 {!docs/openstack/shell/create.md!}
 
 {!docs/shell/stop.md!}

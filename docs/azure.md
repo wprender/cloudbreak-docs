@@ -48,6 +48,8 @@
 
 {!docs/shell/recipe.md!}
 
+{!docs/shell/metadata.md!}
+
 {!docs/azure/shell/create.md!}
 
 {!docs/shell/stop.md!}

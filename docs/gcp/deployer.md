@@ -9,7 +9,7 @@
 ## Setup Cloudbreak Deployer
 
 You should already have the Cloudbreak Deployer either by [using the GCP Cloud Images](gcp.md) or by [installing the 
-Cloudbreak Deployer](onprem.md) manually on your own VM.
+Cloudbreak Deployer](onprem.md) manually on your own VM. (The minimum instance type which is fit for cloudbreak is **n1-standard-2**)
 
 If you have your own installed VM, you should check the [Initialize your Profile](gcp.md#initialize-your-profile) 
 section here before starting the provisioning.
