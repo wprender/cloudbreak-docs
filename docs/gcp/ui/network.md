@@ -15,8 +15,8 @@ Cloudbreak clusters. It will create a new network with a `10.0.0.0/16` subnet ev
 If you'd like to deploy a cluster to a custom network you'll have to **create a new network** template on the **manage 
 networks** panel. You can define the `Virtual Network Identifier` of your network.
 
-`Virtual Network Identifier` is an optional value. This must be an ID of an existing GCP virtual network. If the 
-identifier is provided, the subnet CIDR will be ignored and the existing network's CIDR range will be used.
+`Virtual Network Identifier` is an optional value. This must be an ID of an existing GCP virtual network. This option only works
+if there are no subnets within the existing network.
 
 >**IMPORTANT** Please make sure the defined subnet here doesn't overlap with any of your already deployed subnet in the
  network, because of the validation only happens after the cluster creation starts.
