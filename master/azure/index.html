@@ -310,6 +310,8 @@
         
             <li><a href="#defining-cluster-services_1">Defining cluster services</a></li>
         
+            <li><a href="#metadata-show">Metadata show</a></li>
+        
             <li><a href="#cluster-deployment_1">Cluster deployment</a></li>
         
             <li><a href="#cluster-termination_1">Cluster termination</a></li>
@@ -328,6 +330,9 @@ We provide a way to launch Cloudbreak Deployer based on the new <a href="https:/
 Templates</a>.</p>
 <h2 id="deploy-using-the-azure-portal">Deploy using the Azure Portal</h2>
 <p>To get started using the Azure Resource Manager template to install Cloudbreak, it is as simple as clicking here: <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsequenceiq%2Fazure-cbd-quickstart%2Fv1.2.0%2Fazuredeploy.json">  <img alt="deploy on azure" src="http://azuredeploy.net/deploybutton.png" /> </a></p>
+<blockquote>
+<p><strong><a href="../onprem/#minimum-and-recommended-system-requirements">Minimum and Recommended VM requirements</a>:</strong> 8GB RAM, 10GB disk, 2 cores (The minimum instance type which is fit for cloudbreak is <strong>D2</strong>)</p>
+</blockquote>
 <p><strong>The following parameters are mandatory (beyond to the default values) for the new <code>cbd</code> Template!</strong></p>
 <p>On the <code>Custom deployment</code> panel:</p>
 <ul>
@@ -841,6 +846,10 @@ the <code>Azure Portal Resource groups</code> page.
 <p>There are some advanced features when deploying a new cluster, these are the following:</p>
 <p><code>Minimum cluster size</code> The provisioning strategy in case of the cloud provider cannot allocate all the requested nodes.</p>
 <p><code>Validate blueprint</code> This is selected by default. Cloudbreak validates the Ambari blueprint in this case.</p>
+<p><code>Relocate docker</code> This is selected by default. In startup time the <code>/var/lib/docker</code> will be relocated to the temporarily attached SSD. (In this case please do not stop your machines on Azure UI because then your data will be lost)</p>
+<p><code>Shipyard enabled cluster</code> This is selected by default. Cloudbreak will start a <a href="https://shipyard-project.com/">Shipyard</a> container which helps you to manage your containers.</p>
+<p><code>Persistent Storage Name</code> This is <code>cbstore</code> by default. Cloudbreak will copy the image into a storage which is not deleting under the termination. When you starting a new cluster then the provisioning will be much faster because of the existing image.</p>
+<p><code>Attached Storage Type</code> This is <code>single storage for all vm</code> by default. If you using the default option then your whole cluster will by in one storage which could be a bottleneck in case of <a href="https://azure.microsoft.com/hu-hu/documentation/articles/azure-subscription-service-limits/#storage-limits">Azure</a>. If you are using the <code>separated storage for every vm</code> then we will deploy as much storage account as many node you have and in this case IOPS limit concern just for one node.</p>
 <p><code>Config recommendation strategy</code> Strategy for configuration recommendations how will be applied. Recommended 
 configurations gathered by the response of the stack advisor. </p>
 <ul>
@@ -1047,6 +1056,14 @@ The most <strong>notable example is Ranger setup</strong>:</p>
 <li>A PostgreSQL database can be easily started and configured with a recipe before the blueprint installation starts.</li>
 </ul>
 <p>To learn more about these and check the Ranger recipe out, take a look at the <a href="../recipes/">Cluster customization</a></p>
+<h2 id="metadata-show">Metadata show</h2>
+<p>You can check the stack metadata with</p>
+<pre><code>stack metadata --name myawsstack --instancegroup master
+</code></pre>
+
+<p>Other available options:</p>
+<p><code>--id</code> In this case you can select a stack with id.</p>
+<p><code>--outputType</code> In this case you can modify the outputformat of the command (RAW or JSON). </p>
 <h2 id="cluster-deployment_1">Cluster deployment</h2>
 <p>After all the cluster resources are configured you can deploy a new HDP cluster. The following sub-sections show 
 you a <strong>basic flow for cluster creation with Cloudbreak Shell</strong>.</p>
@@ -1090,7 +1107,11 @@ stack to be used with your Hadoop cluster:</p>
 
 <p>The infrastructure is created asynchronously, the state of the stack can be checked with the stack <code>show command</code>. If 
 it reports AVAILABLE, it means that the virtual machines and the corresponding infrastructure is running at the cloud provider.</p>
-<p>Other available option is <code>--wait</code> - in this case the create command will return only after the process has finished. </p>
+<p>Other available option is:</p>
+<p><code>--wait</code> - in this case the create command will return only after the process has finished.</p>
+<p><code>--relocateDocker</code> - This is true by default. In startup time the <code>/var/lib/docker</code> will be relocated to the temporarily attached SSD. (In this case please do not stop your machines on Azure UI because then your data will be lost)</p>
+<p><code>--persistentStorage</code> - This is <code>cbstore</code> by default. Cloudbreak will copy the image into a storage which is not deleting under the termination. When you starting a new cluster then the provisioning will be much faster because of the existing image.</p>
+<p><code>--attachedStorageType</code> - This is <code>SINGLE</code> by default. If you using the default option then your whole cluster will by in one storage which could be a bottleneck in case of <a href="https://azure.microsoft.com/hu-hu/documentation/articles/azure-subscription-service-limits/#storage-limits">Azure</a>. If you are using the <code>PER_VM</code> then we will deploy as much storage account as many node you have and in this case IOPS limit concern just for one node.</p>
 <p><strong>Create a Hadoop cluster / Cloud provisioning</strong></p>
 <p><strong>You are almost done! One more command and your Hadoop cluster is starting!</strong> Cloud provisioning is done once the 
 cluster is up and running. The new cluster will use your selected blueprint and install your custom Hadoop cluster 
@@ -1098,7 +1119,7 @@ with the selected components and services.</p>
 <pre><code>cluster create --description &quot;my first cluster&quot;
 </code></pre>
 
-<p>You can use the <code>--wait</code> parameter here as well. </p>
+<p>Other available option is <code>--wait</code> - in this case the create command will return only after the process has finished. </p>
 <p><strong>You are done!</strong> You have several opportunities to check the progress during the infrastructure creation then 
 provisioning:</p>
 <ul>
@@ -1172,6 +1193,7 @@ stack stop
 <pre><code>stack terminate --name myawsstack
 </code></pre>
 
+<p>Other available option is <code>--wait</code> - in this case the terminate command will return only after the process has finished. </p>
 <blockquote>
 <p><strong>IMPORTANT</strong> Always use Cloudbreak to terminate the cluster. If that fails for some reason, try to delete the 
 CloudFormation stack first. Instances are started in an Auto Scaling Group so they may be restarted if you terminate an instance manually!</p>
