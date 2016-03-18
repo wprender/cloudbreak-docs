@@ -54,8 +54,7 @@ You can define your own security group by adding all the ports, protocols and CI
  defined here doesn't need to contain the internal rules, those are automatically added by Cloudbreak to the security
   group on GCP.
 
->**IMPORTANT** 443 needs to be there in every security group otherwise Cloudbreak won't be able to communicate with the 
-provisioned cluster.
+{!docs/common/ports.md!}
 
 If `Public in account` is checked all the users belonging to your account will be able to use this security group 
 template to create clusters, but cannot delete it.

@@ -54,14 +54,16 @@ You can define your own security group by adding all the ports, protocols and CI
  defined here doesn't need to contain the internal rules, those are automatically added by Cloudbreak to the security
   group on Azure.
 
->**IMPORTANT** 443 needs to be there in every security group otherwise Cloudbreak won't be able to communicate with the 
-provisioned cluster.
+{!docs/common/ports.md!}
 
 If `Public in account` is checked all the users belonging to your account will be able to use this security group 
 template to create clusters, but cannot delete it.
 
 >**NOTE** The security groups are created on Azure only after the cluster provisioning starts with the selected 
 security group template.
+
+>**IMPORTANT** If you use and existing virtual network and subnet the selected security group will only be applied to the `Cloudbreak gateway node` due to the lack of
+capability to attach multiple security groups to an existing subnet. If you'd like to open ports for Hadoop you must do it on your existing security group.
 
 ![](/images/ui-secgroup_v3.png)
 <sub>*Full size [here](/images/ui-secgroup_v3.png).*</sub>
