@@ -64,7 +64,7 @@ Other available option is:
 
 `--persistentStorage` - This is `cbstore` by default. Cloudbreak will copy the image into a storage which is not deleting under the termination. When you starting a new cluster then the provisioning will be much faster because of the existing image.
 
-`--attachedStorageType` - This is `SINGLE` by default. If you using the default option then your whole cluster will by in one storage which could be a bottleneck in case of [Azure](https://azure.microsoft.com/hu-hu/documentation/articles/azure-subscription-service-limits/#storage-limits). If you are using the `PER_VM` then we will deploy as much storage account as many node you have and in this case IOPS limit concern just for one node.
+`--attachedStorageType` - This is `SINGLE` by default. If you are using the default option then your whole cluster will by in one storage which could be a bottleneck in case of [Azure](https://azure.microsoft.com/hu-hu/documentation/articles/azure-subscription-service-limits/#storage-limits). If you are using the `PER_VM` then we will deploy as much storage account as many node you have and in this case IOPS limit concern just for one node.
 
 **Create a Hadoop cluster / Cloud provisioning**
 
@@ -83,7 +83,7 @@ provisioning:
 - Cloudbreak uses *ARM* to create the resources - you can check out the resources created by Cloudbreak on
  the Azure Portal Resource groups page.
 
-![](../../azure/images/azure-resourcegroups_2.png)
+![](/azure/images/azure-resourcegroups_2.png)
 <sub>*Full size [here](/azure/images/azure-resourcegroups_2.png).*</sub>
 
 - If stack then cluster creation have successfully done, you can check the Ambari Web UI. However you need to know the 
@@ -93,11 +93,11 @@ Ambari IP (for example: `http://23.101.60.49:8080`):
          cluster show
 ```
 
-![](../../images/ambari-dashboard_2.png)
+![](/images/ambari-dashboard_2.png)
 <sub>*Full size [here](/images/ambari-dashboard_2.png).*</sub>
 
 - Besides these you can check the entire progress and the Ambari IP as well on the Cloudbreak Web UI itself. Open the 
 new cluster's `details` and its `Event History` here.
 
-![](../../azure/images/azure-eventhistory_2.png)
+![](/azure/images/azure-eventhistory_2.png)
 <sub>*Full size [here](/azure/images/azure-eventhistory_2.png).*</sub>
