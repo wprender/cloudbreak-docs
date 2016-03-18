@@ -56,7 +56,15 @@ stack create --name myazurestack --region "North Europe"
 The infrastructure is created asynchronously, the state of the stack can be checked with the stack `show command`. If 
 it reports AVAILABLE, it means that the virtual machines and the corresponding infrastructure is running at the cloud provider.
 
-Other available option is `--wait` - in this case the create command will return only after the process has finished. 
+Other available option is:
+
+`--wait` - in this case the create command will return only after the process has finished.
+
+`--relocateDocker` - This is true by default. In startup time the `/var/lib/docker` will be relocated to the temporarily attached SSD. (In this case please do not stop your machines on Azure UI because then your data will be lost)
+
+`--persistentStorage` - This is `cbstore` by default. Cloudbreak will copy the image into a storage which is not deleting under the termination. When you starting a new cluster then the provisioning will be much faster because of the existing image.
+
+`--attachedStorageType` - This is `SINGLE` by default. If you using the default option then your whole cluster will by in one storage which could be a bottleneck in case of [Azure](https://azure.microsoft.com/hu-hu/documentation/articles/azure-subscription-service-limits/#storage-limits). If you are using the `PER_VM` then we will deploy as much storage account as many node you have and in this case IOPS limit concern just for one node.
 
 **Create a Hadoop cluster / Cloud provisioning**
 

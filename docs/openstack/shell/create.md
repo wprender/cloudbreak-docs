@@ -56,7 +56,9 @@ stack create --name myosstack --region local
 The infrastructure is created asynchronously, the state of the stack can be checked with the stack `show command`. If 
 it reports AVAILABLE, it means that the virtual machines and the corresponding infrastructure is running at the cloud provider.
 
-Other available option is `--wait` - in this case the create command will return only after the process has finished. 
+Other available option is:
+
+`--wait` - in this case the create command will return only after the process has finished. 
 
 **Create a Hadoop cluster / Cloud provisioning**
 

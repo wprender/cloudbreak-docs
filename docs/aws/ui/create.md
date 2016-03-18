@@ -65,6 +65,8 @@ There are some advanced features when deploying a new cluster, these are the fol
 
 `Validate blueprint` This is selected by default. Cloudbreak validates the Ambari blueprint in this case.
 
+`Shipyard enabled cluster` This is selected by default. Cloudbreak will start a [Shipyard](https://shipyard-project.com/) container which helps you to manage your containers.
+
 `Config recommendation strategy` Strategy for configuration recommendations how will be applied. Recommended 
 configurations gathered by the response of the stack advisor. 
 
