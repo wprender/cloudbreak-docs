@@ -20,7 +20,7 @@ Templates describe the **instances of your cluster** - the instance type and the
 A template can be used repeatedly to create identical copies of the same stack (or to use as a foundation to start a 
 new stack). Templates can be configured with the following command for example:
 ```
-template create --AZURE --name my-azure-template --description "sample description" --instanceType Standard_D4 --volumeSize 100 --volumeCount 2
+template create --AZURE --name my-azure-template --description "sample description" --instanceType Standard_D4 --volumeSize 100 --volumeCount 2 --volumeType Standard_LRS
 ```
 
 Other available option here is `--publicInAccount`. If it is true, all the users belonging to your account will be able

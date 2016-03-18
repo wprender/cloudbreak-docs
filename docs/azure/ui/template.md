@@ -6,5 +6,7 @@ Templates describe the **instances of your cluster** - the instance type and the
 
 The instance templates can be configured on the **manage templates** panel on the Cloudbreak Dashboard.
 
+{!docs/azure/storage.md!}
+
 If `Public in account`is checked all the users belonging to your account will be able to use this resource to create 
 clusters, but cannot delete it.
