@@ -124,6 +124,12 @@
     </url>
         
     <url>
+     <loc>http://sequenceiq.com/cloudbreak-docs/mesos/</loc>
+     <lastmod>2016-03-18</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
      <loc>http://sequenceiq.com/cloudbreak-docs/spi/</loc>
      <lastmod>2016-03-18</lastmod>
      <changefreq>daily</changefreq>
