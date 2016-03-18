@@ -639,22 +639,20 @@ for <code>DS</code> instance types. For more details about the premium storage r
 <p>If <code>Public in account</code>is checked all the users belonging to your account will be able to use this resource to create 
 clusters, but cannot delete it</p>
 <p><strong>Networks</strong></p>
-<p>Your clusters can be created in their own <strong>networks</strong> or in one of your already existing one. If you choose an 
-existing network, it is possible to create a new subnet within the network. The subnet's IP range must be defined in 
+<p>Your clusters can be created in their own <strong>networks</strong> or in one of your already existing one. The subnet's IP range must be defined in 
 the <code>Subnet (CIDR)</code> field using the general CIDR notation.</p>
 <p><em>Default AZURE Network</em></p>
 <p>If you don't want to create or use your custom network, you can use the <code>default-azure-network</code> for all your 
 Cloudbreak clusters. It will create a new network with a <code>10.0.0.0/16</code> subnet every time a cluster is created.</p>
 <p><em>Custom AZURE Network</em></p>
 <p>If you'd like to deploy a cluster to a custom network you'll have to <strong>create a new network</strong> template on the <strong>manage 
-networks</strong> panel. You can define the <code>Subnet Identifier</code> and the <code>Virtual Network Identifier</code> of your network.</p>
-<p><code>Virtual Network Identifier</code> is an optional value. This must be an ID of an existing AZURE virtual network. If the 
-identifier is provided, the subnet CIDR will be ignored and the existing network's CIDR range will be used.</p>
+networks</strong> panel. If you have an existing network on Azure you can define the <code>Subnet Identifier</code> and the <code>Virtual Network Identifier</code> and the <code>Resource Group Identifier</code> of your network.</p>
+<p>The <code>Resource Group Identifier</code> identifies the resource group which contains your existing virtual network. The <code>Virtual Network Identifier</code> and the 
+<code>Subnet Identifier</code> will tell Cloudbreak which network and subnet to use to launch the new instances.</p>
 <blockquote>
-<p><strong>IMPORTANT</strong> Please make sure the defined subnet here doesn't overlap with any of your already deployed subnet in the
- network, because of the validation only happens after the cluster creation starts.</p>
-<p>In case of existing subnet make sure you have enough room within your network space for the new instances. The 
-provided subnet CIDR will be ignored, but a proper CIDR range will be used.</p>
+<p><strong>IMPORTANT</strong> In case of existing subnet make sure you have enough room within your network space for the new instances. The 
+provided subnet CIDR will be ignored, but the existing subnet's CIDR range will be used. The security group behavior will be changed in this case as well
+described in the security group section below.</p>
 </blockquote>
 <p>If <code>Public in account</code> is checked all the users belonging to your account will be able to use this network template 
 to create clusters, but cannot delete it.</p>
@@ -715,14 +713,16 @@ outside of the virtual network):</p>
  defined here doesn't need to contain the internal rules, those are automatically added by Cloudbreak to the security
   group on Azure.</p>
 <blockquote>
-<p><strong>IMPORTANT</strong> 443 needs to be there in every security group otherwise Cloudbreak won't be able to communicate with the 
-provisioned cluster.</p>
+<p><strong>IMPORTANT</strong> 443 and 22 ports needs to be there in every security group otherwise Cloudbreak won't be able to communicate with the 
+provisioned cluster</p>
 </blockquote>
 <p>If <code>Public in account</code> is checked all the users belonging to your account will be able to use this security group 
 template to create clusters, but cannot delete it.</p>
 <blockquote>
 <p><strong>NOTE</strong> The security groups are created on Azure only after the cluster provisioning starts with the selected 
 security group template.</p>
+<p><strong>IMPORTANT</strong> If you use and existing virtual network and subnet the selected security group will only be applied to the <code>Cloudbreak gateway node</code> due to the lack of
+capability to attach multiple security groups to an existing subnet. If you'd like to open ports for Hadoop you must do it on your existing security group.</p>
 </blockquote>
 <p><img alt="" src="../images/ui-secgroup_v3.png" />
 <sub><em>Full size <a href="../images/ui-secgroup_v3.png">here</a>.</em>&lt;/sub</p>

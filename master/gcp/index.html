@@ -603,8 +603,8 @@ outside of the virtual network):</p>
  defined here doesn't need to contain the internal rules, those are automatically added by Cloudbreak to the security
   group on GCP.</p>
 <blockquote>
-<p><strong>IMPORTANT</strong> 443 needs to be there in every security group otherwise Cloudbreak won't be able to communicate with the 
-provisioned cluster.</p>
+<p><strong>IMPORTANT</strong> 443 and 22 ports needs to be there in every security group otherwise Cloudbreak won't be able to communicate with the 
+provisioned cluster</p>
 </blockquote>
 <p>If <code>Public in account</code> is checked all the users belonging to your account will be able to use this security group 
 template to create clusters, but cannot delete it.</p>
