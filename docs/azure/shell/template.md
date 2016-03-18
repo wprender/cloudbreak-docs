@@ -23,6 +23,8 @@ new stack). Templates can be configured with the following command for example:
 template create --AZURE --name my-azure-template --description "sample description" --instanceType Standard_D4 --volumeSize 100 --volumeCount 2 --volumeType Standard_LRS
 ```
 
+{!docs/azure/storage.md!}
+
 Other available option here is `--publicInAccount`. If it is true, all the users belonging to your account will be able
  to use this template to create clusters, but cannot delete it.
 
