@@ -965,6 +965,8 @@ new stack). Templates can be configured with the following command for example:<
 <pre><code>template create --AZURE --name my-azure-template --description &quot;sample description&quot; --instanceType Standard_D4 --volumeSize 100 --volumeCount 2 --volumeType Standard_LRS
 </code></pre>
 
+<p>The <code>Volume Type</code> describes the <code>Storage Account type</code> which will be used for the attached disks. The only constraint is that the <code>Premium storage</code> can only be used
+for <code>DS</code> instance types. For more details about the premium storage read <a href="https://azure.microsoft.com/en-us/documentation/articles/storage-premium-storage-preview-portal/">this</a>.</p>
 <p>Other available option here is <code>--publicInAccount</code>. If it is true, all the users belonging to your account will be able
  to use this template to create clusters, but cannot delete it.</p>
 <p>You can check whether the template was created successfully</p>
