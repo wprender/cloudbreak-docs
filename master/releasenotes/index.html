@@ -317,6 +317,10 @@
 <td>When WASB is used as a Hadoop filesystem, the files are full-value blobs in a storage account. It means better performance compared to the data disks and the WASB filesystem can be configured very easily but Azure storage accounts have their own <a href="https://azure.microsoft.com/en-us/documentation/articles/azure-subscription-service-limits/#storage-limits">limitations</a> as well. There is a space limitation for TB per storage account (500 TB) as well but the real bottleneck is the total request rate that is only 20000 IOPS where Azure will start to throw errors when trying to do an I/O operation. To bypass those limits Microsoft created a small service called <a href="https://github.com/MicrosoftDX/Dash">DASH</a>. See <a href="../azure/#file-system-configuration">File system configuration</a> for more information.</td>
 </tr>
 <tr>
+<td>Azure Premium Storage</td>
+<td>Added support for Premium Storage with DS type instances.</td>
+</tr>
+<tr>
 <td>OpenStack</td>
 <td>Support for OpenStack Juno and Kilo. See <a href="../openstack/">OpenStack</a> for more information.</td>
 </tr>
