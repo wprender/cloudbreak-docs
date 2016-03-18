@@ -3,6 +3,8 @@
 If you do not have an **Active Directory (AD)** user then you have to configure it before deploying a cluster with 
 Cloudbreak:
 
+> Why you need this? Read more [here](https://azure.microsoft.com/en-us/services/active-directory/)
+
  - Go to `manage.windowsazure.com` > `Active Directory`
  - Select one of your AD where you would like to create the new user
  - You can configure your AD users on `Your active directory` > `Users` menu
@@ -47,6 +49,8 @@ If you use our [Azure Template for Cloudbreak Deployer](azure.md#deploy-using-th
 > Most of the `cbd` commands require `root` permissions. **So `sudo su` here would be worth for you.**
 
 You can setup your Azure Application with the following `cbd` command:
+
+>  Why you need this? Read more [here](https://azure.microsoft.com/en-us/documentation/articles/role-based-access-control-configure/)
 
 ```
 cbd azure configure-arm --app_name myapp --app_password password123 --subscription_id 1234-abcd-efgh-1234
