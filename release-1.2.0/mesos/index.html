@@ -290,7 +290,7 @@
         
             <li><a href="#hostnames-must-be-resolvable-inside-the-mesos-cluster-and-also-by-cloudbreak">Hostnames must be resolvable inside the Mesos cluster and also by Cloudbreak</a></li>
         
-            <li><a href="#docker-must-be-install-on-mesos-slave-nodes-and-docker-containerizer-must-be-enabled">Docker must be install on Mesos slave nodes and Docker containerizer must be enabled</a></li>
+            <li><a href="#docker-must-be-installed-on-mesos-slave-nodes-and-docker-containerizer-must-be-enabled">Docker must be installed on Mesos slave nodes and Docker containerizer must be enabled</a></li>
         
     
         <li class="main "><a href="#provisioning-via-browser">Provisioning via Browser</a></li>
@@ -438,9 +438,9 @@ This will start all the Docker containers and initialize the application.</p>
     10.0.0.5 node5
 </code></pre>
 
-<h2 id="docker-must-be-install-on-mesos-slave-nodes-and-docker-containerizer-must-be-enabled">Docker must be install on Mesos slave nodes and Docker containerizer must be enabled</h2>
+<h2 id="docker-must-be-installed-on-mesos-slave-nodes-and-docker-containerizer-must-be-enabled">Docker must be installed on Mesos slave nodes and Docker containerizer must be enabled</h2>
 <p>To be able to use the Docker containerizer, Docker must be installed on all the Mesos slave nodes. To install Docker, follow the instructions in their documentation <a href="https://docs.docker.com/engine/installation/">here</a>.</p>
-<p>After Docker is installed, it can be configured for the Mesos slave, by adding the <a href="http://mesos.apache.org/documentation/latest/docker-containerizer/">Docker containerizer</a> to each Mesos slave configuration. To configure it, add <code>docker,mesos</code> to the file <code>/etc/mesos-slave/containerizers</code> on each of the slave nodes (or start mesos-slave with the <code>--containerizers=mesos,docker</code> flag, or set the environment variable MESOS_CONTAINERIZERS="mesos,docker"). You may also want to increase the executor timeout to 10 mins by adding <code>10mins</code> to <code>/etc/mesos-slave/executor_registration_timeout</code> because it will allow time for pulling large Docker images</p>
+<p>After Docker is installed, it can be configured for the Mesos slave, by adding the <a href="http://mesos.apache.org/documentation/latest/docker-containerizer/">Docker containerizer</a> to each Mesos slave configuration. To configure it, add <code>docker,mesos</code> to the file <code>/etc/mesos-slave/containerizers</code> on each of the slave nodes (or start mesos-slave with the <code>--containerizers=mesos,docker</code> flag, or set the environment variable MESOS_CONTAINERIZERS="mesos,docker"). You may also want to increase the executor timeout to 10 mins by adding <code>10mins</code> to <code>/etc/mesos-slave/executor_registration_timeout</code> because it will allow time for pulling large Docker images.</p>
 <h1 id="provisioning-via-browser">Provisioning via Browser</h1>
 <p>You can log into the Cloudbreak application at <code>http://&lt;PUBLIC_IP&gt;:3000</code>.</p>
 <p>The main goal of the Cloudbreak UI is to easily create clusters on your own cloud provider, or on your existing Mesos cluster.
