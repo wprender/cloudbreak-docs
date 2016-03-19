@@ -17,7 +17,7 @@ Example:
 	10.0.0.5 node5
 ```
 
-## Docker must be install on Mesos slave nodes and Docker containerizer must be enabled
+## Docker must be installed on Mesos slave nodes and Docker containerizer must be enabled
 
 To be able to use the Docker containerizer, Docker must be installed on all the Mesos slave nodes. To install Docker, follow the instructions in their documentation [here](https://docs.docker.com/engine/installation/).
 
