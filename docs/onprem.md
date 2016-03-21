@@ -78,7 +78,7 @@ Install the Cloudbreak Deployer and unzip the platform specific single binary to
 
 ```
 yum -y install unzip tar
-curl -Ls public-repo-1.hortonworks.com/HDP/cloudbreak/cloudbreak-deployer_1.2.0_$(uname)_x86_64.tgz | sudo tar -xz -C /bin cbd
+curl -Ls s3.amazonaws.com/public-repo-1.hortonworks.com/HDP/cloudbreak/cloudbreak-deployer_1.2.0_$(uname)_x86_64.tgz | sudo tar -xz -C /bin cbd
 cbd --version
 ```
 
