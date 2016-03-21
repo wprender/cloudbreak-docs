@@ -4,14 +4,14 @@
   "tag": "sequenceiq/cloudbreak",
   "slug": "sequenceiq/cloudbreak/openstack.image/33",
   "artifact_type": "openstack.image",
-  "id": "cloudbreak-2016-03-05.img",
+  "id": "cloudbreak-2016-03-17.img",
   "version": 33,
   "metadata": {
-    "created": "2016-03-05 08:50:31 +0000",
+    "created": "2016-03-17 08:50:31 +0000",
     "created_at": "1457167829",
-    "image_name": "cloudbreak-2016-03-05",
+    "image_name": "cloudbreak-2016-03-17",
     "all_docker_images": "<no value>,<no value>,sequenceiq/docker-consul-watch-plugn:1.6,gliderlabs/registrator:v6,sequenceiq/logrotate:v0.5.1,sequenceiq/kerberos:1.1,postgres:9.4.1,sequenceiq/munchausen:0.6.0,gliderlabs/consul:0.6,sequenceiq/cb-gateway-nginx:0.3,gliderlabs/alpine:3.1,swarm:1.1.0,ehazlett/cert-tool:0.0.3,sequenceiq/haveged:1.0,sequenceiq/docker-ldap:1.0,shipyard/shipyard:v3.0.0,rethinkdb:2.2.4,",
-    "cloudbreak_image_version": "1.2.0-v11"
+    "cloudbreak_image_version": "1.2.0-v12"
   },
   "file": true
 }
