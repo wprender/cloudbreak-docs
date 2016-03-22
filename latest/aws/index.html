@@ -358,14 +358,14 @@ Cloudbreak Deployer image based on your region at the <a href="https://aws.amazo
 <p><strong>Cloudbreak Deployer Highlights</strong></p>
 <ul>
 <li>The default SSH username for the EC2 instances is <code>cloudbreak</code>.</li>
-<li>Cloudbreak Deployer location is <code>/var/lib/cloudbreak-deployment</code> on the launched EC2 instance. This is the 
+<li>Cloudbreak Deployer location is <code>/var/lib/cloudbreak-deployment</code> on the launched EC2 instance. This is the
   <code>cbd</code> root folder there.</li>
-<li>All <code>cbd</code> actions must be executed from the <code>cbd</code> root folder.</li>
+<li>All <code>cbd</code> actions must be executed from the <code>cbd</code> root folder as <code>cloudbreak</code> user.</li>
 </ul>
 <h2 id="setup-cloudbreak-deployer">Setup Cloudbreak Deployer</h2>
-<p>You should already have the Cloudbreak Deployer either by <a href="./">using the AWS Cloud Images</a> or by <a href="../onprem/">installing the 
+<p>You should already have the Cloudbreak Deployer either by <a href="./">using the AWS Cloud Images</a> or by <a href="../onprem/">installing the
 Cloudbreak Deployer</a> manually on your own VM.</p>
-<p>If you have your own installed VM, you should check the <a href="./#initialize-your-profile">Initialize your Profile</a> 
+<p>If you have your own installed VM, you should check the <a href="./#initialize-your-profile">Initialize your Profile</a>
 section here before starting the provisioning.</p>
 <p>You can <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstances.html">connect to the previously created <code>cbd</code> VM</a>.</p>
 <p>To open the <code>cloudbreak-deployment</code> directory:</p>
@@ -378,8 +378,8 @@ section here before starting the provisioning.</p>
 <pre><code>cbd init
 </code></pre>
 
-<p>It will create a <code>Profile</code> file in the current directory. Please open the <code>Profile</code> file then check the <code>PUBLIC_IP</code>. 
-This is mandatory, because of to can access the Cloudbreak UI (called Uluwatu). In some cases the <code>cbd</code> tool tries to 
+<p>It will create a <code>Profile</code> file in the current directory. Please open the <code>Profile</code> file then check the <code>PUBLIC_IP</code>.
+This is mandatory, because of to can access the Cloudbreak UI (called Uluwatu). In some cases the <code>cbd</code> tool tries to
 guess it. If <code>cbd</code> cannot get the IP address during the initialization, please set the appropriate value.</p>
 <h3 id="aws-specific-configuration">AWS specific configuration</h3>
 <p><strong>AWS Account Keys</strong></p>
@@ -398,7 +398,7 @@ This will start all the Docker containers and initialize the application.</p>
 <blockquote>
 <p>At the very first time it will take for a while, because of need to download all the necessary docker images.</p>
 </blockquote>
-<p>The <code>cbd start</code> command includes the <code>cbd generate</code> command which applies the following steps: </p>
+<p>The <code>cbd start</code> command includes the <code>cbd generate</code> command which applies the following steps:</p>
 <ul>
 <li>creates the <strong>docker-compose.yml</strong> file that describes the configuration of all the Docker containers needed for the Cloudbreak deployment.</li>
 <li>creates the <strong>uaa.yml</strong> file that holds the configuration of the identity server used to authenticate users to Cloudbreak.</li>
@@ -1226,7 +1226,7 @@ provisioning, we have some <a href="../operations/">interesting insights</a> for
                $("#cloudbreak-deployer-image").append('<br>');
                $("#cloudbreak-deployer-image").append('<br>');
                $("#cloudbreak-deployer-image").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">Download the latest Cloudbreak Deployer image to your local machine:</p>');
-               $("#cloudbreak-deployer-image").append('<pre><code style="font-size: 12pt;color:#333333">curl -O https://s3-eu-west-1.amazonaws.com/cb-openstack-images/' + data.id + '</code></pre>');
+               $("#cloudbreak-deployer-image").append('<pre><code style="font-size: 12pt;color:#333333">curl -O https://public-repo-1.hortonworks.com/HDP/cloudbreak/' + data.id + '</code></pre>');
                $("#cloudbreak-deployer-import").append('<br>');
                $("#cloudbreak-deployer-import").append('<br>');
                $("#cloudbreak-deployer-import").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">Set the following environment variables for the OpenStack image import:</p>');
@@ -1238,7 +1238,7 @@ provisioning, we have some <a href="../operations/">interesting insights</a> for
                $("#cloudbreak-image").append('<br>');
                $("#cloudbreak-image").append('<br>');
                $("#cloudbreak-image").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">Download the latest Cloudbreak image to your local machine:</p>');
-               $("#cloudbreak-image").append('<pre><code style="font-size: 12pt;color:#333333">curl -O https://s3-eu-west-1.amazonaws.com/cb-openstack-images/' + data.id + '</code></pre>');
+               $("#cloudbreak-image").append('<pre><code style="font-size: 12pt;color:#333333">curl -O https://public-repo-1.hortonworks.com/HDP/cloudbreak/' + data.id + '</code></pre>');
                $("#cloudbreak-import").append('<br>');
                $("#cloudbreak-import").append('<br>');
                $("#cloudbreak-import").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">This is very similar to the Cloudbrek Deployer. Set the following environment variables for the OpenStack image import:</p>');

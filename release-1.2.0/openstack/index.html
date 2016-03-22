@@ -386,12 +386,14 @@ name in the <code>Profile</code> file</a></p>
 </blockquote>
 <h1 id="openstack-setup">OpenStack Setup</h1>
 <p><strong>Cloudbreak Deployer Highlights</strong></p>
+<blockquote>
+<p><strong><a href="../onprem/#minimum-and-recommended-system-requirements">Minimum and Recommended VM requirements</a>:</strong> 8GB RAM, 10GB disk, 2 cores</p>
+</blockquote>
 <ul>
-<li>The default SSH username for the OpenStack instances is <code>centos</code>.</li>
-<li>Cloudbreak Deployer location is <code>/var/lib/cloudbreak-deployment</code> on the launched <code>cbd</code> VM. This is the
-      <code>cbd</code> root folder.</li>
-<li>All <code>cbd</code> commands must be executed from the <code>cbd</code> root folder.</li>
-<li>All <code>cbd</code> commands must be executed as <code>root</code> user</li>
+<li>The default SSH username for the OpenStack instances is <code>cloudbreak</code>.</li>
+<li>Cloudbreak Deployer location is <code>/var/lib/cloudbreak-deployment</code> on the launched EC2 instance. This is the
+  <code>cbd</code> root folder.</li>
+<li>All <code>cbd</code> actions must be executed from the <code>cbd</code> root folder as <code>cloudbreak</code> user.</li>
 </ul>
 <h2 id="setup-cloudbreak-deployer">Setup Cloudbreak Deployer</h2>
 <p>You should already have the Cloudbreak Deployer either by <a href="./">using the OpenStack Cloud Images</a> or by
@@ -400,8 +402,7 @@ name in the <code>Profile</code> file</a></p>
 section here before starting the provisioning.</p>
 <p>You can <a href="http://docs.openstack.org/user-guide/dashboard_launch_instances.html#connect-to-your-instance-by-using-ssh">connect to the previously created <code>cbd</code> VM</a>.</p>
 <p>To open the <code>cloudbreak-deployment</code> directory:</p>
-<pre><code>sudo -i
-cd /var/lib/cloudbreak-deployment/
+<pre><code>cd /var/lib/cloudbreak-deployment/
 </code></pre>
 
 <p>This is the directory of the configuration files and the supporting binaries for Cloudbreak Deployer.</p>
@@ -438,7 +439,7 @@ This will start all the Docker containers and initialize the application.</p>
 </code></pre>
 
 <blockquote>
-<p>In case of <code>cbd update</code> is needed, please check the related documentation for <a href="../operations/#update-cloudbreak-deployer">Cloudbreak Deployer Update</a>. Most of the <code>cbd</code> commands require <code>root</code> permissions.</p>
+<p>In case of <code>cbd update</code> is needed, please check the related documentation for <a href="../operations/#update-cloudbreak-deployer">Cloudbreak Deployer Update</a>.</p>
 </blockquote>
 <ul>
 <li>Started Cloudbreak Application logs.</li>
@@ -1236,7 +1237,7 @@ provisioning, we have some <a href="../operations/">interesting insights</a> for
                $("#cloudbreak-deployer-image").append('<br>');
                $("#cloudbreak-deployer-image").append('<br>');
                $("#cloudbreak-deployer-image").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">Download the latest Cloudbreak Deployer image to your local machine:</p>');
-               $("#cloudbreak-deployer-image").append('<pre><code style="font-size: 12pt;color:#333333">curl -O https://s3-eu-west-1.amazonaws.com/cb-openstack-images/' + data.id + '</code></pre>');
+               $("#cloudbreak-deployer-image").append('<pre><code style="font-size: 12pt;color:#333333">curl -O https://public-repo-1.hortonworks.com/HDP/cloudbreak/' + data.id + '</code></pre>');
                $("#cloudbreak-deployer-import").append('<br>');
                $("#cloudbreak-deployer-import").append('<br>');
                $("#cloudbreak-deployer-import").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">Set the following environment variables for the OpenStack image import:</p>');
@@ -1248,7 +1249,7 @@ provisioning, we have some <a href="../operations/">interesting insights</a> for
                $("#cloudbreak-image").append('<br>');
                $("#cloudbreak-image").append('<br>');
                $("#cloudbreak-image").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">Download the latest Cloudbreak image to your local machine:</p>');
-               $("#cloudbreak-image").append('<pre><code style="font-size: 12pt;color:#333333">curl -O https://s3-eu-west-1.amazonaws.com/cb-openstack-images/' + data.id + '</code></pre>');
+               $("#cloudbreak-image").append('<pre><code style="font-size: 12pt;color:#333333">curl -O https://public-repo-1.hortonworks.com/HDP/cloudbreak/' + data.id + '</code></pre>');
                $("#cloudbreak-import").append('<br>');
                $("#cloudbreak-import").append('<br>');
                $("#cloudbreak-import").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">This is very similar to the Cloudbrek Deployer. Set the following environment variables for the OpenStack image import:</p>');
