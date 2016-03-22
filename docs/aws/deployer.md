@@ -7,7 +7,7 @@
 **Cloudbreak Deployer Highlights**
 
   * The default SSH username for the EC2 instances is `ec2-user`.
-  * Cloudbreak Deployer location is `/home/ec2-user/cloudbreak-deployment` on the launched EC2 instance. This is the 
+  * Cloudbreak Deployer location is `/var/lib/cloudbreak-deployment` on the launched EC2 instance. This is the 
   `cbd` root folder there.
   * All `cbd` actions must be executed from the `cbd` root folder.
   * Most of the `cbd` commands require `root` permissions. So it would be worth if you apply the `sudo su`.
@@ -22,9 +22,8 @@ section here before starting the provisioning.
 
 You can [connect to the previously created `cbd` VM](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstances.html).
 
-  * Cloudbreak Deployer location is `/home/ec2-user/cloudbreak-deployment/`.
+  * Cloudbreak Deployer location is `/var/lib/cloudbreak-deployment/`.
   * All `cbd` actions must be executed from the `cbd` root folder.
-  * Most of the `cbd` commands require `root` permissions. So `sudo su` here would be worth for you. 
 
 Open the `cloudbreak-deployment` directory:
 
