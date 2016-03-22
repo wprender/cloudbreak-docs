@@ -332,7 +332,7 @@
                     
 
 <h1 id="openstack-images">OpenStack Images</h1>
-<p>We have pre-built cloud images for OpenStack with the Cloudbreak Deployer pre-installed and with Cloudbreak 
+<p>We have pre-built cloud images for OpenStack with the Cloudbreak Deployer pre-installed and with Cloudbreak
 pre-installed. Following steps will guide you through the launch of the images then the needed configuration.</p>
 <blockquote>
 <p>Alternatively, instead of using the pre-built cloud image, you can install Cloudbreak Deployer on your own VM. See
@@ -358,13 +358,12 @@ export OS_TENANT_NAME=&lt;your_os_tenant_name&gt;
 </code></pre>
 
 <p>Import the new image into your OpenStack:</p>
-<pre><code>glance image-create --name &quot;$OS_IMAGE_NAME&quot; --file &quot;$CBD_LATEST_IMAGE&quot; --disk-format qcow2 --container-format bare 
+<pre><code>glance image-create --name &quot;$OS_IMAGE_NAME&quot; --file &quot;$CBD_LATEST_IMAGE&quot; --disk-format qcow2 --container-format bare
 --progress
 </code></pre>
 
 <blockquote>
-<p><strong>NOTE</strong> This image is needed to launch a machine on your OpenStack with Cloudbreak Deployer.</p>
-<p><strong><a href="../onprem/#minimum-and-recommended-system-requirements">Minimum and Recommended VM requirements</a>:</strong> 4GB RAM, 10GB disk, 2 cores</p>
+<p><strong><a href="../onprem/#minimum-and-recommended-system-requirements">Minimum and Recommended VM requirements</a>:</strong> 8GB RAM, 10GB disk, 2 cores</p>
 </blockquote>
 <p><img alt="" src="../images/os-images.png" />
 <sub><em>Full size <a href="../images/os-images.png">here</a>.</em></sub></p>
@@ -376,19 +375,12 @@ export OS_TENANT_NAME=&lt;your_os_tenant_name&gt;
 </code></pre>
 
 <p>Import the new image into your OpenStack:</p>
-<pre><code>glance image-create --name &quot;$CB_LATEST_IMAGE_NAME&quot; --file &quot;$CB_LATEST_IMAGE&quot; --disk-format qcow2 
+<pre><code>glance image-create --name &quot;$CB_LATEST_IMAGE_NAME&quot; --file &quot;$CB_LATEST_IMAGE&quot; --disk-format qcow2
 --container-format bare --progress
 </code></pre>
 
-<blockquote>
-<p><strong>NOTE</strong> This image is mandatory to provisioning on OpenStack with Cloudbreak application. You need to <a href="./#openstack-specific-configuration">provide its 
-name in the <code>Profile</code> file</a></p>
-</blockquote>
 <h1 id="openstack-setup">OpenStack Setup</h1>
 <p><strong>Cloudbreak Deployer Highlights</strong></p>
-<blockquote>
-<p><strong><a href="../onprem/#minimum-and-recommended-system-requirements">Minimum and Recommended VM requirements</a>:</strong> 8GB RAM, 10GB disk, 2 cores</p>
-</blockquote>
 <ul>
 <li>The default SSH username for the OpenStack instances is <code>cloudbreak</code>.</li>
 <li>Cloudbreak Deployer location is <code>/var/lib/cloudbreak-deployment</code> on the launched EC2 instance. This is the
