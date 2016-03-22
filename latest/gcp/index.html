@@ -364,10 +364,9 @@ Cloudbreak Deployer image at the <a href="https://console.developers.google.com/
 <p><strong>Cloudbreak Deployer Highlights</strong></p>
 <ul>
 <li>The default SSH username for the GCP instances is <code>cloudbreak</code>.</li>
-<li>Cloudbreak Deployer location is <code>/home/cloudbreak/cloudbreak-deployment/</code> on the launched <code>cbd</code> VM. This is the 
+<li>Cloudbreak Deployer location is <code>/var/lib/cloudbreak-deployment</code> on the launched <code>cbd</code> VM. This is the 
       <code>cbd</code> root folder there.</li>
 <li>All <code>cbd</code> actions must be executed from the <code>cbd</code> root folder.</li>
-<li>Most of the <code>cbd</code> commands require <code>root</code> permissions. So it would be worth if you apply the <code>sudo su</code>.</li>
 </ul>
 <h2 id="setup-cloudbreak-deployer">Setup Cloudbreak Deployer</h2>
 <p>You should already have the Cloudbreak Deployer either by <a href="./">using the GCP Cloud Images</a> or by <a href="../onprem/">installing the 
@@ -376,12 +375,11 @@ Cloudbreak Deployer</a> manually on your own VM. (The minimum instance type whic
 section here before starting the provisioning.</p>
 <p>You have several opportunities to <a href="https://cloud.google.com/compute/docs/instances/connecting-to-instance">connect to the previously created <code>cbd</code> VM</a>.</p>
 <ul>
-<li>Cloudbreak Deployer location is <code>/home/cloudbreak/cloudbreak-deployment/</code>.</li>
+<li>Cloudbreak Deployer location is <code>/var/lib/cloudbreak-deployment</code>.</li>
 <li>All <code>cbd</code> actions must be executed from the <code>cbd</code> folder.</li>
-<li>Most of the <code>cbd</code> commands require <code>root</code> permissions. So <code>sudo su</code> here would be worth for you. </li>
 </ul>
 <p>Open the <code>cloudbreak-deployment</code> directory:</p>
-<pre><code>cd cloudbreak-deployment
+<pre><code>cd /var/lib/cloudbreak-deployment
 </code></pre>
 
 <p>This is the directory of the configuration files and the supporting binaries for Cloudbreak Deployer.</p>
