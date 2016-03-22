@@ -1,7 +1,5 @@
 **Cloudbreak Deployer Highlights**
 
-> **[Minimum and Recommended VM requirements](onprem.md#minimum-and-recommended-system-requirements):** 8GB RAM, 10GB disk, 2 cores
-
   * The default SSH username for the OpenStack instances is `cloudbreak`.
   * Cloudbreak Deployer location is `/var/lib/cloudbreak-deployment` on the launched EC2 instance. This is the
   `cbd` root folder.
