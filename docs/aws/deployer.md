@@ -7,16 +7,16 @@
 **Cloudbreak Deployer Highlights**
 
   * The default SSH username for the EC2 instances is `cloudbreak`.
-  * Cloudbreak Deployer location is `/var/lib/cloudbreak-deployment` on the launched EC2 instance. This is the 
+  * Cloudbreak Deployer location is `/var/lib/cloudbreak-deployment` on the launched EC2 instance. This is the
   `cbd` root folder there.
-  * All `cbd` actions must be executed from the `cbd` root folder.
+  * All `cbd` actions must be executed from the `cbd` root folder as `cloudbreak` user.
 
 ## Setup Cloudbreak Deployer
 
-You should already have the Cloudbreak Deployer either by [using the AWS Cloud Images](aws.md) or by [installing the 
+You should already have the Cloudbreak Deployer either by [using the AWS Cloud Images](aws.md) or by [installing the
 Cloudbreak Deployer](onprem.md) manually on your own VM.
 
-If you have your own installed VM, you should check the [Initialize your Profile](aws.md#initialize-your-profile) 
+If you have your own installed VM, you should check the [Initialize your Profile](aws.md#initialize-your-profile)
 section here before starting the provisioning.
 
 You can [connect to the previously created `cbd` VM](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstances.html).
@@ -35,8 +35,8 @@ First initialize `cbd` by creating a `Profile` file:
 ```
 cbd init
 ```
-It will create a `Profile` file in the current directory. Please open the `Profile` file then check the `PUBLIC_IP`. 
-This is mandatory, because of to can access the Cloudbreak UI (called Uluwatu). In some cases the `cbd` tool tries to 
+It will create a `Profile` file in the current directory. Please open the `Profile` file then check the `PUBLIC_IP`.
+This is mandatory, because of to can access the Cloudbreak UI (called Uluwatu). In some cases the `cbd` tool tries to
 guess it. If `cbd` cannot get the IP address during the initialization, please set the appropriate value.
 
 ### AWS specific configuration
@@ -61,7 +61,7 @@ cbd start
 
 >At the very first time it will take for a while, because of need to download all the necessary docker images.
 
-The `cbd start` command includes the `cbd generate` command which applies the following steps: 
+The `cbd start` command includes the `cbd generate` command which applies the following steps:
 
 - creates the **docker-compose.yml** file that describes the configuration of all the Docker containers needed for the Cloudbreak deployment.
 - creates the **uaa.yml** file that holds the configuration of the identity server used to authenticate users to Cloudbreak.

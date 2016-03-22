@@ -1,10 +1,11 @@
 **Cloudbreak Deployer Highlights**
 
-  * The default SSH username for the OpenStack instances is `centos`.
-  * Cloudbreak Deployer location is `/var/lib/cloudbreak-deployment` on the launched `cbd` VM. This is the
-      `cbd` root folder.
-  * All `cbd` commands must be executed from the `cbd` root folder.
-  * All `cbd` commands must be executed as `root` user
+> **[Minimum and Recommended VM requirements](onprem.md#minimum-and-recommended-system-requirements):** 8GB RAM, 10GB disk, 2 cores
+
+  * The default SSH username for the OpenStack instances is `cloudbreak`.
+  * Cloudbreak Deployer location is `/var/lib/cloudbreak-deployment` on the launched EC2 instance. This is the
+  `cbd` root folder.
+  * All `cbd` actions must be executed from the `cbd` root folder as `cloudbreak` user.
 
 ## Setup Cloudbreak Deployer
 
@@ -19,7 +20,6 @@ You can [connect to the previously created `cbd` VM](http://docs.openstack.org/u
 To open the `cloudbreak-deployment` directory:
 
 ```
-sudo -i
 cd /var/lib/cloudbreak-deployment/
 ```
 This is the directory of the configuration files and the supporting binaries for Cloudbreak Deployer.
@@ -63,7 +63,7 @@ After the `cbd start` command finishes followings are worthy to check:
 ```
    cbd doctor
 ```
->In case of `cbd update` is needed, please check the related documentation for [Cloudbreak Deployer Update](operations.md#update-cloudbreak-deployer). Most of the `cbd` commands require `root` permissions.
+>In case of `cbd update` is needed, please check the related documentation for [Cloudbreak Deployer Update](operations.md#update-cloudbreak-deployer).
 
 - Started Cloudbreak Application logs.
 ```
