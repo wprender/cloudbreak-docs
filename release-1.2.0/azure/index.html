@@ -335,7 +335,7 @@
 We provide a way to launch Cloudbreak Deployer based on the new <a href="https://github.com/Azure/azure-quickstart-templates">Azure Resource Manager 
 Templates</a>.</p>
 <h2 id="deploy-using-the-azure-portal">Deploy using the Azure Portal</h2>
-<p>To get started using the Azure Resource Manager template to install Cloudbreak, it is as simple as clicking here: <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsequenceiq%2Fazure-cbd-quickstart%2Fmaster%2Fazuredeploy.json">  <img alt="deploy on azure" src="http://azuredeploy.net/deploybutton.png" /> </a></p>
+<p>To get started using the Azure Resource Manager template to install Cloudbreak, it is as simple as clicking here: <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsequenceiq%2Fazure-cbd-quickstart%2F1.2.0%2Fazuredeploy.json">  <img alt="deploy on azure" src="http://azuredeploy.net/deploybutton.png" /> </a></p>
 <blockquote>
 <p><strong><a href="../onprem/#minimum-and-recommended-system-requirements">Minimum and Recommended VM requirements</a>:</strong> 8GB RAM, 10GB disk, 2 cores (The minimum instance type which is fit for cloudbreak is <strong>D2</strong>)</p>
 </blockquote>
@@ -399,16 +399,29 @@ Cloudbreak Deployer (<code>cbd</code>)</li>
 </ul>
 <h2 id="validate-the-started-cloudbreak-deployer">Validate the started Cloudbreak Deployer</h2>
 <ul>
-<li>SSH to the launched Azure VM.</li>
+<li>
+<p>SSH to the launched Azure VM.</p>
+</li>
+<li>
+<p>Most of the <code>cbd</code> commands require <code>root</code> permissions. So it would be worth if you apply the:</p>
+</li>
+</ul>
+<pre><code>  sudo su
+</code></pre>
+
+<blockquote>
+<p>This is a MUST on Azure because the <a href="https://github.com/Azure/azure-linux-extensions/tree/master/CustomScript">Customscript Extension</a> which basically creates everything running as sudo and this is not modifiable.</p>
+</blockquote>
+<ul>
 <li>Open the <code>cloudbreak-deployment</code> directory:</li>
 </ul>
-<pre><code>   cd /var/lib/cloudbreak-deployment
+<pre><code>  cd /var/lib/cloudbreak-deployment
 </code></pre>
 
 <ul>
 <li>Pre-installed Cloudbreak Deployer version and health:</li>
 </ul>
-<pre><code>   cbd doctor
+<pre><code>  cbd doctor
 </code></pre>
 
 <blockquote>
