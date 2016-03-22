@@ -383,8 +383,12 @@ This is mandatory, because of to can access the Cloudbreak UI (called Uluwatu). 
 guess it. If <code>cbd</code> cannot get the IP address during the initialization, please set the appropriate value.</p>
 <h3 id="aws-specific-configuration">AWS specific configuration</h3>
 <p><strong>AWS Account Keys</strong></p>
-<p>In order for Cloudbreak to be able to launch clusters on AWS on your behalf you need to set your AWS keys in the <code>Profile</code> file.
-We suggest to use the keys of a valid <strong>IAM User</strong> here.</p>
+<p>There are 2 ways to create AWS credentials in Cloudbreak. </p>
+<ul>
+<li>Key-based: It requires your AWS access and secret key and Cloudbreak will use this key to launch the resources. This key needs to be provided when you create your credential in Cloudbreak either with Cloudbreak UI or Cloudbreak CLI.</li>
+<li>Role-based: It requires a valid IAM User role and Cloudbreak will assume this role to get a temporary access and secret key. For this action you need to set your AWS key in the <code>Profile</code> file.
+We suggest to use the keys of a valid <strong>IAM User</strong> here.</li>
+</ul>
 <pre><code>export AWS_ACCESS_KEY_ID=AKIA**************W7SA
 export AWS_SECRET_ACCESS_KEY=RWCT4Cs8******************/*skiOkWD
 </code></pre>
