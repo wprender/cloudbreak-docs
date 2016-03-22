@@ -6,7 +6,7 @@ Here is a **basic flow for cluster creation on Cloudbreak Web UI**:
 
  - Start by selecting a previously created GCP credential in the header.
 
-![](../../images/ui-credentials_v2.png)
+![](/images/ui-credentials_v2.png)
 <sub>*Full size [here](/images/ui-credentials_v2.png).*</sub>
 
  - Open `create cluster`
@@ -54,11 +54,11 @@ Documentation.
 
 Cloudbreak uses *Google Cloud Platform* to create the resources - you can check out the resources created by Cloudbreak
  on the `Compute Engine` page of the `Google Compute Platform`.
-![](/images/gcp-computeengine.png)
+![](/gcp/images/gcp-computeengine.png)
 <sub>*Full size [here](/gcp/images/gcp-computeengine.png).*</sub>
 
 Besides these you can check the progress on the Cloudbreak Web UI itself if you open the new cluster's `Event History`.
-![](/images/gcp-eventhistory.png)
+![](/gcp/images/gcp-eventhistory.png)
 <sub>*Full size [here](/gcp/images/gcp-eventhistory.png).*</sub>
 
 **Advanced options**
