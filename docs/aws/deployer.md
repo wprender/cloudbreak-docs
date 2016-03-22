@@ -43,7 +43,10 @@ guess it. If `cbd` cannot get the IP address during the initialization, please s
 
 **AWS Account Keys**
 
-In order for Cloudbreak to be able to launch clusters on AWS on your behalf you need to set your AWS keys in the `Profile` file.
+There are 2 ways to create AWS credentials in Cloudbreak. 
+
+* Key-based: It requires your AWS access and secret key and Cloudbreak will use this key to launch the resources. This key needs to be provided when you create your credential in Cloudbreak either with Cloudbreak UI or Cloudbreak CLI.
+* Role-based: It requires a valid IAM User role and Cloudbreak will assume this role to get a temporary access and secret key. For this action you need to set your AWS key in the `Profile` file.
 We suggest to use the keys of a valid **IAM User** here.
 
 ```
