@@ -16,7 +16,7 @@ To create a new OpenStack credential follow these steps:
   7. Copy your SSH public key to the `SSH public key` field
     - The SSH public key must be in OpenSSH format and it's private keypair can be used later to [SSH onto every 
     instance](operations.md#ssh-to-the-hosts) of every cluster you'll create with this credential.
-    - The **SSH username** for the OpenStack instances is **centos**.
+    - The **SSH username** for the OpenStack instances is **cloudbreak**.
 
 >Any other parameter is optional here. You can read more about Keystone v3 [here](http://developer.openstack.org/api-ref-identity-v3.html).
 
