@@ -67,7 +67,7 @@ cbd start
 The `cbd start` command includes the `cbd generate` command which applies the following steps:
 
 - creates the **docker-compose.yml** file that describes the configuration of all the Docker containers needed for the Cloudbreak deployment.
-- creates the **uaa.yml** file that holds the configuration of the identity server used to authenticate users to Cloudbreak.
+- creates the **uaa.yml** file that holds the configuration of the identity server which is used to authenticate users to Cloudbreak.
 
 ## Validate the started Cloudbreak Deployer
 
@@ -77,7 +77,7 @@ After the `cbd start` command finishes followings are worthy to check:
 ```
    cbd doctor
 ```
->In case of `cbd update` is needed, please check the related documentation for [Cloudbreak Deployer Update](operations.md#update-cloudbreak-deployer). Most of the `cbd` commands require `root` permissions.
+>In case of `cbd update` is needed, please check the related documentation for [Cloudbreak Deployer Update](operations.md#update-cloudbreak-deployer).
 
 - Started Cloudbreak Application logs:
 ```
