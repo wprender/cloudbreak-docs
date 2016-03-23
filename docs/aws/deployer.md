@@ -1,7 +1,3 @@
-## Cloudbreak Deployer AWS Image Details
-
-> **[Minimum and Recommended VM requirements](onprem.md#minimum-and-recommended-system-requirements):** 8GB RAM, 10GB disk, 2 cores (The minimum instance type which is fit for cloudbreak is **m3.large**)
-
 **Cloudbreak Deployer Highlights**
 
   * The default SSH username for the EC2 instances is `cloudbreak`.
