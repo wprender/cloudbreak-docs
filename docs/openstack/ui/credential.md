@@ -19,7 +19,7 @@ To create a new OpenStack credential follow these steps:
     - The **SSH username** for the OpenStack instances is **centos**.
 
 >Any other parameter is optional here. You can read more about Keystone v3 [here](http://developer.openstack.org/api-ref-identity-v3.html).
-
+>Facing is the URL perspective in which the API is accessing data.
 >`Public in account` means that all the users belonging to your account will be able to use this credential to create 
 clusters, but cannot delete it.
 
