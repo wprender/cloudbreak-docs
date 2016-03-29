@@ -524,11 +524,12 @@ instance</a> of every cluster you'll create with this credential.</li>
 </ol>
 <blockquote>
 <p>Any other parameter is optional here. You can read more about Keystone v3 <a href="http://developer.openstack.org/api-ref-identity-v3.html">here</a>.</p>
+<p><code>API Facing</code> is the URL perspective in which the API is accessing data.</p>
 <p><code>Public in account</code> means that all the users belonging to your account will be able to use this credential to create 
 clusters, but cannot delete it.</p>
 </blockquote>
-<p><img alt="" src="../images/os-credential.png" />
-<sub><em>Full size <a href="../images/os-credential.png">here</a>.</em>&lt;/sub</p>
+<p><img alt="" src="../images/os-credential_v2.png" />
+<sub><em>Full size <a href="../images/os-credential_v2.png">here</a>.</em></sub></p>
 <h2 id="infrastructure-templates">Infrastructure templates</h2>
 <p>After your OpenStack account is linked to Cloudbreak you can start creating resource templates that describe your 
 clusters' infrastructure:</p>
@@ -862,6 +863,11 @@ find further details <a href="./#provisioning-prerequisites">here</a>.</p>
 <li>you can upload your public key from an url: <code>—sshKeyUrl</code> </li>
 <li>or you can add the path of your public key: <code>—sshKeyPath</code></li>
 </ul>
+<p>Other available option:</p>
+<p><code>--facing</code> URL perspective in which the API is accessing data, allowed types are: public, admin and internal.</p>
+<blockquote>
+<p><strong>NOTE</strong> If facing not specified OpenStack default value will be applied.</p>
+</blockquote>
 <p>You can check whether the credential was created successfully</p>
 <pre><code>credential list
 </code></pre>
