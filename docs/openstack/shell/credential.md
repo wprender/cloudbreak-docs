@@ -20,7 +20,7 @@ Alternatives to provide `SSH Key`:
 Other available option:
 
 `--facing` URL perspective in which the API is accessing data, allowed types are: public, admin and internal.
->If facing not specified OpenStack default value will applied.
+>**NOTE** If facing not specified OpenStack default value will be applied.
 
 
 You can check whether the credential was created successfully
