@@ -17,6 +17,12 @@ Alternatives to provide `SSH Key`:
 - you can upload your public key from an url: `—sshKeyUrl` 
 - or you can add the path of your public key: `—sshKeyPath`
 
+Other available option:
+
+`--facing` URL perspective in which the API is accessing data, allowed types are: public, admin and internal.
+>**NOTE** If facing not specified OpenStack default value will be applied.
+
+
 You can check whether the credential was created successfully
 
 ```
