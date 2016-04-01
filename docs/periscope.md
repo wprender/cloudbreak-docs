@@ -1,19 +1,20 @@
 # Auto-Scaling
 
-The purpose of `auto-scaling` is to apply SLA scaling policies to a Cloudbreak-managed Hadoop cluster.
+The purpose of **auto-scaling** is to apply **SLA scaling policies to a Cloudbreak-managed Hadoop cluster**.
 
-##How It Works
+## How It Works
 
 The auto-scaling capabilities is based on [Ambari Metrics](https://cwiki.apache.org/confluence/display/AMBARI/Metrics) - and [Ambari Alerts](https://cwiki.apache.org/confluence/display/AMBARI/Alerts). Based on the Blueprint
 used and the running services, Cloudbreak can access all the available metrics from the subsystem and define `alerts` based on this information.
 
 Beside the default Ambari Metrics, Cloudbreak includes two custom metrics: `Pending YARN containers` and `Pending applications`. These two custom metrics works with the YARN subsystem in order to bring `application` level QoS to the cluster.
 
-> In order to use the `autoscaling` feature with Cloudbreak you will have to enable from the UI or shell.
+## Enable auto-scaling via Browser 
 
-![](/images/enable_periscope.png)
+![](/images/enable_periscope_v2.png)
+<sub>*Full size [here](/images/enable_periscope_v2.png).*</sub>
 
-####Alerts
+## Alerts
 
 Auto-scaling supports two **Alert** types: `metric` and `time` based.
 
@@ -46,7 +47,7 @@ Time alerts have a few configurable fields.
 ![](/images/time_alert.png)
 
 
-####Scaling Policies
+## Scaling Policies
 Scaling is the ability to increase or decrease the capacity of the Hadoop cluster or application based on an alert.
 When scaling policies are used, the capacity is automatically increased or decreased according to the conditions defined.
 Cloudbreak will do the heavy lifting and based on the alerts and the scaling policy linked to them it executes the associated policy. We scaling granularity is at the `hostgroup` level - thus you have the option to scale services or components only, not the whole cluster.
@@ -60,7 +61,7 @@ Scaling policies have a few configurable fields.
 
 ![](/images/policy.png)
 
-####Cluster Scaling Configuration
+## Cluster Scaling Configuration
 
 An SLA scaling policy can contain multiple alerts. When an alert is triggered a `scaling adjustment` is applied, however to keep the cluster size within boundaries a `cluster size min.` and `cluster size max.` is attached to the cluster - thus a scaling policy can never over or undersize a cluster. Also in order to avoid stressing the cluster we have introduced a `cooldown time` period (minutes) - though an alert is raised and there is an associated scaling policy, the system will not apply the policy within the configured timeframe. In an SLA scaling policy the triggered rules are applied in order.
 
