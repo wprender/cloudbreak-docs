@@ -1,3 +1,18 @@
+<font color='red'>
+<font color='red' size='5'>Apr 5, 2016 <font color='red' size='5'>[Production issue](https://github.com/sequenceiq/cloudbreak/issues/1461)</font></font></br>
+> On 31st March 2016 the Systemd package has been updated with a newer version in the central CentOS repository which caused incompatibilities during HDP install and that is the reason why the cluster stopped at 8%. The main problem is that when the Ambari installs the rpcbind package then the Systemd also gets updated and when the next package which had systemd service file packaged with it is installed the yum is completely freeze. The 1.2.1 release will fix the issue.
+
+To apply the patch please update your Profile file:
+```
+ export DOCKER_TAG_CLOUDBREAK=1.2.4-rc.1
+```
+and then restart cbd with:
+```
+cbd kill && cbd regenerate && cbd start
+```
+
+</font>
+
 # Introduction
 
 Cloudbreak simplifies the provisioning, management and monitoring of on-demand HDP clusters in virtual and cloud environments. Cloudbreak leverages the cloud infrastructure platform resources to create host instances, uses Docker technology to deploy the requisite containers cloud-agnostically, and uses Apache Ambari (via Ambari Blueprints) to install and manage the HDP cluster.
