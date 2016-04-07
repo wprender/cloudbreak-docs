@@ -9,7 +9,7 @@
         <link rel="canonical" href="http://sequenceiq.com/cloudbreak-docs/gcp/">
         <link rel="shortcut icon" href="../img/favicon.ico">
 
-	<title>GCP - Cloudbreak 1.2.0</title>
+	<title>GCP - Cloudbreak 1.2.1</title>
 
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
@@ -44,7 +44,7 @@
 
             <!-- Main title -->
             <img class="navbar-logo" src="http://docs.hortonworks.com/HDPDocuments/Ambari-2.1.0.0/bk_Installing_HDP_AMB/common/images/hortonworks-logo.png" alt="Hortonworks Documentation" width="132" height="52">
-            <a class="navbar-brand" href="..">Cloudbreak 1.2.0</a>
+            <a class="navbar-brand" href="..">Cloudbreak 1.2.1</a>
         </div>
 
         <!-- Expanded navigation -->
@@ -875,7 +875,7 @@ the <code>Subnet (CIDR)</code> field using the general CIDR notation. You can re
 Cloudbreak clusters. It will create a new network with a <code>10.0.0.0/16</code> subnet every time a cluster is created.</p>
 <p><em>Custom GCP Network</em></p>
 <p>If you'd like to deploy a cluster to a custom network you'll have to apply the following command:</p>
-<pre><code>network create --GCP --name my-gcp-network --description &quot;sample description&quot; --subnet 10.0.0.0/16
+<pre><code>network create --GCP --name my-gcp-network --description &quot;sample description&quot;
 </code></pre>
 
 <p>Other available options here:</p>
@@ -884,6 +884,8 @@ value and must be an ID of an existing GCP virtual network. If the identifier is
 ignored and the existing network's CIDR range will be used.</p>
 <p><code>--publicInAccount</code> is true, all the users belonging to your account will be able to use this network template 
 to create clusters, but cannot delete it.</p>
+<p><code>--subnet</code> specified subnet which will be used by the cluster (will be created under the provisioning).</p>
+<p><code>--subnetId</code> if you have an existing subnet in the network then you can specify the id here and the cluster will use that existing subnet.</p>
 <blockquote>
 <p><strong>IMPORTANT</strong> Please make sure the defined subnet here doesn't overlap with any of your 
 already deployed subnet in the network, because of the validation only happens after the cluster creation starts.</p>
