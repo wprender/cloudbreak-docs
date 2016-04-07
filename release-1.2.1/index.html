@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="http://sequenceiq.com/cloudbreak-docs/">
+        <link rel="shortcut icon" href="./img/favicon.ico">
+
+	<title>Cloudbreak 1.2.0</title>
+
+        <link href="./css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="./css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link href="./css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="./css/highlight.css">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+    </head>
+
+    <body class="homepage">
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation" background="red">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <img class="navbar-logo" src="http://docs.hortonworks.com/HDPDocuments/Ambari-2.1.0.0/bk_Installing_HDP_AMB/common/images/hortonworks-logo.png" alt="Hortonworks Documentation" width="132" height="52">
+            <a class="navbar-brand" href=".">Cloudbreak 1.2.0</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Home <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li class="active">
+    <a href=".">Introduction</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="architecture/">Architecture</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="onprem/">Installation</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="releasenotes/">Release Notes</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="changelog/">Change Log</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="aws/">AWS</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="azure/">Azure</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="gcp/">GCP</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="openstack/">OpenStack</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reference <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="api/">API</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="shell/">CLI/Shell</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="ui_account/">Account Management</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="periscope/">Auto-Scaling</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="sssd/">SSSD Configuration</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="recipes/">Recipes</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="blueprints/">Blueprints</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="topologies/">Platforms</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="kerberos/">Kerberos</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="mesos/">Mesos</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="spi/">SPI</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="operations/">Operations</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="database/">Migration</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="configuration/">Advanced Configuration</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="development/">Development</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="issues/">Known issues</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                </ul>
+            
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Versions <b class="caret"></b></a>
+                    <ul class="dropdown-menu" id="versions-dropdown">
+                    </ul>
+                </li>
+                
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                
+                    <li class="disabled">
+                        <a rel="next" >
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="architecture/">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/" >
+                            
+                                <i class="fa fa-github"></i>
+                            
+                            GitHub
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#introduction">Introduction</a></li>
+        
+            <li><a href="#installation">Installation</a></li>
+        
+            <li><a href="#learn-more">Learn More</a></li>
+        
+    
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+                    
+
+<h1 id="introduction">Introduction</h1>
+<p>Cloudbreak simplifies the provisioning, management and monitoring of on-demand HDP clusters in virtual and cloud environments. Cloudbreak leverages the cloud infrastructure platform resources to create host instances, uses Docker technology to deploy the requisite containers cloud-agnostically, and uses Apache Ambari (via Ambari Blueprints) to install and manage the HDP cluster.</p>
+<p>Use the Cloudbreak Web UI or CLI to launch HDP clusters on public cloud infrastructure platforms such as Microsoft Azure, Amazon Web Services (AWS), and Google Cloud Platform (GCP) and the private cloud infrastructure platform OpenStack.</p>
+<p>Cloudbreak has two main components: the <strong>Cloudbreak Application</strong> and the <strong>Cloudbreak Deployer</strong>.</p>
+<p>The <strong>Cloudbreak Application</strong> is made up from microservices (Cloudbreak, Uluwatu, Sultans, ...). The <strong>Cloudbreak Deployer</strong> helps you to deploy the Cloudbreak application automatically with Docker support. Once the Cloudbreak Application is deployed, you can use it to provision HDP clusters in different cloud environments.</p>
+<blockquote>
+<p>For an architectural overview of the Cloudbreak Deployer, the Cloudbreak Application, Apache Ambari, Docker and the rest of the Cloudbreak components, please follow this <a href="architecture/">link</a>.</p>
+</blockquote>
+<h2 id="installation">Installation</h2>
+<p>The high-level process to be able to use Cloudbreak to install an HDP cluster includes the following steps:</p>
+<ol>
+<li><strong>Install the Cloudbreak Deployer</strong> by either: <a href="#install-deployer">installing the Cloudbreak Deployer</a> on your own VM/host (Option #1); or by instantiating one of the <a href="#pre-built-images">pre-built cloud images
+that includes Cloudbreak Deployer</a> pre-installed (Option #2).</li>
+<li><strong>Configure the Cloudbreak Deployer and install the Cloudbreak Application</strong>. Once you have installed Cloudbreak Deployer (called "cbd"), it will start up several Docker containers: Cloudbreak API, Cloudbreak Web UI (called "Uluwatu"), Identity Server and supporting databases. You have finished this step if you are able to login in your browser to Cloudbreak Web UI.</li>
+<li><strong>Provision an HDP Cluster</strong> using the Cloudbreak Application.</li>
+</ol>
+<div id="install-deployer"></div>
+
+<h3 id="installing-the-cloudbreak-deployer-install-option-1">Installing the Cloudbreak Deployer (Install Option #1)</h3>
+<blockquote>
+<p><strong><a href="onprem/#minimum-and-recommended-system-requirements">Minimum and Recommended System requirements</a>:</strong> RHEL / CentOS / Oracle Linux 7 (64-bit), Docker 1.9.1, 4GB RAM, 10GB disk, 2 cores recommended</p>
+</blockquote>
+<p>You can install the Cloudbreak Deployer on your own VM/host manually. Once installed, you will use the Deployer to setup
+the Cloudbreak Application. We suggest you install the Cloudbreak Application as close to the
+desired HDP clusters as possible. For example, if you plan to launch clusters on AWS, install the Cloudbreak Application in AWS.</p>
+<p>Follow the instructions for <a href="onprem/">installing the Cloudbreak Deployer</a>. Alternatively, you can consider using one of the <a href="#pre-built-images">pre-built cloud images that includes Cloudbreak Deployer</a> pre-installed.</p>
+<blockquote>
+<p><strong>IMPORTANT:</strong> If you plan to use Cloudbreak on Azure, you <strong>must</strong> use the <a href="azure/#deploy-using-the-azure-portal">Azure Setup</a> instructions to configure the image.</p>
+</blockquote>
+<div id="pre-built-images"></div>
+
+<h3 id="using-the-pre-built-cloud-images-install-option-2">Using the Pre-Built Cloud Images (Install Option #2)</h3>
+<p>We have pre-built cloud images with Cloudbreak Deployer pre-installed. In the below table you can find the 
+provider specific guides to configure and launch <strong>cbd (Cloudbreak Deployer)</strong> then clusters.</p>
+<blockquote>
+<p><strong>Minimum and Recommended VM requirements:</strong> 4GB RAM, 10GB disk, 2 cores recommended</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Cloud</th>
+<th>Cloud Image</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AWS</td>
+<td>You can follow the AWS instructions using this <a href="aws/">link</a>.</td>
+</tr>
+<tr>
+<td>Azure</td>
+<td>There are no pre-built cloud images available for Azure. But we provide an option to use Azure Resource Manager Templates instead. See <a href="azure/">Azure Setup</a> to get the Cloudbreak Deployer installed and configured.</td>
+</tr>
+<tr>
+<td>GCP</td>
+<td>You can follow the GCP instructions using this <a href="gcp/">link</a></td>
+</tr>
+<tr>
+<td>OpenStack</td>
+<td>You can follow the OpenStack instructions using this <a href="openstack/">link</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="learn-more">Learn More</h2>
+<p>For more information on Cloudbreak, Docker, Ambari and Ambari Blueprints, see:</p>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://hortonworks.com/hadoop/cloudbreak/">Cloudbreak Project</a></td>
+<td>Cloudbreak is a tool to help simplify the provisioning of HDP clusters in virtual and cloud environments.</td>
+</tr>
+<tr>
+<td><a href="http://hortonworks.com/hadoop/cloudbreak/#forums">Cloudbreak Forums</a></td>
+<td>Get connected with the community in the Cloudbreak Forums.</td>
+</tr>
+<tr>
+<td><a href="http://hortonworks.com/hadoop/ambari/">Apache Ambari Project</a></td>
+<td>Apache Ambari is an operational platform for provisioning, managing, and monitoring Apache Hadoop clusters. Ambari exposes a robust set of REST APIs and a rich Web interface for cluster management.</td>
+</tr>
+<tr>
+<td><a href="https://cwiki.apache.org/confluence/display/AMBARI/Blueprints">Ambari Blueprints</a></td>
+<td>Ambari Blueprints are a declarative definition of a Hadoop cluster that Ambari can use to create Hadoop clusters.</td>
+</tr>
+<tr>
+<td><a href="https://www.docker.com/">Docker</a></td>
+<td>Docker is an open platform for developers and system administrators to build, ship, and run distributed applications.</td>
+</tr>
+</tbody>
+</table>
+                    <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/index.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
+                </div>
+            
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <center>Documentation built with <a href="https://gliderlabs.com/pagebuilder">Pagebuilder</a>.</center>
+        </footer>
+
+        <script src="./js/jquery-1.10.2.min.js"></script>
+        <script src="./js/bootstrap-3.0.3.min.js"></script>
+        <script src="./js/highlight.pack.js"></script>
+        <script>var base_url = '.';</script>
+        <script data-main="./mkdocs/js/search.js" src="./mkdocs/js/require.js"></script>
+        <script src="./js/base.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            From here you can search these documents. Enter
+                            your search terms below.
+                        </p>
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                            </div>
+                        </form>
+                        <div id="mkdocs-search-results"></div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+         <script>
+           $( document ).ready(function() {
+               $.getJSON("http://sequenceiq.com/cloudbreak-docs/versions.json", function(data) {
+               $("#versions-dropdown").append('<li><a href="http://sequenceiq.com/cloudbreak-docs/latest">latest ('+data.latest+')</a></li>');
+                $.each(data.versions, function( index, value ) {
+                  $("#versions-dropdown").append('<li><a href="http://sequenceiq.com/cloudbreak-docs/'+value+'">'+value+'</a></li>');
+                });
+               });
+
+               <!--AWS Table-->
+               $.getJSON("../providers/aws.json", function(data) {
+               $("#cloudbreak-deployer-aws-image-details").append('<br>');
+               $("#cloudbreak-deployer-aws-image-details").append('<br>');
+               $("#cloudbreak-deployer-aws-image-details").append('<table>');
+                 $("#cloudbreak-deployer-aws-image-details").append('<col width="290">');
+                 $("#cloudbreak-deployer-aws-image-details").append('<col width="290">');
+                 $("#cloudbreak-deployer-aws-image-details").append('<thead>');
+                  $("#cloudbreak-deployer-aws-image-details").append('<tr>');
+                   $("#cloudbreak-deployer-aws-image-details").append('<th halign="center" style="font-size: 14pt;border:none;border-bottom:solid #DDDDDD 1.5pt;padding:6.0pt 6.0pt 6.0pt 6.0pt">' + "Region" + '</th>');
+                   $("#cloudbreak-deployer-aws-image-details").append('<th halign="center" style="font-size: 14pt;border:none;border-bottom:solid #DDDDDD 1.5pt;padding:6.0pt 6.0pt 6.0pt 6.0pt">' + "Image Name" + '</th>');
+                  $("#cloudbreak-deployer-aws-image-details").append('</tr>');
+                 $("#cloudbreak-deployer-aws-image-details").append('</thead>');
+                $("#cloudbreak-deployer-aws-image-details").append('<tbody>');
+                 $.each(data.metadata, function( index, value ) {
+                 if (index.indexOf("region.") === 0) {
+                   shortIndex = index.substring(7)
+                  $("#cloudbreak-deployer-aws-image-details").append('<tr>');
+                   $("#cloudbreak-deployer-aws-image-details").append('<td halign="center" valign="center" text-align="left" style="font-size: 12pt;border:none;border-bottom:solid #DDDDDD 1.5pt;padding:6.0pt 6.0pt 6.0pt 6.0pt">' + shortIndex + '</td>');
+                   $("#cloudbreak-deployer-aws-image-details").append('<td halign="center" valign="center" text-align="right" style="font-size: 12pt;border:none;border-bottom:solid #DDDDDD 1.5pt;padding:6.0pt 6.0pt 6.0pt 6.0pt">' + value + '</td>');
+                  $("#cloudbreak-deployer-aws-image-details").append('</tr>');
+                  }
+                 });
+                $("#cloudbreak-deployer-aws-image-details").append('</tbody>');
+               $("#cloudbreak-deployer-aws-image-details").append('</table>');
+               });
+
+               <!--OpenStack CBD-->
+               $.getJSON("../providers/openstack.json", function(data) {
+               $("#cloudbreak-deployer-image").append('<br>');
+               $("#cloudbreak-deployer-image").append('<br>');
+               $("#cloudbreak-deployer-image").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">Download the latest Cloudbreak Deployer image to your local machine:</p>');
+               $("#cloudbreak-deployer-image").append('<pre><code style="font-size: 12pt;color:#333333">curl -O -k https://public-repo-1.hortonworks.com/HDP/cloudbreak/' + data.id + '</code></pre>');
+               $("#cloudbreak-deployer-import").append('<br>');
+               $("#cloudbreak-deployer-import").append('<br>');
+               $("#cloudbreak-deployer-import").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">Set the following environment variables for the OpenStack image import:</p>');
+               $("#cloudbreak-deployer-import").append('<pre><code style="font-size: 12px;color:#333333">export CBD_LATEST_IMAGE=</code>' + data.id + '</code></p>');
+               });
+
+               <!--OpenStack CB-->
+               $.getJSON("../providers/openstack_cloudbreak.json", function(data) {
+               $("#cloudbreak-image").append('<br>');
+               $("#cloudbreak-image").append('<br>');
+               $("#cloudbreak-image").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">Download the latest Cloudbreak image to your local machine:</p>');
+               $("#cloudbreak-image").append('<pre><code style="font-size: 12pt;color:#333333">curl -O -k https://public-repo-1.hortonworks.com/HDP/cloudbreak/' + data.id + '</code></pre>');
+               $("#cloudbreak-import").append('<br>');
+               $("#cloudbreak-import").append('<br>');
+               $("#cloudbreak-import").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">This is very similar to the Cloudbrek Deployer. Set the following environment variables for the OpenStack image import:</p>');
+               $("#cloudbreak-import").append('<pre><code style="font-size: 12px;color:#333333">export CB_LATEST_IMAGE=</code>' + data.id + '</code></p>');
+               });
+
+               <!--GCP-->
+               $.getJSON("../providers/gcp.json", function(data) {
+               $("#cloudbreak-deployer-gcp-image-details").append('<br>');
+               $("#cloudbreak-deployer-gcp-image-details").append('<br>');
+               $("#cloudbreak-deployer-gcp-image-details").append('<pre><code style="font-size: 12pt;color:#333333">' + data.gcp.import_script + '</code></pre>');
+               });
+           });
+         </script>
+    </body>
+</html>
+
+<!--
+MkDocs version : 0.15.3
+Build Date UTC : 2016-04-07 13:28:50.428624
+-->

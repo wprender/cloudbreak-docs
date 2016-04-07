@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="http://sequenceiq.com/cloudbreak-docs/topologies/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+
+	<title>Platforms - Cloudbreak 1.2.0</title>
+
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/highlight.css">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation" background="red">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <img class="navbar-logo" src="http://docs.hortonworks.com/HDPDocuments/Ambari-2.1.0.0/bk_Installing_HDP_AMB/common/images/hortonworks-logo.png" alt="Hortonworks Documentation" width="132" height="52">
+            <a class="navbar-brand" href="..">Cloudbreak 1.2.0</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Home <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="..">Introduction</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../architecture/">Architecture</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../onprem/">Installation</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../releasenotes/">Release Notes</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../changelog/">Change Log</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../aws/">AWS</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../azure/">Azure</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../gcp/">GCP</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../openstack/">OpenStack</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reference <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../api/">API</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../shell/">CLI/Shell</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../ui_account/">Account Management</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../periscope/">Auto-Scaling</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../sssd/">SSSD Configuration</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../recipes/">Recipes</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../blueprints/">Blueprints</a>
+</li>
+
+                        
+                            
+<li class="active">
+    <a href="./">Platforms</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../kerberos/">Kerberos</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../mesos/">Mesos</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../spi/">SPI</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../operations/">Operations</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../database/">Migration</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../configuration/">Advanced Configuration</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../development/">Development</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../issues/">Known issues</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                </ul>
+            
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Versions <b class="caret"></b></a>
+                    <ul class="dropdown-menu" id="versions-dropdown">
+                    </ul>
+                </li>
+                
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                
+                    <li >
+                        <a rel="next" href="../blueprints/">
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../kerberos/">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/" >
+                            
+                                <i class="fa fa-github"></i>
+                            
+                            GitHub
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#platforms">Platforms</a></li>
+        
+            <li><a href="#data-locality-and-topologies">Data locality and topologies</a></li>
+        
+            <li><a href="#managing-platforms">Managing Platforms</a></li>
+        
+            <li><a href="#credential-network-and-template-creation">Credential, Network and Template Creation</a></li>
+        
+            <li><a href="#cluster-creation-on-ui">Cluster Creation on UI</a></li>
+        
+    
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+                    
+
+<h1 id="platforms">Platforms</h1>
+<blockquote>
+<p>This feature is currently <code>TECHNICAL PREVIEW</code>.</p>
+</blockquote>
+<p>With this feature you can define platform tag that can be attached to Credentials, Networks and Templates. This way you 
+can bundle together different configurations.</p>
+<h2 id="data-locality-and-topologies">Data locality and topologies</h2>
+<p>The <a href="http://docs.openstack.org/developer/sahara/icehouse/userdoc/features.html#data-locality">OpenStack documentation</a> about data locality:</p>
+<blockquote>
+<p>It is extremely important for data processing to do locally (on the same rack, OpenStack compute node or even VM) 
+as much work as possible. Hadoop supports data-locality feature and can schedule jobs to tasktracker nodes that are local for input stream. In this case tasktracker could communicate directly with local data node.</p>
+</blockquote>
+<h3 id="openstack-topology-mapping">OpenStack Topology Mapping</h3>
+<p>Topology mapping can be attached to the Platform definition, that associates the hypervisors with racks. 
+You can set the mapping on the Cloudbreak Web UI by defining this line by line or uploading in a file.</p>
+<p>The <code>mapping file</code> should have the following format:</p>
+<pre><code>hypervisor1 /rack1
+hypervisor2 /rack2
+hypervisor3 /rack2
+</code></pre>
+<p>Based on this mapping the Cloudbreak application could ensure that the rack information of the started VMs will be passed to Hadoop services via Ambari.</p>
+<h2 id="managing-platforms">Managing Platforms</h2>
+<h3 id="cloudbreak-ui">Cloudbreak UI</h3>
+<blockquote>
+<p>You can log into the Cloudbreak application at http://PUBLIC_IP:3000. You can find the provider specific 
+documentations here:</p>
+<ul>
+<li><a href="../aws/">AWS</a></li>
+<li><a href="../azure/">Azure</a></li>
+<li><a href="../gcp/">GCP</a></li>
+<li><a href="../openstack/">OpenStack</a></li>
+</ul>
+</blockquote>
+<p>You can find the <code>manage platforms</code> expandable section on the Cloudbreak Dashboard. With the help of <code>create 
+platform</code> button you can open the platform creation form. <strong>Platform name is the only one 
+required parameter.</strong>
+<img alt="" src="../images/platform-simple.png" /></p>
+<p><a href="#openstack-topology-mapping">OpenStack Topology Mapping</a> is optional on the <code>manage platforms</code>.
+<img alt="" src="../images/platform-form-filled.png" /></p>
+<h3 id="cloudbreak-shell">Cloudbreak Shell</h3>
+<blockquote>
+<p>Start the shell with <code>cbd util cloudbreak-shell</code> on a console. This will launch the Cloudbreak shell inside a Docker
+ container and you are ready to start using it. You can find more details at the <a href="../shell/">Cloudbreak Shell</a> page.</p>
+</blockquote>
+<pre><code># Creating a Platform
+platform create --AWS --name platform-name --description 'description of the platform'
+
+# Creating OpenStack Platform with topology mapping
+platform create --OPENSTACK --name platform-name --description 'openstack platform' --file file_path
+platform create --OPENSTACK --name platform-name --description 'openstack platform' --url url_to_file
+</code></pre>
+
+<h2 id="credential-network-and-template-creation">Credential, Network and Template Creation</h2>
+<p>Credential, Network and Template creation forms and the related shell commands have option to set a platform for 
+the resource.</p>
+<h3 id="cloudbreak-ui_1">Cloudbreak UI</h3>
+<p>Example network resource creation an the UI with the option of selecting a Platform:
+<img alt="" src="../images/platform-select.png" /></p>
+<h3 id="cloudbreak-shell_1">Cloudbreak Shell</h3>
+<pre><code># Example shell command to create Network resource with a connected Platform
+network create --AWS --name aws-network --subnet 10.10.10.0/24 --description 'example network' --platformId 26
+</code></pre>
+
+<h2 id="cluster-creation-on-ui">Cluster Creation on UI</h2>
+<p>If platform has assigned to the selected credential, then only the associated networks and templates can be selected 
+during cluster creation.</p>
+                    <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/topologies.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
+                </div>
+            
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <center>Documentation built with <a href="https://gliderlabs.com/pagebuilder">Pagebuilder</a>.</center>
+        </footer>
+
+        <script src="../js/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/highlight.pack.js"></script>
+        <script>var base_url = '..';</script>
+        <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+        <script src="../js/base.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            From here you can search these documents. Enter
+                            your search terms below.
+                        </p>
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                            </div>
+                        </form>
+                        <div id="mkdocs-search-results"></div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+         <script>
+           $( document ).ready(function() {
+               $.getJSON("http://sequenceiq.com/cloudbreak-docs/versions.json", function(data) {
+               $("#versions-dropdown").append('<li><a href="http://sequenceiq.com/cloudbreak-docs/latest">latest ('+data.latest+')</a></li>');
+                $.each(data.versions, function( index, value ) {
+                  $("#versions-dropdown").append('<li><a href="http://sequenceiq.com/cloudbreak-docs/'+value+'">'+value+'</a></li>');
+                });
+               });
+
+               <!--AWS Table-->
+               $.getJSON("../providers/aws.json", function(data) {
+               $("#cloudbreak-deployer-aws-image-details").append('<br>');
+               $("#cloudbreak-deployer-aws-image-details").append('<br>');
+               $("#cloudbreak-deployer-aws-image-details").append('<table>');
+                 $("#cloudbreak-deployer-aws-image-details").append('<col width="290">');
+                 $("#cloudbreak-deployer-aws-image-details").append('<col width="290">');
+                 $("#cloudbreak-deployer-aws-image-details").append('<thead>');
+                  $("#cloudbreak-deployer-aws-image-details").append('<tr>');
+                   $("#cloudbreak-deployer-aws-image-details").append('<th halign="center" style="font-size: 14pt;border:none;border-bottom:solid #DDDDDD 1.5pt;padding:6.0pt 6.0pt 6.0pt 6.0pt">' + "Region" + '</th>');
+                   $("#cloudbreak-deployer-aws-image-details").append('<th halign="center" style="font-size: 14pt;border:none;border-bottom:solid #DDDDDD 1.5pt;padding:6.0pt 6.0pt 6.0pt 6.0pt">' + "Image Name" + '</th>');
+                  $("#cloudbreak-deployer-aws-image-details").append('</tr>');
+                 $("#cloudbreak-deployer-aws-image-details").append('</thead>');
+                $("#cloudbreak-deployer-aws-image-details").append('<tbody>');
+                 $.each(data.metadata, function( index, value ) {
+                 if (index.indexOf("region.") === 0) {
+                   shortIndex = index.substring(7)
+                  $("#cloudbreak-deployer-aws-image-details").append('<tr>');
+                   $("#cloudbreak-deployer-aws-image-details").append('<td halign="center" valign="center" text-align="left" style="font-size: 12pt;border:none;border-bottom:solid #DDDDDD 1.5pt;padding:6.0pt 6.0pt 6.0pt 6.0pt">' + shortIndex + '</td>');
+                   $("#cloudbreak-deployer-aws-image-details").append('<td halign="center" valign="center" text-align="right" style="font-size: 12pt;border:none;border-bottom:solid #DDDDDD 1.5pt;padding:6.0pt 6.0pt 6.0pt 6.0pt">' + value + '</td>');
+                  $("#cloudbreak-deployer-aws-image-details").append('</tr>');
+                  }
+                 });
+                $("#cloudbreak-deployer-aws-image-details").append('</tbody>');
+               $("#cloudbreak-deployer-aws-image-details").append('</table>');
+               });
+
+               <!--OpenStack CBD-->
+               $.getJSON("../providers/openstack.json", function(data) {
+               $("#cloudbreak-deployer-image").append('<br>');
+               $("#cloudbreak-deployer-image").append('<br>');
+               $("#cloudbreak-deployer-image").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">Download the latest Cloudbreak Deployer image to your local machine:</p>');
+               $("#cloudbreak-deployer-image").append('<pre><code style="font-size: 12pt;color:#333333">curl -O -k https://public-repo-1.hortonworks.com/HDP/cloudbreak/' + data.id + '</code></pre>');
+               $("#cloudbreak-deployer-import").append('<br>');
+               $("#cloudbreak-deployer-import").append('<br>');
+               $("#cloudbreak-deployer-import").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">Set the following environment variables for the OpenStack image import:</p>');
+               $("#cloudbreak-deployer-import").append('<pre><code style="font-size: 12px;color:#333333">export CBD_LATEST_IMAGE=</code>' + data.id + '</code></p>');
+               });
+
+               <!--OpenStack CB-->
+               $.getJSON("../providers/openstack_cloudbreak.json", function(data) {
+               $("#cloudbreak-image").append('<br>');
+               $("#cloudbreak-image").append('<br>');
+               $("#cloudbreak-image").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">Download the latest Cloudbreak image to your local machine:</p>');
+               $("#cloudbreak-image").append('<pre><code style="font-size: 12pt;color:#333333">curl -O -k https://public-repo-1.hortonworks.com/HDP/cloudbreak/' + data.id + '</code></pre>');
+               $("#cloudbreak-import").append('<br>');
+               $("#cloudbreak-import").append('<br>');
+               $("#cloudbreak-import").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">This is very similar to the Cloudbrek Deployer. Set the following environment variables for the OpenStack image import:</p>');
+               $("#cloudbreak-import").append('<pre><code style="font-size: 12px;color:#333333">export CB_LATEST_IMAGE=</code>' + data.id + '</code></p>');
+               });
+
+               <!--GCP-->
+               $.getJSON("../providers/gcp.json", function(data) {
+               $("#cloudbreak-deployer-gcp-image-details").append('<br>');
+               $("#cloudbreak-deployer-gcp-image-details").append('<br>');
+               $("#cloudbreak-deployer-gcp-image-details").append('<pre><code style="font-size: 12pt;color:#333333">' + data.gcp.import_script + '</code></pre>');
+               });
+           });
+         </script>
+    </body>
+</html>
