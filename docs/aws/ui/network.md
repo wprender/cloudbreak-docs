@@ -12,7 +12,15 @@ Cloudbreak clusters. It will create a new VPC with a `10.0.0.0/16` subnet every 
 *Custom AWS Network*
 
 If you'd like to deploy a cluster to a custom VPC you'll have to **create a new network** template on the **manage 
-networks** panel. You can configure the `Subnet Identifier` and the `Internet Gateway Identifier` (IGW) of your VPC.
+networks** panel.
+
+You have the following options:
+
+* **Create a new VPC and a new subnet**: Every time a cluster is created with this kind of network setup a new VPC and a new subnet with the specified IP range will be created for the instances on AWS.
+* **Create a new subnet in an existing VPC**:  Use this kind of network setup if you already have a VPC on AWS where you'd like to put the Cloudbreak created cluster but you'd like to have a separate subnet for it.
+* **Use an existing subnet in an existing VPC**:  Use this kind of network setup if you have an existing VPC with one or more subnets on AWS and you'd like to start the instances of a cluster in one of those subnets.
+
+ You can configure the `Subnet Identifier` and the `Internet Gateway Identifier` (IGW) of your VPC.
 
 >**IMPORTANT** The subnet CIDR cannot overlap each other in a VPC. So you have to create different network 
 templates for every each clusters.
