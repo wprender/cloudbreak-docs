@@ -6,7 +6,7 @@
   "id": "cloudbreak-deployer-121-2016-04-07",
   "version": 9,
   "metadata": {
-    "cbd_version": "1.2.0",
+    "cbd_version": "1.2.1",
     "created": "2016-04-07 13:33:52 +0000",
     "created_at": "1458653632",
     "image_name": "cloudbreak-deployer-121-2016-04-07",
