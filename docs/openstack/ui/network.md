@@ -49,5 +49,5 @@ to create clusters, but cannot delete it.
 >**NOTE** The new networks are created on OpenStack only after the the cluster provisioning starts with the selected 
 network template.
 
-![](/images/os-networks.png)
-<sub>*Full size [here](/images/os-networks.png).*</sub>
+![](/images/os-networks_v2.png)
+<sub>*Full size [here](/images/os-networks_v2.png).*</sub>

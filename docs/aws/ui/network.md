@@ -33,5 +33,5 @@ to create clusters, but cannot delete it.
 >**NOTE** The VPCs, IGWs and subnet are created on AWS only after the the cluster provisioning starts with the selected 
 network template.
 
-![](/aws/images/aws-network_v3.png)
-<sub>*Full size [here](/aws/images/aws-network_v3.png).*</sub>
+![](/aws/images/aws-network_v4.png)
+<sub>*Full size [here](/aws/images/aws-network_v4.png).*</sub>
