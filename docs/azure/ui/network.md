@@ -26,5 +26,5 @@ to create clusters, but cannot delete it.
 >**NOTE** The new networks are created on AZURE only after the the cluster provisioning starts with the selected 
 network template.
 
-![](/azure/images/azure-network.png)
-<sub>*Full size [here](/azure/images/azure-network.png).*</sub>
+![](/azure/images/azure-network_v2.png)
+<sub>*Full size [here](/azure/images/azure-network_v2.png).*</sub>
