@@ -674,9 +674,12 @@ the <code>Subnet (CIDR)</code> field using the general CIDR notation.</p>
 Cloudbreak clusters. It will create a new network with a <code>10.0.0.0/16</code> subnet every time a cluster is created.</p>
 <p><em>Custom AZURE Network</em></p>
 <p>If you'd like to deploy a cluster to a custom network you'll have to <strong>create a new network</strong> template on the <strong>manage 
-networks</strong> panel. If you have an existing network on Azure you can define the <code>Subnet Identifier</code> and the <code>Virtual Network Identifier</code> and the <code>Resource Group Identifier</code> of your network.</p>
-<p>The <code>Resource Group Identifier</code> identifies the resource group which contains your existing virtual network. The <code>Virtual Network Identifier</code> and the 
-<code>Subnet Identifier</code> will tell Cloudbreak which network and subnet to use to launch the new instances.</p>
+networks</strong> panel.</p>
+<p>You have the following options:</p>
+<ul>
+<li><strong>Create a new virtual network and a new subnet</strong>:  Every time a cluster is created with this kind of network setup a new virtual network and a new subnet with the specified IP range will be created for the instances on Azure.</li>
+<li><strong>Use an existing subnet in an existing virtual network</strong>: Use this kind of network setup if you have an existing virtual network with one or more subnets on Azure and you'd like to start the instances of a cluster in one of those subnets. In this case you can define the <code>Subnet Identifier</code> and the <code>Virtual Network Identifier</code> and the <code>Resource Group Identifier</code> of your network. The <code>Resource Group Identifier</code> identifies the resource group which contains your existing virtual network. The <code>Virtual Network Identifier</code> and the <code>Subnet Identifier</code> will tell Cloudbreak which network and subnet to use to launch the new instances.</li>
+</ul>
 <blockquote>
 <p><strong>IMPORTANT</strong> In case of existing subnet make sure you have enough room within your network space for the new instances. The 
 provided subnet CIDR will be ignored, but the existing subnet's CIDR range will be used. The security group behavior will be changed in this case as well

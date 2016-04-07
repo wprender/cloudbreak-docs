@@ -582,7 +582,14 @@ The subnet's IP range must be defined in the <code>Subnet (CIDR)</code> field us
 Cloudbreak clusters. It will create a new VPC with a <code>10.0.0.0/16</code> subnet every time a cluster is created.</p>
 <p><em>Custom AWS Network</em></p>
 <p>If you'd like to deploy a cluster to a custom VPC you'll have to <strong>create a new network</strong> template on the <strong>manage 
-networks</strong> panel. You can configure the <code>Subnet Identifier</code> and the <code>Internet Gateway Identifier</code> (IGW) of your VPC.</p>
+networks</strong> panel.</p>
+<p>You have the following options:</p>
+<ul>
+<li><strong>Create a new VPC and a new subnet</strong>: Every time a cluster is created with this kind of network setup a new VPC and a new subnet with the specified IP range will be created for the instances on AWS.</li>
+<li><strong>Create a new subnet in an existing VPC</strong>:  Use this kind of network setup if you already have a VPC on AWS where you'd like to put the Cloudbreak created cluster but you'd like to have a separate subnet for it.</li>
+<li><strong>Use an existing subnet in an existing VPC</strong>:  Use this kind of network setup if you have an existing VPC with one or more subnets on AWS and you'd like to start the instances of a cluster in one of those subnets.</li>
+</ul>
+<p>You can configure the <code>Subnet Identifier</code> and the <code>Internet Gateway Identifier</code> (IGW) of your VPC.</p>
 <blockquote>
 <p><strong>IMPORTANT</strong> The subnet CIDR cannot overlap each other in a VPC. So you have to create different network 
 templates for every each clusters.</p>
