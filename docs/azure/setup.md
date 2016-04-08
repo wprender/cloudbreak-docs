@@ -4,7 +4,7 @@ Templates](https://github.com/Azure/azure-quickstart-templates).
 
 ## Deploy using the Azure Portal
 
-To get started using the Azure Resource Manager template to install Cloudbreak, it is as simple as clicking here: <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsequenceiq%2Fazure-cbd-quickstart%2Fv1.2.0%2Fazuredeploy.json">  ![deploy on azure](http://azuredeploy.net/deploybutton.png) </a>
+To get started using the Azure Resource Manager template to install Cloudbreak, it is as simple as clicking here: <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsequenceiq%2Fazure-cbd-quickstart%2F1.2.1%2Fazuredeploy.json">  ![deploy on azure](http://azuredeploy.net/deploybutton.png) </a>
 
 > **[Minimum and Recommended VM requirements](onprem.md#minimum-and-recommended-system-requirements):** 8GB RAM, 10GB disk, 2 cores (The minimum instance type which is fit for cloudbreak is **D2**)
 
@@ -63,14 +63,21 @@ Cloudbreak Deployer (`cbd`)
 ## Validate the started Cloudbreak Deployer
 
 - SSH to the launched Azure VM.
+
+- Most of the `cbd` commands require `root` permissions. So it would be worth if you apply the:
+```
+  sudo su
+```
+> This is a MUST on Azure because the [Customscript Extension](https://github.com/Azure/azure-linux-extensions/tree/master/CustomScript) which basically creates everything running as sudo and this is not modifiable.
+
 - Open the `cloudbreak-deployment` directory:
 ```
-   cd /var/lib/cloudbreak-deployment
+  cd /var/lib/cloudbreak-deployment
 ```
 
 - Pre-installed Cloudbreak Deployer version and health:
 ```
-   cbd doctor
+  cbd doctor
 ```
 >In case of `cbd update` is needed, please check the related documentation for [Cloudbreak Deployer Update](operations.md#update-cloudbreak-deployer). Most of the `cbd` commands require `root` permissions.
 

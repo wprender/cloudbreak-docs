@@ -13,7 +13,7 @@ Cloudbreak clusters. It will create a new network with a `10.0.0.0/16` subnet ev
 
 If you'd like to deploy a cluster to a custom network you'll have to apply the following command:
 ```
-network create --GCP --name my-gcp-network --description "sample description" --subnet 10.0.0.0/16
+network create --GCP --name my-gcp-network --description "sample description"
 ```
 Other available options here:
 
@@ -23,6 +23,10 @@ ignored and the existing network's CIDR range will be used.
 
 `--publicInAccount` is true, all the users belonging to your account will be able to use this network template 
 to create clusters, but cannot delete it.
+
+`--subnet` specified subnet which will be used by the cluster (will be created under the provisioning).
+
+`--subnetId` if you have an existing subnet in the network then you can specify the id here and the cluster will use that existing subnet.
 
 >**IMPORTANT** Please make sure the defined subnet here doesn't overlap with any of your 
 already deployed subnet in the network, because of the validation only happens after the cluster creation starts.

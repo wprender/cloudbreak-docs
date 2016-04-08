@@ -11,3 +11,9 @@ Please make sure you opened the following ports on your [security group](http://
  * Identity server (8089)
  * Cloudbreak GUI (3000)
  * User authentication (3001)
+ 
+## Cloudbreak Deployer AWS Image Details
+
+> **[Minimum and Recommended VM requirements](onprem.md#minimum-and-recommended-system-requirements):** 8GB RAM, 10GB disk, 2 cores (The minimum instance type which is fit for cloudbreak is **m3.large**)
+
+ 
