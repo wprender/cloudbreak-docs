@@ -1,7 +1,7 @@
 {
   "gcp": {
-    "default": "sequenceiqimage/cloudbreak-deployer-121-2016-04-07.tar.gz",
-    "import_script": "gcloud compute images create cloudbreak-deployer-121-2016-04-07 --source-uri gs://sequenceiqimage/cloudbreak-deployer-121-2016-04-07.tar.gz"
+    "default": "sequenceiqimage/cloudbreak-deployer-121-2016-04-08.tar.gz",
+    "import_script": "gcloud compute images create cloudbreak-deployer-121-2016-04-08 --source-uri gs://sequenceiqimage/cloudbreak-deployer-121-2016-04-08.tar.gz"
   },
   "versions": {
     "cbd": "1.2.1",
