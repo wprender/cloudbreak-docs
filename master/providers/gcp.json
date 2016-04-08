@@ -1,10 +1,10 @@
 {
   "gcp": {
-    "default": "sequenceiqimage/cloudbreak-deployer-110-rc3-2016-03-04.tar.gz",
-    "import_script": "gcloud compute images create cloudbreak-deployer-110-rc3-2016-03-04 --source-uri gs://sequenceiqimage/cloudbreak-deployer-110-rc3-2016-03-04.tar.gz"
+    "default": "sequenceiqimage/cloudbreak-deployer-121-2016-04-08.tar.gz",
+    "import_script": "gcloud compute images create cloudbreak-deployer-121-2016-04-08 --source-uri gs://sequenceiqimage/cloudbreak-deployer-121-2016-04-08.tar.gz"
   },
   "versions": {
-    "cbd": "1.2.0-rc0",
+    "cbd": "1.2.1",
     "docker": "1.9.1",
     "kernel": "3.10.0-327.3.1.el7",
     "systemd": "219-19.el7"
