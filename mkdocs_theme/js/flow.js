@@ -69,7 +69,7 @@ var flowContaier = $("#flow-container");
 for (var flow in flows) {
     $.ajax({
         async: false,
-        url: "/diagrams/" + flow + ".dot?name=" + flow,
+        url: "../diagrams/" + flow + ".dot",
         success: function(dot) {
             var graph = initGraphByDot(dot);
             sideNav.append('<li class="main active"><a href="#' + flow + '">' + flows[flow] + '</a></li>');
