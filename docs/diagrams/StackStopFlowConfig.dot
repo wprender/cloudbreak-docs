@@ -1,0 +1,12 @@
+digraph {
+INIT_STATE [label="StackStopFlowConfig" shape=ellipse color=green];
+STOP_STATE [label="STOP_STATE\nStackStopAction" shape=rect color=black];
+INIT_STATE -> STOP_STATE [label="STOP_EVENT" color=black style=solid];
+STOP_FAILED_STATE [label="STOP_FAILED_STATE\nStackStopFailedAction" shape=rect color=black];
+STOP_STATE -> STOP_FAILED_STATE [label="STOP_FAILURE_EVENT" color=red style=dashed];
+STOP_FAILED_STATE -> FINAL_STATE [label="STOP_FAIL_HANDLED_EVENT" color=red style=dashed];
+STOP_FINISHED_STATE [label="STOP_FINISHED_STATE\nStackStopFinishedAction" shape=rect color=black];
+STOP_STATE -> STOP_FINISHED_STATE [label="STOP_FINISHED_EVENT" color=black style=solid];
+STOP_FINISHED_STATE -> STOP_FAILED_STATE [label="STOP_FAILURE_EVENT" color=red style=dashed];
+STOP_FINISHED_STATE -> FINAL_STATE [label="STOP_FINALIZED_EVENT" color=black style=solid];
+}

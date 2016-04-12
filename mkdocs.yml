@@ -32,5 +32,7 @@ pages:
         - Operations : operations.md
         - Migration : database.md
         - Advanced Configuration : configuration.md
-        - Development : development.md
+        - Development :
+            - Environments : environments.md
+            - Flows : flow.html
         - Known issues: issues.md
