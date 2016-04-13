@@ -50,10 +50,10 @@ Explanation of the parameters:
     - Number of characters should be between 10 and 255
 - `Database Shema Type` The schema defines all the objects and attributes that the service uses to implementation,
 store data.
-    - [`RFC2307`](http://www.rfc-base.org/rfc-2307.html)
+    - `RFC2307`
     - `RFC2307BIS`
-    - [`IPA`](https://tools.netsa.cert.org/ipa/sql.html)
-    - [`AD`](https://technet.microsoft.com/en-us/library/cc759402(v=ws.10).aspx)
+    - `IPA`
+    - `AD`
 - `Search Base Of Users And Groups` your base search string for your Users and Groups
     - Number of characters should be between 10 and 255
 - `TLS Behavior Of The Connection` applied Transport Layer Security
@@ -143,10 +143,10 @@ Explanation of the parameters:
     - Number of characters should be between 10 and 255
 - `--schema` The schema defines all the objects and attributes that the service uses to implementation,
   store data.
-    - [`RFC2307`](http://www.rfc-base.org/rfc-2307.html)
+    - `RFC2307`
     - `RFC2307BIS`
-    - [`IPA`](https://tools.netsa.cert.org/ipa/sql.html)
-    - [`AD`](https://technet.microsoft.com/en-us/library/cc759402(v=ws.10).aspx)
+    - `IPA`
+    - `AD`
 - `--baseSearch` your base search string for your Users and Groups
     - Number of characters should be between 10 and 255
 - `--tlsReqcert` applied Transport Layer Security
