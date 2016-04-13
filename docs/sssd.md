@@ -106,21 +106,9 @@ password to login:
 ssh ambari-qa@[ambari-host] -p 2022
 ```
 
-**Test configuration**
-
-User and group IDs are starting at 10000 in the LDAP database, so **after login you have to see this results:**
-
-```
-[ambari-qa@host ~]$ id ambari-qa
-uid=10000(ambari-qa) gid=10000(hadoop) groups=10000(hadoop),100(users)
-[ambari-qa@host ~]$ getent passwd ambari-qa
-ambari-qa:*:10000:10000:ambari-qa:/home/ambari-qa:/bin/bash
-```
 # SSSD configurations via CLI
 
 ## Manage SSSD configurations
-
-**Cloudbreak security configurations can be created in two ways** on the Cloudbreak Shell.
 
 You can provide all of your configuration parameters one-by-one via `add` command or you can `upload` in a configuration file.
 
@@ -201,7 +189,7 @@ password to login:
 ssh ambari-qa@[ambari-host] -p 2022
 ```
 
-**Test configuration**
+# Test SSSD configuration
 
 User and group IDs are starting at 10000 in the LDAP database, so **after login you have to see this results:**
 
