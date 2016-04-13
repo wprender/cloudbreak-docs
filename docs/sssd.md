@@ -80,7 +80,7 @@ To create a new cluster with SSSD configuration follow these steps:
      1. Select a `Network` and a `Security Group` that fit for your needs
      2. Check the `Use pre configured SSSD`
      3. `Select configuration` from your previously saved security configurations
-  4. `Choose Blueprint`...etc.
+  3. `Choose Blueprint`...etc.
 
 ![](/images/preconfigured-sssd.png)
 <sub>*Full size [here](/images/preconfigured-sssd.png).*</sub>
