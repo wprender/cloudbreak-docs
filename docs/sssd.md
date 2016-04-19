@@ -14,8 +14,6 @@ ssh [external-user]@[ambari-host] -p 2022
 
 ## Manage SSSD configurations
 
-You can log into the Cloudbreak application at `http://<Your Cloudbreak Deployer Public IP>:3000/`.
-
 The SSSD can be configured on the **manage security configurations** panel on the Cloudbreak Dashboard.
 
 To create a new SSSD configuration follow these steps:
