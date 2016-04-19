@@ -286,11 +286,28 @@
     
         <li class="main active"><a href="#recipes">Recipes</a></li>
         
+    
+        <li class="main "><a href="#create-recipe-via-browser">Create recipe via Browser</a></li>
+        
             <li><a href="#stored-recipes">Stored recipes</a></li>
         
             <li><a href="#downloadable-recipes">Downloadable recipes</a></li>
         
-            <li><a href="#sample-recipe-for-ranger">Sample recipe for Ranger</a></li>
+    
+        <li class="main "><a href="#create-recipe-via-cli">Create recipe via CLI</a></li>
+        
+            <li><a href="#stored-recipes_1">Stored recipes</a></li>
+        
+            <li><a href="#downloadable-recipes_1">Downloadable recipes</a></li>
+        
+    
+        <li class="main "><a href="#sample-ranger-configuration">Sample Ranger configuration</a></li>
+        
+            <li><a href="#recipe-for-ranger">Recipe for Ranger</a></li>
+        
+            <li><a href="#blueprint-for-ranger">Blueprint for Ranger</a></li>
+        
+            <li><a href="#enable-ranger-configuration">Enable Ranger configuration</a></li>
         
     
     </ul>
@@ -299,31 +316,82 @@
                     
 
 <h1 id="recipes">Recipes</h1>
-<p>With the help of Cloudbreak it is very easy to provision Hadoop clusters in the cloud from an Apache Ambari blueprint. Cloudbreak built in provisioning doesn't contain every use case, so we are introducing the concept of recipes.</p>
-<p>Recipes are basically script extensions to a cluster that run on a set of nodes before or after the Ambari cluster installation. With recipes it's quite easy for example to put a JAR file on the Hadoop classpath or run some custom scripts.</p>
+<p><strong>With the help of Cloudbreak</strong> it is very <strong>easy to provision Hadoop clusters from an Apache Ambari blueprint.</strong>
+Cloudbreak built in provisioning <strong>does not contain every use cases, so we introduced the concept of recipes</strong>.</p>
+<blockquote>
+<p><strong>IMPORTANT</strong> Recipes are basically script extensions to a cluster that run on a set of nodes before or after the
+Ambari cluster installation.</p>
+</blockquote>
+<p>With recipes it's quite easy for example to put a JAR file on the Hadoop classpath or run some custom scripts.</p>
+<h1 id="create-recipe-via-browser">Create recipe via Browser</h1>
 <p>In Cloudbreak we supports two ways to configure recipe, we have downloadable and stored recipes.</p>
 <h2 id="stored-recipes">Stored recipes</h2>
-<p>As the name mentions stored recipes are uploaded and stored in Cloudbreak via web interface or shell.</p>
-<p>The easiest way to create a custom recipe:</p>
+<p>As the name mentions stored recipes can be uploaded and stored in Cloudbreak application. Recipes can be configured on
+the <strong>manage recipes</strong> panel on the Cloudbreak Dashboard.</p>
+<p><strong>Add recipe</strong></p>
+<p>To create a new recipe follow these steps:</p>
+<ol>
+<li>Fill out the recipe <code>Name</code></li>
+<li>Set a <code>Timeout</code> (in minutes) for the script execution</li>
+<li>Select <code>SCRIPT</code> as <code>Plugins</code> configuration type</li>
+<li>Select <code>ALL_NODES</code> as <code>Plugins</code> execution type</li>
+<li>Copy your <code>Pre Install Script</code> here</li>
+</ol>
+<p><img alt="" src="../images/recipe-create-script.png" />
+<sub><em>Full size <a href="../images/recipe-create-script.png">here</a>.</em></sub></p>
+<p>Explanation of the parameters:</p>
 <ul>
-<li>create your own pre and/or post scripts</li>
-<li>upload them on shell or web interface</li>
+<li><code>Name</code> the name of the new recipe<ul>
+<li>Starts with a lowercase alphabetic</li>
+<li>Can contain lowercase alphanumeric and hyphens only</li>
+<li>Number of characters should be between 1 and 100</li>
 </ul>
-<h3 id="add-recipe">Add recipe</h3>
-<p>On the web interface under <strong>manage recipes</strong> section you should <strong>create new recipe</strong>. Please choose between SCRIPT, FILE or URL type plugin, and fill required fields.</p>
-<p>To add recipe via shell use the following command:</p>
-<pre><code>recipe store --name [recipe-name] --executionType [ONE_NODE|ALL_NODES] --preInstallScriptFile /path/of/the/pre-install-script --postInstallScriptFile /path/of/the/post-install-script
-</code></pre>
-
-<p>This command has optional parameters:</p>
-<p><code>--description</code> "string" description of the recipe</p>
-<p><code>--timeout</code> "integer" timeout of the script execution</p>
-<p><code>--publicInAccount</code> "flag" flags if the recipe is public in the account</p>
-<p>In the background Cloudbreak pushes recipe to Consul key/value store during cluster creation.</p>
+</li>
+<li><code>Timeout</code> the script execution timeout in minutes<ul>
+<li>Only numeric characters can be applied</li>
+</ul>
+</li>
+<li><code>Plugins</code> configuration type:<ul>
+<li><code>SCRIPT</code> you can provide your configuration scripts on the GUI</li>
+<li><code>FILE</code> you can upload your configuration scripts as files</li>
+<li><code>URL</code> you can provide a public GIT repository of your recipe configurations</li>
+</ul>
+</li>
+<li><code>Plugins</code> execution type:<ul>
+<li><code>ONE_NODE</code> the recipe will execute on only one node in the host group</li>
+<li><code>All_NODES</code> the recipe will execute on every single instance in the host group</li>
+</ul>
+</li>
+<li><code>Pre Install Script</code> executing the <code>recipe-pre-install</code> script<ul>
+<li>before the cluster install is started a <code>recipe-pre-install Consul event</code> is sent to the cluster that triggers
+the <code>recipe-pre-install hook</code> of the enabled plugins</li>
+</ul>
+</li>
+<li><code>Post install Script</code> executing the <code>recipe-post-install</code> script<ul>
+<li>after the cluster installation is finished similar happens (as in case of <code>Pre Install Script</code>) but with the
+<code>recipe-post-install Consul event</code> and <code>recipe-post-install hook</code></li>
+</ul>
+</li>
+</ul>
+<p>Optional parameters and theirs explanation:</p>
+<ul>
+<li><code>Description</code> a maximum 1000 character long description for the new configuration</li>
+<li><code>Timeout</code> the script execution timeout in minutes</li>
+<li><code>Public In Account</code> If it is checked, all the users belonging to your account will be able to use this security
+configuration, but cannot delete it</li>
+</ul>
+<blockquote>
+<p><strong>NOTE</strong> In the background Cloudbreak pushes recipe to Consul key-value store during cluster creation. Cloudbreak is
+ able to check the key-value store if the recipe finished successfully or not.</p>
+</blockquote>
 <h2 id="downloadable-recipes">Downloadable recipes</h2>
-<p>A downloadable recipe should be available on HTTP, HTTPS protocols optionally with basic authentication, or any kind of public Git repository.</p>
-<p>This kind of recipe must contain a plugin.toml file, with some basic information about the recipe. Besides this at least a recipe-pre-install or a recipe-post-install script.</p>
-<p>Content of plugin.toml:</p>
+<p>A downloadable recipe should be available on HTTP, HTTPS protocols optionally with basic authentication, or any kind
+of public Git repository.</p>
+<blockquote>
+<p><strong>IMPORTANT</strong> This kind of <strong>recipe must contain a <code>plugin.toml</code> file, with some basic information about the recipe</strong>.
+Besides this at least a recipe-pre-install or a recipe-post-install script.</p>
+</blockquote>
+<p><strong>Content of plugin.toml</strong></p>
 <pre><code>[plugin]
 name = &quot;[recipe-name]&quot;
 description = &quot;[description-of-the-recipe]&quot;
@@ -333,8 +401,123 @@ maintainer_email = &quot;[maintainer-email]&quot;
 website_url = &quot;[website-url]&quot;
 </code></pre>
 
-<p>Pre- and post scripts are regular shell scripts, and must be executable.</p>
-<p>To configure recipe or recipe groups in Cloudbreak you have to create a descriptive JSON file and send it to Cloudbreak via our shell. On web interface you don't need to take care of this file.</p>
+<p><strong>Add recipe</strong></p>
+<p>To create a new recipe follow these steps:</p>
+<ol>
+<li>Fill out the recipe <code>Name</code></li>
+<li>Set a <code>Timeout</code> (in minutes) for the script execution</li>
+<li>Select <code>URL</code> as <code>Plugins</code> configuration type</li>
+<li>Select <code>ALL_NODES</code> as <code>Plugins</code> execution type</li>
+<li>Copy your recipe URL here (for example <code>https://github.com/mhmxs/consul-plugins-plugn-pre-post-test.git</code>)</li>
+</ol>
+<p><img alt="" src="../images/recipe-create-url.png" />
+<sub><em>Full size <a href="../images/recipe-create-url.png">here</a>.</em></sub></p>
+<p>Explanation of the parameters:</p>
+<ul>
+<li><code>Name</code> the name of the new recipe<ul>
+<li>Starts with a lowercase alphabetic</li>
+<li>Can contain lowercase alphanumeric and hyphens only</li>
+<li>Number of characters should be between 1 and 100</li>
+</ul>
+</li>
+<li><code>Timeout</code> the script execution timeout in minutes<ul>
+<li>Only numeric characters can be applied</li>
+</ul>
+</li>
+<li><code>Plugins</code> configuration type:<ul>
+<li><code>SCRIPT</code> you can provide your configuration scripts on the GUI</li>
+<li><code>FILE</code> you can upload your configuration scripts as files</li>
+<li><code>URL</code> you can provide a public GIT repository of your recipe configurations<ul>
+<li>You can read more about the supported protocols (GIT, HTTP, HTTPS) and theirs limitations below</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>Plugins</code> execution type:<ul>
+<li><code>ONE_NODE</code> the recipe will execute on only one node in the host group</li>
+<li><code>All_NODES</code> the recipe will execute on every single instance in the host group</li>
+</ul>
+</li>
+</ul>
+<p>Optional parameters and theirs explanation:</p>
+<ul>
+<li><code>Description</code> a maximum 1000 character long description for the new configuration</li>
+<li><code>Timeout</code> the script execution timeout in minutes</li>
+<li><code>Properties</code><ul>
+<li>saved to Consul key-value store (for example <code>"recipes.gcp-p12.p12-encoded": "&lt;base64-encoded-p12-file&gt;"</code>)</li>
+<li>are available from the pre or post script by fetching <code>http://localhost:8500/v1/kv/[key]?raw</code></li>
+</ul>
+</li>
+<li><code>Public In Account</code> If it is checked, all the users belonging to your account will be able to use this security
+configuration, but cannot delete it</li>
+</ul>
+<blockquote>
+<p><strong>NOTE</strong> In the background Cloudbreak pushes recipe to Consul key-value store during cluster creation. Cloudbreak is
+ able to check the key-value store if the recipe finished successfully or not.</p>
+</blockquote>
+<h1 id="create-recipe-via-cli">Create recipe via CLI</h1>
+<h2 id="stored-recipes_1">Stored recipes</h2>
+<p>As the name mentions stored recipes can be uploaded and stored in Cloudbreak Shell.</p>
+<p><strong>Add recipe</strong></p>
+<pre><code>recipe store --name [recipe-name] --executionType [ONE_NODE|ALL_NODES] --preInstallScriptFile /path/of/the/pre-install-script --postInstallScriptFile /path/of/the/post-install-script
+</code></pre>
+
+<p>Explanation of the parameters:</p>
+<ul>
+<li><code>--name</code> [string] the name of the new recipe<ul>
+<li>Starts with a lowercase alphabetic</li>
+<li>Can contain lowercase alphanumeric and hyphens only</li>
+<li>Number of characters should be between 1 and 100</li>
+</ul>
+</li>
+<li><code>--executionType</code> [string] execution type:<ul>
+<li><code>ONE_NODE</code> the recipe will execute on only one node in the host group</li>
+<li><code>All_NODES</code> the recipe will execute on every single instance in the host group</li>
+</ul>
+</li>
+<li><code>--preInstallScriptFile</code> [string] the path of the <code>recipe-pre-install</code> script<ul>
+<li>before the cluster install is started a <code>recipe-pre-install Consul event</code> is sent to the cluster that triggers
+the <code>recipe-pre-install hook</code> of the enabled plugins</li>
+</ul>
+</li>
+<li><code>--postInstallScriptFile</code> [string] the path of the <code>recipe-post-install</code> script<ul>
+<li>after the cluster installation is finished similar happens (as in case of <code>Pre Install Script</code>) but with the
+<code>recipe-post-install Consul event</code> and <code>recipe-post-install hook</code></li>
+</ul>
+</li>
+</ul>
+<p>Optional parameters and theirs explanation:</p>
+<ul>
+<li><code>--description</code> [string] a maximum 1000 character long description for the new configuration</li>
+<li><code>--timeout</code> [integer] the script execution timeout in minutes</li>
+<li><code>--publicInAccount</code> [flag] If it is checked, all the users belonging to your account will be able to use this
+security
+configuration, but cannot delete it</li>
+</ul>
+<blockquote>
+<p><strong>NOTE</strong> In the background Cloudbreak pushes recipe to Consul key-value store during cluster creation. Cloudbreak is
+ able to check the key-value store if the recipe finished successfully or not.</p>
+</blockquote>
+<h2 id="downloadable-recipes_1">Downloadable recipes</h2>
+<p>A downloadable recipe should be available on HTTP, HTTPS protocols optionally with basic authentication, or any kind
+of public Git repository.</p>
+<blockquote>
+<p><strong>IMPORTANT</strong> This kind of <strong>recipe must contain a <code>plugin.toml</code> file, with some basic information about the recipe</strong>.
+Besides this at least a recipe-pre-install or a recipe-post-install script.</p>
+</blockquote>
+<p><strong>Content of plugin.toml</strong></p>
+<pre><code>[plugin]
+name = &quot;[recipe-name]&quot;
+description = &quot;[description-of-the-recipe]&quot;
+version = &quot;1.0&quot;
+maintainer_name = &quot;[maintainer-name]&quot;
+maintainer_email = &quot;[maintainer-email]&quot;
+website_url = &quot;[website-url]&quot;
+</code></pre>
+
+<p><strong>Content of recipe.json</strong></p>
+<p>Pre- and post scripts are regular shell scripts, and must be executable. <strong>To configure recipe or recipe groups in
+Cloudbreak you have to create a descriptive JSON file and send it to Cloudbreak via our shell</strong>.</p>
 <pre><code>{
   &quot;name&quot;: &quot;[recipe-name]&quot;,
   &quot;description&quot;: &quot;[description-of-the-recipe]&quot;,
@@ -349,34 +532,35 @@ website_url = &quot;[website-url]&quot;
 }
 </code></pre>
 
-<p>At this point we need to understand some element of the JSON above.</p>
-<p>First of all <code>properties</code>. Properties are saved to Consul key/value store, and they are available from the pre or post script by fetching http://localhost:8500/v1/kv/[key]?raw. This option is a good choice if you want to write reusable recipes.</p>
-<p>The next one is <code>plugins</code>. As you read before we support a few kind of protocols, and each of them has their own limitations:</p>
+<p>Explanation of the parameters:</p>
 <ul>
-<li>
-<p>Git</p>
-<ul>
-<li>git repository must be public (or available from the cluster)</li>
-<li>the recipe files must be on the root</li>
-<li>only repository default branch supported, there is no opportunity to check out different branch</li>
+<li><code>properties</code><ul>
+<li>saved to Consul key-value store (for example <code>"recipes.gcp-p12.p12-encoded": "&lt;base64-encoded-p12-file&gt;"</code>)</li>
+<li>are available from the pre or post script by fetching <code>http://localhost:8500/v1/kv/[key]?raw</code></li>
+<li>option is a good choice if you want to write reusable recipes</li>
 </ul>
 </li>
-<li>
-<p>HTTP(S)</p>
-<ul>
-<li>on this kind of protocols you have to bundle your recipe into a tar or zip file</li>
-<li>basic authentication is the only way to protect recipe from public</li>
+<li><strong>Protocols of <code>plugins</code></strong> Cloudbreak supports three protocols, and each of them has their own <strong>limitations</strong>:<ul>
+<li>Git<ul>
+<li>git repository <strong>must be public</strong> (or available from the cluster)</li>
+<li>the recipe <strong>files must be on the root</strong></li>
+<li>only <strong>the default is branch supported</strong>, there is no opportunity to check out different branch</li>
+</ul>
+</li>
+<li>HTTP(S)<ul>
+<li>on this kind of protocols you <strong>have to bundle your recipe into a <code>tar</code> or <code>zip</code> file</strong></li>
+<li><strong>basic authentication</strong> is the only way to protect recipe from public</li>
 </ul>
 </li>
 </ul>
-<p>Last one is the execution type of the recipe. We supports two options:</p>
-<ul>
-<li>ONE_NODE means the recipe will execute only one node in the hostgroup</li>
-<li>All_NODES runs every single instance in the hostgroup.</li>
+</li>
+<li><strong>Execution type of <code>plugins</code></strong> Cloudbreak supports two type:<ul>
+<li><code>ONE_NODE</code> the recipe will execute on only one node in the host group</li>
+<li><code>All_NODES</code> the recipe will execute on every single instance in the host group</li>
 </ul>
-<h3 id="add-recipe_1">Add recipe</h3>
-<p>On the web interface please select URL type plugin, and fill other required fields.</p>
-<p>To add recipe via shell use the command(s) below:</p>
+</li>
+</ul>
+<p><strong>Add recipe</strong></p>
 <pre><code>recipe add --file /path/of/the/recipe/json
 </code></pre>
 
@@ -384,14 +568,49 @@ website_url = &quot;[website-url]&quot;
 <pre><code>recipe add --url http(s)://mydomain.com/my-recipe.json
 </code></pre>
 
-<p>Add command has an optional parameter</p>
-<p><code>--publicInAccount</code> is checked all the users belonging to your account will be able to use this recipe for create clusters, but cannot delete it.</p>
-<h2 id="sample-recipe-for-ranger">Sample recipe for Ranger</h2>
-<p>To be able to install Ranger from a blueprint, a database must be running when Ambari starts to install Ranger Admin. With Cloudbreak a database can be configured and started from a recipe. We've created a sample recipe that can be used to initialize and start a PostgreSQL database that will be able to accept connections from Ranger and store its data. Add the <code>ONE_NODE</code> recipe from <a href="https://github.com/sequenceiq/consul-plugins-ranger-db.git">this URL</a> on the Cloudbreak UI:</p>
-<p><img alt="" src="../images/ranger-recipe.png" /></p>
-<p>And add this recipe to the same hostgroup where Ranger Admin is installed on the 'Choose Blueprint' when creating a new cluster:</p>
-<p><img alt="" src="../images/ranger-hostgroup.png" /></p>
-<p>Ranger installation also has some required properties that must be added to the blueprint. We've created a sample one-node blueprint with the necessary configurations to install Ranger Admin and Ranger Usersync. The configuration values in this blueprint match the sample recipe above - they are set to use a PostgreSQL database on the same host where Ranger Admin is installed. Usersync is configured to use UNIX as the authentication method and it should also be installed on the same host where Ranger Admin is installed.</p>
+<p>Explanation of the parameters:</p>
+<ul>
+<li><code>--file</code> [string] the local path of the recipe configuration file (<code>recipe.json</code>)</li>
+<li><code>--url</code> [string] you can provide a public repository of your recipe configuration file (<code>recipe.json</code>)<ul>
+<li>You can read more about the supported protocols (GIT, HTTP, HTTPS) and theirs limitations above</li>
+</ul>
+</li>
+</ul>
+<p>Optional parameters and theirs explanation:</p>
+<ul>
+<li><code>--publicInAccount</code> [flag] If it is checked, all the users belonging to your account will be able to use this
+security configuration, but cannot delete it</li>
+</ul>
+<blockquote>
+<p><strong>NOTE</strong> In the background Cloudbreak pushes recipe to Consul key-value store during cluster creation. Cloudbreak is
+ able to check the key-value store if the recipe finished successfully or not.</p>
+</blockquote>
+<h1 id="sample-ranger-configuration">Sample Ranger configuration</h1>
+<p>To be able to <strong>install Ranger from a blueprint, a database must be running when Ambari starts to install Ranger
+Admin. With Cloudbreak a database can be configured and started from a recipe.</strong></p>
+<h2 id="recipe-for-ranger">Recipe for Ranger</h2>
+<p>We've created a <strong>sample recipe that can be used to initialize and start a <code>PostgreSQL</code> database that will be able to
+accept connections from Ranger and store its data</strong>.</p>
+<p>To create our sample Ranger recipe follow these steps:</p>
+<ol>
+<li>Fill out the recipe <code>Name</code></li>
+<li>Select <code>URL</code> as <code>Plugins</code> configuration type</li>
+<li>Select <code>ONE_NODE</code> as <code>Plugins</code> execution type</li>
+<li>Copy the recipe URL: <code>https://github.com/sequenceiq/consul-plugins-ranger-db.git</code></li>
+</ol>
+<p><img alt="" src="../images/ranger-recipe-url.png" />
+<sub><em>Full size <a href="../images/ranger-recipe-url.png">here</a>.</em></sub></p>
+<blockquote>
+<p>You can find the <strong>Explanation of the parameters</strong> at the <a href="#downloadable-recipes">Downloadable recipes section</a>.</p>
+<p><strong>IMPORTANT</strong> You should add this recipe to the same host group where Ranger Admin is installed.</p>
+</blockquote>
+<h2 id="blueprint-for-ranger">Blueprint for Ranger</h2>
+<p><strong>Ranger installation also has some required properties that must be added to the blueprint.</strong></p>
+<p>We've created a <strong>sample one-node blueprint with the necessary configurations to install <code>Ranger Admin</code> and <code>Ranger
+Usersync</code></strong>.</p>
+<p>The configuration values in this blueprint match the sample recipe above - <strong>they are set to use a <code>PostgreSQL</code> database
+on the same host where Ranger Admin is installed</strong>. Usersync is configured to use UNIX as the authentication method and
+ it should also be installed on the same host where Ranger Admin is installed.</p>
 <pre><code>{
   &quot;configurations&quot;: [
     {
@@ -744,11 +963,39 @@ website_url = &quot;[website-url]&quot;
 }
 </code></pre>
 
-<p><strong>Notes</strong></p>
+<h2 id="enable-ranger-configuration">Enable Ranger configuration</h2>
+<p>The sample Cloudbreak Ranger configuration can be applied on the <strong>Create cluster</strong> panel on the Cloudbreak Dashboard.</p>
+<p>To create a new cluster with sample Ranger configuration follow these steps:</p>
+<ol>
+<li>Fill out the <code>Configure Cluster</code> tab with appropriate values<ol>
+<li>Fill out your new cluster <code>Name</code></li>
+<li>Select an appropriate <code>Region</code></li>
+</ol>
+</li>
+<li>Open the <code>Setup Network and Security</code> tab<ol>
+<li>Select a <code>Network</code> and a <code>Security Group</code> that fit for your needs</li>
+</ol>
+</li>
+<li><code>Choose Blueprint</code>...etc.<ol>
+<li>Select the previously created <code>ranger-psql-onenode-sample</code> blueprint</li>
+<li>Select a <code>Template</code> for the gateway and the host group (these can be different) that fit your needs</li>
+<li>Select the <code>ranger-db-startup</code> from the host group's <code>Recipes</code></li>
+</ol>
+</li>
+<li><code>Review and Launch</code>...etc.</li>
+</ol>
+<p><img alt="" src="../images/ranger-hostgroup-blueprint.png" />
+<sub><em>Full size <a href="../images/ranger-hostgroup-blueprint.png">here</a>.</em></sub></p>
+<blockquote>
+<p><strong>IMPORTANT</strong></p>
 <ul>
-<li>Ranger plugins cannot be enabled by default in a blueprint due to some Ambari restrictions, so properties like <code>ranger-hdfs-plugin-enabled</code> must be set to <em>No</em> and the plugins must be enabled from the Ambari UI with the checkboxes and by restarting the necessary services.</li>
-<li>If using the UNIX user sync, it may be necessary in some cases to restart the Ranger Usersync Services after the blueprint installation finished if the UNIX users cannot be seen on the Ranger Admin UI.</li>
+<li>Ranger plugins cannot be enabled by default in a blueprint due to some Ambari restrictions, so properties like
+<code>ranger-hdfs-plugin-enabled</code> must be set to <em>No</em> and the plugins must be enabled from the Ambari UI with the
+checkboxes and by restarting the necessary services.</li>
+<li>If using the UNIX user sync, it may be necessary in some cases to restart the Ranger Usersync Services after the
+blueprint installation finished if the UNIX users cannot be seen on the Ranger Admin UI.</li>
 </ul>
+</blockquote>
                     <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/recipes.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
                 </div>
             
