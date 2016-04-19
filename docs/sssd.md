@@ -19,12 +19,12 @@ The SSSD can be configured on the **manage security configurations** panel on th
 To create a new SSSD configuration follow these steps:
 
   1. Fill out the new security configuration `Name`
-  2. Select `PARAMETERS` as `Configuration Type`
+  2. Select `Parameters` as `Configuration Type`
   3. Select `LDAP` as `Provider Type`
   4. Copy your LDAP URL to the `Provider URL` field
   5. Select `RFC2307` as `Database Shema Type`
   6. Copy your base search string to the `Search Base Of Users And Groups` field
-  7. Select `NEVER` as `TLS Behavior Of The Connection`
+  7. Select `Never` as `TLS Behavior Of The Connection`
 
 ![](/images/sssd-create.png)
 <sub>*Full size [here](/images/sssd-create.png).*</sub>
@@ -36,12 +36,12 @@ Explanation of the parameters:
     - Can contain lowercase alphanumeric and hyphens only
     - Number of characters should be between 1 and 100
 - `Configuration Type`:
-    - `PARAMETERS` you can provide your configuration parameters on the GUI
-    - `FILE` you can upload your configuration file
-    - `TEXT` you can copy-paste your configuration`
+    - `Parameters` you can provide your configuration parameters on the GUI
+    - `File` you can upload your configuration file
+    - `Text` you can copy-paste your configuration`
 - `Provider Type`
     - `LDAP` Lightweight Directory Access Protocol
-    - `ACTIVE_DIRECTORY` Active Directory
+    - `Active Directory` Active Directory
     - `IPA` Identity, Policy and Audit suit
 - `Provider URL` your LDAP or AD provider address
     - Can contain LDAP and AD protocols only
@@ -51,7 +51,7 @@ store data.
     - `RFC2307`
     - `RFC2307BIS`
     - `IPA`
-    - `AD`
+    - `Active Directory`
 - `Search Base Of Users And Groups` your base search string for your Users and Groups
     - Number of characters should be between 10 and 255
 - `TLS Behavior Of The Connection` applied Transport Layer Security

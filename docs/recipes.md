@@ -23,8 +23,8 @@ To create a new recipe follow these steps:
 
   1. Fill out the recipe `Name`
   2. Set a `Timeout` (in minutes) for the script execution
-  3. Select `SCRIPT` as `Plugins` configuration type
-  4. Select `ALL_NODES` as `Plugins` execution type
+  3. Select `Script` as `Plugins` configuration type
+  4. Select `All Nodes` as `Plugins` execution type
   5. Copy your `Pre Install Script` here
 
 ![](/images/recipe-create-script.png)
@@ -39,12 +39,12 @@ Explanation of the parameters:
 - `Timeout` the script execution timeout in minutes
     - Only numeric characters can be applied
 - `Plugins` configuration type:
-    - `SCRIPT` you can provide your configuration scripts on the GUI
-    - `FILE` you can upload your configuration scripts as files
-    - `URL` you can provide a public GIT repository of your recipe configurations
+    - `Script` you can provide your configuration scripts on the GUI
+    - `File` you can upload your configuration scripts as files
+    - `Url` you can provide a public GIT repository of your recipe configurations
 - `Plugins` execution type:
-    - `ONE_NODE` the recipe will execute on only one node in the host group
-    - `All_NODES` the recipe will execute on every single instance in the host group
+    - `One Node` the recipe will execute on only one node in the host group
+    - `All Nodes` the recipe will execute on every single instance in the host group
 - `Pre Install Script` executing the `recipe-pre-install` script
     - before the cluster install is started a `recipe-pre-install Consul event` is sent to the cluster that triggers
     the `recipe-pre-install hook` of the enabled plugins
@@ -87,8 +87,8 @@ To create a new recipe follow these steps:
 
   1. Fill out the recipe `Name`
   2. Set a `Timeout` (in minutes) for the script execution
-  3. Select `URL` as `Plugins` configuration type
-  4. Select `ALL_NODES` as `Plugins` execution type
+  3. Select `Url` as `Plugins` configuration type
+  4. Select `All Nodes` as `Plugins` execution type
   5. Copy your recipe URL here (for example `https://github.com/mhmxs/consul-plugins-plugn-pre-post-test.git`)
 
 ![](/images/recipe-create-url.png)
@@ -103,13 +103,13 @@ Explanation of the parameters:
 - `Timeout` the script execution timeout in minutes
     - Only numeric characters can be applied
 - `Plugins` configuration type:
-    - `SCRIPT` you can provide your configuration scripts on the GUI
-    - `FILE` you can upload your configuration scripts as files
-    - `URL` you can provide a public GIT repository of your recipe configurations
+    - `Script` you can provide your configuration scripts on the GUI
+    - `File` you can upload your configuration scripts as files
+    - `Url` you can provide a public GIT repository of your recipe configurations
         - You can read more about the supported protocols (GIT, HTTP, HTTPS) and theirs limitations below
 - `Plugins` execution type:
-    - `ONE_NODE` the recipe will execute on only one node in the host group
-    - `All_NODES` the recipe will execute on every single instance in the host group
+    - `One Node` the recipe will execute on only one node in the host group
+    - `All Nodes` the recipe will execute on every single instance in the host group
 
 Optional parameters and theirs explanation:
 
