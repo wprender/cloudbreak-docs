@@ -7,14 +7,11 @@ can bundle together different configurations.
 
 ## Data locality and topologies
 
-The [OpenStack documentation](http://docs.openstack.org/developer/sahara/icehouse/userdoc/features
-.html#data-locality) about data locality:
-
->**IMPORTANT** It is extremely important **for data processing to do locally (on the same rack, OpenStack compute
-node or even VM) as much work as possible**.
-
->Hadoop supports data-locality feature and can schedule jobs to task tracker nodes
-that are local for input stream. In this case task tracker could communicate directly with local data node.
+>The [OpenStack documentation](http://docs.openstack.org/developer/sahara/icehouse/userdoc/features
+ .html#data-locality) says about data locality: "It is extremely important for data processing to do locally (on the
+ same rack, OpenStack compute node or even VM) as much work as possible. Hadoop supports data-locality feature and
+ can schedule jobs to task tracker nodes that are local for input stream. In this case task tracker could communicate
+  directly with local data node."
 
 ### OpenStack Topology Mapping
 
