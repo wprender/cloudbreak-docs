@@ -9,6 +9,8 @@ var flows = {
     "StackSyncFlowConfig" : "Stack synchronization flow",
     "StackStopFlowConfig" : "Stack stop flow",
     "StackStartFlowConfig" : "Stack start flow",
+    "ClusterUpscaleFlowConfig" : "Cluster upscale flow",
+    "StackDownscaleConfig" : "Stack downscale flow",
     "ClusterTerminationFlowConfig" : "Cluster temination flow",
     "StackTerminationFlowConfig" : "Stack temination flow",
     "InstanceTerminationFlowConfig" : "Instance temination flow"
@@ -29,7 +31,7 @@ var initGraphByDot = function(dot) {
     graph.nodes().forEach(function(v) {
         var node = graph.node(v);
         node.label = v.replace(/_STATE/g, '');
-        if (node.label.indexOf("_FAIL") >= 0 || node.label.indexOf("_ERROR") >= 0) {
+        if (node.label.indexOf("FAIL") >= 0 || node.label.indexOf("ERROR") >= 0) {
             node.color = "red";
         } else if (node.label == "INIT" || node.label == "FINAL") {
             node.color = "green";
@@ -73,7 +75,7 @@ for (var flow in flows) {
         success: function(dot) {
             var graph = initGraphByDot(dot);
             sideNav.append('<li class="main active"><a href="#' + flow + '">' + flows[flow] + '</a></li>');
-            flowContaier.append('<p><h2 id="' + flow + '">' + flows[flow] + '</h2><svg id="Svg' + flow + '" width=800 height=600><g/></svg></p>');
+            flowContaier.append('<p><h2 id="' + flow + '">' + flows[flow] + '</h2><svg id="Svg' + flow + '" width=1000 height=600><g/></svg></p>');
             var svg = d3.select("#Svg" + flow), inner = svg.select("g");
             renderSvg(svg, inner, graph);
         }

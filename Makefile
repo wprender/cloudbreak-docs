@@ -11,7 +11,7 @@ else
 endif
 
 preview:
-	 docker run --rm -p 8000:8000 -v $(PWD):/work sequenceiq/pagebuilder mkdocs serve
+	 docker run --rm --name cloudbreak-docs-preview -p 8000:8000 -v $(PWD):/work sequenceiq/pagebuilder mkdocs serve
 
 circleci:
 	rm ~/.gitconfig
