@@ -1,6 +1,6 @@
 # Install Cloudbreak Deployer
 
-To install Cloudbreak Deployer on your selected environment you have to follow the steps below. The instruction 
+To install Cloudbreak Deployer on your selected environment you have to follow the steps below. The instruction
 describe a CentOS based installation.
 
 ## Minimum and Recommended System Requirements
@@ -14,7 +14,7 @@ To run the Cloudbreak Deployer and install the Cloudbreak Application, you must 
     * 10GB disk
     * 2 cores
 
-> You can install Cloudbreak on **Mac OS X for evaluation purposes only**. This operating system is not supported 
+> You can install Cloudbreak on **Mac OS X for evaluation purposes only**. This operating system is not supported
 for a production deployment of Cloudbreak.
 
 Make sure you opened the following ports:
@@ -78,7 +78,7 @@ Install the Cloudbreak Deployer and unzip the platform specific single binary to
 
 ```
 yum -y install unzip tar
-curl -Ls s3.amazonaws.com/public-repo-1.hortonworks.com/HDP/cloudbreak/cloudbreak-deployer_1.2.1_$(uname)_x86_64.tgz | sudo tar -xz -C /bin cbd
+curl -Ls s3.amazonaws.com/public-repo-1.hortonworks.com/HDP/cloudbreak/cloudbreak-deployer_1.2.2_$(uname)_x86_64.tgz | sudo tar -xz -C /bin cbd
 cbd --version
 ```
 
@@ -135,17 +135,17 @@ cbd logs cloudbreak
 ## Troubleshooting
 
 If you are faced with permission or connection issue, first you can try to disable **SELinux**:
-  
+
   1. Setting the `SELINUX=disabled` in `/etc/selinux/config`
   2. Reboot the machine
   3. Ensure the SELinux is not turned on after
-    
+
 ```
 setenforce 0 && sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
 ```
 ## Next steps
 
-Now you have all the pre-requisites for Cloudbreak. You can follow with the **cloud provider specific** configuration. Select one of the provider in the header 
+Now you have all the pre-requisites for Cloudbreak. You can follow with the **cloud provider specific** configuration. Select one of the provider in the header
 then follow the steps from the **Setup** section:
 
  * [AWS](aws.md#aws-setup)

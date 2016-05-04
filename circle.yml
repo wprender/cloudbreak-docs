@@ -17,11 +17,11 @@ deployment:
   master:
     branch: master
     commands:
-      - eval $(docker run -e MASTER=release-1.2.1 sequenceiq/pagebuilder circleci-cmd)
+      - eval $(docker run -e MASTER=release-1.2.2 sequenceiq/pagebuilder circleci-cmd)
   releases:
     branch: /release.*/
     commands:
-      - eval $(docker run -e MASTER=release-1.2.1 sequenceiq/pagebuilder circleci-cmd)
+      - eval $(docker run -e MASTER=release-1.2.2 sequenceiq/pagebuilder circleci-cmd)
 
 
 general:
