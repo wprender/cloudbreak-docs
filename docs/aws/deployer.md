@@ -37,7 +37,7 @@ guess it. If `cbd` cannot get the IP address during the initialization, please s
 
 **AWS Account Keys**
 
-There are 2 ways to create AWS credentials in Cloudbreak. 
+There are 2 ways to create AWS credentials in Cloudbreak.
 
 * Key-based: It requires your AWS access and secret key and Cloudbreak will use this key to launch the resources. This key needs to be provided when you create your credential in Cloudbreak either with Cloudbreak UI or Cloudbreak CLI.
 * Role-based: It requires a valid IAM User role and Cloudbreak will assume this role to get a temporary access and secret key. For this action you need to set your AWS key in the `Profile` file.
@@ -47,6 +47,8 @@ We suggest to use the keys of a valid **IAM User** here.
 export AWS_ACCESS_KEY_ID=AKIA**************W7SA
 export AWS_SECRET_ACCESS_KEY=RWCT4Cs8******************/*skiOkWD
 ```
+>If you want to use instance profile then you should not set these variables. Please be sure that the instance profile role can assume roles on AWS if you want to provision your clusters with Role ARN's and not with aws access and secret keys.
+
 ## Start Cloudbreak Deployer
 
 To start the Cloudbreak application use the following command.
