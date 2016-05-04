@@ -290,8 +290,6 @@
         
             <li><a href="#technical-preview">Technical Preview</a></li>
         
-            <li><a href="#behavioral-changes">Behavioral Changes</a></li>
-        
     
     </ul>
 </div></div>
@@ -311,16 +309,20 @@
 </thead>
 <tbody>
 <tr>
-<td>Cloudbreak Cluster installation</td>
-<td><a href="https://github.com/sequenceiq/cloudbreak/issues/1461">Fixed hanging cluster installation</a>.</td>
+<td>Ability to create cluster without public IP</td>
+<td>We are supporting to create cluster on AWS without public IPs.</td>
 </tr>
 <tr>
-<td>Azure Persistent Storage name fix</td>
-<td>Storage name generation was buggy after some API change.</td>
+<td>UI pageload fix</td>
+<td>Sometimes the UI load is hanging.</td>
 </tr>
 <tr>
-<td>GCP attached disk type was buggy</td>
-<td>Attached disk was buggy after some API change.</td>
+<td>Ability to use cloudbreak with instance profile</td>
+<td>Want to run CB on a separate management host and it can only assume an IAM role, due to security reasons they keys will be rotated periodically but can be fetched or renewed from instance metadata.</td>
+</tr>
+<tr>
+<td>Lazy format fix on Azure</td>
+<td>Azure format was extremely slow when more than 16 disks are attached.</td>
 </tr>
 </tbody>
 </table>
@@ -349,22 +351,6 @@
 <tr>
 <td>Platforms</td>
 <td><strong>Technical Preview</strong> Support for defining Platforms to relate different configurations together. See <a href="../topologies/">Platforms</a> for more information.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="behavioral-changes">Behavioral Changes</h2>
-<p>This release introduces the following changes in behavior as compared to previous Cloudbreak versions:</p>
-<table>
-<thead>
-<tr>
-<th>Title</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Cloudbreak Web UI</td>
-<td>Network creation form changes (easier creation of existing network).</td>
 </tr>
 </tbody>
 </table>

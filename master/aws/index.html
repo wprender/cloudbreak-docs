@@ -395,7 +395,7 @@ This is mandatory, because of to can access the Cloudbreak UI (called Uluwatu). 
 guess it. If <code>cbd</code> cannot get the IP address during the initialization, please set the appropriate value.</p>
 <h3 id="aws-specific-configuration">AWS specific configuration</h3>
 <p><strong>AWS Account Keys</strong></p>
-<p>There are 2 ways to create AWS credentials in Cloudbreak. </p>
+<p>There are 2 ways to create AWS credentials in Cloudbreak.</p>
 <ul>
 <li>Key-based: It requires your AWS access and secret key and Cloudbreak will use this key to launch the resources. This key needs to be provided when you create your credential in Cloudbreak either with Cloudbreak UI or Cloudbreak CLI.</li>
 <li>Role-based: It requires a valid IAM User role and Cloudbreak will assume this role to get a temporary access and secret key. For this action you need to set your AWS key in the <code>Profile</code> file.
@@ -405,6 +405,9 @@ We suggest to use the keys of a valid <strong>IAM User</strong> here.</li>
 export AWS_SECRET_ACCESS_KEY=RWCT4Cs8******************/*skiOkWD
 </code></pre>
 
+<blockquote>
+<p>If you want to use instance profile then you should not set these variables. Please be sure that the instance profile role can assume roles on AWS if you want to use Cloudbreak with Role ARN's and not with keys.</p>
+</blockquote>
 <h2 id="start-cloudbreak-deployer">Start Cloudbreak Deployer</h2>
 <p>To start the Cloudbreak application use the following command.
 This will start all the Docker containers and initialize the application.</p>
@@ -594,35 +597,35 @@ fulfilled by Amazon). <strong>This option is <em>not supported</em> by the defau
 If you choose an existing VPC it is possible to create a new subnet within the VPC or use an already existing one.
 The subnet's IP range must be defined in the <code>Subnet (CIDR)</code> field using the general CIDR notation.</p>
 <p><em>Default AWS Network</em></p>
-<p>If you don't want to create or use your custom VPC, you can use the <code>default-aws-network</code> for all your 
+<p>If you don't want to create or use your custom VPC, you can use the <code>default-aws-network</code> for all your
 Cloudbreak clusters. It will create a new VPC with a <code>10.0.0.0/16</code> subnet every time a cluster is created.</p>
 <p><em>Custom AWS Network</em></p>
-<p>If you'd like to deploy a cluster to a custom VPC you'll have to <strong>create a new network</strong> template on the <strong>manage 
+<p>If you'd like to deploy a cluster to a custom VPC you'll have to <strong>create a new network</strong> template on the <strong>manage
 networks</strong> panel.</p>
 <p>You have the following options:</p>
 <ul>
 <li><strong>Create a new VPC and a new subnet</strong>: Every time a cluster is created with this kind of network setup a new VPC and a new subnet with the specified IP range will be created for the instances on AWS.</li>
 <li><strong>Create a new subnet in an existing VPC</strong>:  Use this kind of network setup if you already have a VPC on AWS where you'd like to put the Cloudbreak created cluster but you'd like to have a separate subnet for it.</li>
-<li><strong>Use an existing subnet in an existing VPC</strong>:  Use this kind of network setup if you have an existing VPC with one or more subnets on AWS and you'd like to start the instances of a cluster in one of those subnets.</li>
+<li><strong>Use an existing subnet in an existing VPC</strong>:  Use this kind of network setup if you have an existing VPC with one or more subnets on AWS and you'd like to start the instances of a cluster in one of those subnets. If the subnet not able to assign public IPs to your machines then your vm's will not get public IP's and the whole cluster can reach with VPN connection.</li>
 </ul>
 <p>You can configure the <code>Subnet Identifier</code> and the <code>Internet Gateway Identifier</code> (IGW) of your VPC.</p>
 <blockquote>
-<p><strong>IMPORTANT</strong> The subnet CIDR cannot overlap each other in a VPC. So you have to create different network 
+<p><strong>IMPORTANT</strong> The subnet CIDR cannot overlap each other in a VPC. So you have to create different network
 templates for every each clusters.</p>
 </blockquote>
-<p>To create a new subnet within the VPC, provide the ID of the subnet which is in the existing VPC and your cluster 
-will be launched into that subnet. <strong>For example</strong> you can create 3 different clusters with 3 different network 
+<p>To create a new subnet within the VPC, provide the ID of the subnet which is in the existing VPC and your cluster
+will be launched into that subnet. <strong>For example</strong> you can create 3 different clusters with 3 different network
 templates for multiple subnets <code>10.0.0.0/24</code>, <code>10.0.1.0/24</code>, <code>10.0.2.0/24</code> with the same VPC and IGW identifiers.</p>
 <blockquote>
-<p><strong>IMPORTANT</strong> Please make sure the define subnet here doesn't overlap with any of your already deployed subnet in 
+<p><strong>IMPORTANT</strong> Please make sure the define subnet here doesn't overlap with any of your already deployed subnet in
 the VPC, because of the validation only happens after the cluster creation starts.</p>
-<p>In case of existing subnet make sure you have enough room within your network space for the new instances. The 
+<p>In case of existing subnet make sure you have enough room within your network space for the new instances. The
 provided subnet CIDR will be ignored, but a proper CIDR range will be used.</p>
 </blockquote>
-<p>If <code>Public in account</code> is checked all the users belonging to your account will be able to use this network template 
+<p>If <code>Public in account</code> is checked all the users belonging to your account will be able to use this network template
 to create clusters, but cannot delete it.</p>
 <blockquote>
-<p><strong>NOTE</strong> The VPCs, IGWs and subnet are created on AWS only after the the cluster provisioning starts with the selected 
+<p><strong>NOTE</strong> The VPCs, IGWs and subnet are created on AWS only after the the cluster provisioning starts with the selected
 network template.</p>
 </blockquote>
 <p><img alt="" src="../aws/images/aws-network_v4.png" />
