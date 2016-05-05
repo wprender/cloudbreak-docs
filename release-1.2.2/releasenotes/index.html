@@ -294,16 +294,16 @@
 </thead>
 <tbody>
 <tr>
-<td>Ability to create cluster without public IP</td>
-<td>We are supporting to create cluster on Aws without public IPs. (Deploying cluster into a private Subnet)</td>
+<td>Ability to create clusters without public IP</td>
+<td>In case a cluster is deployd in a private subnet then instances will not have public IP addresses.</td>
 </tr>
 <tr>
 <td>UI pageload fix</td>
 <td>Sometimes the UI load was hanging.</td>
 </tr>
 <tr>
-<td>Ability to use Cloudbreak with instance profile</td>
-<td>THis optional is available if you want to run CB on a separate management host and it can only assume an IAM role, due to security reasons Aws keys will be rotated periodically but can be fetched or renewed from instance metadata.</td>
+<td>Ability to use Cloudbreak with IAM instance profiles</td>
+<td>In case you already have instance profiles roles configured (and they can assume roles) you can pass it to Cloudbreak.</td>
 </tr>
 <tr>
 <td>Lazy format fix on Azure</td>
