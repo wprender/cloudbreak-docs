@@ -8,9 +8,9 @@ This release includes the following fixes and improvements:
 
 | Feature | Description |
 |----|----|
-| Ability to create cluster without public IP | We are supporting to create cluster on Aws without public IPs. (Deploying cluster into a private Subnet) |
+| Ability to create clusters without public IP | In case a cluster is deployd in a private subnet then instances will not have public IP addresses. |
 | UI pageload fix | Sometimes the UI load was hanging. |
-| Ability to use Cloudbreak with instance profile | THis optional is available if you want to run CB on a separate management host and it can only assume an IAM role, due to security reasons Aws keys will be rotated periodically but can be fetched or renewed from instance metadata. |
+| Ability to use Cloudbreak with IAM instance profiles | In case you already have instance profiles roles configured (and they can assume roles) you can pass it to Cloudbreak. |
 | Lazy format fix on Azure | Azure format was extremely slow when more than 16 disks are attached. |
 
 ## Technical Preview
