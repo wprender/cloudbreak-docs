@@ -207,24 +207,9 @@
 
                         
                             
-  <li class="dropdown-submenu">
-    <a tabindex="-1" href="">Development</a>
-    <ul class="dropdown-menu">
-        
-            
 <li >
-    <a href="../environments/">Environments</a>
+    <a href="../development/">Development</a>
 </li>
-
-        
-            
-<li >
-    <a href="../flow/">Flows</a>
-</li>
-
-        
-    </ul>
-  </li>
 
                         
                             
@@ -286,29 +271,13 @@
     
         <li class="main active"><a href="#system-security-services-daemon">System Security Services Daemon</a></li>
         
-    
-        <li class="main "><a href="#sssd-configurations-via-browser">SSSD configurations via Browser</a></li>
-        
             <li><a href="#manage-sssd-configurations">Manage SSSD configurations</a></li>
         
             <li><a href="#enable-sssd-configuration">Enable SSSD configuration</a></li>
         
             <li><a href="#embedded-ldap-support">Embedded LDAP support</a></li>
         
-    
-        <li class="main "><a href="#sssd-configurations-via-cli">SSSD configurations via CLI</a></li>
-        
-            <li><a href="#manage-sssd-configurations_1">Manage SSSD configurations</a></li>
-        
-            <li><a href="#enable-sssd-configuration_1">Enable SSSD configuration</a></li>
-        
-            <li><a href="#embedded-ldap-support_1">Embedded LDAP support</a></li>
-        
-    
-        <li class="main "><a href="#test-sssd-configuration">Test SSSD configuration</a></li>
-        
-    
-        <li class="main "><a href="#throubleshooting">Throubleshooting</a></li>
+            <li><a href="#throubleshooting">Throubleshooting</a></li>
         
     
     </ul>
@@ -326,223 +295,64 @@ Other big problem around the user management is that created users must be consi
 <pre><code>ssh [external-user]@[ambari-host] -p 2022
 </code></pre>
 
-<h1 id="sssd-configurations-via-browser">SSSD configurations via Browser</h1>
 <h2 id="manage-sssd-configurations">Manage SSSD configurations</h2>
-<p>The SSSD can be configured on the <strong>manage security configurations</strong> panel on the Cloudbreak Dashboard.</p>
-<p>To create a new SSSD configuration follow these steps:</p>
-<ol>
-<li>Fill out the new security configuration <code>Name</code></li>
-<li>Select <code>Parameters</code> as <code>Configuration Type</code></li>
-<li>Select <code>LDAP</code> as <code>Provider Type</code></li>
-<li>Copy your LDAP URL to the <code>Provider URL</code> field</li>
-<li>Select <code>RFC2307</code> as <code>Database Shema Type</code></li>
-<li>Copy your base search string to the <code>Search Base Of Users And Groups</code> field</li>
-<li>Select <code>Never</code> as <code>TLS Behavior Of The Connection</code></li>
-</ol>
-<p><img alt="" src="../images/sssd-create.png" />
-<sub><em>Full size <a href="../images/sssd-create.png">here</a>.</em></sub></p>
-<p>Explanation of the parameters:</p>
+<p>You can add new configuration on the web UI. Go to <strong>manage security configurations</strong> section and select <strong>create configuration</strong>. There are 3 types of configuration:</p>
 <ul>
-<li><code>Name</code> the name of the new security configuration<ul>
-<li>Starts with a lowercase alphabetic</li>
-<li>Can contain lowercase alphanumeric and hyphens only</li>
-<li>Number of characters should be between 1 and 100</li>
+<li>PARAMETERS, Cloudbreak will generate configuration by the given parameters</li>
+<li>FILE, upload your configuration</li>
+<li>TEXT, simply type or paste your configuration</li>
 </ul>
-</li>
-<li><code>Configuration Type</code>:<ul>
-<li><code>Parameters</code> you can provide your configuration parameters on the GUI</li>
-<li><code>File</code> you can upload your configuration file</li>
-<li><code>Text</code> you can copy-paste your configuration`</li>
-</ul>
-</li>
-<li><code>Provider Type</code><ul>
-<li><code>LDAP</code> Lightweight Directory Access Protocol</li>
-<li><code>Active Directory</code> Active Directory</li>
-<li><code>IPA</code> Identity, Policy and Audit suit</li>
-</ul>
-</li>
-<li><code>Provider URL</code> your LDAP or AD provider address<ul>
-<li>Can contain LDAP and AD protocols only</li>
-<li>Number of characters should be between 10 and 255</li>
-</ul>
-</li>
-<li><code>Database Shema Type</code> The schema defines all the objects and attributes that the service uses to implementation,
-store data.<ul>
-<li><code>RFC2307</code></li>
-<li><code>RFC2307BIS</code></li>
-<li><code>IPA</code></li>
-<li><code>Active Directory</code></li>
-</ul>
-</li>
-<li><code>Search Base Of Users And Groups</code> your base search string for your Users and Groups<ul>
-<li>Number of characters should be between 10 and 255</li>
-</ul>
-</li>
-<li><code>TLS Behavior Of The Connection</code> applied Transport Layer Security</li>
-</ul>
-<p>Optional parameters and theirs explanation:</p>
-<ul>
-<li><code>Description</code> a maximum 1000 character long description for the new configuration</li>
-<li><code>Active Directory Server(s)</code> IP address or Host name of the used Active Directory server<ul>
-<li>In case of more than one server, the list should be comma-separated</li>
-</ul>
-</li>
-<li><code>Kerberos Server(s)</code> IP address or Host names of the Kerberos server<ul>
-<li>In case of more than one server, the list should be comma-separated</li>
-</ul>
-</li>
-<li><code>Kerberos Realm</code> name of your Kerberos Realm</li>
-<li><code>Public In Account</code> If it is checked, all the users belonging to your account will be able to use this security
-configuration, but cannot delete it</li>
-</ul>
-<h2 id="enable-sssd-configuration">Enable SSSD configuration</h2>
-<p>Your Cloudbreak SSSD configuration can be applied on the <strong>Create cluster</strong> panel on the Cloudbreak Dashboard.</p>
-<p>To create a new cluster with SSSD configuration follow these steps:</p>
-<ol>
-<li>Fill out the <code>Configure Cluster</code> tab with appropriate values</li>
-<li>Open the <code>Setup Network and Security</code> tab<ol>
-<li>Select a <code>Network</code> and a <code>Security Group</code> that fit for your needs</li>
-<li>Check the <code>Use pre configured SSSD</code></li>
-<li><code>Select configuration</code> from your previously saved security configurations</li>
-</ol>
-</li>
-<li><code>Choose Blueprint</code>...etc.</li>
-</ol>
-<p><img alt="" src="../images/preconfigured-sssd.png" />
-<sub><em>Full size <a href="../images/preconfigured-sssd.png">here</a>.</em></sub></p>
-<h2 id="embedded-ldap-support">Embedded LDAP support</h2>
-<p>In Cloudbreak there is a built in but optional LDAP service. Your Cloudbreak SSSD configuration can be applied on the <strong>Create cluster</strong> panel on the Cloudbreak Dashboard.</p>
-<p>To create a new cluster with embedded LDAP support follow these steps:</p>
-<ol>
-<li>Fill out the <code>Configure Cluster</code> tab with appropriate values</li>
-<li>Open the <code>Setup Network and Security</code> tab<ol>
-<li>Select a <code>Network</code> and a <code>Security Group</code> that fit for your needs</li>
-<li>Check the <code>Start LDAP And Configure SSSD</code></li>
-</ol>
-</li>
-<li><code>Choose Blueprint</code>...etc.</li>
-</ol>
-<p>In the background <strong>Cloudbreak creates a default SSSD configuration named <code>cloudbreak-default-ldap</code></strong>. If there is no
-other selected configuration, it <strong>starts LDAP service then integrate them</strong>.</p>
-<p>If you want to <strong>connect to an Ambari node</strong> (except Ambari server), just use <code>ambari-qa</code> user with <code>cloudbreak</code>
-password to login:</p>
-<pre><code>ssh ambari-qa@[ambari-host] -p 2022
-</code></pre>
-
-<h1 id="sssd-configurations-via-cli">SSSD configurations via CLI</h1>
-<h2 id="manage-sssd-configurations_1">Manage SSSD configurations</h2>
-<p>You can provide all of your configuration parameters one-by-one via <code>add</code> command or you can <code>upload</code> in a configuration file.</p>
-<p><strong>Add SSSD configuration</strong></p>
+<p>In the shell you have two options <code>add</code> and <code>upload</code>.</p>
 <pre><code>sssdconfig add --name [config-name] --providerType [LDAP|ACTIVE_DIRECTORY|IPA] --url [provider-url] --schema [AD|IPA|RFC2307|RFC2307BIS] --baseSearch [search-base-of-posix-entities] --tlsReqcert [NEVER|ALLOW|TRY|DEMAND|HARD]
 </code></pre>
 
-<p>Explanation of the parameters:</p>
-<ul>
-<li><code>--name</code> the name of the new security configuration<ul>
-<li>Starts with a lowercase alphabetic</li>
-<li>Can contain lowercase alphanumeric and hyphens only</li>
-<li>Number of characters should be between 1 and 100</li>
-</ul>
-</li>
-<li><code>--providerType</code><ul>
-<li><code>LDAP</code> Lightweight Directory Access Protocol</li>
-<li><code>ACTIVE_DIRECTORY</code> Active Directory</li>
-<li><code>IPA</code> Identity, Policy and Audit suit</li>
-</ul>
-</li>
-<li><code>--url</code> your LDAP or AD provider address<ul>
-<li>Can contain LDAP and AD protocols only</li>
-<li>Number of characters should be between 10 and 255</li>
-</ul>
-</li>
-<li><code>--schema</code> The schema defines all the objects and attributes that the service uses to implementation,
-  store data.<ul>
-<li><code>RFC2307</code></li>
-<li><code>RFC2307BIS</code></li>
-<li><code>IPA</code></li>
-<li><code>AD</code></li>
-</ul>
-</li>
-<li><code>--baseSearch</code> your base search string for your Users and Groups<ul>
-<li>Number of characters should be between 10 and 255</li>
-</ul>
-</li>
-<li><code>--tlsReqcert</code> applied Transport Layer Security</li>
-</ul>
-<p>Optional parameters and theirs explanation:</p>
-<ul>
-<li><code>--description</code> [string] a maximum 1000 character long description for the new configuration</li>
-<li><code>--adServer</code> [string] IP address or Host name of the used Active Directory server.<ul>
-<li>In case of more than one server, the list should be comma-separated</li>
-</ul>
-</li>
-<li><code>--kerberosServer</code> [string] IP address or Host names of the Kerberos server.<ul>
-<li>In case of more than one server, the list should be comma-separated</li>
-</ul>
-</li>
-<li><code>--kerberosRealm</code> [string] name of your Kerberos Realm</li>
-<li><code>--publicInAccount</code> [flag] If it is checked, all the users belonging to your account will be able to use this
-security configuration, but cannot delete it</li>
-</ul>
-<p><strong>Upload SSSD configuration</strong></p>
+<p>This command has optional parameters:</p>
+<p><code>--description</code> "string" description of the configuration</p>
+<p><code>--adServer</code> "string" comma-separated list of IP addresses or hostnames of the AD servers</p>
+<p><code>--kerberosServer</code> "string" comma-separated list of IP addresses or hostnames of the Kerberos servers</p>
+<p><code>--kerberosRealm</code> "string" name of the Kerberos realm</p>
+<p><code>--publicInAccount</code> "flag" flags if the configuration is public in the account</p>
+<p>To upload configuration please use <code>upload</code> command:</p>
 <pre><code>sssdconfig upload --name [config-name] --file [configuration-path]
 </code></pre>
 
-<p>Optional parameters and theirs explanation:</p>
+<p>This command also has optional parameters:</p>
+<p><code>--description</code> "string" description of the configuration</p>
+<p><code>--publicInAccount</code> "flag" flags if the configuration is public in the account</p>
+<h2 id="enable-sssd-configuration">Enable SSSD configuration</h2>
+<p>There are two ways to enable SSSD configuration on a Cloudbreak cluster.</p>
 <ul>
-<li><code>--description</code> [string] a maximum 1000 character long description for the new configuration</li>
-<li><code>--publicInAccount</code> [flag] If it is checked, all the users belonging to your account will be able to use this
-security configuration, but cannot delete it</li>
+<li>On UI in the <strong>Create cluster</strong> wizard, on the <strong>Setup Network and Security</strong> tab, check the <strong>Use pre configured SSSD</strong> option and select an existing configuration at <strong>Select configuration</strong>.</li>
+<li>In CLoudbreak shell before <code>cluster create</code> command select a configuration by name <code>sssdconfig select --name [config-name]</code> or by id <code>sssdconfig select --id [config-id]</code></li>
 </ul>
-<h2 id="enable-sssd-configuration_1">Enable SSSD configuration</h2>
-<p>To create a new cluster with SSSD configuration in Cloudbreak Shell, you <strong>should select one of your SSSD configuration
- before <code>cluster create</code></strong>:</p>
-<pre><code>sssdconfig select --name sssd-test-config
-</code></pre>
-
+<h2 id="embedded-ldap-support">Embedded LDAP support</h2>
+<p>In Cloudbreak there is a built in but optionally LDAP service,</p>
+<ul>
+<li>On UI in the <strong>Create cluster</strong> wizard, on the <strong>Setup Network and Security</strong> tab, check the <strong>Start LDAP and configure SSSD</strong> option.</li>
+</ul>
 <p>or</p>
-<pre><code>sssdconfig select --id 2
-</code></pre>
-
-<h2 id="embedded-ldap-support_1">Embedded LDAP support</h2>
-<p>In Cloudbreak there is a built in but optional LDAP service. To create a new cluster with embedded LDAP support in
-Cloudbreak Shell, you should <strong>place <code>ldapRequired</code> flag in the <code>cluster create</code></strong>:</p>
-<pre><code>cluster create --ldapRequired
-</code></pre>
-
-<p>In the background <strong>Cloudbreak creates a default SSSD configuration named <code>cloudbreak-default-ldap</code></strong>. If there is no
-other selected configuration, it <strong>starts LDAP service then integrate them</strong>.</p>
-<p>If you want to <strong>connect to an Ambari node</strong> (except Ambari server), just use <code>ambari-qa</code> user with <code>cloudbreak</code>
-password to login:</p>
-<pre><code>ssh ambari-qa@[ambari-host] -p 2022
-</code></pre>
-
-<h1 id="test-sssd-configuration">Test SSSD configuration</h1>
-<p>User and group IDs are starting at 10000 in the LDAP database, so <strong>after login you have to see this results:</strong></p>
+<ul>
+<li>In Cloudbreak shell place <code>ldapRequired</code> flag in <code>cluster create</code> command: <code>cluster create --ldapRequired</code>.</li>
+</ul>
+<p>That's it. In the background Cloudbreak creates a default SSSD configuration named <code>cloudbreak-default-ldap</code> if there is no other selected configuration, starts LDAP service and integrate them together. If you want to connect to an Ambari node (except Ambari server), just use <code>ambari-qa</code> user with <code>cloudbreak</code> password to login: <code>ssh ambari-qa@[ambari-host] -p 2022</code>.</p>
+<h3 id="test-configuration">Test configuration</h3>
+<p>User and group ids are starting at 10000 in the LDAP database, so after login you have to see this results:</p>
 <pre><code>[ambari-qa@host ~]$ id ambari-qa
 uid=10000(ambari-qa) gid=10000(hadoop) groups=10000(hadoop),100(users)
 [ambari-qa@host ~]$ getent passwd ambari-qa
 ambari-qa:*:10000:10000:ambari-qa:/home/ambari-qa:/bin/bash
 </code></pre>
 
-<h1 id="throubleshooting">Throubleshooting</h1>
-<p>In Cloudbreak the SSSD service starts in very verbose mode.</p>
-<p><strong>To read log files:</strong></p>
-<ul>
-<li>Login to the host as <code>centos</code> user</li>
-</ul>
+<h2 id="throubleshooting">Throubleshooting</h2>
+<p>In Cloudbreak the SSSD service starts in very verbose mode. To read log files first login to the host as <code>centos</code> user.</p>
 <pre><code>ssh centos@[ambari-host] -i [cluster-credential]
 </code></pre>
 
-<ul>
-<li>Jump into Ambari agent Docker container</li>
-</ul>
+<p>Next you have jump into Ambari agent Docker container.</p>
 <pre><code>sudo docker exec -it $(docker ps --format=&quot;{{.Names}}&quot; | grep ambari-agent) bash
 </code></pre>
 
-<ul>
-<li>Logs are found at <code>/var/log/sssd</code> directory in file per service format</li>
-</ul>
+<p>Logs are found at <code>/var/log/sssd</code> directory in file per service format.</p>
 <pre><code>[root@docker-ambari /]# ls /var/log/sssd
 ldap_child.log  sssd_LDAP.log  sssd.log  sssd_nss.log  sssd_pam.log
 </code></pre>
