@@ -47,7 +47,7 @@ We suggest to use the keys of a valid **IAM User** here.
 export AWS_ACCESS_KEY_ID=AKIA**************W7SA
 export AWS_SECRET_ACCESS_KEY=RWCT4Cs8******************/*skiOkWD
 ```
->If you want to use instance profile then you should not set these variables. Please be sure that the instance profile role can assume roles on AWS if you want to provision your clusters with Role ARN's and not with aws access and secret keys.
+>If you'd like to use instance profiles then these variables should not be configured. Please be sure that the instance profile role can assume roles on AWS if you want to provision your clusters with Role ARN's and not with AWS access and secret keys.
 
 ## Start Cloudbreak Deployer
 
