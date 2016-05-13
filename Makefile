@@ -12,7 +12,7 @@ endif
 
 CB_LOCATION = $(shell echo \${CBLOC})
 ifeq ($(CB_LOCATION),)
-	CB_LOCATION = "../cloudbreak"
+	CB_LOCATION = ../cloudbreak
 endif
 
 preview:
@@ -33,7 +33,7 @@ test:
 	docker run --rm -p 8000:8000 -v $(PWD):/work sequenceiq/pagebuilder mkdocs build
 
 copy-generated-dots:
-	cp $(CB_LOCATION)/build/diagrams/flow/*.dot docs/diagrams
+	cp $(CB_LOCATION)/core/build/diagrams/flow/*.dot docs/diagrams
 
 generate-dots-by-branch:
 	docker run --rm -v $(PWD):/work $(CACHE_OPTION) -e BRANCH=$(CB_BRANCH) -it sequenceiq/pagebuilder generate-dots
