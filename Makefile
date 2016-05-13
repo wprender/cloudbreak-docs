@@ -10,6 +10,11 @@ else
 	CACHE_OPTION=-v $(CACHE):/root/.gradle
 endif
 
+CB_LOCATION = $(shell echo \${CBLOC})
+ifeq ($(CB_LOCATION),)
+	CB_LOCATION = "../cloudbreak"
+endif
+
 preview:
 	 docker run --rm --name cloudbreak-docs-preview -p 8000:8000 -v $(PWD):/work sequenceiq/pagebuilder mkdocs serve
 
@@ -26,6 +31,9 @@ update-images:
 
 test:
 	docker run --rm -p 8000:8000 -v $(PWD):/work sequenceiq/pagebuilder mkdocs build
+
+copy-generated-dots:
+	cp $(CB_LOCATION)/build/diagrams/flow/*.dot docs/diagrams
 
 generate-dots-by-branch:
 	docker run --rm -v $(PWD):/work $(CACHE_OPTION) -e BRANCH=$(CB_BRANCH) -it sequenceiq/pagebuilder generate-dots
