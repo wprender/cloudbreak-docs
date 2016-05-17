@@ -75,3 +75,9 @@ configurations gathered by the response of the stack advisor.
 * `ALWAYS_APPLY`              Applies on all configuration properties.
 
 `Start LDAP and configure SSSD` Enables the [System Security Services Daemon](sssd.md) configuration.
+
+`Seamless S3 Access` Cluster will be able to reach S3 buckets without any configuration.
+
+* `Disable S3 Access By Default`               Cluster will not be able to reach S3 buckets.
+* `Create Role For S3 Access`                  The Cloudformation template will create a new role and assign to every instance.
+* `Define Existing Role For S3 Access`         Cluster will use the predefined instance role. You should define the role in the `Role for S3 connection` box.
