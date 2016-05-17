@@ -10,6 +10,7 @@ var flows = {
     "StackStopFlowConfig" : "Stack stop flow",
     "StackStartFlowConfig" : "Stack start flow",
     "ClusterUpscaleFlowConfig" : "Cluster upscale flow",
+    "StackUpscaleConfig" : "Stack upscale flow",
     "StackDownscaleConfig" : "Stack downscale flow",
     "ClusterTerminationFlowConfig" : "Cluster temination flow",
     "StackTerminationFlowConfig" : "Stack temination flow",
