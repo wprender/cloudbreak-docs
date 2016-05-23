@@ -546,16 +546,16 @@ database and can be reused with multiple clusters to describe the infrastructure
 <p>The instance templates can be configured on the <strong>manage templates</strong> panel on the Cloudbreak Dashboard.</p>
 <p>If <code>Public in account</code> is checked all the users belonging to your account will be able to use this resource to create clusters, but cannot delete it.</p>
 <p><strong>Networks</strong></p>
-<p>Your clusters can be created in their own <strong>networks</strong> or in one of your already existing one. If you choose an 
-existing network, it is possible to create a new subnet within the network. The subnet's IP range must be defined in 
+<p>Your clusters can be created in their own <strong>networks</strong> or in one of your already existing one. If you choose an
+existing network, it is possible to create a new subnet within the network. The subnet's IP range must be defined in
 the <code>Subnet (CIDR)</code> field using the general CIDR notation. Here you can read more about <a href="http://docs.openstack.org/liberty/networking-guide/intro-networking.html">OpenStack networking</a>.</p>
 <p><em>Custom OpenStack Network</em></p>
-<p>If you'd like to deploy a cluster to your OpenStack network you'll have to <strong>create a new network</strong> template on the 
+<p>If you'd like to deploy a cluster to your OpenStack network you'll have to <strong>create a new network</strong> template on the
 <strong>manage networks</strong> panel on the Cloudbreak Dashboard.</p>
 <blockquote>
-<p>"Before launching an instance, you must create the necessary virtual network infrastructure...an instance uses a 
-public provider virtual network that connects to the physical network infrastructure...This network includes a DHCP 
-server that provides IP addresses to instances...The admin or other privileged user must create this network because 
+<p>"Before launching an instance, you must create the necessary virtual network infrastructure...an instance uses a
+public provider virtual network that connects to the physical network infrastructure...This network includes a DHCP
+server that provides IP addresses to instances...The admin or other privileged user must create this network because
 it connects directly to the physical network infrastructure."</p>
 <p>Here you can read more about OpenStack <a href="http://docs.openstack.org/liberty/install-guide-rdo/launch-instance.html#create-virtual-networks">virtual network</a> and <a href="http://docs.openstack.org/liberty/install-guide-rdo/launch-instance-networks-public.html">public provider network</a>.</p>
 </blockquote>
@@ -568,27 +568,27 @@ it connects directly to the physical network infrastructure."</p>
 <p>Explanation of the parameters:</p>
 <ul>
 <li><code>Name</code> the name of the new network<ul>
-<li>it must be between 5 and 100 characters long</li>
+<li>Length must be between 5 and 100 characters</li>
 <li>Starts with a lowercase alphabetic character</li>
 <li>Can contain lowercase alphanumeric and hyphens only</li>
 </ul>
 </li>
-<li><code>Subnet (CIDR)</code> Copy your OpenStack public network's subnet with CIDR block to the <code>Subnet (CIDR)</code> field</li>
-<li><code>Public Network ID</code> Copy your OpenStack public network ID to the <code>Public Network ID</code> field</li>
-<li><code>Virtual Network Identifier</code> This must be an ID of an existing OpenStack virtual network.</li>
-<li><code>Router Identifier</code> Your virtual network router ID (must be provided in case of existing virtual network).</li>
-<li><code>Subnet Identifier</code> Your subnet ID within your virtual network. If the identifier is provided, the <code>Subnet (CIDR)</code> will be ignored.</li>
+<li><code>Subnet (CIDR)</code> With this field you define the IP address space usable by your VMs within the cluster. Cloudbreak supports the private address space defined in <a href="https://tools.ietf.org/html/rfc1918">RFC1918</a>. E.g. you can use 10.0.0.0/24</li>
+<li><code>Floating Pool ID</code> <a href="http://docs.openstack.org/openstack-ops/content/floating_ips.html">Floating IPs</a>  are not automatically allocated to instances by default, they needs to be attached to instances after creation. The Floating IPs are used to provide access to your VMs running on OpenStack. You can figure out the available network pools and their IDs by using the <code>nova floating-ip-pool-list</code> and <code>neutron net-external-list</code> or copy-pasting it from OpenStack Horizon UI. Such networks have the <code>External Network</code> field set to <code>Yes</code>. If you are unable to find the ID then just consult with your OpenStack network administrator. Please note that if you do not set this field then your cluster might not be accessible.</li>
+<li><code>Virtual Network Identifier</code> This is the ID of an existing virtual network on OpenStack where you would like to launch the cluster. (Must be provided for <strong>Create a new subnet in an existing network</strong> and <strong>Use an existing subnet in an existing network</strong>)</li>
+<li><code>Router Identifier</code> Specify the router ID that shall interconnect your existing Network with the Subnet which will be created by CLoudbreak. (Must be provided for <strong>Create a new subnet in an existing network</strong>).</li>
+<li><code>Subnet Identifier</code> This is the ID of an existing subnet on OpenStack where you would like to launch the cluster. (Must be provided for <strong>Use an existing subnet in an existing network</strong>)</li>
 </ul>
 <blockquote>
 <p><strong>IMPORTANT</strong> Please make sure the defined subnet here doesn't overlap with any of your already deployed subnet in the
  network, because of the validation only happens after the cluster creation starts.</p>
-<p>In case of existing subnet make sure you have enough room within your network space for the new instances. The 
+<p>In case of existing subnet make sure you have enough room within your network space for the new instances. The
 provided subnet CIDR will be ignored, but a proper CIDR range will be used.</p>
 </blockquote>
-<p>If <code>Public in account</code> is checked all the users belonging to your account will be able to use this network template 
+<p>If <code>Public in account</code> is checked all the users belonging to your account will be able to use this network template
 to create clusters, but cannot delete it.</p>
 <blockquote>
-<p><strong>NOTE</strong> The new networks are created on OpenStack only after the the cluster provisioning starts with the selected 
+<p><strong>NOTE</strong> The new networks are created on OpenStack only after the the cluster provisioning starts with the selected
 network template.</p>
 </blockquote>
 <p><img alt="" src="../images/os-networks_v2.png" />
