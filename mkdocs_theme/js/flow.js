@@ -14,7 +14,9 @@ var flows = {
     "StackDownscaleConfig" : "Stack downscale flow",
     "ClusterTerminationFlowConfig" : "Cluster temination flow",
     "StackTerminationFlowConfig" : "Stack temination flow",
-    "InstanceTerminationFlowConfig" : "Instance temination flow"
+    "InstanceTerminationFlowConfig" : "Instance temination flow",
+    "ClusterStartFlowConfig" : "Cluster start flow",
+    "ClusterStopFlowConfig" : "Cluster stop flow"
 };
 
 var initGraphByDot = function(dot) {
