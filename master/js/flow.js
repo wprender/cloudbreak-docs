@@ -7,6 +7,7 @@ var colors = {
 var flows = {
     "StackCreationFlowConfig": "Stack creation flow",
     "StackSyncFlowConfig" : "Stack synchronization flow",
+    "ClusterSyncFlowConfig" : "Cluster synchronization flow",
     "StackStopFlowConfig" : "Stack stop flow",
     "StackStartFlowConfig" : "Stack start flow",
     "ClusterUpscaleFlowConfig" : "Cluster upscale flow",
