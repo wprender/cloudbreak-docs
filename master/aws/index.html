@@ -408,6 +408,17 @@ export AWS_SECRET_ACCESS_KEY=RWCT4Cs8******************/*skiOkWD
 <blockquote>
 <p>If you want to use instance profile then you should not set these variables. Please be sure that the instance profile role can assume roles on AWS if you want to use Cloudbreak with Role ARN's and not with keys.</p>
 </blockquote>
+<p>In order to differentiate launched instances we gice you the option to use custom tags on your AWS resources which were deployed by Cloudbreak. The tagging mechanism can be used with the following variables. </p>
+<p>Please set this variable if you want just one custom tag on your Cloudformation resources</p>
+<pre><code>export CB_AWS_DEFAULT_CF_TAG=whatever
+</code></pre>
+
+<p>Then the name of the tag will be <code>CloudbreakId</code> and the value will be <code>whatever</code>.</p>
+<p>If you want some more specific tagging then use this variable</p>
+<pre><code>export CB_AWS_CUSTOM_CF_TAGS=myveryspecifictag:veryspecific
+</code></pre>
+
+<p>Then the name of the tag will be <code>myveryspecifictag</code> and the value will be <code>veryspecific</code>. You can specify a list of tags here with a comma separated list for example: <code>tag1:value1,tag2:value2,tag3:value3</code></p>
 <h2 id="start-cloudbreak-deployer">Start Cloudbreak Deployer</h2>
 <p>To start the Cloudbreak application use the following command.
 This will start all the Docker containers and initialize the application.</p>
