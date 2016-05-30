@@ -716,6 +716,10 @@ be Kerberized. See more about it in the <a href="../kerberos/">Kerberos</a> sect
 <li>the recipes for nodes</li>
 </ul>
 </li>
+<li>You need to select where you want to install the Ambari server to. Only 1 host group can be selected.
+   If you want to install the Ambari server to a separate node, you need to extend your blueprint with a new host group
+   which contains only 1 service: HDFS_CLIENT and select this host group for the Ambari server. Note: this host group cannot be scaled so 
+   it is not advised to select a 'slave' host group for this purpose.</li>
 <li>Click on the <code>Add File System</code> button</li>
 </ul>
 <p><code>Add File System</code> tab</p>
@@ -976,10 +980,12 @@ you a <strong>basic flow for cluster creation with Cloudbreak Shell</strong>.</p
 
 <p><strong>Configure instance groups</strong></p>
 <p>You must configure instance groups before provisioning. An instance group define a group of nodes with a specified 
-template. Usually we create instance groups for host groups in the blueprint.</p>
-<pre><code>instancegroup configure --instanceGroup cbgateway --nodecount 1 --templateName minviable-gcp
-instancegroup configure --instanceGroup master --nodecount 1 --templateName minviable-gcp
-instancegroup configure --instanceGroup slave_1 --nodecount 1 --templateName minviable-gcp
+template. Usually we create instance groups for host groups in the blueprint. For Ambari server only 1 host group can be specified.
+If you want to install the Ambari server to a separate node, you need to extend your blueprint with a new host group
+which contains only 1 service: HDFS_CLIENT and select this host group for the Ambari server. Note: this host group cannot be scaled so 
+it is not advised to select a 'slave' host group for this purpose.</p>
+<pre><code>instancegroup configure --instanceGroup master --nodecount 1 --templateName minviable-aws --ambariServer true
+instancegroup configure --instanceGroup slave_1 --nodecount 1 --templateName minviable-aws --ambariServer false
 </code></pre>
 
 <p>Other available option:</p>
