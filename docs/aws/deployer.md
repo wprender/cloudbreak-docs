@@ -49,7 +49,7 @@ export AWS_SECRET_ACCESS_KEY=RWCT4Cs8******************/*skiOkWD
 ```
 >If you want to use instance profile then you should not set these variables. Please be sure that the instance profile role can assume roles on AWS if you want to use Cloudbreak with Role ARN's and not with keys.
 
-In most of the cases you want some custom tags on your AWS resources which were deployed by Cloudbreak. We provide a functionality for tagging mechanism with the following variables. 
+In order to differentiate launched instances we gice you the option to use custom tags on your AWS resources which were deployed by Cloudbreak. The tagging mechanism can be used with the following variables. 
 
 Please set this variable if you want just one custom tag on your Cloudformation resources
 
@@ -58,7 +58,7 @@ export CB_AWS_DEFAULT_CF_TAG=whatever
 ```
 Then the name of the tag will be `CloudbreakId` and the value will be `whatever`.
 
-If you want some more specific tag then use this variable
+If you want some more specific tagging then use this variable
 
 ```
 export CB_AWS_CUSTOM_CF_TAGS=myveryspecifictag:veryspecific
