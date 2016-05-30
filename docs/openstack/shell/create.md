@@ -20,12 +20,14 @@ blueprint select --name multi-node-hdfs-yarn
 **Configure instance groups**
 
 You must configure instance groups before provisioning. An instance group define a group of nodes with a specified 
-template. Usually we create instance groups for host groups in the blueprint.
+template. Usually we create instance groups for host groups in the blueprint. For Ambari server only 1 host group can be specified.
+If you want to install the Ambari server to a separate node, you need to extend your blueprint with a new host group
+which contains only 1 service: HDFS_CLIENT and select this host group for the Ambari server. Note: this host group cannot be scaled so 
+it is not advised to select a 'slave' host group for this purpose.
 
 ```
-instancegroup configure --instanceGroup cbgateway --nodecount 1 --templateName my-os-template
-instancegroup configure --instanceGroup master --nodecount 1 --templateName my-os-template
-instancegroup configure --instanceGroup slave_1 --nodecount 1 --templateName my-os-template
+instancegroup configure --instanceGroup master --nodecount 1 --templateName minviable-aws --ambariServer true
+instancegroup configure --instanceGroup slave_1 --nodecount 1 --templateName minviable-aws --ambariServer false
 ```
 Other available option:
 
