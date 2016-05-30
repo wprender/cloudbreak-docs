@@ -795,7 +795,13 @@ configurations gathered by the response of the stack advisor. </p>
 <li><code>ONLY_STACK_DEFAULTS_APPLY</code> Applies only on the default configurations for all included services.</li>
 <li><code>ALWAYS_APPLY</code>              Applies on all configuration properties.</li>
 </ul>
-<p><code>Start LDAP and configure SSSD</code> Enables the <a href="../sssd/">System Security Services Daemon</a> configuration</p>
+<p><code>Start LDAP and configure SSSD</code> Enables the <a href="../sssd/">System Security Services Daemon</a> configuration.</p>
+<p><code>Seamless S3 Access</code> Cluster will be able to reach S3 buckets without any configuration.</p>
+<ul>
+<li><code>Disable S3 Access By Default</code>               Cluster will not be able to reach S3 buckets.</li>
+<li><code>Create Role For S3 Access</code>                  The Cloudformation template will create a new role and assign to every instance.</li>
+<li><code>Define Existing Role For S3 Access</code>         Cluster will use the predefined instance role. You should define the role in the <code>Role for S3 connection</code> box</li>
+</ul>
 <h2 id="cluster-termination">Cluster termination</h2>
 <p>You can terminate running or stopped clusters with the <code>terminate</code> button in the cluster details.</p>
 <blockquote>
@@ -1034,7 +1040,9 @@ stack to be used with your Hadoop cluster:</p>
 <p>The infrastructure is created asynchronously, the state of the stack can be checked with the stack <code>show command</code>. If 
 it reports AVAILABLE, it means that the virtual machines and the corresponding infrastructure is running at the cloud provider.</p>
 <p>Other available option is:</p>
-<p><code>--wait</code> - in this case the create command will return only after the process has finished. </p>
+<p><code>--wait</code> - in this case the create command will return only after the process has finished. 
+<code>--instanceProfileStrategy</code> - strategy for seamless S3 connection. (CREATE, USE_EXISTING)
+<code>--s3Role</code> - If you selected 'USE_EXISTING' strategy then you should define the S3 role which will be assigned to instances.</p>
 <p><strong>Create a Hadoop cluster / Cloud provisioning</strong></p>
 <p><strong>You are almost done! One more command and your Hadoop cluster is starting!</strong> Cloud provisioning is done once the 
 cluster is up and running. The new cluster will use your selected blueprint and install your custom Hadoop cluster 
