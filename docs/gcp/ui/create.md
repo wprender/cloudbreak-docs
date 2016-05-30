@@ -36,6 +36,10 @@ be Kerberized. See more about it in the [Kerberos](kerberos.md) section of this 
     - the templates
     - the number of nodes for all of the host groups in the blueprint
     - the recipes for nodes
+ - You need to select where you want to install the Ambari server to. Only 1 host group can be selected.
+   If you want to install the Ambari server to a separate node, you need to extend your blueprint with a new host group
+   which contains only 1 service: HDFS_CLIENT and select this host group for the Ambari server. Note: this host group cannot be scaled so 
+   it is not advised to select a 'slave' host group for this purpose.
  - Click on the `Add File System` button
 
 `Add File System` tab
