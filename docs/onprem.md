@@ -1,7 +1,8 @@
 # Install Cloudbreak Deployer
 
-To install Cloudbreak Deployer on your selected environment you have to follow the steps below. The instruction
-describe a CentOS based installation.
+Follow these steps to install Cloudbreak Deployer in your operating system. 
+
+>The instructions below are for CentOS. If you are using a differnt OS, perform equivalent steps. 
 
 ## Minimum and Recommended System Requirements
 
@@ -17,7 +18,7 @@ To run the Cloudbreak Deployer and install the Cloudbreak Application, you must 
 > You can install Cloudbreak on **Mac OS X for evaluation purposes only**. This operating system is not supported
 for a production deployment of Cloudbreak.
 
-Make sure you opened the following ports:
+Make sure that you opened the following ports:
 
  * SSH (22)
  * Cloudbreak API (8080)
@@ -25,25 +26,25 @@ Make sure you opened the following ports:
  * Cloudbreak GUI (3000)
  * User authentication (3001)
 
-Every command shall be executed as **root**. In order to get root privileges execute:
+Execute every command as **root**. In order to get root privileges execute:
 
 ```
 sudo -i
 ```
 
-Ensure that your system is up-to date and reboot if necessary (e.g. there was a kernel update)  :
+Ensure that your system is up-to-date and reboot it if necessary (for example, if there was a kernel update):
 
 ```
 yum -y update
 ```
 
-You need to install iptables-services, otherwise the 'iptables save' command will not be available:
+Install iptables-services. Without iptables-services installed the 'iptables save' command will not be available:
 
 ```
 yum -y install iptables-services net-tools
 ```
 
-Please configure permissive iptables on your machine:
+Configure permissive iptables on your machine:
 
 ```
 iptables --flush INPUT && \
@@ -64,7 +65,7 @@ gpgkey=https://yum.dockerproject.org/gpg
 EOF
 ```
 
-Then you are able to install the Docker service:
+Next, install the Docker service:
 
 ```
 yum install -y docker-engine-1.9.1 docker-engine-selinux-1.9.1
@@ -74,7 +75,7 @@ systemctl enable docker
 
 ## Install Cloudbreak Deployer
 
-Install the Cloudbreak Deployer and unzip the platform specific single binary to your PATH. The one-liner way is:
+Install the Cloudbreak Deployer and unzip the platform-specific single binary to your PATH. A quick way to do this is:
 
 ```
 yum -y install unzip tar
@@ -82,11 +83,11 @@ curl -Ls s3.amazonaws.com/public-repo-1.hortonworks.com/HDP/cloudbreak/cloudbrea
 cbd --version
 ```
 
-Once the Cloudbreak Deployer is installed, you can start to setup the Cloudbreak application.
+Once the Cloudbreak Deployer is installed, you can start to set up the Cloudbreak application.
 
 ## Initialize your Profile
 
-First initialize `cbd` by creating a `Profile` file:
+First initialize `cbd`:
 
 ```
 mkdir cloudbreak-deployment
@@ -94,37 +95,38 @@ cd cloudbreak-deployment
 cbd init
 ```
 
-It will create a `Profile` file in the current directory. Please edit the file - the only required
-configuration is the `PUBLIC_IP`. This IP will be used to access the Cloudbreak UI
-(called Uluwatu). In some cases the `cbd` tool tries to guess it, if can't than will give a hint.
+Cloudbreak Deployer creates a file called Profile in the current directory. The Profile file includes your PUBLIC_IP. Edit PUBLIC_IP to provide an IP address that will be used to access the Cloudbreak UI. In some cases, cbd tries to guess the IP address; if can't. this will give a hint.
+
+
 
 ## Generate your Profile
 
-You are done with the configuration of Cloudbreak Deployer. The last thing you have to do is to regenerate the configurations in order to take effect.
+You are done with the configuration of Cloudbreak Deployer. The last thing you have to do is to generate the configurations by executing:
 
 ```
 rm *.yml
 cbd generate
 ```
 
-This command applies the following steps:
+This step creates the following configurations:
 
-- creates the **docker-compose.yml** file that describes the configuration of all the Docker containers needed for the Cloudbreak deployment.
-- creates the **uaa.yml** file that holds the configuration of the identity server used to authenticate users to Cloudbreak.
+- Creates the **docker-compose.yml** file that describes the configuration of all the Docker containers needed for the Cloudbreak deployment.
+- Creates the **uaa.yml** file that holds the configuration of the identity server used to authenticate users to Cloudbreak.
 
 ## Start Cloudbreak
 
-To start the Cloudbreak application use the following command.
-This will start all the Docker containers and initialize the application. It will take a few minutes until all the services start.
+To start the Cloudbreak application use the following command:
 
 ```
 cbd pull
 cbd start
 ```
 
->At the very first time it will take for a while, because of need to download all the necessary docker images.
+This will start all the Docker containers and initialize the application. It will take a few minutes for all the services to start.
 
-After the `cbd start` command finishes you can check the logs of the Cloudbreak application with this command:
+>The first time you start the Coudbreak app, the process will take longer than usual due to the download of all the necessary docker images.
+
+After the `cbd start` command finishes, use this command to check the logs of the Cloudbreak application:
 
 ```
 cbd logs cloudbreak
@@ -134,23 +136,23 @@ cbd logs cloudbreak
 
 ## Troubleshooting
 
-If you are faced with permission or connection issue, first you can try to disable **SELinux**:
+If you are faced with permission or connection issues, try to disable **SELinux**:
 
-  1. Setting the `SELINUX=disabled` in `/etc/selinux/config`
+  1. Set the `SELINUX=disabled` in `/etc/selinux/config`
   2. Reboot the machine
-  3. Ensure the SELinux is not turned on after
+  3. Ensure the SELinux is not turned on afterwards.
 
 ```
 setenforce 0 && sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
 ```
+
 ## Next steps
 
-Now you have all the pre-requisites for Cloudbreak. You can follow with the **cloud provider specific** configuration. Select one of the provider in the header
-then follow the steps from the **Setup** section:
+After you have met all the pre-requisites for Cloudbreak, perform the **cloud provider specific** configuration. Select your cloud  provider and follow the steps in the **Setup** section:
 
  * [AWS](aws.md#aws-setup)
  * [Azure](azure.md)
  * [GCP](gcp.md#google-setup)
  * [OpenStack](openstack.md#openstack-setup)
 
-> **Note!** AWS and OpenStack Setup sections contain additional and provider specific `Profile` settings.
+> **Note:** AWS and OpenStack Setup sections contain additional and provider-specific `Profile` settings.
