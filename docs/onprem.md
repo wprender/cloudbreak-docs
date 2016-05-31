@@ -1,6 +1,6 @@
 # Install Cloudbreak Deployer
 
-Follow these steps to install Cloudbreak Deployer in your operating system. 
+Follow these steps to install Cloudbreak Deployer on your operating system. 
 
 >The instructions below are for CentOS. If you are using a differnt OS, perform equivalent steps. 
 
