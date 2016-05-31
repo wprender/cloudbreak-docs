@@ -100,12 +100,6 @@
     </url>
         
     <url>
-     <loc>http://sequenceiq.com/cloudbreak-docs/recipes/</loc>
-     <lastmod>2016-05-31</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
      <loc>http://sequenceiq.com/cloudbreak-docs/blueprints/</loc>
      <lastmod>2016-05-31</lastmod>
      <changefreq>daily</changefreq>
