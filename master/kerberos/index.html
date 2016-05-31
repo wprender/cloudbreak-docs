@@ -353,23 +353,20 @@ hadoop jar $JAR_JOBCLIENT mrbench -baseDir /user/ambari-qa/smallJobsBenchmark -n
 <ul>
 <li>Log in via SSH to the Cloudbreak gateway node (IP address is the same as the Ambari UI)</li>
 </ul>
-<pre><code>sudo docker exec -i kerberos bash
-kadmin -p [admin_user]/[admin_user]@NODE.DC1.CONSUL (type admin password)
+<pre><code>kadmin -p [admin_user]/[admin_user]@NODE.DC1.CONSUL (type admin password)
 addprinc custom-user (type user password twice)
 </code></pre>
 
 <ul>
 <li>Log in via SSH to all other nodes</li>
 </ul>
-<pre><code>sudo docker exec -i $(docker ps | grep ambari-warmup | cut -d&quot; &quot; -f 1) bash
-useradd custom-user
+<pre><code>useradd custom-user
 </code></pre>
 
 <ul>
 <li>Log in via SSH to one of the nodes</li>
 </ul>
-<pre><code>sudo docker exec -i $(docker ps | grep ambari-warmup | cut -d&quot; &quot; -f 1) bash
-su custom-user
+<pre><code>su custom-user
 kinit -p custom-user (type user password)
 hdfs dfs -mkdir input
 hdfs dfs -put /tmp/wait-for-host-number.sh input

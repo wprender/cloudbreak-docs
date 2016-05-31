@@ -535,15 +535,9 @@ ambari-qa:*:10000:10000:ambari-qa:/home/ambari-qa:/bin/bash
 </code></pre>
 
 <ul>
-<li>Jump into Ambari agent Docker container</li>
-</ul>
-<pre><code>sudo docker exec -it $(docker ps --format=&quot;{{.Names}}&quot; | grep ambari-agent) bash
-</code></pre>
-
-<ul>
 <li>Logs are found at <code>/var/log/sssd</code> directory in file per service format</li>
 </ul>
-<pre><code>[root@docker-ambari /]# ls /var/log/sssd
+<pre><code>[root@ambari /]# ls /var/log/sssd
 ldap_child.log  sssd_LDAP.log  sssd.log  sssd_nss.log  sssd_pam.log
 </code></pre>
                     <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/sssd.md" ><i class="fa fa-github"></i> Edit on GitHub </a>

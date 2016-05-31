@@ -297,14 +297,13 @@
                     
 
 <h1 id="introduction">Introduction</h1>
-<p>Cloudbreak simplifies the provisioning, management and monitoring of on-demand HDP clusters in virtual and cloud environments. Cloudbreak leverages the cloud infrastructure platform resources to create host instances, uses Docker technology to deploy the requisite containers cloud-agnostically, and uses Apache Ambari (via Ambari Blueprints) to install and manage the HDP cluster.</p>
-<p>Use the Cloudbreak Web UI or CLI to launch HDP clusters on public cloud infrastructure platforms such as Microsoft Azure, Amazon Web Services (AWS), and Google Cloud Platform (GCP) and the private cloud infrastructure platform OpenStack.</p>
+<p>Cloudbreak simplifies the provisioning, management and monitoring of on-demand HDP clusters in virtual and cloud environments. Cloudbreak leverages the cloud infrastructure platform resources to create host instances and uses Apache Ambari (via Ambari Blueprints) to install and manage the HDP cluster.</p>
+<p>Use the Cloudbreak Web UI, REST API or CLI to launch HDP clusters on public cloud infrastructure platforms such as Microsoft Azure, Amazon Web Services (AWS), and Google Cloud Platform (GCP) and the private cloud infrastructure platform OpenStack.</p>
 <p>Cloudbreak has two main components: the <strong>Cloudbreak Application</strong> and the <strong>Cloudbreak Deployer</strong>.</p>
 <p>The <strong>Cloudbreak Application</strong> is made up from microservices (Cloudbreak, Uluwatu, Sultans, ...). The <strong>Cloudbreak Deployer</strong> helps you to deploy the Cloudbreak application automatically with Docker support. Once the Cloudbreak Application is deployed, you can use it to provision HDP clusters in different cloud environments.</p>
 <blockquote>
-<p>For an architectural overview of the Cloudbreak Deployer, the Cloudbreak Application, Apache Ambari, Docker and the rest of the Cloudbreak components, please follow this <a href="architecture/">link</a>.</p>
+<p>For an architectural overview of the Cloudbreak Deployer, the Cloudbreak Application, Apache Ambari and the rest of the Cloudbreak components, please follow this <a href="architecture/">link</a>.</p>
 </blockquote>
-<p>here this is wrong</p>
 <h2 id="installation">Installation</h2>
 <p>The high-level process to be able to use Cloudbreak to install an HDP cluster includes the following steps:</p>
 <ol>
@@ -329,7 +328,7 @@ desired HDP clusters as possible. For example, if you plan to launch clusters on
 <div id="pre-built-images"></div>
 
 <h3 id="using-the-pre-built-cloud-images-install-option-2">Using the Pre-Built Cloud Images (Install Option #2)</h3>
-<p>We have pre-built cloud images with Cloudbreak Deployer pre-installed. In the below table you can find the 
+<p>We have pre-built cloud images with Cloudbreak Deployer pre-installed. In the below table you can find the
 provider specific guides to configure and launch <strong>cbd (Cloudbreak Deployer)</strong> then clusters.</p>
 <blockquote>
 <p><strong>Minimum and Recommended VM requirements:</strong> 4GB RAM, 10GB disk, 2 cores recommended</p>
@@ -361,7 +360,7 @@ provider specific guides to configure and launch <strong>cbd (Cloudbreak Deploye
 </tbody>
 </table>
 <h2 id="learn-more">Learn More</h2>
-<p>For more information on Cloudbreak, Docker, Ambari and Ambari Blueprints, see:</p>
+<p>For more information on Cloudbreak, Ambari and Ambari Blueprints, see:</p>
 <table>
 <thead>
 <tr>
@@ -385,10 +384,6 @@ provider specific guides to configure and launch <strong>cbd (Cloudbreak Deploye
 <tr>
 <td><a href="https://cwiki.apache.org/confluence/display/AMBARI/Blueprints">Ambari Blueprints</a></td>
 <td>Ambari Blueprints are a declarative definition of a Hadoop cluster that Ambari can use to create Hadoop clusters.</td>
-</tr>
-<tr>
-<td><a href="https://www.docker.com/">Docker</a></td>
-<td>Docker is an open platform for developers and system administrators to build, ship, and run distributed applications.</td>
 </tr>
 </tbody>
 </table>
@@ -508,5 +503,5 @@ provider specific guides to configure and launch <strong>cbd (Cloudbreak Deploye
 
 <!--
 MkDocs version : 0.15.3
-Build Date UTC : 2016-05-30 11:06:28.600136
+Build Date UTC : 2016-05-31 14:27:57.026259
 -->
