@@ -7,5 +7,5 @@ This document explains the four steps that need to be followed to create Cloudbr
 
 - connect your AZURE account with Cloudbreak
 - create some template resources on the UI that describe the infrastructure of your clusters
-- create a blueprint that describes the HDP services in your clusters and add some recipes for customization
+- create a blueprint that describes the HDP services in your clusters
 - launch the cluster itself based on these template resources

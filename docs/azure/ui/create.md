@@ -1,17 +1,3 @@
-**Cluster customization**
-
-Sometimes it can be useful to **define some custom scripts so called Recipes in Cloudbreak** that run during cluster
-creation and add some additional functionality.
-
-For example it can be a service you'd like to install but it's not supported by Ambari or some script that
-automatically downloads some data to the necessary nodes.
-The most **notable example is Ranger setup**:
-
-- It has a prerequisite of a running database when Ranger Admin is installing.
-- A PostgreSQL database can be easily started and configured with a recipe before the blueprint installation starts.
-
-To learn more about these and check the Ranger recipe out, take a look at the [Cluster customization](recipes.md).
-
 ## Cluster deployment
 
 After all the cluster resources are configured you can deploy a new HDP cluster.
@@ -49,7 +35,6 @@ be Kerberized. See more about it in the [Kerberos](kerberos.md) section of this 
  - After you've selected a `Blueprint`, you should be able to configure:
     - the templates
     - the number of nodes for all of the host groups in the blueprint
-    - the recipes for nodes
  - You need to select where you want to install the Ambari server to. Only 1 host group can be selected.
    If you want to install the Ambari server to a separate node, you need to extend your blueprint with a new host group
    which contains only 1 service: HDFS_CLIENT and select this host group for the Ambari server. Note: this host group cannot be scaled so

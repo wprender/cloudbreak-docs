@@ -26,8 +26,6 @@
 
 {!docs/blueprint/short_blueprint.md!}
 
-{!docs/recipe/short_recipe.md!}
-
 {!docs/aws/ui/create.md!}
 
 {!docs/aws/ui/termination.md!}
@@ -45,8 +43,6 @@
 {!docs/aws/shell/network.md!}
 
 {!docs/shell/blueprint.md!}
-
-{!docs/shell/recipe.md!}
 
 {!docs/shell/metadata.md!}
 

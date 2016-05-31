@@ -16,7 +16,6 @@ On the expanded `account details` you can check your **security scopes**.
 Cloudbreak has distinct security scope for the following resources:
 
  - Blueprints
- - Recipes
  - Templates
  - Credentials
  - Stacks

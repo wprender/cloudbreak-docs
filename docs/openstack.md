@@ -24,8 +24,6 @@
 
 {!docs/blueprint/short_blueprint.md!}
 
-{!docs/recipe/short_recipe.md!}
-
 {!docs/openstack/ui/create.md!}
 
 {!docs/openstack/ui/termination.md!}
@@ -43,8 +41,6 @@
 {!docs/openstack/shell/network.md!}
 
 {!docs/shell/blueprint.md!}
-
-{!docs/shell/recipe.md!}
 
 {!docs/shell/metadata.md!}
 
