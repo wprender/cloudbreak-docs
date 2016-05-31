@@ -207,12 +207,9 @@ In Cloudbreak the SSSD service starts in very verbose mode.
 ```
 ssh centos@[ambari-host] -i [cluster-credential]
 ```
-- Jump into Ambari agent Docker container
-```
-sudo docker exec -it $(docker ps --format="{{.Names}}" | grep ambari-agent) bash
-```
+
 - Logs are found at `/var/log/sssd` directory in file per service format
 ```
-[root@docker-ambari /]# ls /var/log/sssd
+[root@ambari /]# ls /var/log/sssd
 ldap_child.log	sssd_LDAP.log  sssd.log  sssd_nss.log  sssd_pam.log
 ```

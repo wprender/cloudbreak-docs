@@ -47,7 +47,6 @@ To create Hadoop users please follow the steps below.
   * Log in via SSH to the Cloudbreak gateway node (IP address is the same as the Ambari UI)
 
 ```
-sudo docker exec -i kerberos bash
 kadmin -p [admin_user]/[admin_user]@NODE.DC1.CONSUL (type admin password)
 addprinc custom-user (type user password twice)
 ```
@@ -55,14 +54,12 @@ addprinc custom-user (type user password twice)
   * Log in via SSH to all other nodes
 
 ```
-sudo docker exec -i $(docker ps | grep ambari-warmup | cut -d" " -f 1) bash
 useradd custom-user
 ```
 
   * Log in via SSH to one of the nodes
 
 ```
-sudo docker exec -i $(docker ps | grep ambari-warmup | cut -d" " -f 1) bash
 su custom-user
 kinit -p custom-user (type user password)
 hdfs dfs -mkdir input

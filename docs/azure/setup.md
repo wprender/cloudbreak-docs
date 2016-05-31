@@ -46,9 +46,7 @@ at:```http://<VM Public IP>:3000/```
 Meanwhile Azure is creating the deployment, here is some information about what happens in the background:
 
   * Start an instance from the official CentOS image
-    * So no custom image copy is needed, which would take about 30
-   minutes
-  * Use [Docker VM Extension](https://github.com/Azure/azure-docker-extension) to install Docker
+  * So no custom image copy is needed, which would take about 30 minutes
   * Use [CustomScript Extension](https://github.com/Azure/azure-linux-extensions/tree/master/CustomScript) to install
 Cloudbreak Deployer (`cbd`)
 

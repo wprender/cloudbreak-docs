@@ -10,7 +10,7 @@ To run the Cloudbreak Deployer and install the Cloudbreak Application, you must 
   * RHEL / CentOS / Oracle Linux 7 (64-bit)
   * Docker 1.9.1
   * Minimum and Recommended VM requirements:
-    * 4GB RAM
+    * 8GB RAM
     * 10GB disk
     * 2 cores
 

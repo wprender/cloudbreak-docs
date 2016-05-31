@@ -1,17 +1,15 @@
 # Introduction
 
-Cloudbreak simplifies the provisioning, management and monitoring of on-demand HDP clusters in virtual and cloud environments. Cloudbreak leverages the cloud infrastructure platform resources to create host instances, uses Docker technology to deploy the requisite containers cloud-agnostically, and uses Apache Ambari (via Ambari Blueprints) to install and manage the HDP cluster.
+Cloudbreak simplifies the provisioning, management and monitoring of on-demand HDP clusters in virtual and cloud environments. Cloudbreak leverages the cloud infrastructure platform resources to create host instances and uses Apache Ambari (via Ambari Blueprints) to install and manage the HDP cluster.
 
-Use the Cloudbreak Web UI or CLI to launch HDP clusters on public cloud infrastructure platforms such as Microsoft Azure, Amazon Web Services (AWS), and Google Cloud Platform (GCP) and the private cloud infrastructure platform OpenStack.
+Use the Cloudbreak Web UI, REST API or CLI to launch HDP clusters on public cloud infrastructure platforms such as Microsoft Azure, Amazon Web Services (AWS), and Google Cloud Platform (GCP) and the private cloud infrastructure platform OpenStack.
 
 Cloudbreak has two main components: the **Cloudbreak Application** and the **Cloudbreak Deployer**.
 
 The **Cloudbreak Application** is made up from microservices (Cloudbreak, Uluwatu, Sultans, ...). The **Cloudbreak Deployer** helps you to deploy the Cloudbreak application automatically with Docker support. Once the Cloudbreak Application is deployed, you can use it to provision HDP clusters in different cloud environments.
 
-> For an architectural overview of the Cloudbreak Deployer, the Cloudbreak Application, Apache Ambari, Docker and the rest of the Cloudbreak components, please follow this [link](architecture.md).
+> For an architectural overview of the Cloudbreak Deployer, the Cloudbreak Application, Apache Ambari and the rest of the Cloudbreak components, please follow this [link](architecture.md).
 
-
-here this is wrong
 ## Installation
 
 The high-level process to be able to use Cloudbreak to install an HDP cluster includes the following steps:
@@ -38,7 +36,7 @@ Follow the instructions for [installing the Cloudbreak Deployer](onprem.md). Alt
 <div id="pre-built-images"></div>
 ### Using the Pre-Built Cloud Images (Install Option #2)
 
-We have pre-built cloud images with Cloudbreak Deployer pre-installed. In the below table you can find the 
+We have pre-built cloud images with Cloudbreak Deployer pre-installed. In the below table you can find the
 provider specific guides to configure and launch **cbd (Cloudbreak Deployer)** then clusters.
 
 > **Minimum and Recommended VM requirements:** 4GB RAM, 10GB disk, 2 cores recommended
@@ -52,7 +50,7 @@ provider specific guides to configure and launch **cbd (Cloudbreak Deployer)** t
 
 ## Learn More
 
-For more information on Cloudbreak, Docker, Ambari and Ambari Blueprints, see:
+For more information on Cloudbreak, Ambari and Ambari Blueprints, see:
 
 | Resource | Description |
 |---|---|
@@ -60,4 +58,3 @@ For more information on Cloudbreak, Docker, Ambari and Ambari Blueprints, see:
 |[Cloudbreak Forums](http://hortonworks.com/hadoop/cloudbreak/#forums) | Get connected with the community in the Cloudbreak Forums. |
 |[Apache Ambari Project](http://hortonworks.com/hadoop/ambari/) | Apache Ambari is an operational platform for provisioning, managing, and monitoring Apache Hadoop clusters. Ambari exposes a robust set of REST APIs and a rich Web interface for cluster management. |
 |[Ambari Blueprints](https://cwiki.apache.org/confluence/display/AMBARI/Blueprints)| Ambari Blueprints are a declarative definition of a Hadoop cluster that Ambari can use to create Hadoop clusters. |
-|[Docker](https://www.docker.com/) | Docker is an open platform for developers and system administrators to build, ship, and run distributed applications. |
