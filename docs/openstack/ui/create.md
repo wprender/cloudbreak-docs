@@ -81,5 +81,3 @@ configurations gathered by the response of the stack advisor.
 * `NEVER_APPLY`               Configuration recommendations are ignored with this option.
 * `ONLY_STACK_DEFAULTS_APPLY` Applies only on the default configurations for all included services.
 * `ALWAYS_APPLY`              Applies on all configuration properties.
-
-`Start LDAP and configure SSSD` Enables the [System Security Services Daemon](sssd.md) configuration.
