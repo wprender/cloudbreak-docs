@@ -10,13 +10,13 @@ group. This may change in a later release.
 
 You can also use the two pre-defined security groups in Cloudbreak.
 
-`only-ssh-and-ssl:` all ports are locked down except for SSH and gateway HTTPS (you can't access Hadoop services 
+`only-ssh-and-ssl:` all ports are locked down except for SSH and the selected Ambari Server HTTPS (you can't access Hadoop services 
 outside of the virtual network):
 
 * SSH (22)
 * HTTPS (443)
 
-`all-services-port:` all Hadoop services and SSH, gateway HTTPS are accessible by default:
+`all-services-port:` all Hadoop services, SSH and HTTPS are accessible by default:
 
 * SSH (22)
 * HTTPS (443)

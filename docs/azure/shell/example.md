@@ -11,7 +11,6 @@ credential select --name myazurecredential
 template create --AZURE --name azuretemplate --description azure-template --instanceType Standard_D3 --volumeSize 100 
 --volumeCount 2
 blueprint select --name hdp-small-default
-instancegroup configure --instanceGroup cbgateway --nodecount 1 --templateName azuretemplate
 instancegroup configure --instanceGroup host_group_master_1 --nodecount 1 --templateName azuretemplate
 instancegroup configure --instanceGroup host_group_master_2 --nodecount 1 --templateName azuretemplate
 instancegroup configure --instanceGroup host_group_master_3 --nodecount 1 --templateName azuretemplate

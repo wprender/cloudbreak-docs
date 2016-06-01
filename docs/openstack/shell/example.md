@@ -10,7 +10,6 @@ credential create --OPENSTACK --name my-os-credential --description "credentail 
 credential select --name my-os-credential
 template create --OPENSTACK --name ostemplate --description openstack-template --instanceType m1.large --volumeSize 100 --volumeCount 2
 blueprint select --name hdp-small-default
-instancegroup configure --instanceGroup cbgateway --nodecount 1 --templateName ostemplate
 instancegroup configure --instanceGroup host_group_master_1 --nodecount 1 --templateName ostemplate
 instancegroup configure --instanceGroup host_group_master_2 --nodecount 1 --templateName ostemplate
 instancegroup configure --instanceGroup host_group_master_3 --nodecount 1 --templateName ostemplate

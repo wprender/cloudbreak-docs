@@ -10,7 +10,6 @@ credential select --name my-aws-credential
 template create --AWS --name awstemplate --description aws-template --instanceType m4.xlarge --volumeSize 100 
 --volumeCount 2
 blueprint select --name hdp-small-default
-instancegroup configure --instanceGroup cbgateway --nodecount 1 --templateName awstemplate
 instancegroup configure --instanceGroup host_group_master_1 --nodecount 1 --templateName awstemplate
 instancegroup configure --instanceGroup host_group_master_2 --nodecount 1 --templateName awstemplate
 instancegroup configure --instanceGroup host_group_master_3 --nodecount 1 --templateName awstemplate

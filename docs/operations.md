@@ -87,11 +87,9 @@ Inside the container everything works the same way as expected. In order to do s
 
 The disks that are attached to the instances are automatically mounted to `/hadoopfs/fs1`, `/hadoopfs/fs2`, ... `/hadoopfs/fsN` respectively.
 
-## Cloudbreak gateway node
+## Selected Ambari Server node
 
-With every Cloudbreak cluster installation there is a special node called *cbgateway* started that won't run an ambari-agent container so it won't run HDP services either.
-It can be seen on the Cloudbreak UI among the hostgroups when creating a cluster, but its node count cannot be changed from 1 and it shouldn't be there in the Ambari blueprint.
-It is by design because this instance has some special tasks:
+This instance has some special tasks:
 
 - it runs the Ambari server and its database
 - it runs an nginx proxy that is used by the Cloudbreak API to communicate with the cluster securely
@@ -109,4 +107,4 @@ You can check the Ambari logs on the host instance under the ``/hadoopfs/fs1/log
 
 **Ambari database**
 
-Ambari's database runs on the `cbgateway`. To access it SSH to the `gateway` node and run the following command:
+To access Ambari's database SSH to the selected node and run the following command:
