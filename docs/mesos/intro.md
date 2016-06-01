@@ -68,4 +68,4 @@ IP-per-task means that every task of an app (all the containers) deployed throug
 
 ####5. Recipes are not supported
 
-[Recipes](recipes.md) are script extensions to an HDP cluster installation supported by Cloudbreak, but it is not supported with the Mesos integration because of the lack of a Consul deployment as this feature is heavily dependent on Consul's HTTP API.
+Recipes are script extensions to an HDP cluster installation supported by Cloudbreak, but it is not supported with the Mesos integration because of the lack of a Consul deployment as this feature is heavily dependent on Consul's HTTP API.

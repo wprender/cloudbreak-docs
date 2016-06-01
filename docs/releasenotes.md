@@ -21,5 +21,4 @@ This release includes the following Technical Preview features and improvements:
 |----|----|
 | Mesos | **Technical Preview** Support for Mesos cloud provider. |
 | Kerberos | **Technical Preview** Support for enabling Kerberos on the HDP clusters deployed by Cloudbreak. See [Kerberos](kerberos.md) for more information. |
-| SSSD | **Technical Preview** Support for configuring System Security Services Daemon (SSSD) to help with cluster user management. See [SSSD](sssd.md) for more information. |
 | Platforms | **Technical Preview** Support for defining Platforms to relate different configurations together. See [Platforms](topologies.md) for more information. |
