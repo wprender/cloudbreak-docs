@@ -5,10 +5,6 @@ After all the cluster resources are configured you can deploy a new HDP cluster.
 Here is a **basic flow for cluster creation on Cloudbreak Web UI**:
 
  - Start by selecting a previously created GCP credential in the header.
-
-![](/images/ui-credentials_v2.png)
-<sub>*Full size [here](/images/ui-credentials_v2.png).*</sub>
-
  - Open `create cluster`
 
 `Configure Cluster` tab
@@ -83,5 +79,3 @@ configurations gathered by the response of the stack advisor.
 * `NEVER_APPLY`               Configuration recommendations are ignored with this option.
 * `ONLY_STACK_DEFAULTS_APPLY` Applies only on the default configurations for all included services.
 * `ALWAYS_APPLY`              Applies on all configuration properties.
-
-`Start LDAP and configure SSSD` Enables the [System Security Services Daemon](sssd.md) configuration.
