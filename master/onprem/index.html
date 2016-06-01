@@ -295,8 +295,10 @@
                     
 
 <h1 id="install-cloudbreak-deployer">Install Cloudbreak Deployer</h1>
-<p>To install Cloudbreak Deployer on your selected environment you have to follow the steps below. The instruction
-describe a CentOS based installation.</p>
+<p>Follow these steps to install Cloudbreak Deployer on your operating system. </p>
+<blockquote>
+<p>The instructions below are for CentOS. If you are using a differnt OS, perform equivalent steps. </p>
+</blockquote>
 <h2 id="minimum-and-recommended-system-requirements">Minimum and Recommended System Requirements</h2>
 <p>To run the Cloudbreak Deployer and install the Cloudbreak Application, you must meet the following requirements:</p>
 <ul>
@@ -313,7 +315,7 @@ describe a CentOS based installation.</p>
 <p>You can install Cloudbreak on <strong>Mac OS X for evaluation purposes only</strong>. This operating system is not supported
 for a production deployment of Cloudbreak.</p>
 </blockquote>
-<p>Make sure you opened the following ports:</p>
+<p>Make sure that you opened the following ports:</p>
 <ul>
 <li>SSH (22)</li>
 <li>Cloudbreak API (8080)</li>
@@ -321,19 +323,19 @@ for a production deployment of Cloudbreak.</p>
 <li>Cloudbreak GUI (3000)</li>
 <li>User authentication (3001)</li>
 </ul>
-<p>Every command shall be executed as <strong>root</strong>. In order to get root privileges execute:</p>
+<p>Execute every command as <strong>root</strong>. In order to get root privileges execute:</p>
 <pre><code>sudo -i
 </code></pre>
 
-<p>Ensure that your system is up-to date and reboot if necessary (e.g. there was a kernel update)  :</p>
+<p>Ensure that your system is up-to-date and reboot it if necessary (for example, if there was a kernel update):</p>
 <pre><code>yum -y update
 </code></pre>
 
-<p>You need to install iptables-services, otherwise the 'iptables save' command will not be available:</p>
+<p>Install iptables-services. Without iptables-services installed the 'iptables save' command will not be available:</p>
 <pre><code>yum -y install iptables-services net-tools
 </code></pre>
 
-<p>Please configure permissive iptables on your machine:</p>
+<p>Configure permissive iptables on your machine:</p>
 <pre><code>iptables --flush INPUT &amp;&amp; \
 iptables --flush FORWARD &amp;&amp; \
 service iptables save
@@ -350,52 +352,50 @@ gpgkey=https://yum.dockerproject.org/gpg
 EOF
 </code></pre>
 
-<p>Then you are able to install the Docker service:</p>
+<p>Next, install the Docker service:</p>
 <pre><code>yum install -y docker-engine-1.9.1 docker-engine-selinux-1.9.1
 systemctl start docker
 systemctl enable docker
 </code></pre>
 
 <h2 id="install-cloudbreak-deployer_1">Install Cloudbreak Deployer</h2>
-<p>Install the Cloudbreak Deployer and unzip the platform specific single binary to your PATH. The one-liner way is:</p>
+<p>Install the Cloudbreak Deployer and unzip the platform-specific single binary to your PATH. A quick way to do this is:</p>
 <pre><code>yum -y install unzip tar
 curl -Ls s3.amazonaws.com/public-repo-1.hortonworks.com/HDP/cloudbreak/cloudbreak-deployer_1.2.2_$(uname)_x86_64.tgz | sudo tar -xz -C /bin cbd
 cbd --version
 </code></pre>
 
-<p>Once the Cloudbreak Deployer is installed, you can start to setup the Cloudbreak application.</p>
+<p>Once the Cloudbreak Deployer is installed, you can start to set up the Cloudbreak application.</p>
 <h2 id="initialize-your-profile">Initialize your Profile</h2>
-<p>First initialize <code>cbd</code> by creating a <code>Profile</code> file:</p>
+<p>First initialize <code>cbd</code>:</p>
 <pre><code>mkdir cloudbreak-deployment
 cd cloudbreak-deployment
 cbd init
 </code></pre>
 
-<p>It will create a <code>Profile</code> file in the current directory. Please edit the file - the only required
-configuration is the <code>PUBLIC_IP</code>. This IP will be used to access the Cloudbreak UI
-(called Uluwatu). In some cases the <code>cbd</code> tool tries to guess it, if can't than will give a hint.</p>
+<p>Cloudbreak Deployer creates a file called Profile in the current directory. The Profile file includes your PUBLIC_IP. Edit PUBLIC_IP to provide an IP address that will be used to access the Cloudbreak UI. In some cases, cbd tries to guess the IP address; if can't. this will give a hint.</p>
 <h2 id="generate-your-profile">Generate your Profile</h2>
-<p>You are done with the configuration of Cloudbreak Deployer. The last thing you have to do is to regenerate the configurations in order to take effect.</p>
+<p>You are done with the configuration of Cloudbreak Deployer. The last thing you have to do is to generate the configurations by executing:</p>
 <pre><code>rm *.yml
 cbd generate
 </code></pre>
 
-<p>This command applies the following steps:</p>
+<p>This step creates the following configurations:</p>
 <ul>
-<li>creates the <strong>docker-compose.yml</strong> file that describes the configuration of all the Docker containers needed for the Cloudbreak deployment.</li>
-<li>creates the <strong>uaa.yml</strong> file that holds the configuration of the identity server used to authenticate users to Cloudbreak.</li>
+<li>Creates the <strong>docker-compose.yml</strong> file that describes the configuration of all the Docker containers needed for the Cloudbreak deployment.</li>
+<li>Creates the <strong>uaa.yml</strong> file that holds the configuration of the identity server used to authenticate users to Cloudbreak.</li>
 </ul>
 <h2 id="start-cloudbreak">Start Cloudbreak</h2>
-<p>To start the Cloudbreak application use the following command.
-This will start all the Docker containers and initialize the application. It will take a few minutes until all the services start.</p>
+<p>To start the Cloudbreak application use the following command:</p>
 <pre><code>cbd pull
 cbd start
 </code></pre>
 
+<p>This will start all the Docker containers and initialize the application. It will take a few minutes for all the services to start.</p>
 <blockquote>
-<p>At the very first time it will take for a while, because of need to download all the necessary docker images.</p>
+<p>The first time you start the Coudbreak app, the process will take longer than usual due to the download of all the necessary docker images.</p>
 </blockquote>
-<p>After the <code>cbd start</code> command finishes you can check the logs of the Cloudbreak application with this command:</p>
+<p>After the <code>cbd start</code> command finishes, use this command to check the logs of the Cloudbreak application:</p>
 <pre><code>cbd logs cloudbreak
 </code></pre>
 
@@ -403,18 +403,17 @@ cbd start
 <p>Cloudbreak should start within a minute - you should see a line like this: <code>Started CloudbreakApplication in 36.823 seconds</code></p>
 </blockquote>
 <h2 id="troubleshooting">Troubleshooting</h2>
-<p>If you are faced with permission or connection issue, first you can try to disable <strong>SELinux</strong>:</p>
+<p>If you are faced with permission or connection issues, try to disable <strong>SELinux</strong>:</p>
 <ol>
-<li>Setting the <code>SELINUX=disabled</code> in <code>/etc/selinux/config</code></li>
+<li>Set the <code>SELINUX=disabled</code> in <code>/etc/selinux/config</code></li>
 <li>Reboot the machine</li>
-<li>Ensure the SELinux is not turned on after</li>
+<li>Ensure the SELinux is not turned on afterwards.</li>
 </ol>
 <pre><code>setenforce 0 &amp;&amp; sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
 </code></pre>
 
 <h2 id="next-steps">Next steps</h2>
-<p>Now you have all the pre-requisites for Cloudbreak. You can follow with the <strong>cloud provider specific</strong> configuration. Select one of the provider in the header
-then follow the steps from the <strong>Setup</strong> section:</p>
+<p>After you have met all the pre-requisites for Cloudbreak, perform the <strong>cloud provider specific</strong> configuration. Select your cloud  provider and follow the steps in the <strong>Setup</strong> section:</p>
 <ul>
 <li><a href="../aws/#aws-setup">AWS</a></li>
 <li><a href="../azure/">Azure</a></li>
@@ -422,7 +421,7 @@ then follow the steps from the <strong>Setup</strong> section:</p>
 <li><a href="../openstack/#openstack-setup">OpenStack</a></li>
 </ul>
 <blockquote>
-<p><strong>Note!</strong> AWS and OpenStack Setup sections contain additional and provider specific <code>Profile</code> settings.</p>
+<p><strong>Note:</strong> AWS and OpenStack Setup sections contain additional and provider-specific <code>Profile</code> settings.</p>
 </blockquote>
                     <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/onprem.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
                 </div>
