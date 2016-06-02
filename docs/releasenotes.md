@@ -1,6 +1,6 @@
 # Release Notes
 
-The Release Notes summarize and describe changes released in Cloudbreak.
+The Release Notes document describes new features and fixes incorporated in this version of Cloudbreak.
 
 ## Fixes
 
@@ -8,10 +8,10 @@ This release includes the following fixes and improvements:
 
 | Feature | Description |
 |----|----|
-| Ability to create cluster without public IP | We are supporting to create cluster on Aws without public IPs. (Deploying cluster into a private Subnet) |
-| UI pageload fix | Sometimes the UI load was hanging. |
-| Ability to use Cloudbreak with instance profile | THis optional is available if you want to run CB on a separate management host and it can only assume an IAM role, due to security reasons Aws keys will be rotated periodically but can be fetched or renewed from instance metadata. |
-| Lazy format fix on Azure | Azure format was extremely slow when more than 16 disks are attached. |
+| Creating a cluster without public IP | We now support creating clusters on AWS without public IPs (Deploying a cluster into a private subnet). |
+| UI pageload | We fixed the issue with the hanging UI load. |
+| Using Cloudbreak with instance profile | This option is now available if you want to run Cloudbreak on a separate management host (It can only assume an IAM role). Due to security reasons AWS keys are rotated periodically, but they can be fetched or renewed from instance metadata. |
+| Lazy format on Azure | We fixed the issue causing Azure format to be extremely slow when more than 16 disks were attached. |
 
 ## Technical Preview
 
