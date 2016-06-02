@@ -1,26 +1,26 @@
-**Cloudbreak Deployer Highlights**
+Before setting up Cloudbreak Deployer, you should know that:
 
   * The default SSH username for the EC2 instances is `cloudbreak`.
-  * Cloudbreak Deployer location is `/var/lib/cloudbreak-deployment` on the launched EC2 instance. This is the
-  `cbd` root folder there.
-  * All `cbd` actions must be executed from the `cbd` root folder as `cloudbreak` user.
+  * Cloudbreak Deployer location on your EC2 instance is `/var/lib/cloudbreak-deployment`. This is the
+  `cbd` root folder.
+  * You must execute all `cbd` actions from the `cbd` root folder as a `cloudbreak` user.
 
-## Setup Cloudbreak Deployer
+## Set up Cloudbreak Deployer
 
-You should already have the Cloudbreak Deployer either by [using the AWS Cloud Images](aws.md) or by [installing the
+You should have already installed the Cloudbreak Deployer either [using the AWS Cloud Images](aws.md) or by [installing the
 Cloudbreak Deployer](onprem.md) manually on your own VM.
 
-If you have your own installed VM, you should check the [Initialize your Profile](aws.md#initialize-your-profile)
+If you used your own VM, check the [Initialize your Profile](aws.md#initialize-your-profile)
 section here before starting the provisioning.
 
 You can [connect to the previously created `cbd` VM](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstances.html).
 
-To open the `cloudbreak-deployment` directory:
+To open the `cloudbreak-deployment` directory, run:
 
 ```
 cd /var/lib/cloudbreak-deployment/
 ```
-This is the directory of the configuration files and the supporting binaries for Cloudbreak Deployer.
+This directory contains configuration files and the supporting binaries for Cloudbreak Deployer.
 
 ### Initialize your Profile
 
@@ -29,70 +29,70 @@ First initialize `cbd` by creating a `Profile` file:
 ```
 cbd init
 ```
-It will create a `Profile` file in the current directory. Please open the `Profile` file then check the `PUBLIC_IP`.
-This is mandatory, because of to can access the Cloudbreak UI (called Uluwatu). In some cases the `cbd` tool tries to
-guess it. If `cbd` cannot get the IP address during the initialization, please set the appropriate value.
+This will create a `Profile` file in the current directory. Open the `Profile` file and check the `PUBLIC_IP`. Cloudbreak UI uses the `PUBLIC_IP` to access the Cloudbreak UI. In some cases, the `cbd` tool tries to guess it. If `cbd` did not get the IP address during the initialization, set the appropriate value.
 
-### AWS specific configuration
+### Perform AWS-Specific Configurations
 
 **AWS Account Keys**
 
-There are 2 ways to create AWS credentials in Cloudbreak.
+There are two ways to create AWS credentials in Cloudbreak:
 
-* Key-based: It requires your AWS access and secret key and Cloudbreak will use this key to launch the resources. This key needs to be provided when you create your credential in Cloudbreak either with Cloudbreak UI or Cloudbreak CLI.
-* Role-based: It requires a valid IAM User role and Cloudbreak will assume this role to get a temporary access and secret key. For this action you need to set your AWS key in the `Profile` file.
-We suggest to use the keys of a valid **IAM User** here.
+* **Key-based:** This requires your AWS access key and secret key pair. Cloudbreak will use these keys to launch the resources. Provide the keys when you create your credentials in Cloudbreak either with Cloudbreak UI or Cloudbreak CLI.
+* **Role-based:** This requires a valid IAM User role (We suggest that you use keys of a valid **IAM User**). Cloudbreak will assume this role to get a temporary access and secret key pair. To set your AWS keys in the `Profile` file, add these lines:
 
-```
-export AWS_ACCESS_KEY_ID=AKIA**************W7SA
-export AWS_SECRET_ACCESS_KEY=RWCT4Cs8******************/*skiOkWD
-```
->If you want to use instance profile then you should not set these variables. Please be sure that the instance profile role can assume roles on AWS if you want to use Cloudbreak with Role ARN's and not with keys.
+  ```
+  export AWS_ACCESS_KEY_ID=AKIA**************W7SA
+  export AWS_SECRET_ACCESS_KEY=RWCT4Cs8******************/*skiOkWD
+  ```
+  
+> If you want to use instance profile, do not set these variables. If you want to use Cloudbreak with Role ARNs instead of keys, make sure that the instance profile role can assume roles on AWS.
 
-In order to differentiate launched instances we gice you the option to use custom tags on your AWS resources which were deployed by Cloudbreak. The tagging mechanism can be used with the following variables. 
+**Custom Tags**
 
-Please set this variable if you want just one custom tag on your Cloudformation resources
+In order to differentiate launched instances, we give you the option to use custom tags on your AWS resources deployed by Cloudbreak. You can use the tagging mechanism with the following variables. 
+
+If you want just one custom tag on your Cloudformation resources, set this variable :
 
 ```
 export CB_AWS_DEFAULT_CF_TAG=whatever
 ```
 Then the name of the tag will be `CloudbreakId` and the value will be `whatever`.
 
-If you want some more specific tagging then use this variable
+If you need more specific tagging, set this variable:
 
 ```
 export CB_AWS_CUSTOM_CF_TAGS=myveryspecifictag:veryspecific
 ```
-Then the name of the tag will be `myveryspecifictag` and the value will be `veryspecific`. You can specify a list of tags here with a comma separated list for example: `tag1:value1,tag2:value2,tag3:value3`
+Then the name of the tag will be `myveryspecifictag` and the value will be `veryspecific`. You can specify a list of tags here with a comma separated list; for example: `tag1:value1,tag2:value2,tag3:value3`.
 
 ## Start Cloudbreak Deployer
 
-To start the Cloudbreak application use the following command.
-This will start all the Docker containers and initialize the application.
+To start the Cloudbreak application use the following command:
 
 ```
 cbd start
 ```
+This will start all the Docker containers and initialize the application.
 
->At the very first time it will take for a while, because of need to download all the necessary docker images.
+> The first time you start the Coudbreak app, the process will take longer than usual due to the download of all the necessary docker images.
 
 The `cbd start` command includes the `cbd generate` command which applies the following steps:
 
-- creates the **docker-compose.yml** file that describes the configuration of all the Docker containers needed for the Cloudbreak deployment.
-- creates the **uaa.yml** file that holds the configuration of the identity server which is used to authenticate users to Cloudbreak.
+* Creates the **docker-compose.yml** file that describes the configuration of all the Docker containers needed for the Cloudbreak deployment.
+* Creates the **uaa.yml** file that holds the configuration of the identity server used to authenticate users to Cloudbreak.
 
-## Validate the started Cloudbreak Deployer
+## Validate that Cloudbreak Deployer Has Started
 
-After the `cbd start` command finishes followings are worthy to check:
+After the `cbd start` command finishes, check the following:
 
-- Pre-installed Cloudbreak Deployer version and health:
-```
+* Pre-installed Cloudbreak Deployer version and health:
+   ```
    cbd doctor
-```
->In case of `cbd update` is needed, please check the related documentation for [Cloudbreak Deployer Update](operations.md#update-cloudbreak-deployer).
+   ```
+ > In case `cbd update` is needed, check documentation for [Cloudbreak Deployer Update](operations.md#update-cloudbreak-deployer).
 
-- Started Cloudbreak Application logs:
-```
+* Cloudbreak Application logs:
+   ```
    cbd logs cloudbreak
-```
->Cloudbreak should start within a minute - you should see a line like this: `Started CloudbreakApplication in 36.823 seconds`
+   ```
+  You should see a message like this in the log: `Started CloudbreakApplication in 36.823 seconds`. Cloudbreak normally takes less than a minute to start.
