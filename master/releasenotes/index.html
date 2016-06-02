@@ -285,7 +285,7 @@
                     
 
 <h1 id="release-notes">Release Notes</h1>
-<p>The Release Notes summarize and describe changes released in Cloudbreak.</p>
+<p>The Release Notes document describes new features and fixes incorporated in this version of Cloudbreak.</p>
 <h2 id="fixes">Fixes</h2>
 <p>This release includes the following fixes and improvements:</p>
 <table>
@@ -297,20 +297,20 @@
 </thead>
 <tbody>
 <tr>
-<td>Ability to create cluster without public IP</td>
-<td>We are supporting to create cluster on Aws without public IPs. (Deploying cluster into a private Subnet)</td>
+<td>Creating a cluster without public IP</td>
+<td>We now support creating clusters on AWS without public IPs (Deploying a cluster into a private subnet).</td>
 </tr>
 <tr>
-<td>UI pageload fix</td>
-<td>Sometimes the UI load was hanging.</td>
+<td>UI pageload</td>
+<td>We fixed the issue with the hanging UI load.</td>
 </tr>
 <tr>
-<td>Ability to use Cloudbreak with instance profile</td>
-<td>THis optional is available if you want to run CB on a separate management host and it can only assume an IAM role, due to security reasons Aws keys will be rotated periodically but can be fetched or renewed from instance metadata.</td>
+<td>Using Cloudbreak with instance profile</td>
+<td>This option is now available if you want to run Cloudbreak on a separate management host (It can only assume an IAM role). Due to security reasons AWS keys are rotated periodically, but they can be fetched or renewed from instance metadata.</td>
 </tr>
 <tr>
-<td>Lazy format fix on Azure</td>
-<td>Azure format was extremely slow when more than 16 disks are attached.</td>
+<td>Lazy format on Azure</td>
+<td>We fixed the issue causing Azure format to be extremely slow when more than 16 disks were attached.</td>
 </tr>
 </tbody>
 </table>
