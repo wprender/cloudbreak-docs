@@ -11,15 +11,15 @@ credential select --name myazurecredential
 template create --AZURE --name azuretemplate --description azure-template --instanceType Standard_D3 --volumeSize 100 
 --volumeCount 2
 blueprint select --name hdp-small-default
-instancegroup configure --instanceGroup host_group_master_1 --nodecount 1 --templateName azuretemplate
-instancegroup configure --instanceGroup host_group_master_2 --nodecount 1 --templateName azuretemplate
-instancegroup configure --instanceGroup host_group_master_3 --nodecount 1 --templateName azuretemplate
-instancegroup configure --instanceGroup host_group_client_1  --nodecount 1 --templateName azuretemplate
-instancegroup configure --instanceGroup host_group_slave_1 --nodecount 3 --templateName azuretemplate
+instancegroup configure --instanceGroup host_group_master_1 --nodecount 1 --templateName azuretemplate --ambariServer true
+instancegroup configure --instanceGroup host_group_master_2 --nodecount 1 --templateName azuretemplate --ambariServer false
+instancegroup configure --instanceGroup host_group_master_3 --nodecount 1 --templateName azuretemplate --ambariServer false
+instancegroup configure --instanceGroup host_group_client_1  --nodecount 1 --templateName azuretemplate --ambariServer false
+instancegroup configure --instanceGroup host_group_slave_1 --nodecount 3 --templateName azuretemplate --ambariServer false
 network select --name default-azure-network
 securitygroup select --name all-services-port
-stack create --name my-first-stack --region "West US"
-cluster create --description "My first cluster"
+stack create --AZURE --name my-first-stack --region "West US" --wait true
+cluster create --description "My first cluster" --wait true
 ```
 
 **Congratulations!** Your cluster should now be up and running on this way as well. To learn more about Cloudbreak and 
