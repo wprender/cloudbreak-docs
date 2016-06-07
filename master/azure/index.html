@@ -339,7 +339,7 @@
 We provide a way to launch Cloudbreak Deployer based on the new <a href="https://github.com/Azure/azure-quickstart-templates">Azure Resource Manager
 Templates</a>.</p>
 <h2 id="deploy-using-the-azure-portal">Deploy using the Azure Portal</h2>
-<p>To get started using the Azure Resource Manager template to install Cloudbreak, it is as simple as clicking here: <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsequenceiq%2Fazure-cbd-quickstart%2F1.2.2%2Fazuredeploy.json">  <img alt="deploy on azure" src="http://azuredeploy.net/deploybutton.png" /> </a></p>
+<p>To get started using the Azure Resource Manager template to install Cloudbreak, it is as simple as clicking here: <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsequenceiq%2Fazure-cbd-quickstart%2F1.2.3%2Fazuredeploy.json">  <img alt="deploy on azure" src="http://azuredeploy.net/deploybutton.png" /> </a></p>
 <blockquote>
 <p><strong><a href="../onprem/#minimum-and-recommended-system-requirements">Minimum and Recommended VM requirements</a>:</strong> 8GB RAM, 10GB disk, 2 cores (The minimum instance type which is fit for cloudbreak is <strong>D2</strong>)</p>
 </blockquote>
@@ -385,7 +385,9 @@ at:<code>http://&lt;VM Public IP&gt;:3000/</code><ul>
 <p>Meanwhile Azure is creating the deployment, here is some information about what happens in the background:</p>
 <ul>
 <li>Start an instance from the official CentOS image</li>
-<li>So no custom image copy is needed, which would take about 30 minutes</li>
+<li>So no custom image copy is needed, which would take about 30
+   minutes</li>
+<li>Use <a href="https://github.com/Azure/azure-docker-extension">Docker VM Extension</a> to install Docker</li>
 <li>Use <a href="https://github.com/Azure/azure-linux-extensions/tree/master/CustomScript">CustomScript Extension</a> to install
 Cloudbreak Deployer (<code>cbd</code>)</li>
 </ul>
@@ -1346,7 +1348,8 @@ provisioning, we have some <a href="../operations/">interesting insights</a> for
                $.getJSON("../providers/gcp.json", function(data) {
                $("#cloudbreak-deployer-gcp-image-details").append('<br>');
                $("#cloudbreak-deployer-gcp-image-details").append('<br>');
-               $("#cloudbreak-deployer-gcp-image-details").append('<pre><code style="font-size: 12pt;color:#333333">' + data.gcp.import_script + '</code></pre>');
+               $("#cloudbreak-deployer-gcp-image-details").append('<pre><code style="font-size: 12pt;color:#333333"> [HACK] gcloud compute images create '
+                   + data.id + ' --source-uri gs://sequenceiqimage/' + data.id + '.tar.gz' + '</code></pre>');
                });
            });
          </script>

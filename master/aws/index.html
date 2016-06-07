@@ -604,8 +604,11 @@ networks</strong> panel.</p>
 <p>You have the following options:</p>
 <ul>
 <li><strong>Create a new VPC and a new subnet</strong>: Every time a cluster is created with this kind of network setup a new VPC and a new subnet with the specified IP range will be created for the instances on AWS.</li>
-<li><strong>Create a new subnet in an existing VPC</strong>:  Use this kind of network setup if you already have a VPC on AWS where you'd like to put the Cloudbreak created cluster but you'd like to have a separate subnet for it.</li>
-<li><strong>Use an existing subnet in an existing VPC</strong>:  Use this kind of network setup if you have an existing VPC with one or more subnets on AWS and you'd like to start the instances of a cluster in one of those subnets. If the subnet not able to assign public IPs to your machines then your vm's will not get public IP's and the whole cluster can reach with VPN connection.</li>
+<li><strong>Create a new subnet in an existing VPC</strong>:  Use this kind of network setup if you already have a VPC on AWS where you'd like to put the Cloudbreak created cluster but you'd like to have a separate subnet for it. This setup is only supported for basic VPCs, where an Internet Gateway is configured and instances can have public IP addresses to access the Internet. If you have a specific VPC setup (VGW, NAT, private subnets, etc..) then only the third option can be used.</li>
+<li><strong>Use an existing subnet in an existing VPC</strong>:  Use this kind of network setup if you have an existing VPC with one or more subnets on AWS and you'd like to start the instances of a cluster in one of those subnets. Use this setup if you have a specific VPC setup: you should first create the subnet(s) where you'd like to install your clusters directly through AWS and provide their IDs here. In this case there are only 2 requirements for the subnets:</li>
+<li>instances in the subnet should be able to reach the Internet to download yum packages (it can be done through a Virtual Gateway, a NAT instance, an Internet Gateway or any other setup)</li>
+<li>the VM where Cloudbreak is deployed must be able to reach the instances in the cluster on port 443. (It’s in the same subnet, or through a router from another subnet)</li>
+<li><strong>NOTE</strong>: instances in the subnet doesn't need to have public IP addresses in this case</li>
 </ul>
 <p>You can configure the <code>Subnet Identifier</code> and the <code>Internet Gateway Identifier</code> (IGW) of your VPC.</p>
 <blockquote>
@@ -618,8 +621,7 @@ templates for multiple subnets <code>10.0.0.0/24</code>, <code>10.0.1.0/24</code
 <blockquote>
 <p><strong>IMPORTANT</strong> Please make sure the define subnet here doesn't overlap with any of your already deployed subnet in
 the VPC, because of the validation only happens after the cluster creation starts.</p>
-<p>In case of existing subnet make sure you have enough room within your network space for the new instances. The
-provided subnet CIDR will be ignored, but a proper CIDR range will be used.</p>
+<p>In case of existing subnet make sure you have enough room within your network space for the new instances.</p>
 </blockquote>
 <p>If <code>Public in account</code> is checked all the users belonging to your account will be able to use this network template
 to create clusters, but cannot delete it.</p>
@@ -1260,7 +1262,8 @@ provisioning, we have some <a href="../operations/">interesting insights</a> for
                $.getJSON("../providers/gcp.json", function(data) {
                $("#cloudbreak-deployer-gcp-image-details").append('<br>');
                $("#cloudbreak-deployer-gcp-image-details").append('<br>');
-               $("#cloudbreak-deployer-gcp-image-details").append('<pre><code style="font-size: 12pt;color:#333333">' + data.gcp.import_script + '</code></pre>');
+               $("#cloudbreak-deployer-gcp-image-details").append('<pre><code style="font-size: 12pt;color:#333333"> [HACK] gcloud compute images create '
+                   + data.id + ' --source-uri gs://sequenceiqimage/' + data.id + '.tar.gz' + '</code></pre>');
                });
            });
          </script>
