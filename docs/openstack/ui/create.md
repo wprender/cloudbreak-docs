@@ -58,7 +58,9 @@ Besides these you can check the progress on the Cloudbreak Web UI itself if you 
 
 **Advanced options**
 
-`Consul server count` the number of Consul servers (add number), by default is 3. It varies with the cluster size.
+`Ambari Username` This user will be used as admin user in Ambari. You can log in using this username on the Ambari UI.
+
+`Ambari Password` The password associated with the Ambari username. This password will be also the default password for all required passwords which are not specified in the blueprint. E.g: hive DB password.
 
 `Connector Variant` Cloudbreak provides two implementation for creating OpenStack cluster
 
