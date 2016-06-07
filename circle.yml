@@ -23,7 +23,6 @@ deployment:
     commands:
       - eval $(docker run -e MASTER=release-1.2.3 sequenceiq/pagebuilder circleci-cmd)
 
-
 general:
   branches:
     ignore:

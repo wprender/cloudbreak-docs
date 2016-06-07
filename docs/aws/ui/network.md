@@ -17,8 +17,11 @@ networks** panel.
 You have the following options:
 
 * **Create a new VPC and a new subnet**: Every time a cluster is created with this kind of network setup a new VPC and a new subnet with the specified IP range will be created for the instances on AWS.
-* **Create a new subnet in an existing VPC**:  Use this kind of network setup if you already have a VPC on AWS where you'd like to put the Cloudbreak created cluster but you'd like to have a separate subnet for it.
-* **Use an existing subnet in an existing VPC**:  Use this kind of network setup if you have an existing VPC with one or more subnets on AWS and you'd like to start the instances of a cluster in one of those subnets. If the subnet not able to assign public IPs to your machines then your vm's will not get public IP's and the whole cluster can reach with VPN connection.
+* **Create a new subnet in an existing VPC**:  Use this kind of network setup if you already have a VPC on AWS where you'd like to put the Cloudbreak created cluster but you'd like to have a separate subnet for it. This setup is only supported for basic VPCs, where an Internet Gateway is configured and instances can have public IP addresses to access the Internet. If you have a specific VPC setup (VGW, NAT, private subnets, etc..) then only the third option can be used.
+* **Use an existing subnet in an existing VPC**:  Use this kind of network setup if you have an existing VPC with one or more subnets on AWS and you'd like to start the instances of a cluster in one of those subnets. Use this setup if you have a specific VPC setup: you should first create the subnet(s) where you'd like to install your clusters directly through AWS and provide their IDs here. In this case there are only 2 requirements for the subnets:
+ - instances in the subnet should be able to reach the Internet to download yum packages (it can be done through a Virtual Gateway, a NAT instance, an Internet Gateway or any other setup)
+ - the VM where Cloudbreak is deployed must be able to reach the instances in the cluster on port 443. (It’s in the same subnet, or through a router from another subnet)
+ - **NOTE**: instances in the subnet doesn't need to have public IP addresses in this case
 
  You can configure the `Subnet Identifier` and the `Internet Gateway Identifier` (IGW) of your VPC.
 
@@ -32,8 +35,7 @@ templates for multiple subnets `10.0.0.0/24`, `10.0.1.0/24`, `10.0.2.0/24` with 
 >**IMPORTANT** Please make sure the define subnet here doesn't overlap with any of your already deployed subnet in
 the VPC, because of the validation only happens after the cluster creation starts.
 
->In case of existing subnet make sure you have enough room within your network space for the new instances. The
-provided subnet CIDR will be ignored, but a proper CIDR range will be used.
+>In case of existing subnet make sure you have enough room within your network space for the new instances.
 
 If `Public in account` is checked all the users belonging to your account will be able to use this network template
 to create clusters, but cannot delete it.
