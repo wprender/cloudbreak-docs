@@ -55,6 +55,10 @@ Besides these you can check the progress on the Cloudbreak Web UI itself if you 
 
 There are some advanced features when deploying a new cluster, these are the following:
 
+`Ambari Username` This user will be used as admin user in Ambari. You can log in using this username on the Ambari UI.
+
+`Ambari Password` The password associated with the Ambari username. This password will be also the default password for all required passwords which are not specified in the blueprint. E.g: hive DB password.
+
 `Availability Zone` You can restrict the instances to a [specific availability zone](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html). It may be useful if you're using
  reserved instances.
 
