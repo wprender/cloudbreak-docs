@@ -721,6 +721,8 @@ Documentation.</p>
 <sub><em>Full size <a href="../gcp/images/gcp-eventhistory.png">here</a>.</em></sub></p>
 <p><strong>Advanced options</strong></p>
 <p>There are some advanced features when deploying a new cluster, these are the following:</p>
+<p><code>Ambari Username</code> This user will be used as admin user in Ambari. You can log in using this username on the Ambari UI.</p>
+<p><code>Ambari Password</code> The password associated with the Ambari username. This password will be also the default password for all required passwords which are not specified in the blueprint. E.g: hive DB password.</p>
 <p><code>Availability Zone</code> You can restrict the instances to a <a href="https://cloud.google.com/compute/docs/zones">specific availability zone</a>. It may be useful if you're using
  reserved instances.</p>
 <p><code>Minimum cluster size</code> The provisioning strategy in case of the cloud provider cannot allocate all the requested nodes.</p>
