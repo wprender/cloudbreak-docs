@@ -703,13 +703,13 @@ public IP address so all the instances in the cluster will belong to the same se
 This may change in a later release.</p>
 <p><em>Default Security Group</em></p>
 <p>You can also use the two pre-defined security groups in Cloudbreak.</p>
-<p><code>only-ssh-and-ssl:</code> all ports are locked down except for SSH and the selected Ambari Server HTTPS (you can't access Hadoop services 
+<p><code>only-ssh-and-ssl:</code> all ports are locked down except for SSH and gateway HTTPS (you can't access Hadoop services 
 outside of the virtual network):</p>
 <ul>
 <li>SSH (22)</li>
 <li>HTTPS (443)</li>
 </ul>
-<p><code>all-services-port:</code> all Hadoop services, SSH and HTTPS are accessible by default:</p>
+<p><code>all-services-port:</code> all Hadoop services and SSH, gateway and HTTPS are accessible by default:</p>
 <ul>
 <li>SSH (22)</li>
 <li>HTTPS (443)</li>
@@ -754,7 +754,7 @@ template to create clusters, but cannot delete it.</p>
 <blockquote>
 <p><strong>NOTE</strong> The security groups are created on Azure only after the cluster provisioning starts with the selected 
 security group template.</p>
-<p><strong>IMPORTANT</strong> If you use and existing virtual network and subnet the selected security group will only be applied to the selected Ambari Server node due to the lack of
+<p><strong>IMPORTANT</strong> If you use and existing virtual network and subnet the selected security group will only be applied to the <code>Cloudbreak gateway node</code> due to the lack of
 capability to attach multiple security groups to an existing subnet. If you'd like to open ports for Hadoop you must do it on your existing security group.</p>
 </blockquote>
 <p><img alt="" src="../images/ui-secgroup_v3.png" />
@@ -1229,19 +1229,20 @@ credential select --name myazurecredential
 template create --AZURE --name azuretemplate --description azure-template --instanceType Standard_D3 --volumeSize 100 
 --volumeCount 2
 blueprint select --name hdp-small-default
-instancegroup configure --instanceGroup host_group_master_1 --nodecount 1 --templateName azuretemplate --ambariServer true
-instancegroup configure --instanceGroup host_group_master_2 --nodecount 1 --templateName azuretemplate --ambariServer false
-instancegroup configure --instanceGroup host_group_master_3 --nodecount 1 --templateName azuretemplate --ambariServer false
-instancegroup configure --instanceGroup host_group_client_1  --nodecount 1 --templateName azuretemplate --ambariServer false
-instancegroup configure --instanceGroup host_group_slave_1 --nodecount 3 --templateName azuretemplate --ambariServer false
+instancegroup configure --instanceGroup cbgateway --nodecount 1 --templateName azuretemplate
+instancegroup configure --instanceGroup host_group_master_1 --nodecount 1 --templateName azuretemplate
+instancegroup configure --instanceGroup host_group_master_2 --nodecount 1 --templateName azuretemplate
+instancegroup configure --instanceGroup host_group_master_3 --nodecount 1 --templateName azuretemplate
+instancegroup configure --instanceGroup host_group_client_1  --nodecount 1 --templateName azuretemplate
+instancegroup configure --instanceGroup host_group_slave_1 --nodecount 3 --templateName azuretemplate
 network select --name default-azure-network
 securitygroup select --name all-services-port
-stack create --AZURE --name my-first-stack --region &quot;West US&quot; --wait true
-cluster create --description &quot;My first cluster&quot; --wait true
+stack create --name my-first-stack --region &quot;West US&quot;
+cluster create --description &quot;My first cluster&quot;
 </code></pre>
 
 <p><strong>Congratulations!</strong> Your cluster should now be up and running on this way as well. To learn more about Cloudbreak and 
-provisioning, we have some <a href="../operations/">interesting insights</a> for you.</p>
+provisioning, we have some <a href="../operations/">interesting insights</a> for you</p>
                     <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/azure.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
                 </div>
             

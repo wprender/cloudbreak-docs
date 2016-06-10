@@ -288,7 +288,7 @@
         
             <li><a href="#data-volumes">Data volumes</a></li>
         
-            <li><a href="#selected-ambari-server-node">Selected Ambari Server node</a></li>
+            <li><a href="#cloudbreak-gateway-node">Cloudbreak gateway node</a></li>
         
     
     </ul>
@@ -372,8 +372,10 @@ It means that after <code>ssh</code> the client services won't be available inst
 Inside the container everything works the same way as expected. In order to do so there are a few options.</p>
 <h2 id="data-volumes">Data volumes</h2>
 <p>The disks that are attached to the instances are automatically mounted to <code>/hadoopfs/fs1</code>, <code>/hadoopfs/fs2</code>, ... <code>/hadoopfs/fsN</code> respectively.</p>
-<h2 id="selected-ambari-server-node">Selected Ambari Server node</h2>
-<p>This instance has some special tasks:</p>
+<h2 id="cloudbreak-gateway-node">Cloudbreak gateway node</h2>
+<p>With every Cloudbreak cluster installation there is a special node called <em>cbgateway</em> started that won't run an ambari-agent container so it won't run HDP services either.
+It can be seen on the Cloudbreak UI among the hostgroups when creating a cluster, but its node count cannot be changed from 1 and it shouldn't be there in the Ambari blueprint.
+It is by design because this instance has some special tasks:</p>
 <ul>
 <li>it runs the Ambari server and its database</li>
 <li>it runs an nginx proxy that is used by the Cloudbreak API to communicate with the cluster securely</li>
@@ -385,7 +387,7 @@ Inside the container everything works the same way as expected. In order to do s
 <p><em>Ambari logs</em></p>
 <p>You can check the Ambari logs on the host instance under the <code>`/hadoopfs/fs1/logs</code> folder as well.</p>
 <p><strong>Ambari database</strong></p>
-<p>To access Ambari's database SSH to the selected node and run the following command:</p>
+<p>Ambari's database runs on the <code>cbgateway</code>. To access it SSH to the <code>gateway</code> node and run the following command:</p>
                     <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/operations.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
                 </div>
             

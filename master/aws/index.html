@@ -626,12 +626,12 @@ public IP address so all the instances in the cluster will belong to the same se
 This may change in a later release.</p>
 <p><em>Default Security Group</em></p>
 <p>You can also use the two pre-defined security groups in Cloudbreak.</p>
-<p><code>only-ssh-and-ssl:</code> all ports are locked down except for SSH and the selected Ambari Server HTTPS (you can't access Hadoop services outside of the VPC):</p>
+<p><code>only-ssh-and-ssl:</code> all ports are locked down except for SSH and gateway HTTPS (you can't access Hadoop services outside of the VPC):</p>
 <ul>
 <li>SSH (22)</li>
 <li>HTTPS (443)</li>
 </ul>
-<p><code>all-services-port:</code> all Hadoop services, SSH and HTTPS are accessible by default:</p>
+<p><code>all-services-port:</code> all Hadoop services and SSH, gateway and HTTPS are accessible by default:</p>
 <ul>
 <li>SSH (22)</li>
 <li>HTTPS (443)</li>
@@ -1130,19 +1130,20 @@ credential select --name my-aws-credential
 template create --AWS --name awstemplate --description aws-template --instanceType m4.xlarge --volumeSize 100 
 --volumeCount 2
 blueprint select --name hdp-small-default
-instancegroup configure --instanceGroup host_group_master_1 --nodecount 1 --templateName awstemplate --ambariServer true
-instancegroup configure --instanceGroup host_group_master_2 --nodecount 1 --templateName awstemplate --ambariServer false
-instancegroup configure --instanceGroup host_group_master_3 --nodecount 1 --templateName awstemplate --ambariServer false
-instancegroup configure --instanceGroup host_group_client_1  --nodecount 1 --templateName awstemplate --ambariServer false
-instancegroup configure --instanceGroup host_group_slave_1 --nodecount 3 --templateName awstemplate --ambariServer false
+instancegroup configure --instanceGroup cbgateway --nodecount 1 --templateName awstemplate
+instancegroup configure --instanceGroup host_group_master_1 --nodecount 1 --templateName awstemplate
+instancegroup configure --instanceGroup host_group_master_2 --nodecount 1 --templateName awstemplate
+instancegroup configure --instanceGroup host_group_master_3 --nodecount 1 --templateName awstemplate
+instancegroup configure --instanceGroup host_group_client_1  --nodecount 1 --templateName awstemplate
+instancegroup configure --instanceGroup host_group_slave_1 --nodecount 3 --templateName awstemplate
 network select --name default-aws-network
 securitygroup select --name all-services-port
-stack create --AWS --name my-first-stack --region us-east-1 --wait true
-cluster create --description &quot;My first cluster&quot; --wait true
+stack create --name my-first-stack --region us-east-1
+cluster create --description &quot;My first cluster&quot;
 </code></pre>
 
 <p><strong>Congratulations!</strong> Your cluster should now be up and running on this way as well. To learn more about Cloudbreak and 
-provisioning, we have some <a href="../operations/">interesting insights</a> for you.</p>
+provisioning, we have some <a href="../operations/">interesting insights</a> for you</p>
                     <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/aws.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
                 </div>
             
