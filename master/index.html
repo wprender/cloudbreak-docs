@@ -286,27 +286,32 @@
 
 <h1 id="introduction">Introduction</h1>
 <p>Cloudbreak simplifies the provisioning, management, and monitoring of on-demand HDP clusters in virtual and cloud environments. It leverages the cloud infrastructure platform resources to create host instances and uses Apache Ambari (via Ambari Blueprints) to install and manage the HDP cluster.</p>
-<p>Use the Cloudbreak Web UI, REST API or CLI to launch HDP clusters on public cloud infrastructure platforms such as Microsoft Azure, Amazon Web Services (AWS), and Google Cloud Platform (GCP), and the private cloud infrastructure platform OpenStack.</p>
+<p>Use the Cloudbreak Web UI, REST API, or CLI to launch HDP clusters on public cloud infrastructure platforms such as <strong>Microsoft Azure</strong>, <strong>Amazon Web Services (AWS)</strong>, and <strong>Google Cloud Platform (GCP)</strong>, and the private cloud infrastructure platform <strong>OpenStack</strong>.</p>
 <p>Cloudbreak has two main components: the <strong>Cloudbreak Application</strong> and the <strong>Cloudbreak Deployer</strong>.</p>
-<p>The <strong>Cloudbreak Application</strong> consists of multiple microservices (Cloudbreak, Uluwatu, Sultans, and so on). The <strong>Cloudbreak Deployer</strong> helps you to deploy the Cloudbreak application automatically with Docker support. Once the Cloudbreak Application is deployed, you can use it to provision HDP clusters in various cloud environments.</p>
+<p>The <strong>Cloudbreak Application</strong> consists of multiple microservices (Cloudbreak, Uluwatu, Sultans, and so on). 
+The <strong>Cloudbreak Deployer</strong> helps you to deploy the Cloudbreak application automatically with Docker support. Once the Cloudbreak Application is deployed, you can use it to provision HDP clusters in various cloud environments.</p>
 <blockquote>
 <p>For an architectural overview of the Cloudbreak Deployer, the Cloudbreak Application, Apache Ambari, and the rest of the Cloudbreak components, see <a href="architecture/">Architecture</a>.</p>
 </blockquote>
 <h2 id="installation">Installation</h2>
 <p>On a high level, to set up Cloudbreak and install an HDP cluster, you need to perform the following steps:</p>
 <ol>
-<li><strong>Install the Cloudbreak Deployer</strong> by either <a href="#install-deployer">installing the Cloudbreak Deployer</a> on your own VM/host (Install Option #1) or by instantiating one of the <a href="#pre-built-images">pre-built cloud images that include Cloudbreak Deployer</a> pre-installed (Install Option #2).</li>
-<li><strong>Configure the Cloudbreak Deployer and install the Cloudbreak Application</strong>. Once you have installed Cloudbreak Deployer (called "cbd"), it will start up several Docker containers: Cloudbreak API, Cloudbreak Web UI (called "Uluwatu"), Identity Server, and supporting databases. You have successfully completed this step if you are able to log in to Cloudbreak Web UI in your browser.</li>
+<li><strong>Install the Cloudbreak Deployer</strong> using one of the two available scenarios:  </li>
+<li><a href="#install-deployer">Install the Cloudbreak Deployer</a> on your own VM/host (Install Option #1), or  </li>
+<li>Instantiate one of the <a href="#pre-built-images">pre-built cloud images that include Cloudbreak Deployer</a> pre-installed (Install Option #2).</li>
+<li><strong>Configure the Cloudbreak Deployer and install the Cloudbreak Application</strong>.<br />
+  Once you have installed Cloudbreak Deployer (called "cbd"), it will start up several Docker containers: Cloudbreak API, Cloudbreak Web UI (called "Uluwatu"), Identity Server, and supporting databases. You have successfully completed this step if you are able to log in to Cloudbreak Web UI in your browser.</li>
 <li><strong>Provision an HDP Cluster</strong> using the Cloudbreak Application.</li>
 </ol>
 <div id="install-deployer"></div>
 
 <h3 id="installing-the-cloudbreak-deployer-install-option-1">Installing the Cloudbreak Deployer (Install Option #1)</h3>
 <blockquote>
-<p><strong><a href="onprem/#minimum-and-recommended-system-requirements">Minimum and Recommended System requirements</a>:</strong> RHEL / CentOS / Oracle Linux 7 (64-bit), Docker 1.9.1, 4GB RAM, 10GB disk, 2 cores recommended</p>
+<p><strong><a href="onprem/#minimum-and-recommended-system-requirements">Minimum and Recommended System requirements</a>:</strong> 
+RHEL / CentOS / Oracle Linux 7 (64-bit), Docker 1.9.1, 4GB RAM, 10GB disk, 2 cores recommended</p>
 </blockquote>
-<p>You can install the Cloudbreak Deployer on your own VM/host manually. Once installed, use the Deployer to setup
-the Cloudbreak Application. We suggest that you install the Cloudbreak Application as close to the
+<p>You can install the Cloudbreak Deployer on your own VM/host manually. Once Cloudbreak Deployer is installed, use it to set up
+the Cloudbreak Application. We suggest that you install the Cloudbreak Application as close to your
 desired HDP clusters as possible. For example, if you plan to launch clusters on AWS, install the Cloudbreak Application on AWS.</p>
 <p>Follow the instructions for <a href="onprem/">installing the Cloudbreak Deployer</a>. Alternatively, consider using one of the <a href="#pre-built-images">pre-built cloud images that include Cloudbreak Deployer</a> pre-installed.</p>
 <blockquote>
@@ -330,7 +335,7 @@ links to provider-specific instructions for configuring and launching <strong>cb
 <tbody>
 <tr>
 <td>AWS</td>
-<td>Follow the AWS instructions using this <a href="aws/">link</a>.</td>
+<td>Follow the <a href="aws/">AWS instructions</a>.</td>
 </tr>
 <tr>
 <td>Azure</td>
@@ -338,11 +343,11 @@ links to provider-specific instructions for configuring and launching <strong>cb
 </tr>
 <tr>
 <td>GCP</td>
-<td>Follow the GCP instructions using this <a href="gcp/">link</a></td>
+<td>Follow the <a href="gcp/">GCP instructions</a></td>
 </tr>
 <tr>
 <td>OpenStack</td>
-<td>Follow the OpenStack instructions using this <a href="openstack/">link</a></td>
+<td>Follow the <a href="openstack/">OpenStack instructions</a></td>
 </tr>
 </tbody>
 </table>
@@ -366,7 +371,7 @@ links to provider-specific instructions for configuring and launching <strong>cb
 </tr>
 <tr>
 <td><a href="http://hortonworks.com/hadoop/ambari/">Apache Ambari Project</a></td>
-<td>Apache Ambari is an operational platform for provisioning, managing, and monitoring Apache Hadoop clusters. Ambari exposes a robust set of REST APIs and a rich Web interface for cluster management.</td>
+<td>Apache Ambari is an operational platform for provisioning, managing, and monitoring Apache Hadoop clusters. Ambari exposes a robust set of REST APIs and a rich web interface for cluster management.</td>
 </tr>
 <tr>
 <td><a href="https://cwiki.apache.org/confluence/display/AMBARI/Blueprints">Ambari Blueprints</a></td>
@@ -491,5 +496,5 @@ links to provider-specific instructions for configuring and launching <strong>cb
 
 <!--
 MkDocs version : 0.15.3
-Build Date UTC : 2016-06-09 19:23:52.979897
+Build Date UTC : 2016-06-10 08:41:57.226238
 -->
