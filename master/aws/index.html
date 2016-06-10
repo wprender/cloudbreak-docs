@@ -279,11 +279,13 @@
     
         <li class="main "><a href="#aws-setup">AWS Setup</a></li>
         
-            <li><a href="#setup-cloudbreak-deployer">Setup Cloudbreak Deployer</a></li>
+            <li><a href="#set-up-cloudbreak-deployer">Set up Cloudbreak Deployer</a></li>
         
             <li><a href="#start-cloudbreak-deployer">Start Cloudbreak Deployer</a></li>
         
-            <li><a href="#validate-the-started-cloudbreak-deployer">Validate the started Cloudbreak Deployer</a></li>
+            <li><a href="#validate-that-cloudbreak-deployer-has-started">Validate that Cloudbreak Deployer Has Started</a></li>
+        
+            <li><a href="#optional-configurations">Optional Configurations</a></li>
         
     
         <li class="main "><a href="#provisioning-prerequisites">Provisioning Prerequisites</a></li>
@@ -355,92 +357,77 @@ The minimum instance type which is suitable for Cloudbreak is <strong>m3.large</
 To learn about all requirements, see **<a href="../onprem/#minimum-and-recommended-system-requirements">Minimum and Recommended VM requirements</a>.</p>
 </blockquote>
 <h1 id="aws-setup">AWS Setup</h1>
-<p><strong>Cloudbreak Deployer Highlights</strong></p>
+<p>Before configuring Cloudbreak Deployer, you should know that:</p>
 <ul>
 <li>The default SSH username for the EC2 instances is <code>cloudbreak</code>.</li>
-<li>Cloudbreak Deployer location is <code>/var/lib/cloudbreak-deployment</code> on the launched EC2 instance. This is the
-  <code>cbd</code> root folder there.</li>
-<li>All <code>cbd</code> actions must be executed from the <code>cbd</code> root folder as <code>cloudbreak</code> user.</li>
+<li>Cloudbreak Deployer location on your EC2 instance is <code>/var/lib/cloudbreak-deployment</code>. This is the
+  <code>cbd</code> root folder.</li>
+<li>You must execute all <code>cbd</code> actions from the <code>cbd</code> root folder as a <code>cloudbreak</code> user.</li>
 </ul>
-<h2 id="setup-cloudbreak-deployer">Setup Cloudbreak Deployer</h2>
-<p>You should already have the Cloudbreak Deployer either by <a href="./">using the AWS Cloud Images</a> or by <a href="../onprem/">installing the
+<h2 id="set-up-cloudbreak-deployer">Set up Cloudbreak Deployer</h2>
+<p>You should have already installed the Cloudbreak Deployer either <a href="./">using the AWS Cloud Images</a> or by <a href="../onprem/">installing the
 Cloudbreak Deployer</a> manually on your own VM.</p>
-<p>If you have your own installed VM, you should check the <a href="./#initialize-your-profile">Initialize your Profile</a>
-section here before starting the provisioning.</p>
 <p>You can <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstances.html">connect to the previously created <code>cbd</code> VM</a>.</p>
-<p>To open the <code>cloudbreak-deployment</code> directory:</p>
+<p>To open the <code>cloudbreak-deployment</code> directory, run:</p>
 <pre><code>cd /var/lib/cloudbreak-deployment/
 </code></pre>
 
-<p>This is the directory of the configuration files and the supporting binaries for Cloudbreak Deployer.</p>
-<h3 id="initialize-your-profile">Initialize your Profile</h3>
-<p>First initialize <code>cbd</code> by creating a <code>Profile</code> file:</p>
-<pre><code>cbd init
-</code></pre>
-
-<p>It will create a <code>Profile</code> file in the current directory. Please open the <code>Profile</code> file then check the <code>PUBLIC_IP</code>.
-This is mandatory, because of to can access the Cloudbreak UI (called Uluwatu). In some cases the <code>cbd</code> tool tries to
-guess it. If <code>cbd</code> cannot get the IP address during the initialization, please set the appropriate value.</p>
-<h3 id="aws-specific-configuration">AWS specific configuration</h3>
-<p><strong>AWS Account Keys</strong></p>
-<p>There are 2 ways to create AWS credentials in Cloudbreak.</p>
-<ul>
-<li>Key-based: It requires your AWS access and secret key and Cloudbreak will use this key to launch the resources. This key needs to be provided when you create your credential in Cloudbreak either with Cloudbreak UI or Cloudbreak CLI.</li>
-<li>Role-based: It requires a valid IAM User role and Cloudbreak will assume this role to get a temporary access and secret key. For this action you need to set your AWS key in the <code>Profile</code> file.
-We suggest to use the keys of a valid <strong>IAM User</strong> here.</li>
-</ul>
-<pre><code>export AWS_ACCESS_KEY_ID=AKIA**************W7SA
-export AWS_SECRET_ACCESS_KEY=RWCT4Cs8******************/*skiOkWD
-</code></pre>
-
+<p>This directory contains configuration files and the supporting binaries for Cloudbreak Deployer.</p>
+<h3 id="configuring-role-based-credentials">Configuring Role-based Credentials</h3>
+<p>There are two ways to create AWS credentials in Cloudbreak:</p>
+<p><strong>Key-based:</strong> - This requires your AWS access key and secret key pair. Cloudbreak will use these keys to launch the resources. For starters, this is a simpler option that does not require additional configuration. You will provide the keys later when you <a href="credentials.md">provision an HDP cluster</a>.</p>
+<p><strong>Role-based:</strong> - This requires a valid <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html">IAM role</a> with "AssumeRole" policy. Cloudbreak will assume this role to get temporary access and the access/secret key pair.</p>
+<p>To configure role-based credentials, start your instance with an "AssumeRole" policy. For more information, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html">Using Instance Profiles</a> and <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html">Using an IAM Role to Grant Permissions to Applications Running on Amazon EC2 Instances</a>.</p>
+<p>Alternatively, you can set your AWS keys of an IAM user with an"AssumeRole" policy in the <code>Profile</code> file:</p>
+<p><code>export AWS_ACCESS_KEY_ID=AKIA**************W7SA
+  export AWS_SECRET_ACCESS_KEY=RWCT4Cs8******************/*skiOkWD</code></p>
 <blockquote>
-<p>If you want to use instance profile then you should not set these variables. Please be sure that the instance profile role can assume roles on AWS if you want to use Cloudbreak with Role ARN's and not with keys.</p>
+<p>If you want to use instance profile, do not set these variables. If you want to use Cloudbreak with Role ARNs instead of keys, make sure that the instance profile role can assume roles on AWS.</p>
 </blockquote>
-<p>In order to differentiate launched instances we gice you the option to use custom tags on your AWS resources which were deployed by Cloudbreak. The tagging mechanism can be used with the following variables. </p>
-<p>Please set this variable if you want just one custom tag on your Cloudformation resources</p>
+<h2 id="start-cloudbreak-deployer">Start Cloudbreak Deployer</h2>
+<p>To start the Cloudbreak application use the following command:</p>
+<pre><code>cbd start
+</code></pre>
+
+<p>This will start all the Docker containers and initialize the application.</p>
+<blockquote>
+<p>The first time you start the Coudbreak app, the process will take longer than usual due to the download of all the necessary docker images.</p>
+</blockquote>
+<p>The <code>cbd start</code> command includes the <code>cbd generate</code> command which applies the following steps:</p>
+<ul>
+<li>Creates the <strong>docker-compose.yml</strong> file that describes the configuration of all the Docker containers needed for the Cloudbreak deployment.</li>
+<li>Creates the <strong>uaa.yml</strong> file that holds the configuration of the identity server used to authenticate users to Cloudbreak.</li>
+</ul>
+<h2 id="validate-that-cloudbreak-deployer-has-started">Validate that Cloudbreak Deployer Has Started</h2>
+<p>After the <code>cbd start</code> command finishes, check the following:</p>
+<ul>
+<li>
+<p>Pre-installed Cloudbreak Deployer version and health:
+   <code>cbd doctor</code></p>
+<blockquote>
+<p>In case <code>cbd update</code> is needed, check documentation for <a href="../operations/#update-cloudbreak-deployer">Cloudbreak Deployer Update</a>.</p>
+</blockquote>
+</li>
+<li>
+<p>Cloudbreak Application logs:
+   <code>cbd logs cloudbreak</code>
+  You should see a message like this in the log: <code>Started CloudbreakApplication in 36.823 seconds</code>. Cloudbreak normally takes less than a minute to start.</p>
+</li>
+</ul>
+<h2 id="optional-configurations">Optional Configurations</h2>
+<p>You can perform the following optional comnfigurations:</p>
+<h3 id="optional-set-custom-tags">(Optional) Set Custom Tags**</h3>
+<p>In order to differentiate launched instances, we give you the option to use custom tags on your AWS resources deployed by Cloudbreak. You can use the tagging mechanism with the following variables. </p>
+<p>If you want just one custom tag on your Cloudformation resources, set this variable :</p>
 <pre><code>export CB_AWS_DEFAULT_CF_TAG=whatever
 </code></pre>
 
 <p>Then the name of the tag will be <code>CloudbreakId</code> and the value will be <code>whatever</code>.</p>
-<p>If you want some more specific tagging then use this variable</p>
+<p>If you need more specific tagging, set this variable:</p>
 <pre><code>export CB_AWS_CUSTOM_CF_TAGS=myveryspecifictag:veryspecific
 </code></pre>
 
-<p>Then the name of the tag will be <code>myveryspecifictag</code> and the value will be <code>veryspecific</code>. You can specify a list of tags here with a comma separated list for example: <code>tag1:value1,tag2:value2,tag3:value3</code></p>
-<h2 id="start-cloudbreak-deployer">Start Cloudbreak Deployer</h2>
-<p>To start the Cloudbreak application use the following command.
-This will start all the Docker containers and initialize the application.</p>
-<pre><code>cbd start
-</code></pre>
-
-<blockquote>
-<p>At the very first time it will take for a while, because of need to download all the necessary docker images.</p>
-</blockquote>
-<p>The <code>cbd start</code> command includes the <code>cbd generate</code> command which applies the following steps:</p>
-<ul>
-<li>creates the <strong>docker-compose.yml</strong> file that describes the configuration of all the Docker containers needed for the Cloudbreak deployment.</li>
-<li>creates the <strong>uaa.yml</strong> file that holds the configuration of the identity server which is used to authenticate users to Cloudbreak.</li>
-</ul>
-<h2 id="validate-the-started-cloudbreak-deployer">Validate the started Cloudbreak Deployer</h2>
-<p>After the <code>cbd start</code> command finishes followings are worthy to check:</p>
-<ul>
-<li>Pre-installed Cloudbreak Deployer version and health:</li>
-</ul>
-<pre><code>   cbd doctor
-</code></pre>
-
-<blockquote>
-<p>In case of <code>cbd update</code> is needed, please check the related documentation for <a href="../operations/#update-cloudbreak-deployer">Cloudbreak Deployer Update</a>.</p>
-</blockquote>
-<ul>
-<li>Started Cloudbreak Application logs:</li>
-</ul>
-<pre><code>   cbd logs cloudbreak
-</code></pre>
-
-<blockquote>
-<p>Cloudbreak should start within a minute - you should see a line like this: <code>Started CloudbreakApplication in 36.823 seconds</code></p>
-</blockquote>
+<p>Then the name of the tag will be <code>myveryspecifictag</code> and the value will be <code>veryspecific</code>. You can specify a list of tags here with a comma separated list; for example: <code>tag1:value1,tag2:value2,tag3:value3</code>.</p>
 <h1 id="provisioning-prerequisites">Provisioning Prerequisites</h1>
 <h2 id="iam-role-setup">IAM role setup</h2>
 <blockquote>
@@ -639,12 +626,12 @@ public IP address so all the instances in the cluster will belong to the same se
 This may change in a later release.</p>
 <p><em>Default Security Group</em></p>
 <p>You can also use the two pre-defined security groups in Cloudbreak.</p>
-<p><code>only-ssh-and-ssl:</code> all ports are locked down except for SSH and gateway HTTPS (you can't access Hadoop services outside of the VPC):</p>
+<p><code>only-ssh-and-ssl:</code> all ports are locked down except for SSH and the selected Ambari Server HTTPS (you can't access Hadoop services outside of the VPC):</p>
 <ul>
 <li>SSH (22)</li>
 <li>HTTPS (443)</li>
 </ul>
-<p><code>all-services-port:</code> all Hadoop services and SSH, gateway and HTTPS are accessible by default:</p>
+<p><code>all-services-port:</code> all Hadoop services, SSH and HTTPS are accessible by default:</p>
 <ul>
 <li>SSH (22)</li>
 <li>HTTPS (443)</li>
@@ -1143,20 +1130,19 @@ credential select --name my-aws-credential
 template create --AWS --name awstemplate --description aws-template --instanceType m4.xlarge --volumeSize 100 
 --volumeCount 2
 blueprint select --name hdp-small-default
-instancegroup configure --instanceGroup cbgateway --nodecount 1 --templateName awstemplate
-instancegroup configure --instanceGroup host_group_master_1 --nodecount 1 --templateName awstemplate
-instancegroup configure --instanceGroup host_group_master_2 --nodecount 1 --templateName awstemplate
-instancegroup configure --instanceGroup host_group_master_3 --nodecount 1 --templateName awstemplate
-instancegroup configure --instanceGroup host_group_client_1  --nodecount 1 --templateName awstemplate
-instancegroup configure --instanceGroup host_group_slave_1 --nodecount 3 --templateName awstemplate
+instancegroup configure --instanceGroup host_group_master_1 --nodecount 1 --templateName awstemplate --ambariServer true
+instancegroup configure --instanceGroup host_group_master_2 --nodecount 1 --templateName awstemplate --ambariServer false
+instancegroup configure --instanceGroup host_group_master_3 --nodecount 1 --templateName awstemplate --ambariServer false
+instancegroup configure --instanceGroup host_group_client_1  --nodecount 1 --templateName awstemplate --ambariServer false
+instancegroup configure --instanceGroup host_group_slave_1 --nodecount 3 --templateName awstemplate --ambariServer false
 network select --name default-aws-network
 securitygroup select --name all-services-port
-stack create --name my-first-stack --region us-east-1
-cluster create --description &quot;My first cluster&quot;
+stack create --AWS --name my-first-stack --region us-east-1 --wait true
+cluster create --description &quot;My first cluster&quot; --wait true
 </code></pre>
 
 <p><strong>Congratulations!</strong> Your cluster should now be up and running on this way as well. To learn more about Cloudbreak and 
-provisioning, we have some <a href="../operations/">interesting insights</a> for you</p>
+provisioning, we have some <a href="../operations/">interesting insights</a> for you.</p>
                     <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/aws.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
                 </div>
             
