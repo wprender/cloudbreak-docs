@@ -276,17 +276,19 @@
         
             <li><a href="#minimum-and-recommended-system-requirements">Minimum and Recommended System Requirements</a></li>
         
+            <li><a href="#prerequisites">Prerequisites</a></li>
+        
             <li><a href="#install-cloudbreak-deployer_1">Install Cloudbreak Deployer</a></li>
         
-            <li><a href="#initialize-your-profile">Initialize your Profile</a></li>
+            <li><a href="#initialize-your-profile">Initialize Your Profile</a></li>
         
-            <li><a href="#generate-your-profile">Generate your Profile</a></li>
+            <li><a href="#generate-your-profile">Generate Your Profile</a></li>
         
             <li><a href="#start-cloudbreak">Start Cloudbreak</a></li>
         
             <li><a href="#troubleshooting">Troubleshooting</a></li>
         
-            <li><a href="#next-steps">Next steps</a></li>
+            <li><a href="#next-steps">Next Steps</a></li>
         
     
     </ul>
@@ -315,49 +317,52 @@
 <p>You can install Cloudbreak on <strong>Mac OS X for evaluation purposes only</strong>. This operating system is not supported
 for a production deployment of Cloudbreak.</p>
 </blockquote>
+<h2 id="prerequisites">Prerequisites</h2>
+<ol>
+<li>
 <p>Make sure that you opened the following ports:</p>
-<ul>
-<li>SSH (22)</li>
+</li>
+<li>
+<p>SSH (22)</p>
+</li>
 <li>Cloudbreak API (8080)</li>
 <li>Identity server (8089)</li>
 <li>Cloudbreak GUI (3000)</li>
-<li>User authentication (3001)</li>
-</ul>
+<li>
+<p>User authentication (3001)</p>
+</li>
+<li>
 <p>Execute every command as <strong>root</strong>. In order to get root privileges execute:</p>
-<pre><code>sudo -i
-</code></pre>
-
-<p>Ensure that your system is up-to-date and reboot it if necessary (for example, if there was a kernel update):</p>
-<pre><code>yum -y update
-</code></pre>
-
-<p>Install iptables-services. Without iptables-services installed the 'iptables save' command will not be available:</p>
-<pre><code>yum -y install iptables-services net-tools
-</code></pre>
-
-<p>Configure permissive iptables on your machine:</p>
-<pre><code>iptables --flush INPUT &amp;&amp; \
-iptables --flush FORWARD &amp;&amp; \
-service iptables save
-</code></pre>
-
-<p>Configure a custom Docker repository for installing the correct version of Docker:</p>
-<pre><code>cat &gt; /etc/yum.repos.d/docker.repo &lt;&lt;&quot;EOF&quot;
-[dockerrepo]
-name=Docker Repository
-baseurl=https://yum.dockerproject.org/repo/main/centos/7
-enabled=1
-gpgcheck=1
-gpgkey=https://yum.dockerproject.org/gpg
-EOF
-</code></pre>
-
+</li>
+</ol>
+<p><code>sudo -i</code></p>
+<ol>
+<li>Ensure that your system is up-to-date and reboot it if necessary (for example, if there was a kernel update):</li>
+</ol>
+<p><code>yum -y update</code></p>
+<ol>
+<li>Install iptables-services. Without iptables-services installed the 'iptables save' command will not be available:</li>
+</ol>
+<p><code>yum -y install iptables-services net-tools</code></p>
+<p>Then, configure permissive iptables on your machine:</p>
+<p><code>iptables --flush INPUT &amp;&amp; \
+  iptables --flush FORWARD &amp;&amp; \
+  service iptables save</code></p>
+<ol>
+<li>Configure a custom Docker repository for installing the correct version of Docker:</li>
+</ol>
+<p><code>cat &gt; /etc/yum.repos.d/docker.repo &lt;&lt;"EOF"
+ [dockerrepo]
+  name=Docker Repository
+  baseurl=https://yum.dockerproject.org/repo/main/centos/7
+  enabled=1
+  gpgcheck=1
+  gpgkey=https://yum.dockerproject.org/gpg
+  EOF</code></p>
 <p>Next, install the Docker service:</p>
-<pre><code>yum install -y docker-engine-1.9.1 docker-engine-selinux-1.9.1
-systemctl start docker
-systemctl enable docker
-</code></pre>
-
+<p><code>yum install -y docker-engine-1.9.1 docker-engine-selinux-1.9.1
+  systemctl start docker
+  systemctl enable docker</code></p>
 <h2 id="install-cloudbreak-deployer_1">Install Cloudbreak Deployer</h2>
 <p>Install the Cloudbreak Deployer and unzip the platform-specific single binary to your PATH. A quick way to do this is:</p>
 <pre><code>yum -y install unzip tar
@@ -366,15 +371,15 @@ cbd --version
 </code></pre>
 
 <p>Once the Cloudbreak Deployer is installed, you can start to set up the Cloudbreak application.</p>
-<h2 id="initialize-your-profile">Initialize your Profile</h2>
+<h2 id="initialize-your-profile">Initialize Your Profile</h2>
 <p>First initialize <code>cbd</code>:</p>
 <pre><code>mkdir cloudbreak-deployment
 cd cloudbreak-deployment
 cbd init
 </code></pre>
 
-<p>Cloudbreak Deployer creates a file called Profile in the current directory. The Profile file includes your PUBLIC_IP. Edit PUBLIC_IP to provide an IP address that will be used to access the Cloudbreak UI. In some cases, cbd tries to guess the IP address; if can't. this will give a hint.</p>
-<h2 id="generate-your-profile">Generate your Profile</h2>
+<p>This will create a <code>Profile</code> file in the current directory. Open the <code>Profile</code> file and check the <code>PUBLIC_IP</code>. Cloudbreak UI uses the <code>PUBLIC_IP</code> to access the Cloudbreak UI. In some cases, the <code>cbd</code> tool tries to guess it. If <code>cbd</code> did not get the IP address during the initialization, set the appropriate value.</p>
+<h2 id="generate-your-profile">Generate Your Profile</h2>
 <p>You are done with the configuration of Cloudbreak Deployer. The last thing you have to do is to generate the configurations by executing:</p>
 <pre><code>rm *.yml
 cbd generate
@@ -399,9 +404,7 @@ cbd start
 <pre><code>cbd logs cloudbreak
 </code></pre>
 
-<blockquote>
-<p>Cloudbreak should start within a minute - you should see a line like this: <code>Started CloudbreakApplication in 36.823 seconds</code></p>
-</blockquote>
+<p>You should see a message like this in the log: <code>Started CloudbreakApplication in 36.823 seconds</code>. Cloudbreak normally takes less than a minute to start. </p>
 <h2 id="troubleshooting">Troubleshooting</h2>
 <p>If you are faced with permission or connection issues, try to disable <strong>SELinux</strong>:</p>
 <ol>
@@ -412,7 +415,7 @@ cbd start
 <pre><code>setenforce 0 &amp;&amp; sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
 </code></pre>
 
-<h2 id="next-steps">Next steps</h2>
+<h2 id="next-steps">Next Steps</h2>
 <p>After you have met all the pre-requisites for Cloudbreak, perform the <strong>cloud provider specific</strong> configuration. Select your cloud  provider and follow the steps in the <strong>Setup</strong> section:</p>
 <ul>
 <li><a href="../aws/#aws-setup">AWS</a></li>
