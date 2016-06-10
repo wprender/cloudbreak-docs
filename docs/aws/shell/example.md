@@ -10,16 +10,15 @@ credential select --name my-aws-credential
 template create --AWS --name awstemplate --description aws-template --instanceType m4.xlarge --volumeSize 100 
 --volumeCount 2
 blueprint select --name hdp-small-default
-instancegroup configure --instanceGroup cbgateway --nodecount 1 --templateName awstemplate
-instancegroup configure --instanceGroup host_group_master_1 --nodecount 1 --templateName awstemplate
-instancegroup configure --instanceGroup host_group_master_2 --nodecount 1 --templateName awstemplate
-instancegroup configure --instanceGroup host_group_master_3 --nodecount 1 --templateName awstemplate
-instancegroup configure --instanceGroup host_group_client_1  --nodecount 1 --templateName awstemplate
-instancegroup configure --instanceGroup host_group_slave_1 --nodecount 3 --templateName awstemplate
+instancegroup configure --instanceGroup host_group_master_1 --nodecount 1 --templateName awstemplate --ambariServer true
+instancegroup configure --instanceGroup host_group_master_2 --nodecount 1 --templateName awstemplate --ambariServer false
+instancegroup configure --instanceGroup host_group_master_3 --nodecount 1 --templateName awstemplate --ambariServer false
+instancegroup configure --instanceGroup host_group_client_1  --nodecount 1 --templateName awstemplate --ambariServer false
+instancegroup configure --instanceGroup host_group_slave_1 --nodecount 3 --templateName awstemplate --ambariServer false
 network select --name default-aws-network
 securitygroup select --name all-services-port
-stack create --name my-first-stack --region us-east-1
-cluster create --description "My first cluster"
+stack create --AWS --name my-first-stack --region us-east-1 --wait true
+cluster create --description "My first cluster" --wait true
 ```
 
 **Congratulations!** Your cluster should now be up and running on this way as well. To learn more about Cloudbreak and 

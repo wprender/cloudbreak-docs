@@ -11,16 +11,15 @@ credential select --name my-gcp-credential
 template create --GCP --name gcptemplate --description gcp-template --instanceType n1-standard-4 --volumeSize 100 
 --volumeCount 2
 blueprint select --name hdp-small-default
-instancegroup configure --instanceGroup cbgateway --nodecount 1 --templateName gcptemplate
-instancegroup configure --instanceGroup host_group_master_1 --nodecount 1 --templateName gcptemplate
-instancegroup configure --instanceGroup host_group_master_2 --nodecount 1 --templateName gcptemplate
-instancegroup configure --instanceGroup host_group_master_3 --nodecount 1 --templateName gcptemplate
-instancegroup configure --instanceGroup host_group_client_1  --nodecount 1 --templateName gcptemplate
-instancegroup configure --instanceGroup host_group_slave_1 --nodecount 3 --templateName gcptemplate
+instancegroup configure --instanceGroup host_group_master_1 --nodecount 1 --templateName gcptemplate --ambariServer true
+instancegroup configure --instanceGroup host_group_master_2 --nodecount 1 --templateName gcptemplate --ambariServer false
+instancegroup configure --instanceGroup host_group_master_3 --nodecount 1 --templateName gcptemplate --ambariServer false
+instancegroup configure --instanceGroup host_group_client_1  --nodecount 1 --templateName gcptemplate --ambariServer false
+instancegroup configure --instanceGroup host_group_slave_1 --nodecount 3 --templateName gcptemplate --ambariServer false
 network select --name default-gcp-network
 securitygroup select --name all-services-port
-stack create --name my-first-stack --region us-central1
-cluster create --description "My first cluster"
+stack create --GCP --name my-first-stack --region us-central1 --wait true
+cluster create --description "My first cluster" --wait true
 ```
 
 **Congratulations!** Your cluster should now be up and running on this way as well. To learn more about Cloudbreak and 

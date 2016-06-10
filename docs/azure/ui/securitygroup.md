@@ -10,13 +10,13 @@ This may change in a later release.
 
 You can also use the two pre-defined security groups in Cloudbreak.
 
-`only-ssh-and-ssl:` all ports are locked down except for SSH and gateway HTTPS (you can't access Hadoop services 
+`only-ssh-and-ssl:` all ports are locked down except for SSH and the selected Ambari Server HTTPS (you can't access Hadoop services 
 outside of the virtual network):
 
 * SSH (22)
 * HTTPS (443)
 
-`all-services-port:` all Hadoop services and SSH, gateway and HTTPS are accessible by default:
+`all-services-port:` all Hadoop services, SSH and HTTPS are accessible by default:
 
 * SSH (22)
 * HTTPS (443)
@@ -62,7 +62,7 @@ template to create clusters, but cannot delete it.
 >**NOTE** The security groups are created on Azure only after the cluster provisioning starts with the selected 
 security group template.
 
->**IMPORTANT** If you use and existing virtual network and subnet the selected security group will only be applied to the `Cloudbreak gateway node` due to the lack of
+>**IMPORTANT** If you use and existing virtual network and subnet the selected security group will only be applied to the selected Ambari Server node due to the lack of
 capability to attach multiple security groups to an existing subnet. If you'd like to open ports for Hadoop you must do it on your existing security group.
 
 ![](/images/ui-secgroup_v3.png)
