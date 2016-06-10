@@ -287,15 +287,15 @@
 <h1 id="architecture">Architecture</h1>
 <h2 id="cloudbreak-deployer-architecture">Cloudbreak Deployer Architecture</h2>
 <p>Cloudbreak Deployer includes the following components:<br />
-- <strong>uaa</strong>: OAuth Identity Server
-- <strong>cloudbreak</strong>: the Cloudbreak app
-- <strong>periscope</strong>: the Periscope app
-- <strong>uluwatu</strong>: Cloudbreak Web UI
-- <strong>sultans</strong>: user management</p>
+- <strong>UAA</strong>: OAuth identity server implementation
+- <strong>Cloudbreak</strong>: the Cloudbreak application
+- <strong>Periscope</strong>: the Periscope application
+- <strong>Uluwatu</strong>: Cloudbreak web UI
+- <strong>Sultans</strong>: Cloudbreak user management</p>
 <h3 id="system-level-containers">System Level Containers</h3>
 <p>Cloudbreak Deployer includes the following system-level containers:
-- <strong>consul</strong>: Service Registry
-- <strong>registrator</strong>: automatically registers/unregisters containers with consul</p>
+- <strong>Consul</strong>: Cloudbreak service registry
+- <strong>Registrator</strong>: automatically registers/unregisters containers with consul</p>
 <h2 id="cloudbreak-application-architecture">Cloudbreak Application Architecture</h2>
 <p>Cloudbreak is built on the foundation of cloud provider APIs and Apache Ambari.</p>
 <h3 id="apache-ambari">Apache Ambari</h3>
@@ -303,17 +303,17 @@
 <p><img alt="" src="https://raw.githubusercontent.com/sequenceiq/cloudbreak/master/docs/images/ambari-overview.png" /></p>
 <p>Ambari enables System Administrators to: </p>
 <ol>
-<li><strong>Provision a Hadoop Cluster</strong>:<ul>
+<li><strong>Provision a Hadoop Cluster</strong>:  <ul>
 <li>Ambari provides a step-by-step wizard for installing Hadoop services across any number of hosts.</li>
 <li>Ambari handles configuration of Hadoop services for the cluster.</li>
 </ul>
 </li>
-<li><strong>Manage a Hadoop Cluster</strong>:<ul>
+<li><strong>Manage a Hadoop Cluster</strong>:  <ul>
 <li>Ambari provides central management for starting, stopping, and reconfiguring Hadoop services across the entire.
    cluster.</li>
 </ul>
 </li>
-<li><strong>Monitor a Hadoop Cluster</strong>:<ul>
+<li><strong>Monitor a Hadoop Cluster</strong>:  <ul>
 <li>Ambari provides a dashboard for monitoring health and status of the Hadoop cluster.</li>
 <li>Ambari lets you set predefined alerts or add custom alerts.</li>
 </ul>
