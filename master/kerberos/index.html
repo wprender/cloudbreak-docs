@@ -339,7 +339,7 @@ hadoop jar $JAR_JOBCLIENT mrbench -baseDir /user/ambari-qa/smallJobsBenchmark -n
 <h3 id="create-hadoop-users">Create Hadoop Users</h3>
 <p>To create Hadoop users please follow the steps below.</p>
 <ul>
-<li>Log in via SSH to the Cloudbreak gateway node (IP address is the same as the Ambari UI)</li>
+<li>Log in via SSH to the node where the Ambari Server is (IP address is the same as the Ambari UI)</li>
 </ul>
 <pre><code>kadmin -p [admin_user]/[admin_user]@NODE.DC1.CONSUL (type admin password)
 addprinc custom-user (type user password twice)
