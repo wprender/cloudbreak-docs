@@ -37,6 +37,12 @@ guess it. If `cbd` cannot get the IP address during the initialization, please s
 
 Make sure that the [VM image used by Cloudbreak is imported on your OpenStack](openstack.md#cloudbreak-import).
 
+## Using self-signed certificates
+If your OpenStack is secured with a self-signed certificate, you need to import that certificate into Cloudbreak, 
+or else Cloudbreak won't be able to communicate with your OpenStack. To import the certificate, place the certificate 
+file in the generated certs directory `/certs/trusted/`. The trusted directory does not exist by default, so you need to create it.
+Cloudbreak will automatically pick up these certificates and import them into its truststore upon start.
+
 ## Start Cloudbreak Deployer
 
 To start the Cloudbreak application use the following command.
