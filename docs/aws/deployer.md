@@ -23,9 +23,9 @@ This directory contains configuration files and the supporting binaries for Clou
 
 There are two ways to create AWS credentials in Cloudbreak:
 
-**Key-based:** - This requires your AWS access key and secret key pair. Cloudbreak will use these keys to launch the resources. For starters, this is a simpler option that does not require additional configuration. You will provide the keys later when you [provision an HDP cluster](credentials.md).
+**Key-based:** This requires your AWS access key and secret key pair. Cloudbreak will use these keys to launch the resources. For starters, this is a simpler option that does not require additional configuration. You will provide the keys later when you [provision an HDP cluster](credentials.md).
  
-**Role-based:** - This requires a valid [IAM role](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html) with "AssumeRole" policy. Cloudbreak will assume this role to get temporary access and the access/secret key pair.
+**Role-based:** This requires a valid [IAM role](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html) with "AssumeRole" policy. Cloudbreak will assume this role to get temporary access and the access/secret key pair.
 
 To configure role-based credentials, start your instance with an "AssumeRole" policy. For more information, see [Using Instance Profiles](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html) and [Using an IAM Role to Grant Permissions to Applications Running on Amazon EC2 Instances](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html).
 
@@ -62,7 +62,7 @@ After the `cbd start` command finishes, check the following:
    ```
    cbd doctor
    ```
- > In case `cbd update` is needed, check documentation for [Cloudbreak Deployer Update](operations.md#update-cloudbreak-deployer).
+ > In case `cbd update` is needed, check the documentation for [Cloudbreak Deployer Update](operations.md#update-cloudbreak-deployer).
 
 * Cloudbreak Application logs:
    ```
@@ -75,7 +75,7 @@ After the `cbd start` command finishes, check the following:
 
 You can perform the following optional comnfigurations:
 
-### (Optional) Set Custom Tags**
+### Set Custom Tags**
 
 In order to differentiate launched instances, we give you the option to use custom tags on your AWS resources deployed by Cloudbreak. You can use the tagging mechanism with the following variables. 
 
