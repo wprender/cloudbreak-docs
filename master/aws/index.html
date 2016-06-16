@@ -375,8 +375,8 @@ Cloudbreak Deployer</a> manually on your own VM.</p>
 <p>This directory contains configuration files and the supporting binaries for Cloudbreak Deployer.</p>
 <h3 id="configuring-role-based-credentials">Configuring Role-based Credentials</h3>
 <p>There are two ways to create AWS credentials in Cloudbreak:</p>
-<p><strong>Key-based:</strong> - This requires your AWS access key and secret key pair. Cloudbreak will use these keys to launch the resources. For starters, this is a simpler option that does not require additional configuration. You will provide the keys later when you <a href="credentials.md">provision an HDP cluster</a>.</p>
-<p><strong>Role-based:</strong> - This requires a valid <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html">IAM role</a> with "AssumeRole" policy. Cloudbreak will assume this role to get temporary access and the access/secret key pair.</p>
+<p><strong>Key-based:</strong> This requires your AWS access key and secret key pair. Cloudbreak will use these keys to launch the resources. For starters, this is a simpler option that does not require additional configuration. You will provide the keys later when you <a href="credentials.md">provision an HDP cluster</a>.</p>
+<p><strong>Role-based:</strong> This requires a valid <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html">IAM role</a> with "AssumeRole" policy. Cloudbreak will assume this role to get temporary access and the access/secret key pair.</p>
 <p>To configure role-based credentials, start your instance with an "AssumeRole" policy. For more information, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html">Using Instance Profiles</a> and <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html">Using an IAM Role to Grant Permissions to Applications Running on Amazon EC2 Instances</a>.</p>
 <p>Alternatively, you can set your AWS keys of an IAM user with an"AssumeRole" policy in the <code>Profile</code> file:</p>
 <p><code>export AWS_ACCESS_KEY_ID=AKIA**************W7SA
@@ -405,7 +405,7 @@ Cloudbreak Deployer</a> manually on your own VM.</p>
 <p>Pre-installed Cloudbreak Deployer version and health:
    <code>cbd doctor</code></p>
 <blockquote>
-<p>In case <code>cbd update</code> is needed, check documentation for <a href="../operations/#update-cloudbreak-deployer">Cloudbreak Deployer Update</a>.</p>
+<p>In case <code>cbd update</code> is needed, check the documentation for <a href="../operations/#update-cloudbreak-deployer">Cloudbreak Deployer Update</a>.</p>
 </blockquote>
 </li>
 <li>
@@ -416,7 +416,7 @@ Cloudbreak Deployer</a> manually on your own VM.</p>
 </ul>
 <h2 id="optional-configurations">Optional Configurations</h2>
 <p>You can perform the following optional comnfigurations:</p>
-<h3 id="optional-set-custom-tags">(Optional) Set Custom Tags**</h3>
+<h3 id="set-custom-tags">Set Custom Tags**</h3>
 <p>In order to differentiate launched instances, we give you the option to use custom tags on your AWS resources deployed by Cloudbreak. You can use the tagging mechanism with the following variables. </p>
 <p>If you want just one custom tag on your Cloudformation resources, set this variable :</p>
 <pre><code>export CB_AWS_DEFAULT_CF_TAG=whatever
