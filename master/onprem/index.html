@@ -318,51 +318,49 @@
 for a production deployment of Cloudbreak.</p>
 </blockquote>
 <h2 id="prerequisites">Prerequisites</h2>
-<ol>
-<li>
 <p>Make sure that you opened the following ports:</p>
-</li>
-<li>
-<p>SSH (22)</p>
-</li>
+<ul>
+<li>SSH (22)</li>
 <li>Cloudbreak API (8080)</li>
 <li>Identity server (8089)</li>
 <li>Cloudbreak GUI (3000)</li>
-<li>
-<p>User authentication (3001)</p>
-</li>
-<li>
+<li>User authentication (3001)</li>
+</ul>
 <p>Execute every command as <strong>root</strong>. In order to get root privileges execute:</p>
-</li>
-</ol>
-<p><code>sudo -i</code></p>
-<ol>
-<li>Ensure that your system is up-to-date and reboot it if necessary (for example, if there was a kernel update):</li>
-</ol>
-<p><code>yum -y update</code></p>
-<ol>
-<li>Install iptables-services. Without iptables-services installed the 'iptables save' command will not be available:</li>
-</ol>
-<p><code>yum -y install iptables-services net-tools</code></p>
+<pre><code>sudo -i
+</code></pre>
+
+<p>Ensure that your system is up-to-date and reboot it if necessary (for example, if there was a kernel update):</p>
+<pre><code>yum -y update
+</code></pre>
+
+<p>Install iptables-services. Without iptables-services installed the 'iptables save' command will not be available:</p>
+<pre><code>yum -y install iptables-services net-tools
+</code></pre>
+
 <p>Then, configure permissive iptables on your machine:</p>
-<p><code>iptables --flush INPUT &amp;&amp; \
-  iptables --flush FORWARD &amp;&amp; \
-  service iptables save</code></p>
-<ol>
-<li>Configure a custom Docker repository for installing the correct version of Docker:</li>
-</ol>
-<p><code>cat &gt; /etc/yum.repos.d/docker.repo &lt;&lt;"EOF"
- [dockerrepo]
-  name=Docker Repository
-  baseurl=https://yum.dockerproject.org/repo/main/centos/7
-  enabled=1
-  gpgcheck=1
-  gpgkey=https://yum.dockerproject.org/gpg
-  EOF</code></p>
+<pre><code>iptables --flush INPUT &amp;&amp; \
+iptables --flush FORWARD &amp;&amp; \
+service iptables save
+</code></pre>
+
+<p>Configure a custom Docker repository for installing the correct version of Docker:</p>
+<pre><code>cat &gt; /etc/yum.repos.d/docker.repo &lt;&lt;&quot;EOF&quot;
+[dockerrepo]
+name=Docker Repository
+baseurl=https://yum.dockerproject.org/repo/main/centos/7
+enabled=1
+gpgcheck=1
+gpgkey=https://yum.dockerproject.org/gpg
+EOF
+</code></pre>
+
 <p>Next, install the Docker service:</p>
-<p><code>yum install -y docker-engine-1.9.1 docker-engine-selinux-1.9.1
-  systemctl start docker
-  systemctl enable docker</code></p>
+<pre><code>yum install -y docker-engine-1.9.1 docker-engine-selinux-1.9.1
+systemctl start docker
+systemctl enable docker
+</code></pre>
+
 <h2 id="install-cloudbreak-deployer_1">Install Cloudbreak Deployer</h2>
 <p>Install the Cloudbreak Deployer and unzip the platform-specific single binary to your PATH. A quick way to do this is:</p>
 <pre><code>yum -y install unzip tar
