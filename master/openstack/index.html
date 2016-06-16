@@ -283,6 +283,8 @@
         
             <li><a href="#setup-cloudbreak-deployer">Setup Cloudbreak Deployer</a></li>
         
+            <li><a href="#using-self-signed-certificates">Using self-signed certificates</a></li>
+        
             <li><a href="#start-cloudbreak-deployer">Start Cloudbreak Deployer</a></li>
         
             <li><a href="#validate-the-started-cloudbreak-deployer">Validate the started Cloudbreak Deployer</a></li>
@@ -412,6 +414,11 @@ This is mandatory, because of to can access the Cloudbreak UI (called Uluwatu). 
 guess it. If <code>cbd</code> cannot get the IP address during the initialization, please set the appropriate value.</p>
 <h3 id="openstack-specific-configuration">OpenStack specific configuration</h3>
 <p>Make sure that the <a href="./#cloudbreak-import">VM image used by Cloudbreak is imported on your OpenStack</a>.</p>
+<h2 id="using-self-signed-certificates">Using self-signed certificates</h2>
+<p>If your OpenStack is secured with a self-signed certificate, you need to import that certificate into Cloudbreak, 
+or else Cloudbreak won't be able to communicate with your OpenStack. To import the certificate, place the certificate 
+file in the generated certs directory <code>/certs/trusted/</code>. The trusted directory does not exist by default, so you need to create it.
+Cloudbreak will automatically pick up these certificates and import them into its truststore upon start.</p>
 <h2 id="start-cloudbreak-deployer">Start Cloudbreak Deployer</h2>
 <p>To start the Cloudbreak application use the following command.
 This will start all the Docker containers and initialize the application.</p>
@@ -1218,11 +1225,11 @@ provisioning, we have some <a href="../operations/">interesting insights</a> for
                $("#cloudbreak-deployer-image").append('<br>');
                $("#cloudbreak-deployer-image").append('<br>');
                $("#cloudbreak-deployer-image").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">Download the latest Cloudbreak Deployer image to your local machine:</p>');
-               $("#cloudbreak-deployer-image").append('<pre><code style="font-size: 12pt;color:#333333">curl -O -k https://public-repo-1.hortonworks.com/HDP/cloudbreak/' + data.id + '</code></pre>');
+               $("#cloudbreak-deployer-image").append('<pre><code style="font-size: 12pt;color:#333333">curl -O -k https://public-repo-1.hortonworks.com/HDP/cloudbreak/' + data.metadata.image_name + '.img</code></pre>');
                $("#cloudbreak-deployer-import").append('<br>');
                $("#cloudbreak-deployer-import").append('<br>');
                $("#cloudbreak-deployer-import").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">Set the following environment variables for the OpenStack image import:</p>');
-               $("#cloudbreak-deployer-import").append('<pre><code style="font-size: 12px;color:#333333">export CBD_LATEST_IMAGE=</code>' + data.id + '</code></p>');
+               $("#cloudbreak-deployer-import").append('<pre><code style="font-size: 12px;color:#333333">export CBD_LATEST_IMAGE=</code>' + data.metadata.image_name + '.img</code></p>');
                });
 
                <!--OpenStack CB-->
@@ -1230,11 +1237,11 @@ provisioning, we have some <a href="../operations/">interesting insights</a> for
                $("#cloudbreak-image").append('<br>');
                $("#cloudbreak-image").append('<br>');
                $("#cloudbreak-image").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">Download the latest Cloudbreak image to your local machine:</p>');
-               $("#cloudbreak-image").append('<pre><code style="font-size: 12pt;color:#333333">curl -O -k https://public-repo-1.hortonworks.com/HDP/cloudbreak/' + data.id + '</code></pre>');
+               $("#cloudbreak-image").append('<pre><code style="font-size: 12pt;color:#333333">curl -O -k https://public-repo-1.hortonworks.com/HDP/cloudbreak/' + data.metadata.image_name + '.img</code></pre>');
                $("#cloudbreak-import").append('<br>');
                $("#cloudbreak-import").append('<br>');
                $("#cloudbreak-import").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">This is very similar to the Cloudbrek Deployer. Set the following environment variables for the OpenStack image import:</p>');
-               $("#cloudbreak-import").append('<pre><code style="font-size: 12px;color:#333333">export CB_LATEST_IMAGE=</code>' + data.id + '</code></p>');
+               $("#cloudbreak-import").append('<pre><code style="font-size: 12px;color:#333333">export CB_LATEST_IMAGE=</code>' + data.metadata.image_name + '.img</code></p>');
                });
 
                <!--GCP-->
