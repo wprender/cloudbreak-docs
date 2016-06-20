@@ -33,36 +33,6 @@ cbd logs cloudbreak
 
 You can also check the individual logs of `uluwatu`, `periscope`, and `identity`.
 
-## Update Cloudbreak Deployer
-
-The cloudbreak-deployer tool is capable of upgrading itself to a newer version.
-
-Please apply the following steps on the console:
-
-- Update Cloudbreak Deployer
-```
-   cbd update
-```
-- Update the `docker-compose.yml` file with new Docker containers that are needed for the `cbd`
-```
-   cbd regenerate
-```
-- Start the new version of the `cbd`
-```
-   cbd start
-```
-> It will take for a while, because of need to download all the updated docker images for the new version.
-
-- Check the health and version of the updated `cbd`
-```
-   cbd doctor
-```
-- Check the started Cloudbreak Application logs
-```
-   cbd logs cloudbreak
-```
->Cloudbreak should start within a minute - you should see a line like this: `Started CloudbreakApplication in 36.823 seconds`
-
 ## SSH to the hosts
 
 In the current version of Cloudbreak all the nodes can have a public IP address and all the nodes can be accessible via SSH.

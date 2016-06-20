@@ -20,6 +20,7 @@ pages:
     - Reference:
         - API : api.md
         - CLI/Shell : shell.md
+        - Update Cloudbreak: update.md
         - Account Management: ui_account.md
         - Auto-Scaling : periscope.md
         - Blueprints : blueprints.md
@@ -29,7 +30,6 @@ pages:
         - Mesos: mesos.md
         - SPI: spi.md
         - Operations : operations.md
-        - Migration : database.md
         - Advanced Configuration : configuration.md
         - Development :
             - Environments : environments.md

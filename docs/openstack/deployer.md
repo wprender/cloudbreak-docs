@@ -67,7 +67,7 @@ After the `cbd start` command finishes followings are worthy to check:
 ```
    cbd doctor
 ```
->In case of `cbd update` is needed, please check the related documentation for [Cloudbreak Deployer Update](operations.md#update-cloudbreak-deployer).
+>In case of `cbd update` is needed, please check the related documentation for [Cloudbreak Deployer Update](update.md#update-cloudbreak-deployer).
 
 - Started Cloudbreak Application logs.
 ```
