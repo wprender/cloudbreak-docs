@@ -22,16 +22,26 @@ You have a few options to give it a try:
 
 Start the shell with `cbd util cloudbreak-shell`. This will launch the Cloudbreak shell inside a Docker container and you are ready to start using it.
 
-<a name="dockerimage"></a>
-### Starting Cloudbreak shell with our prepared docker image
+### Connect cloudbreak shell with a remote cloudbreak instance
 
-You can find the docker image and its documentation [here](https://github.com/sequenceiq/docker-cb-shell).
+#### Prerequisites
+```
+- Ports are available for the local machine: 8080 for Cloudbreak API and 8089 for identity service
+- Installed and running Docker on the local machine
+```
+
+#### Steps
+- Execute `cbd util cloudbreak-shell-remote` for remote command on the remote host.
+- Execute the result of the previous command on the local machine.
+
+<a name="dockerimage"></a>
+The command is using our docker container. You can find the docker image and its documentation [here](https://github.com/sequenceiq/docker-cb-shell).
 
 <a name="fromsource"></a>
 ### Build from source
 
 If want to use the code or extend it with new commands follow the steps below. You will need:
-- jdk 1.7
+- jdk 1.8
 
 ```
 git clone https://github.com/sequenceiq/cloudbreak.git
