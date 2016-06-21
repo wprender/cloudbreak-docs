@@ -1,10 +1,4 @@
-# Update
-
-Cloudbreak has a built in solution to keep it up-to-date.
-
-## Update Cloudbreak Deployer
-
-The cloudbreak-deployer tool is capable of upgrading itself to a newer version.
+# Update Cloudbreak Deployer
 
 To update Cloudbreak Deployer to the newest version, run the following commands on the console where your `Profile` is located:
 
@@ -20,7 +14,7 @@ cbd update
 ```
 cbd regenerate
 ```
-- Remove obsolete containers, if other Cloudbreak instance doesn't use old versions:
+- If there are no other Cloudbreak instances that still use old Cloudbreak versions, remove the obsolete containers:
 ```
 cbd util cleanup
 ```
@@ -32,4 +26,4 @@ cbd doctor
 ```
 cbd start
 ```
-> Since Cloudbreak needs to download updated docker images for the new version, this step may take a while.
+> Cloudbreak needs to download updated docker images for the new version, so this step may take a while.
