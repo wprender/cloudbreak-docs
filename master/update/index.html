@@ -278,9 +278,7 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#update">Update</a></li>
-        
-            <li><a href="#update-cloudbreak-deployer">Update Cloudbreak Deployer</a></li>
+        <li class="main active"><a href="#update-cloudbreak-deployer">Update Cloudbreak Deployer</a></li>
         
     
     </ul>
@@ -288,10 +286,7 @@
                 <div class="col-md-9" role="main">
                     
 
-<h1 id="update">Update</h1>
-<p>Cloudbreak has a built in solution to keep it up-to-date.</p>
-<h2 id="update-cloudbreak-deployer">Update Cloudbreak Deployer</h2>
-<p>The cloudbreak-deployer tool is capable of upgrading itself to a newer version.</p>
+<h1 id="update-cloudbreak-deployer">Update Cloudbreak Deployer</h1>
 <p>To update Cloudbreak Deployer to the newest version, run the following commands on the console where your <code>Profile</code> is located:</p>
 <ul>
 <li>Stop all of the running Cloudbreak components:</li>
@@ -312,7 +307,7 @@
 </code></pre>
 
 <ul>
-<li>Remove obsolete containers, if other Cloudbreak instance doesn't use old versions:</li>
+<li>If there are no other Cloudbreak instances that still use old Cloudbreak versions, remove the obsolete containers:</li>
 </ul>
 <pre><code>cbd util cleanup
 </code></pre>
@@ -330,7 +325,7 @@
 </code></pre>
 
 <blockquote>
-<p>Since Cloudbreak needs to download updated docker images for the new version, this step may take a while.</p>
+<p>Cloudbreak needs to download updated docker images for the new version, so this step may take a while.</p>
 </blockquote>
                     <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/update.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
                 </div>

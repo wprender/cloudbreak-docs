@@ -1397,17 +1397,12 @@
         }, 
         {
             "location": "/update/", 
-            "text": "Update\n\n\nCloudbreak has a built in solution to keep it up-to-date.\n\n\nUpdate Cloudbreak Deployer\n\n\nThe cloudbreak-deployer tool is capable of upgrading itself to a newer version.\n\n\nTo update Cloudbreak Deployer to the newest version, run the following commands on the console where your \nProfile\n is located:\n\n\n\n\nStop all of the running Cloudbreak components:\n\n\n\n\ncbd kill\n\n\n\n\n\n\nUpdate Cloudbreak Deployer:\n\n\n\n\ncbd update\n\n\n\n\n\n\nUpdate the \ndocker-compose.yml\n file with new Docker containers that are needed for the \ncbd\n:\n\n\n\n\ncbd regenerate\n\n\n\n\n\n\nRemove obsolete containers, if other Cloudbreak instance doesn't use old versions:\n\n\n\n\ncbd util cleanup\n\n\n\n\n\n\nCheck the health and version of the updated \ncbd\n: \n\n\n\n\ncbd doctor\n\n\n\n\n\n\nStart the new version of the \ncbd\n:\n\n\n\n\ncbd start\n\n\n\n\n\n\nSince Cloudbreak needs to download updated docker images for the new version, this step may take a while.", 
+            "text": "Update Cloudbreak Deployer\n\n\nTo update Cloudbreak Deployer to the newest version, run the following commands on the console where your \nProfile\n is located:\n\n\n\n\nStop all of the running Cloudbreak components:\n\n\n\n\ncbd kill\n\n\n\n\n\n\nUpdate Cloudbreak Deployer:\n\n\n\n\ncbd update\n\n\n\n\n\n\nUpdate the \ndocker-compose.yml\n file with new Docker containers that are needed for the \ncbd\n:\n\n\n\n\ncbd regenerate\n\n\n\n\n\n\nIf there are no other Cloudbreak instances that still use old Cloudbreak versions, remove the obsolete containers:\n\n\n\n\ncbd util cleanup\n\n\n\n\n\n\nCheck the health and version of the updated \ncbd\n: \n\n\n\n\ncbd doctor\n\n\n\n\n\n\nStart the new version of the \ncbd\n:\n\n\n\n\ncbd start\n\n\n\n\n\n\nCloudbreak needs to download updated docker images for the new version, so this step may take a while.", 
             "title": "Update Cloudbreak"
         }, 
         {
-            "location": "/update/#update", 
-            "text": "Cloudbreak has a built in solution to keep it up-to-date.", 
-            "title": "Update"
-        }, 
-        {
             "location": "/update/#update-cloudbreak-deployer", 
-            "text": "The cloudbreak-deployer tool is capable of upgrading itself to a newer version.  To update Cloudbreak Deployer to the newest version, run the following commands on the console where your  Profile  is located:   Stop all of the running Cloudbreak components:   cbd kill   Update Cloudbreak Deployer:   cbd update   Update the  docker-compose.yml  file with new Docker containers that are needed for the  cbd :   cbd regenerate   Remove obsolete containers, if other Cloudbreak instance doesn't use old versions:   cbd util cleanup   Check the health and version of the updated  cbd :    cbd doctor   Start the new version of the  cbd :   cbd start   Since Cloudbreak needs to download updated docker images for the new version, this step may take a while.", 
+            "text": "To update Cloudbreak Deployer to the newest version, run the following commands on the console where your  Profile  is located:   Stop all of the running Cloudbreak components:   cbd kill   Update Cloudbreak Deployer:   cbd update   Update the  docker-compose.yml  file with new Docker containers that are needed for the  cbd :   cbd regenerate   If there are no other Cloudbreak instances that still use old Cloudbreak versions, remove the obsolete containers:   cbd util cleanup   Check the health and version of the updated  cbd :    cbd doctor   Start the new version of the  cbd :   cbd start   Cloudbreak needs to download updated docker images for the new version, so this step may take a while.", 
             "title": "Update Cloudbreak Deployer"
         }, 
         {
