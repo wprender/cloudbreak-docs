@@ -62,7 +62,7 @@ After the `cbd start` command finishes, check the following:
    ```
    cbd doctor
    ```
- > In case `cbd update` is needed, check the documentation for [Cloudbreak Deployer Update](update.md#update-cloudbreak-deployer).
+ > If you need to run `cbd update`, refer to [Cloudbreak Deployer Update](update.md#update-cloudbreak-deployer).
 
 * Cloudbreak Application logs:
    ```
@@ -73,9 +73,9 @@ After the `cbd start` command finishes, check the following:
 
 ## Optional Configurations
 
-You can perform the following optional comnfigurations:
+You can perform the following optional configurations:
 
-### Set Custom Tags**
+### Set Custom Tags
 
 In order to differentiate launched instances, we give you the option to use custom tags on your AWS resources deployed by Cloudbreak. You can use the tagging mechanism with the following variables. 
 
