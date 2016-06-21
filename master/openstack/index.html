@@ -287,13 +287,13 @@
     
         <li class="main "><a href="#openstack-setup">OpenStack Setup</a></li>
         
-            <li><a href="#setup-cloudbreak-deployer">Setup Cloudbreak Deployer</a></li>
+            <li><a href="#set-up-cloudbreak-deployer">Set up Cloudbreak Deployer</a></li>
         
-            <li><a href="#using-self-signed-certificates">Using self-signed certificates</a></li>
+            <li><a href="#using-self-signed-certificates">Using Self-signed Certificates</a></li>
         
             <li><a href="#start-cloudbreak-deployer">Start Cloudbreak Deployer</a></li>
         
-            <li><a href="#validate-the-started-cloudbreak-deployer">Validate the started Cloudbreak Deployer</a></li>
+            <li><a href="#validate-that-cloudbreak-deployer-has-started">Validate that Cloudbreak Deployer Has Started</a></li>
         
     
         <li class="main "><a href="#provisioning-prerequisites">Provisioning Prerequisites</a></li>
@@ -392,72 +392,72 @@ export OS_TENANT_NAME=&lt;your_os_tenant_name&gt;
 </code></pre>
 
 <h1 id="openstack-setup">OpenStack Setup</h1>
-<p><strong>Cloudbreak Deployer Highlights</strong></p>
+<p>Before configuring Cloudbreak Deployer, you should know that:</p>
 <ul>
 <li>The default SSH username for the OpenStack instances is <code>cloudbreak</code>.</li>
-<li>Cloudbreak Deployer location is <code>/var/lib/cloudbreak-deployment</code> on the launched EC2 instance. This is the
+<li>Cloudbreak Deployer location on the launched EC2 instance is <code>/var/lib/cloudbreak-deployment</code>. This is the
   <code>cbd</code> root folder.</li>
-<li>All <code>cbd</code> actions must be executed from the <code>cbd</code> root folder as <code>cloudbreak</code> user.</li>
+<li>You must execute all <code>cbd</code> actions from the <code>cbd</code> root folder as a <code>cloudbreak</code> user.</li>
 </ul>
-<h2 id="setup-cloudbreak-deployer">Setup Cloudbreak Deployer</h2>
-<p>You should already have the Cloudbreak Deployer either by <a href="./">using the OpenStack Cloud Images</a> or by
+<h2 id="set-up-cloudbreak-deployer">Set up Cloudbreak Deployer</h2>
+<p>You should have already installed the Cloudbreak Deployer either by <a href="./">using the OpenStack Cloud Images</a> or by
 <a href="../onprem/">installing the Cloudbreak Deployer</a> manually on your own VM.</p>
-<p>If you have your own installed VM, you should check the <a href="./#initialize-your-profile">Initialize your Profile</a>
+<p>If you have your own installed VM, check the <a href="./#initialize-your-profile">Initialize your Profile</a>
 section here before starting the provisioning.</p>
 <p>You can <a href="http://docs.openstack.org/user-guide/dashboard_launch_instances.html#connect-to-your-instance-by-using-ssh">connect to the previously created <code>cbd</code> VM</a>.</p>
-<p>To open the <code>cloudbreak-deployment</code> directory:</p>
+<p>To open the <code>cloudbreak-deployment</code> directory, run:</p>
 <pre><code>cd /var/lib/cloudbreak-deployment/
 </code></pre>
 
-<p>This is the directory of the configuration files and the supporting binaries for Cloudbreak Deployer.</p>
-<h3 id="initialize-your-profile">Initialize your Profile</h3>
-<p>First initialize <code>cbd</code> by creating a <code>Profile</code> file:</p>
+<p>This directory contains configuration files and the supporting binaries for Cloudbreak Deployer.</p>
+<h3 id="initialize-your-profile">Initialize Your Profile</h3>
+<p>First, initialize <code>cbd</code>:</p>
 <pre><code>cbd init
 </code></pre>
 
-<p>It will create a <code>Profile</code> file in the current directory. Please open the <code>Profile</code> file then check the <code>PUBLIC_IP</code>.
-This is mandatory, because of to can access the Cloudbreak UI (called Uluwatu). In some cases the <code>cbd</code> tool tries to
-guess it. If <code>cbd</code> cannot get the IP address during the initialization, please set the appropriate value.</p>
-<h3 id="openstack-specific-configuration">OpenStack specific configuration</h3>
+<p>This will create a <code>Profile</code> file in the current directory. Open the <code>Profile</code> file and check the <code>PUBLIC_IP</code>.
+The <code>PUBLIC_IP</code> is mandatory because it is used to access the Cloudbreak UI. In some cases the <code>cbd</code> tool tries to
+guess it. If <code>cbd</code> cannot get the IP address during the initialization, set the appropriate value.</p>
+<h3 id="openstack-specific-configuration">OpenStack-specific Configuration</h3>
 <p>Make sure that the <a href="./#cloudbreak-import">VM image used by Cloudbreak is imported on your OpenStack</a>.</p>
-<h2 id="using-self-signed-certificates">Using self-signed certificates</h2>
+<h2 id="using-self-signed-certificates">Using Self-signed Certificates</h2>
 <p>If your OpenStack is secured with a self-signed certificate, you need to import that certificate into Cloudbreak, 
 or else Cloudbreak won't be able to communicate with your OpenStack. To import the certificate, place the certificate 
 file in the generated certs directory <code>/certs/trusted/</code>. The trusted directory does not exist by default, so you need to create it.
 Cloudbreak will automatically pick up these certificates and import them into its truststore upon start.</p>
 <h2 id="start-cloudbreak-deployer">Start Cloudbreak Deployer</h2>
-<p>To start the Cloudbreak application use the following command.
-This will start all the Docker containers and initialize the application.</p>
+<p>To start the Cloudbreak application, use the following command:</p>
 <pre><code>cbd start
 </code></pre>
 
+<p>This will start all the Docker containers and initialize the application.</p>
 <blockquote>
-<p>At the very first time it will take for a while, because of need to download all the necessary docker images.</p>
+<p>The first time you start the Coudbreak app, the process will take longer than usual due to the download of all the necessary docker images.</p>
 </blockquote>
 <p>The <code>cbd start</code> command includes the <code>cbd generate</code> command which applies the following steps:</p>
 <ul>
 <li>creates the <strong>docker-compose.yml</strong> file that describes the configuration of all the Docker containers needed for the Cloudbreak deployment.</li>
 <li>creates the <strong>uaa.yml</strong> file that holds the configuration of the identity server used to authenticate users to Cloudbreak.</li>
 </ul>
-<h2 id="validate-the-started-cloudbreak-deployer">Validate the started Cloudbreak Deployer</h2>
-<p>After the <code>cbd start</code> command finishes followings are worthy to check:</p>
+<h2 id="validate-that-cloudbreak-deployer-has-started">Validate that Cloudbreak Deployer Has Started</h2>
+<p>After the <code>cbd start</code> command finishes, check the following:</p>
 <ul>
-<li>Pre-installed Cloudbreak Deployer version and health.</li>
+<li>Pre-installed Cloudbreak Deployer version and health:</li>
 </ul>
 <pre><code>   cbd doctor
 </code></pre>
 
 <blockquote>
-<p>In case of <code>cbd update</code> is needed, please check the related documentation for <a href="../update/#update-cloudbreak-deployer">Cloudbreak Deployer Update</a>.</p>
+<p>If you need to run <code>cbd update</code>, refer to <a href="../update/#update-cloudbreak-deployer">Cloudbreak Deployer Update</a>.</p>
 </blockquote>
 <ul>
-<li>Started Cloudbreak Application logs.</li>
+<li>Cloudbreak Application logs:</li>
 </ul>
 <pre><code>   cbd logs cloudbreak
 </code></pre>
 
 <blockquote>
-<p>Cloudbreak should start within a minute - you should see a line like this: <code>Started CloudbreakApplication in 36.823 seconds</code></p>
+<p>You should see a line like this: <code>Started CloudbreakApplication in 36.823 seconds</code>. Cloudbreak normally takes less than a minute to start.</p>
 </blockquote>
 <h1 id="provisioning-prerequisites">Provisioning Prerequisites</h1>
 <h2 id="generate-a-new-ssh-key">Generate a new SSH key</h2>
