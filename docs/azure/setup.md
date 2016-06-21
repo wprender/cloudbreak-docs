@@ -1,25 +1,23 @@
-On other cloud providers, we provide “public images” that are pre-built with the Cloudbreak Deployer. But on Azure, its a different process.
-We provide a way to launch Cloudbreak Deployer based on the new [Azure Resource Manager
-Templates](https://github.com/Azure/azure-quickstart-templates).
+Setting up Cloudbreak on Azure is different than with other cloud providers for which we provide pre-built “public images” with Cloudbreak Deployer pre-installed. On Azure, you launch Cloudbreak Deployer using [Azure Resource Manager Templates](https://github.com/Azure/azure-quickstart-templates).
 
-## Deploy using the Azure Portal
+## Deploy Using the Azure Portal
 
-To get started using the Azure Resource Manager template to install Cloudbreak, it is as simple as clicking here: <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsequenceiq%2Fazure-cbd-quickstart%2F1.3.0%2Fazuredeploy.json">  ![deploy on azure](http://azuredeploy.net/deploybutton.png) </a>
+To get started using the Azure Resource Manager template to install Cloudbreak, click here: <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsequenceiq%2Fazure-cbd-quickstart%2F1.3.0%2Fazuredeploy.json">  ![deploy on azure](http://azuredeploy.net/deploybutton.png) </a>
 
-> **[Minimum and Recommended VM requirements](onprem.md#minimum-and-recommended-system-requirements):** 8GB RAM, 10GB disk, 2 cores (The minimum instance type which is fit for cloudbreak is **D2**)
+> **[Minimum and Recommended VM Requirements](onprem.md#minimum-and-recommended-system-requirements):** 8GB RAM, 10GB disk, 2 cores (The minimum instance type suitable for Cloudbreak is **D2**)
 
-**The following parameters are mandatory (beyond to the default values) for the new `cbd` Template!**
+** In addition to the default values, the following parameters are mandatory for the new `cbd` template:**
 
 On the `Custom deployment` panel:
 
-  * Please create a new `Resource group`
+  * Create a new `Resource group`
   * Select an appropriate `Resource group location`
 
 On the `Parameters` panel:
 
   * Select the same `LOCATION` as for the resource group
   * `PASSWORD` must be between 6-72 characters long and must satisfy
-  at least 3 of password complexity requirements from the following:
+  at least 3 of the following password complexity requirements:
     * Contains an uppercase character
     * Contains a lowercase character
     * Contains a numeric digit
@@ -27,8 +25,7 @@ On the `Parameters` panel:
 
 **Finally** you should review the `Legal terms` from the `Custom deployment` panel:
 
-  * If you agree with the terms and conditions, just click on `Create`
-button of this panel
+  * To agree with the terms and conditions, click on `Create` button in this panel
   * Also click on the `Create` button on the `Custom deployment`
 
 > Deployment takes about **15-20 minutes**. You can track the
@@ -43,7 +40,7 @@ at:```http://<VM Public IP>:3000/```
 
 ## Under the hood
 
-Meanwhile Azure is creating the deployment, here is some information about what happens in the background:
+While Azure is creating the deployment, review this information about what happens in the background:
 
   * Start an instance from the official CentOS image
   * So no custom image copy is needed, which would take about 30
@@ -79,7 +76,7 @@ Cloudbreak Deployer (`cbd`)
 ```
   cbd doctor
 ```
->In case of `cbd update` is needed, please check the related documentation for [Cloudbreak Deployer Update](update.md#update-cloudbreak-deployer). Most of the `cbd` commands require `root` permissions.
+>If you need to run `cbd update` refer to [Cloudbreak Deployer Update](update.md#update-cloudbreak-deployer). Most of the `cbd` commands require `root` permissions.
 
 - Started Cloudbreak Application logs:
 ```
