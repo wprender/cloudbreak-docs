@@ -136,6 +136,12 @@
                         
                             
 <li >
+    <a href="../update/">Update Cloudbreak</a>
+</li>
+
+                        
+                            
+<li >
     <a href="../ui_account/">Account Management</a>
 </li>
 
@@ -185,12 +191,6 @@
                             
 <li class="active">
     <a href="./">Operations</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../database/">Migration</a>
 </li>
 
                         
@@ -253,7 +253,7 @@
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="../database/">
+                        <a rel="prev" href="../configuration/">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -285,8 +285,6 @@
             <li><a href="#troubleshoot">Troubleshoot</a></li>
         
             <li><a href="#logs">Logs</a></li>
-        
-            <li><a href="#update-cloudbreak-deployer">Update Cloudbreak Deployer</a></li>
         
             <li><a href="#ssh-to-the-hosts">SSH to the hosts</a></li>
         
@@ -324,45 +322,6 @@ It can reveal some common problems with your docker or boot2docker configuration
 </code></pre>
 
 <p>You can also check the individual logs of <code>uluwatu</code>, <code>periscope</code>, and <code>identity</code>.</p>
-<h2 id="update-cloudbreak-deployer">Update Cloudbreak Deployer</h2>
-<p>The cloudbreak-deployer tool is capable of upgrading itself to a newer version.</p>
-<p>Please apply the following steps on the console:</p>
-<ul>
-<li>Update Cloudbreak Deployer</li>
-</ul>
-<pre><code>   cbd update
-</code></pre>
-
-<ul>
-<li>Update the <code>docker-compose.yml</code> file with new Docker containers that are needed for the <code>cbd</code></li>
-</ul>
-<pre><code>   cbd regenerate
-</code></pre>
-
-<ul>
-<li>Start the new version of the <code>cbd</code></li>
-</ul>
-<pre><code>   cbd start
-</code></pre>
-
-<blockquote>
-<p>It will take for a while, because of need to download all the updated docker images for the new version.</p>
-</blockquote>
-<ul>
-<li>Check the health and version of the updated <code>cbd</code></li>
-</ul>
-<pre><code>   cbd doctor
-</code></pre>
-
-<ul>
-<li>Check the started Cloudbreak Application logs</li>
-</ul>
-<pre><code>   cbd logs cloudbreak
-</code></pre>
-
-<blockquote>
-<p>Cloudbreak should start within a minute - you should see a line like this: <code>Started CloudbreakApplication in 36.823 seconds</code></p>
-</blockquote>
 <h2 id="ssh-to-the-hosts">SSH to the hosts</h2>
 <p>In the current version of Cloudbreak all the nodes can have a public IP address and all the nodes can be accessible via SSH.
 The public IP addresses of a running cluster can be checked on the Cloudbreak UI under the <em>Nodes</em> tab.
