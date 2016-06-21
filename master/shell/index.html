@@ -280,7 +280,7 @@
     
         <li class="main active"><a href="#cloudbreak-shell">Cloudbreak Shell</a></li>
         
-            <li><a href="#install-and-start-cloudbreak-shell">Install and start Cloudbreak shell</a></li>
+            <li><a href="#install-and-start-cloudbreak-shell">Install and Start Cloudbreak Shell</a></li>
         
     
     </ul>
@@ -289,42 +289,42 @@
                     
 
 <h1 id="cloudbreak-shell">Cloudbreak Shell</h1>
-<p>The goal with the CLI was to provide an interactive command line tool which supports:</p>
+<p>The CLI is an interactive command line tool which supports:</p>
 <ul>
 <li>all functionality available through the REST API or Cloudbreak web UI</li>
-<li>makes possible complete automation of management task via <strong>scripts</strong></li>
-<li>context aware command availability</li>
+<li>complete automation of management tasks via <strong>scripts</strong></li>
+<li>context-aware commands</li>
+<li>required/optional parameters</li>
 <li>tab completion</li>
-<li>required/optional parameter support</li>
 <li><strong>hint</strong> command to guide you on the usual path</li>
 </ul>
-<h2 id="install-and-start-cloudbreak-shell">Install and start Cloudbreak shell</h2>
-<p>You have a few options to give it a try:</p>
+<h2 id="install-and-start-cloudbreak-shell">Install and Start Cloudbreak Shell</h2>
+<p>Install Cloudbreak shell using one of the following options:</p>
 <ul>
-<li><a href="#deployer">use Cloudreak deployer - <strong>recommended</strong></a></li>
-<li><a href="#dockerimage">use our prepared docker image</a></li>
-<li><a href="#fromsource">build it from source</a></li>
+<li><a href="#deployer">(<strong>Recommended</strong>) Use Cloudreak Deployer</a></li>
+<li><a href="#dockerimage">Use our prepared Docker image</a></li>
+<li><a href="#fromsource">Build it from source</a></li>
 </ul>
 <p><a name="deployer"></a></p>
-<h3 id="starting-cloudbreak-shell-using-cloudbreak-deployer">Starting cloudbreak shell using cloudbreak deployer</h3>
-<p>Start the shell with <code>cbd util cloudbreak-shell</code>. This will launch the Cloudbreak shell inside a Docker container and you are ready to start using it.</p>
-<h3 id="connect-cloudbreak-shell-with-a-remote-cloudbreak-instance">Connect cloudbreak shell with a remote cloudbreak instance</h3>
+<h3 id="starting-cloudbreak-shell-using-cloudbreak-deployer">Starting Cloudbreak Shell Using Cloudbreak Deployer</h3>
+<p>Start the shell with <code>cbd util cloudbreak-shell</code>. This will launch the Cloudbreak shell inside a Docker container, and you can start using it.</p>
+<h3 id="connect-cloudbreak-shell-with-a-remote-cloudbreak-instance">Connect Cloudbreak Shell with a Remote Cloudbreak Instance</h3>
 <h4 id="prerequisites">Prerequisites</h4>
-<pre><code>- Ports are available for the local machine: 8080 for Cloudbreak API and 8089 for identity service
-- Installed and running Docker on the local machine
-</code></pre>
-
-<h4 id="steps">Steps</h4>
 <ul>
-<li>Execute <code>cbd util cloudbreak-shell-remote</code> for remote command on the remote host.</li>
-<li>Execute the result of the previous command on the local machine.</li>
+<li>The following ports are available on the local machine: 8080 for Cloudbreak API and 8089 for identity service</li>
+<li>Docker is istalled and running on the local machine</li>
 </ul>
-<p><a name="dockerimage"></a>
-The command is using our docker container. You can find the docker image and its documentation <a href="https://github.com/sequenceiq/docker-cb-shell">here</a>.</p>
+<h4 id="steps">Steps</h4>
+<ol>
+<li>Execute <code>cbd util cloudbreak-shell-remote</code> on the remote host.</li>
+<li>Execute the result of the previous command on the local machine.</li>
+</ol>
+<p><a name="dockerimage"></a></p>
+<h3 id="use-our-prepared-docker-image">Use Our Prepared Docker image</h3>
+<p>The command is using our docker container. You can find the docker image and its documentation <a href="https://github.com/sequenceiq/docker-cb-shell">here</a>.</p>
 <p><a name="fromsource"></a></p>
-<h3 id="build-from-source">Build from source</h3>
-<p>If want to use the code or extend it with new commands follow the steps below. You will need:
-- jdk 1.8</p>
+<h3 id="build-from-source">Build from Source</h3>
+<p>If want to use the code or extend it with new commands, follow the steps below. You will need JDK 1.8.</p>
 <pre><code>git clone https://github.com/sequenceiq/cloudbreak.git
 cd cloudbreak/shell
 ../gradlew clean build
@@ -332,9 +332,9 @@ cd cloudbreak/shell
 
 <blockquote>
 <p><strong>Note</strong>
-In case you use the hosted version of Cloudbreak you should use the <code>latest-release.sh</code> to get the right version of the CLI.</p>
+If you use the hosted version of Cloudbreak, use <code>latest-release.sh</code> to get the right version of the CLI.</p>
 </blockquote>
-<p><strong>Start Cloudbreak-shell from the built source</strong></p>
+<p>Start Cloudbreak-shell from the build source using:</p>
 <pre><code>Usage:
   java -jar cloudbreak-shell-0.5-SNAPSHOT.jar                  : Starts Cloudbreak Shell in interactive mode.
   java -jar cloudbreak-shell-0.5-SNAPSHOT.jar --cmdfile=&lt;FILE&gt; : Cloudbreak executes commands read from the file.
@@ -349,19 +349,19 @@ Note:
   You should specify at least your username and password.
 </code></pre>
 
-<p>Once you are connected you can start to create a cluster. If you are lost and need guidance through the process you can use <code>hint</code>. You can always use <kbd>TAB</kbd> for completion.</p>
+<p>Once you are connected, you can create a cluster. Use <code>hint</code> if you get lost or need guidance through the process. Use <kbd>TAB</kbd> for completion.</p>
 <blockquote>
 <p><strong>Note</strong>
-All commands are <code>context aware</code> - they are available only when it makes sense - this way you are never confused and guided by the system on the right path.</p>
+All commands are <code>context-aware</code> - they are available only when it makes sense. This way the system guides you nad keeps you on the right path.</p>
 </blockquote>
-<p><strong>Provider specific documentations</strong></p>
+<p><strong>Provider-specific Documentation</strong></p>
 <ul>
 <li><a href="../aws/#interactive-mode-cloudbreak-shell">AWS</a></li>
 <li><a href="../azure/#interactive-mode-cloudbreak-shell">Azure</a></li>
 <li><a href="../gcp/#interactive-mode-cloudbreak-shell">GCP</a></li>
 <li><a href="../openstack/#interactive-mode-cloudbreak-shell">OpenStack</a></li>
 </ul>
-<p>or you can find a more detailed documentation about Cloudbreak-shell in its <a href="https://github.com/sequenceiq/cloudbreak-shell">Github repositiry</a>.</p>
+<p>Or, you can find more detailed documentation of the Cloudbreak-shell in its <a href="https://github.com/sequenceiq/cloudbreak-shell">Github repositiry</a>.</p>
                     <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/shell.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
                 </div>
             
