@@ -17,7 +17,9 @@ var flows = {
     "StackTerminationFlowConfig" : "Stack temination flow",
     "InstanceTerminationFlowConfig" : "Instance temination flow",
     "ClusterStartFlowConfig" : "Cluster start flow",
-    "ClusterStopFlowConfig" : "Cluster stop flow"
+    "ClusterStopFlowConfig" : "Cluster stop flow",
+    "ClusterResetFlowConfig" : "Cluster reinstall flow",
+    "ClusterCredentialChangeFlowConfig" : "Ambari user/password change flow"
 };
 
 var initGraphByDot = function(dot) {
