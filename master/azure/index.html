@@ -280,7 +280,7 @@
     
         <li class="main active"><a href="#azure-setup">Azure Setup</a></li>
         
-            <li><a href="#deploy-using-the-azure-portal">Deploy using the Azure Portal</a></li>
+            <li><a href="#deploy-using-the-azure-portal">Deploy Using the Azure Portal</a></li>
         
             <li><a href="#under-the-hood">Under the hood</a></li>
         
@@ -341,25 +341,23 @@
                     
 
 <h1 id="azure-setup">Azure Setup</h1>
-<p>On other cloud providers, we provide “public images” that are pre-built with the Cloudbreak Deployer. But on Azure, its a different process.
-We provide a way to launch Cloudbreak Deployer based on the new <a href="https://github.com/Azure/azure-quickstart-templates">Azure Resource Manager
-Templates</a>.</p>
-<h2 id="deploy-using-the-azure-portal">Deploy using the Azure Portal</h2>
-<p>To get started using the Azure Resource Manager template to install Cloudbreak, it is as simple as clicking here: <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsequenceiq%2Fazure-cbd-quickstart%2F1.3.0%2Fazuredeploy.json">  <img alt="deploy on azure" src="http://azuredeploy.net/deploybutton.png" /> </a></p>
+<p>Setting up Cloudbreak on Azure is different than with other cloud providers for which we provide pre-built “public images” with Cloudbreak Deployer pre-installed. On Azure, you launch Cloudbreak Deployer using <a href="https://github.com/Azure/azure-quickstart-templates">Azure Resource Manager Templates</a>.</p>
+<h2 id="deploy-using-the-azure-portal">Deploy Using the Azure Portal</h2>
+<p>To get started using the Azure Resource Manager template to install Cloudbreak, click here: <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsequenceiq%2Fazure-cbd-quickstart%2F1.3.0%2Fazuredeploy.json">  <img alt="deploy on azure" src="http://azuredeploy.net/deploybutton.png" /> </a></p>
 <blockquote>
-<p><strong><a href="../onprem/#minimum-and-recommended-system-requirements">Minimum and Recommended VM requirements</a>:</strong> 8GB RAM, 10GB disk, 2 cores (The minimum instance type which is fit for cloudbreak is <strong>D2</strong>)</p>
+<p><strong><a href="../onprem/#minimum-and-recommended-system-requirements">Minimum and Recommended VM Requirements</a>:</strong> 8GB RAM, 10GB disk, 2 cores (The minimum instance type suitable for Cloudbreak is <strong>D2</strong>)</p>
 </blockquote>
-<p><strong>The following parameters are mandatory (beyond to the default values) for the new <code>cbd</code> Template!</strong></p>
+<p><strong> In addition to the default values, the following parameters are mandatory for the new <code>cbd</code> template:</strong></p>
 <p>On the <code>Custom deployment</code> panel:</p>
 <ul>
-<li>Please create a new <code>Resource group</code></li>
+<li>Create a new <code>Resource group</code></li>
 <li>Select an appropriate <code>Resource group location</code></li>
 </ul>
 <p>On the <code>Parameters</code> panel:</p>
 <ul>
 <li>Select the same <code>LOCATION</code> as for the resource group</li>
 <li><code>PASSWORD</code> must be between 6-72 characters long and must satisfy
-  at least 3 of password complexity requirements from the following:<ul>
+  at least 3 of the following password complexity requirements:<ul>
 <li>Contains an uppercase character</li>
 <li>Contains a lowercase character</li>
 <li>Contains a numeric digit</li>
@@ -369,8 +367,7 @@ Templates</a>.</p>
 </ul>
 <p><strong>Finally</strong> you should review the <code>Legal terms</code> from the <code>Custom deployment</code> panel:</p>
 <ul>
-<li>If you agree with the terms and conditions, just click on <code>Create</code>
-button of this panel</li>
+<li>To agree with the terms and conditions, click on <code>Create</code> button in this panel</li>
 <li>Also click on the <code>Create</code> button on the <code>Custom deployment</code></li>
 </ul>
 <blockquote>
@@ -388,7 +385,7 @@ at:<code>http://&lt;VM Public IP&gt;:3000/</code><ul>
 </li>
 </ul>
 <h2 id="under-the-hood">Under the hood</h2>
-<p>Meanwhile Azure is creating the deployment, here is some information about what happens in the background:</p>
+<p>While Azure is creating the deployment, review this information about what happens in the background:</p>
 <ul>
 <li>Start an instance from the official CentOS image</li>
 <li>So no custom image copy is needed, which would take about 30
@@ -433,7 +430,7 @@ Cloudbreak Deployer (<code>cbd</code>)</li>
 </code></pre>
 
 <blockquote>
-<p>In case of <code>cbd update</code> is needed, please check the related documentation for <a href="../update/#update-cloudbreak-deployer">Cloudbreak Deployer Update</a>. Most of the <code>cbd</code> commands require <code>root</code> permissions.</p>
+<p>If you need to run <code>cbd update</code> refer to <a href="../update/#update-cloudbreak-deployer">Cloudbreak Deployer Update</a>. Most of the <code>cbd</code> commands require <code>root</code> permissions.</p>
 </blockquote>
 <ul>
 <li>Started Cloudbreak Application logs:</li>
