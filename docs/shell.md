@@ -26,8 +26,7 @@ Start the shell with `cbd util cloudbreak-shell`. This will launch the Cloudbrea
 
 #### Prerequisites
 
-- The following ports are available on the local machine: 8080 for Cloudbreak API and 8089 for identity service
-- Docker is istalled and running on the local machine
+- Docker is installed and running on the local machine
 
 #### Steps
  
