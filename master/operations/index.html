@@ -294,6 +294,8 @@
         
             <li><a href="#selected-ambari-server-node">Selected Ambari Server node</a></li>
         
+            <li><a href="#proxy-settings">Proxy settings</a></li>
+        
     
     </ul>
 </div></div>
@@ -351,6 +353,37 @@ Inside the container everything works the same way as expected. In order to do s
 <p>You can check the Ambari logs on the host instance under the <code>`/hadoopfs/fs1/logs</code> folder as well.</p>
 <p><strong>Ambari database</strong></p>
 <p>To access Ambari's database SSH to the selected node and run the following command:</p>
+<h2 id="proxy-settings">Proxy settings</h2>
+<h3 id="for-the-cbd">For the cbd</h3>
+<p>The following configs needs to be added to your <code>Profile</code>:</p>
+<pre><code>export CB_HTTP_PROXY=&quot;http://YOUR_PROXY_ADDRESS:YOUR_PROXY_PORT/&quot;
+export CB_HTTPS_PROXY=&quot;http://YOUR_PROXY_ADDRESS:YOUR_PROXY_PORT/&quot;
+export CB_JAVA_OPTS=&quot;-Dhttp.proxyHost=YOUR_PROXY_ADDRESS -Dhttp.proxyPort=YOUR_PROXY_PORT -Dhttps.proxyHost=YOUR_PROXY_ADDRESS -Dhttps.proxyPort=YOUR_PROXY_PORT -Dhttp.nonProxyHosts=172.17.0.1|*.service.consul|*.node.dc1.consul&quot;
+</code></pre>
+
+<h3 id="for-docker">For Docker</h3>
+<p>To download newer Docker images from the official repository the proxy settings should also be configured for the Docker service. It could be done through configuring the 'HTTP_PROXY' variable in your environment then the docker service should be restarted.</p>
+<blockquote>
+<p><strong>NOTE</strong> <a href="https://docs.docker.com/engine/admin/systemd/#/http-proxy">Related related part of the Docker documentation</a></p>
+</blockquote>
+<h3 id="for-the-provisioned-clusters">For the provisioned clusters</h3>
+<p>If the cluster would like to be provisioned to a (virtual) network that is behind a proxy then the <code>yum</code> on the provisioned machines needs to be configured to use that proxy. This is important because the Ambari install needs access to public repositories. The proxy settings of the <code>yum</code> could be configured by using the recipe functionality of Cloudbreak. A 'pre' recipe that will run on all of the nodes before the Ambari install begins needs to be created with the following <code>bash</code> script:</p>
+<pre><code>#!/bin/bash
+cat &gt;&gt; /etc/yum.conf &lt;&lt;ENDOF
+
+proxy=http://YOUR_PROXY_ADDRESS:YOUR_PROXY_PORT
+
+ENDOF
+</code></pre>
+
+<h3 id="useful">Useful</h3>
+<p>We created a <code>CURL</code> command that could be used for testing your proxy settings:</p>
+<pre><code>https_proxy=&quot;YOUR_PROXY_ADDRESS:YOUR_PROXY_PORT&quot; curl -X GET -I --insecure https://cloudbreak-api.sequenceiq.com/info
+</code></pre>
+
+<p>It's result should start with:</p>
+<pre><code>HTTP/1.1 200 OK
+</code></pre>
                     <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/operations.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
                 </div>
             
