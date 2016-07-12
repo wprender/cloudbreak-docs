@@ -87,8 +87,10 @@ To access Ambari's database SSH to the selected node and run the following comma
 The following configs needs to be added to your `Profile`:
 
 ```
+export http_proxy="http://YOUR_PROXY_ADDRESS:YOUR_PROXY_PORT/"
+export https_proxy="http(s)://YOUR_PROXY_ADDRESS:YOUR_PROXY_PORT/"
 export CB_HTTP_PROXY="http://YOUR_PROXY_ADDRESS:YOUR_PROXY_PORT/"
-export CB_HTTPS_PROXY="http://YOUR_PROXY_ADDRESS:YOUR_PROXY_PORT/"
+export CB_HTTPS_PROXY="http(s)://YOUR_PROXY_ADDRESS:YOUR_PROXY_PORT/"
 export CB_JAVA_OPTS="-Dhttp.proxyHost=YOUR_PROXY_ADDRESS -Dhttp.proxyPort=YOUR_PROXY_PORT -Dhttps.proxyHost=YOUR_PROXY_ADDRESS -Dhttps.proxyPort=YOUR_PROXY_PORT -Dhttp.nonProxyHosts=172.17.0.1|*.service.consul|*.node.dc1.consul"
 ```
 
