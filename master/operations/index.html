@@ -356,8 +356,10 @@ Inside the container everything works the same way as expected. In order to do s
 <h2 id="proxy-settings">Proxy settings</h2>
 <h3 id="for-the-cbd">For the cbd</h3>
 <p>The following configs needs to be added to your <code>Profile</code>:</p>
-<pre><code>export CB_HTTP_PROXY=&quot;http://YOUR_PROXY_ADDRESS:YOUR_PROXY_PORT/&quot;
-export CB_HTTPS_PROXY=&quot;http://YOUR_PROXY_ADDRESS:YOUR_PROXY_PORT/&quot;
+<pre><code>export http_proxy=&quot;http://YOUR_PROXY_ADDRESS:YOUR_PROXY_PORT/&quot;
+export https_proxy=&quot;http(s)://YOUR_PROXY_ADDRESS:YOUR_PROXY_PORT/&quot;
+export CB_HTTP_PROXY=&quot;http://YOUR_PROXY_ADDRESS:YOUR_PROXY_PORT/&quot;
+export CB_HTTPS_PROXY=&quot;http(s)://YOUR_PROXY_ADDRESS:YOUR_PROXY_PORT/&quot;
 export CB_JAVA_OPTS=&quot;-Dhttp.proxyHost=YOUR_PROXY_ADDRESS -Dhttp.proxyPort=YOUR_PROXY_PORT -Dhttps.proxyHost=YOUR_PROXY_ADDRESS -Dhttps.proxyPort=YOUR_PROXY_PORT -Dhttp.nonProxyHosts=172.17.0.1|*.service.consul|*.node.dc1.consul&quot;
 </code></pre>
 
