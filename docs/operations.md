@@ -39,23 +39,16 @@ cbd logs uluwatu
 
 ## SSH to the Hosts
 
-In the current version of Cloudbreak, all the nodes can have a public IP address and all the nodes can be accessible via SSH.
-You can check the public IP addresses of a running cluster in the Cloudbreak UI under the *Nodes* tab.
-Cloudbreak supports only key-based authentication; the public key can be specified when creating a cloud credential.
 
-Each cloud provider has a different SSH user. In order to figure out the SSH user, you can try it with the `root` user - that will tell you the correct username.
+To ssh to a running VM, you need to know its public IP address and private key. You can find the IP addresses of all the running VMs in the Cloudbreak UI, on the Cluster details page, in the Nodes section. Only key-based authentication is supported. The private key that you need to use to access the VM is the counterpart of the public key that you specified when creating a cloud credential.
+
+Cloudbreak creates a `cloudbreak` user which can be used to ssh into the box. This user has passwordless sudo rights.
 
 For example:
 
 ```
-ssh -i ~/.ssh/private-key.pem USER_NAME@<public-ip>
+ssh -i ~/.ssh/your-private-key.pem cloudbreak@<public-ip>
 ```
-
-## Accessing HDP Client Services
-
-The main difference between general HDP clusters and Cloudbreak-installed HDP clusters is that in Cloudbreak each host runs not only an Ambari server or agent, but also the HDP services in the same Docker container.
-This means that after `ssh` the client services won't be available instantly. You will first have to `enter` the ambari-agent container.
-Inside the container, everything works as expected. In order to do so there are a few options.
 
 ## Data Volumes
 
@@ -67,7 +60,7 @@ The instance that serves as an Ambari server node performs a few special tasks:
 
 - It runs the Ambari server and its database
 - It runs an nginx proxy that is used by the Cloudbreak API to securely communicate with the cluster
-- If Kerberos is configured, it runs a Kerberos KDC container 
+- If Kerberos is configured, it runs a Kerberos KDC container
 
 **Logs**
 
@@ -78,11 +71,6 @@ You can access Hadoop logs from the host and from the container in the `/hadoopf
 *Ambari Logs*
 
 You can access Ambari logs from the host instance in the ``/hadoopfs/fs1/logs` folder.
-
-**Ambari Database**
-
-To access Ambari's database, SSH to the selected node and run the following command:
-
 
 ## Proxy Settings
 
@@ -107,7 +95,7 @@ To download newer Docker images from the official repository, you need to config
 ### For Provisioned Clusters
 
 For a cluster to be provisioned to a (virtual) network that is behind a proxy, the `yum` on the provisioned machines needs to be configured to use that proxy. This is important because the Ambari install needs access to public repositories. You can configure `yum` proxy settings by using the recipe functionality of Cloudbreak. Use the following `bash` script to create a 'pre' recipe that will run on all of the nodes before the Ambari install:
- 
+
 ```
 #!/bin/bash
 cat >> /etc/yum.conf <<ENDOF
@@ -117,7 +105,7 @@ proxy=http://YOUR_PROXY_ADDRESS:YOUR_PROXY_PORT
 ENDOF
 ```
 
-### Test Your Proxy Settings 
+### Test Your Proxy Settings
 
 You can use the following `CURL` command to test your proxy settings:
 ```
