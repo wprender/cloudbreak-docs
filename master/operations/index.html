@@ -284,17 +284,17 @@
         
             <li><a href="#troubleshoot">Troubleshoot</a></li>
         
-            <li><a href="#logs">Logs</a></li>
+            <li><a href="#view-logs">View Logs</a></li>
         
-            <li><a href="#ssh-to-the-hosts">SSH to the hosts</a></li>
+            <li><a href="#ssh-to-the-hosts">SSH to the Hosts</a></li>
         
-            <li><a href="#accessing-hdp-client-services">Accessing HDP client services</a></li>
+            <li><a href="#accessing-hdp-client-services">Accessing HDP Client Services</a></li>
         
-            <li><a href="#data-volumes">Data volumes</a></li>
+            <li><a href="#data-volumes">Data Volumes</a></li>
         
-            <li><a href="#selected-ambari-server-node">Selected Ambari Server node</a></li>
+            <li><a href="#ambari-server-node">Ambari Server Node</a></li>
         
-            <li><a href="#proxy-settings">Proxy settings</a></li>
+            <li><a href="#proxy-settings">Proxy Settings</a></li>
         
     
     </ul>
@@ -304,58 +304,60 @@
 
 <h1 id="operations">Operations</h1>
 <h2 id="debug">Debug</h2>
-<p>If you want to have more detailed output set the <code>DEBUG</code> env variable to non-zero:</p>
-<pre><code>DEBUG=1 cbd some_command
+<p>To get more detailed commnad prompt output, set the <code>DEBUG</code> env variable to non-zero:  </p>
+<pre><code>DEBUG=1 cbd &lt;some_command&gt;
 </code></pre>
 
 <h2 id="troubleshoot">Troubleshoot</h2>
-<p>You can use the <code>doctor</code> command to diagnose your environment.
-It can reveal some common problems with your docker or boot2docker configuration and it also checks the cbd versions.</p>
+<p>The <code>doctor</code> command helps you diagnose problems in your environment, such as common problems with your docker or boot2docker configuration. You can also use it to check cbd versions.  </p>
 <pre><code>cbd doctor
 </code></pre>
 
-<h2 id="logs">Logs</h2>
-<p>The aggregated logs of all the Cloudbreak components can be checked with:</p>
+<h2 id="view-logs">View Logs</h2>
+<p>To check the aggregated logs of all the Cloudbreak components use:  </p>
 <pre><code>cbd logs
 </code></pre>
 
-<p>It can also be used to check the logs of an individual docker container. To see only the logs of the Cloudbreak backend:</p>
+<p>You can also check the logs of an individual docker container. To see only the logs of the Cloudbreak backend, use:</p>
 <pre><code>cbd logs cloudbreak
 </code></pre>
 
-<p>You can also check the individual logs of <code>uluwatu</code>, <code>periscope</code>, and <code>identity</code>.</p>
-<h2 id="ssh-to-the-hosts">SSH to the hosts</h2>
-<p>In the current version of Cloudbreak all the nodes can have a public IP address and all the nodes can be accessible via SSH.
-The public IP addresses of a running cluster can be checked on the Cloudbreak UI under the <em>Nodes</em> tab.
-Only key-based authentication is supported - the public key can be specified when creating a cloud credential.</p>
-<p>Each cloud provider has different SSH user. In order to figure out the username you can try it wit the <code>root</code> user - that will tell you the correct username.</p>
-<p>As an example:</p>
+<p>You can also check the individual logs of <code>uluwatu</code>, <code>periscope</code>, and <code>identity</code>. For example:</p>
+<pre><code>cbd logs uluwatu
+</code></pre>
+
+<h2 id="ssh-to-the-hosts">SSH to the Hosts</h2>
+<p>In the current version of Cloudbreak, all the nodes can have a public IP address and all the nodes can be accessible via SSH.
+You can check the public IP addresses of a running cluster in the Cloudbreak UI under the <em>Nodes</em> tab.
+Cloudbreak supports only key-based authentication; the public key can be specified when creating a cloud credential.</p>
+<p>Each cloud provider has a different SSH user. In order to figure out the SSH user, you can try it with the <code>root</code> user - that will tell you the correct username.</p>
+<p>For example:</p>
 <pre><code>ssh -i ~/.ssh/private-key.pem USER_NAME@&lt;public-ip&gt;
 </code></pre>
 
-<h2 id="accessing-hdp-client-services">Accessing HDP client services</h2>
-<p>The main difference between general HDP clusters and Cloudbreak-installed HDP clusters is that each host runs an Ambari server or agent Docker container and the HDP services will be installed in this container as well.
-It means that after <code>ssh</code> the client services won't be available instantly, first you'll have to <code>enter</code> the ambari-agent container.
-Inside the container everything works the same way as expected. In order to do so there are a few options.</p>
-<h2 id="data-volumes">Data volumes</h2>
+<h2 id="accessing-hdp-client-services">Accessing HDP Client Services</h2>
+<p>The main difference between general HDP clusters and Cloudbreak-installed HDP clusters is that in Cloudbreak each host runs not only an Ambari server or agent, but also the HDP services in the same Docker container.
+This means that after <code>ssh</code> the client services won't be available instantly. You will first have to <code>enter</code> the ambari-agent container.
+Inside the container, everything works as expected. In order to do so there are a few options.</p>
+<h2 id="data-volumes">Data Volumes</h2>
 <p>The disks that are attached to the instances are automatically mounted to <code>/hadoopfs/fs1</code>, <code>/hadoopfs/fs2</code>, ... <code>/hadoopfs/fsN</code> respectively.</p>
-<h2 id="selected-ambari-server-node">Selected Ambari Server node</h2>
-<p>This instance has some special tasks:</p>
+<h2 id="ambari-server-node">Ambari Server Node</h2>
+<p>The instance that serves as an Ambari server node performs a few special tasks:</p>
 <ul>
-<li>it runs the Ambari server and its database</li>
-<li>it runs an nginx proxy that is used by the Cloudbreak API to communicate with the cluster securely</li>
-<li>it runs a Kerberos KDC container if Kerberos is configured</li>
+<li>It runs the Ambari server and its database</li>
+<li>It runs an nginx proxy that is used by the Cloudbreak API to securely communicate with the cluster</li>
+<li>If Kerberos is configured, it runs a Kerberos KDC container </li>
 </ul>
 <p><strong>Logs</strong></p>
-<p><em>Hadoop logs</em></p>
-<p>Hadoop logs are available from the host and from the container as well in the <code>/hadoopfs/fs1/logs</code> directory.</p>
-<p><em>Ambari logs</em></p>
-<p>You can check the Ambari logs on the host instance under the <code>`/hadoopfs/fs1/logs</code> folder as well.</p>
-<p><strong>Ambari database</strong></p>
-<p>To access Ambari's database SSH to the selected node and run the following command:</p>
-<h2 id="proxy-settings">Proxy settings</h2>
+<p><em>Hadoop Logs</em></p>
+<p>You can access Hadoop logs from the host and from the container in the <code>/hadoopfs/fs1/logs</code> directory.</p>
+<p><em>Ambari Logs</em></p>
+<p>You can access Ambari logs from the host instance in the <code>`/hadoopfs/fs1/logs</code> folder.</p>
+<p><strong>Ambari Database</strong></p>
+<p>To access Ambari's database, SSH to the selected node and run the following command:</p>
+<h2 id="proxy-settings">Proxy Settings</h2>
 <h3 id="for-the-cbd">For the cbd</h3>
-<p>The following configs needs to be added to your <code>Profile</code>:</p>
+<p>Add the following configs to your <code>Profile</code>:</p>
 <pre><code>export http_proxy=&quot;http://YOUR_PROXY_ADDRESS:YOUR_PROXY_PORT/&quot;
 export https_proxy=&quot;http(s)://YOUR_PROXY_ADDRESS:YOUR_PROXY_PORT/&quot;
 export CB_HTTP_PROXY=&quot;http://YOUR_PROXY_ADDRESS:YOUR_PROXY_PORT/&quot;
@@ -364,12 +366,12 @@ export CB_JAVA_OPTS=&quot;-Dhttp.proxyHost=YOUR_PROXY_ADDRESS -Dhttp.proxyPort=Y
 </code></pre>
 
 <h3 id="for-docker">For Docker</h3>
-<p>To download newer Docker images from the official repository the proxy settings should also be configured for the Docker service. It could be done through configuring the 'HTTP_PROXY' variable in your environment then the docker service should be restarted.</p>
+<p>To download newer Docker images from the official repository, you need to configure the proxy settings for the Docker service. You can do this by configuring the 'HTTP_PROXY' variable in your environment. Next, restart the docker service.</p>
 <blockquote>
-<p><strong>NOTE</strong> <a href="https://docs.docker.com/engine/admin/systemd/#/http-proxy">Related related part of the Docker documentation</a></p>
+<p><strong>NOTE</strong> See <a href="https://docs.docker.com/engine/admin/systemd/#/http-proxy">related Docker documentation</a></p>
 </blockquote>
-<h3 id="for-the-provisioned-clusters">For the provisioned clusters</h3>
-<p>If the cluster would like to be provisioned to a (virtual) network that is behind a proxy then the <code>yum</code> on the provisioned machines needs to be configured to use that proxy. This is important because the Ambari install needs access to public repositories. The proxy settings of the <code>yum</code> could be configured by using the recipe functionality of Cloudbreak. A 'pre' recipe that will run on all of the nodes before the Ambari install begins needs to be created with the following <code>bash</code> script:</p>
+<h3 id="for-provisioned-clusters">For Provisioned Clusters</h3>
+<p>For a cluster to be provisioned to a (virtual) network that is behind a proxy, the <code>yum</code> on the provisioned machines needs to be configured to use that proxy. This is important because the Ambari install needs access to public repositories. You can configure <code>yum</code> proxy settings by using the recipe functionality of Cloudbreak. Use the following <code>bash</code> script to create a 'pre' recipe that will run on all of the nodes before the Ambari install:</p>
 <pre><code>#!/bin/bash
 cat &gt;&gt; /etc/yum.conf &lt;&lt;ENDOF
 
@@ -378,12 +380,12 @@ proxy=http://YOUR_PROXY_ADDRESS:YOUR_PROXY_PORT
 ENDOF
 </code></pre>
 
-<h3 id="useful">Useful</h3>
-<p>We created a <code>CURL</code> command that could be used for testing your proxy settings:</p>
+<h3 id="test-your-proxy-settings">Test Your Proxy Settings</h3>
+<p>You can use the following <code>CURL</code> command to test your proxy settings:</p>
 <pre><code>https_proxy=&quot;YOUR_PROXY_ADDRESS:YOUR_PROXY_PORT&quot; curl -X GET -I --insecure https://cloudbreak-api.sequenceiq.com/info
 </code></pre>
 
-<p>It's result should start with:</p>
+<p>Its output should start with:</p>
 <pre><code>HTTP/1.1 200 OK
 </code></pre>
                     <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/operations.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
