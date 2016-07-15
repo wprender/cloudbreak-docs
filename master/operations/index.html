@@ -294,8 +294,6 @@
         
             <li><a href="#ssh-to-the-hosts">SSH to the Hosts</a></li>
         
-            <li><a href="#accessing-hdp-client-services">Accessing HDP Client Services</a></li>
-        
             <li><a href="#data-volumes">Data Volumes</a></li>
         
             <li><a href="#ambari-server-node">Ambari Server Node</a></li>
@@ -333,18 +331,12 @@
 </code></pre>
 
 <h2 id="ssh-to-the-hosts">SSH to the Hosts</h2>
-<p>In the current version of Cloudbreak, all the nodes can have a public IP address and all the nodes can be accessible via SSH.
-You can check the public IP addresses of a running cluster in the Cloudbreak UI under the <em>Nodes</em> tab.
-Cloudbreak supports only key-based authentication; the public key can be specified when creating a cloud credential.</p>
-<p>Each cloud provider has a different SSH user. In order to figure out the SSH user, you can try it with the <code>root</code> user - that will tell you the correct username.</p>
+<p>To ssh to a running VM, you need to know its public IP address and private key. You can find the IP addresses of all the running VMs in the Cloudbreak UI, on the Cluster details page, in the Nodes section. Only key-based authentication is supported. The private key that you need to use to access the VM is the counterpart of the public key that you specified when creating a cloud credential.</p>
+<p>Cloudbreak creates a <code>cloudbreak</code> user which can be used to ssh into the box. This user has passwordless sudo rights.</p>
 <p>For example:</p>
-<pre><code>ssh -i ~/.ssh/private-key.pem USER_NAME@&lt;public-ip&gt;
+<pre><code>ssh -i ~/.ssh/your-private-key.pem cloudbreak@&lt;public-ip&gt;
 </code></pre>
 
-<h2 id="accessing-hdp-client-services">Accessing HDP Client Services</h2>
-<p>The main difference between general HDP clusters and Cloudbreak-installed HDP clusters is that in Cloudbreak each host runs not only an Ambari server or agent, but also the HDP services in the same Docker container.
-This means that after <code>ssh</code> the client services won't be available instantly. You will first have to <code>enter</code> the ambari-agent container.
-Inside the container, everything works as expected. In order to do so there are a few options.</p>
 <h2 id="data-volumes">Data Volumes</h2>
 <p>The disks that are attached to the instances are automatically mounted to <code>/hadoopfs/fs1</code>, <code>/hadoopfs/fs2</code>, ... <code>/hadoopfs/fsN</code> respectively.</p>
 <h2 id="ambari-server-node">Ambari Server Node</h2>
@@ -352,15 +344,13 @@ Inside the container, everything works as expected. In order to do so there are 
 <ul>
 <li>It runs the Ambari server and its database</li>
 <li>It runs an nginx proxy that is used by the Cloudbreak API to securely communicate with the cluster</li>
-<li>If Kerberos is configured, it runs a Kerberos KDC container </li>
+<li>If Kerberos is configured, it runs a Kerberos KDC container</li>
 </ul>
 <p><strong>Logs</strong></p>
 <p><em>Hadoop Logs</em></p>
 <p>You can access Hadoop logs from the host and from the container in the <code>/hadoopfs/fs1/logs</code> directory.</p>
 <p><em>Ambari Logs</em></p>
 <p>You can access Ambari logs from the host instance in the <code>`/hadoopfs/fs1/logs</code> folder.</p>
-<p><strong>Ambari Database</strong></p>
-<p>To access Ambari's database, SSH to the selected node and run the following command:</p>
 <h2 id="proxy-settings">Proxy Settings</h2>
 <h3 id="for-the-cbd">For the cbd</h3>
 <p>Add the following configs to your <code>Profile</code>:</p>
