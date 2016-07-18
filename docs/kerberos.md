@@ -1,15 +1,14 @@
 #Kerberos Security
 
-> This feature is currently `TECHNICAL PREVIEW`.
+> This feature is part of `TECHNICAL PREVIEW`.
 
-Cloudbreak can enable Kerberos security on the cluster. When enabled, Cloudbreak will install an MIT KDC into the cluster
-and enable Kerberos on the cluster.
+Cloudbreak supports using Kerberos security on the cluster. When creating a cluster, provide your Kerberos configuration details, and Cloudbreak will install an MIT KDC and enable Kerberos on the cluster.
 
 ## Enable Kerberos
 
-To enable Kerberos in a cluster, when creating your cluster via the UI, do the following:
+To enable Kerberos on a cluster, do the following when creating your cluster via Cloudbreak web UI:
 
-1. When in the **Create cluster** wizard, on the **Setup Network and Security** tab, check the **Enable security** option.
+1. In the **Create cluster** wizard, in the **Setup Network and Security** tab, check the **Enable security** option.
 2. Fill in the following fields:
 
 | Field | Description |
@@ -18,18 +17,19 @@ To enable Kerberos in a cluster, when creating your cluster via the UI, do the f
 | Kerberos admin | The KDC admin username to use for the KDC. |
 | Kerberos password | The KDC admin password to use for the KDC. |
 
-> The Cloudbreak Kerberos setup does not contain Active Directory support or any other third party user authentication method. If you
-want to use custom Hadoop user, you have to create users manually with the same name on all Ambari containers on each node.
+> The Cloudbreak Kerberos setup does not csupport Active Directory or any other third party user authentication method. If you
+want to use custom Hadoop user, you have to create it manually with the same name in all Ambari containers on each node.
 
 ### Testing Kerberos
 
-To run a job on the cluster, you can use one of the default Hadoop users, like `ambari-qa`, as usual.
+To run a job on the cluster, you can use one of the default Hadoop users, like `ambari-qa`.
+Once kerberos is enabled, you need a `ticket` to execute any job on the cluster. 
 
-Once kerberos is enabled you need a `ticket` to execute any job on the cluster. Here's an example to get a ticket:
+Here's an example of how to get a ticket:
 ```
 kinit -V -kt /etc/security/keytabs/smokeuser.headless.keytab ambari-qa-sparktest-rec@NODE.DC1.CONSUL
 ```
-Example job:
+Here is an example job:
 ```java
 export HADOOP_LIBS=/usr/hdp/current/hadoop-mapreduce-client
 export JAR_EXAMPLES=$HADOOP_LIBS/hadoop-mapreduce-examples.jar
@@ -42,22 +42,22 @@ hadoop jar $JAR_JOBCLIENT mrbench -baseDir /user/ambari-qa/smallJobsBenchmark -n
 
 ### Create Hadoop Users
 
-To create Hadoop users please follow the steps below.
+To create Hadoop users, follow the steps below.
 
-  * Log in via SSH to the node where the Ambari Server is (IP address is the same as the Ambari UI)
+  * Log in via SSH to the node where the Ambari Server is (IP address is the same as the Ambari UI) and run:
 
 ```
 kadmin -p [admin_user]/[admin_user]@NODE.DC1.CONSUL (type admin password)
 addprinc custom-user (type user password twice)
 ```
 
-  * Log in via SSH to all other nodes
+  * Log in via SSH to all other nodes and, on each node, run:
 
 ```
 useradd custom-user
 ```
 
-  * Log in via SSH to one of the nodes
+  * Log in via SSH to one of the nodes and run:
 
 ```
 su custom-user
