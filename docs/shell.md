@@ -72,7 +72,7 @@ Options:
 Once you are connected, you can create a cluster. Use `hint` if you get lost or need guidance through the process. Use <kbd>TAB</kbd> for completion.
 
 > **Note: **
-> All commands are `context-aware`, which means that they are available only when they are relevant. This way the system guides you nad keeps you on the right path.
+> All commands are **context-aware**, which means that they are available only when they are relevant. This way the system guides you nad keeps you on the right path.
 
 **Provider-specific Documentation**
 
