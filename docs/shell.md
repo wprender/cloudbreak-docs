@@ -7,18 +7,18 @@ The CLI is an interactive command line tool which supports:
 * context-aware commands
 * required/optional parameters
 * tab completion
-* **hint** command to guide you on the usual path
+* **hint** command that guides you when you need help
 
 ## Install and Start Cloudbreak Shell
 
 Install Cloudbreak shell using one of the following options:
 
-- [(**Recommended**) Use Cloudreak Deployer](#deployer)
-- [Use our prepared Docker image](#dockerimage)
-- [Build it from source](#fromsource)
+- [(**Recommended**) Install Cloudbreak Shell Using Cloudreak Deployer](#deployer)
+- [Use Our Prepared Docker Image](#dockerimage)
+- [Build From Source](#fromsource)
 
 <a name="deployer"></a>
-### Starting Cloudbreak Shell Using Cloudbreak Deployer
+### Install Cloudbreak Shell Using Cloudbreak Deployer
 
 Start the shell with `cbd util cloudbreak-shell`. This will launch the Cloudbreak shell inside a Docker container, and you can start using it.
 
@@ -26,7 +26,7 @@ Start the shell with `cbd util cloudbreak-shell`. This will launch the Cloudbrea
 
 #### Prerequisites
 
-- Docker is installed and running on the local machine
+Docker is installed and running on the local machine
 
 #### Steps
  
@@ -49,7 +49,7 @@ cd cloudbreak/shell
 ../gradlew clean build
 ```
 
-> **Note**
+> **Note: **
 > If you use the hosted version of Cloudbreak, use `latest-release.sh` to get the right version of the CLI.
 
 Start Cloudbreak-shell from the build source using:
@@ -64,14 +64,15 @@ Options:
   --identity.address=<http[s]://HOSTNAME:PORT>    Address of the SequenceIQ identity server [default: https://identity.sequenceiq.com].
   --sequenceiq.user=<USER>                        Username of the SequenceIQ user [default: user@sequenceiq.com].
   --sequenceiq.password=<PASSWORD>                Password of the SequenceIQ user [default: password].
-
-Note:
-  You should specify at least your username and password.
 ```
+ 
+> **Note: **
+> You should specify at least your username and password.
+
 Once you are connected, you can create a cluster. Use `hint` if you get lost or need guidance through the process. Use <kbd>TAB</kbd> for completion.
 
-> **Note**
-> All commands are `context-aware` - they are available only when it makes sense. This way the system guides you nad keeps you on the right path.
+> **Note: **
+> All commands are `context-aware`, which means that they are available only when they are relevant. This way the system guides you nad keeps you on the right path.
 
 **Provider-specific Documentation**
 
@@ -80,4 +81,4 @@ Once you are connected, you can create a cluster. Use `hint` if you get lost or 
 - [GCP](gcp.md#interactive-mode-cloudbreak-shell)
 - [OpenStack](openstack.md#interactive-mode-cloudbreak-shell)
 
-Or, you can find more detailed documentation of the Cloudbreak-shell in its [Github repositiry](https://github.com/sequenceiq/cloudbreak-shell).
+You can also find more detailed documentation of the Cloudbreak-shell in its [Github repositiry](https://github.com/sequenceiq/cloudbreak-shell).
