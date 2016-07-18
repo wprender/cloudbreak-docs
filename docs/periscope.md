@@ -109,7 +109,7 @@ Explanation of the parameters:
 
 To keep your cluster healthy, Cloudbreak auto-scaling runs several background checks during `downscale` operation.
 
-* **Cloudbreak will never remove `application master nodes` from a cluster.** In order to make sure that a node running AM is not 
+* **Cloudbreak will never remove `application master nodes` from a cluster.** In order to make sure that a node running Ambari Metrics is not 
 removed, **Cloudbreak has to be able to access the YARN Resource Manager**. When creating a cluster using the 
 `default` secure network template, **make sure that the RM's port is open on that node**.
 * In order to **keep a healthy HDFS during downscale, Cloudbreak always keeps the `replication factor` configured and makes sure that there is enough `space` on HDFS to rebalance data**.
