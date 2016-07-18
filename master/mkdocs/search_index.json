@@ -1342,13 +1342,13 @@
         }, 
         {
             "location": "/api/", 
-            "text": "API documentation\n\n\nCloudbreak is a RESTful application development platform with the goal of helping developers to build solutions for deploying HDP clusters in different environments. Once it is deployed in your favourite servlet container it exposes a REST API allowing to span up Hadoop clusters of arbitary sizes and cloud providers.\n\n\nThe \nAPI documentation\n is generated from the code using \nSwagger\n.", 
+            "text": "API Documentation\n\n\nCloudbreak is a RESTful application development platform whose goal is to help developers deploy HDP clusters in different environments. Once Cloudbreak is deployed in your favorite servlet container, it exposes a REST API, allowing you to spin up Hadoop clusters of any size with your chosen cloud provider.\n\n\nThe \nAPI documentation\n was generated from the code using \nSwagger\n.", 
             "title": "API"
         }, 
         {
             "location": "/api/#api-documentation", 
-            "text": "Cloudbreak is a RESTful application development platform with the goal of helping developers to build solutions for deploying HDP clusters in different environments. Once it is deployed in your favourite servlet container it exposes a REST API allowing to span up Hadoop clusters of arbitary sizes and cloud providers.  The  API documentation  is generated from the code using  Swagger .", 
-            "title": "API documentation"
+            "text": "Cloudbreak is a RESTful application development platform whose goal is to help developers deploy HDP clusters in different environments. Once Cloudbreak is deployed in your favorite servlet container, it exposes a REST API, allowing you to spin up Hadoop clusters of any size with your chosen cloud provider.  The  API documentation  was generated from the code using  Swagger .", 
+            "title": "API Documentation"
         }, 
         {
             "location": "/shell/", 
