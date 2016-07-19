@@ -1407,33 +1407,33 @@
         }, 
         {
             "location": "/ui_account/", 
-            "text": "Account management on UI\n\n\nOn the Cloudbreak UI (Uluwatu) there are opportunity to review the user's entitlements and manage some settings.\n\n\nAccount Details page\n\n\nYou can view the \naccount details\n on the \naccount\n page (by clicking on the related header menu).\n\n\nSecurity scopes\n\n\nOn the expanded \naccount details\n you can check your \nsecurity scopes\n.\n\n\n\n\nNote:\n Even the administrator users cannot modify the list of scopes.\n\n\n\n\nCloudbreak has distinct security scope for the following resources:\n\n\n\n\nBlueprints\n\n\nTemplates\n\n\nCredentials\n\n\nStacks\n\n\nNetworks\n\n\nSecurity Groups\n\n\n\n\n\n\nIn the future the list of security scopes could be extended with new resources.\n\n\n\n\nCloud platforms\n\n\nCloud platforms\n table lists the supported cloud platforms by Cloudbreak.\n\n\nAdministrator users can set the used (what will be available) cloud platforms for the group.\n\n\nFor example:\n If the AWS cloud platform is the selected, only the AWS networks, resources, credentials and \nplatforms to be displayed and can be created for every users in the account (also for the managed users).\n\n\nSupported Cloud platforms:\n\n\n\n\nAWS\n\n\nAzure RM\n\n\nGCP\n\n\nOpenStack", 
+            "text": "Manage Your Account Using Cloudbreak UI\n\n\nYou can use the Cloudbreak UI (Uluwatu) to view and manage your settings.\n\n\nAccount Details\n\n\nGo to the \naccount\n page and view your \naccount details\n.\n\n\nSecurity Scopes\n\n\nExpand the \naccount details\n page to check your \nsecurity scopes\n.\n\n\n\n\nNote: \n Even administrator users cannot modify the list of scopes.\n\n\n\n\nCloudbreak has distinct security scopes for the following resources:\n\n\n\n\nBlueprints\n\n\nTemplates\n\n\nCredentials\n\n\nStacks\n\n\nNetworks\n\n\nSecurity Groups\n\n\n\n\n\n\nNote: \n In the future, the list of security scopes may be extended to include new resources.\n\n\n\n\nCloud Platforms\n\n\nCloud platforms\n table lists cloud platforms supported by Cloudbreak.\n\n\nOnly administrator users can set the cloud platforms used by the group.\n For example, if the administrator selects AWS cloud platform, only AWS networks, resources, and credentials will be displayed and can be created for users in the account (including managed users).\n\n\nSupported Cloud Platforms:\n\n\n\n\nAWS\n\n\nAzure RM\n\n\nGCP\n\n\nOpenStack", 
             "title": "Account Management"
         }, 
         {
-            "location": "/ui_account/#account-management-on-ui", 
-            "text": "On the Cloudbreak UI (Uluwatu) there are opportunity to review the user's entitlements and manage some settings.", 
-            "title": "Account management on UI"
+            "location": "/ui_account/#manage-your-account-using-cloudbreak-ui", 
+            "text": "You can use the Cloudbreak UI (Uluwatu) to view and manage your settings.", 
+            "title": "Manage Your Account Using Cloudbreak UI"
         }, 
         {
-            "location": "/ui_account/#account-details-page", 
-            "text": "You can view the  account details  on the  account  page (by clicking on the related header menu).", 
-            "title": "Account Details page"
+            "location": "/ui_account/#account-details", 
+            "text": "Go to the  account  page and view your  account details .", 
+            "title": "Account Details"
         }, 
         {
             "location": "/ui_account/#security-scopes", 
-            "text": "On the expanded  account details  you can check your  security scopes .   Note:  Even the administrator users cannot modify the list of scopes.   Cloudbreak has distinct security scope for the following resources:   Blueprints  Templates  Credentials  Stacks  Networks  Security Groups    In the future the list of security scopes could be extended with new resources.", 
-            "title": "Security scopes"
+            "text": "Expand the  account details  page to check your  security scopes .   Note:   Even administrator users cannot modify the list of scopes.   Cloudbreak has distinct security scopes for the following resources:   Blueprints  Templates  Credentials  Stacks  Networks  Security Groups    Note:   In the future, the list of security scopes may be extended to include new resources.", 
+            "title": "Security Scopes"
         }, 
         {
             "location": "/ui_account/#cloud-platforms", 
-            "text": "Cloud platforms  table lists the supported cloud platforms by Cloudbreak.  Administrator users can set the used (what will be available) cloud platforms for the group.  For example:  If the AWS cloud platform is the selected, only the AWS networks, resources, credentials and \nplatforms to be displayed and can be created for every users in the account (also for the managed users).", 
-            "title": "Cloud platforms"
+            "text": "Cloud platforms  table lists cloud platforms supported by Cloudbreak.  Only administrator users can set the cloud platforms used by the group.  For example, if the administrator selects AWS cloud platform, only AWS networks, resources, and credentials will be displayed and can be created for users in the account (including managed users).", 
+            "title": "Cloud Platforms"
         }, 
         {
             "location": "/ui_account/#supported-cloud-platforms", 
             "text": "AWS  Azure RM  GCP  OpenStack", 
-            "title": "Supported Cloud platforms:"
+            "title": "Supported Cloud Platforms:"
         }, 
         {
             "location": "/periscope/", 
