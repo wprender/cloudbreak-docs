@@ -1,8 +1,8 @@
-# Mesos introduction
+# Mesos Introduction
 
 {!docs/mesos/intro.md!}
 
-# Cloudbreak deployer
+# Cloudbreak Deployer
 
 {!docs/mesos/deployer.md!}
 
