@@ -286,7 +286,7 @@
     
         <li class="main active"><a href="#mesos-introduction">Mesos Introduction</a></li>
         
-            <li><a href="#differences-with-the-cloud-provider-implementations">Differences with the cloud provider implementations</a></li>
+            <li><a href="#differences-with-other-cloud-provider-implementations">Differences with Other Cloud Provider Implementations</a></li>
         
             <li><a href="#technical-preview-restrictions">Technical Preview Restrictions</a></li>
         
@@ -329,12 +329,12 @@
 
 <h1 id="mesos-introduction">Mesos Introduction</h1>
 <blockquote>
-<p>Mesos support is currently <code>TECHNICAL PREVIEW</code>. It may not be suitable for production use.</p>
+<p>Mesos support is part of <code>TECHNICAL PREVIEW</code>. It may not be suitable for production use.</p>
 </blockquote>
-<p>The basic concepts of Cloudbreak's Mesos support are the same as the other other cloud provider implementations: HDP clusters will be provisioned through Ambari with the help of blueprints and Ambari server and agents run in Docker containers. But it has a lot of major differences, and to start working with Cloudbreak on Mesos these differences must be understood first.</p>
-<h2 id="differences-with-the-cloud-provider-implementations">Differences with the cloud provider implementations</h2>
-<h4 id="1-the-mesos-integration-doesnt-start-new-instances-and-doesnt-build-a-new-infrastructure-on-a-cloud-provider">1. The Mesos integration doesn't start new instances and doesn't build a new infrastructure on a cloud provider.</h4>
-<p>Cloudbreak's normal behavior is to build the infrastructure first where Hadoop components will be deployed later through Ambari. It involves creating or reusing the networking layer like virtual networks and subnets, provisioning new virtual machines in these networks from pre-existing cloud images and starting the Ambari docker containers on these nodes. Mesos integration was designed <em>not</em> to include these steps because in most cases users already have their own Mesos infrastructure and would like to deploy their cluster there, near their other components. That's why Cloudbreak expects to "bring your own Mesos infrastructure" and configure access to this Mesos deployment in Cloudbreak first.</p>
+<p>The basic concepts of Cloudbreak's Mesos support are similar as in other cloud provider implementations: HDP clusters are provisioned through Ambari with the help of blueprints, and Ambari server and agents run in Docker containers. But there are a few major differences that you should consider before you start working with Cloudbreak on Mesos.</p>
+<h2 id="differences-with-other-cloud-provider-implementations">Differences with Other Cloud Provider Implementations</h2>
+<h4 id="1-the-mesos-integration-doesnt-start-new-instances-and-doesnt-build-new-infrastructure-on-a-cloud-provider">1. The Mesos integration doesn't start new instances and doesn't build new infrastructure on a cloud provider.</h4>
+<p>Cloudbreak's normal behavior is to first build the infrastructure where Hadoop components will later be deployed through Ambari. It involves creating or reusing the networking layer (virtual networks, subnets, and so on), provisioning new virtual machines in these networks from pre-existing cloud images, and starting the Ambari docker containers on these nodes. Mesos integration was designed <em>not</em> to include these steps because in most cases users already have their own Mesos infrastructure and would like to deploy their cluster there, near their other components. That's why Cloudbreak expects a "bring your own Mesos" infrastructure and expects you to configure access to this Mesos deployment in Cloudbreak first.</p>
 <h4 id="2-a-mesos-credential-on-the-cloudbreak-ui-means-configuring-access-to-the-marathon-api">2. A Mesos credential on the Cloudbreak UI means configuring access to the Marathon API.</h4>
 <p>Cloudbreak needs a control system in Mesos through which it can communicate and start Ambari containers. The standard application scheduling framework for services in Mesos is Marathon so we've chosen it as the solution for Cloudbreak. It means that to be able to communicate with Mesos, Cloudbreak needs a Marathon deployment on the Mesos cluster. When setting up access in Cloudbreak a Marathon API endpoint must be specified. Basic authentication and TLS on the Marathon API is not yet supported in the tech preview.</p>
 <h4 id="3-a-mesos-template-on-the-cloudbreak-ui-means-constraints-instead-of-new-resources">3. A Mesos template on the Cloudbreak UI means constraints instead of new resources.</h4>
