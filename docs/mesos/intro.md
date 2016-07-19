@@ -20,13 +20,13 @@ For example, consider these two scenarios:
 - An AWS template with an instance type of `m4.large` and 4 pieces of 50 GB attached magnetic volumes will create a VM with these specs when Cloudbreak is building the cluster infrastructure.
 - A Mesos template with 2 CPU cores and 4 GB memory means that Cloudbreak will request the Marathon API to schedule the Ambari container on a node where these resources can be satisfied.
 
-####4. Cloudbreak doesn't start a gateway instance.
+####4. On Mesos, Cloudbreak doesn't start a gateway instance.
 
-On the cloud providers there is a gateway VM that's deployed for every new cluster by Cloudbreak. It runs a few containers like Ambari server but most importantly runs an Nginx server. Every communication between a Cloudbreak deployment and a cluster deployed by Cloudbreak goes through this Nginx instance. This is done on a 2-way TLS channel where the Nginx server is responsible for the TLS termination. Communication inside the cluster, like between Ambari server and agents is not encrypted but every communication from outside is secure. It enables Cloudbreak to be deployed outside of the private network of the cluster. The Mesos integration doesn't have a solution like this, so every communication between Cloudbreak and the cluster goes through an unencrypted channel. This is one of the reasons that in this case Cloudbreak should be deployed inside the same private network (or in the same Mesos cluster) where the clusters will be deployed.
+On other cloud providers, Cloudbreak deploys a gateway VM for every new cluster. The gateway VM runs a few containers, such as Ambari server, and, most importantly, it runs an Nginx server. All communication between Cloudbreak Deployer and a cluster deployed by Cloudbreak hsppens through this Nginx instance. This is done through a two-way TLS channel where the Nginx server is responsible for the TLS termination. Communication inside the cluster (for example, between Ambari server and agents) is not encrypted, but all communication from outside is secure. This allows Cloudbreak to be deployed outside of the private network of the cluster. The Mesos integration doesn't have a solution like this, so all communication between Cloudbreak and the Mesos cluster happens through an unencrypted channel. For this reason, on Mesos, Cloudbreak should be deployed inside the same private network (or in the same Mesos cluster) where the clusters will be deployed.
 
 ## Limitations of the Technical Preview 
 
-####1. No support for Consul or other out-of-the-box DNS solution.
+####1. No support for Consul or other custom DNS solution.
 
 On Mesos, Cloudbreak does not provide a custom DNS solution like on other cloud providers, where Cloudbreak uses Consul to resolve addresses for nodes and some services (such as Ambari server). In this technucal preview, containers are deployed with `net=host`, so Mesos nodes must be set up manually in order to be able to resolve hostnames to IP addresses and vice versa. You can resolve them by creating the `/etc/hosts` file on each node in the cluster.
   
