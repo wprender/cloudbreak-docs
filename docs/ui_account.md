@@ -1,19 +1,19 @@
 
 
-# Account management on UI
+# Manage Your Account Using Cloudbreak UI
 
-On the Cloudbreak UI (Uluwatu) there are opportunity to review the user's entitlements and manage some settings.
+You can use the Cloudbreak UI (Uluwatu) to view and manage your settings.
 
-## Account Details page
+## Account Details 
 
-You can view the `account details` on the `account` page (by clicking on the related header menu).
+Go to the `account` page and view your `account details`.
 
-### Security scopes
+### Security Scopes
 
-On the expanded `account details` you can check your **security scopes**.
-> **Note:** Even the administrator users cannot modify the list of scopes.
+Expand the `account details` page to check your **security scopes**.
+> **Note: ** Even administrator users cannot modify the list of scopes.
 
-Cloudbreak has distinct security scope for the following resources:
+Cloudbreak has distinct security scopes for the following resources:
 
  - Blueprints
  - Templates
@@ -22,18 +22,15 @@ Cloudbreak has distinct security scope for the following resources:
  - Networks
  - Security Groups
 
-> In the future the list of security scopes could be extended with new resources.
+> **Note: ** In the future, the list of security scopes may be extended to include new resources.
 
-### Cloud platforms
+### Cloud Platforms
 
-`Cloud platforms` table lists the supported cloud platforms by Cloudbreak.
+`Cloud platforms` table lists cloud platforms supported by Cloudbreak.
 
-**Administrator users can set the used (what will be available) cloud platforms for the group.**
+**Only administrator users can set the cloud platforms used by the group.** For example, if the administrator selects AWS cloud platform, only AWS networks, resources, and credentials will be displayed and can be created for users in the account (including managed users).
 
-**For example:** If the AWS cloud platform is the selected, only the AWS networks, resources, credentials and 
-platforms to be displayed and can be created for every users in the account (also for the managed users).
-
-#### Supported Cloud platforms:
+#### Supported Cloud Platforms:
 
  - AWS
  - Azure RM
