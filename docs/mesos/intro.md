@@ -15,8 +15,8 @@ Marathon is a standard application scheduling framework for services in Mesos. C
 ####3. A Mesos template in the Cloudbreak UI means resource constraints instead of new resources.
 
 Through the Cloudbreak UI, you can create Cloudbreak templates that define the virtual machines in a cluster's hostgroup that will be provisioned through the cloud provider API. You can create such templates for Mesos and you can link the VMs to a hostgroup, but for Mesos these templates mean resource constraints that will be demanded through the Marathon API, not resources that will created. 
-For example:
-
+  
+For example, consider these two scenarios:  
 - An AWS template with an instance type of `m4.large` and 4 pieces of 50 GB attached magnetic volumes will create a VM with these specs when Cloudbreak is building the cluster infrastructure.
 - A Mesos template with 2 CPU cores and 4 GB memory means that Cloudbreak will request the Marathon API to schedule the Ambari container on a node where these resources can be satisfied.
 
@@ -26,13 +26,13 @@ On the cloud providers there is a gateway VM that's deployed for every new clust
 
 ## Limitations of the Technical Preview 
 
-####1. No out-of-the-box DNS solution such as Consul.
+####1. No support for Consul or other out-of-the-box DNS solution.
 
-In case of Mesos, Cloudbreak does not provide a custom DNS solution like on other cloud providers, where Consul is used to provide addresses for every node and some services like Ambari server. In this technucal preview, containers are deployed with `net=host`, and Mesos nodes must be set up manually in a way to be able to resolve each other's hostnames to IP addresses and vice versa with reserve DNS. This is a requirement of Hadoop and it is usually accomplished by setting up the `/etc/hosts` file on each node in the cluster, but it can also be provided by some DNS servers like Amazon's default DNS server in a virtual network.
-Example:
-
-- there are 5 nodes in the Mesos cluster: `node1, node2, node3, node4 and node5` with IP addresses of `10.0.0.1 to 10.0.0.5` respectively.
-- the `/etc/hosts` file on `node1` should contain these entries:
+On Mesos, Cloudbreak does not provide a custom DNS solution like on other cloud providers, where Cloudbreak uses Consul to resolve addresses for nodes and some services (such as Ambari server). In this technucal preview, containers are deployed with `net=host`, so Mesos nodes must be set up manually in order to be able to resolve hostnames to IP addresses and vice versa. You can resolve them by creating the `/etc/hosts` file on each node in the cluster.
+  
+For example, consider this scenario:  
+- There are 5 nodes in the Mesos cluster: `node1, node2, node3, node4 and node5` with IP addresses of `10.0.0.1 to 10.0.0.5` respectively.
+- The `/etc/hosts` file on `node1` should contain these entries that match IP addresses with hostnames:
 
 ```
 	10.0.0.2 node2
@@ -54,7 +54,7 @@ Considering that there is no gateway node and so the communication between Cloud
 ####3. Storage management needs to be improved
 
 This is one of the two biggest limitations of the current Mesos integration. The current integration doesn't offer volume management, which means that data is stored inside Docker containers. This solution has a few problems that will be addressed in future releases:
-
+  
 - Data can only be stored on the volumes where Docker is installed (typically the root volume), and not on attached volumes
 - After the container is destroyed, the data is destroyed as well
 - There is no data locality
