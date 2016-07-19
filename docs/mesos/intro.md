@@ -6,7 +6,7 @@
 
 ####1. The Mesos integration doesn't start new instances and doesn't build new infrastructure on a cloud provider.
 
-Cloudbreak expects a "bring your own Mesos" infrastructure and expects you to configure access to your Mesos deployment in Cloudbreak first. On other cloud providers, Cloudbreak first builds the infrastructure where Hadoop components are later deployed through Ambari. This involves creating or reusing the networking layer (virtual networks, subnets, and so on), provisioning new virtual machines in these networks from pre-existing cloud images, and starting docker containers on these VMs (nodes). However, the Mesos integration was designed *not* to include these steps, because in most cases users already have their own Mesos infrastructure on which they would like to deploy their cluster. 
+Cloudbreak expects a "bring your own Mesos" infrastructure, which means that you have to deploy Mesos first and then configure access to the existing Mesos deployment in Cloudbreak. On other cloud providers, Cloudbreak first builds the infrastructure where Hadoop components are later deployed through Ambari. This involves creating or reusing the networking layer (virtual networks, subnets, and so on), provisioning new virtual machines in these networks from pre-existing cloud images, and starting docker containers on these VMs (nodes). However, the Mesos integration was designed *not* to include these steps, because in most cases users already have their own Mesos infrastructure on which they would like to deploy their cluster. 
 
 ####2. A Mesos credential in the Cloudbreak UI provides access to the Marathon API.
 
