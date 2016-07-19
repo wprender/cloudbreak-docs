@@ -28,10 +28,10 @@ On other cloud providers, Cloudbreak deploys a gateway VM for every new cluster.
 
 ####1. No support for Consul or other custom DNS solution.
 
-On Mesos, Cloudbreak does not provide a custom DNS solution like on other cloud providers, where Cloudbreak uses Consul to resolve addresses for nodes and some services (such as Ambari server). In this technucal preview, containers are deployed with `net=host`, so Mesos nodes must be set up manually in order to resolve hostnames to IP addresses and vice versa. You can resolve them by creating the `/etc/hosts` file on each node in the cluster.
+Unlike on other cloud providers where Cloudbreak uses Consul, on Mesos, Cloudbreak does not provide a custom DNS solution. In this technical preview, containers are deployed with `net=host`, so Mesos nodes must be set up manually in order to resolve hostnames to IP addresses and vice versa with reserve DNS. To manually resolve them, create the `/etc/hosts` file on each node in the cluster.
   
 For example, consider this scenario:  
-- There are 5 nodes in the Mesos cluster: `node1, node2, node3, node4 and node5` with IP addresses of `10.0.0.1 to 10.0.0.5` respectively.
+- There are five nodes in the Mesos cluster: `node1, node2, node3, node4 and node5` with IP addresses ranging from `10.0.0.1` to `10.0.0.5`.
 - The `/etc/hosts` file on `node1` should contain these entries that match IP addresses with hostnames:
 
 ```
