@@ -6,7 +6,7 @@
 
 ####1. The Mesos integration doesn't start new instances and doesn't build new infrastructure on a cloud provider.
 
-Cloudbreak expects a "bring your own Mesos" infrastructure and expects you to configure access to your Mesos deployment in Cloudbreak first. On other cloud providers, Cloudbreak first builds the infrastructure where Hadoop components are later deployed through Ambari. This involves creating or reusing the networking layer (virtual networks, subnets, and so on), provisioning new virtual machines in these networks from pre-existing cloud images, and starting the Ambari docker containers on these VMs (nodes). However, the Mesos integration was designed *not* to include these steps, because in most cases users already have their own Mesos infrastructure on which they would like to deploy their cluster. 
+Cloudbreak expects a "bring your own Mesos" infrastructure and expects you to configure access to your Mesos deployment in Cloudbreak first. On other cloud providers, Cloudbreak first builds the infrastructure where Hadoop components are later deployed through Ambari. This involves creating or reusing the networking layer (virtual networks, subnets, and so on), provisioning new virtual machines in these networks from pre-existing cloud images, and starting docker containers on these VMs (nodes). However, the Mesos integration was designed *not* to include these steps, because in most cases users already have their own Mesos infrastructure on which they would like to deploy their cluster. 
 
 ####2. A Mesos credential in the Cloudbreak UI provides access to the Marathon API.
 
@@ -28,7 +28,7 @@ On other cloud providers, Cloudbreak deploys a gateway VM for every new cluster.
 
 ####1. No support for Consul or other custom DNS solution.
 
-On Mesos, Cloudbreak does not provide a custom DNS solution like on other cloud providers, where Cloudbreak uses Consul to resolve addresses for nodes and some services (such as Ambari server). In this technucal preview, containers are deployed with `net=host`, so Mesos nodes must be set up manually in order to be able to resolve hostnames to IP addresses and vice versa. You can resolve them by creating the `/etc/hosts` file on each node in the cluster.
+On Mesos, Cloudbreak does not provide a custom DNS solution like on other cloud providers, where Cloudbreak uses Consul to resolve addresses for nodes and some services (such as Ambari server). In this technucal preview, containers are deployed with `net=host`, so Mesos nodes must be set up manually in order to resolve hostnames to IP addresses and vice versa. You can resolve them by creating the `/etc/hosts` file on each node in the cluster.
   
 For example, consider this scenario:  
 - There are 5 nodes in the Mesos cluster: `node1, node2, node3, node4 and node5` with IP addresses of `10.0.0.1 to 10.0.0.5` respectively.
