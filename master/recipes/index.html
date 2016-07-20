@@ -286,9 +286,9 @@
     
         <li class="main active"><a href="#recipes">Recipes</a></li>
         
-            <li><a href="#stored-recipes">Stored recipes</a></li>
+            <li><a href="#adding-recipes">Adding Recipes</a></li>
         
-            <li><a href="#sample-recipe-for-yum-proxy-setting">Sample recipe for Yum proxy setting</a></li>
+            <li><a href="#sample-recipe-for-yum-proxy-setting">Sample Recipe for Yum Proxy Setting</a></li>
         
     
     </ul>
@@ -297,18 +297,16 @@
                     
 
 <h1 id="recipes">Recipes</h1>
-<p>With the help of Cloudbreak it is very easy to provision Hadoop clusters in the cloud from an Apache Ambari blueprint. Cloudbreak built in provisioning doesn't contain every use case, so we are introducing the concept of recipes.</p>
-<p>Recipes are basically script extensions to a cluster that run on all nodes before or after the Ambari cluster installation. With recipes it's quite easy for example to put a JAR file on the Hadoop classpath or run some custom scripts.</p>
-<h2 id="stored-recipes">Stored recipes</h2>
-<p>Recipes are uploaded and stored in Cloudbreak via web interface or shell.</p>
-<p>The easiest way to create a custom recipe:</p>
+<p>Although Cloudbreak lets you provision Hadoop clusters in the cloud from Ambari blueprints, Cloudbreak built-in provisioning doesn't contain all possible use cases. For that reason, we introduced recipes.</p>
+<p>A <strong>recipe</strong> is a script extension to a cluster that runs on all nodes before or after the Ambari cluster installation. For example, you can use a recipe to put a JAR file on the Hadoop classpath. Recipes are uploaded and stored in Cloudbreak through the web UI or shell.</p>
+<p>The easiest way to create a custom recipe is to:</p>
 <ul>
-<li>create your own pre and/or post scripts</li>
-<li>upload them on shell or web interface</li>
+<li>Create your own pre and/or post scripts</li>
+<li>Upload them using the web UI or shell </li>
 </ul>
-<h3 id="add-recipe">Add recipe</h3>
-<p>On the web interface under <strong>manage recipes</strong> section you should <strong>create new recipe</strong>. Please choose between SCRIPT or FILE type plugin, and fill required fields.</p>
-<p>To add recipe via shell use the following command:</p>
+<h2 id="adding-recipes">Adding Recipes</h2>
+<p>To add recipe via the web UI, in the <strong>manage recipes</strong> section, choose <strong>create new recipe</strong>. Next, select either SCRIPT or FILE type plugin and fill in required fields.</p>
+<p>To add recipe via shell, use the following command:</p>
 <pre><code>recipe store --name [recipe-name] --preInstallScriptFile /path/of/the/pre-install-script --postInstallScriptFile /path/of/the/post-install-script
 </code></pre>
 
@@ -316,14 +314,14 @@
 <p><code>--description</code> "string" description of the recipe</p>
 <p><code>--timeout</code> "integer" timeout of the script execution</p>
 <p><code>--publicInAccount</code> "flag" flags if the recipe is public in the account</p>
-<h2 id="sample-recipe-for-yum-proxy-setting">Sample recipe for Yum proxy setting</h2>
+<h2 id="sample-recipe-for-yum-proxy-setting">Sample Recipe for Yum Proxy Setting</h2>
+<p>We've created a sample recipe that can be used to set proxy for yum:</p>
 <pre><code>#!/bin/bash
 cat &gt;&gt; /etc/yum.conf &lt;&lt;ENDOF
 proxy=http://10.0.0.133:3128
 ENDOF
 </code></pre>
 
-<p>We've created a sample recipe that can be used to set proxy for yum.</p>
 <p><img alt="" src="../images/create-recipe.png" /></p>
 <p>You can add this recipe to hostgroups:</p>
 <p><img alt="" src="../images/select-recipe.png" /></p>

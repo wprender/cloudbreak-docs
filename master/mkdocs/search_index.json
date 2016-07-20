@@ -1507,28 +1507,23 @@
         }, 
         {
             "location": "/recipes/", 
-            "text": "Recipes\n\n\nWith the help of Cloudbreak it is very easy to provision Hadoop clusters in the cloud from an Apache Ambari blueprint. Cloudbreak built in provisioning doesn't contain every use case, so we are introducing the concept of recipes.\n\n\nRecipes are basically script extensions to a cluster that run on all nodes before or after the Ambari cluster installation. With recipes it's quite easy for example to put a JAR file on the Hadoop classpath or run some custom scripts.\n\n\nStored recipes\n\n\nRecipes are uploaded and stored in Cloudbreak via web interface or shell.\n\n\nThe easiest way to create a custom recipe:\n\n\n\n\ncreate your own pre and/or post scripts\n\n\nupload them on shell or web interface\n\n\n\n\nAdd recipe\n\n\nOn the web interface under \nmanage recipes\n section you should \ncreate new recipe\n. Please choose between SCRIPT or FILE type plugin, and fill required fields.\n\n\nTo add recipe via shell use the following command:\n\n\nrecipe store --name [recipe-name] --preInstallScriptFile /path/of/the/pre-install-script --postInstallScriptFile /path/of/the/post-install-script\n\n\n\n\nThis command has optional parameters:\n\n\n--description\n \"string\" description of the recipe\n\n\n--timeout\n \"integer\" timeout of the script execution\n\n\n--publicInAccount\n \"flag\" flags if the recipe is public in the account\n\n\nSample recipe for Yum proxy setting\n\n\n#!/bin/bash\ncat \n /etc/yum.conf \nENDOF\nproxy=http://10.0.0.133:3128\nENDOF\n\n\n\n\nWe've created a sample recipe that can be used to set proxy for yum.\n\n\n\n\nYou can add this recipe to hostgroups:", 
+            "text": "Recipes\n\n\nAlthough Cloudbreak lets you provision Hadoop clusters in the cloud from Ambari blueprints, Cloudbreak built-in provisioning doesn't contain all possible use cases. For that reason, we introduced recipes.\n\n\nA \nrecipe\n is a script extension to a cluster that runs on all nodes before or after the Ambari cluster installation. For example, you can use a recipe to put a JAR file on the Hadoop classpath. Recipes are uploaded and stored in Cloudbreak through the web UI or shell.\n\n\nThe easiest way to create a custom recipe is to:\n\n\n\n\nCreate your own pre and/or post scripts\n\n\nUpload them using the web UI or shell \n\n\n\n\nAdding Recipes\n\n\nTo add recipe via the web UI, in the \nmanage recipes\n section, choose \ncreate new recipe\n. Next, select either SCRIPT or FILE type plugin and fill in required fields.\n\n\nTo add recipe via shell, use the following command:\n\n\nrecipe store --name [recipe-name] --preInstallScriptFile /path/of/the/pre-install-script --postInstallScriptFile /path/of/the/post-install-script\n\n\n\n\nThis command has optional parameters:\n\n\n--description\n \"string\" description of the recipe\n\n\n--timeout\n \"integer\" timeout of the script execution\n\n\n--publicInAccount\n \"flag\" flags if the recipe is public in the account\n\n\nSample Recipe for Yum Proxy Setting\n\n\nWe've created a sample recipe that can be used to set proxy for yum:\n\n\n#!/bin/bash\ncat \n /etc/yum.conf \nENDOF\nproxy=http://10.0.0.133:3128\nENDOF\n\n\n\n\n\n\nYou can add this recipe to hostgroups:", 
             "title": "Recipes"
         }, 
         {
             "location": "/recipes/#recipes", 
-            "text": "With the help of Cloudbreak it is very easy to provision Hadoop clusters in the cloud from an Apache Ambari blueprint. Cloudbreak built in provisioning doesn't contain every use case, so we are introducing the concept of recipes.  Recipes are basically script extensions to a cluster that run on all nodes before or after the Ambari cluster installation. With recipes it's quite easy for example to put a JAR file on the Hadoop classpath or run some custom scripts.", 
+            "text": "Although Cloudbreak lets you provision Hadoop clusters in the cloud from Ambari blueprints, Cloudbreak built-in provisioning doesn't contain all possible use cases. For that reason, we introduced recipes.  A  recipe  is a script extension to a cluster that runs on all nodes before or after the Ambari cluster installation. For example, you can use a recipe to put a JAR file on the Hadoop classpath. Recipes are uploaded and stored in Cloudbreak through the web UI or shell.  The easiest way to create a custom recipe is to:   Create your own pre and/or post scripts  Upload them using the web UI or shell", 
             "title": "Recipes"
         }, 
         {
-            "location": "/recipes/#stored-recipes", 
-            "text": "Recipes are uploaded and stored in Cloudbreak via web interface or shell.  The easiest way to create a custom recipe:   create your own pre and/or post scripts  upload them on shell or web interface", 
-            "title": "Stored recipes"
-        }, 
-        {
-            "location": "/recipes/#add-recipe", 
-            "text": "On the web interface under  manage recipes  section you should  create new recipe . Please choose between SCRIPT or FILE type plugin, and fill required fields.  To add recipe via shell use the following command:  recipe store --name [recipe-name] --preInstallScriptFile /path/of/the/pre-install-script --postInstallScriptFile /path/of/the/post-install-script  This command has optional parameters:  --description  \"string\" description of the recipe  --timeout  \"integer\" timeout of the script execution  --publicInAccount  \"flag\" flags if the recipe is public in the account", 
-            "title": "Add recipe"
+            "location": "/recipes/#adding-recipes", 
+            "text": "To add recipe via the web UI, in the  manage recipes  section, choose  create new recipe . Next, select either SCRIPT or FILE type plugin and fill in required fields.  To add recipe via shell, use the following command:  recipe store --name [recipe-name] --preInstallScriptFile /path/of/the/pre-install-script --postInstallScriptFile /path/of/the/post-install-script  This command has optional parameters:  --description  \"string\" description of the recipe  --timeout  \"integer\" timeout of the script execution  --publicInAccount  \"flag\" flags if the recipe is public in the account", 
+            "title": "Adding Recipes"
         }, 
         {
             "location": "/recipes/#sample-recipe-for-yum-proxy-setting", 
-            "text": "#!/bin/bash\ncat   /etc/yum.conf  ENDOF\nproxy=http://10.0.0.133:3128\nENDOF  We've created a sample recipe that can be used to set proxy for yum.   You can add this recipe to hostgroups:", 
-            "title": "Sample recipe for Yum proxy setting"
+            "text": "We've created a sample recipe that can be used to set proxy for yum:  #!/bin/bash\ncat   /etc/yum.conf  ENDOF\nproxy=http://10.0.0.133:3128\nENDOF   You can add this recipe to hostgroups:", 
+            "title": "Sample Recipe for Yum Proxy Setting"
         }, 
         {
             "location": "/blueprints/", 
