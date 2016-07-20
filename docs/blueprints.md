@@ -1,9 +1,6 @@
-
-
-
 # Blueprints
 
-Cloudbreak provides a list of default Hadoop cluster Blueprints for your convenience. However you can always build and use your own Blueprint.
+for your convenience, Cloudbreak provides a list of default HDP cluster blueprints. You can also build and use your own blueprint.
 
 
 | Name | Description | Services | Source |
@@ -14,9 +11,9 @@ Cloudbreak provides a list of default Hadoop cluster Blueprints for your conveni
 
 ## Components
 
-Ambari supports the concept of stacks and associated services in a stack definition. By leveraging the stack definition, Ambari has a consistent and defined interface to install, manage and monitor a set of services and provides extensibility model for new stacks and services to be introduced.
+Ambari supports the concept of stacks and associated services in a stack definition. By leveraging the stack definition, Ambari has a consistent and defined interface to install, manage, and monitor a set of services, and provides extensibility model for new stacks and services to be introduced.
 
-At high level the supported list of components can be grouped into main categories: Master and Slave - and bundling them together form a Hadoop Service.
+At a high level, the supported components can be grouped into two main categories: master and slave. The components are bundled together, forming specific services:
 
 | Services    | Components                                                              |
 |:----------- |:------------------------------------------------------------------------|
