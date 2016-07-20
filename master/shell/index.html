@@ -302,23 +302,21 @@
 <li>context-aware commands</li>
 <li>required/optional parameters</li>
 <li>tab completion</li>
-<li><strong>hint</strong> command to guide you on the usual path</li>
+<li><strong>hint</strong> command that guides you when you need help</li>
 </ul>
 <h2 id="install-and-start-cloudbreak-shell">Install and Start Cloudbreak Shell</h2>
 <p>Install Cloudbreak shell using one of the following options:</p>
 <ul>
-<li><a href="#deployer">(<strong>Recommended</strong>) Use Cloudreak Deployer</a></li>
-<li><a href="#dockerimage">Use our prepared Docker image</a></li>
-<li><a href="#fromsource">Build it from source</a></li>
+<li><a href="#deployer">(<strong>Recommended</strong>) Install Cloudbreak Shell Using Cloudreak Deployer</a></li>
+<li><a href="#dockerimage">Use Our Prepared Docker Image</a></li>
+<li><a href="#fromsource">Build From Source</a></li>
 </ul>
 <p><a name="deployer"></a></p>
-<h3 id="starting-cloudbreak-shell-using-cloudbreak-deployer">Starting Cloudbreak Shell Using Cloudbreak Deployer</h3>
+<h3 id="install-cloudbreak-shell-using-cloudbreak-deployer">Install Cloudbreak Shell Using Cloudbreak Deployer</h3>
 <p>Start the shell with <code>cbd util cloudbreak-shell</code>. This will launch the Cloudbreak shell inside a Docker container, and you can start using it.</p>
 <h3 id="connect-cloudbreak-shell-with-a-remote-cloudbreak-instance">Connect Cloudbreak Shell with a Remote Cloudbreak Instance</h3>
 <h4 id="prerequisites">Prerequisites</h4>
-<ul>
-<li>Docker is installed and running on the local machine</li>
-</ul>
+<p>Docker is installed and running on the local machine</p>
 <h4 id="steps">Steps</h4>
 <ol>
 <li>Execute <code>cbd util cloudbreak-shell-remote</code> on the remote host.</li>
@@ -336,7 +334,7 @@ cd cloudbreak/shell
 </code></pre>
 
 <blockquote>
-<p><strong>Note</strong>
+<p><strong>Note: </strong>
 If you use the hosted version of Cloudbreak, use <code>latest-release.sh</code> to get the right version of the CLI.</p>
 </blockquote>
 <p>Start Cloudbreak-shell from the build source using:</p>
@@ -349,15 +347,16 @@ Options:
   --identity.address=&lt;http[s]://HOSTNAME:PORT&gt;    Address of the SequenceIQ identity server [default: https://identity.sequenceiq.com].
   --sequenceiq.user=&lt;USER&gt;                        Username of the SequenceIQ user [default: user@sequenceiq.com].
   --sequenceiq.password=&lt;PASSWORD&gt;                Password of the SequenceIQ user [default: password].
-
-Note:
-  You should specify at least your username and password.
 </code></pre>
 
+<blockquote>
+<p><strong>Note: </strong>
+You should specify at least your username and password.</p>
+</blockquote>
 <p>Once you are connected, you can create a cluster. Use <code>hint</code> if you get lost or need guidance through the process. Use <kbd>TAB</kbd> for completion.</p>
 <blockquote>
-<p><strong>Note</strong>
-All commands are <code>context-aware</code> - they are available only when it makes sense. This way the system guides you nad keeps you on the right path.</p>
+<p><strong>Note: </strong>
+All commands are <strong>context-aware</strong>, which means that they are available only when they are relevant. This way the system guides you nad keeps you on the right path.</p>
 </blockquote>
 <p><strong>Provider-specific Documentation</strong></p>
 <ul>
@@ -366,7 +365,7 @@ All commands are <code>context-aware</code> - they are available only when it ma
 <li><a href="../gcp/#interactive-mode-cloudbreak-shell">GCP</a></li>
 <li><a href="../openstack/#interactive-mode-cloudbreak-shell">OpenStack</a></li>
 </ul>
-<p>Or, you can find more detailed documentation of the Cloudbreak-shell in its <a href="https://github.com/sequenceiq/cloudbreak-shell">Github repositiry</a>.</p>
+<p>You can also find more detailed documentation of the Cloudbreak-shell in its <a href="https://github.com/sequenceiq/cloudbreak-shell">Github repositiry</a>.</p>
                     <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/shell.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
                 </div>
             
