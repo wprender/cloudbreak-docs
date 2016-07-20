@@ -1,8 +1,8 @@
-# Platforms
+# Platform Tagging
 
 > This feature is part of `TECHNICAL PREVIEW`.
 
-You can define platform tag that can be attached to credentials, networks, and templates to bundle together different configurations.
+You can define platform tags and attach them to credentials, networks, and templates to bundle together different configurations.
 
 ## Data Locality and Topologies
 
@@ -10,8 +10,8 @@ The [OpenStack documentation](http://docs.openstack.org/developer/sahara/icehous
 
 ### OpenStack Topology Mapping
 
-Topology mapping can be attached to the platform definition, which associates the hypervisors with racks. 
-You can set the mapping on the Cloudbreak web UI by defining it line by line or uploading the mapping in a file.
+You can create a topology mapping, which associates hypervisors with racks, and then attach it to the platform definition. 
+You can set the mapping in the Cloudbreak UI or in CLI by defining it line by line or uploading the mapping in a file.
 
 The `mapping file` should have the following format:
 
@@ -19,10 +19,9 @@ The `mapping file` should have the following format:
     hypervisor2 /rack2
     hypervisor3 /rack2
 
-Based on this mapping, the Cloudbreak application could ensure that the rack information of the started VMs will be
-passed to Hadoop services via Ambari.
+Based on this mapping, the Cloudbreak application ensures that the rack information of the started VMs will be passed to Hadoop services via Ambari.
 
-## Platform Configuration through Cloudbrak UI
+## Platform Configuration Through Cloudbrak UI
 
 ### Manage Platform Configuration
 
@@ -47,6 +46,8 @@ To create a new platform configuration:
 
 Explanation of the parameters:
 
+Required parameters:
+
 - `Name` - name for the new configuration
     - Starts with a lowercase alphabetic character 
     - Contains lowercase alphanumeric and hyphens only
@@ -69,8 +70,7 @@ You can apply your Cloudbreak platform configuration in the following panels:
 - `create credential`
 - `create template`
 
-To create a new network with a previously created configuration for instance, follow these steps in the **create
-network** panel:
+To create a new network with a previously created configuration, follow these steps in the **create network** panel:
 
   1. From cloud provider tabs, select `OpenStack`.
   2. Enter the new network `Name`.
@@ -81,7 +81,7 @@ network** panel:
 ![](/images/platform-select_v2.png)
 <sub>*Full size [here](/images/platform-select_v2.png).*</sub>
 
->**IMOPRTANT:** If you assign a platform to a selected credential, then only the associated networks and templates can
+>**IMOPRTANT:** If you assign a platform to a selected credential, then only networks and templates associated with that credential can
  be selected during cluster creation.
 
 ## Platform Configuration via CLI
@@ -117,5 +117,5 @@ Here is an example shell command to create a new network with a connected platfo
 network create --AWS --name aws-network --subnet 10.10.10.0/24 --description 'example network' --platformId 26
 ```
 
->**IMOPRTANT:** If you assign a platform to a selected credential, then only the associated networks and templates can
+>**IMOPRTANT:** If you assign a platform to a selected credential, then only networks and templates associated with that credential can
  be selected during cluster creation.
