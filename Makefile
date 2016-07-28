@@ -15,10 +15,15 @@ ifeq ($(CB_LOCATION),)
 	CB_LOCATION = ../cloudbreak
 endif
 
+PW_PORT = $(shell echo \${PORT})
+ifeq ($(PW_PORT),)
+	PW_PORT = 8000
+endif
+
 PB_VER = "v3"
 
 preview:
-	 docker run --rm --name cloudbreak-docs-preview -p 8000:8000 -v $(PWD):/work sequenceiq/pagebuilder:$(PB_VER) mkdocs serve
+	 docker run --rm --name cloudbreak-docs-preview -p $(PW_PORT):8000 -v $(PWD):/work sequenceiq/pagebuilder:$(PB_VER) mkdocs serve
 
 circleci:
 	rm ~/.gitconfig
