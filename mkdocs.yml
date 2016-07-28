@@ -26,8 +26,9 @@ pages:
         - Recipes: recipes.md
         - Blueprints : blueprints.md
         - Platforms : topologies.md
-        - Cloud images: images.md
+        - Cloud Images: images.md
         - Kerberos: kerberos.md
+        - Ambari Database: database.md
         - Mesos: mesos.md
         - SPI: spi.md
         - Operations : operations.md
@@ -35,4 +36,4 @@ pages:
         - Development :
             - Environments : environments.md
             - Flows : flow.html
-        - Known issues: issues.md
+        - Known Issues: issues.md
