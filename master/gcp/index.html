@@ -525,22 +525,23 @@ clusters, but cannot delete it.</p>
 <p><img alt="" src="../gcp/images/gcp-credential.png" />
 <sub><em>Full size <a href="../gcp/images/gcp-credential.png">here</a>.</em></sub></p>
 <h2 id="infrastructure-templates">Infrastructure templates</h2>
-<p>After your GCP account is linked to Cloudbreak you can start creating resource templates that describe your clusters' 
+<p>After your GCP account is linked to Cloudbreak you can start creating resource templates that describe your clusters'
 infrastructure:</p>
 <ul>
 <li>templates</li>
 <li>networks</li>
 <li>security groups</li>
 </ul>
-<p>When you create one of the above resource, <strong>Cloudbreak does not make any requests to GCP. Resources are only created 
-on GCP after the <code>create cluster</code> button has pushed.</strong> These templates are saved to Cloudbreak's database and can be 
+<p>When you create one of the above resource, <strong>Cloudbreak does not make any requests to GCP. Resources are only created
+on GCP after the <code>create cluster</code> button has pushed.</strong> These templates are saved to Cloudbreak's database and can be
 reused with multiple clusters to describe the infrastructure.</p>
 <p><strong>Templates</strong></p>
 <p>Templates describe the <strong>instances of your cluster</strong> - the instance type and the attached volumes. A typical setup is
  to combine multiple templates in a cluster for the different types of nodes. For example you may want to attach multiple
  large disks to the datanodes or have memory optimized instances for Spark nodes.</p>
 <p>The instance templates can be configured on the <strong>manage templates</strong> panel on the Cloudbreak Dashboard.</p>
-<p>If <code>Public in account</code> is checked all the users belonging to your account will be able to use this resource to create clusters, but cannot delete it</p>
+<p>If <code>Preemptible</code> is checked then the template will be <a href="https://cloud.google.com/compute/docs/instances/preemptible">preemptible</a></p>
+<p>If <code>Public in account</code> is checked all the users belonging to your account will be able to use this resource to create clusters, but cannot delete it.</p>
 <p><strong>Networks</strong></p>
 <p>Your clusters can be created in their own <strong>networks</strong> or in one of your already existing one. If you choose an 
 existing network, it is possible to create a new subnet within the network. The subnet's IP range must be defined in 
@@ -839,7 +840,7 @@ Account Credentials. You should have already a valid GCP service account. You ca
 </code></pre>
 
 <h2 id="infrastructure-templates_1">Infrastructure templates</h2>
-<p>After your GCP account is linked to Cloudbreak you can start creating resource templates that describe your clusters' 
+<p>After your GCP account is linked to Cloudbreak you can start creating resource templates that describe your clusters'
 infrastructure:</p>
 <ul>
 <li>security groups</li>
@@ -847,21 +848,22 @@ infrastructure:</p>
 <li>templates</li>
 </ul>
 <p>When you create one of the above resource, <strong>Cloudbreak does not make any requests to GCP. Resources are only created
- on GCP after the <code>cluster create</code> has applied.</strong> These templates are saved to Cloudbreak's database and can be 
+ on GCP after the <code>cluster create</code> has applied.</strong> These templates are saved to Cloudbreak's database and can be
  reused with multiple clusters to describe the infrastructure.</p>
 <p><strong>Templates</strong></p>
 <p>Templates describe the <strong>instances of your cluster</strong> - the instance type and the attached volumes. A typical setup is
  to combine multiple templates in a cluster for the different types of nodes. For example you may want to attach multiple
  large disks to the datanodes or have memory optimized instances for Spark nodes.</p>
-<p>A template can be used repeatedly to create identical copies of the same stack (or to use as a foundation to start a 
+<p>A template can be used repeatedly to create identical copies of the same stack (or to use as a foundation to start a
 new stack). Templates can be configured with the following command for example:</p>
 <pre><code>template create --GCP --name my-gcp-template --instanceType n1-standard-2 --volumeCount 2 --volumeSize 100
 </code></pre>
 
 <p>Other available options here:</p>
-<p><code>--volumeType</code> The default is <code>pd-standard</code> (HDD), other allowed value is <code>pd-ssd</code> 
+<p><code>--volumeType</code> The default is <code>pd-standard</code> (HDD), other allowed value is <code>pd-ssd</code>
 (SSD).</p>
-<p><code>--publicInAccount</code> is true, all the users belonging to your account will be able to use this template 
+<p><code>--preemptible</code> is true, the template will be <a href="https://cloud.google.com/compute/docs/instances/preemptible">preemptible</a></p>
+<p><code>--publicInAccount</code> is true, all the users belonging to your account will be able to use this template
 to create clusters, but cannot delete it.</p>
 <p>You can check whether the template was created successfully</p>
 <pre><code>template list
