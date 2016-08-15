@@ -496,7 +496,7 @@ links to provider-specific instructions for configuring and launching <strong>cb
                $.getJSON("../providers/gcp.json", function(data) {
                $("#cloudbreak-deployer-gcp-image-details").append('<br>');
                $("#cloudbreak-deployer-gcp-image-details").append('<br>');
-               $("#cloudbreak-deployer-gcp-image-details").append('<pre><code style="font-size: 12pt;color:#333333"> [HACK] gcloud compute images create '
+               $("#cloudbreak-deployer-gcp-image-details").append('<pre><code style="font-size: 12pt;color:#333333"> gcloud compute images create '
                    + data.id + ' --source-uri gs://sequenceiqimage/' + data.id + '.tar.gz' + '</code></pre>');
                });
            });
@@ -506,5 +506,5 @@ links to provider-specific instructions for configuring and launching <strong>cb
 
 <!--
 MkDocs version : 0.15.3
-Build Date UTC : 2016-08-02 12:04:02.962804
+Build Date UTC : 2016-08-15 08:43:25.145533
 -->
