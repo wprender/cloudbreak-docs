@@ -42,7 +42,7 @@ If you choose this installation option, follow the instructions for [installing 
 We provide pre-built cloud images with Cloudbreak Deployer pre-installed. The following table includes
 links to provider-specific instructions for configuring and launching **cbd (Cloudbreak Deployer)** and then clusters.
 
-> **Minimum and Recommended VM Requirements:** 4GB RAM, 10GB disk, 2 cores recommended
+> **VM Requirements:** 4GB RAM, 10GB disk, 2 cores recommended
 
 | Cloud | Cloud Image |
 |---|---|
