@@ -24,7 +24,7 @@ Once you have installed Cloudbreak Deployer (called "cbd"), the deployer will st
 
 You can install the Cloudbreak Deployer on your own VM/host manually. 
 
-> **[Minimum and Recommended System Requirements](onprem.md#minimum-and-recommended-system-requirements):** 
+> **[System Requirements](onprem.md#minimum-and-recommended-system-requirements):** 
 > RHEL / CentOS / Oracle Linux 7 (64-bit), Docker 1.9.1, 4GB RAM, 10GB disk, 2 cores recommended
 
 Once Cloudbreak Deployer is installed, use it to set up
