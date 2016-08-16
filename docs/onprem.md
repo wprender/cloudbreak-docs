@@ -98,7 +98,7 @@ Once the Cloudbreak Deployer is installed, you can set up the Cloudbreak applica
 
 ## Initialize Your Profile
 
-1. Initialize `cbd` by using:
+Initialize `cbd` by using:
 
 ```
 mkdir cloudbreak-deployment
