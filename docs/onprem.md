@@ -4,7 +4,7 @@ Follow these steps to install Cloudbreak Deployer on your operating system.
 
 >The instructions below are for CentOS. If you are using a differnt OS, perform equivalent steps. 
 
-## Minimum and Recommended System Requirements
+## System Requirements
 
 To run the Cloudbreak Deployer and install the Cloudbreak application, your system must meet the following requirements:
 
