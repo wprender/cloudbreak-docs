@@ -67,6 +67,32 @@ To launch the Periscope(Autoscaling) application execute the `com.sequenceiq.per
 -Dserver.port=8085
 -Dperiscope.cert.dir=FULL_PATH_OF_THE_CERTS_DIR_GENERATED_BY_CBD
 ```
+#### Local Development Setup for UI
+
+By default, the Cloudbreak UI is a service called 'Uluwatu' that is run inside a docker container. The UI files (JS and CSS) are installed as part of the docker container. Sometimes, it is useful to load the UI files from the local environment, for e.g. to keep the changes between the UI and backend application in sync. In order to do this, perform the following steps:
+
+* Install npm and bower locally.
+    * On Mac OSX, this can be done as follows
+```
+brew install npm
+npm install -g bower
+```
+* Install the dependencies for the UI project locally.
+```
+cd $CLOUDBREAK_HOME/cloudbreak/web && npm install
+cd $CLOUDBREAK_HOME/cloudbreak/web/app/static && bower install
+```
+where $CLOUDBREAK_HOME is where the Cloudbreak project is cloned. This step could take a while depending on network speed.
+* Add the following line to the Profile file:
+```
+export ULUWATU_VOLUME_HOST=$CLOUDBREAK_HOME/cloudbreak/web
+```
+* Restart Cloudbreak & switch to the local environment, as described above
+```
+cbd restart
+cbd util local-dev
+```
+The export line makes the specified path to be loaded as a volume inside the docker container running the web UI process and reflects the same files. To be sure, it would be best to refresh the browser cache to make sure the files are reloaded from this location.
 
 #### Command line
 
