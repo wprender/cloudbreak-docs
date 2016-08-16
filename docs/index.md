@@ -16,7 +16,7 @@ On a high level, to set up Cloudbreak and provision an HDP cluster, you need to 
     - ([Install Option #1](#install-deployer)) Install the Cloudbreak Deployer on your own VM/host, or 
     - ([Install Option #2](#pre-built-images)) Instantiate one of the pre-built cloud images that include Cloudbreak Deployer pre-installed.
 2. **Configure the Cloudbreak Deployer and install the Cloudbreak Application**.   
-Once you have installed Cloudbreak Deployer (called "cbd"), the deployer will start up several Docker containers: Cloudbreak API, Cloudbreak Web UI (called "Uluwatu"), Identity Server, and supporting databases. You have successfully completed this step if you are able to log in to Cloudbreak Web UI in your browser.
+Once you have installed Cloudbreak Deployer (called "cbd"), the deployer will start up several Docker containers: Cloudbreak API, Cloudbreak web UI (called "Uluwatu"), Identity Server, and supporting databases. You have successfully completed this step if you are able to log in to Cloudbreak web UI in your browser.
 3. **Provision an HDP Cluster** using the Cloudbreak Application.
 
 <div id="install-deployer"></div>
@@ -60,4 +60,4 @@ For more information on Cloudbreak, Ambari and Ambari blueprints, see:
 |[Cloudbreak Project](http://hortonworks.com/hadoop/cloudbreak/) | Visit the Hortonworks website to see Cloudbreak-related news and updates. |
 |[Cloudbreak Forums](http://hortonworks.com/hadoop/cloudbreak/#forums) | Visit the Cloudbreak Forums to get connected with the Cloudbreak community. |
 |[Apache Ambari Project](http://hortonworks.com/hadoop/ambari/) | Learn about the Apache Ambari Project. Apache Ambari is an operational platform for provisioning, managing, and monitoring Apache Hadoop clusters. Ambari exposes a robust set of REST APIs and a rich web interface for cluster management. |
-|[Ambari Blueprints](https://cwiki.apache.org/confluence/display/AMBARI/Blueprints)| Learn about Ambari bleuprints. Ambari blueprints are a declarative definition of a Hadoop cluster that Ambari can use to create Hadoop clusters. |
+|[Ambari Blueprints](https://cwiki.apache.org/confluence/display/AMBARI/Blueprints)| Learn about Ambari Bleuprints. Ambari Blueprints are a declarative definition of a Hadoop cluster that Ambari can use to create Hadoop clusters. |
