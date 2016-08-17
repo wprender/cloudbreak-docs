@@ -1,17 +1,17 @@
 
 
-# Manage Your Account Using Cloudbreak UI
+# Manage Your Account Using the Cloudbreak Web UI
 
-You can use the Cloudbreak UI (Uluwatu) to view and manage your settings.
+You can use the Cloudbreak web UI to view and manage your settings.
 
 ## Account Details 
 
-Go to the `account` page and view your `account details`.
+Click on `account` in the header menu to go the `account` page and expand the `account details` tab.
 
 ### Security Scopes
 
-Expand the `account details` page to check your **security scopes**.
-> **Note: ** Even administrator users cannot modify the list of scopes.
+Expand the `account details` tab to check your security scopes.
+Even administrator users cannot modify the list of scopes.
 
 Cloudbreak has distinct security scopes for the following resources:
 
@@ -26,11 +26,11 @@ Cloudbreak has distinct security scopes for the following resources:
 
 ### Cloud Platforms
 
-`Cloud platforms` table lists cloud platforms supported by Cloudbreak.
+The `Cloud platforms` table lists cloud platforms supported by Cloudbreak.
 
-**Only administrator users can set the cloud platforms used by the group.** For example, if the administrator selects AWS cloud platform, only AWS networks, resources, and credentials will be displayed and can be created for users in the account (including managed users).
+Only administrator users can set the cloud platforms used by the group. For example, if the administrator selects AWS cloud platform, only AWS networks, resources, and credentials will be displayed and can be created for users in the account (including managed users).
 
-#### Supported Cloud Platforms:
+The following cloud platforms are supported:
 
  - AWS
  - Azure RM
