@@ -2,18 +2,18 @@
 
 The CLI is an interactive command line tool which supports:
 
-* all functionality available through the REST API or Cloudbreak web UI
-* complete automation of management tasks via **scripts**
-* context-aware commands
-* required/optional parameters
-* tab completion
-* **hint** command that guides you when you need help
+* All functionality available through the REST API or Cloudbreak web UI
+* Complete automation of management tasks via **scripts**
+* Context-aware commands
+* Required/optional parameters
+* Tab completion
+* The **hint** command that guides you when you need help
 
 ## Install and Start Cloudbreak Shell
 
 Install Cloudbreak shell using one of the following options:
 
-- [(**Recommended**) Install Cloudbreak Shell Using Cloudreak Deployer](#deployer)
+- [Install Cloudbreak Shell Using Cloudreak Deployer](#deployer) (Recommended) 
 - [Use Our Prepared Docker Image](#dockerimage)
 - [Build From Source](#fromsource)
 
@@ -24,11 +24,7 @@ Start the shell with `cbd util cloudbreak-shell`. This will launch the Cloudbrea
 
 ### Connect Cloudbreak Shell with a Remote Cloudbreak Instance
 
-#### Prerequisites
-
-Docker is installed and running on the local machine
-
-#### Steps
+**Prerequisites:** Docker is installed and running on the local machine
  
 1. Execute `cbd util cloudbreak-shell-remote` on the remote host.
 2. Execute the result of the previous command on the local machine.
@@ -36,12 +32,16 @@ Docker is installed and running on the local machine
 <a name="dockerimage"></a>
 ### Use Our Prepared Docker image
 
-The command is using our docker container. You can find the docker image and its documentation [here](https://github.com/sequenceiq/docker-cb-shell).
+You can find the docker image and its documentation [here](https://github.com/sequenceiq/docker-cb-shell).
 
 <a name="fromsource"></a>
 ### Build from Source
 
-If want to use the code or extend it with new commands, follow the steps below. You will need JDK 1.8.
+If want to use the code or extend it with new commands, follow the steps below.
+
+**Prerequisites:** JDK 1.8.  
+
+Execute the folowing commands:
 
 ```
 git clone https://github.com/sequenceiq/cloudbreak.git
