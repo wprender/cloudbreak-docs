@@ -1,46 +1,52 @@
 #Environments
 
-##Cloudbreak application
+##Cloudbreak Application
 
-#### Local Development Setup
-To use this development environment on OSX, you need to have Docker and Boot2docker installed.
+Use these steps to set up your local development environment, IDEA, command line, UI and database development, and builds for the Cloudbreak application.
 
-Simplest way to prepare the working environment is to start the Cloudbreak on your local machine is to use the [Cloudbreak Deployer](https://github.com/sequenceiq/cloudbreak-deployer).
+### Local Development Environment Setup
 
-First you need to create a _sandbox_ directory which will store the necessary  configuration files and dependencies of [Cloudbreak Deployer](https://github.com/sequenceiq/cloudbreak-deployer). This directory must be created outside of the cloned Cloudbreak git repository:
+Before setting up your development environment on OSX, you must install Docker and Boot2docker.
+
+The simplest way to prepare your working environment is to start Cloudbreak on your local machine using the Cloudbreak Deployer. The latest version of the Cloudbreak Deployer is available in [this github repository](https://github.com/sequenceiq/cloudbreak-deployer).
+
+**Step 1:** Create a _sandbox_ directory which will store the necessary configuration files and dependencies of the Cloudbreak Deployer. This directory must be created outside of your cloned Cloudbreak git repository. For example:
 ```
 mkdir cbd-local
 ```
 
-To start the complete Cloudbreak ecosystem on your machine just execute the following sequence of commands:
+**Step 2:** Start the entire Cloudbreak ecosystem on your machine by executing the following sequence of commands:  
 ```
-cd cbd-local
-curl https://raw.githubusercontent.com/sequenceiq/cloudbreak-deployer/master/install | sh && cbd --version
-cbd update master
-cbd init
-cbd start
-```
-If everything went well then the Cloudbreak will be available on http://192.168.59.103:3000. For more details and config parameters please check the documentation of [Cloudbreak Deployer](https://github.com/sequenceiq/cloudbreak-deployer).
+cd cbd-local  
+curl https://raw.githubusercontent.com/sequenceiq/cloudbreak-deployer/master/install | sh && cbd --version  
+cbd update master  
+cbd init  
+cbd start  
+```  
 
-The deployer has generated a `certs` directory under `cbd-local` directory which will be needed later on to set up the IDEA properly.
+**Step 3:** If Cloudbreak starts correctly, Cloudbreak application will be available at http://192.168.59.103:3000. For more details and config parameters, check the documentation for [Cloudbreak Deployer](https://github.com/sequenceiq/cloudbreak-deployer).
 
-The next step is to edit the `cbd-local/Profile` file with any editor and add the CB_SCHEMA_SCRIPTS_LOCATION environment variable which configures the location of SQL scripts that are in the 'core/src/main/resources/schema' directory in the cloned Cloudbreak git repository. Please note that the full path needs to be configured and env variables like $USER cannot be used.
+**Step 4:** Note that the deployer has generated a `certs` directory under `cbd-local` directory. You will need it later to set up the IDEA.
+
+**Step 5:** Next, edit the `cbd-local/Profile` file, adding the CB_SCHEMA_SCRIPTS_LOCATION environment variable which configures the location of SQL scripts that are in the 'core/src/main/resources/schema' directory in the cloned Cloudbreak git repository. Note that the full path needs to be configured and env variables such as `$USER` cannot be used.
 
 ```
 export CB_SCHEMA_SCRIPTS_LOCATION=/Users/myusername/prj/cloudbreak/core/src/main/resources/schema
 ```
 
-In order to kill Cloudbreak container running inside the boot2docker and redirect the Cloudbreak related traffic to the Cloudbreak running in IDEA use the followig command:
+**Step 6:** Use the following command to kill a Cloudbreak container running inside the boot2docker and to redirect the Cloudbreak-related traffic to the Cloudbreak running in the IDEA:
 
 ```
 cbd util local-dev
 ```
 
-#### IDEA
+### IDEA Setup
 
-Cloudbreak can be imported into IDEA as gradle project. Once it is done, you need to import the proper code formatter by using the __File -> Import Settings...__ menu and selecting the `idea_settings.jar` located in the `config` directory in Cloudbreak git repository.
+**Step 1:** Import Cloudbreak into IDEA as a gradle project. 
 
-To launch the Cloudbreak application execute the `com.sequenceiq.cloudbreak.CloudbreakApplication` class with VM options:
+**Step 2:**: Import the proper code formatter. To do this, use the __File -> Import Settings...__ menu and select the `idea_settings.jar` located in the `config` directory in the Cloudbreak [github repository](https://github.com/sequenceiq/cloudbreak-deployer).
+
+**Step 3:** To launch the Cloudbreak application, execute the `com.sequenceiq.cloudbreak.CloudbreakApplication` class with VM options:
 ```
 -XX:MaxPermSize=1024m
 -Dcb.cert.dir=FULL_PATH_OF_THE_CERTS_DIR_GENERATED_BY_CBD
@@ -53,9 +59,9 @@ To launch the Cloudbreak application execute the `com.sequenceiq.cloudbreak.Clou
 -Dserver.port=9091
 ```
 
-The `-Dcb.cert.dir=FULL_PATH_OF_THE_CERTS_DIR_GENERATED_BY_CBD` value above needs to be replaced with the full path of `certs` directory generated by Cloudbreak Deployer e.g. `-Dcb.cert.dir=/Users/myusername/prj/cbd-local/certs`
+The `-Dcb.cert.dir=FULL_PATH_OF_THE_CERTS_DIR_GENERATED_BY_CBD` value above needs to be replaced with the full path of `certs` directory generated by Cloudbreak Deployer. For example: `-Dcb.cert.dir=/Users/myusername/prj/cbd-local/certs`
 
-To launch the Periscope(Autoscaling) application execute the `com.sequenceiq.periscope.PeriscopeApplication` class with VM options:
+**Step 4:** To launch the Periscope (Autoscaling) application execute the `com.sequenceiq.periscope.PeriscopeApplication` class with VM options:
 ```
 -XX:MaxPermSize=1024m
 -Dperiscope.client.id=periscope
@@ -67,36 +73,39 @@ To launch the Periscope(Autoscaling) application execute the `com.sequenceiq.per
 -Dserver.port=8085
 -Dperiscope.cert.dir=FULL_PATH_OF_THE_CERTS_DIR_GENERATED_BY_CBD
 ```
-#### Local Development Setup for UI
 
-By default, the Cloudbreak UI is a service called 'Uluwatu' that is run inside a docker container. The UI files (JS and CSS) are installed as part of the docker container. Sometimes, it is useful to load the UI files from the local environment, for e.g. to keep the changes between the UI and backend application in sync. In order to do this, perform the following steps:
+### Local Development Setup for UI
 
-* Install npm and bower locally.
-    * On Mac OSX, this can be done as follows
+By default, the Cloudbreak UI is a service called 'Uluwatu' that runs inside a docker container. The UI files (JS and CSS) are installed as part of the docker container. To keep the changes between the UI and backend application in sync, you may want to load the UI files from the local environment. To do this, perform the following steps:
+
+**Step 1:** Install npm and bower locally. On Mac OSX, you can do this by running:
 ```
 brew install npm
 npm install -g bower
 ```
-* Install the dependencies for the UI project locally.
+**Step 2:** Install the dependencies of the UI project locally:
 ```
 cd $CLOUDBREAK_HOME/cloudbreak/web && npm install
 cd $CLOUDBREAK_HOME/cloudbreak/web/app/static && bower install
 ```
-where $CLOUDBREAK_HOME is where the Cloudbreak project is cloned. This step could take a while depending on network speed.
-* Add the following line to the Profile file:
+where `$CLOUDBREAK_HOME` is the directory where the Cloudbreak project is cloned. This step may take a while depending on your network speed.
+
+**Step 3:** Add the following line to the Profile file:
 ```
 export ULUWATU_VOLUME_HOST=$CLOUDBREAK_HOME/cloudbreak/web
 ```
-* Restart Cloudbreak & switch to the local environment, as described above
+**Step 4:** Restart Cloudbreak and switch to the local environment, as described above
 ```
 cbd restart
 cbd util local-dev
 ```
-The export line makes the specified path to be loaded as a volume inside the docker container running the web UI process and reflects the same files. To be sure, it would be best to refresh the browser cache to make sure the files are reloaded from this location.
+The export line causes the specified path to be loaded as a volume inside the docker container running the web UI process. Refresh the browser cache to make sure the files are reloaded from this location.
 
-#### Command line
+### Command Line Setup
 
-To run Cloudbreak from command line you have to create a property file, for example `application.properties`, with the content below, and execute `java -jar -XX:MaxPermSize=1024m -Dspring.config.location=file:///path/of/property/application.properties core/build/libs/cloudbreak.jar` command at project root. Important that the path of `application.properties` must be an absolute path.
+To run Cloudbreak from command line:
+
+**Step 1:** Create a property file, for example `application.properties`, with the content below:
 ```
 cb.cert.dir=FULL_PATH_OF_THE_CERTS_DIR_GENERATED_BY_CBD
 cb.client.id=cloudbreak
@@ -108,15 +117,23 @@ cb.identity.server.url=http://192.168.59.103:8089
 server.port=9091
 ```
 
-#### Database development
+**Step 2:** Execute `java -jar -XX:MaxPermSize=1024m -Dspring.config.location=file:///path/of/property/application.properties core/build/libs/cloudbreak.jar` command at project root. 
 
-If schema change is required in Cloudbreak database (cbdb), then the developer needs to write SQL scripts to migrate the database accordingly. In Cloudbreak the schema migration is managed by [MYBATIS Migrations](https://github.com/mybatis/migrations) and the cbd tool provides an easy-to-use wrapper for it. The syntax for using the migration commands is `cbd migrate <database name> <command> [parameters]` e.g. `cbd migrate migrate status`.
+Note that the path of `application.properties` must be an absolute path.
 
-Create a SQL template for schema changes:
+### Database Development
+
+If schema change is required in Cloudbreak database (cbdb), then the developer needs to write SQL scripts to migrate the database accordingly. In Cloudbreak, the schema migration is managed by [MYBATIS Migrations](https://github.com/mybatis/migrations) and the cbd tool provides an easy-to-use wrapper for it. 
+
+The basic syntax for the migration commands is `cbd migrate <database name> <command> [parameters]` 
+
+For example: `cbd migrate migrate status`
+
+**Step 1:** Create a SQL template for schema changes:
 ```
 cbd migrate cbdb new "CLOUD-123 schema change for new feature"
 ```
-As as result of the above command an SQL file template is generated under the path specified in `CB_SCHEMA_SCRIPTS_LOCATION` environment variable, which is defined in Profile. The structure of the generated SQL template looks like the following:
+As as result of the above command, an SQL file template is generated under the path specified in `CB_SCHEMA_SCRIPTS_LOCATION` environment variable, which is defined in Profile. The structure of the generated SQL template looks like this:
 ```
 -- // CLOUD-123 schema change for new feature
 -- Migration SQL that makes the change goes here.
@@ -126,15 +143,15 @@ As as result of the above command an SQL file template is generated under the pa
 -- //@UNDO
 -- SQL to undo the change goes here.
 ```
-Once you have implemented your SQLs then you can execute them with:
+**Step 2:** Once you have implemented your SQLs, you can execute them with:
 ```
 cbd migrate cbdb up
 ```
-If you would like to rollback the last SQL file, then just use the down command:
+If you would like to rollback the last SQL file, use the `down` command:
 ```
 cbd migrate cbdb down
 ```
-On order to check the status of database
+To check the database status, use:
 ```
 cbd migrate cbdb status
 
@@ -153,20 +170,20 @@ ID             Applied At          Description
 ------------------------------------------------------------------------
 ```
 
-#### Building
+### Building
 
-Gradle is used for build and dependency management. Gradle wrapper is added to Cloudbreak git repository, therefore building can be done with:
+Gradle is used for build and dependency management. Since Gradle wrapper is added to the Cloudbreak git repository, building can be done with:
 ```
 ./gradlew clean build
 ```
 
-##Cloudbreak deployer
+##Cloudbreak Deployer
 
-####Contribution
+###Contributing
 
-Development process should happen on separate branches. Then a pull-request should be opened as usual.
+Development process happens on separate branches. Open a pull-request to contribute your changes.
 
-To build the project
+To build the project:
 ```
 # make deps needed only once
 make deps
@@ -186,58 +203,59 @@ If you want to test the binary CircleCI build from your branch named `fix-someth
 cbd update fix-something
 ```
 
-#### Snapshots
+### Snapshots
 
-We recommend to always use the latest release, but you might want to check new features or bugfixes.
-All successful builds from the `master` branch are uploaded to the public S3 bucket. You can download it:
+We recommend that you always use the latest release, but you might also want to check new features or bugfixes in the `master` branch.
+All successful builds from the `master` branch are uploaded to the public S3 bucket. You can download it using:
 
 ```
 curl -L s3.amazonaws.com/public-repo-1.hortonworks.com/HDP/cloudbreak/cloudbreak-deployer_snapshot_$(uname)_x86_64.tgz | tar -xz
 ```
 
-Instead of overwriting the released version, download it to a **local directory** and useit by refering as `./cbd`
+Instead of overwriting the released version, download it to a **local directory** and use it by referring to it as `./cbd`
 
 ```
 ./cbd --version
 ```
 
-#### Testing
+### Testing
 
 Shell scripts shouldn’t raise exceptions when it comes to unit testing. [basht](https://github.com/progrium/basht) is
- used for testing. See the reasoning: [why not bats or shunit2](https://github.com/progrium/basht#why-not-bats-or-shunit2).
+ used for testing. See [this link](https://github.com/progrium/basht#why-not-bats-or-shunit2) to learn why not bats or shunit2.
 
-Please cover your bash functions with unit tests and run test with:
+You must cover your bash functions with unit tests and run the test with:
 
 ```
 make tests
 ```
 
-#### Release Process of the Clodbreak Deployer tool
+### Release Process for the Clodbreak Deployer Tool
 
 The master branch is always built on [CircleCI](https://circleci.com/gh/sequenceiq/cloudbreak-deployer).
-When you wan’t a new release, all you have to do:
+
+When you want to create a new release, run:
 
 ```
 make release-next-ver
 ```
 
-`make release-next-ver` performs the following steps:
+The `make release-next-ver` performs the following steps:
 
  * On the `master` branch:
-    * Updates the `VERSION` file by increasing the **patch** version number (for example from 0.5.2 to 0.5.3)
-    * Updates `CHANGELOG.md` with the release date
-    * Creates a new **Unreleased** section in top of `CHANGELOG.md`
+    * Updates the `VERSION` file by increasing the **patch** version number (For example, from 0.5.2 to 0.5.3).
+    * Updates `CHANGELOG.md` with the release date.
+    * Creates a new **Unreleased** section at the top of `CHANGELOG.md`.
  * Creates a PullRequest for the release branch:
-    * create a new branch with a name like `release-0.5.x`
-    * this branch should be the same as `origin/master`
-    * create a pull request into `release` branch
+    * Creates a new branch with a name like `release-0.5.x`.
+    * This branch should be the same as `origin/master`.
+    * Creates a pull request on the `release` branch.
 
-#### Acceptance
+### Acceptance
 
-Now you should test this release. You can get it by `cbd update release-x.y.z`. Comment with LGTM (Looking Good To Me).
+Now you should test this release. You can update to it by running `cbd update release-x.y.z`. Comment with LGTM (Looking Good To Me).
 
 Once the PR is merged, CircleCI will:
 
-* create a new release on [GitHub releases tab](https://github.com/sequenceiq/cloudbreak-deployer/releases), with the
+* Create a new release on [GitHub releases tab](https://github.com/sequenceiq/cloudbreak-deployer/releases), with the
  help of [gh-release](https://github.com/progrium/gh-release).
-* it will create the git tag with `v` prefix like: `v0.0.3`
+* Create the git tag with `v` prefix like: `v0.0.3`.
