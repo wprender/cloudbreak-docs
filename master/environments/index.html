@@ -356,6 +356,38 @@ cbd start
 -Dperiscope.cert.dir=FULL_PATH_OF_THE_CERTS_DIR_GENERATED_BY_CBD
 </code></pre>
 
+<h4 id="local-development-setup-for-ui">Local Development Setup for UI</h4>
+<p>By default, the Cloudbreak UI is a service called 'Uluwatu' that is run inside a docker container. The UI files (JS and CSS) are installed as part of the docker container. Sometimes, it is useful to load the UI files from the local environment, for e.g. to keep the changes between the UI and backend application in sync. In order to do this, perform the following steps:</p>
+<ul>
+<li>Install npm and bower locally.<ul>
+<li>On Mac OSX, this can be done as follows</li>
+</ul>
+</li>
+</ul>
+<pre><code>brew install npm
+npm install -g bower
+</code></pre>
+
+<ul>
+<li>Install the dependencies for the UI project locally.</li>
+</ul>
+<pre><code>cd $CLOUDBREAK_HOME/cloudbreak/web &amp;&amp; npm install
+cd $CLOUDBREAK_HOME/cloudbreak/web/app/static &amp;&amp; bower install
+</code></pre>
+
+<p>where $CLOUDBREAK_HOME is where the Cloudbreak project is cloned. This step could take a while depending on network speed.
+* Add the following line to the Profile file:</p>
+<pre><code>export ULUWATU_VOLUME_HOST=$CLOUDBREAK_HOME/cloudbreak/web
+</code></pre>
+
+<ul>
+<li>Restart Cloudbreak &amp; switch to the local environment, as described above</li>
+</ul>
+<pre><code>cbd restart
+cbd util local-dev
+</code></pre>
+
+<p>The export line makes the specified path to be loaded as a volume inside the docker container running the web UI process and reflects the same files. To be sure, it would be best to refresh the browser cache to make sure the files are reloaded from this location.</p>
 <h4 id="command-line">Command line</h4>
 <p>To run Cloudbreak from command line you have to create a property file, for example <code>application.properties</code>, with the content below, and execute <code>java -jar -XX:MaxPermSize=1024m -Dspring.config.location=file:///path/of/property/application.properties core/build/libs/cloudbreak.jar</code> command at project root. Important that the path of <code>application.properties</code> must be an absolute path.</p>
 <pre><code>cb.cert.dir=FULL_PATH_OF_THE_CERTS_DIR_GENERATED_BY_CBD
