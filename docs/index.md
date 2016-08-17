@@ -1,4 +1,4 @@
-# Introduction
+# Overview
 
 Cloudbreak simplifies the provisioning, management, and monitoring of on-demand HDP clusters in virtual and cloud environments. It leverages cloud infrastructure to create host instances, and uses Apache Ambari (via Ambari Blueprints) to install and manage HDP clusters.
 
@@ -8,7 +8,7 @@ Cloudbreak has two main components: the **Cloudbreak Application** and the **Clo
 
 > For an architectural overview of the Cloudbreak Deployer, the Cloudbreak Application, Apache Ambari, and other Cloudbreak components, see [Architecture](architecture.md).
 
-## Installation
+## Installation Options
 
 On a high level, to set up Cloudbreak and provision an HDP cluster, you need to perform the following steps:
 
