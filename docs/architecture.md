@@ -3,17 +3,17 @@
 ##Cloudbreak Deployer Architecture
 
 Cloudbreak Deployer includes the following components:  
-- **UAA**: OAuth identity server implementation
-- **Cloudbreak**: the Cloudbreak application
-- **Periscope**: the Periscope application
-- **Uluwatu**: Cloudbreak web UI
+- **UAA**: OAuth identity server implementation  
+- **Cloudbreak**: the Cloudbreak application  
+- **Periscope**: the Periscope application  
+- **Uluwatu**: Cloudbreak web UI  
 - **Sultans**: Cloudbreak user management
 
 ### System Level Containers
 
-Cloudbreak Deployer includes the following system-level containers:
-- **Consul**: Cloudbreak service registry
-- **Registrator**: automatically registers/unregisters containers with consul
+Cloudbreak Deployer includes the following system-level containers:  
+- **Consul**: Cloudbreak service registry  
+- **Registrator**: automatically registers/unregisters containers with consul  
 
 ##Cloudbreak Application Architecture
 
@@ -37,7 +37,7 @@ Ambari enables System Administrators to:
      * Ambari provides a dashboard for monitoring health and status of the Hadoop cluster.
      * Ambari lets you set predefined alerts or add custom alerts.
 
-####Ambari Blueprint
+####Ambari Blueprints
 Ambari blueprints are a declarative definition of a cluster. With a blueprint, you can specify stack, component
  layout, and configurations to materialise a Hadoop cluster instance (via a REST API) without having to use the Ambari
   Cluster Install Wizard.
