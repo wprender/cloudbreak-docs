@@ -303,35 +303,38 @@
                     
 
 <h1 id="introduction">Introduction</h1>
-<p>Cloudbreak simplifies the provisioning, management, and monitoring of on-demand HDP clusters in virtual and cloud environments. It leverages the cloud infrastructure platform resources to create host instances and uses Apache Ambari (via Ambari Blueprints) to install and manage the HDP cluster.</p>
-<p>Use the Cloudbreak Web UI, REST API, or CLI to launch HDP clusters on public cloud infrastructure platforms such as <strong>Microsoft Azure</strong>, <strong>Amazon Web Services (AWS)</strong>, and <strong>Google Cloud Platform (GCP)</strong>, and the private cloud infrastructure platform <strong>OpenStack</strong>.</p>
-<p>Cloudbreak has two main components: the <strong>Cloudbreak Application</strong> and the <strong>Cloudbreak Deployer</strong>.</p>
-<p>The <strong>Cloudbreak Application</strong> consists of multiple microservices (Cloudbreak, Uluwatu, Sultans, and so on). 
-The <strong>Cloudbreak Deployer</strong> helps you to deploy the Cloudbreak application automatically with Docker support. Once the Cloudbreak Application is deployed, you can use it to provision HDP clusters in various cloud environments.</p>
+<p>Cloudbreak simplifies the provisioning, management, and monitoring of on-demand HDP clusters in virtual and cloud environments. It leverages cloud infrastructure to create host instances, and uses Apache Ambari (via Ambari Blueprints) to install and manage HDP clusters.</p>
+<p>Using the Cloudbreak Web UI, REST API, or CLI, you can launch HDP clusters on public cloud infrastructure platforms such as <strong>Microsoft Azure</strong>, <strong>Amazon Web Services (AWS)</strong>, and <strong>Google Cloud Platform (GCP)</strong>, and the private cloud infrastructure platform <strong>OpenStack</strong>.</p>
+<p>Cloudbreak has two main components: the <strong>Cloudbreak Application</strong> and the <strong>Cloudbreak Deployer</strong>. The <strong>Cloudbreak Application</strong> consists of multiple microservices (Cloudbreak, Uluwatu, Sultans, and so on). The <strong>Cloudbreak Deployer</strong> helps you to deploy the Cloudbreak Application automatically with Docker support. Once the Cloudbreak Application is deployed, you can use it to provision HDP clusters in various cloud environments.</p>
 <blockquote>
-<p>For an architectural overview of the Cloudbreak Deployer, the Cloudbreak Application, Apache Ambari, and the rest of the Cloudbreak components, see <a href="architecture/">Architecture</a>.</p>
+<p>For an architectural overview of the Cloudbreak Deployer, the Cloudbreak Application, Apache Ambari, and other Cloudbreak components, see <a href="architecture/">Architecture</a>.</p>
 </blockquote>
 <h2 id="installation">Installation</h2>
-<p>On a high level, to set up Cloudbreak and install an HDP cluster, you need to perform the following steps:</p>
+<p>On a high level, to set up Cloudbreak and provision an HDP cluster, you need to perform the following steps:</p>
 <ol>
-<li><strong>Install the Cloudbreak Deployer</strong> using one of the two available scenarios: (Install Option #1) <a href="#install-deployer">Install the Cloudbreak Deployer</a> on your own VM/host (Install Option #1), or (Install Option #2) Instantiate one of the <a href="#pre-built-images">pre-built cloud images that include Cloudbreak Deployer</a> pre-installed.</li>
-<li><strong>Configure the Cloudbreak Deployer and install the Cloudbreak Application</strong>.<br />
-  Once you have installed Cloudbreak Deployer (called "cbd"), it will start up several Docker containers: Cloudbreak API, Cloudbreak Web UI (called "Uluwatu"), Identity Server, and supporting databases. You have successfully completed this step if you are able to log in to Cloudbreak Web UI in your browser.</li>
+<li><strong>Install the Cloudbreak Deployer</strong> using one of the two available scenarios: <ul>
+<li>(<a href="#install-deployer">Install Option #1</a>) Install the Cloudbreak Deployer on your own VM/host, or </li>
+<li>(<a href="#pre-built-images">Install Option #2</a>) Instantiate one of the pre-built cloud images that include Cloudbreak Deployer pre-installed.</li>
+</ul>
+</li>
+<li><strong>Configure the Cloudbreak Deployer and install the Cloudbreak Application</strong>. <br />
+Once you have installed Cloudbreak Deployer (called "cbd"), the deployer will start up several Docker containers: Cloudbreak API, Cloudbreak web UI (called "Uluwatu"), Identity Server, and supporting databases. You have successfully completed this step if you are able to log in to Cloudbreak web UI in your browser.</li>
 <li><strong>Provision an HDP Cluster</strong> using the Cloudbreak Application.</li>
 </ol>
 <div id="install-deployer"></div>
 
 <h3 id="installing-the-cloudbreak-deployer-install-option-1">Installing the Cloudbreak Deployer (Install Option #1)</h3>
+<p>You can install the Cloudbreak Deployer on your own VM/host manually. </p>
 <blockquote>
-<p><strong><a href="onprem/#minimum-and-recommended-system-requirements">Minimum and Recommended System requirements</a>:</strong> 
+<p><strong><a href="onprem/#minimum-and-recommended-system-requirements">System Requirements</a>:</strong> 
 RHEL / CentOS / Oracle Linux 7 (64-bit), Docker 1.9.1, 4GB RAM, 10GB disk, 2 cores recommended</p>
 </blockquote>
-<p>You can install the Cloudbreak Deployer on your own VM/host manually. Once Cloudbreak Deployer is installed, use it to set up
+<p>Once Cloudbreak Deployer is installed, use it to set up
 the Cloudbreak Application. We suggest that you install the Cloudbreak Application as close to your
 desired HDP clusters as possible. For example, if you plan to launch clusters on AWS, install the Cloudbreak Application on AWS.</p>
-<p>Follow the instructions for <a href="onprem/">installing the Cloudbreak Deployer</a>. Alternatively, consider using one of the <a href="#pre-built-images">pre-built cloud images that include Cloudbreak Deployer</a> pre-installed.</p>
+<p>If you choose this installation option, follow the instructions for <a href="onprem/">installing the Cloudbreak Deployer</a>. Alternatively, consider using one of the <a href="#pre-built-images">pre-built cloud images that include Cloudbreak Deployer</a> pre-installed.</p>
 <blockquote>
-<p><strong>IMPORTANT:</strong> If you plan to use Cloudbreak on Azure, you <strong>must</strong> use the <a href="azure/#deploy-using-the-azure-portal">Azure Setup</a> instructions to configure the image.</p>
+<p><strong>IMPORTANT:</strong> If you plan to use Cloudbreak on Azure, you must use the <a href="azure/#deploy-using-the-azure-portal">Azure Setup</a> instructions to configure the image.</p>
 </blockquote>
 <div id="pre-built-images"></div>
 
@@ -339,7 +342,7 @@ desired HDP clusters as possible. For example, if you plan to launch clusters on
 <p>We provide pre-built cloud images with Cloudbreak Deployer pre-installed. The following table includes
 links to provider-specific instructions for configuring and launching <strong>cbd (Cloudbreak Deployer)</strong> and then clusters.</p>
 <blockquote>
-<p><strong>Minimum and Recommended VM requirements:</strong> 4GB RAM, 10GB disk, 2 cores recommended</p>
+<p><strong>VM Requirements:</strong> 4GB RAM, 10GB disk, 2 cores recommended</p>
 </blockquote>
 <table>
 <thead>
@@ -355,7 +358,7 @@ links to provider-specific instructions for configuring and launching <strong>cb
 </tr>
 <tr>
 <td>Azure</td>
-<td>There are no pre-built cloud images available for Azure. However, we give you an option to use Azure Resource Manager Templates instead. See <a href="azure/">Azure Setup</a> to install and configure Cloudbreak Deployer.</td>
+<td>There are no pre-built cloud images available for Azure. However, we give you an option to use Azure Resource Manager Templates instead. Follow the <a href="azure/">Azure Setup</a> instructions to install and configure Cloudbreak Deployer.</td>
 </tr>
 <tr>
 <td>GCP</td>
@@ -368,7 +371,7 @@ links to provider-specific instructions for configuring and launching <strong>cb
 </tbody>
 </table>
 <h2 id="learn-more">Learn More</h2>
-<p>For more information on Cloudbreak, Ambari and Ambari Blueprints, see:</p>
+<p>For more information on Cloudbreak, Ambari and Ambari blueprints, see:</p>
 <table>
 <thead>
 <tr>
@@ -379,7 +382,7 @@ links to provider-specific instructions for configuring and launching <strong>cb
 <tbody>
 <tr>
 <td><a href="http://hortonworks.com/hadoop/cloudbreak/">Cloudbreak Project</a></td>
-<td>Cloudbreak simplifies the provisioning of HDP clusters in virtual and cloud environments.</td>
+<td>Visit the Hortonworks website to see Cloudbreak-related news and updates.</td>
 </tr>
 <tr>
 <td><a href="http://hortonworks.com/hadoop/cloudbreak/#forums">Cloudbreak Forums</a></td>
@@ -387,11 +390,11 @@ links to provider-specific instructions for configuring and launching <strong>cb
 </tr>
 <tr>
 <td><a href="http://hortonworks.com/hadoop/ambari/">Apache Ambari Project</a></td>
-<td>Apache Ambari is an operational platform for provisioning, managing, and monitoring Apache Hadoop clusters. Ambari exposes a robust set of REST APIs and a rich web interface for cluster management.</td>
+<td>Learn about the Apache Ambari Project. Apache Ambari is an operational platform for provisioning, managing, and monitoring Apache Hadoop clusters. Ambari exposes a robust set of REST APIs and a rich web interface for cluster management.</td>
 </tr>
 <tr>
 <td><a href="https://cwiki.apache.org/confluence/display/AMBARI/Blueprints">Ambari Blueprints</a></td>
-<td>Ambari Blueprints are a declarative definition of a Hadoop cluster that Ambari can use to create Hadoop clusters.</td>
+<td>Learn about Ambari Bleuprints. Ambari Blueprints are a declarative definition of a Hadoop cluster that Ambari can use to create Hadoop clusters.</td>
 </tr>
 </tbody>
 </table>
@@ -512,5 +515,5 @@ links to provider-specific instructions for configuring and launching <strong>cb
 
 <!--
 MkDocs version : 0.15.3
-Build Date UTC : 2016-08-17 07:09:01.314322
+Build Date UTC : 2016-08-17 07:09:16.932208
 -->
