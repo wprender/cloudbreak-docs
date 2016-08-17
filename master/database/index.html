@@ -6,10 +6,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         
-        <link rel="canonical" href="http://sequenceiq.com/cloudbreak-docs/flow/">
+        <link rel="canonical" href="http://sequenceiq.com/cloudbreak-docs/database/">
         <link rel="shortcut icon" href="../img/favicon.ico">
 
-	<title>Flows - Cloudbreak 1.3.0</title>
+	<title>Ambari Database - Cloudbreak 1.3.0</title>
 
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
@@ -183,8 +183,8 @@
 
                         
                             
-<li >
-    <a href="../database/">Ambari Database</a>
+<li class="active">
+    <a href="./">Ambari Database</a>
 </li>
 
                         
@@ -224,8 +224,8 @@
 
         
             
-<li class="active">
-    <a href="./">Flows</a>
+<li >
+    <a href="../flow/">Flows</a>
 </li>
 
         
@@ -260,12 +260,12 @@
                 </li>
                 
                     <li >
-                        <a rel="next" href="../environments/">
+                        <a rel="next" href="../kerberos/">
                             <i class="fa fa-arrow-left"></i> Previous
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="../issues/">
+                        <a rel="prev" href="../mesos/">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -290,57 +290,60 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
+        <li class="main active"><a href="#ambari-database">Ambari Database</a></li>
+        
+            <li><a href="#good-to-know">Good to Know</a></li>
+        
+            <li><a href="#configure-database-on-the-web-ui">Configure database on the web UI</a></li>
+        
+            <li><a href="#configure-database-with-shell">Configure database with shell</a></li>
+        
+    
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
                     
 
-<script src="../js/jquery.min.js"></script>
+<h1 id="ambari-database">Ambari Database</h1>
+<p>Ambari by default uses an embedded database to persist data. Ambari and Cloudbreak don't take care on database backups, so this should be a good solution for example ephemeral or test clusters, but not for long running production clusters. Ability to configure remote database for Ambari in Cloudbreak comes in picture here. You should setup a supported database on your own way or use cloud provider's database service and simply pass details to Cloudbreak during cluster creation. Cloudbreak would configure Ambari to connect that remote database. Out of the box PostgreSQL, MariaDB and MySQL are supported. That means if you are using these type of databases you only need to take care on the database itself and the user permissions to create the cluster. Cloudbreak will initialize database tables, relations, default values and downloads JDBC driver too for Ambari. On other case you have to execute create SQL on your database and deliver JDBC driver to <code>/opt/jdbc-drivers</code> directory on Ambari server node.</p>
+<h2 id="good-to-know">Good to Know</h2>
+<ul>
+<li>Cloudbreak doesn't validate database connection itself, so wrong connection parameters cause cluster installation fail.</li>
+<li>Database must be available for Ambari server. The concrete solution is depends on many things for example network topology.<ul>
+<li>Be sure the database is located in the same region than Ambari cluster. Slow database connection also causes cluster installation fail.</li>
+<li>Your own database could be on a public server with firewall protection, but for security reason we suggest to use private virtual network with subnet and configure Cloudbreak network to use existing resources.</li>
+</ul>
+</li>
+<li>If you selected PostgreSQL, Ambari shall use the <code>public</code> schema, not possible to configure different one.</li>
+<li>Database name, username and password should not contain ' character. Other special characters are allowed by Cloudbreak.</li>
+<li>On case of out of the box supported databases Cloudbreak creates the tables and Ambari upgrades if neccessary, but all other operations on the database is your responsibility.</li>
+</ul>
+<h2 id="configure-database-on-the-web-ui">Configure database on the web UI</h2>
+<p>You should find database configuration under <strong><em>Advanced options</em></strong> on <strong><em>Configure Ambari Database</em></strong> tab.</p>
+<p><img alt="" src="../images/ambari-database.png" />
+<sub><em>Full size <a href="../images/ambari-database.png">here</a>.</em></sub></p>
+<h2 id="configure-database-with-shell">Configure database with shell</h2>
+<p>To configure remote database for Ambari with Cloudbreak shell you have to use <code>database configure</code> command before <code>cluster create</code> command:</p>
+<pre><code>database configure --vendor [vendor] --host [host-or-ip] --port [port] --name [database-name] --username [user-name] --password [password]
+</code></pre>
 
-<style id="css">
-    svg {
-        border: 1px solid #999;
-        overflow: hidden;
-    }
-    .node {
-        white-space: nowrap;
-    }
-    .node rect,
-    .node circle,
-    .node ellipse {
-        stroke: #333;
-        fill: #fff;
-        stroke-width: 1.5px;
-    }
-    .cluster rect {
-        stroke: #333;
-        fill: #000;
-        fill-opacity: 0.1;
-        stroke-width: 1.5px;
-    }
-    .edgePath path.path {
-        stroke: #333;
-        stroke-width: 1.5px;
-        fill: none;
-    }
-</style>
-
-<div class="col-md-9" role="main">
-    <h1>Flows</h1>
-    <p>
-        Cloudbreak has an asynchron mechanism to manage clusters in the background. Each operation like <a href="#StackCreationFlowConfig">stack creation</a> is encapsulated into a flow, and triggered if neccessary.
-    </p>
-    <div id="flow-container"></div>
-</div>
-
-<script src="../js/d3.v3.min.js"></script>
-
-<script src="../js/dagre-d3.js"></script>
-
-<script src="../js/graphlib-dot.js"></script>
-
-<script src="../js/flow.js"></script>
-                    <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/flow.html" ><i class="fa fa-github"></i> Edit on GitHub </a>
+<p>Vendor values are:</p>
+<ul>
+<li>MARIADB</li>
+<li>MSSQL</li>
+<li>MYSQL</li>
+<li>ORACLE</li>
+<li>POSTGRES</li>
+<li>SQLANYWHERE</li>
+</ul>
+<h3 id="upgrade-jdbc-driver">Upgrade JDBC driver</h3>
+<p>During installation Cloudbreak distributes JDBC driver for Ambari to different locations. If you want to upgrade or use different one you have to do the steps manually:</p>
+<ul>
+<li>copy driver to <code>/var/lib/ambari-server/jdbc-drivers</code> directory</li>
+<li>symlink driver to <code>/usr/share/java</code>, <code>/usr/lib/jvm/java/jre/lib/ext</code> directories</li>
+<li>reconfigure Ambari by executing <code>ambari-server setup --jdbc-db=[db-vendor] --jdbc-driver=[driver-location]</code> command</li>
+</ul>
+                    <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/database.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
                 </div>
             
         </div>

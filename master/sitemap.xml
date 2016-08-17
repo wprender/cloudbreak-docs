@@ -130,6 +130,12 @@
     </url>
         
     <url>
+     <loc>http://sequenceiq.com/cloudbreak-docs/database/</loc>
+     <lastmod>2016-08-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
      <loc>http://sequenceiq.com/cloudbreak-docs/mesos/</loc>
      <lastmod>2016-08-17</lastmod>
      <changefreq>daily</changefreq>
