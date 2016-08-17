@@ -19,6 +19,6 @@ This release includes the following Technical Preview features and improvements:
 
 | Feature | Description |
 |----|----|
-| Mesos | **Technical Preview** Support for Mesos cloud provider. |
+| Mesos | **Technical Preview** Support for Mesos cloud provider. See [Mesos](mesos.md) for more information. |
 | Kerberos | **Technical Preview** Support for enabling Kerberos on the HDP clusters deployed by Cloudbreak. See [Kerberos](kerberos.md) for more information. |
 | Platforms | **Technical Preview** Support for defining Platforms to relate different configurations together. See [Platforms](topologies.md) for more information. |
