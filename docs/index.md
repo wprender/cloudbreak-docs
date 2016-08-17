@@ -13,14 +13,14 @@ Cloudbreak has two main components: the **Cloudbreak Application** and the **Clo
 On a high level, to set up Cloudbreak and provision an HDP cluster, you need to perform the following steps:
 
 1. **Install the Cloudbreak Deployer** using one of the two available scenarios: 
-    - ([Install Option #1](#install-deployer)) Install the Cloudbreak Deployer on your own VM/host, or 
-    - ([Install Option #2](#pre-built-images)) Instantiate one of the pre-built cloud images that include Cloudbreak Deployer pre-installed.
+    - ([Option #1](#install-deployer)) Install the Cloudbreak Deployer on your own VM/host, or 
+    - ([Option #2](#pre-built-images)) Instantiate one of the pre-built cloud images that include Cloudbreak Deployer pre-installed.
 2. **Configure the Cloudbreak Deployer and install the Cloudbreak Application**.   
 Once you have installed Cloudbreak Deployer (called "cbd"), the deployer will start up several Docker containers: Cloudbreak API, Cloudbreak web UI (called "Uluwatu"), Identity Server, and supporting databases. You have successfully completed this step if you are able to log in to Cloudbreak web UI in your browser.
 3. **Provision an HDP Cluster** using the Cloudbreak Application.
 
 <div id="install-deployer"></div>
-### Installing the Cloudbreak Deployer (Install Option #1)
+### (Option #1) Installing the Cloudbreak Deployer
 
 You can install the Cloudbreak Deployer on your own VM/host manually. 
 
@@ -37,7 +37,7 @@ If you choose this installation option, follow the instructions for [installing 
 
 
 <div id="pre-built-images"></div>
-### Using the Pre-Built Cloud Images (Install Option #2)
+### (Option #2) Using the Pre-Built Cloud Images
 
 We provide pre-built cloud images with Cloudbreak Deployer pre-installed. The following table includes
 links to provider-specific instructions for configuring and launching **cbd (Cloudbreak Deployer)** and then clusters.
