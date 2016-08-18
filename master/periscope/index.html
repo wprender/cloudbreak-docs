@@ -292,15 +292,13 @@
     
         <li class="main active"><a href="#auto-scaling">Auto-Scaling</a></li>
         
-            <li><a href="#how-it-works">How It Works</a></li>
-        
             <li><a href="#enable-auto-scaling-through-cloudbreak-ui">Enable Auto-scaling through Cloudbreak UI</a></li>
         
             <li><a href="#alerts">Alerts</a></li>
         
             <li><a href="#scaling-policies">Scaling Policies</a></li>
         
-            <li><a href="#cluster-scaling-options">Cluster Scaling Options</a></li>
+            <li><a href="#cluster-scaling-configurations">Cluster Scaling Configurations</a></li>
         
             <li><a href="#downscale-scaling-considerations">Downscale Scaling Considerations</a></li>
         
@@ -311,8 +309,7 @@
                     
 
 <h1 id="auto-scaling">Auto-Scaling</h1>
-<p>The purpose of <strong>auto-scaling</strong> is to apply SLA scaling policies to a Cloudbreak-managed HDP cluster.</p>
-<h2 id="how-it-works">How It Works</h2>
+<p>The goal of <strong>auto-scaling</strong> is to apply Service Level Agreement (SLA) scaling policies to a Cloudbreak-managed HDP cluster.</p>
 <p>The auto-scaling capability is based on <a href="https://cwiki.apache.org/confluence/display/AMBARI/Metrics">Ambari Metrics</a> and <a href="https://cwiki.apache.org/confluence/display/AMBARI/Alerts">Ambari Alerts</a>. Based on the blueprint
 used and the services running, Cloudbreak accesses all available metrics from the subsystem and defines alerts based on these metrics.</p>
 <p>In addition to the default Ambari Metrics, Cloudbreak includes two custom metrics: <code>Pending YARN containers</code> and <code>Pending applications</code>. These two custom metrics work with the YARN subsystem in order to bring application-level QoS to the cluster.</p>
@@ -327,8 +324,8 @@ used and the services running, Cloudbreak accesses all available metrics from th
 <h4 id="change-default-threshold-for-an-ambari-metric">Change Default Threshold for an Ambari Metric</h4>
 <p>To change default threshold for an Ambari metric:</p>
 <ol>
-<li>Log in to <strong>Ambari web UI</strong>. </li>
-<li>click on <code>Alerts</code> to open the <strong>Alerts</strong> page. </li>
+<li>Log in to Ambari web UI. </li>
+<li>From the header menu, select <code>Alerts</code> to open the <strong>Alerts</strong> page. </li>
 <li>Select an alert from the list. </li>
 <li>In the <code>Configuration</code> panel, click on <code>Edit</code>. </li>
 <li>Now you can modify the values in the <code>Threshold</code> section. </li>
@@ -336,7 +333,7 @@ used and the services running, Cloudbreak accesses all available metrics from th
 <p><img alt="" src="../images/ambari_threshold_v2.png" />
 <sub><em>Full size <a href="../images/ambari_threshold_v2.png">here</a>.</em></sub></p>
 <h4 id="create-a-new-metric-based-alert">Create a New Metric-based Alert</h4>
-<p>To create a new Cloudbreak metric-based alert in the Cloudbreak UI:</p>
+<p>To create a new Cloudbreak metric-based alert in the Cloudbreak web UI:</p>
 <ol>
 <li>Enter the <code>alert name</code>. Only alphanumeric characters (min 5, max 100 characters) are allowed.</li>
 <li>Enter a <code>description</code> for the new alert.</li>
@@ -352,19 +349,20 @@ used and the services running, Cloudbreak accesses all available metrics from th
 <sub><em>Full size <a href="../images/metric_alert_v2.png">here</a>.</em></sub></p>
 <h3 id="time-based-alerts">Time-based Alerts</h3>
 <p>Time-based alerts are based on <code>cron</code> expressions, allowing alerts to be triggered based on time.</p>
-<h4 id="set-up-time-based-alert">Set up Time-based Alert</h4>
+<h4 id="create-a-time-based-alert">Create a Time-based Alert</h4>
 <p>To create a new Cloudbreak time-based alert in the Cloudbreak UI::</p>
 <ol>
 <li>Enter <code>alert name</code>. Only alphanumeric characters (min 5, max 100 characters) are allowed.</li>
 <li>Enter <code>description</code> for the new alert.</li>
-<li>Select a <code>time zone</code> for this alert.</li>
+<li>Select a <code>time zone</code> for the new alert.</li>
 <li>Provide the <code>cron expression</code> to define the time-based job scheduler (<em>cron</em> expression) for this alert.</li>
 </ol>
 <p><img alt="" src="../images/time_alert_v2.png" />
 <sub><em>Full size <a href="../images/time_alert_v2.png">here</a>.</em></sub></p>
 <h2 id="scaling-policies">Scaling Policies</h2>
-<p>Scaling is the ability to increase or decrease the capacity of the HDP cluster or an application running on it based on an alert and according to the policy definition. After you set up your alerts and a scaling policy linked to them, Cloudbreak will execute the policy. <strong>Scaling granularity is at the <code>host group</code> level; Thus you have the option to scale services or components only, not the whole cluster.</strong></p>
-<h3 id="set-up-scaling-policy">Set up Scaling Policy</h3>
+<p>Scaling is the ability to increase or decrease the capacity of the HDP cluster or an application running on it based on an alert and according to the policy definition. After you set up your alerts and a scaling policy linked to them, Cloudbreak will execute the policy. </p>
+<p>Scaling granularity is at the <code>host group</code> level; Thus you have an option to scale services or components only, not the whole cluster.</p>
+<h3 id="create-a-new-scaling-policy">Create a New Scaling Policy</h3>
 <p>To create a new Cloudbreak scaling policy:</p>
 <ol>
 <li>Enter the <code>policy name</code>. Only alphanumeric characters (min 5, max 100 characters) are allowed.</li>
@@ -379,8 +377,9 @@ used and the services running, Cloudbreak accesses all available metrics from th
 </ol>
 <p><img alt="" src="../images/policy_v2.png" />
 <sub><em>Full size <a href="../images/policy_v2.png">here</a>.</em></sub></p>
-<h2 id="cluster-scaling-options">Cluster Scaling Options</h2>
-<p>An SLA scaling policy can contain multiple alerts. When an alert is triggered, a <code>scaling adjustment</code> is applied. To make sure the scaling this adjustemnt doesn't oversize or undersize your cluster, you can keep the cluster size within defined boundaries using <code>cluster size min.</code> and <code>cluster size max.</code>.</p>
+<h2 id="cluster-scaling-configurations">Cluster Scaling Configurations</h2>
+<p>An SLA scaling policy can contain multiple alerts. When an alert is triggered, a <code>scaling adjustment</code> is applied. </p>
+<p>To make sure the scaling this adjustemnt doesn't oversize or undersize your cluster, you can keep the cluster size within defined boundaries using <code>cluster size min.</code> and <code>cluster size max.</code></p>
 <p>To avoid stressing the cluster, we have introduced a <code>cooldown time</code> period (in minutes). When an alert is raised and there is an associated scaling policy, the system will not apply the policy within the configured cooldown timeframe.</p>
 <blockquote>
 <p><strong>Note:</strong> In an SLA scaling policy the triggered rules are applied in order.</p>
@@ -396,12 +395,12 @@ used and the services running, Cloudbreak accesses all available metrics from th
 <h2 id="downscale-scaling-considerations">Downscale Scaling Considerations</h2>
 <p>To keep your cluster healthy, Cloudbreak auto-scaling runs several background checks during <code>downscale</code> operation.</p>
 <ul>
-<li><strong>Cloudbreak will never remove <code>application master nodes</code> from a cluster.</strong> In order to make sure that a node running Ambari Metrics is not 
-removed, <strong>Cloudbreak has to be able to access the YARN Resource Manager</strong>. When creating a cluster using the 
-<code>default</code> secure network template, <strong>make sure that the RM's port is open on that node</strong>.</li>
-<li>In order to <strong>keep a healthy HDFS during downscale, Cloudbreak always keeps the <code>replication factor</code> configured and makes sure that there is enough <code>space</code> on HDFS to rebalance data</strong>.</li>
-<li>During downscale, <strong>in order to minimize the rebalancing, replication, and HDFS storms, Cloudbreak checks block locations 
-and computes the least costly operations</strong>.</li>
+<li>Cloudbreak will never remove <code>application master nodes</code> from a cluster. In order to make sure that a node running Ambari Metrics is not 
+removed, Cloudbreak has to be able to access the YARN Resource Manager. When creating a cluster using the 
+<code>default</code> secure network template, make sure that the RM's port is open on that node.</li>
+<li>In order to keep a healthy HDFS during downscale, Cloudbreak always keeps the <code>replication factor</code> configured and makes sure that there is enough <code>space</code> on HDFS to rebalance data.</li>
+<li>During downscale, in order to minimize the rebalancing, replication, and HDFS storms, Cloudbreak checks block locations 
+and computes the least costly operations.</li>
 </ul>
                     <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/periscope.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
                 </div>
