@@ -1,33 +1,40 @@
 # Ambari Database
 
-Ambari by default uses an embedded database to persist data. Ambari and Cloudbreak don't take care on database backups, so this should be a good solution for example ephemeral or test clusters, but not for long running production clusters. Ability to configure remote database for Ambari in Cloudbreak comes in picture here. You should setup a supported database on your own way or use cloud provider's database service and simply pass details to Cloudbreak during cluster creation. Cloudbreak would configure Ambari to connect that remote database. Out of the box PostgreSQL, MariaDB and MySQL are supported. That means if you are using these type of databases you only need to take care on the database itself and the user permissions to create the cluster. Cloudbreak will initialize database tables, relations, default values and downloads JDBC driver too for Ambari. On other case you have to execute create SQL on your database and deliver JDBC driver to `/opt/jdbc-drivers` directory on Ambari server node.
+By default, Ambari uses an embedded database to store data. However, Ambari and Cloudbreak don't perform backups of this database, so although this database is sufficient for ephemeral or test clusters, it is not be sufficient for long-running production clusters. Therefore, you may need to configure a remote database for Ambari in Cloudbreak.  
 
-## Good to Know
+You have two options for configuring a remote database: you can set up a supported database on your own or use a cloud provider's database service. Next, you need to pass the details to Cloudbreak during cluster creation, and Cloudbreak will configure Ambari to connect to that remote database. 
 
-- Cloudbreak doesn't validate database connection itself, so wrong connection parameters cause cluster installation fail.
-- Database must be available for Ambari server. The concrete solution is depends on many things for example network topology.
-    - Be sure the database is located in the same region than Ambari cluster. Slow database connection also causes cluster installation fail.
-    - Your own database could be on a public server with firewall protection, but for security reason we suggest to use private virtual network with subnet and configure Cloudbreak network to use existing resources.
-- If you selected PostgreSQL, Ambari shall use the `public` schema, not possible to configure different one.
-- Database name, username and password should not contain ' character. Other special characters are allowed by Cloudbreak.
-- On case of out of the box supported databases Cloudbreak creates the tables and Ambari upgrades if neccessary, but all other operations on the database is your responsibility.
+Cloudbreak supports out of the box PostgreSQL, MariaDB and MySQL. This means that if you are using any of these databases, you only need to create the database itself and configure user permissions to create the cluster. Cloudbreak will initialize database tables, relations, default values, and will download JDBC driver for Ambari. For other databases, you have to execute create SQL on your database and deliver JDBC driver to `/opt/jdbc-drivers` directory on Ambari server node.
 
-## Configure database on the web UI
+## Important Considerations
 
-You should find database configuration under ***Advanced options*** on ***Configure Ambari Database*** tab.
+Consider these constraints when setting up your remote datatabse:   
+
+- Cloudbreak doesn't validate the database connection, so wrong connection parameters will cause the cluster installation to fail.
+- Your database must be available to the Ambari server. Note that:
+    - The database must be located in the same region as the Ambari cluster. Slow database connection will cause cluster installation fail.
+    - The database could be on a public server with firewall protection, but for security reasons we suggest that you use a private virtual network with subnet, and configure the Cloudbreak network to use existing resources.
+ - For the supported out of the box databases, Cloudbreak creates the tables and upgrades Ambari if neccessary, but performing any other operations on the database is your responsibility.
+- If you selected PostgreSQL, Ambari must use the `public` schema. It is not possible to configure a different schema.
+- Database name, username, and password should not contain the `'` character. Other special characters are allowed.
+
+
+## Configure Database with the Web UI
+
+You can find database configuration in the ***Configure Ambari Database*** tab, under ***Advanced options***:
 
 ![](/images/ambari-database.png)
 <sub>*Full size [here](/images/ambari-database.png).*</sub>
 
-## Configure database with shell
+## Configure Database with the Shell
 
-To configure remote database for Ambari with Cloudbreak shell you have to use `database configure` command before `cluster create` command:
+To configure a remote database for Ambari with Cloudbreak shell, use `database configure` command before `cluster create` command. The syntax is:
 
 ```
 database configure --vendor [vendor] --host [host-or-ip] --port [port] --name [database-name] --username [user-name] --password [password]
 ```
 
-Vendor values are:
+Accepted `vendor` values are:
 
 - MARIADB
 - MSSQL
@@ -36,11 +43,11 @@ Vendor values are:
 - POSTGRES
 - SQLANYWHERE
 
-### Upgrade JDBC driver
+### Upgrade the JDBC Driver
 
-During installation Cloudbreak distributes JDBC driver for Ambari to different locations. If you want to upgrade or use different one you have to do the steps manually:
+During installation, Cloudbreak distributes the JDBC driver for Ambari to different locations. If you want to upgrade the driver or use a different one, you have to perform these steps:
 
-- copy driver to `/var/lib/ambari-server/jdbc-drivers` directory
-- symlink driver to `/usr/share/java`, `/usr/lib/jvm/java/jre/lib/ext` directories
-- reconfigure Ambari by executing `ambari-server setup --jdbc-db=[db-vendor] --jdbc-driver=[driver-location]` command
+1. Copy the driver to the `/var/lib/ambari-server/jdbc-drivers` directory.
+2. Symlink the driver to `/usr/share/java`, `/usr/lib/jvm/java/jre/lib/ext` directories.
+3. Reconfigure Ambari by executing the `ambari-server setup --jdbc-db=[db-vendor] --jdbc-driver=[driver-location]` command.
 
