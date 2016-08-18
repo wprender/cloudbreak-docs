@@ -1,8 +1,9 @@
 # Custom Cloud Images
-Every cloud platform comes with default images that contain packages required to build an Ambari and HDP stack. These default images are declared in yml files, which Cloudbreak loads upon start. You can customize these images and use them instead of the defaults. To overwrite the default yml files, place files declaring your custom images in the `/var/lib/cloudbreak-deployment/etc` directory. The format of the yml files is platform-specific and described in the following sections.  
+Every cloud platform comes with default images that contain packages required to build an Ambari and HDP stack. These default images are declared in yml files, which Cloudbreak loads upon start. You can customize these images and use them instead of the defaults. 
 
->`Note:` The etc directory must be present in the Cloudbreak deployment directory. By default it does not exist so you need 
-to create it.
+To overwrite the default yml files, place files declaring your custom images in the `/var/lib/cloudbreak-deployment/etc` directory. The etc directory does not exist by default so you need to create it.
+
+The format of the yml files is platform-specific and described in the following sections.  
 
 >`Note:` If you wish to change the images after Cloudbreak has been launched, you need to restart the application after updating the images.
  
