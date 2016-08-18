@@ -21,11 +21,11 @@ The `mapping file` should have the following format:
 
 Based on this mapping, the Cloudbreak application ensures that the rack information of the started VMs will be passed to Hadoop services via Ambari.
 
-## Platform Configuration Through Cloudbrak UI
+## Platform Configuration Through Cloudbreak UI
 
 ### Manage Platform Configuration
 
->You can log in to the Cloudbreak application at http://<PUBLIC_IP>:3000. You can find the provider-specific documentation here:
+>You can log in to the Cloudbreak application at http://PUBLIC_IP:3000. You can find the provider-specific documentation here:
 >
 * [AWS](aws.md)
 * [Azure](azure.md)
