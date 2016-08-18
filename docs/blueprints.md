@@ -1,6 +1,6 @@
 # Blueprints
 
-for your convenience, Cloudbreak provides a list of default HDP cluster blueprints. You can also build and use your own blueprint.
+For your convenience, Cloudbreak provides a list of default HDP cluster blueprints. You can also build and use your own blueprint.
 
 
 | Name | Description | Services | Source |
