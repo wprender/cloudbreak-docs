@@ -296,13 +296,7 @@
         
             <li><a href="#prerequisites">Prerequisites</a></li>
         
-            <li><a href="#install-cloudbreak-deployer_1">Install Cloudbreak Deployer</a></li>
-        
-            <li><a href="#initialize-your-profile">Initialize Your Profile</a></li>
-        
-            <li><a href="#generate-your-profile">Generate Your Profile</a></li>
-        
-            <li><a href="#start-cloudbreak-application">Start Cloudbreak Application</a></li>
+            <li><a href="#installation">Installation</a></li>
         
             <li><a href="#troubleshooting">Troubleshooting</a></li>
         
@@ -385,7 +379,8 @@ systemctl start docker
 systemctl enable docker
 </code></pre>
 
-<h2 id="install-cloudbreak-deployer_1">Install Cloudbreak Deployer</h2>
+<h2 id="installation">Installation</h2>
+<h4 id="install-cloudbreak-deployer_1">Install Cloudbreak Deployer</h4>
 <p>Install the Cloudbreak Deployer and unzip the platform-specific single binary to your PATH. For example:</p>
 <pre><code>yum -y install unzip tar
 curl -Ls s3.amazonaws.com/public-repo-1.hortonworks.com/HDP/cloudbreak/cloudbreak-deployer_1.3.0_$(uname)_x86_64.tgz | sudo tar -xz -C /bin cbd
@@ -393,7 +388,7 @@ cbd --version
 </code></pre>
 
 <p>Once the Cloudbreak Deployer is installed, you can set up the Cloudbreak application.</p>
-<h2 id="initialize-your-profile">Initialize Your Profile</h2>
+<h4 id="initialize-your-profile">Initialize Your Profile</h4>
 <p>Initialize <code>cbd</code> by using:</p>
 <pre><code>mkdir cloudbreak-deployment
 cd cloudbreak-deployment
@@ -402,7 +397,7 @@ cbd init
 
 <p>This creates a <code>Profile</code> file in the current directory.   </p>
 <p>Open the <code>Profile</code> file and check the <code>PUBLIC_IP</code>. Cloudbreak UI uses the <code>PUBLIC_IP</code> to access the Cloudbreak UI. In some cases, the <code>cbd</code> tool tries to guess it. If <code>cbd</code> did not get the IP address during the initialization, set the appropriate value.</p>
-<h2 id="generate-your-profile">Generate Your Profile</h2>
+<h4 id="generate-your-profile">Generate Your Profile</h4>
 <p>Generate configurations by executing:</p>
 <pre><code>rm *.yml
 cbd generate
@@ -413,7 +408,7 @@ cbd generate
 <li>The <strong>docker-compose.yml</strong> file that describes the configurations of all the Docker containers required for the Cloudbreak deployment.</li>
 <li>The <strong>uaa.yml</strong> file that holds the configurations of the identity server used to authenticate users to Cloudbreak.</li>
 </ul>
-<h2 id="start-cloudbreak-application">Start Cloudbreak Application</h2>
+<h4 id="start-cloudbreak-application">Start Cloudbreak Application</h4>
 <p>To start the Cloudbreak application, use the following command:</p>
 <pre><code>cbd pull
 cbd start
