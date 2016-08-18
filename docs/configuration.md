@@ -1,48 +1,55 @@
-# Configuration
+# Advanced Configuration
 
-Configuration is based on environment variables. Cloudbreak Deployer always forks a new bash subprocess **without
-inheriting environment variables**. The only way to set ENV vars relevant for Cloudbreak Deployer is to set them
-in a file called `Profile`.
+Cloudbreak Deployer configuration is based on environment variables. Cloudbreak Deployer always opens a new bash subprocess **without inheriting environment variables**. Only the following environment variables _are_ inherited:
 
-To see all available config variables with their default value:
+- `HOME`
+- `DEBUG`
+- `TRACE`
+- `CBD_DEFAULT_PROFILE`
+- all `DOCKER_XXX`
+
+To set environment variables relevant for Cloudbreak Deployer, add them to a file called `Profile`.
+
+To see all available environment variables with their default values, run:
 
 ```
 cbd env show
 ```
 
-The `Profile` will be simple **sourced** in bash terms, so you can use the usual syntaxes to set config values:
+The `Profile` file is **sourced**, so you can use the usual syntax to set configuration values:
 
 ```
 export MY_VAR=some_value
-export OTHER_VAR=dunno
+export OTHER_VAR=another_value
 ```
 
-## Env specific Profile
 
-Let’s say you want to use a different version of Cloudbreak for **prod** and **qa** profile.
-You can specify the Docker image tag via: `DOCKER_TAG_CLOUDBREAK`.
-`Profile` is always sourced, so you will have two env specific configurations:
-- `Profile.dev`
+## Environment Specific Profiles
+
+Let’s say that you want to use a different version of Cloudbreak for **prod** and **qa** profile. Since the `Profile` file is sourced, you will have to create two environment specific configurations that can be sourced:  
+- `Profile.prod`  
 - `Profile.qa`
 
-For prod you need:
+For example, to create and use a **prod** profile, you need to:
 
-- create a file called `Profile.prod`
-- write the env specific `export DOCKER_TAG_CLOUDBREAK=0.3.99` into `Profile.prod`
-- set the env variable: `CBD_DEFAULT_PROFILE=prod`
+1. Create a file called `Profile.prod`
+2. Write the environment-specific `export DOCKER_TAG_CLOUDBREAK=0.3.99` into `Profile.prod` to specify Docker image.
+3. Set the environment variable: `CBD_DEFAULT_PROFILE=prod`
 
-To use the `prod` specific profile once:
+To use the `prod` specific profile once, set:
 ```
 CBD_DEFAULT_PROFILE=prod cbd some_commands
 ```
 
-For permanent setting you can `export CBD_DEFAULT_PROFILE=prod` in your `.bash_profile`.
+To permanently use the  `prod` profile, set `export CBD_DEFAULT_PROFILE=prod` in your `.bash_profile`.
 
 ## Available Configurations
 
 ### SMTP
 
-If you want to change SMTP parameters, put the corresponding lines into your `Profile`. You can also see the default values of the parameters in the following box.
+If you want to change SMTP parameters, add them your `Profile`.  
+
+The default values of the SMTP parameters are:
 ```
 export CLOUDBREAK_SMTP_SENDER_USERNAME=
 export CLOUDBREAK_SMTP_SENDER_PASSWORD=
@@ -54,60 +61,53 @@ export CLOUDBREAK_SMTP_STARTTLS_ENABLE=true
 export CLOUDBREAK_SMTP_TYPE=smtp
 ```
 
-*Using SMTPS*
+#### SMTPS 
 
-If your SMTP server uses SMTPS you should change the protocol in your Profile:
+If your SMTP server uses SMTPS, you must set the protocol in your `Profile` to `smtps`:
 ```
 export CLOUDBREAK_SMTP_TYPE=smtps
 ```
-If the certificate used by the SMTP server is self-signed, or Java's default trust store doesn't contain it than you can add it to the trust store by copying it to `certs/trusted` inside the Cloudbreak deployer directory and start (or restart) the Cloudbreak container (with `cbd start`).The Cloudbreak container will automatically import the certificates in that directory to its trust store on startup.
+#### Certificates 
 
-###Access from custom domains
+If the certificate used by the SMTP server is self-signed or the Java's default trust store doesn't contain it, you can add it to the trust store by copying it to `certs/trusted` inside the Cloudbreak Deployer directory, and start (or restart) the Cloudbreak container (with `cbd start`). On startup, the Cloudbreak container  automatically imports the certificates in that directory to its trust store.
 
-Cloudbreak deployer uses UAA as an identity provider and supports multi tenancy. In UAA terminology this is referred as identity zones. An identity zone is accessed through a unique subdomain. If the standard UAA responds to [https://uaa.10.244.0.34.xip.io](https://uaa.10.244.0.34.xip.io) a zone on this UAA would be accessed through [https://testzone1.uaa.10.244.0.34.xip.io](https://testzone1.uaa.10.244.0.34.xip.io).
+###Access from Custom Domains
 
-As an example in our hosted deployment the `identity.sequenceiq.com` domain refers to our identity server and the `UAA_ZONE_DOMAIN` variable has to be set to that domain. This variable is necessary for UAA to identify which zone provider should handle the requests that arrives to the given domain.
+Cloudbreak Deployer supports multitenancy and uses UAA as an identity provider. In UAA, multitenancy is managed through identity zones. An identity zone is accessed through a unique subdomain. For example, if the standard UAA responds to [https://uaa.10.244.0.34.xip.io](https://uaa.10.244.0.34.xip.io), a zone on this UAA can be accessed through a unique subdomain [https://testzone1.uaa.10.244.0.34.xip.io](https://testzone1.uaa.10.244.0.34.xip.io). 
 
-
-If you want to use a custom domain for your identity or deployment, put the `UAA_ZONE_DOMAIN` line into your
-`Profile`. You can see an example in the following box:
+If you want to use a custom domain for your identity or deployment, add the `UAA_ZONE_DOMAIN` line to your `Profile`:
 ```
 export UAA_ZONE_DOMAIN=my-subdomain.example.com
 ```
 
+For example, in our hosted deployment, the `identity.sequenceiq.com` domain refers to our identity server; therefore, the `UAA_ZONE_DOMAIN` variable has to be set to that domain. This variable is necessary for UAA to identify which zone provider should handle the requests that arrive to that domain.
+
+
 ### Consul
 
-[Consul](http://consul.io) is used for DNS resolution. All Cloudbreak related services are registered as
-**someservice.service.consul**. Consul’s built in DNS server is able to “fall-back” on an other DNS server.
-This option is called `-recursor`. Clodbreak Deployer first tries to discover the DNS settings of the host,
-by looking for **nameserver** entry in `/etc/resolv.conf`. If it finds one consul will use it as a recursor,
-otherwise **8.8.8.8** will be used.
+Cloudbreak uses [Consul](http://consul.io) for DNS resolution. All Cloudbreak-related services are registered as **someservice.service.consul**. 
 
-For a full list of available consul config options, see the [docs](https://consul.io/docs/agent/options.html).
+Consul’s built-in DNS server is able to fall back on another DNS server.
+This option is called `-recursor`. Clodbreak Deployer first tries to discover the DNS settings of the host by looking for **nameserver** entry in the `/etc/resolv.conf` file. If it finds one, consul will use it as a recursor. Otherwise, it will use **8.8.8.8** .
 
-You can pass any additional consul configuration by defining a `DOCKER_CONSUL_OPTIONS` in `Profile`.
+For a full list of available consul config options, see Consul [documentation](https://consul.io/docs/agent/options.html).
 
-## Azure Resource manager command
-- **cbd azure configure-arm**
-- **cbd azure deploy-dash**
-See the documentation [here](/azure/#azure-application-setup-with-cloudbreak-deployer).
+To pass any additional Consul configuration, define a `DOCKER_CONSUL_OPTIONS` in the `Profile` file.
 
-## Caveats
+### SSH Fingerprint Verification
 
-The **Cloudbreak Deployer** tool opens a clean bash subshell, without inheriting environment variables.
-
-Only the following environment variables _are_ inherited:
-
-- `HOME`
-- `DEBUG`
-- `TRACE`
-- `CBD_DEFAULT_PROFILE`
-- all `DOCKER_XXX`
-
-##SSH fingerprint verification
-
-Cloudbreak is able to verify the SSH fingerprints of the provisioned virtual machines. We disable this feature by default for AWS and GCP because we have experienced issues, since Cloud providers do not always print the SSH fingerprint into the provisioned machines console output. The fingerprint validation feature could be turned on by configuring the 'CB_AWS_HOSTKEY_VERIFY' and/or the CB_GCP_HOSTKEY_VERIFY variables in your cbd profile like in the following example:
+Cloudbreak is able to verify the SSH fingerprints of the provisioned virtual machines. We disable this feature by default for AWS and GCP, because we have experienced issues caused by the fact that Ccoud providers do not always print the SSH fingerprint into the provisioned machines console output. The fingerprint validation feature can be turned on by configuring the `CB_AWS_HOSTKEY_VERIFY` and/or the `CB_GCP_HOSTKEY_VERIFY` variables in your `Profile`. For example:
 ```
 export CB_AWS_HOSTKEY_VERIFY=true
 export CB_GCP_HOSTKEY_VERIFY=true
 ```
+
+## Provider Specific Configurations
+
+### Azure Resource Manager Command
+
+- **cbd azure configure-arm**
+- **cbd azure deploy-dash**
+
+For more information, see Azure [documentation](/azure/#azure-application-setup-with-cloudbreak-deployer).
+
