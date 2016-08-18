@@ -83,8 +83,9 @@ yum install -y docker-engine-1.9.1 docker-engine-selinux-1.9.1
 systemctl start docker
 systemctl enable docker
 ```
+## Installation
 
-## Install Cloudbreak Deployer
+#### Install Cloudbreak Deployer
 
 Install the Cloudbreak Deployer and unzip the platform-specific single binary to your PATH. For example:
 
@@ -96,7 +97,7 @@ cbd --version
 
 Once the Cloudbreak Deployer is installed, you can set up the Cloudbreak application.
 
-## Initialize Your Profile
+#### Initialize Your Profile
 
 Initialize `cbd` by using:
 
@@ -111,8 +112,7 @@ This creates a `Profile` file in the current directory.
 Open the `Profile` file and check the `PUBLIC_IP`. Cloudbreak UI uses the `PUBLIC_IP` to access the Cloudbreak UI. In some cases, the `cbd` tool tries to guess it. If `cbd` did not get the IP address during the initialization, set the appropriate value.
 
 
-
-## Generate Your Profile
+#### Generate Your Profile
 
 Generate configurations by executing:
 
@@ -127,7 +127,7 @@ This creates the following configuration files:
 - The **uaa.yml** file that holds the configurations of the identity server used to authenticate users to Cloudbreak.
 
 
-## Start Cloudbreak Application
+#### Start Cloudbreak Application
 
 To start the Cloudbreak application, use the following command:
 
