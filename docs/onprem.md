@@ -162,11 +162,11 @@ setenforce 0 && sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/ selinux/co
 
 ## Next Steps
 
-After you have met all the pre-requisites for Cloudbreak, perform the **cloud provider specific** configuration. Follow the cloud provider-specific steps in the **Setup** section:
+After you have installed Cloudbreak Deployer, perform cloud provider specific configurations and then provision a cluster. See **cloud provider specific** steps:
 
  * [AWS](aws.md#aws-setup)
  * [Azure](azure.md)
  * [GCP](gcp.md#google-setup)
  * [OpenStack](openstack.md#openstack-setup)
 
-> **Note:** AWS and OpenStack Setup sections contain additional and provider-specific `Profile` settings.
+> **Note:** AWS and OpenStack Setup sections contain provider-specific and other additional `Profile` settings.
