@@ -1,42 +1,35 @@
-Before configuring Cloudbreak Deployer, you should know that:
+Before getting started with Cloudbreak Deployer, you should know that:
 
   * The default SSH username for the EC2 instances is `cloudbreak`.
   * Cloudbreak Deployer location on your EC2 instance is `/var/lib/cloudbreak-deployment`. This is the
   `cbd` root folder.
   * You must execute all `cbd` actions from the `cbd` root folder as a `cloudbreak` user.
 
-## Set up Cloudbreak Deployer
-
-You should have already installed the Cloudbreak Deployer either [using the AWS Cloud Images](aws.md) or by [installing the
+In the previous step, you should have already set up a VM with Cloudbreak Doployer either [using the AWS Cloud Images](aws.md) or by [installing the
 Cloudbreak Deployer](onprem.md) manually on your own VM.
 
-You can [connect to the previously created `cbd` VM](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstances.html).
+Now you need to [connect to the previously created `cbd` VM](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstances.html).
 
-To open the `cloudbreak-deployment` directory, run:
+## Cloudbreak Deployment Directory
+
+To navigate to the `cloudbreak-deployment` directory, run:
 
 ```
 cd /var/lib/cloudbreak-deployment/
 ```
 This directory contains configuration files and the supporting binaries for Cloudbreak Deployer.
 
-### Configuring Role-based Credentials
 
-There are two ways to create AWS credentials in Cloudbreak:
+## Initialize Your Profile
 
-**Key-based:** This requires your AWS access key and secret key pair. Cloudbreak will use these keys to launch the resources. For starters, this is a simpler option that does not require additional configuration. You will provide the keys later when you [provision an HDP cluster](credentials.md).
- 
-**Role-based:** This requires a valid [IAM role](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html) with "AssumeRole" policy. Cloudbreak will assume this role to get temporary access and the access/secret key pair.
+First, initialize `cbd` by creating a `Profile` file:
 
-To configure role-based credentials, start your instance with an "AssumeRole" policy. For more information, see [Using Instance Profiles](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html) and [Using an IAM Role to Grant Permissions to Applications Running on Amazon EC2 Instances](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html).
-
-Alternatively, you can set your AWS keys of an IAM user with an"AssumeRole" policy in the `Profile` file:
-
-  ```
-  export AWS_ACCESS_KEY_ID=AKIA**************W7SA
-  export AWS_SECRET_ACCESS_KEY=RWCT4Cs8******************/*skiOkWD
-  ```
-  
-> If you want to use instance profile, do not set these variables. If you want to use Cloudbreak with Role ARNs instead of keys, make sure that the instance profile role can assume roles on AWS.
+```
+cbd init
+```
+This will create a `Profile` file in the current directory. Open the `Profile` file and check the `PUBLIC_IP`. 
+`PUBLIC_IP`is mandatory, because it is used to access the Cloudbreak UI. In some cases the `cbd` tool tries to 
+guess it. If `cbd` cannot get the IP address during the initialization, set the appropriate value.
 
 ## Start Cloudbreak Deployer
 
@@ -70,6 +63,25 @@ After the `cbd start` command finishes, check the following:
    ```
   You should see a message like this in the log: `Started CloudbreakApplication in 36.823 seconds`. Cloudbreak normally takes less than a minute to start.
   
+  
+## Configure Role-based Credentials
+
+There are two ways to create AWS credentials in Cloudbreak:
+
+**Key-based:** This requires your AWS access key and secret key pair. Cloudbreak will use these keys to launch the resources. For starters, this is a simpler option that does not require additional configuration. You will provide the keys later when you [provision an HDP cluster](credentials.md).
+ 
+**Role-based:** This requires a valid [IAM role](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html) with "AssumeRole" policy. Cloudbreak will assume this role to get temporary access and the access/secret key pair.
+
+To configure role-based credentials, start your instance with an "AssumeRole" policy. For more information, see [Using Instance Profiles](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html) and [Using an IAM Role to Grant Permissions to Applications Running on Amazon EC2 Instances](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html).
+
+Alternatively, you can set your AWS keys of an IAM user with an"AssumeRole" policy in the `Profile` file:
+
+  ```
+  export AWS_ACCESS_KEY_ID=AKIA**************W7SA
+  export AWS_SECRET_ACCESS_KEY=RWCT4Cs8******************/*skiOkWD
+  ```
+  
+> If you want to use instance profile, do not set these variables. If you want to use Cloudbreak with Role ARNs instead of keys, make sure that the instance profile role can assume roles on AWS.   
 
 ## Optional Configurations
 

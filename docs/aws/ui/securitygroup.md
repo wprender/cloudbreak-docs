@@ -1,4 +1,4 @@
-**Security groups**
+#### Security groups
 
 Security group templates are very similar to the [security groups on the AWS Console](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html).
 **They describe the allowed inbound traffic to the instances in the cluster.**
@@ -57,7 +57,7 @@ You can define your own security group by adding all the ports, protocols and CI
 If `Public in account` is checked all the users belonging to your account will be able to use this security group 
 template to create clusters, but cannot delete it.
 
->**NOTE** The security groups are created on AWS only after the cluster provisioning starts with the selected security group template.
+>**NOTE:** The security groups are created on AWS only after the cluster provisioning starts with the selected security group template.
 
 ![](/images/ui-secgroup_v3.png)
 <sub>*Full size [here](/images/ui-secgroup_v3.png).*</sub>

@@ -3,9 +3,11 @@ Before configuring Cloudbreak Deployer, you should know that:
   * All `cbd` actions must be executed from the `cbd` root folder.
   * Most of the `cbd` commands require `root` permissions, so you may want to apply `sudo su`.
 
-## Set up Cloudbreak Deployer
+## Cloudbreak Deployer Installation
 
-First. [install the Cloudbreak Deployer](onprem.md) manually on a VM inside your Mesos cluster's private network.
+#### Install CLoudbreak Deployer
+
+First, [install the Cloudbreak Deployer](onprem.md) manually on a VM inside your Mesos cluster's private network.
 
 If you have your own installed VM, check the [Initialize your Profile](mesos.md#initialize-your-profile) section here before starting the provisioning.
 
@@ -16,7 +18,7 @@ cd cloudbreak-deployment
 ```
 This directory contains configuration files and the supporting binaries for Cloudbreak Deployer.
 
-### Initialize your Profile
+#### Initialize your Profile
 
 First initialize `cbd`:  
 ```
@@ -26,7 +28,7 @@ This creates a `Profile` file in the current directory. Open the `Profile` file 
 The `PUBLIC_IP` is mandatory, because it is used to access the Cloudbreak UI. In some cases the `cbd` tool tries to 
 guess it. If `cbd` cannot get the IP address during the initialization, set the appropriate value.
 
-## Start Cloudbreak Deployer
+#### Start Cloudbreak Deployer
 
 To start the Cloudbreak application use the following command:  
 ```
@@ -41,7 +43,7 @@ The `cbd start` command includes the `cbd generate` command which applies the fo
 - creates the **docker-compose.yml** file that describes the configuration of all the Docker containers needed for the Cloudbreak deployment.
 - creates the **uaa.yml** file that holds the configuration of the identity server used to authenticate users to Cloudbreak.
 
-## Validate that Cloudbreak Deployer Has Started
+#### Validate that Cloudbreak Deployer Has Started
 
 After the `cbd start` command finishes, check the following:
 

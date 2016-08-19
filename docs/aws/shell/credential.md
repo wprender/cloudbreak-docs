@@ -1,4 +1,4 @@
-## Setting up AWS credential
+## Setting up AWS Credential
 
 Cloudbreak works by connecting your AWS account through so called Credentials, and then uses these credentials to 
 create resources on your behalf. Credentials can be configured with the following command for example:
@@ -8,7 +8,7 @@ credential create --AWS --name my-aws-credential --description "sample descripti
 arn:aws:iam::***********:role/userrole --sshKeyString "ssh-rsa AAAAB****etc"
 ```
 
->**NOTE** that Cloudbreak **does not set your cloud user details** - we work around the concept of [IAM](http://aws.amazon.com/iam/) - **on Amazon (or other cloud providers)**. You should have already a valid IAM role. You can 
+>**NOTE:**  Cloudbreak **does not set your cloud user details** - we work around the concept of [IAM](http://aws.amazon.com/iam/) - **on Amazon (or other cloud providers)**. You should have already a valid IAM role. You can 
 find further details [here](aws.md#provisioning-prerequisites).
 
 Alternatives to provide `SSH Key`:

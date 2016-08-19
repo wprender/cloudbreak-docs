@@ -1,4 +1,4 @@
-## Cluster deployment
+## Cluster Deployment
 
 After all the cluster resources are configured you can deploy a new HDP cluster.
 

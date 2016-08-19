@@ -1,4 +1,4 @@
-**Security groups**
+#### Security groups
 
 Security group templates are very similar to the [security groups on the AWS Console](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html). **They describe the allowed 
 inbound traffic to the instances in the cluster.** Currently only one security group template can be selected for a 

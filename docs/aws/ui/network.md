@@ -1,4 +1,4 @@
-**Networks**
+#### Networks
 
 Your clusters can be created in their own **Virtual Private Cloud (VPC)** or in one of your already existing VPCs.
 If you choose an existing VPC it is possible to create a new subnet within the VPC or use an already existing one.
@@ -25,14 +25,14 @@ You have the following options:
 
  You can configure the `Subnet Identifier` and the `Internet Gateway Identifier` (IGW) of your VPC.
 
->**IMPORTANT** The subnet CIDR cannot overlap each other in a VPC. So you have to create different network
+>**IMPORTANT:** The subnet CIDR cannot overlap each other in a VPC. So you have to create different network
 templates for every each clusters.
 
 To create a new subnet within the VPC, provide the ID of the subnet which is in the existing VPC and your cluster
 will be launched into that subnet. **For example** you can create 3 different clusters with 3 different network
 templates for multiple subnets `10.0.0.0/24`, `10.0.1.0/24`, `10.0.2.0/24` with the same VPC and IGW identifiers.
 
->**IMPORTANT** Please make sure the define subnet here doesn't overlap with any of your already deployed subnet in
+>**IMPORTANT:** Make sure the define subnet here doesn't overlap with any of your already deployed subnet in
 the VPC, because of the validation only happens after the cluster creation starts.
 
 >In case of existing subnet make sure you have enough room within your network space for the new instances.
@@ -40,7 +40,7 @@ the VPC, because of the validation only happens after the cluster creation start
 If `Public in account` is checked all the users belonging to your account will be able to use this network template
 to create clusters, but cannot delete it.
 
->**NOTE** The VPCs, IGWs and subnet are created on AWS only after the the cluster provisioning starts with the selected
+>**NOTE:** The VPCs, IGWs and subnet are created on AWS only after the the cluster provisioning starts with the selected
 network template.
 
 ![](/aws/images/aws-network_v4.png)

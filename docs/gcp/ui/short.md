@@ -10,4 +10,4 @@ This document explains the four steps that need to be followed to create Cloudbr
 - create a blueprint that describes the HDP services in your clusters
 - launch the cluster itself based on these template resources
 
->**IMPORTANT** Make sure that you have sufficient qouta (CPU, network, etc) for the requested cluster size.
+>**IMPORTANT:** Make sure that you have sufficient qouta (CPU, network, etc) for the requested cluster size.

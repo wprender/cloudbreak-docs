@@ -1,4 +1,4 @@
-## Setting up GCP credential
+## Setting up GCP Credential
 
 Cloudbreak works by connecting your GCP account through so called Credentials, and then uses these credentials to 
 create resources on your behalf. Credentials can be configured with the following command for example:
@@ -7,7 +7,7 @@ credential create --GCP --description "sample description" --name my-gcp-credent
 --serviceAccountId <your GCP service account mail address> --serviceAccountPrivateKeyPath /files/mykey.p12 
 --sshKeyString "ssh-rsa AAAAB3***etc."
 ```
->**NOTE** that Cloudbreak **does not set your cloud user details** - we work around the concept of GCP Service 
+>**NOTE:** Cloudbreak **does not set your cloud user details** - we work around the concept of GCP Service 
 Account Credentials. You should have already a valid GCP service account. You can find further details [here](gcp.md#provisioning-prerequisites).
 
 Alternatives to provide `SSH Key`:

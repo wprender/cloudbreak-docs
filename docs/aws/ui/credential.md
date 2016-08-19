@@ -1,4 +1,4 @@
-## Setting up AWS credentials
+## Setting up AWS Credentials
 
 Cloudbreak works by connecting your AWS account through so called *Credentials*, and then uses these credentials to 
 create resources on your behalf. The credentials can be configured on the **manage credentials** panel on the 

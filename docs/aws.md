@@ -2,17 +2,17 @@
 
 {!docs/aws/images.md!}
 
-# AWS Setup
+# Cloudbreak Deployer Setup on AWS
 
 {!docs/aws/deployer.md!}
 
-# Provisioning Prerequisites
+# Cluster Provisioning Prerequisites
 
 {!docs/aws/iamrole.md!}
 
 {!docs/common/sshkey.md!}
 
-# Provisioning via Browser
+# Cluster Provisioning via Browser
 
 {!docs/aws/ui/short.md!}
 
@@ -34,7 +34,7 @@
 
 {!docs/shell/short_shell.md!}
 
-# Provisioning via CLI
+# Cluster Provisioning via CLI
 
 {!docs/aws/shell/credential.md!}
 

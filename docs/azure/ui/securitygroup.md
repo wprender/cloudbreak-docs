@@ -1,4 +1,4 @@
-**Security groups**
+#### Security groups
 
 Security group templates are very similar to the [security groups on Azure](https://azure.microsoft.com/en-us/documentation/articles/virtual-networks-nsg/).
 **They describe the allowed inbound traffic to the instances in the cluster.**
@@ -59,10 +59,10 @@ You can define your own security group by adding all the ports, protocols and CI
 If `Public in account` is checked all the users belonging to your account will be able to use this security group 
 template to create clusters, but cannot delete it.
 
->**NOTE** The security groups are created on Azure only after the cluster provisioning starts with the selected 
+>**NOTE:** The security groups are created on Azure only after the cluster provisioning starts with the selected 
 security group template.
 
->**IMPORTANT** If you use and existing virtual network and subnet the selected security group will only be applied to the selected Ambari Server node due to the lack of
+>**IMPORTANT:** If you use and existing virtual network and subnet the selected security group will only be applied to the selected Ambari Server node due to the lack of
 capability to attach multiple security groups to an existing subnet. If you'd like to open ports for Hadoop you must do it on your existing security group.
 
 ![](/images/ui-secgroup_v3.png)

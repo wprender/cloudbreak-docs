@@ -1,4 +1,4 @@
-## Generate a new SSH key
+## Generate a New SSH Key
 
 All the instances created by Cloudbreak are configured to allow key-based SSH,
 so you'll need to provide an SSH public key that can be used later to SSH onto the instances in the clusters you'll create with Cloudbreak.
@@ -20,7 +20,8 @@ You'll be asked to enter a passphrase, but you can leave it empty.
 # Enter same passphrase again: [Type passphrase again]
 ```
 
-After you enter a passphrase the keypair is generated. The output should look something like below.
+After you enter a passphrase the keypair is generated. The output should look something like below. 
+
 ```
 # Your identification has been saved in /Users/you/.ssh/id_rsa.
 # Your public key has been saved in /Users/you/.ssh/id_rsa.pub.

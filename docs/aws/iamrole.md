@@ -1,4 +1,4 @@
-## IAM role setup
+## IAM Role Setup
 
 > If you want to use your Aws Access Key and your Secret Access Key to authenticate to Amazon then please use the `Key based authentication` and you do not need to setup an IAM Role.
 

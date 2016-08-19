@@ -1,4 +1,4 @@
-**Stop cluster**
+#### Stop Cluster
 
 You have the ability to **stop your existing stack then its cluster** if you want to suspend the work on it.
 

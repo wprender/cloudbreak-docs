@@ -1,6 +1,6 @@
 
 
-# Manage Your Account Using the Cloudbreak Web UI
+# Account Management
 
 You can use the Cloudbreak web UI to view and manage your settings.
 

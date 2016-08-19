@@ -1,4 +1,4 @@
-## Infrastructure templates
+## Infrastructure Templates
 
 After your GCP account is linked to Cloudbreak you can start creating resource templates that describe your clusters'
 infrastructure:
@@ -11,7 +11,7 @@ When you create one of the above resource, **Cloudbreak does not make any reques
  on GCP after the `cluster create` has applied.** These templates are saved to Cloudbreak's database and can be
  reused with multiple clusters to describe the infrastructure.
 
-**Templates**
+#### Templates
 
 Templates describe the **instances of your cluster** - the instance type and the attached volumes. A typical setup is
  to combine multiple templates in a cluster for the different types of nodes. For example you may want to attach multiple
