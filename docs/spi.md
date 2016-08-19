@@ -1,30 +1,32 @@
 #Service Provider Interface (SPI)
 
-Cloudbreak already supports multiple cloud platforms and provides an easy way to integrate a new provider trough [Cloudbreak's Service Provider Interface (SPI)](https://github.com/sequenceiq/cloudbreak/tree/master/cloud-api) which is a plugin mechanism to enable a seamless integration of any cloud provider.
+Cloudbreak already supports multiple cloud platforms and provides an easy way to integrate a new provider trough [Cloudbreak's Service Provider Interface (SPI)](https://github.com/sequenceiq/cloudbreak/tree/master/cloud-api), a plugin mechanism that enables seamless integration of any cloud provider.
 
-The SPI plugin mechanism has been used to integrate all existing providers to Cloudbreak, therefore if a new provider is integrated it immediately becomes a first class citizen in Cloudbreak.
+The SPI plugin mechanism has been used to integrate all currently supported providers with Cloudbreak. Consequently, when a new provider is integrated, it immediately becomes a first class citizen in Cloudbreak.
  
- * [cloud-aws](https://github.com/sequenceiq/cloudbreak/tree/master/cloud-aws) module integrates Amazon Web Services
- * [cloud-gcp](https://github.com/sequenceiq/cloudbreak/tree/master/cloud-gcp) module integrates Google Cloud Platform
- * [cloud-arm](https://github.com/sequenceiq/cloudbreak/tree/master/cloud-arm) module integrates Microsoft Azure
- * [cloud-openstack](https://github.com/sequenceiq/cloudbreak/tree/master/cloud-openstack) module integrates OpenStack
+ * The [cloud-aws](https://github.com/sequenceiq/cloudbreak/tree/master/cloud-aws) module integrates Amazon Web Services
+ * The [cloud-gcp](https://github.com/sequenceiq/cloudbreak/tree/master/cloud-gcp) module integrates Google Cloud Platform
+ * The [cloud-arm](https://github.com/sequenceiq/cloudbreak/tree/master/cloud-arm) module integrates Microsoft Azure
+ * The [cloud-openstack](https://github.com/sequenceiq/cloudbreak/tree/master/cloud-openstack) module integrates OpenStack
 
-The SPI interface is event based, scales well and decoupled from Cloudbreak. The core of Cloudbreak is communicating trough [EventBus](http://projectreactor.io/) with providers, but the complexity of Event handling is hidden from the provider implementation.
+The SPI interface is event-based, it scales well, and is decoupled from Cloudbreak. The core of Cloudbreak uses [EventBus](http://projectreactor.io/) to communicate with the providers, but the complexity of event handling is hidden from the provider implementation.
 
-##Resource management
+##Resource Management
 
-There are two kind of deployment/resource management method is supported by cloud providers:
+Cloud providers support two kinds of deployment and resource management methods:
 
-* template based deployments
-* individual resource based deployments
+* Template-based deployments
+* Individual resource-based deployments
 
-Cloudbreak's SPI supports both way of resource management. It provides a well defined interfaces, abstract classes and helper classes like scheduling and polling of resources to aid the integration and to avoid any boilerplate code in the module of cloud provider.
+Cloudbreak's SPI supports both of these methods. It provides a well-defined interfaces, abstract classes, and helper classes, scheduling and polling of resources to aid the integration and to avoid any boilerplate code in the module of cloud provider.
 
-##Template based deployments
+###Template Based Deployments
 
-Providers with template based deployments like [AWS CloudFormation](https://aws.amazon.com/cloudformation/), [Azure ARM](https://azure.microsoft.com/en-us/documentation/articles/resource-group-overview/#) or [OpenStack Heat](https://wiki.openstack.org/wiki/Heat) have the ability to create and manage a collection of related cloud resources, provisioning and updating them in an orderly and predictable fashion. This means that Cloudbreak needs a reference to the template itself and every change in the infrastructure (e.g creating new instance or deleting one) is managed through this templating mechanism.
+Providers with template-based deployments like [AWS CloudFormation](https://aws.amazon.com/cloudformation/), [Azure ARM](https://azure.microsoft.com/en-us/documentation/articles/resource-group-overview/#) or [OpenStack Heat](https://wiki.openstack.org/wiki/Heat) have the ability to create and manage a collection of related cloud resources, provisioning and updating them in an orderly and predictable fashion. 
 
-If the provider has templating support then the provider's [gradle](http://gradle.org/) module shall depend on the [cloud-api](https://github.com/sequenceiq/cloudbreak/tree/master/cloud-api) module.
+In such scenario, Cloudbreak needs a reference to the template itself because every change in the infrastructure (for example, creating new instance or deleting one) is managed through this templating mechanism.
+
+If a provider has templating support, then the provider's [gradle](http://gradle.org/) module depends on the [cloud-api](https://github.com/sequenceiq/cloudbreak/tree/master/cloud-api) module:
 
 ```
 apply plugin: 'java'
@@ -46,13 +48,15 @@ dependencies {
 }
 ```
 
-The entry point of the provider is the  [CloudConnector](https://github.com/sequenceiq/cloudbreak/blob/master/cloud-api/src/main/java/com/sequenceiq/cloudbreak/cloud/CloudConnector.java) interface and every interface that needs to be implemented is reachable trough this interface.
+The entry point for the provider is the  [CloudConnector](https://github.com/sequenceiq/cloudbreak/blob/master/cloud-api/src/main/java/com/sequenceiq/cloudbreak/cloud/CloudConnector.java) interface and every interface that needs to be implemented is reachable trough this interface.
 
-##Individual resource based deployments
+###Individual Resource Based Deployments
 
-Providers like GCP that does not support suitable templating mechanism or for customisable providers like OpenStack where the Heat Orchestration (templating) component optional the individual resources needs to be handlet separately. This means that resources like networks, discs and compute instances needs to be created and managed with an ordered sequence of API calls and Cloudbreak shall provide a solution to manage the collection of related cloud resources together.
+There are providers such as GCP that do not support suitable templating mechanism, and customisable providers such as OpenStack where the Heat Orchestration (templating) component is optional and individual resources need to be handled separately. 
 
-If the provider has no templating support then the provider's [gradle](http://gradle.org/) module shall depend on the [cloud-template](https://github.com/sequenceiq/cloudbreak/tree/master/cloud-template) module, that includes Cloudbreak defined abstract template. This template is a set of abstract and utility classes to support provisioning and updating related resources in an orderly and predictable manner trough ordered sequences of cloud API calls.
+In such scenarios, resources such as networks, discs, and compute instances need to be created and managed with an ordered sequence of API calls, and Cloudbreak needs to provide a solution to manage the collection of related cloud resources as a whole.
+
+If the provider has no templating support, then the provider's [gradle](http://gradle.org/) module typically depends on the [cloud-template](https://github.com/sequenceiq/cloudbreak/tree/master/cloud-template) module, which includes Cloudbreak defined abstract template. This template is a set of abstract and utility classes to support provisioning and updating related resources in an orderly and predictable manner trough ordered sequences of cloud API calls:
 
 ```
 apply plugin: 'java'
@@ -76,12 +80,12 @@ dependencies {
 
 ##Variants
 
-OpenStack is very modular and allows to install different components for e.g. volume storage or different components for networking (e.g. Nova networking or Neutron) or even you have a chance that some components like Heat are not installed at all.
+OpenStack is highly modular. It allows you to install different components, for example for volume storage or networking (Nova networking, Neutron, etc.). Or, in some scenarios, some components such as Heat may not installed at all.
 
-Cloudbreak's SPI interface reflects this flexibility using so called variants. This means that if some part of cloud provider (typically OpenStack) is using different component you don't need re-implement the complete stack but just use a different variant and re-implement the part what is different.
+Cloudbreak's SPI interface reflects this flexibility using so called variants. This means that if some part of cloud provider (typically OpenStack) is using different component, you don't need re-implement the complete stack but just use a different variant and re-implement the part that is different.
 
 The reference implementation for this feature can be found in  [cloud-openstack](https://github.com/sequenceiq/cloudbreak/tree/master/cloud-openstack) module which support a HEAT and NATIVE variants. The HEAT variant utilizes the Heat templating to launch a stack, but the NATIVE variant starts the cluster by using a sequence of API calls without Heat to achieve the same result, although both of them are using the same authentication and credential management.
 
 ##Development
 
-In order to set up a development environment please take a look at [Local Development Setup](https://github.com/sequenceiq/cloudbreak/blob/master/docs/dev/development.md) documentation.
+For instructions to set up your development environment, see [Local Development Setup](https://github.com/sequenceiq/cloudbreak/blob/master/docs/dev/development.md).
