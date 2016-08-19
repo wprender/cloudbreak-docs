@@ -12,6 +12,7 @@ pages:
         - Architecture : architecture.md
         - Installation : onprem.md
         - Release Notes : releasenotes.md
+        - Known Issues: issues.md
         - Change Log : changelog.md
     - AWS: aws.md
     - Azure : azure.md
@@ -36,4 +37,3 @@ pages:
         - Development :
             - Environments : environments.md
             - Flows : flow.html
-        - Known Issues: issues.md
