@@ -28,6 +28,12 @@
     </url>
         
     <url>
+     <loc>http://sequenceiq.com/cloudbreak-docs/issues/</loc>
+     <lastmod>2016-08-21</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
      <loc>http://sequenceiq.com/cloudbreak-docs/changelog/</loc>
      <lastmod>2016-08-21</lastmod>
      <changefreq>daily</changefreq>
@@ -162,12 +168,6 @@
     <url>
      <loc>http://sequenceiq.com/cloudbreak-docs</loc>
      <lastmod></lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>http://sequenceiq.com/cloudbreak-docs/issues/</loc>
-     <lastmod>2016-08-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
