@@ -30,7 +30,7 @@ cbd start
 
 # Update existing clusters
 
-If the Cloudbreak has been updated to `1.4.0` version then existing clusters that are provisioned by the previous `1.3.0` version needs to be updated to be still managable through Cloudbreak.
+If Cloudbreak has been updated to `1.4.0` version then existing clusters that are provisioned by the previous `1.3.0` version needs to be updated to be still managable through Cloudbreak.
 
 To update existing clusters from `1.3.0` to `1.4.0` version, run the following commands on the `cbgateway` node of the cluster:
 
