@@ -32,7 +32,7 @@ pages:
         - Ambari Database: database.md
         - Mesos: mesos.md
         - SPI: spi.md
-        - Operations : operations.md
+        - Basic Operations : operations.md
         - Advanced Configuration : configuration.md
         - Development :
             - Environments : environments.md
