@@ -300,27 +300,27 @@
 
 <h1 id="update-cloudbreak-deployer">Update Cloudbreak Deployer</h1>
 <p>To update Cloudbreak Deployer to the newest version, run the following commands on the console where your <code>Profile</code> is located:</p>
-<p><strong>Step1:</strong> Stop all of the running Cloudbreak components:</p>
+<p><strong>Step 1:</strong> Stop all of the running Cloudbreak components:</p>
 <pre><code>cbd kill
 </code></pre>
 
-<p><strong>Step2:</strong> Update Cloudbreak Deployer:</p>
+<p><strong>Step 2:</strong> Update Cloudbreak Deployer:</p>
 <pre><code>cbd update
 </code></pre>
 
-<p><strong>Step3:</strong> Update the <code>docker-compose.yml</code> file with new Docker containers needed for the <code>cbd</code>:</p>
+<p><strong>Step 3:</strong> Update the <code>docker-compose.yml</code> file with new Docker containers needed for the <code>cbd</code>:</p>
 <pre><code>cbd regenerate
 </code></pre>
 
-<p><strong>Step4:</strong> If there are no other Cloudbreak instances that still use old Cloudbreak versions, remove the obsolete containers:</p>
+<p><strong>Step 4:</strong> If there are no other Cloudbreak instances that still use old Cloudbreak versions, remove the obsolete containers:</p>
 <pre><code>cbd util cleanup
 </code></pre>
 
-<p><strong>Step5:</strong> Check the health and version of the updated <code>cbd</code>: </p>
+<p><strong>Step 5:</strong> Check the health and version of the updated <code>cbd</code>: </p>
 <pre><code>cbd doctor
 </code></pre>
 
-<p><strong>Step6:</strong> Start the new version of the <code>cbd</code>:</p>
+<p><strong>Step 6:</strong> Start the new version of the <code>cbd</code>:</p>
 <pre><code>cbd start
 </code></pre>
 

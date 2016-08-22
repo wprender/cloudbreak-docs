@@ -310,7 +310,7 @@
     
         <li class="main "><a href="#provisioning-prerequisites">Provisioning Prerequisites</a></li>
         
-            <li><a href="#generate-a-new-ssh-key">Generate a new SSH key</a></li>
+            <li><a href="#generate-a-new-ssh-key">Generate a New SSH Key</a></li>
         
     
         <li class="main "><a href="#provisioning-via-browser">Provisioning via Browser</a></li>
@@ -319,7 +319,7 @@
         
             <li><a href="#infrastructure-templates">Infrastructure templates</a></li>
         
-            <li><a href="#defining-cluster-services">Defining cluster services</a></li>
+            <li><a href="#defining-cluster-services">Defining Cluster Services</a></li>
         
             <li><a href="#cluster-deployment">Cluster deployment</a></li>
         
@@ -330,7 +330,7 @@
         
             <li><a href="#start-cloudbreak-shell">Start Cloudbreak Shell</a></li>
         
-            <li><a href="#autocomplete-and-hints">Autocomplete and hints</a></li>
+            <li><a href="#autocomplete-and-hints">Autocomplete and Hints</a></li>
         
     
         <li class="main "><a href="#provisioning-via-cli">Provisioning via CLI</a></li>
@@ -339,15 +339,15 @@
         
             <li><a href="#infrastructure-templates_1">Infrastructure templates</a></li>
         
-            <li><a href="#defining-cluster-services_1">Defining cluster services</a></li>
+            <li><a href="#defining-cluster-services_1">Defining Cluster Services</a></li>
         
-            <li><a href="#metadata-show">Metadata show</a></li>
+            <li><a href="#metadata-show">Metadata Show</a></li>
         
             <li><a href="#cluster-deployment_1">Cluster deployment</a></li>
         
-            <li><a href="#cluster-termination_1">Cluster termination</a></li>
+            <li><a href="#cluster-termination_1">Cluster Termination</a></li>
         
-            <li><a href="#silent-mode">Silent mode</a></li>
+            <li><a href="#silent-mode">Silent Mode</a></li>
         
     
     </ul>
@@ -472,7 +472,7 @@ Cloudbreak will automatically pick up these certificates and import them into it
 <p>You should see a line like this: <code>Started CloudbreakApplication in 36.823 seconds</code>. Cloudbreak normally takes less than a minute to start.</p>
 </blockquote>
 <h1 id="provisioning-prerequisites">Provisioning Prerequisites</h1>
-<h2 id="generate-a-new-ssh-key">Generate a new SSH key</h2>
+<h2 id="generate-a-new-ssh-key">Generate a New SSH Key</h2>
 <p>All the instances created by Cloudbreak are configured to allow key-based SSH,
 so you'll need to provide an SSH public key that can be used later to SSH onto the instances in the clusters you'll create with Cloudbreak.
 You can use one of your existing keys or you can generate a new one.</p>
@@ -489,7 +489,7 @@ You'll be asked to enter a passphrase, but you can leave it empty.
 # Enter same passphrase again: [Type passphrase again]
 </code></pre>
 
-<p>After you enter a passphrase the keypair is generated. The output should look something like below.</p>
+<p>After you enter a passphrase the keypair is generated. The output should look something like below. </p>
 <pre><code># Your identification has been saved in /Users/you/.ssh/id_rsa.
 # Your public key has been saved in /Users/you/.ssh/id_rsa.pub.
 # The key fingerprint is:
@@ -667,8 +667,8 @@ security group template.</p>
 </blockquote>
 <p><img alt="" src="../images/ui-secgroup_v3.png" />
 <sub><em>Full size <a href="../images/ui-secgroup_v3.png">here</a>.</em>&lt;/sub</p>
-<h2 id="defining-cluster-services">Defining cluster services</h2>
-<p><strong>Blueprints</strong></p>
+<h2 id="defining-cluster-services">Defining Cluster Services</h2>
+<h4 id="blueprints">Blueprints</h4>
 <p>Blueprints are your declarative definition of a Hadoop cluster. These are the same blueprints that are <a href="https://cwiki.apache.org/confluence/display/AMBARI/Blueprints">used by Ambari</a>.</p>
 <p>You can use the 3 default blueprints pre-defined in Cloudbreak or you can create your own ones.
 Blueprints can be added from file, URL (an <a href="https://raw.githubusercontent
@@ -677,7 +677,7 @@ whole JSON can be written in the <code>JSON text</code> box.</p>
 <p>The host groups in the JSON will be mapped to a set of instances when starting the cluster. Besides this the services and
  components will also be installed on the corresponding nodes. Blueprints can be modified later from the Ambari UI.</p>
 <blockquote>
-<p><strong>NOTE</strong> Not necessary to define all the configuration in the blueprint. If a configuration is missing, Ambari will 
+<p><strong>NOTE:</strong> It is not necessary to define all the configuration in the blueprint. If a configuration is missing, Ambari will 
 fill that with a default value.</p>
 </blockquote>
 <p>If <code>Public in account</code> is checked all the users belonging to your account will be able to use this blueprint to 
@@ -833,7 +833,7 @@ instance manually!</p>
 example if your <code>cbd</code> working directory is <code>~/cloudbreak-deployment</code> then copy your <strong>blueprint JSON, public ssh key 
 file...etc.</strong> to here. You can refer to these files with their names from the shell.</p>
 </blockquote>
-<h2 id="autocomplete-and-hints">Autocomplete and hints</h2>
+<h2 id="autocomplete-and-hints">Autocomplete and Hints</h2>
 <p>Cloudbreak Shell helps to you with <strong>hint messages</strong> from the very beginning, for example:</p>
 <pre><code>cloudbreak-shell&gt;hint
 Hint: Add a blueprint with the 'blueprint add' command or select an existing one with 'blueprint select'
@@ -945,15 +945,15 @@ provided <code>Subnet (CIDR)</code> range.</p>
 <pre><code>network list
 </code></pre>
 
-<h2 id="defining-cluster-services_1">Defining cluster services</h2>
-<p><strong>Blueprints</strong></p>
+<h2 id="defining-cluster-services_1">Defining Cluster Services</h2>
+<h4 id="blueprints_1">Blueprints</h4>
 <p>Blueprints are your declarative definition of a Hadoop cluster. These are the same blueprints that are <a href="https://cwiki.apache.org/confluence/display/AMBARI/Blueprints">used by Ambari</a>.</p>
 <p>You can use the 3 default blueprints pre-defined in Cloudbreak or you can create your own ones.
 Blueprints can be added from file or URL (an <a href="https://raw.githubusercontent.com/sequenceiq/cloudbreak/master/integration-test/src/main/resources/blueprint/multi-node-hdfs-yarn.bp">example blueprint</a>).</p>
 <p>The host groups in the JSON will be mapped to a set of instances when starting the cluster. Besides this the services and
  components will also be installed on the corresponding nodes. Blueprints can be modified later from the Ambari UI.</p>
 <blockquote>
-<p><strong>NOTE</strong> Not necessary to define all the configuration in the blueprint. If a configuration is missing, Ambari will fill that with a default value.</p>
+<p><strong>NOTE:</strong> It is not necessary to define all the configuration in the blueprint. If a configuration is missing, Ambari will fill that with a default value.</p>
 </blockquote>
 <pre><code>blueprint add --name my-blueprint --description &quot;sample description&quot; --file &lt;the path of the blueprint&gt;
 </code></pre>
@@ -971,7 +971,7 @@ modifications.</strong>
 There is no automatic way to modify an exported blueprint and make it instantly usable in Cloudbreak, the 
 modifications have to be done manually.
 When the blueprint is exported some configurations are hardcoded for example domain names, memory configurations..etc. that won't be applicable to the Cloudbreak cluster.</p>
-<h2 id="metadata-show">Metadata show</h2>
+<h2 id="metadata-show">Metadata Show</h2>
 <p>You can check the stack metadata with</p>
 <pre><code>stack metadata --name myawsstack --instancegroup master
 </code></pre>
@@ -1063,7 +1063,7 @@ new cluster's <code>details</code> and its <code>Event History</code> here.</li>
 <p>For example:
 <img alt="" src="../images/ui-eventhistory_4.png" />
 <sub><em>Full size <a href="../images/ui-eventhistory_4.png">here</a>.</em></sub></p>
-<p><strong>Stop cluster</strong></p>
+<h4 id="stop-cluster">Stop Cluster</h4>
 <p>You have the ability to <strong>stop your existing stack then its cluster</strong> if you want to suspend the work on it.</p>
 <p>Select a stack for example with its name:</p>
 <pre><code>stack select --name my-stack
@@ -1076,7 +1076,7 @@ selected stack:</p>
 stack stop
 </code></pre>
 
-<p><strong>Restart cluster</strong></p>
+<h4 id="restart-cluster">Restart Cluster</h4>
 <p><strong>Select your stack that you would like to restart</strong> after this you can apply:</p>
 <pre><code>stack start
 </code></pre>
@@ -1085,7 +1085,7 @@ stack stop
 <pre><code>cluster start
 </code></pre>
 
-<p><strong>Upscale cluster</strong></p>
+<h4 id="upscale-cluster">Upscale Cluster</h4>
 <p>If you need more instances to your infrastructure, you can <strong>upscale your selected stack</strong>:</p>
 <pre><code>stack node --ADD --instanceGroup host_group_slave_1 --adjustment 6
 </code></pre>
@@ -1095,7 +1095,7 @@ stack stop
 <pre><code>cluster node --ADD --hostgroup host_group_slave_1 --adjustment 6
 </code></pre>
 
-<p><strong>Downscale cluster</strong></p>
+<h4 id="downscale-cluster">Downscale Cluster</h4>
 <p>You also can reduce the number of instances in your infrastructure. <strong>After you selected your stack</strong>:</p>
 <pre><code>cluster node --REMOVE  --hostgroup host_group_slave_1 --adjustment -2
 </code></pre>
@@ -1105,14 +1105,14 @@ stack stop
 <pre><code>stack node --REMOVE  --instanceGroup host_group_slave_1 --adjustment -2
 </code></pre>
 
-<h2 id="cluster-termination_1">Cluster termination</h2>
+<h2 id="cluster-termination_1">Cluster Termination</h2>
 <p>You can terminate running or stopped clusters with</p>
 <pre><code>stack terminate --name myawsstack
 </code></pre>
 
 <p>Other available option is <code>--wait</code> - in this case the terminate command will return only after the process has finished. </p>
 <blockquote>
-<p><strong>IMPORTANT</strong> Always use Cloudbreak to terminate the cluster. If that fails for some reason, try to delete the 
+<p><strong>IMPORTANT:</strong> Always use Cloudbreak to terminate the cluster. If that fails for some reason, try to delete the 
 CloudFormation stack first. Instances are started in an Auto Scaling Group so they may be restarted if you terminate an instance manually!</p>
 </blockquote>
 <p>Sometimes Cloudbreak cannot synchronize it's state with the cluster state at the cloud provider and the cluster can't
@@ -1122,7 +1122,7 @@ CloudFormation stack first. Instances are started in an Auto Scaling Group so th
 <li>You should check the related resources at the AWS CloudFormation</li>
 <li>If it is needed you need to manually remove resources from ther</li>
 </ol>
-<h2 id="silent-mode">Silent mode</h2>
+<h2 id="silent-mode">Silent Mode</h2>
 <p>With Cloudbreak Shell you can execute script files as well. A script file contains shell commands and can 
 be executed with the <code>script</code> cloudbreak shell command</p>
 <pre><code>script &lt;your script file&gt;
@@ -1133,7 +1133,7 @@ be executed with the <code>script</code> cloudbreak shell command</p>
 </code></pre>
 
 <blockquote>
-<p><strong>IMPORTANT</strong> You have to copy all your files into the <code>cbd</code> working directory, what you would like to use in shell.
+<p><strong>IMPORTANT:</strong> You have to copy all your files into the <code>cbd</code> working directory, what you would like to use in shell.
  For example if your <code>cbd</code> working directory is ~/cloudbreak-deployment then copy your script file to here.</p>
 </blockquote>
 <h3 id="example">Example</h3>

@@ -294,57 +294,53 @@
         
             <li><a href="#deploy-using-the-azure-portal">Deploy Using the Azure Portal</a></li>
         
-            <li><a href="#under-the-hood">Under the hood</a></li>
-        
-            <li><a href="#validate-the-started-cloudbreak-deployer">Validate the started Cloudbreak Deployer</a></li>
-        
     
         <li class="main "><a href="#provisioning-prerequisites">Provisioning Prerequisites</a></li>
         
-            <li><a href="#azure-access-setup">Azure access setup</a></li>
+            <li><a href="#azure-access-setup">Azure Access Setup</a></li>
         
-            <li><a href="#azure-application-setup-with-cloudbreak-deployer">Azure application setup with Cloudbreak Deployer</a></li>
+            <li><a href="#azure-application-setup-with-cloudbreak-deployer">Azure Application Setup with Cloudbreak Deployer</a></li>
         
-            <li><a href="#file-system-configuration">File system configuration</a></li>
+            <li><a href="#file-system-configuration">File System Configuration</a></li>
         
-            <li><a href="#generate-a-new-ssh-key">Generate a new SSH key</a></li>
+            <li><a href="#generate-a-new-ssh-key">Generate a New SSH Key</a></li>
         
     
         <li class="main "><a href="#provisioning-via-browser">Provisioning via Browser</a></li>
         
-            <li><a href="#setting-up-azure-credentials">Setting up Azure credentials</a></li>
+            <li><a href="#setting-up-azure-credentials">Setting up Azure Credentials</a></li>
         
-            <li><a href="#infrastructure-templates">Infrastructure templates</a></li>
+            <li><a href="#infrastructure-templates">Infrastructure Templates</a></li>
         
-            <li><a href="#defining-cluster-services">Defining cluster services</a></li>
+            <li><a href="#defining-cluster-services">Defining Cluster Services</a></li>
         
-            <li><a href="#cluster-deployment">Cluster deployment</a></li>
+            <li><a href="#cluster-deployment">Cluster Deployment</a></li>
         
-            <li><a href="#cluster-termination">Cluster termination</a></li>
+            <li><a href="#cluster-termination">Cluster Termination</a></li>
         
     
         <li class="main "><a href="#interactive-mode-cloudbreak-shell">Interactive mode / Cloudbreak Shell</a></li>
         
             <li><a href="#start-cloudbreak-shell">Start Cloudbreak Shell</a></li>
         
-            <li><a href="#autocomplete-and-hints">Autocomplete and hints</a></li>
+            <li><a href="#autocomplete-and-hints">Autocomplete and Hints</a></li>
         
     
         <li class="main "><a href="#provisioning-via-cli">Provisioning via CLI</a></li>
         
-            <li><a href="#setting-up-azure-credential">Setting up Azure credential</a></li>
+            <li><a href="#setting-up-azure-credential">Setting up Azure Credential</a></li>
         
-            <li><a href="#infrastructure-templates_1">Infrastructure templates</a></li>
+            <li><a href="#infrastructure-templates_1">Infrastructure Templates</a></li>
         
-            <li><a href="#defining-cluster-services_1">Defining cluster services</a></li>
+            <li><a href="#defining-cluster-services_1">Defining Cluster Services</a></li>
         
-            <li><a href="#metadata-show">Metadata show</a></li>
+            <li><a href="#metadata-show">Metadata Show</a></li>
         
-            <li><a href="#cluster-deployment_1">Cluster deployment</a></li>
+            <li><a href="#cluster-deployment_1">Cluster Deployment</a></li>
         
-            <li><a href="#cluster-termination_1">Cluster termination</a></li>
+            <li><a href="#cluster-termination_1">Cluster Termination</a></li>
         
-            <li><a href="#silent-mode">Silent mode</a></li>
+            <li><a href="#silent-mode">Silent Mode</a></li>
         
     
     </ul>
@@ -353,13 +349,16 @@
                     
 
 <h1 id="azure-setup">Azure Setup</h1>
-<p>Setting up Cloudbreak on Azure is different than with other cloud providers for which we provide pre-built “public images” with Cloudbreak Deployer pre-installed. On Azure, you launch Cloudbreak Deployer using <a href="https://github.com/Azure/azure-quickstart-templates">Azure Resource Manager Templates</a>.</p>
+<p>Setting up Cloudbreak on Azure is different than on other cloud providers for which we provide pre-built public images with Cloudbreak Deployer pre-installed. On Azure, you launch Cloudbreak Deployer using the <a href="https://github.com/Azure/azure-quickstart-templates">Azure Resource Manager Templates</a>.</p>
 <h2 id="deploy-using-the-azure-portal">Deploy Using the Azure Portal</h2>
-<p>To get started using the Azure Resource Manager template to install Cloudbreak, click here: <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsequenceiq%2Fazure-cbd-quickstart%2F1.3.0%2Fazuredeploy.json">  <img alt="deploy on azure" src="http://azuredeploy.net/deploybutton.png" /> </a></p>
-<blockquote>
-<p><strong><a href="../onprem/#minimum-and-recommended-system-requirements">Minimum and Recommended VM Requirements</a>:</strong> 8GB RAM, 10GB disk, 2 cores (The minimum instance type suitable for Cloudbreak is <strong>D2</strong>)</p>
-</blockquote>
-<p><strong> In addition to the default values, the following parameters are mandatory for the new <code>cbd</code> template:</strong></p>
+<p>To get started with Cloudbreak installation using the Azure Resource Manager template, click here: <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsequenceiq%2Fazure-cbd-quickstart%2F1.3.0%2Fazuredeploy.json">  <img alt="deploy on azure" src="http://azuredeploy.net/deploybutton.png" /> </a></p>
+<h3 id="vm-requirements">VM Requirements</h3>
+<p>When selecting an instance type, consider these minimum and recomended requirements:<br />
+- 8GB RAM, 10GB disk, 2 cores 
+- The minimum instance type suitable for Cloudbreak is <strong>D2</strong></p>
+<p>To learn about all requirements, see <a href="../onprem/#system-requirements">System Requirements</a>.</p>
+<h3 id="deployment-details">Deployment Details</h3>
+<p>In addition to the default values, the following parameters are <strong>mandatory</strong> for the new <code>cbd</code> template:</p>
 <p>On the <code>Custom deployment</code> panel:</p>
 <ul>
 <li>Create a new <code>Resource group</code></li>
@@ -396,7 +395,7 @@ at:<code>http://&lt;VM Public IP&gt;:3000/</code><ul>
 </ul>
 </li>
 </ul>
-<h2 id="under-the-hood">Under the hood</h2>
+<h3 id="under-the-hood">Under the Hood</h3>
 <p>While Azure is creating the deployment, review this information about what happens in the background:</p>
 <ul>
 <li>Start an instance from the official CentOS image</li>
@@ -414,7 +413,7 @@ Cloudbreak Deployer (<code>cbd</code>)</li>
 <li>All <code>cbd</code> actions must be executed from the <code>cbd</code> root folder.</li>
 <li>Most of the <code>cbd</code> commands require <code>root</code> permissions. So it would be worth if you apply the <code>sudo su</code>.</li>
 </ul>
-<h2 id="validate-the-started-cloudbreak-deployer">Validate the started Cloudbreak Deployer</h2>
+<h3 id="validate-that-cloudbreak-deployer-has-started">Validate That Cloudbreak Deployer Has Started</h3>
 <ul>
 <li>
 <p>SSH to the launched Azure VM.</p>
@@ -459,7 +458,7 @@ order to launch clusters. In order to work we need to create an <strong>Active D
 <blockquote>
 <p>If you forget to configure these steps you will not able to create any resource with Cloudbreak</p>
 </blockquote>
-<h2 id="azure-access-setup">Azure access setup</h2>
+<h2 id="azure-access-setup">Azure Access Setup</h2>
 <p>If you do not have an <strong>Active Directory (AD)</strong> user then you have to configure it before deploying a cluster with 
 Cloudbreak:</p>
 <blockquote>
@@ -501,7 +500,7 @@ Cloudbreak:</p>
 </li>
 <li>You will see the new co-administrator a in the <code>ADMINISTRATORS</code> list</li>
 </ul>
-<h2 id="azure-application-setup-with-cloudbreak-deployer">Azure application setup with Cloudbreak Deployer</h2>
+<h2 id="azure-application-setup-with-cloudbreak-deployer">Azure Application Setup with Cloudbreak Deployer</h2>
 <p>In order for Cloudbreak to be able to launch clusters on Azure on your behalf you need to set up your <strong>Azure ARM 
 application</strong>. If you do not want to create your ARM application via the Azure Web UI, <strong>we automated the related Azure 
 configurations in the Cloudbreak Deployer</strong>.</p>
@@ -540,18 +539,18 @@ Password: password123
 App Owner Tenant ID: sdwerwe1-d98e-dsf12-dsf123-df123232
 </code></pre>
 
-<h2 id="file-system-configuration">File system configuration</h2>
+<h2 id="file-system-configuration">File System Configuration</h2>
 <p>When starting a cluster with Cloudbreak on Azure, the default file system is “Windows Azure Blob Storage”. Hadoop has 
 built-in support for the <a href="https://hadoop.apache.org/docs/current/hadoop-azure/index.html">WASB file system</a> so it can be
 used easily as HDFS.</p>
-<h3 id="disks-and-blob-storage">Disks and blob storage</h3>
+<h3 id="disks-and-blob-storage">Disks and Blob Storage</h3>
 <p>In Azure every data disk attached to a virtual machine <a href="https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-disks-vhds/">is stored</a> as a virtual hard disk (VHD) in a page blob inside an Azure storage account. Because these are not local disks and the operations must be done on the VHD files it causes degraded performance when used as HDFS.
 When WASB is used as a Hadoop file system the files are full-value blobs in a storage account. It means better performance compared to the data disks and the WASB file system can be configured very easily but Azure storage accounts have their own <a href="https://azure.microsoft.com/en-us/documentation/articles/azure-subscription-service-limits/#storage-limits">limitations</a> as well. There is a space limitation for TB per storage account (500 TB) as well but the real bottleneck is the total request rate that is only 20000 IOPS where Azure will start to throw errors when trying to do an I/O operation.
 To bypass those limits Microsoft created a small service called <a href="https://github.com/MicrosoftDX/Dash">DASH</a>. DASH itself is a service that imitates the API of the Azure Blob Storage API and it can be deployed as a Microsoft Azure Cloud Service. Because its API is the same as the standard blob storage API it can be used <em>almost</em> in the same way as the default WASB file system from a Hadoop deployment.
 DASH works by sharding the storage access across multiple storage accounts. It can be configured to distribute storage account load to at most 15 <strong>scaleout</strong> storage accounts. It needs one more <strong>namespace</strong> storage account where it keeps track of where the data is stored.
 When configuring a WASB file system with Hadoop, the only required config entries are the ones where the access details are described. To access a storage account Azure generates an access key that is displayed on the Azure portal or can be queried through the API while the account name is the name of the storage account itself. A DASH service has a similar account name and key, those can be configured in the configuration file while deploying the cloud service.</p>
 <p><img alt="" src="../diagrams/dash.png" /></p>
-<h3 id="deploying-a-dash-service-with-cloudbreak-deployer">Deploying a DASH service with Cloudbreak Deployer</h3>
+<h3 id="deploying-a-dash-service-with-cloudbreak-deployer">Deploying a DASH Service with Cloudbreak Deployer</h3>
 <p>We automated the deployment of DASH service in Cloudbreak Deployer. After <code>cbd</code> is installed, simply run the 
 following command to deploy a DASH cloud service with 5 scale out storage accounts:</p>
 <pre><code>cbd azure deploy-dash --accounts 5 --prefix dash --location &quot;West Europe&quot; --instances 3
@@ -568,7 +567,7 @@ following command to deploy a DASH cloud service with 5 scale out storage accoun
 same DASH file system configuration the same data can be accessed from all the clusters, but every cluster can have a 
 different service configured as well. In that case deploy as many DASH services with <code>cbd</code> as clusters with 
 Cloudbreak and configure them accordingly.</p>
-<h3 id="containers-within-the-storage-account">Containers within the storage account</h3>
+<h3 id="containers-within-the-storage-account">Containers Within the Storage Account</h3>
 <p>Cloudbreak creates a new container in the configured storage account for each cluster with the following name 
 pattern <code>cloudbreak-UNIQUE_ID</code>. Re-using existing containers in the same account is not supported as dirty data can 
 lead to failing cluster installations. In order to take advantage of the WASB file system your data does not have to 
@@ -579,10 +578,10 @@ be in the same storage account nor in the same container. You can add as many ac
 </code></pre>
 
 <blockquote>
-<p><strong>IMPORTANT</strong> Make sure that your cloud account can launch instances using the new Azure ARM (a.k.a. V2) API and 
+<p><strong>IMPORTANT:</strong> Make sure that your cloud account can launch instances using the new Azure ARM (a.k.a. V2) API and 
 you have sufficient qouta (CPU, network, etc) for the requested cluster size.</p>
 </blockquote>
-<h2 id="generate-a-new-ssh-key">Generate a new SSH key</h2>
+<h2 id="generate-a-new-ssh-key">Generate a New SSH Key</h2>
 <p>All the instances created by Cloudbreak are configured to allow key-based SSH,
 so you'll need to provide an SSH public key that can be used later to SSH onto the instances in the clusters you'll create with Cloudbreak.
 You can use one of your existing keys or you can generate a new one.</p>
@@ -599,7 +598,7 @@ You'll be asked to enter a passphrase, but you can leave it empty.
 # Enter same passphrase again: [Type passphrase again]
 </code></pre>
 
-<p>After you enter a passphrase the keypair is generated. The output should look something like below.</p>
+<p>After you enter a passphrase the keypair is generated. The output should look something like below. </p>
 <pre><code># Your identification has been saved in /Users/you/.ssh/id_rsa.
 # Your public key has been saved in /Users/you/.ssh/id_rsa.pub.
 # The key fingerprint is:
@@ -618,7 +617,7 @@ This description details the AZURE setup - if you'd like to use a different clou
 <li>create a blueprint that describes the HDP services in your clusters</li>
 <li>launch the cluster itself based on these template resource</li>
 </ul>
-<h2 id="setting-up-azure-credentials">Setting up Azure credentials</h2>
+<h2 id="setting-up-azure-credentials">Setting up Azure Credentials</h2>
 <p>Cloudbreak works by connecting your AZURE account through so called <em>Credentials</em>, and then uses these credentials to 
 create resources on your behalf. The credentials can be configured on the <strong>manage credentials</strong> panel on the 
 Cloudbreak Dashboard.</p>
@@ -663,7 +662,7 @@ clusters, but cannot delete it.</p>
 </blockquote>
 <p><img alt="" src="../azure/images/azure-credentials.png" />
 <sub><em>Full size <a href="../azure/images/azure-credentials.png">here</a>.</em></sub></p>
-<h2 id="infrastructure-templates">Infrastructure templates</h2>
+<h2 id="infrastructure-templates">Infrastructure Templates</h2>
 <p>After your AZURE account is linked to Cloudbreak you can start creating resource templates that describe your clusters' 
 infrastructure:</p>
 <ul>
@@ -674,7 +673,7 @@ infrastructure:</p>
 <p>When you create one of the above resource, <strong>Cloudbreak does not make any requests to AZURE. Resources are only created
  on AZURE after the <code>create cluster</code> button has pushed.</strong> These templates are saved to Cloudbreak's database and can be 
  reused with multiple clusters to describe the infrastructure</p>
-<p><strong>Templates</strong></p>
+<h4 id="templates">Templates</h4>
 <p>Templates describe the <strong>instances of your cluster</strong> - the instance type and the attached volumes. A typical setup is
  to combine multiple templates in a cluster for the different types of nodes. For example you may want to attach multiple
  large disks to the datanodes or have memory optimized instances for Spark nodes.</p>
@@ -683,7 +682,7 @@ infrastructure:</p>
 for <code>DS</code> instance types. For more details about the premium storage read <a href="https://azure.microsoft.com/en-us/documentation/articles/storage-premium-storage-preview-portal/">this</a>.</p>
 <p>If <code>Public in account</code>is checked all the users belonging to your account will be able to use this resource to create 
 clusters, but cannot delete it</p>
-<p><strong>Networks</strong></p>
+<h4 id="networks">Networks</h4>
 <p>Your clusters can be created in their own <strong>networks</strong> or in one of your already existing one. The subnet's IP range must be defined in 
 the <code>Subnet (CIDR)</code> field using the general CIDR notation.</p>
 <p><em>Default AZURE Network</em></p>
@@ -698,19 +697,19 @@ networks</strong> panel.</p>
 <li><strong>Use an existing subnet in an existing virtual network</strong>: Use this kind of network setup if you have an existing virtual network with one or more subnets on Azure and you'd like to start the instances of a cluster in one of those subnets. In this case you can define the <code>Subnet Identifier</code> and the <code>Virtual Network Identifier</code> and the <code>Resource Group Identifier</code> of your network. The <code>Resource Group Identifier</code> identifies the resource group which contains your existing virtual network. The <code>Virtual Network Identifier</code> and the <code>Subnet Identifier</code> will tell Cloudbreak which network and subnet to use to launch the new instances.</li>
 </ul>
 <blockquote>
-<p><strong>IMPORTANT</strong> In case of existing subnet make sure you have enough room within your network space for the new instances. The 
+<p><strong>IMPORTANT:</strong> In case of existing subnet make sure you have enough room within your network space for the new instances. The 
 provided subnet CIDR will be ignored, but the existing subnet's CIDR range will be used. The security group behavior will be changed in this case as well
 described in the security group section below.</p>
 </blockquote>
 <p>If <code>Public in account</code> is checked all the users belonging to your account will be able to use this network template 
 to create clusters, but cannot delete it.</p>
 <blockquote>
-<p><strong>NOTE</strong> The new networks are created on AZURE only after the the cluster provisioning starts with the selected 
+<p><strong>NOTE:</strong> The new networks are created on AZURE only after the the cluster provisioning starts with the selected 
 network template.</p>
 </blockquote>
 <p><img alt="" src="../azure/images/azure-network_v2.png" />
 <sub><em>Full size <a href="../azure/images/azure-network_v2.png">here</a>.</em></sub></p>
-<p><strong>Security groups</strong></p>
+<h4 id="security-groups">Security groups</h4>
 <p>Security group templates are very similar to the <a href="https://azure.microsoft.com/en-us/documentation/articles/virtual-networks-nsg/">security groups on Azure</a>.
 <strong>They describe the allowed inbound traffic to the instances in the cluster.</strong>
 Currently only one security group template can be selected for a Cloudbreak cluster and all the instances have a 
@@ -767,15 +766,15 @@ provisioned cluster</p>
 <p>If <code>Public in account</code> is checked all the users belonging to your account will be able to use this security group 
 template to create clusters, but cannot delete it.</p>
 <blockquote>
-<p><strong>NOTE</strong> The security groups are created on Azure only after the cluster provisioning starts with the selected 
+<p><strong>NOTE:</strong> The security groups are created on Azure only after the cluster provisioning starts with the selected 
 security group template.</p>
-<p><strong>IMPORTANT</strong> If you use and existing virtual network and subnet the selected security group will only be applied to the selected Ambari Server node due to the lack of
+<p><strong>IMPORTANT:</strong> If you use and existing virtual network and subnet the selected security group will only be applied to the selected Ambari Server node due to the lack of
 capability to attach multiple security groups to an existing subnet. If you'd like to open ports for Hadoop you must do it on your existing security group.</p>
 </blockquote>
 <p><img alt="" src="../images/ui-secgroup_v3.png" />
 <sub><em>Full size <a href="../images/ui-secgroup_v3.png">here</a>.</em>&lt;/sub</p>
-<h2 id="defining-cluster-services">Defining cluster services</h2>
-<p><strong>Blueprints</strong></p>
+<h2 id="defining-cluster-services">Defining Cluster Services</h2>
+<h4 id="blueprints">Blueprints</h4>
 <p>Blueprints are your declarative definition of a Hadoop cluster. These are the same blueprints that are <a href="https://cwiki.apache.org/confluence/display/AMBARI/Blueprints">used by Ambari</a>.</p>
 <p>You can use the 3 default blueprints pre-defined in Cloudbreak or you can create your own ones.
 Blueprints can be added from file, URL (an <a href="https://raw.githubusercontent
@@ -784,7 +783,7 @@ whole JSON can be written in the <code>JSON text</code> box.</p>
 <p>The host groups in the JSON will be mapped to a set of instances when starting the cluster. Besides this the services and
  components will also be installed on the corresponding nodes. Blueprints can be modified later from the Ambari UI.</p>
 <blockquote>
-<p><strong>NOTE</strong> Not necessary to define all the configuration in the blueprint. If a configuration is missing, Ambari will 
+<p><strong>NOTE:</strong> It is not necessary to define all the configuration in the blueprint. If a configuration is missing, Ambari will 
 fill that with a default value.</p>
 </blockquote>
 <p>If <code>Public in account</code> is checked all the users belonging to your account will be able to use this blueprint to 
@@ -796,7 +795,7 @@ modifications.</strong>
 There is no automatic way to modify an exported blueprint and make it instantly usable in Cloudbreak, the 
 modifications have to be done manually.
 When the blueprint is exported some configurations are hardcoded for example domain names, memory configurations...etc. that won't be applicable to the Cloudbreak cluster</p>
-<h2 id="cluster-deployment">Cluster deployment</h2>
+<h2 id="cluster-deployment">Cluster Deployment</h2>
 <p>After all the cluster resources are configured you can deploy a new HDP cluster.</p>
 <p>Here is a <strong>basic flow for cluster creation on Cloudbreak Web UI</strong>:</p>
 <ul>
@@ -883,10 +882,10 @@ configurations gathered by the response of the stack advisor.</p>
 <li><code>ONLY_STACK_DEFAULTS_APPLY</code> Applies only on the default configurations for all included services.</li>
 <li><code>ALWAYS_APPLY</code>              Applies on all configuration properties.</li>
 </ul>
-<h2 id="cluster-termination">Cluster termination</h2>
+<h2 id="cluster-termination">Cluster Termination</h2>
 <p>You can terminate running or stopped clusters with the <code>terminate</code> button in the cluster details.</p>
 <blockquote>
-<p><strong>IMPORTANT</strong> Always use Cloudbreak to terminate the cluster. If that fails for some reason, try to delete the 
+<p><strong>IMPORTANT:</strong> Always use Cloudbreak to terminate the cluster. If that fails for some reason, try to delete the 
 Azure resource group first. Instances are started in an Auto Scaling Group so they may be restarted if you terminate an 
 instance manually!</p>
 </blockquote>
@@ -940,7 +939,7 @@ instance manually!</p>
 example if your <code>cbd</code> working directory is <code>~/cloudbreak-deployment</code> then copy your <strong>blueprint JSON, public ssh key 
 file...etc.</strong> to here. You can refer to these files with their names from the shell.</p>
 </blockquote>
-<h2 id="autocomplete-and-hints">Autocomplete and hints</h2>
+<h2 id="autocomplete-and-hints">Autocomplete and Hints</h2>
 <p>Cloudbreak Shell helps to you with <strong>hint messages</strong> from the very beginning, for example:</p>
 <pre><code>cloudbreak-shell&gt;hint
 Hint: Add a blueprint with the 'blueprint add' command or select an existing one with 'blueprint select'
@@ -953,7 +952,7 @@ credential create --AWS          credential create --AZURE        credential cre
 </code></pre>
 
 <h1 id="provisioning-via-cli">Provisioning via CLI</h1>
-<h2 id="setting-up-azure-credential">Setting up Azure credential</h2>
+<h2 id="setting-up-azure-credential">Setting up Azure Credential</h2>
 <p>Cloudbreak works by connecting your Azure account through so called Credentials, and then uses these credentials to 
 create resources on your behalf. Credentials can be configured with the following command for example:</p>
 <pre><code>credential create --AZURE --name my-azure-credential --description &quot;sample credential&quot; --subscriptionId 
@@ -963,7 +962,7 @@ your-azure-application-id --password YourApplicationPassword --sshKeyString &quo
 
 <blockquote>
 <p>Cloudbreak is supporting simple rsa public key instead of X509 certificate file after 1.0.4 version</p>
-<p><strong>NOTE</strong> that Cloudbreak <strong>does not set your cloud user details</strong> - we work around the concept of Access Control 
+<p><strong>NOTE:</strong> Cloudbreak <strong>does not set your cloud user details</strong> - we work around the concept of Access Control 
 Service (ACS). You should have already a valid Azure Subscription and Application. You can find further details <a href="./#provisioning-prerequisites">here</a>.</p>
 </blockquote>
 <p>Alternatives to provide <code>SSH Key</code>:</p>
@@ -979,7 +978,7 @@ Service (ACS). You should have already a valid Azure Subscription and Applicatio
 <pre><code>credential select --name my-azure-credential
 </code></pre>
 
-<h2 id="infrastructure-templates_1">Infrastructure templates</h2>
+<h2 id="infrastructure-templates_1">Infrastructure Templates</h2>
 <p>After your Azure account is linked to Cloudbreak you can start creating resource templates that describe your clusters' 
 infrastructure:</p>
 <ul>
@@ -990,7 +989,7 @@ infrastructure:</p>
 <p>When you create one of the above resource, <strong>Cloudbreak does not make any requests to Azure. Resources are only created
  on Azure after the <code>cluster create</code> has applied.</strong> These templates are saved to Cloudbreak's database and can be 
  reused with multiple clusters to describe the infrastructure.</p>
-<p><strong>Templates</strong></p>
+<h4 id="templates_1">Templates</h4>
 <p>Templates describe the <strong>instances of your cluster</strong> - the instance type and the attached volumes. A typical setup is
  to combine multiple templates in a cluster for the different types of nodes. For example you may want to attach multiple
  large disks to the datanodes or have memory optimized instances for Spark nodes.</p>
@@ -1007,7 +1006,7 @@ for <code>DS</code> instance types. For more details about the premium storage r
 <pre><code>template list
 </code></pre>
 
-<p><strong>Networks</strong></p>
+<h4 id="networks_1">Networks</h4>
 <p>Your clusters can be created in their own <strong>networks</strong> or in one of your already existing one. If you choose an 
 existing network, it is possible to create a new subnet within the network. The subnet's IP range must be defined in 
 the <code>Subnet (CIDR)</code> field using the general CIDR notation.</p>
@@ -1021,7 +1020,7 @@ time a cluster is created.</p>
 </code></pre>
 
 <blockquote>
-<p><strong>IMPORTANT</strong> Please make sure the defined subnet and theirs address prefixes here doesn't overlap with any of your 
+<p><strong>IMPORTANT:</strong> Make sure the defined subnet and theirs address prefixes here doesn't overlap with any of your 
 already deployed subnet and its already used address prefix in the network, because of the validation only happens 
 after the cluster creation 
 starts.</p>
@@ -1041,18 +1040,18 @@ provided subnet CIDR will be ignored, but a proper CIDR range will be used.</p>
 <p>If <code>--publicInAccount</code> is true, all the users belonging to your account will be able to use this network template 
 to create clusters, but cannot delete it.</p>
 <blockquote>
-<p><strong>NOTE</strong> The new networks are created on AZURE only after the the cluster provisioning starts with the selected 
+<p><strong>NOTE:</strong> The new networks are created on AZURE only after the the cluster provisioning starts with the selected 
 network template.</p>
 </blockquote>
-<h2 id="defining-cluster-services_1">Defining cluster services</h2>
-<p><strong>Blueprints</strong></p>
+<h2 id="defining-cluster-services_1">Defining Cluster Services</h2>
+<h4 id="blueprints_1">Blueprints</h4>
 <p>Blueprints are your declarative definition of a Hadoop cluster. These are the same blueprints that are <a href="https://cwiki.apache.org/confluence/display/AMBARI/Blueprints">used by Ambari</a>.</p>
 <p>You can use the 3 default blueprints pre-defined in Cloudbreak or you can create your own ones.
 Blueprints can be added from file or URL (an <a href="https://raw.githubusercontent.com/sequenceiq/cloudbreak/master/integration-test/src/main/resources/blueprint/multi-node-hdfs-yarn.bp">example blueprint</a>).</p>
 <p>The host groups in the JSON will be mapped to a set of instances when starting the cluster. Besides this the services and
  components will also be installed on the corresponding nodes. Blueprints can be modified later from the Ambari UI.</p>
 <blockquote>
-<p><strong>NOTE</strong> Not necessary to define all the configuration in the blueprint. If a configuration is missing, Ambari will fill that with a default value.</p>
+<p><strong>NOTE:</strong> It is not necessary to define all the configuration in the blueprint. If a configuration is missing, Ambari will fill that with a default value.</p>
 </blockquote>
 <pre><code>blueprint add --name my-blueprint --description &quot;sample description&quot; --file &lt;the path of the blueprint&gt;
 </code></pre>
@@ -1070,7 +1069,7 @@ modifications.</strong>
 There is no automatic way to modify an exported blueprint and make it instantly usable in Cloudbreak, the 
 modifications have to be done manually.
 When the blueprint is exported some configurations are hardcoded for example domain names, memory configurations..etc. that won't be applicable to the Cloudbreak cluster.</p>
-<h2 id="metadata-show">Metadata show</h2>
+<h2 id="metadata-show">Metadata Show</h2>
 <p>You can check the stack metadata with</p>
 <pre><code>stack metadata --name myawsstack --instancegroup master
 </code></pre>
@@ -1078,20 +1077,20 @@ When the blueprint is exported some configurations are hardcoded for example dom
 <p>Other available options:</p>
 <p><code>--id</code> In this case you can select a stack with id.</p>
 <p><code>--outputType</code> In this case you can modify the outputformat of the command (RAW or JSON). </p>
-<h2 id="cluster-deployment_1">Cluster deployment</h2>
+<h2 id="cluster-deployment_1">Cluster Deployment</h2>
 <p>After all the cluster resources are configured you can deploy a new HDP cluster. The following sub-sections show
 you a <strong>basic flow for cluster creation with Cloudbreak Shell</strong>.</p>
-<p><strong>Select credential</strong></p>
+<h4 id="select-credential">Select Credential</h4>
 <p>Select one of your previously created Azure credential:</p>
 <pre><code>credential select --name my-azure-credential
 </code></pre>
 
-<p><strong>Select blueprint</strong></p>
+<h4 id="select-blueprint">Select Blueprint</h4>
 <p>Select one of your previously created blueprint which fits your needs:</p>
 <pre><code>blueprint select --name multi-node-hdfs-yarn
 </code></pre>
 
-<p><strong>Configure instance groups</strong></p>
+<h4 id="configure-instance-groups">Configure Instance Groups</h4>
 <p>You must configure instance groups before provisioning. An instance group define a group of nodes with a specified
 template. Usually we create instance groups for host groups in the blueprint. For Ambari server only 1 host group can be specified.
 If you want to install the Ambari server to a separate node, you need to extend your blueprint with a new host group
@@ -1103,17 +1102,17 @@ instancegroup configure --instanceGroup slave_1 --nodecount 1 --templateName min
 
 <p>Other available option:</p>
 <p><code>--templateId</code> Id of the template</p>
-<p><strong>Select network</strong></p>
+<h4 id="select-network">Select Network</h4>
 <p>Select one of your previously created network which fits your needs or a default one:</p>
 <pre><code>network select --name default-azure-network
 </code></pre>
 
-<p><strong>Select security group</strong></p>
+<h4 id="select-security-group">Select Security Group</h4>
 <p>Select one of your previously created security which fits your needs or a default one:</p>
 <pre><code>securitygroup select --name all-services-port
 </code></pre>
 
-<p><strong>Create stack / Create cloud infrastructure</strong></p>
+<h4 id="create-stack-create-cloud-infrastructure">Create Stack / Create Cloud Infrastructure**</h4>
 <p>Stack means the running cloud infrastructure that is created based on the instance groups configured earlier
 (<code>credential</code>, <code>instancegroups</code>, <code>network</code>, <code>securitygroup</code>). Same as in case of the API or UI the new cluster will
 use your templates and by using Azure ARM will launch your cloud stack. Use the following command to create a
@@ -1127,7 +1126,7 @@ it reports AVAILABLE, it means that the virtual machines and the corresponding i
 <p><code>--wait</code> - in this case the create command will return only after the process has finished.</p>
 <p><code>--persistentStorage</code> - This is <code>cbstore</code> by default. Cloudbreak will copy the image into a storage which is not deleting under the termination. When you starting a new cluster then the provisioning will be much faster because of the existing image.</p>
 <p><code>--attachedStorageType</code> - This is <code>SINGLE</code> by default. If you are using the default option then your whole cluster will by in one storage which could be a bottleneck in case of <a href="https://azure.microsoft.com/hu-hu/documentation/articles/azure-subscription-service-limits/#storage-limits">Azure</a>. If you are using the <code>PER_VM</code> then we will deploy as much storage account as many node you have and in this case IOPS limit concern just for one node.</p>
-<p><strong>Create a Hadoop cluster / Cloud provisioning</strong></p>
+<h4 id="create-a-hadoop-cluster-cloud-provisioning">Create a Hadoop Cluster / Cloud Provisioning</h4>
 <p><strong>You are almost done! One more command and your Hadoop cluster is starting!</strong> Cloud provisioning is done once the
 cluster is up and running. The new cluster will use your selected blueprint and install your custom Hadoop cluster
 with the selected components and services.</p>
@@ -1161,7 +1160,7 @@ new cluster's <code>details</code> and its <code>Event History</code> here.</li>
 </ul>
 <p><img alt="" src="../azure/images/azure-eventhistory_2.png" />
 <sub><em>Full size <a href="../azure/images/azure-eventhistory_2.png">here</a>.</em></sub></p>
-<p><strong>Stop cluster</strong></p>
+<h4 id="stop-cluster">Stop Cluster</h4>
 <p>You have the ability to <strong>stop your existing stack then its cluster</strong> if you want to suspend the work on it.</p>
 <p>Select a stack for example with its name:</p>
 <pre><code>stack select --name my-stack
@@ -1174,7 +1173,7 @@ selected stack:</p>
 stack stop
 </code></pre>
 
-<p><strong>Restart cluster</strong></p>
+<h4 id="restart-cluster">Restart Cluster</h4>
 <p><strong>Select your stack that you would like to restart</strong> after this you can apply:</p>
 <pre><code>stack start
 </code></pre>
@@ -1183,7 +1182,7 @@ stack stop
 <pre><code>cluster start
 </code></pre>
 
-<p><strong>Upscale cluster</strong></p>
+<h4 id="upscale-cluster">Upscale Cluster</h4>
 <p>If you need more instances to your infrastructure, you can <strong>upscale your selected stack</strong>:</p>
 <pre><code>stack node --ADD --instanceGroup host_group_slave_1 --adjustment 6
 </code></pre>
@@ -1193,7 +1192,7 @@ stack stop
 <pre><code>cluster node --ADD --hostgroup host_group_slave_1 --adjustment 6
 </code></pre>
 
-<p><strong>Downscale cluster</strong></p>
+<h4 id="downscale-cluster">Downscale Cluster</h4>
 <p>You also can reduce the number of instances in your infrastructure. <strong>After you selected your stack</strong>:</p>
 <pre><code>cluster node --REMOVE  --hostgroup host_group_slave_1 --adjustment -2
 </code></pre>
@@ -1203,14 +1202,14 @@ stack stop
 <pre><code>stack node --REMOVE  --instanceGroup host_group_slave_1 --adjustment -2
 </code></pre>
 
-<h2 id="cluster-termination_1">Cluster termination</h2>
+<h2 id="cluster-termination_1">Cluster Termination</h2>
 <p>You can terminate running or stopped clusters with</p>
 <pre><code>stack terminate --name myawsstack
 </code></pre>
 
 <p>Other available option is <code>--wait</code> - in this case the terminate command will return only after the process has finished. </p>
 <blockquote>
-<p><strong>IMPORTANT</strong> Always use Cloudbreak to terminate the cluster. If that fails for some reason, try to delete the 
+<p><strong>IMPORTANT:</strong> Always use Cloudbreak to terminate the cluster. If that fails for some reason, try to delete the 
 CloudFormation stack first. Instances are started in an Auto Scaling Group so they may be restarted if you terminate an instance manually!</p>
 </blockquote>
 <p>Sometimes Cloudbreak cannot synchronize it's state with the cluster state at the cloud provider and the cluster can't
@@ -1220,7 +1219,7 @@ CloudFormation stack first. Instances are started in an Auto Scaling Group so th
 <li>You should check the related resources at the AWS CloudFormation</li>
 <li>If it is needed you need to manually remove resources from ther</li>
 </ol>
-<h2 id="silent-mode">Silent mode</h2>
+<h2 id="silent-mode">Silent Mode</h2>
 <p>With Cloudbreak Shell you can execute script files as well. A script file contains shell commands and can 
 be executed with the <code>script</code> cloudbreak shell command</p>
 <pre><code>script &lt;your script file&gt;
@@ -1231,7 +1230,7 @@ be executed with the <code>script</code> cloudbreak shell command</p>
 </code></pre>
 
 <blockquote>
-<p><strong>IMPORTANT</strong> You have to copy all your files into the <code>cbd</code> working directory, what you would like to use in shell.
+<p><strong>IMPORTANT:</strong> You have to copy all your files into the <code>cbd</code> working directory, what you would like to use in shell.
  For example if your <code>cbd</code> working directory is ~/cloudbreak-deployment then copy your script file to here.</p>
 </blockquote>
 <h3 id="example">Example</h3>

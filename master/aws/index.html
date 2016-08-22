@@ -292,62 +292,70 @@
     
         <li class="main active"><a href="#aws-images">AWS Images</a></li>
         
+            <li><a href="#prerequisites">Prerequisites</a></li>
+        
             <li><a href="#cloudbreak-deployer-aws-image-details">Cloudbreak Deployer AWS Image Details</a></li>
         
-    
-        <li class="main "><a href="#aws-setup">AWS Setup</a></li>
+            <li><a href="#vm-requirements">VM Requirements</a></li>
         
-            <li><a href="#set-up-cloudbreak-deployer">Set up Cloudbreak Deployer</a></li>
+    
+        <li class="main "><a href="#cloudbreak-deployer-setup-on-aws">Cloudbreak Deployer Setup on AWS</a></li>
+        
+            <li><a href="#cloudbreak-deployment-directory">Cloudbreak Deployment Directory</a></li>
+        
+            <li><a href="#initialize-your-profile">Initialize Your Profile</a></li>
         
             <li><a href="#start-cloudbreak-deployer">Start Cloudbreak Deployer</a></li>
         
             <li><a href="#validate-that-cloudbreak-deployer-has-started">Validate that Cloudbreak Deployer Has Started</a></li>
         
+            <li><a href="#configure-role-based-credentials">Configure Role-based Credentials</a></li>
+        
             <li><a href="#optional-configurations">Optional Configurations</a></li>
         
     
-        <li class="main "><a href="#provisioning-prerequisites">Provisioning Prerequisites</a></li>
+        <li class="main "><a href="#cluster-provisioning-prerequisites">Cluster Provisioning Prerequisites</a></li>
         
-            <li><a href="#iam-role-setup">IAM role setup</a></li>
+            <li><a href="#iam-role-setup">IAM Role Setup</a></li>
         
-            <li><a href="#generate-a-new-ssh-key">Generate a new SSH key</a></li>
+            <li><a href="#generate-a-new-ssh-key">Generate a New SSH Key</a></li>
         
     
-        <li class="main "><a href="#provisioning-via-browser">Provisioning via Browser</a></li>
+        <li class="main "><a href="#cluster-provisioning-via-browser">Cluster Provisioning via Browser</a></li>
         
-            <li><a href="#setting-up-aws-credentials">Setting up AWS credentials</a></li>
+            <li><a href="#setting-up-aws-credentials">Setting up AWS Credentials</a></li>
         
-            <li><a href="#infrastructure-templates">Infrastructure templates</a></li>
+            <li><a href="#infrastructure-templates">Infrastructure Templates</a></li>
         
-            <li><a href="#defining-cluster-services">Defining cluster services</a></li>
+            <li><a href="#defining-cluster-services">Defining Cluster Services</a></li>
         
-            <li><a href="#cluster-deployment">Cluster deployment</a></li>
+            <li><a href="#cluster-deployment">Cluster Deployment</a></li>
         
-            <li><a href="#cluster-termination">Cluster termination</a></li>
+            <li><a href="#cluster-termination">Cluster Termination</a></li>
         
     
         <li class="main "><a href="#interactive-mode-cloudbreak-shell">Interactive mode / Cloudbreak Shell</a></li>
         
             <li><a href="#start-cloudbreak-shell">Start Cloudbreak Shell</a></li>
         
-            <li><a href="#autocomplete-and-hints">Autocomplete and hints</a></li>
+            <li><a href="#autocomplete-and-hints">Autocomplete and Hints</a></li>
         
     
-        <li class="main "><a href="#provisioning-via-cli">Provisioning via CLI</a></li>
+        <li class="main "><a href="#cluster-provisioning-via-cli">Cluster Provisioning via CLI</a></li>
         
-            <li><a href="#setting-up-aws-credential">Setting up AWS credential</a></li>
+            <li><a href="#setting-up-aws-credential">Setting up AWS Credential</a></li>
         
-            <li><a href="#infrastructure-templates_1">Infrastructure templates</a></li>
+            <li><a href="#infrastructure-templates_1">Infrastructure Templates</a></li>
         
-            <li><a href="#defining-cluster-services_1">Defining cluster services</a></li>
+            <li><a href="#defining-cluster-services_1">Defining Cluster Services</a></li>
         
-            <li><a href="#metadata-show">Metadata show</a></li>
+            <li><a href="#metadata-show">Metadata Show</a></li>
         
-            <li><a href="#cluster-deployment_1">Cluster deployment</a></li>
+            <li><a href="#cluster-deployment_1">Cluster Deployment</a></li>
         
-            <li><a href="#cluster-termination_1">Cluster termination</a></li>
+            <li><a href="#cluster-termination_1">Cluster Termination</a></li>
         
-            <li><a href="#silent-mode">Silent mode</a></li>
+            <li><a href="#silent-mode">Silent Mode</a></li>
         
     
     </ul>
@@ -356,52 +364,53 @@
                     
 
 <h1 id="aws-images">AWS Images</h1>
-<p>We have pre-built cloud images for AWS with the Cloudbreak Deployer pre-installed. Go to your <a href="https://aws.amazon.com/console/">AWS Management Console</a> to launch the latest Cloudbreak Deployer image in your region.  </p>
+<p>We have pre-built Cloudbreak Deployer cloud images for AWS with the Cloudbreak Deployer pre-installed. Go to your <a href="https://aws.amazon.com/console/">AWS Management Console</a> to launch the latest Cloudbreak Deployer image in your region.  </p>
 <blockquote>
-<p>As an alternative to using the pre-built cloud images for AWS, you can install Cloudbreak Deployer on your own VM. For more information, see <a href="../onprem/">installation page</a>.</p>
+<p>As an alternative to using the pre-built cloud images for AWS, you can install Cloudbreak Deployer on your own VM. For more information, see the <a href="../onprem/">installation instructions</a>.</p>
 </blockquote>
+<h2 id="prerequisites">Prerequisites</h2>
+<h4 id="ports">Ports</h4>
 <p>Make sure that you have opened the following ports on your <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html">security group</a>:</p>
 <ul>
 <li>SSH (22)</li>
 <li>Cloudbreak API (8080)</li>
 <li>Identity server (8089)</li>
 <li>Cloudbreak UI (3000)</li>
-<li>User authentication (3001)</li>
+<li>User authentication (3001) </li>
 </ul>
 <h2 id="cloudbreak-deployer-aws-image-details">Cloudbreak Deployer AWS Image Details</h2>
-<blockquote>
-<p><strong><a href="../onprem/#minimum-and-recommended-system-requirements">Minimum and Recommended VM requirements</a>:</strong> 8GB RAM, 10GB disk, 2 cores. 
-The minimum instance type which is suitable for Cloudbreak is <strong>m3.large</strong>.
-To learn about all requirements, see **<a href="../onprem/#minimum-and-recommended-system-requirements">Minimum and Recommended VM requirements</a>.</p>
-</blockquote>
-<h1 id="aws-setup">AWS Setup</h1>
-<p>Before configuring Cloudbreak Deployer, you should know that:</p>
+<h2 id="vm-requirements">VM Requirements</h2>
+<p>When selecting an instance type, consider these minimum and recomended requirements:  </p>
+<ul>
+<li>8GB RAM, 10GB disk, 2 cores. </li>
+<li>The minimum instance type which is suitable for Cloudbreak is <strong>m3.large</strong>.</li>
+</ul>
+<p>To learn about all requirements, see <a href="../onprem/#system-requirements">System Requirements</a>.</p>
+<h1 id="cloudbreak-deployer-setup-on-aws">Cloudbreak Deployer Setup on AWS</h1>
+<p>Before getting started with Cloudbreak Deployer, you should know that:</p>
 <ul>
 <li>The default SSH username for the EC2 instances is <code>cloudbreak</code>.</li>
 <li>Cloudbreak Deployer location on your EC2 instance is <code>/var/lib/cloudbreak-deployment</code>. This is the
   <code>cbd</code> root folder.</li>
 <li>You must execute all <code>cbd</code> actions from the <code>cbd</code> root folder as a <code>cloudbreak</code> user.</li>
 </ul>
-<h2 id="set-up-cloudbreak-deployer">Set up Cloudbreak Deployer</h2>
-<p>You should have already installed the Cloudbreak Deployer either <a href="./">using the AWS Cloud Images</a> or by <a href="../onprem/">installing the
+<p>In the previous step, you should have already set up a VM with Cloudbreak Doployer either <a href="./">using the AWS Cloud Images</a> or by <a href="../onprem/">installing the
 Cloudbreak Deployer</a> manually on your own VM.</p>
-<p>You can <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstances.html">connect to the previously created <code>cbd</code> VM</a>.</p>
-<p>To open the <code>cloudbreak-deployment</code> directory, run:</p>
+<p>Now you need to <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstances.html">connect to the previously created <code>cbd</code> VM</a>.</p>
+<h2 id="cloudbreak-deployment-directory">Cloudbreak Deployment Directory</h2>
+<p>To navigate to the <code>cloudbreak-deployment</code> directory, run:</p>
 <pre><code>cd /var/lib/cloudbreak-deployment/
 </code></pre>
 
 <p>This directory contains configuration files and the supporting binaries for Cloudbreak Deployer.</p>
-<h3 id="configuring-role-based-credentials">Configuring Role-based Credentials</h3>
-<p>There are two ways to create AWS credentials in Cloudbreak:</p>
-<p><strong>Key-based:</strong> This requires your AWS access key and secret key pair. Cloudbreak will use these keys to launch the resources. For starters, this is a simpler option that does not require additional configuration. You will provide the keys later when you <a href="credentials.md">provision an HDP cluster</a>.</p>
-<p><strong>Role-based:</strong> This requires a valid <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html">IAM role</a> with "AssumeRole" policy. Cloudbreak will assume this role to get temporary access and the access/secret key pair.</p>
-<p>To configure role-based credentials, start your instance with an "AssumeRole" policy. For more information, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html">Using Instance Profiles</a> and <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html">Using an IAM Role to Grant Permissions to Applications Running on Amazon EC2 Instances</a>.</p>
-<p>Alternatively, you can set your AWS keys of an IAM user with an"AssumeRole" policy in the <code>Profile</code> file:</p>
-<p><code>export AWS_ACCESS_KEY_ID=AKIA**************W7SA
-  export AWS_SECRET_ACCESS_KEY=RWCT4Cs8******************/*skiOkWD</code></p>
-<blockquote>
-<p>If you want to use instance profile, do not set these variables. If you want to use Cloudbreak with Role ARNs instead of keys, make sure that the instance profile role can assume roles on AWS.</p>
-</blockquote>
+<h2 id="initialize-your-profile">Initialize Your Profile</h2>
+<p>First, initialize <code>cbd</code> by creating a <code>Profile</code> file:</p>
+<pre><code>cbd init
+</code></pre>
+
+<p>This will create a <code>Profile</code> file in the current directory. Open the <code>Profile</code> file and check the <code>PUBLIC_IP</code>. 
+<code>PUBLIC_IP</code>is mandatory, because it is used to access the Cloudbreak UI. In some cases the <code>cbd</code> tool tries to 
+guess it. If <code>cbd</code> cannot get the IP address during the initialization, set the appropriate value.</p>
 <h2 id="start-cloudbreak-deployer">Start Cloudbreak Deployer</h2>
 <p>To start the Cloudbreak application use the following command:</p>
 <pre><code>cbd start
@@ -432,6 +441,17 @@ Cloudbreak Deployer</a> manually on your own VM.</p>
   You should see a message like this in the log: <code>Started CloudbreakApplication in 36.823 seconds</code>. Cloudbreak normally takes less than a minute to start.</p>
 </li>
 </ul>
+<h2 id="configure-role-based-credentials">Configure Role-based Credentials</h2>
+<p>There are two ways to create AWS credentials in Cloudbreak:</p>
+<p><strong>Key-based:</strong> This requires your AWS access key and secret key pair. Cloudbreak will use these keys to launch the resources. For starters, this is a simpler option that does not require additional configuration. You will provide the keys later when you <a href="credentials.md">provision an HDP cluster</a>.</p>
+<p><strong>Role-based:</strong> This requires a valid <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html">IAM role</a> with "AssumeRole" policy. Cloudbreak will assume this role to get temporary access and the access/secret key pair.</p>
+<p>To configure role-based credentials, start your instance with an "AssumeRole" policy. For more information, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html">Using Instance Profiles</a> and <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html">Using an IAM Role to Grant Permissions to Applications Running on Amazon EC2 Instances</a>.</p>
+<p>Alternatively, you can set your AWS keys of an IAM user with an"AssumeRole" policy in the <code>Profile</code> file:</p>
+<p><code>export AWS_ACCESS_KEY_ID=AKIA**************W7SA
+  export AWS_SECRET_ACCESS_KEY=RWCT4Cs8******************/*skiOkWD</code></p>
+<blockquote>
+<p>If you want to use instance profile, do not set these variables. If you want to use Cloudbreak with Role ARNs instead of keys, make sure that the instance profile role can assume roles on AWS.   </p>
+</blockquote>
 <h2 id="optional-configurations">Optional Configurations</h2>
 <p>You can perform the following optional configurations:</p>
 <h3 id="set-custom-tags">Set Custom Tags</h3>
@@ -446,8 +466,8 @@ Cloudbreak Deployer</a> manually on your own VM.</p>
 </code></pre>
 
 <p>Then the name of the tag will be <code>myveryspecifictag</code> and the value will be <code>veryspecific</code>. You can specify a list of tags here with a comma separated list; for example: <code>tag1:value1,tag2:value2,tag3:value3</code>.</p>
-<h1 id="provisioning-prerequisites">Provisioning Prerequisites</h1>
-<h2 id="iam-role-setup">IAM role setup</h2>
+<h1 id="cluster-provisioning-prerequisites">Cluster Provisioning Prerequisites</h1>
+<h2 id="iam-role-setup">IAM Role Setup</h2>
 <blockquote>
 <p>If you want to use your Aws Access Key and your Secret Access Key to authenticate to Amazon then please use the <code>Key based authentication</code> and you do not need to setup an IAM Role.</p>
 </blockquote>
@@ -509,7 +529,7 @@ This command creates a role with the name <code>cbreak-deployer</code> by defaul
 <p>You can check the generated role on your AWS console, under IAM roles:
 <img alt="" src="../aws/images/aws-iam-role_v2.png" />
 <sub><em>Full size <a href="../aws/images/aws-iam-role_v2.png">here</a>.</em></sub></p>
-<h2 id="generate-a-new-ssh-key">Generate a new SSH key</h2>
+<h2 id="generate-a-new-ssh-key">Generate a New SSH Key</h2>
 <p>All the instances created by Cloudbreak are configured to allow key-based SSH,
 so you'll need to provide an SSH public key that can be used later to SSH onto the instances in the clusters you'll create with Cloudbreak.
 You can use one of your existing keys or you can generate a new one.</p>
@@ -526,7 +546,7 @@ You'll be asked to enter a passphrase, but you can leave it empty.
 # Enter same passphrase again: [Type passphrase again]
 </code></pre>
 
-<p>After you enter a passphrase the keypair is generated. The output should look something like below.</p>
+<p>After you enter a passphrase the keypair is generated. The output should look something like below. </p>
 <pre><code># Your identification has been saved in /Users/you/.ssh/id_rsa.
 # Your public key has been saved in /Users/you/.ssh/id_rsa.pub.
 # The key fingerprint is:
@@ -534,7 +554,7 @@ You'll be asked to enter a passphrase, but you can leave it empty.
 </code></pre>
 
 <p>Later you'll need to pass the <code>.pub</code> file's contents to Cloudbreak and use the private part to SSH to the instances</p>
-<h1 id="provisioning-via-browser">Provisioning via Browser</h1>
+<h1 id="cluster-provisioning-via-browser">Cluster Provisioning via Browser</h1>
 <p>You can log into the Cloudbreak application at <code>http://&lt;Public_IP&gt;:3000/</code>.</p>
 <p>The main goal of the Cloudbreak UI is to easily create clusters on your own cloud provider account.
 This description details the AWS setup - if you'd like to use a different cloud provider check out its manual.</p>
@@ -548,7 +568,7 @@ This description details the AWS setup - if you'd like to use a different cloud 
 <blockquote>
 <p><strong>IMPORTANT</strong> Make sure that you have sufficient qouta (CPU, network, etc) for the requested cluster size</p>
 </blockquote>
-<h2 id="setting-up-aws-credentials">Setting up AWS credentials</h2>
+<h2 id="setting-up-aws-credentials">Setting up AWS Credentials</h2>
 <p>Cloudbreak works by connecting your AWS account through so called <em>Credentials</em>, and then uses these credentials to 
 create resources on your behalf. The credentials can be configured on the <strong>manage credentials</strong> panel on the 
 Cloudbreak Dashboard.</p>
@@ -574,7 +594,7 @@ clusters, but cannot delete it.</p>
 </blockquote>
 <p><img alt="" src="../aws/images/aws-credential_v3.png" />
 <sub><em>Full size <a href="../aws/images/aws-credential_v3.png">here</a>.</em></sub></p>
-<h2 id="infrastructure-templates">Infrastructure templates</h2>
+<h2 id="infrastructure-templates">Infrastructure Templates</h2>
 <p>After your AWS account is linked to Cloudbreak you can start creating resource templates that describe your clusters' infrastructure:</p>
 <ul>
 <li>templates</li>
@@ -584,7 +604,7 @@ clusters, but cannot delete it.</p>
 <p>When you create one of the above resource, <strong>Cloudbreak does not make any requests to AWS. Resources are only created
  on AWS after the <code>create cluster</code> button has pushed.</strong> These templates are saved to Cloudbreak's database and can be 
  reused with multiple clusters to describe the infrastructure.</p>
-<p><strong>Templates</strong></p>
+<h4 id="templates">Templates</h4>
 <p>Templates describe the <strong>instances of your cluster</strong> - the instance type and the attached volumes. A typical setup is
  to combine multiple templates in a cluster for the different types of nodes. For example you may want to attach multiple
  large disks to the datanodes or have memory optimized instances for Spark nodes.</p>
@@ -596,7 +616,7 @@ fulfilled by Amazon). <strong>This option is <em>not supported</em> by the defau
 <li><code>EBS encryption</code> is supported for all volume types. If this option is checked then all the attached disks <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">will be encrypted</a> by Amazon using the AWS KMS master keys.</li>
 <li>If <code>Public in account</code> is checked all the users belonging to your account will be able to use this resource to create clusters, but cannot delete it.</li>
 </ul>
-<p><strong>Networks</strong></p>
+<h4 id="networks">Networks</h4>
 <p>Your clusters can be created in their own <strong>Virtual Private Cloud (VPC)</strong> or in one of your already existing VPCs.
 If you choose an existing VPC it is possible to create a new subnet within the VPC or use an already existing one.
 The subnet's IP range must be defined in the <code>Subnet (CIDR)</code> field using the general CIDR notation.</p>
@@ -617,26 +637,26 @@ networks</strong> panel.</p>
 </ul>
 <p>You can configure the <code>Subnet Identifier</code> and the <code>Internet Gateway Identifier</code> (IGW) of your VPC.</p>
 <blockquote>
-<p><strong>IMPORTANT</strong> The subnet CIDR cannot overlap each other in a VPC. So you have to create different network
+<p><strong>IMPORTANT:</strong> The subnet CIDR cannot overlap each other in a VPC. So you have to create different network
 templates for every each clusters.</p>
 </blockquote>
 <p>To create a new subnet within the VPC, provide the ID of the subnet which is in the existing VPC and your cluster
 will be launched into that subnet. <strong>For example</strong> you can create 3 different clusters with 3 different network
 templates for multiple subnets <code>10.0.0.0/24</code>, <code>10.0.1.0/24</code>, <code>10.0.2.0/24</code> with the same VPC and IGW identifiers.</p>
 <blockquote>
-<p><strong>IMPORTANT</strong> Please make sure the define subnet here doesn't overlap with any of your already deployed subnet in
+<p><strong>IMPORTANT:</strong> Make sure the define subnet here doesn't overlap with any of your already deployed subnet in
 the VPC, because of the validation only happens after the cluster creation starts.</p>
 <p>In case of existing subnet make sure you have enough room within your network space for the new instances.</p>
 </blockquote>
 <p>If <code>Public in account</code> is checked all the users belonging to your account will be able to use this network template
 to create clusters, but cannot delete it.</p>
 <blockquote>
-<p><strong>NOTE</strong> The VPCs, IGWs and subnet are created on AWS only after the the cluster provisioning starts with the selected
+<p><strong>NOTE:</strong> The VPCs, IGWs and subnet are created on AWS only after the the cluster provisioning starts with the selected
 network template.</p>
 </blockquote>
 <p><img alt="" src="../aws/images/aws-network_v4.png" />
 <sub><em>Full size <a href="../aws/images/aws-network_v4.png">here</a>.</em></sub></p>
-<p><strong>Security groups</strong></p>
+<h4 id="security-groups">Security groups</h4>
 <p>Security group templates are very similar to the <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html">security groups on the AWS Console</a>.
 <strong>They describe the allowed inbound traffic to the instances in the cluster.</strong>
 Currently only one security group template can be selected for a Cloudbreak cluster and all the instances have a 
@@ -691,12 +711,12 @@ provisioned cluster</p>
 <p>If <code>Public in account</code> is checked all the users belonging to your account will be able to use this security group 
 template to create clusters, but cannot delete it.</p>
 <blockquote>
-<p><strong>NOTE</strong> The security groups are created on AWS only after the cluster provisioning starts with the selected security group template.</p>
+<p><strong>NOTE:</strong> The security groups are created on AWS only after the cluster provisioning starts with the selected security group template.</p>
 </blockquote>
 <p><img alt="" src="../images/ui-secgroup_v3.png" />
 <sub><em>Full size <a href="../images/ui-secgroup_v3.png">here</a>.</em></sub></p>
-<h2 id="defining-cluster-services">Defining cluster services</h2>
-<p><strong>Blueprints</strong></p>
+<h2 id="defining-cluster-services">Defining Cluster Services</h2>
+<h4 id="blueprints">Blueprints</h4>
 <p>Blueprints are your declarative definition of a Hadoop cluster. These are the same blueprints that are <a href="https://cwiki.apache.org/confluence/display/AMBARI/Blueprints">used by Ambari</a>.</p>
 <p>You can use the 3 default blueprints pre-defined in Cloudbreak or you can create your own ones.
 Blueprints can be added from file, URL (an <a href="https://raw.githubusercontent
@@ -705,7 +725,7 @@ whole JSON can be written in the <code>JSON text</code> box.</p>
 <p>The host groups in the JSON will be mapped to a set of instances when starting the cluster. Besides this the services and
  components will also be installed on the corresponding nodes. Blueprints can be modified later from the Ambari UI.</p>
 <blockquote>
-<p><strong>NOTE</strong> Not necessary to define all the configuration in the blueprint. If a configuration is missing, Ambari will 
+<p><strong>NOTE:</strong> It is not necessary to define all the configuration in the blueprint. If a configuration is missing, Ambari will 
 fill that with a default value.</p>
 </blockquote>
 <p>If <code>Public in account</code> is checked all the users belonging to your account will be able to use this blueprint to 
@@ -717,7 +737,7 @@ modifications.</strong>
 There is no automatic way to modify an exported blueprint and make it instantly usable in Cloudbreak, the 
 modifications have to be done manually.
 When the blueprint is exported some configurations are hardcoded for example domain names, memory configurations...etc. that won't be applicable to the Cloudbreak cluster</p>
-<h2 id="cluster-deployment">Cluster deployment</h2>
+<h2 id="cluster-deployment">Cluster Deployment</h2>
 <p>After all the cluster resources are configured you can deploy a new HDP cluster.</p>
 <p>Here is a <strong>basic flow for cluster creation on Cloudbreak Web UI</strong>:</p>
 <ul>
@@ -774,7 +794,7 @@ the AWS Console CloudFormation page.
 <p>Besides these you can check the progress on the Cloudbreak Web UI itself if you open the new cluster's <code>Event History</code>.
 <img alt="" src="../images/ui-eventhistory_v3.png" />
 <sub><em>Full size <a href="../images/ui-eventhistory_v3.png">here</a>.</em></sub></p>
-<p><strong>Advanced options</strong></p>
+<h4 id="advanced-options">Advanced Options</h4>
 <p>There are some advanced features when deploying a new cluster, these are the following:</p>
 <p><code>Ambari Username</code> This user will be used as admin user in Ambari. You can log in using this username on the Ambari UI.</p>
 <p><code>Ambari Password</code> The password associated with the Ambari username. This password will be also the default password for all required passwords which are not specified in the blueprint. E.g: hive DB password.</p>
@@ -797,10 +817,10 @@ configurations gathered by the response of the stack advisor. </p>
 <li><code>Create Role For S3 Access</code>                  The Cloudformation template will create a new role and assign to every instance.</li>
 <li><code>Define Existing Role For S3 Access</code>         Cluster will use the predefined instance role. You should define the role in the <code>Role for S3 connection</code> box</li>
 </ul>
-<h2 id="cluster-termination">Cluster termination</h2>
+<h2 id="cluster-termination">Cluster Termination</h2>
 <p>You can terminate running or stopped clusters with the <code>terminate</code> button in the cluster details.</p>
 <blockquote>
-<p><strong>IMPORTANT</strong> Always use Cloudbreak to terminate the cluster. If that fails for some reason, try to delete the 
+<p><strong>IMPORTANT:</strong> Always use Cloudbreak to terminate the cluster. If that fails for some reason, try to delete the 
 CloudFormation stack first. Instances are started in an Auto Scaling Group so they may be restarted if you terminate an instance manually!</p>
 </blockquote>
 <p>Sometimes Cloudbreak cannot synchronize it's state with the cluster state at the cloud provider and the cluster can't
@@ -853,7 +873,7 @@ CloudFormation stack first. Instances are started in an Auto Scaling Group so th
 example if your <code>cbd</code> working directory is <code>~/cloudbreak-deployment</code> then copy your <strong>blueprint JSON, public ssh key 
 file...etc.</strong> to here. You can refer to these files with their names from the shell.</p>
 </blockquote>
-<h2 id="autocomplete-and-hints">Autocomplete and hints</h2>
+<h2 id="autocomplete-and-hints">Autocomplete and Hints</h2>
 <p>Cloudbreak Shell helps to you with <strong>hint messages</strong> from the very beginning, for example:</p>
 <pre><code>cloudbreak-shell&gt;hint
 Hint: Add a blueprint with the 'blueprint add' command or select an existing one with 'blueprint select'
@@ -865,8 +885,8 @@ cloudbreak-shell&gt;
 credential create --AWS          credential create --AZURE        credential create --EC2          credential create --GCP          credential create --OPENSTACK
 </code></pre>
 
-<h1 id="provisioning-via-cli">Provisioning via CLI</h1>
-<h2 id="setting-up-aws-credential">Setting up AWS credential</h2>
+<h1 id="cluster-provisioning-via-cli">Cluster Provisioning via CLI</h1>
+<h2 id="setting-up-aws-credential">Setting up AWS Credential</h2>
 <p>Cloudbreak works by connecting your AWS account through so called Credentials, and then uses these credentials to 
 create resources on your behalf. Credentials can be configured with the following command for example:</p>
 <pre><code>credential create --AWS --name my-aws-credential --description &quot;sample description&quot; --roleArn 
@@ -874,7 +894,7 @@ arn:aws:iam::***********:role/userrole --sshKeyString &quot;ssh-rsa AAAAB****etc
 </code></pre>
 
 <blockquote>
-<p><strong>NOTE</strong> that Cloudbreak <strong>does not set your cloud user details</strong> - we work around the concept of <a href="http://aws.amazon.com/iam/">IAM</a> - <strong>on Amazon (or other cloud providers)</strong>. You should have already a valid IAM role. You can 
+<p><strong>NOTE:</strong>  Cloudbreak <strong>does not set your cloud user details</strong> - we work around the concept of <a href="http://aws.amazon.com/iam/">IAM</a> - <strong>on Amazon (or other cloud providers)</strong>. You should have already a valid IAM role. You can 
 find further details <a href="./#provisioning-prerequisites">here</a>.</p>
 </blockquote>
 <p>Alternatives to provide <code>SSH Key</code>:</p>
@@ -890,7 +910,7 @@ find further details <a href="./#provisioning-prerequisites">here</a>.</p>
 <pre><code>credential select --name my-aws-credential
 </code></pre>
 
-<h2 id="infrastructure-templates_1">Infrastructure templates</h2>
+<h2 id="infrastructure-templates_1">Infrastructure Templates</h2>
 <p>After your AWS account is linked to Cloudbreak you can start creating resource templates that describe your clusters' infrastructure:</p>
 <ul>
 <li>security groups</li>
@@ -900,7 +920,7 @@ find further details <a href="./#provisioning-prerequisites">here</a>.</p>
 <p>When you create one of the above resource, <strong>Cloudbreak does not make any requests to AWS. Resources are only created
  on AWS after the <code>cluster create</code> has applied.</strong> These templates are saved to Cloudbreak's database and can be 
  reused with multiple clusters to describe the infrastructure.</p>
-<p><strong>Templates</strong></p>
+<h4 id="templates_1">Templates</h4>
 <p>Templates describe the <strong>instances of your cluster</strong> - the instance type and the attached volumes. A typical setup is
  to combine multiple templates in a cluster for the different types of nodes. For example you may want to attach multiple
  large disks to the datanodes or have memory optimized instances for Spark nodes.</p>
@@ -916,7 +936,7 @@ new stack). Templates can be configured with the following command for example:<
 <pre><code>template list
 </code></pre>
 
-<p><strong>Networks</strong></p>
+<h4 id="networks_1">Networks</h4>
 <p>Your clusters can be created in their own <strong>Virtual Private Cloud (VPC)</strong> or in one of your already existing VPCs. If 
 you choose an existing VPC it is possible to create a new subnet within the VPC or use an already existing one. The 
 subnet's IP range must be defined in the <code>Subnet (CIDR)</code> field using the general CIDR notation.</p>
@@ -946,15 +966,15 @@ clusters, but cannot delete it.</p>
 <pre><code>network list
 </code></pre>
 
-<h2 id="defining-cluster-services_1">Defining cluster services</h2>
-<p><strong>Blueprints</strong></p>
+<h2 id="defining-cluster-services_1">Defining Cluster Services</h2>
+<h4 id="blueprints_1">Blueprints</h4>
 <p>Blueprints are your declarative definition of a Hadoop cluster. These are the same blueprints that are <a href="https://cwiki.apache.org/confluence/display/AMBARI/Blueprints">used by Ambari</a>.</p>
 <p>You can use the 3 default blueprints pre-defined in Cloudbreak or you can create your own ones.
 Blueprints can be added from file or URL (an <a href="https://raw.githubusercontent.com/sequenceiq/cloudbreak/master/integration-test/src/main/resources/blueprint/multi-node-hdfs-yarn.bp">example blueprint</a>).</p>
 <p>The host groups in the JSON will be mapped to a set of instances when starting the cluster. Besides this the services and
  components will also be installed on the corresponding nodes. Blueprints can be modified later from the Ambari UI.</p>
 <blockquote>
-<p><strong>NOTE</strong> Not necessary to define all the configuration in the blueprint. If a configuration is missing, Ambari will fill that with a default value.</p>
+<p><strong>NOTE:</strong> It is not necessary to define all the configuration in the blueprint. If a configuration is missing, Ambari will fill that with a default value.</p>
 </blockquote>
 <pre><code>blueprint add --name my-blueprint --description &quot;sample description&quot; --file &lt;the path of the blueprint&gt;
 </code></pre>
@@ -972,7 +992,7 @@ modifications.</strong>
 There is no automatic way to modify an exported blueprint and make it instantly usable in Cloudbreak, the 
 modifications have to be done manually.
 When the blueprint is exported some configurations are hardcoded for example domain names, memory configurations..etc. that won't be applicable to the Cloudbreak cluster.</p>
-<h2 id="metadata-show">Metadata show</h2>
+<h2 id="metadata-show">Metadata Show</h2>
 <p>You can check the stack metadata with</p>
 <pre><code>stack metadata --name myawsstack --instancegroup master
 </code></pre>
@@ -980,20 +1000,19 @@ When the blueprint is exported some configurations are hardcoded for example dom
 <p>Other available options:</p>
 <p><code>--id</code> In this case you can select a stack with id.</p>
 <p><code>--outputType</code> In this case you can modify the outputformat of the command (RAW or JSON). </p>
-<h2 id="cluster-deployment_1">Cluster deployment</h2>
-<p>After all the cluster resources are configured you can deploy a new HDP cluster. The following sub-sections show 
-you a <strong>basic flow for cluster creation with Cloudbreak Shell</strong>.</p>
-<p><strong>Select credential</strong></p>
+<h2 id="cluster-deployment_1">Cluster Deployment</h2>
+<p>After all the cluster resources are configured you can deploy a new HDP cluster. The following sub-sections show you a <strong>basic flow for cluster creation with Cloudbreak Shell</strong>.</p>
+<h4 id="select-credential">Select Credential</h4>
 <p>Select one of your previously created AWS credential:</p>
 <pre><code>credential select --name my-aws-credential
 </code></pre>
 
-<p><strong>Select blueprint</strong></p>
+<h4 id="select-blueprint">Select Blueprint</h4>
 <p>Select one of your previously created blueprint which fits your needs:</p>
 <pre><code>blueprint select --name multi-node-hdfs-yarn
 </code></pre>
 
-<p><strong>Configure instance groups</strong></p>
+<h4 id="configure-instance-groups">Configure Instance Groups</h4>
 <p>You must configure instance groups before provisioning. An instance group define a group of nodes with a specified 
 template. Usually we create instance groups for host groups in the blueprint. For Ambari server only 1 host group can be specified.
 If you want to install the Ambari server to a separate node, you need to extend your blueprint with a new host group
@@ -1005,17 +1024,17 @@ instancegroup configure --instanceGroup slave_1 --nodecount 1 --templateName min
 
 <p>Other available option:</p>
 <p><code>--templateId</code> Id of the template</p>
-<p><strong>Select network</strong></p>
+<h4 id="select-network">Select Network</h4>
 <p>Select one of your previously created network which fits your needs or a default one:</p>
 <pre><code>network select --name default-aws-network
 </code></pre>
 
-<p><strong>Select security group</strong></p>
+<h4 id="select-security-group">Select Security Group</h4>
 <p>Select one of your previously created security which fits your needs or a default one:</p>
 <pre><code>securitygroup select --name all-services-port
 </code></pre>
 
-<p><strong>Create stack / Create cloud infrastructure</strong></p>
+<h4 id="create-stack-create-cloud-infrastructure">Create Stack / Create Cloud Infrastructure</h4>
 <p>Stack means the running cloud infrastructure that is created based on the instance groups configured earlier 
 (<code>credential</code>, <code>instancegroups</code>, <code>network</code>, <code>securitygroup</code>). Same as in case of the API or UI the new cluster will 
 use your templates and by using CloudFormation will launch your cloud stack. Use the following command to create a 
@@ -1029,7 +1048,7 @@ it reports AVAILABLE, it means that the virtual machines and the corresponding i
 <p><code>--wait</code> - in this case the create command will return only after the process has finished. 
 <code>--instanceProfileStrategy</code> - strategy for seamless S3 connection. (CREATE, USE_EXISTING)
 <code>--s3Role</code> - If you selected 'USE_EXISTING' strategy then you should define the S3 role which will be assigned to instances.</p>
-<p><strong>Create a Hadoop cluster / Cloud provisioning</strong></p>
+<h4 id="create-a-hadoop-cluster-cloud-provisioning">Create a Hadoop Cluster / Cloud Provisioning</h4>
 <p><strong>You are almost done! One more command and your Hadoop cluster is starting!</strong> Cloud provisioning is done once the 
 cluster is up and running. The new cluster will use your selected blueprint and install your custom Hadoop cluster 
 with the selected components and services.</p>
@@ -1066,7 +1085,7 @@ new cluster's <code>details</code> and its <code>Event History</code> here.</li>
 <p>For example:
 <img alt="" src="../images/ui-eventhistory_v3.png" />
 <sub><em>Full size <a href="../images/ui-eventhistory_v3.png">here</a>.</em></sub></p>
-<p><strong>Stop cluster</strong></p>
+<h4 id="stop-cluster">Stop Cluster</h4>
 <p>You have the ability to <strong>stop your existing stack then its cluster</strong> if you want to suspend the work on it.</p>
 <p>Select a stack for example with its name:</p>
 <pre><code>stack select --name my-stack
@@ -1079,7 +1098,7 @@ selected stack:</p>
 stack stop
 </code></pre>
 
-<p><strong>Restart cluster</strong></p>
+<h4 id="restart-cluster">Restart Cluster</h4>
 <p><strong>Select your stack that you would like to restart</strong> after this you can apply:</p>
 <pre><code>stack start
 </code></pre>
@@ -1088,7 +1107,7 @@ stack stop
 <pre><code>cluster start
 </code></pre>
 
-<p><strong>Upscale cluster</strong></p>
+<h4 id="upscale-cluster">Upscale Cluster</h4>
 <p>If you need more instances to your infrastructure, you can <strong>upscale your selected stack</strong>:</p>
 <pre><code>stack node --ADD --instanceGroup host_group_slave_1 --adjustment 6
 </code></pre>
@@ -1098,7 +1117,7 @@ stack stop
 <pre><code>cluster node --ADD --hostgroup host_group_slave_1 --adjustment 6
 </code></pre>
 
-<p><strong>Downscale cluster</strong></p>
+<h4 id="downscale-cluster">Downscale Cluster</h4>
 <p>You also can reduce the number of instances in your infrastructure. <strong>After you selected your stack</strong>:</p>
 <pre><code>cluster node --REMOVE  --hostgroup host_group_slave_1 --adjustment -2
 </code></pre>
@@ -1108,14 +1127,14 @@ stack stop
 <pre><code>stack node --REMOVE  --instanceGroup host_group_slave_1 --adjustment -2
 </code></pre>
 
-<h2 id="cluster-termination_1">Cluster termination</h2>
+<h2 id="cluster-termination_1">Cluster Termination</h2>
 <p>You can terminate running or stopped clusters with</p>
 <pre><code>stack terminate --name myawsstack
 </code></pre>
 
 <p>Other available option is <code>--wait</code> - in this case the terminate command will return only after the process has finished. </p>
 <blockquote>
-<p><strong>IMPORTANT</strong> Always use Cloudbreak to terminate the cluster. If that fails for some reason, try to delete the 
+<p><strong>IMPORTANT:</strong> Always use Cloudbreak to terminate the cluster. If that fails for some reason, try to delete the 
 CloudFormation stack first. Instances are started in an Auto Scaling Group so they may be restarted if you terminate an instance manually!</p>
 </blockquote>
 <p>Sometimes Cloudbreak cannot synchronize it's state with the cluster state at the cloud provider and the cluster can't
@@ -1125,7 +1144,7 @@ CloudFormation stack first. Instances are started in an Auto Scaling Group so th
 <li>You should check the related resources at the AWS CloudFormation</li>
 <li>If it is needed you need to manually remove resources from ther</li>
 </ol>
-<h2 id="silent-mode">Silent mode</h2>
+<h2 id="silent-mode">Silent Mode</h2>
 <p>With Cloudbreak Shell you can execute script files as well. A script file contains shell commands and can 
 be executed with the <code>script</code> cloudbreak shell command</p>
 <pre><code>script &lt;your script file&gt;
@@ -1136,7 +1155,7 @@ be executed with the <code>script</code> cloudbreak shell command</p>
 </code></pre>
 
 <blockquote>
-<p><strong>IMPORTANT</strong> You have to copy all your files into the <code>cbd</code> working directory, what you would like to use in shell.
+<p><strong>IMPORTANT:</strong> You have to copy all your files into the <code>cbd</code> working directory, what you would like to use in shell.
  For example if your <code>cbd</code> working directory is ~/cloudbreak-deployment then copy your script file to here.</p>
 </blockquote>
 <h3 id="example">Example</h3>
