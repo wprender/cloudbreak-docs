@@ -1,4 +1,4 @@
-## Setting up Azure credentials
+## Setting up Azure Credentials
 
 Cloudbreak works by connecting your AZURE account through so called *Credentials*, and then uses these credentials to 
 create resources on your behalf. The credentials can be configured on the **manage credentials** panel on the 
@@ -40,7 +40,7 @@ clusters, but cannot delete it.
 ![](/azure/images/azure-credentials.png)
 <sub>*Full size [here](/azure/images/azure-credentials.png).*</sub>
 
-## Infrastructure templates
+## Infrastructure Templates
 
 After your AZURE account is linked to Cloudbreak you can start creating resource templates that describe your clusters' 
 infrastructure:

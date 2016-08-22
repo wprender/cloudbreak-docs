@@ -33,7 +33,7 @@ This will launch the Cloudbreak shell inside a Docker container then it is ready
 example if your `cbd` working directory is `~/cloudbreak-deployment` then copy your **blueprint JSON, public ssh key 
 file...etc.** to here. You can refer to these files with their names from the shell.
 
-## Autocomplete and hints
+## Autocomplete and Hints
 
 Cloudbreak Shell helps to you with **hint messages** from the very beginning, for example:
 ```

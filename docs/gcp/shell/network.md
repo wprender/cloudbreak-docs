@@ -1,4 +1,4 @@
-**Networks**
+#### Networks
 
 Your clusters can be created in their own **networks** or in one of your already existing one. If you choose an 
 existing network, it is possible to create a new subnet within the network. The subnet's IP range must be defined in 
@@ -28,7 +28,7 @@ to create clusters, but cannot delete it.
 
 `--subnetId` if you have an existing subnet in the network then you can specify the id here and the cluster will use that existing subnet.
 
->**IMPORTANT** Please make sure the defined subnet here doesn't overlap with any of your 
+>**IMPORTANT:** Make sure the defined subnet here doesn't overlap with any of your 
 already deployed subnet in the network, because of the validation only happens after the cluster creation starts.
    
 >In case of existing subnet make sure you have enough room within your network space for the new instances. The 
@@ -38,6 +38,6 @@ You can check whether the network was created successfully
 ```
 network list
 ```
->**NOTE** The new networks are created on GCP only after the the cluster provisioning starts with the selected 
+>**NOTE:** The new networks are created on GCP only after the the cluster provisioning starts with the selected 
 network template.
 

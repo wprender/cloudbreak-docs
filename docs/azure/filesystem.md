@@ -1,10 +1,10 @@
-## File system configuration
+## File System Configuration
 
 When starting a cluster with Cloudbreak on Azure, the default file system is “Windows Azure Blob Storage”. Hadoop has 
 built-in support for the [WASB file system](https://hadoop.apache.org/docs/current/hadoop-azure/index.html) so it can be
 used easily as HDFS.
 
-### Disks and blob storage
+### Disks and Blob Storage
 
 In Azure every data disk attached to a virtual machine [is stored](https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-disks-vhds/) as a virtual hard disk (VHD) in a page blob inside an Azure storage account. Because these are not local disks and the operations must be done on the VHD files it causes degraded performance when used as HDFS.
 When WASB is used as a Hadoop file system the files are full-value blobs in a storage account. It means better performance compared to the data disks and the WASB file system can be configured very easily but Azure storage accounts have their own [limitations](https://azure.microsoft.com/en-us/documentation/articles/azure-subscription-service-limits/#storage-limits) as well. There is a space limitation for TB per storage account (500 TB) as well but the real bottleneck is the total request rate that is only 20000 IOPS where Azure will start to throw errors when trying to do an I/O operation.
@@ -14,7 +14,7 @@ When configuring a WASB file system with Hadoop, the only required config entrie
 
 ![](/diagrams/dash.png)
 
-### Deploying a DASH service with Cloudbreak Deployer
+### Deploying a DASH Service with Cloudbreak Deployer
 
 We automated the deployment of DASH service in Cloudbreak Deployer. After `cbd` is installed, simply run the 
 following command to deploy a DASH cloud service with 5 scale out storage accounts:
@@ -34,7 +34,7 @@ same DASH file system configuration the same data can be accessed from all the c
 different service configured as well. In that case deploy as many DASH services with `cbd` as clusters with 
 Cloudbreak and configure them accordingly.
 
-### Containers within the storage account
+### Containers Within the Storage Account
 
 Cloudbreak creates a new container in the configured storage account for each cluster with the following name 
 pattern `cloudbreak-UNIQUE_ID`. Re-using existing containers in the same account is not supported as dirty data can 
@@ -46,5 +46,5 @@ be in the same storage account nor in the same container. You can add as many ac
 hadoop fs -ls wasb://data@youraccount.blob.core.windows.net/terasort-input/
 ```
 
-> **IMPORTANT** Make sure that your cloud account can launch instances using the new Azure ARM (a.k.a. V2) API and 
+> **IMPORTANT:** Make sure that your cloud account can launch instances using the new Azure ARM (a.k.a. V2) API and 
 you have sufficient qouta (CPU, network, etc) for the requested cluster size.

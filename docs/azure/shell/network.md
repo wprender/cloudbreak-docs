@@ -1,4 +1,4 @@
-**Networks**
+#### Networks
 
 Your clusters can be created in their own **networks** or in one of your already existing one. If you choose an 
 existing network, it is possible to create a new subnet within the network. The subnet's IP range must be defined in 
@@ -17,7 +17,7 @@ If you'd like to deploy a cluster to a custom network you'll have to apply the f
 network create --AZURE --name my-azure-network --addressPrefix 192.168.123.123 --subnet 10.0.0.0/16
 ```
 
->**IMPORTANT** Please make sure the defined subnet and theirs address prefixes here doesn't overlap with any of your 
+>**IMPORTANT:** Make sure the defined subnet and theirs address prefixes here doesn't overlap with any of your 
 already deployed subnet and its already used address prefix in the network, because of the validation only happens 
 after the cluster creation 
 starts.
@@ -40,6 +40,6 @@ You can find more details about the AZURE Address Prefixes [here](https://azure.
 If `--publicInAccount` is true, all the users belonging to your account will be able to use this network template 
 to create clusters, but cannot delete it.
 
->**NOTE** The new networks are created on AZURE only after the the cluster provisioning starts with the selected 
+>**NOTE:** The new networks are created on AZURE only after the the cluster provisioning starts with the selected 
 network template.
 

@@ -1,12 +1,20 @@
-Setting up Cloudbreak on Azure is different than with other cloud providers for which we provide pre-built “public images” with Cloudbreak Deployer pre-installed. On Azure, you launch Cloudbreak Deployer using [Azure Resource Manager Templates](https://github.com/Azure/azure-quickstart-templates).
+Setting up Cloudbreak on Azure is different than on other cloud providers for which we provide pre-built public images with Cloudbreak Deployer pre-installed. On Azure, you launch Cloudbreak Deployer using the [Azure Resource Manager Templates](https://github.com/Azure/azure-quickstart-templates).
 
 ## Deploy Using the Azure Portal
 
-To get started using the Azure Resource Manager template to install Cloudbreak, click here: <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsequenceiq%2Fazure-cbd-quickstart%2F1.3.0%2Fazuredeploy.json">  ![deploy on azure](http://azuredeploy.net/deploybutton.png) </a>
+To get started with Cloudbreak installation using the Azure Resource Manager template, click here: <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsequenceiq%2Fazure-cbd-quickstart%2F1.3.0%2Fazuredeploy.json">  ![deploy on azure](http://azuredeploy.net/deploybutton.png) </a>
 
-> **[Minimum and Recommended VM Requirements](onprem.md#minimum-and-recommended-system-requirements):** 8GB RAM, 10GB disk, 2 cores (The minimum instance type suitable for Cloudbreak is **D2**)
+### VM Requirements
 
-** In addition to the default values, the following parameters are mandatory for the new `cbd` template:**
+When selecting an instance type, consider these minimum and recomended requirements:  
+- 8GB RAM, 10GB disk, 2 cores 
+- The minimum instance type suitable for Cloudbreak is **D2**
+
+To learn about all requirements, see [System Requirements](onprem.md#system-requirements).
+
+### Deployment Details
+
+In addition to the default values, the following parameters are **mandatory** for the new `cbd` template:
 
 On the `Custom deployment` panel:
 
@@ -38,7 +46,7 @@ at:```http://<VM Public IP>:3000/```
     * email: admin@example.com
     * password: cloudbreak
 
-## Under the hood
+### Under the Hood
 
 While Azure is creating the deployment, review this information about what happens in the background:
 
@@ -57,7 +65,7 @@ Cloudbreak Deployer (`cbd`)
   * All `cbd` actions must be executed from the `cbd` root folder.
   * Most of the `cbd` commands require `root` permissions. So it would be worth if you apply the `sudo su`.
 
-## Validate the started Cloudbreak Deployer
+### Validate That Cloudbreak Deployer Has Started
 
 - SSH to the launched Azure VM.
 

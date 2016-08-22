@@ -1,4 +1,4 @@
-**Security groups**
+#### Security Groups
 
 Security group templates are very similar to the [Firewalls on GCP](https://cloud.google
 .com/compute/docs/networks-and-firewalls#firewalls). **They describe the allowed inbound traffic 
@@ -59,7 +59,7 @@ You can define your own security group by adding all the ports, protocols and CI
 If `Public in account` is checked all the users belonging to your account will be able to use this security group 
 template to create clusters, but cannot delete it.
 
->**NOTE** The security groups are created on GCP only after the cluster provisioning starts with the selected 
+>**NOTE:** The security groups are created on GCP only after the cluster provisioning starts with the selected 
 security group template.
 
 ![](/images/ui-secgroup_v3.png)

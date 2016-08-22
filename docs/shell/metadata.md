@@ -1,4 +1,4 @@
-## Metadata show
+## Metadata Show
 
 You can check the stack metadata with
 

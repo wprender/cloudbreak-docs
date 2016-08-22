@@ -1,23 +1,23 @@
-## Cluster deployment
+## Cluster Deployment
 
 After all the cluster resources are configured you can deploy a new HDP cluster. The following sub-sections show 
 you a **basic flow for cluster creation with Cloudbreak Shell**.
 
-**Select credential**
+#### Select Credential
 
 Select one of your previously created GCP credential:
 ```
 credential select --name my-gcp-credential
 ```
 
-**Select blueprint**
+#### Select Blueprint
 
 Select one of your previously created blueprint which fits your needs:
 ```
 blueprint select --name multi-node-hdfs-yarn
 ```
 
-**Configure instance groups**
+#### Configure Instance Groups
 
 You must configure instance groups before provisioning. An instance group define a group of nodes with a specified 
 template. Usually we create instance groups for host groups in the blueprint. For Ambari server only 1 host group can be specified.
@@ -33,20 +33,20 @@ Other available option:
 
 `--templateId` Id of the template
 
-**Select network**
+#### Select Network
 
 Select one of your previously created network which fits your needs or a default one:
 ```
 network select --name default-gcp-network
 ```
 
-**Select security group**
+#### Select Security Group
 
 Select one of your previously created security which fits your needs or a default one:
 ```
 securitygroup select --name all-services-port
 ```
-**Create stack / Create cloud infrastructure**
+#### Create Stack / Create Cloud Infrastructure
 
 Stack means the running cloud infrastructure that is created based on the instance groups configured earlier 
 (`credential`, `instancegroups`, `network`, `securitygroup`). Same as in case of the API or UI the new cluster will 
@@ -62,7 +62,7 @@ Other available option is:
 
 `--wait` - in this case the create command will return only after the process has finished. 
 
-**Create a Hadoop cluster / Cloud provisioning**
+#### Create a Hadoop cluster / Cloud Provisioning
 
 **You are almost done! One more command and your Hadoop cluster is starting!** Cloud provisioning is done once the 
 cluster is up and running. The new cluster will use your selected blueprint and install your custom Hadoop cluster 

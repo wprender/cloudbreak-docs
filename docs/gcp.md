@@ -2,17 +2,17 @@
 
 {!docs/gcp/images.md!}
 
-# Google Setup
+# Cloudbreak Deployer Setup on Google
 
 {!docs/gcp/deployer.md!}
 
-# Provisioning Prerequisites
+# Cluster Provisioning Prerequisites
 
 {!docs/gcp/access_setup.md!}
 
 {!docs/common/sshkey.md!}
 
-# Provisioning via Browser
+# Cluster Provisioning via Browser
 
 {!docs/gcp/ui/short.md!}
 
@@ -34,7 +34,7 @@
 
 {!docs/shell/short_shell.md!}
 
-# Provisioning via CLI
+# Cluster Provisioning via CLI
 
 {!docs/gcp/shell/credential.md!}
 

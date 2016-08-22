@@ -1,28 +1,24 @@
-Before configuring Cloudbreak Deployer, note that:
+Before getting started with Cloudbreak Deployer, you should know that:
 
   * The default SSH username for the GCP instances is `cloudbreak`.
-  * Cloudbreak Deployer location on the launched `cbd` VM is `/var/lib/cloudbreak-deployment`. This is the 
-      `cbd` root folder.
+  * Cloudbreak Deployer location on your VM is `/var/lib/cloudbreak-deployment`. This is the `cbd` root folder.
   * You must execute all `cbd` actions from the `cbd` root folder.
 
-## Set up Cloudbreak Deployer
 
-You should already have the Cloudbreak Deployer either [using the GCP Cloud Images](gcp.md) or by [installing the 
-Cloudbreak Deployer](onprem.md) manually on your own VM. (The minimum instance type suitable for cloudbreak is **n1-standard-2**)
-
-If you have installed Cloudbreak Deployer on your own VM, check the [Initialize your Profile](gcp.md#initialize-your-profile) 
-section here before starting the provisioning.
+In the previous step, you should have already set up a VM with Cloudbreak Doployer either [the GCP Cloud Images](gcp.md) or by [installing the Cloudbreak Deployer](onprem.md) manually on your own VM.
 
 There are several ways to [connect to the previously created `cbd` VM](https://cloud.google.com/compute/docs/instances/connecting-to-instance).
 
-Open the `cloudbreak-deployment` directory:
+## Cloudbreak Deployment Directory
+
+To navigate to the `cloudbreak-deployment` directory, use:
 
 ```
 cd /var/lib/cloudbreak-deployment
 ```
 This directory contains configuration files and the supporting binaries for Cloudbreak Deployer.
 
-### Initialize Your Profile
+## Initialize Your Profile
 
 First, initialize `cbd` by creating a `Profile` file:
 

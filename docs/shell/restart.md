@@ -1,4 +1,4 @@
-**Restart cluster**
+#### Restart Cluster
 
 **Select your stack that you would like to restart** after this you can apply:
 

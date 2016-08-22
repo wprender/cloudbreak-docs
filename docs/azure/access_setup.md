@@ -1,4 +1,4 @@
-## Azure access setup
+## Azure Access Setup
 
 If you do not have an **Active Directory (AD)** user then you have to configure it before deploying a cluster with 
 Cloudbreak:
@@ -34,7 +34,7 @@ Cloudbreak:
     * Click on the tick button in the bottom of the the ADD A CO-ADMINISTRATOR window
  - You will see the new co-administrator a in the `ADMINISTRATORS` list
 
-## Azure application setup with Cloudbreak Deployer
+## Azure Application Setup with Cloudbreak Deployer
 
 In order for Cloudbreak to be able to launch clusters on Azure on your behalf you need to set up your **Azure ARM 
 application**. If you do not want to create your ARM application via the Azure Web UI, **we automated the related Azure 

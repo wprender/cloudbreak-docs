@@ -1,6 +1,6 @@
 # Cloudbreak Shell
 
-The CLI is an interactive command line tool which supports:
+The Cloudbreak Shell is an interactive command line tool which supports:
 
 * All functionality available through the REST API or Cloudbreak web UI
 * Complete automation of management tasks via **scripts**
@@ -22,12 +22,6 @@ Install Cloudbreak shell using one of the following options:
 
 Start the shell with `cbd util cloudbreak-shell`. This will launch the Cloudbreak shell inside a Docker container, and you can start using it.
 
-### Connect Cloudbreak Shell with a Remote Cloudbreak Instance
-
-**Prerequisites:** Docker is installed and running on the local machine
- 
-1. Execute `cbd util cloudbreak-shell-remote` on the remote host.
-2. Execute the result of the previous command on the local machine.
 
 <a name="dockerimage"></a>
 ### Use Our Prepared Docker image
@@ -74,11 +68,21 @@ Once you are connected, you can create a cluster. Use `hint` if you get lost or 
 > **Note: **
 > All commands are **context-aware**, which means that they are available only when they are relevant. This way the system guides you nad keeps you on the right path.
 
-**Provider-specific Documentation**
+## Connect Cloudbreak Shell with a Remote Cloudbreak Instance
+
+**Prerequisites:** Docker is installed and running on the local machine
+ 
+1. Execute `cbd util cloudbreak-shell-remote` on the remote host.
+2. Execute the result of the previous command on the local machine.
+
+
+## Documentation 
+
+For **complete documentation** of the Cloudbreak shell, see Cloudbreak  [github repository](https://github.com/sequenceiq/cloudbreak/tree/master/shell).
+
+For **Provider-specific Documentation**, see:
 
 - [AWS](aws.md#interactive-mode-cloudbreak-shell)
 - [Azure](azure.md#interactive-mode-cloudbreak-shell)
 - [GCP](gcp.md#interactive-mode-cloudbreak-shell)
 - [OpenStack](openstack.md#interactive-mode-cloudbreak-shell)
-
-You can also find more detailed documentation of the Cloudbreak-shell in its [Github repositiry](https://github.com/sequenceiq/cloudbreak-shell).

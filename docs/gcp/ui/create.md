@@ -1,4 +1,4 @@
-## Cluster deployment
+## Cluster Deployment
 
 After all the cluster resources are configured you can deploy a new HDP cluster.
 
@@ -60,7 +60,7 @@ Besides these you can check the progress on the Cloudbreak Web UI itself if you 
 ![](/gcp/images/gcp-eventhistory.png)
 <sub>*Full size [here](/gcp/images/gcp-eventhistory.png).*</sub>
 
-**Advanced options**
+### Advanced Options
 
 There are some advanced features when deploying a new cluster, these are the following:
 

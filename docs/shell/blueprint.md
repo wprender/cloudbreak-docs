@@ -1,6 +1,6 @@
-## Defining cluster services
+## Defining Cluster Services
 
-**Blueprints**
+#### Blueprints
 
 Blueprints are your declarative definition of a Hadoop cluster. These are the same blueprints that are [used by Ambari](https://cwiki.apache.org/confluence/display/AMBARI/Blueprints).
 
@@ -10,7 +10,7 @@ Blueprints can be added from file or URL (an [example blueprint](https://raw.git
 The host groups in the JSON will be mapped to a set of instances when starting the cluster. Besides this the services and
  components will also be installed on the corresponding nodes. Blueprints can be modified later from the Ambari UI.
  
->**NOTE** Not necessary to define all the configuration in the blueprint. If a configuration is missing, Ambari will fill that with a default value.
+>**NOTE:** It is not necessary to define all the configuration in the blueprint. If a configuration is missing, Ambari will fill that with a default value.
 
 ```
 blueprint add --name my-blueprint --description "sample description" --file <the path of the blueprint>
