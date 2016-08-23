@@ -1,8 +1,6 @@
 #Service Provider Interface (SPI)
 
-Cloudbreak already supports multiple cloud platforms and provides an easy way to integrate a new provider trough [Cloudbreak's Service Provider Interface (SPI)](https://github.com/sequenceiq/cloudbreak/tree/master/cloud-api), a plugin mechanism that enables seamless integration of any cloud provider.
-
-The SPI plugin mechanism has been used to integrate all currently supported providers with Cloudbreak. Consequently, when a new provider is integrated, it immediately becomes a first class citizen in Cloudbreak.
+Cloudbreak already supports multiple cloud platforms and provides an easy way to integrate a new provider trough [Cloudbreak's Service Provider Interface (SPI)](https://github.com/sequenceiq/cloudbreak/tree/master/cloud-api), a plugin mechanism that enables seamless integration of any cloud provider. The SPI plugin mechanism has been used to integrate all currently supported providers with Cloudbreak. Consequently, if you use SPI to integrate a new provider, the integration will be seamless.
  
  * The [cloud-aws](https://github.com/sequenceiq/cloudbreak/tree/master/cloud-aws) module integrates Amazon Web Services
  * The [cloud-gcp](https://github.com/sequenceiq/cloudbreak/tree/master/cloud-gcp) module integrates Google Cloud Platform
