@@ -374,18 +374,30 @@
 <li>ClusterBootstrapperTest randomly fails</li>
 <li>slider does not work with ssl on python 2.7.9+</li>
 <li>fix Ambari address on UI for clusters that provisioned by an older version of Cloudbreak</li>
+<li>credential visibility on cluster details view</li>
+<li>"Keystone Version" dropdown layouts</li>
 </ul>
 <h3 id="added">Added</h3>
 <ul>
 <li>added HDP version field to RDS config</li>
 <li>ability to configure remote database for Ambari</li>
 <li>stacks/clusters are associated with Cloudbreak version</li>
+<li>new resource to configure LDAP service for Knox</li>
+<li>support of Google's spot instances</li>
+<li>support for c4 instance types in AWS</li>
+<li>enable auto recovery for HDP services on failure via blueprint</li>
+<li>ability to specify multiple subnets for the same VPC on AWS</li>
+<li>ability to configure default regions</li>
 </ul>
 <h3 id="changed">Changed</h3>
 <ul>
 <li>reinstate recipes on Uluwatu UI</li>
 <li>increase Ambari password length and fix error message</li>
 <li>automatic blueprint update during startup</li>
+<li>on OpenStack stack name contains stack ID</li>
+<li>disable upgrade of saltstack</li>
+<li>remove unecessary <code>require</code> flags from API documentation</li>
+<li>improve security of salt communication</li>
 </ul>
 <h2 id="v140">[v1.4.0]</h2>
 <h3 id="fixed_1">Fixed</h3>
